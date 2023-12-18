@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex">
+    <meta name="author" content="ITHunt">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/style.css">
+    <title>Удаление акканута</title>
+</head>
+<body>
+<main>
+    <div class="container">
+        <div class="login" id="login">
+            <div class="oneStage" id="oneStage">
+                <h2 class="h2Warning">Внимание!</h2>
+                <div class="textWarning">
+                    <p style="font-weight: 700">Удаление аккаунта приведет к безвозвратной утрате всех ваших данных!</p>
+
+                        <p style="margin-top: 20px">Удаление аккаунта является окончательным действием, и вы больше не сможете восстановить свой аккаунт или связанные с ним данные. Если у вас есть какие-либо вопросы или сомнения, пожалуйста, обратитесь к нашей службе поддержки для получения дополнительной информации.
+                        Подтвердите, что вы понимаете последствия удаления аккаунта и готовы продолжить.</p>
+                </div>
+                <div class="buttonsRemove">
+                    <button class="canel" style="margin: auto;"><a href="/">Отмена</a></button>
+
+                    <button class="nextStage" id="remove">Подтвердить</button>
+                </div>
+            </div>
+            <div class="twoStage" style="display: none;" id="twoStage">
+                <h2 class="h2Warning">Подтвердить удаление аккаунта</h2>
+                <div class="textWarning">
+                    <p>Введите код, который мы отправили вам на почту</p>
+                        <div class="labls">
+                            <input class="inputBox" type="number" maxlength="6" id="removeAccountInput">
+                            <div class="box start"></div>
+                            <div class="box"></div>
+                            <div class="box"></div>
+                            <div class="box"></div>
+                            <div class="box"></div>
+                            <div class="box end"></div>
+                        </div>
+                        <div class="buttonsOnRemove">
+                            <button type="button" class="canelRemove"><a href="/">Отменить</a></button>
+                            <button type="submit" class="sendRemoveAccount" id="goRemove" disabled>Удалить аккаунт</button>
+                        </div>
+                </div>
+            </div>
+            <!-- <div class="succsess">
+                <p class="succsessMessage">Аккаунт успешно удален!</p>
+            </div> -->
+        </div>
+
+    </div>
+</main>
+<script src="./js/remove.js"></script>
+</body>
+</html>

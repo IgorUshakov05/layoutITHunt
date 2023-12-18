@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Найдите работу или предложите её в IT-сфере с помощью нашего сайта. Мы предлагаем широкий выбор вакансий для различных специализаций.">
+    <meta name="keywords" content="IT, работа, вакансии, поиск работы, ITHunt, специалисты, программист, разработчик, тестировщик, веб-дизайнер">
+    <meta name="robots" content="index, follow">
+    <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon">
+    <meta name="author" content="ITHunt">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/js/jquery.js"></script>
+    <title>ITHunt - Фаст-ворк</title>
+</head>
+<body>
+<%- include('./header.ejs', { isLoggedIn, username, active: 'fast-work'}) %>
+
+
+<main class="main">
+     <div class="twoBlocks">
+        <div noindex class="personalInfo filterAlways">
+            <div class="openFilter">
+                <div class="picFilter">
+                    <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 2.37622H19.2179" stroke="black" stroke-width="0.554457" stroke-linecap="round"/>
+                        <circle cx="12.8811" cy="2.37624" r="2.37624" fill="#5412E0"/>
+                        <path d="M1 13.4655H19.2179" stroke="black" stroke-width="0.554457" stroke-linecap="round"/>
+                        <circle cx="12.8811" cy="13.6237" r="2.37624" fill="#5412E0"/>
+                        <path d="M19.2178 7.9209L0.999909 7.9209" stroke="black" stroke-width="0.554457" stroke-linecap="round"/>
+                        <circle cx="5.75242" cy="8.0792" r="2.37624" transform="rotate(-180 5.75242 8.0792)" fill="#5412E0"/>
+                        </svg>
+                    </div>
+                    <p style="margin-left: 10px;font-size: 13px; margin-bottom: 2px;">Раскрыть фильтр</p>
+            </div>
+            <div class="filt">
+
+            <div class="specialisationSelect FirsSpec">
+                <h1>Специализация</h1>
+                <div class="searchSpecialist">
+                    <!-- <div class="selectedSpecial">
+                        <p id="title">FrontEnd разработчик</p>
+                        <div id="removeSpecial" class="removeSpecial"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L16 16" stroke="white" stroke-linecap="round"/>
+                            <path d="M16 1L8.5 8.5L1 16" stroke="white" stroke-linecap="round"/>
+                            </svg>
+                            </div>
+                    </div> -->
+                    <input type="text" placeholder="Fronend" class="descrtopSearchDesctop">
+                    <!-- <ul class="optionsSelectSpec">
+                        <li class="optionsSelectSpecItem">
+                            <p class="titleSearch">Программист</p>
+                            <p class="selectSearch">Выбрать</p>
+                        </li>
+                        <li class="optionsSelectSpecItem">
+                            <p class="titleSearch">Веб-дизайнер</p>
+                            <p class="selectSearch">Выбрать</p>
+                        </li>
+                    </ul> -->
+                </div>
+            </div>
+            <div class="specialisationSelect">
+                <h1>Уровень сложности</h1>
+                <div class="NoWrapExirient">
+                    
+                        <div class="elemExpiriens">
+                            <input type="radio" id="One" name="Level" value="1" />
+                            <label class="elemExpiriensLabel" for="One">1</label>
+                        </div>
+ 
+                            <div class="elemExpiriens">
+                                <input type="radio" id="two" name="Level" value="2" />
+                                <label class="elemExpiriensLabel" for="two">2</label>
+                            </div>
+                            
+                            <div class="elemExpiriens">
+                                <input type="radio" id="Three" name="Level" value="3" />
+                            <label class="elemExpiriensLabel" for="Three">3</label>
+                        </div>
+ 
+                      <div class="elemExpiriens">
+                        <input type="radio" id="Four" name="Level" value="4" />
+                        <label class="elemExpiriensLabel" for="Four">4</label>
+                      </div>
+                      <div class="elemExpiriens">
+                        <input type="radio" id="Five" name="Level" value="5" />
+                        <label class="elemExpiriensLabel" for="Five">5</label>
+                      </div>
+                </div>
+            </div>
+            <div class="softsSkills">
+                <div class="downloadSkills">
+                    <h1>Навыки</h1>
+                    <div class="downSkill">
+                        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="17" height="17" rx="2" fill="#5412E0"/>
+                            <path d="M3 7L9 13L15 7" stroke="white" stroke-width="2"/>
+                            <path d="M9 2L9 12" stroke="white" stroke-width="2"/>
+                            </svg>
+                            
+                    </div>
+                </div>
+                <div class="searchSpecialist">
+                    <div class="inpSkills">
+                        <input type="text" placeholder="Webpack" class="descrtopSearchDesctop">
+                        <div class="downSkill downSkillMob">
+                            <svg style="width: 100%;height: 100%;"  width="36" height="37" viewBox="0 0 36 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.824463 3.02086C0.824463 1.49656 2.06016 0.260864 3.58446 0.260864H33.24C34.7643 0.260864 36 1.49656 36 3.02086V33.5009C36 35.0252 34.7643 36.2609 33.24 36.2609H3.58446C2.06016 36.2609 0.824463 35.0252 0.824463 33.5009V3.02086Z" fill="#4900E3"/>
+                                <path d="M12.5496 17.2609L18.4122 23.2609L24.2748 17.2609" stroke="white" stroke-width="2"/>
+                                <path d="M18.4121 12.2609L18.4121 22.2609" stroke="white" stroke-width="2"/>
+                                </svg>
+                                
+                                
+                        </div>
+                    </div>
+                     <!-- <ul class="optionsSelectSpec">
+                        <li class="optionsSelectSpecItem">
+                            <p class="titleSearch">JavaScript</p>
+                            <p class="selectSearch">Выбрать</p>
+                        </li>
+                        <li class="optionsSelectSpecItem">
+                            <p class="titleSearch">TypeScript</p>
+                            <p class="selectSearch">Выбрать</p>
+                        </li>
+                    </ul>  -->
+                </div>
+                <div class="selectedSkills">
+                    <span class="addad">Добавленные</span>
+                    <div class="listAddadSkills">
+                        <!-- <div class="skill">
+                            <p class="titleSkill">JavaScript</p>
+                            <div id="removeSpecial" class="removeSpecial"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L16 16" stroke="white" stroke-linecap="round"/>
+                                <path d="M16 1L8.5 8.5L1 16" stroke="white" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <p class="titleSkill">CSS</p>
+                            <div id="removeSpecial" class="removeSpecial"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L16 16" stroke="white" stroke-linecap="round"/>
+                                <path d="M16 1L8.5 8.5L1 16" stroke="white" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <p class="titleSkill">GIT</p>
+                            <div id="removeSpecial" class="removeSpecial"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L16 16" stroke="white" stroke-linecap="round"/>
+                                <path d="M16 1L8.5 8.5L1 16" stroke="white" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <p class="titleSkill">TypeScript</p>
+                            <div id="removeSpecial" class="removeSpecial"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L16 16" stroke="white" stroke-linecap="round"/>
+                                <path d="M16 1L8.5 8.5L1 16" stroke="white" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="specialisationSelect">
+                <div class="zp">
+                    <h1>Стоимость </h1>
+                    <h1 class="itemP">Ꝑ</h1>
+                </div>
+               <div class="toForT">
+                <input class="descrtopSearchDesctop priceTo" placeholder="от" type="number" name="min" id="min"><input class="descrtopSearchDesctop priceDo" type="number" placeholder="до" name="max" id="max">
+               </div>
+            </div>
+            <div class="resetAndSend">
+                <button type="reset" class="resetForm">Сбросить</button>
+                <button type="submit" class="sendForm">Применить</button>
+            </div>
+        </div>
+
+        </div>
+        <div class="MoreInfo">
+            <div class="listVacas">
+                <div class="vakansiaItem">
+                    <div class="topInfoPriceAndTitle">
+                        <div class="titleAndTypeJob">
+                            <h2><span><a href="#"  class="titleJob">Веб-дизайнер</a></span></h2>
+                           </div>
+                        <div class="priceJob priceJobFastJob">
+                            <h3 class="rightPlace"><span class="priceItem"><%= (123123).toLocaleString("no-NO") %></span><span class="p">Ꝑ</span></h3>
+                            <div class="termOfTheWork">
+                                <% let mounth = 1 %>
+                                <span class="termOfTheWorkNumber"><%= mounth %></span>
+                                <% if (mounth === 1) { %>
+                                    <span class="termOfTheWorkNumber">месяц</span>
+                                <% } else if(mounth <=4 && mounth > 1)  { %>
+                                    <span class="termOfTheWorkNumber">месяца</span>
+                                <% }else  {%>
+                                    <span class="termOfTheWorkNumber">месяцев</span>
+                                <% } %>
+                   </div>
+                        </div>
+                    </div>
+                    <div class="middleInfoVacansya d-blockFastWork">
+                        <div class="descriptionVacansy">
+                        <p class="descriptionVacansyText">
+                            Мы понимаем, что в процессе поиска работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы и предоставить необходимую помощь в кратчайшие сроки. Мы ценим ваше время и стремимся обеспечить гладкое и безопасное пользование нашей платформой. Мы понимаем, что в процессе поиска работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы  работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы и предоставить необходимую помощь в кратчайшие сроки. Мы ценим ваше время и стремимся обеспечить гладкое и безопасное пользование нашей платформой. Мы понимаем, что в процессе поиска работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы  работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы и предоставить необходимую помощь в кратчайшие сроки. Мы ценим ваше время и стремимся обеспечить гладкое и безопасное пользование нашей платформой. Мы понимаем, что в процессе поиска работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы </p>
+                        </div>
+                        <div class="showFull"><span class="showFullText">Показать полностью</span></div>
+                    </div>
+                    <div class="stackForJob">
+                        <ul class="listStacks">
+                            <li class="abilityItem">
+                                <h5 class="ability">HTML</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">JavaScript</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">React</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">Node.js</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">Python</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">Java</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">PHP</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">Angular</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">Vue.js</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">TypeScript</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">Java</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">JavaScript</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">HTML</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">CSS</h5>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bottomInfo">
+                        <a href ="#">
+                            <div class="companyInfo">
+                                <div class="img">
+                                    <img width="40" height="40" alt="Логотип компании" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/200px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png">
+                                </div>
+                                <div class="titleCompanyAndDate">
+                                    <div class="titleCompany"><span class="styleTitleCompany">MTC</span></div>
+                                    <div class="titleCompany"><span class="styleTimeCompany">35 часов назад</span></div>
+                                </div>
+                            </div>
+                        </a>
+                            <div class="buttonsElements">
+                                <!-- addingFavorite - класс добавленого в избранное -->
+                                <button class="Infavorites ">В избранное</button>
+                                <button class="Respond">Откликнуться</button>
+                            </div>
+                    </div>
+                </div>
+                <div class="vakansiaItem">
+                    <div class="topInfoPriceAndTitle">
+                        <div class="titleAndTypeJob">
+                            <h2><span><a href="#"  class="titleJob">Веб-дизайнер</a></span></h2>
+                           </div>
+                        <div class="priceJob priceJobFastJob">
+                            <h3 class="rightPlace"><span class="priceItem"><%= (50000).toLocaleString("no-NO") %></span><span class="p">Ꝑ</span></h3>
+                            <div class="termOfTheWork">
+                                <% let year = 5 %>
+                                <span class="termOfTheWorkNumberOne"><%= year %></span>
+                                <% if (year === 1) { %>
+                                    <span class="termOfTheWorkNumber">месяц</span>
+                                <% } else if(year <=4 && year > 1)  { %>
+                                    <span class="termOfTheWorkNumber">месяца</span>
+                                <% }else  {%>
+                                    <span class="termOfTheWorkNumber">месяцев</span>
+                                <% } %>
+                   </div>
+                        </div>
+                    </div>
+                    <div class="middleInfoVacansya d-blockFastWork">
+                        <div class="descriptionVacansy">
+                        <p class="descriptionVacansyText">
+                            Мы понимаем, что в процессе поиска работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы и предоставить необходимую помощь в кратчайшие сроки. Мы ценим ваше время и стремимся обеспечить гладкое и безопасное пользование нашей платформой. Мы понимаем, что в процессе поиска работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы  работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы и предоставить необходимую помощь в кратчайшие сроки. Мы ценим ваше время и стремимся обеспечить гладкое и безопасное пользование нашей платформой. Мы понимаем, что в процессе поиска работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы  работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы и предоставить необходимую помощь в кратчайшие сроки. Мы ценим ваше время и стремимся обеспечить гладкое и безопасное пользование нашей платформой. Мы понимаем, что в процессе поиска работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы </p>
+                        </div>
+                        <div class="showFull"><span class="showFullText">Показать полностью</span></div>
+                    </div>
+                    <div class="stackForJob">
+                        <ul class="listStacks">
+                            <li class="abilityItem">
+                                <h5 class="ability">HTML</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">JavaScript</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">React</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">Node.js</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">Python</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">Java</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">PHP</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">Angular</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">Vue.js</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">TypeScript</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">Java</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">JavaScript</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">HTML</h5>
+                            </li>
+                            <li class="abilityItem">
+                                <h5 class="ability">CSS</h5>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bottomInfo">
+                        <a href ="#">
+                            <div class="companyInfo">
+                                <div class="img">
+                                    <img width="40" height="40" alt="Логотип компании" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/200px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png">
+                                </div>
+                                <div class="titleCompanyAndDate">
+                                    <div class="titleCompany"><span class="styleTitleCompany">MTC</span></div>
+                                    <div class="titleCompany"><span class="styleTimeCompany">35 часов назад</span></div>
+                                </div>
+                            </div>
+                        </a>
+                            <div class="buttonsElements">
+                                <!-- addingFavorite - класс добавленого в избранное -->
+                                <button class="Infavorites ">В избранное</button>
+                                <button class="Respond">Откликнуться</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="showMore">
+                <button id="getMore" class="showMoreButton" title="Загрузить больше Фаст-ворки">Загрузить ещё фаст-ворки</button>
+            </div>
+        </div>
+</div>
+</main>
+
+<%- include('./footer.ejs') %>
+<script src="/js/header.js"></script>
+</body>
+</html>

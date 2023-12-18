@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Найдите работу или предложите её в IT-сфере с помощью нашего сайта. Мы предлагаем широкий выбор вакансий для различных специализаций.">
+    <meta name="keywords" content="IT, работа, вакансии, поиск работы, ITHunt, специалисты, программист, разработчик, тестировщик, веб-дизайнер">
+    <meta name="robots" content="index, follow">
+    <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon">
+    <meta name="author" content="ITHunt">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/js/jquery.js"></script>
+    <title>Список чатов</title>
+</head>
+<body style="overflow-y: hidden !important;">
+<%- include('./header.ejs', { isLoggedIn, username, active: 'chat'}) %>
+
+<main class="main main2">
+    <div class="twoBlocks mt20">
+
+        <% let users =
+                [{username:"Кирилл Губарев", message:"Привет,Я срал каждый день чтобы было кайф"},{username:"Игорь Ушаков", message:"Я самый лучший"}]
+        %>
+        <%- include('./listChats', {users, priv:false})%>
+            <div class="MoreInfo  userChatSelect NoneChat">
+                <div class="topInfoAboutUser w100">
+                    <div class="leftInfoUser">
+                        <div class="avatarUserOnChat">
+                            <div class="avatarUserOnChatLeft">
+                                <div class="noneBlock noneCOlor"></div>
+                            </div>
+                            <div class="avatarUserOnChatRigth">
+                                <h1 class="userNamePrivateChat noneCOlor">Ушаков Игорь</h1>
+                                <span class="lastTime noneCOlor">40 минут назад</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="middleInfoUser">
+                        <span class="majorUser noneCOlor">Программист-Плэй Бой-Гений</span>
+                    </div>
+                    <div class="endInfoUser noneCOlorFlex">
+                        <div class="noneBlock noneCOlor"></div>
+                        <div class="noneBlock noneCOlor"></div>
+                    </div>
+                </div>
+                <div class="chatSomeNone">
+                    <% if (!users) {%>
+                    <h1>Здесь можно отправлять сообщения</h1>
+                        <%} else {%>
+                    <h1>Выбери из списка чатов, кому хотите написать</h1>
+                        <%}%>
+                    <% if(!users) {%>
+                        <p>Но для начала пополните список чатов</p>
+                    <% } %>
+                    <div class="noSelectChatSvg">
+                        <% if(!users) {%>
+                            <svg width="430" height="219" viewBox="0 0 430 219" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="29" y="1" width="400" height="69" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
+                                <rect x="29" y="75" width="400" height="69" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
+                                <rect x="1" y="149" width="400" height="69" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
+                                <rect x="99" y="41" width="265" height="9" fill="#E8E8E8"/>
+                                <rect x="99" y="115" width="265" height="9" fill="#E8E8E8"/>
+                                <rect x="71" y="189" width="265" height="9" fill="#E8E8E8"/>
+                                <rect x="99" y="20" width="134" height="17" fill="#E8E8E8"/>
+                                <rect x="99" y="94" width="134" height="17" fill="#E8E8E8"/>
+                                <rect x="71" y="168" width="134" height="17" fill="#E8E8E8"/>
+                                <circle cx="63" cy="36" r="22" fill="#E8E8E8"/>
+                                <circle cx="63" cy="110" r="22" fill="#E8E8E8"/>
+                                <circle cx="35" cy="184" r="22" fill="#E8E8E8"/>
+                            </svg>
+
+                    <% } else {%>
+                                <svg width="476" height="222" viewBox="0 0 476 222" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="38" y="1" width="400" height="69" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
+                                    <rect x="0.319336" y="65" width="475.362" height="82" rx="4" fill="#5412E0"/>
+                                    <rect x="38" y="152" width="400" height="69" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
+                                    <rect x="108" y="41" width="265" height="9" fill="#E8E8E8"/>
+                                    <rect opacity="0.4" x="83.5068" y="112.536" width="314.928" height="10.6957" fill="#E3E3E3"/>
+                                    <rect x="108" y="192" width="265" height="9" fill="#E8E8E8"/>
+                                    <rect x="108" y="20" width="134" height="17" fill="#E8E8E8"/>
+                                    <rect x="83.5068" y="87.5797" width="159.246" height="20.2029" fill="#E3E3E3"/>
+                                    <rect x="108" y="171" width="134" height="17" fill="#E8E8E8"/>
+                                    <circle cx="72" cy="36" r="22" fill="#E8E8E8"/>
+                                    <circle cx="40.725" cy="106.594" r="26.1449" fill="#E3E3E3"/>
+                                    <circle cx="72" cy="187" r="22" fill="#E8E8E8"/>
+                                </svg>
+                        <%}%>
+
+                    </div>
+                </div>
+                <% if(!users) {%>
+                <div class="bottomInputChat">
+                    <div class="lastMess ">
+                        <svg width="368" height="72" viewBox="0 0 368 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M368 4C368 1.79086 366.209 0 364 0H10.6392C8.43005 0 6.63919 1.79086 6.63919 4V65.7159L3.05176e-05 72H34.3988H364C366.209 72 368 70.2091 368 68V4Z" fill="black" fill-opacity="0.26"/>
+                        </svg>
+                    </div>
+                </div>
+                <%}%>
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+
+<%- include('footer')%>
+<script src="js/header.js"></script>
+</body>
+</html>

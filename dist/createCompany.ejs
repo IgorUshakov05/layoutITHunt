@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/style.css">
+    <title>Создание компании</title>
+</head>
+<body>
+    <main class="main">
+        <div class="container">
+        <div class="createCompanyMainBlock">
+            <div class="lineStage">
+                <p id="stageCreate">Заполните основную информацию</p>
+                <progress class="lineCreateLevel" id="progress" max="100" value="4"></progress>
+            </div>
+            <div class="createCompanyMain" id="windowSendCompany">
+                <div class="createOne" id="OneStageElem">
+                    <div class="photoCompany">
+                        <div class="leftSide">
+                            <img src="/assets/pictures/EnablePhoto.png" alt="изображение компании" id="avatarCompany">
+                                <input class="setPhotoInput" type="file" name="image" id="avatarCompany1" accept="image/*">
+                        </div>
+                        <div class="rightSide">
+                            <p style="word-spacing: none;">Установите фотографию</p>
+                            <div class="setInputPhoto">
+                                <input class="setPhotoInput" type="file" id="avatarCompany2" name="image" accept="image/*">
+                            <div class="svgShka">
+                                <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11.1547 9.70492L13.2434 4.63234C13.4549 4.11871 13.0773 3.55481 12.5218 3.55481H4.06456C3.74833 3.55481 3.46335 3.74565 3.34295 4.03807L1.25424 9.11065C1.04274 9.62428 1.42038 10.1882 1.97585 10.1882H10.4331C10.7493 10.1882 11.0343 9.99734 11.1547 9.70492Z" stroke="white" stroke-width="0.613169"></path>
+                                    <path d="M1.2002 7.06666V1.21368C1.2002 0.782683 1.54959 0.433289 1.98059 0.433289H3.83947C4.13506 0.433289 4.40528 0.600295 4.53748 0.864681L4.88648 1.56269C5.01867 1.82707 5.2889 1.99408 5.58449 1.99408H10.1748C10.6058 1.99408 10.9552 2.34348 10.9552 2.77448V2.77448" stroke="white" stroke-width="0.613169" stroke-linecap="round"></path>
+                                </svg>
+
+                            </div>
+                            <p class="setInputPhotoText">Загрузите изображение</p>
+                        </div>
+                            <p class="IHeed setMyPhoto">Разрешение фотографии должно быть 1:1</p>
+                        </div>
+                    </div>
+                    <div class="inputs inputsCompany">
+                        <input type="text" placeholder="Наименование компании" required  name="nameCompany" id="nameCompany">
+                        <div class="groupInput">
+                            <div class="leftInputs">
+                                <div class="inputs">
+                                    <input class="100%" type="number" maxlength="12" required placeholder="ИНН" id="innCompany" name="innCompany">
+                                </div>
+                             </div>
+                            <div class="rigthInputs">
+                                <div class="inputs">
+                                <input class="100%" type="text" required placeholder="Ссылка официальный на сайт " id="websiteCompany" name="websiteCompany">
+                            </div>
+                            </div>
+                        </div>
+                        <div class="groupInput">
+                            <div class="leftInputs">
+                                <div class="inputs">
+                                    <input required class="100%" type="text" id="addresCompany" name="addresCompany" placeholder="Местоположение">
+                                </div>
+                             </div>
+                            <div class="rigthInputs">
+                                <div class="inputs">
+                                <input required class="100%" type="text" placeholder="Контактный телефон" id="numberCompany" name="numberCompany">
+                            </div>
+                            </div>
+                        </div>
+                        <textarea required placeholder="Описание" class="descriptionCompany" name="description" id="descriptionCompany" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="bottomElem">
+                            <div class="canel">
+                            <a href="/me">Отмена</a>
+                        </div>
+                        <div class="nextStageCompany">
+                            <button disabled id="toTwoStage" class="submitButton submitButtonComp">Продолжить создание</button>
+                        </div>
+                    </div>   
+                </div>
+                <div class="createTwo" id="TwoStageElem">
+                    <div id="understage">
+
+                        <label for="post" id="removes">Укажите доменную почту</label>
+                        <div class="inputs emailCompany " id="setIsNotValid">
+                            <input class="100%" type="email" id="postCompany" placeholder="Почта" name="post">
+                        </div>
+                        <div class="bottomElem" id="removess">
+                            <div class="nextStageCompany getCode" id="parentButtonGetCode">
+                                <button id="getCodePass" class="submitButton submitButtonComp" disabled>Получить код</button>
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="textWarning" id="textWarning">
+                        <p>Введите код, который мы отправили вам на почту</p>
+                            <div class="labls">
+                                <input class="inputBox" type="number" maxlength="6" id="removeAccountInput">
+                                <div class="box start"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                                <div class="box end"></div>
+                            </div>
+                            <div class="nextStageCompany getCode" id="parentButtonGetCode">
+                                <button id="postCodeVerefy" class="submitButton submitButtonComp" disabled>Отправить код</button>
+                            </div>
+                    </div>
+                </div>
+                <div class="createThree" id="lastStage"></div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </main>
+    <script src="/js/sendCompany.js"></script>
+</body>
+</html>
