@@ -78,12 +78,6 @@ $(document).ready(function() {
             $('.filt').removeClass('clearFilt');
         }})
 
-    $('.openMethodsMEnu').on("click", function () {
-        $('.windowMethodsChatMobile').toggleClass('activeMenuBottom')
-    });
-
-    $('#closeMenu').on("click", function () {
-        $('.windowMethodsChatMobile').toggleClass('activeMenuBottom')
-    });
+    
 
 });

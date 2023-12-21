@@ -43,7 +43,7 @@
                     </div>
                     <div class="endMethodUser">
                         <div class="windowMethodsChat">
-                            <button type="button" id="searchMessage" title="Найти сообщение">
+                            <button type="button" class="whereMyMessage" id="searchMessage" title="Найти сообщение">
                                 <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M18.5909 9.63636C18.5909 14.632 14.5411 18.6818 9.54547 18.6818C4.54979 18.6818 0.5 14.632 0.5 9.63636C0.5 4.64069 4.54979 0.590897 9.54547 0.590897C14.5411 0.590897 18.5909 4.64069 18.5909 9.63636Z" stroke="black"/>
                                     <path d="M15.4541 16.4546L20.4541 21.4546" stroke="black"/>
@@ -67,10 +67,12 @@
                                 <circle cx="2" cy="8" r="2" fill="#5412E0"/>
                                 <circle cx="2" cy="14" r="2" fill="#5412E0"/>
                             </svg>
-
                         </div>
                     </div>
                 </div>
+                </div>
+                <div class="searchMessageModalWindow">
+                    <input class="searchInputMessage" type="search" id="searchInput" oninput="searchMessages()" placeholder="Что ищем?"><p id="score">0</p>
                 </div>
                 <div class="someChat">
                    <div class="boxMessage">
@@ -175,7 +177,7 @@
                                 </div>
                 </div>
                 <div class="windowMethodsChatMobile ">
-                    <button type="button" id="searchMessage" title="Найти сообщение">
+                    <button type="button" id="searchMessage" title="Найти сообщение" class="whereMyMessage hex">
                         <svg width="24" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M18.5909 9.63636C18.5909 14.632 14.5411 18.6818 9.54547 18.6818C4.54979 18.6818 0.5 14.632 0.5 9.63636C0.5 4.64069 4.54979 0.590897 9.54547 0.590897C14.5411 0.590897 18.5909 4.64069 18.5909 9.63636Z" stroke="black"/>
                             <path d="M15.4541 16.4546L20.4541 21.4546" stroke="black"/>
@@ -214,5 +216,6 @@
     </div>
 </main>
 <script src="js/header.js"></script>
+<script src="js/searchMessage.js"></script>
 </body>
 </html>
