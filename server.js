@@ -7,7 +7,9 @@ const login = require('./pageRoutes/login')
 const myprofile = require('./pageRoutes/MyProfile')
 const registration = require('./pageRoutes/registration')
 const fastWork = require('./pageRoutes/fastWork')
+const fastWorkItem = require('./pageRoutes/fastworkItem')
 const chat = require('./pageRoutes/chat')
+const vacancia = require('./pageRoutes/vacansyaItem')
 const userChat = require('./pageRoutes/privateChat')
 const deleteAccount = require('./pageRoutes/deleteAccount')
 const specialists = require('./pageRoutes/specialist')
@@ -24,9 +26,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist')));
 app.set('views', path.join(__dirname, 'dist'));
 
-app.use(index,login,myprofile,registration,chat, userChat,settings,deleteAccount,createCompany, fastWork,specialists,vacancies)
+app.use(index,login,myprofile,registration,chat,vacancia,fastWorkItem,userChat,settings,deleteAccount,createCompany, fastWork,specialists,vacancies)
 app.get('/robots.txt',(req,res)=>{
     res.sendFile(path.join(__dirname,'robots.txt'))
+})
+
+app.get('*',  (req,res) => {
+    res.render('pageNotFaund')
 })
 start = (PORT) => {
     try {

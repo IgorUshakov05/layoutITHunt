@@ -1,4 +1,5 @@
 function searchMessages() {
+    document.getElementById('newMessageLine').remove()
     var input, filter, messages, message, text, i, matches;
     input = document.getElementById('searchInput');
     filter = input.value.toUpperCase().trim();
@@ -60,7 +61,7 @@ if($('.whereMyMessage').hasClass('crest')) {
 // При открытии
 else {
     $('.searchMessageModalWindow').addClass('showModalWind')
-    $('.whereMyMessage').eq(0).addClass('crest').css('padding', '0').eq(0).html(close)
+    $('.whereMyMessage').eq(0).addClass('crest').eq(0).html(close)
     $('.openMethodsMEnu').addClass('crest').html(close)
     $('.windowMethodsChatMobile').removeClass('showModalWind')
 }
@@ -88,7 +89,7 @@ $('.openMethodsMEnu').on('click', () => {
 
     $('.whereMyMessage').eq(1).on('click', () => {
         $('.openMethodsMEnu').addClass('crest').addClass('crest').html(close)
-        $('.whereMyMessage').eq(0).addClass('crest').css('padding', '0').html(close)
+        $('.whereMyMessage').eq(0).addClass('crest').html(close)
         $('.searchMessageModalWindow').addClass('showModalWind')
         $('.windowMethodsChatMobile').removeClass('showModalWind')
     })

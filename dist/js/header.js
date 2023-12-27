@@ -77,7 +77,23 @@ $(document).ready(function() {
         if ($(window).width() > 1100) {
             $('.filt').removeClass('clearFilt');
         }})
-
     
+    $('.buttonremoveChat').on('click', () => {
+        $('.blackBack').addClass('BlockModal')
+        $('.removeChatNone').addClass('BlockModal')
+        $('.windowMethodsChatMobile').removeClass('showModalWind')
+    })
 
+    $('.blockUser').on('click', () => {
+        $('.blackBack').addClass('BlockModal')
+        $('.blockUs').addClass('BlockModal')
+        $('.windowMethodsChatMobile').removeClass('showModalWind')
+    })
+
+    $('.canelss').on('click', () => {
+        $('.blackBack').removeClass('BlockModal')
+        $('.blockUs').removeClass('BlockModal')
+        $('.removeChatNone').removeClass('BlockModal')
+        $('.windowMethodsChatMobile').removeClass('showModalWind')
+    })
 });
