@@ -9,6 +9,7 @@ const registration = require('./pageRoutes/registration')
 const fastWork = require('./pageRoutes/fastWork')
 const fastWorkItem = require('./pageRoutes/fastworkItem')
 const chat = require('./pageRoutes/chat')
+const company = require('./pageRoutes/company')
 const vacancia = require('./pageRoutes/vacansyaItem')
 const userChat = require('./pageRoutes/privateChat')
 const deleteAccount = require('./pageRoutes/deleteAccount')
@@ -26,7 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist')));
 app.set('views', path.join(__dirname, 'dist'));
 
-app.use(index,login,myprofile,registration,chat,vacancia,fastWorkItem,userChat,settings,deleteAccount,createCompany, fastWork,specialists,vacancies)
+app.use(index,login,myprofile,registration,company,chat,vacancia,fastWorkItem,userChat,settings,deleteAccount,createCompany, fastWork,specialists,vacancies)
 app.get('/robots.txt',(req,res)=>{
     res.sendFile(path.join(__dirname,'robots.txt'))
 })

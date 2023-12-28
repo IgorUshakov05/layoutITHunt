@@ -8,6 +8,10 @@ function removeFuture() {
     addToFavorites.className = 'Infavorites'
 }
 
+$('.titleCompanyAndPhoto').on('click',() => {
+    $('.descriptionCompanyInVacansy').toggle()
+})
+
 addToFavorites.addEventListener('click', () => {
     if(addToFavorites.classList[1] === 'addingFavorite') {
         removeFuture()    
