@@ -96,4 +96,13 @@ $(document).ready(function() {
         $('.removeChatNone').removeClass('BlockModal')
         $('.windowMethodsChatMobile').removeClass('showModalWind')
     })
+
+    $('.settingsOpen').on('click', () => {
+        $('.allInfoProfile').toggle(); // This line toggles the visibility of elements with the class .allInfoProfile
+        console.log("hello");
+        $('.settingsMenu').toggle()
+        $('body').css('overflow', 'scroll')
+        $('.settingsOpen').toggleClass('rotate90'); // This line toggles the class rotate on elements with the class settingsOpen
+    });
+    
 });

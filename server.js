@@ -4,7 +4,9 @@ const path = require('path');
 const mongoose = require('mongoose');
 const index = require('./pageRoutes/indexPage')
 const login = require('./pageRoutes/login')
-const myprofile = require('./pageRoutes/MyProfile')
+const myprofileProfessional = require('./pageRoutes/MeProfile')
+const myprofileHR = require('./pageRoutes/MeHR')
+const HisprofileHR = require('./pageRoutes/SeeSideHr')
 const registration = require('./pageRoutes/registration')
 const fastWork = require('./pageRoutes/fastWork')
 const fastWorkItem = require('./pageRoutes/fastworkItem')
@@ -27,7 +29,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist')));
 app.set('views', path.join(__dirname, 'dist'));
 
-app.use(index,login,myprofile,registration,company,chat,vacancia,fastWorkItem,userChat,settings,deleteAccount,createCompany, fastWork,specialists,vacancies)
+app.use(index,login,myprofileProfessional,HisprofileHR,myprofileHR,registration,company,chat,vacancia,fastWorkItem,userChat,settings,deleteAccount,createCompany, fastWork,specialists,vacancies)
 app.get('/robots.txt',(req,res)=>{
     res.sendFile(path.join(__dirname,'robots.txt'))
 })

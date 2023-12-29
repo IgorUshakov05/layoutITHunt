@@ -604,13 +604,12 @@ background: #009718;
 }
 
 .stack > li {
-    border-radius: 29px;
+    border-radius: 4px;
     background: #DDD;
     padding: 10px;
-    margin-top: 7px;
-
+    margin-top: 6px;
     color: #000;
-    margin-right: 15px;
+    margin-right: 6px;
     text-align: justify;
     font-size: 13px;
     font-style: normal;
@@ -1341,6 +1340,10 @@ p.error {
     margin-bottom: 10px;
     color: red;
 }
+.clickShow {
+    width: 30%;
+    overflow: hidden;
+}
 .toGoogle {
     border: none !important;
 }
@@ -1566,7 +1569,8 @@ text-decoration-style: solid;
 .personalInfo {
     padding: 20px;
     background: #FFF;
-   box-shadow: 0px 1px 4px 0px rgba(151, 149, 255, 0.25);
+    /* 0px 1px 4px 0px rgba(151, 149, 255, 0.25) */
+    box-shadow: .;
 }
 .personalInfo,.MoreInfo {
     width: 31%;
@@ -1594,7 +1598,7 @@ text-decoration-style: solid;
     box-shadow: 0px 1px 4px 0px rgba(151, 149, 255, 0.25);
 }
 .textInfoAbout {
-    margin-left: 20px;
+    margin-left: 12px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -1695,6 +1699,10 @@ letter-spacing: 0.15px;
 .contacts,.portfolio {
     width: 45%;
 }
+
+.contactsHR {
+    width: 100%;
+}
 .listInfoBottom {
     margin-top: 7px;
 }
@@ -1704,6 +1712,16 @@ letter-spacing: 0.15px;
     justify-content: start;
     margin-top: 10px;
 }
+.listInfoBottomHR {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.listInfoBottomHR > li {
+    width: 48%;
+    overflow: hidden;
+}
+
 .settingsOpen {
     width: 20px;
     height: 14px;
@@ -1723,11 +1741,16 @@ letter-spacing: 0.15px;
 .settingsOpen > div:nth-child(2) {
     width: 100%;
 }
+.listInfoBottom > li > svg {
+    min-height: 19px;
+    min-width: 19px;
+}
 .listInfoBottom > li > a {
     font-family: Ubuntu;
     font-size: 13px;
     font-style: normal;
     margin-left: 7px;
+    white-space: nowrap;
     font-weight: 400;
     line-height: 127.9%; /* 15.348px */
     letter-spacing: 0.12px;
@@ -1821,6 +1844,11 @@ letter-spacing: 0.15px;
     line-height: 141.4%; /* 18.382px */
     letter-spacing: -0.065px;
 }
+
+.settingsMenu > li:nth-child(1) {
+    margin-top: 0;
+}
+
 .Rows {
     width: 48%;
 }
@@ -4402,10 +4430,13 @@ margin-top: 10px;
     align-items: center;
 }
 
-.boxShadow {
-   box-shadow: 0px 1px 4px 0px rgba(151, 149, 255, 0.25);
+
+.boxShadow,.boxFilter {
+   box-shadow:0px 1px 4px 0px rgba(0, 0, 0, 0.25);
    padding: 20px;
 }
+
+
 .toMoreVacansyA > div {
     margin-left: 10px;
 }
@@ -4487,6 +4518,16 @@ letter-spacing: -0.065px;
     font-size: 14px;
     margin-right: 25px;
 }
+
+.rotate90 {
+    transform: rotate(90deg);
+}
+
+.settingsMenu {
+    margin-top: 47px;
+    display: none;
+    background:none;
+ }
 
 .buttonsVacant > button {
     margin-right: 0;
@@ -4714,4 +4755,552 @@ letter-spacing: 0.084px;
     display: flex;
     margin-top: 10px;
     justify-content: start;
+}
+
+@media (max-width: 1100px) {
+    .boxShadow,.boxFilter {
+        box-shadow:  0px 1px 4px 0px rgba(151, 149, 255, 0.25);
+     }
+}
+
+.addCompany {
+    border-radius: 4.905px;
+background: #5412E0;
+width: fit-content;
+display: flex;
+color: #FFF;
+font-family: Raleway;
+font-size: 13px;
+word-wrap: nowrap;
+font-style: normal;
+padding: 10px;
+align-items:center;
+font-weight: 400;
+white-space: nowrap;
+line-height: normal;
+letter-spacing: 0.13px;
+}
+
+.addCompany > span {
+    margin-left: 8px;
+}
+
+.addCompany:hover {
+background: #5811f1;
+}
+.closeVacancy,.closeFast {
+    margin-left: 5px;
+    cursor:pointer;
+}
+.favoriteSpecialist {
+    width: 50%;
+}
+.clute {
+    position: relative;
+    transition: 0.2s ease;
+}
+.clute:hover::before {
+    content: 'Видно только вам';
+    position: absolute;
+    width: fit-content;
+    left: 100%;
+    color: #000;
+    font-family: Raleway;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.12px;
+    bottom: 100%;
+    padding: 7px;
+    white-space: nowrap;
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    background: white;
+    border-radius: 4px 4px 4px 0px;
+}
+.inLine {
+    display: flex;
+    align-items:flex-end;
+}
+.myVac:not(:nth-child(1))   {
+    margin-top: 10px;
+}
+
+.bottomMobile {
+    display: flex;
+    margin-top: 15px;
+    flex-direction: column;
+    padding-top: 10px;
+    border-top: 1px solid black;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bottomMobile > .editAndRemove {
+    margin-top: 10px;
+}
+.bottomMobile > div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+.myVacancyText {
+    font-family: Raleway;
+    font-size: 21.289px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.213px;
+}
+.arrow {
+    display:none;
+    cursor: pointer!important;
+}
+.vacancyIter {
+font-family: Ubuntu;
+margin-left: 2px;
+font-size: 21.289px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+letter-spacing: 0.213px;
+}
+
+.myVac {
+    border-radius: 4px;
+    padding: 12px 20px;
+background: #FFF;
+box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.titleVacansyProf {
+    color: #000;cursor: pointer;
+    font-family: Raleway;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 141.4%; /* 21.21px */
+    letter-spacing: -0.075px;
+}
+
+.leftmaring {
+    margin-left: 15px;
+}
+
+.topFlex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.abilityItemProf {
+    border-radius: 4px;
+}
+.priceInMyVac {
+    margin-top: 3px;
+    display: flex;
+    align-items:flex-end;
+}
+.priceInMyVac  > span {
+    font-weight: 100;
+    font-size: 12px;
+    margin-left: 1px;
+}
+.priceInMyVac > p {
+font-family: Raleway;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+letter-spacing: -0.065px;
+}
+.editVacancy {
+    font-family: Raleway;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.128px;
+}
+.removeVacancy {
+color:#4900E3;
+background:none;
+border:none;
+padding: 9px 35px;
+margin-left: 15px;
+border-radius: 4px;
+border: 0.5px solid#4900E3;  
+}
+
+.descriptionVacansyProfile {
+    margin-top: 10px;
+    display: none;
+}
+
+.descriptionVacansyProfile > p {
+    color: #000;
+text-align: justify;
+font-family: Raleway;
+font-size: 13px;
+font-style: normal;
+font-weight: 300;
+line-height: 136%; /* 17.68px */
+letter-spacing: -0.065px;
+}
+
+.editVacancy {
+    cursor: pointer;
+}
+
+.removeVacancy:active {
+    background:#4900E3;
+    color: white;
+}
+.countClick:hover {
+    color: #3F00C3;
+}
+.countClick {
+    color: #000;
+font-family: Ubuntu;
+font-size: 13px;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+letter-spacing: 0.13px;
+}
+.vacancyBox,.fastBox {
+    margin-top: 10px;
+}
+
+.placeJob {
+    display: flex;
+    max-width: 62%;
+    width: 100%;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.placeAndTime {
+    margin-top:15px;
+}
+
+.placeJob > span {
+font-family: Raleway;
+font-size: 14px;
+font-style: normal;
+margin-left: 5px;
+font-weight: 400;
+letter-spacing: -0.065px;
+}
+
+.time {
+    display: flex; 
+    align-items: center;
+    justify-content: flex-end;
+    width: 30%;
+}
+.time>time {
+    margin-left: 8px;
+font-family: Raleway;
+font-size: 14.5px;
+font-style: normal;
+font-weight: 300;
+line-height: 141.4%; /* 18.382px */
+letter-spacing: -0.065px;
+}
+
+.placeAndTime {
+    display:flex; 
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bottomMobile {
+    display: none;
+}
+
+@media (max-width: 1100px) {
+    .mobNone {
+        display:none;
+    }
+    .arrow {
+        display: block;
+    }
+    .bottomMobile {
+        display: block;
+    }
+    .myVacancy {
+        margin-top:10px;
+    }
+    .favoriteSpecialist {
+        width: 100%;
+    }
+    .clickShow {
+        width: 100%;
+    }
+    .clute:hover::before {
+        right: 100%;
+        left: auto;
+        border-radius: 4px 4px 0px 4px;
+    }
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+.placeAndTimefast {
+    align-items: flex-end;
+    width: 100%;
+
+}
+
+.letInfo {
+    width: 41px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    aspect-ratio:1/1;
+    border-radius: 50%;
+}
+.letInfo > img {
+    border-radius:inherit;
+}
+
+.time {
+    width:fit-content;
+}
+
+.addNewVacansy {
+    display: flex;
+padding: 10px 18px;
+justify-content: center;
+align-items: center;
+margin-top: 10px;
+gap: 10px;
+border-radius: 4px;
+background: #5412E0;
+}
+
+.addNewVacansy:active {
+background: #2e009274;
+
+}
+
+.addNewVacansy > span {
+    color: #FFF;
+font-family: Raleway;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 141.4%; /* 18.382px */
+letter-spacing: 0.065px;
+}
+.myFavoritePersonalist {
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-top: 10px;
+    border-radius:4px;
+}
+
+.rightInfo {
+    display: flex;
+    margin-left: 10px;
+    justify-content: space-between;
+    height: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+
+.myDady {
+    display: flex;
+    border-radius:3px;
+    padding: 7px 12px;
+
+    align-items: center;
+    justify-content: space-between;
+}
+.myDady:hover {
+    background:rgb(0 0 0 / 15%);
+}
+.myDady:hover > .removeUser {
+    display: block;
+}
+.inherit {
+    display:inherit;
+}
+.removeUserFavorite {
+    color: #C62828;
+font-size: 13px;
+font-style: normal;
+font-weight: 400;
+line-height: 141.4%; /* 18.382px */
+letter-spacing: -0.065px;
+}
+.removeUser {
+    margin-right: 10px;
+    display: none;
+    cursor: pointer;
+}
+.inputSearchFavorite {
+    width: 100%;
+}
+.inputSearchFavorite > input {
+    width: 100%;
+}
+
+.infoUser {
+    max-width: 75%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+overflow: hidden;
+    align-content: space-between;
+    flex-wrap: wrap;
+}
+
+.dadysIsNotActive {
+    max-height: 150px;
+    overflow-y: hidden;
+}
+.addNewVacansy {
+    cursor: pointer;
+}
+
+.dadys {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.inputSearchFavorite {
+    padding: 10px;
+    box-sizing:border-box;
+display: none;
+}
+
+.searchChatFavorite  {
+    font-size: 13px;
+    margin-top: 0px;
+}
+
+.specialnostText{
+    font-size: 13px;
+    font-style: normal;
+    white-space: nowrap;
+    font-weight: 400;
+    line-height: 141.4%; /* 18.382px */
+    letter-spacing: -0.065px;
+}
+
+.firstNameAndLastNameText {
+    font-family: "Raleway";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    white-space: nowrap;
+    line-height: 141.4%; /* 21.21px */
+    letter-spacing: -0.075px;
+}
+
+.bottoMargin {
+    margin-bottom: 30px;
+}
+.imgNones {
+    width: 415px;
+    margin-top: 20px;
+    height: fit-content;
+    max-width: 100%;
+}
+
+.imgNones >img {
+    width: 100%;
+    height: 100%;
+}
+
+.boxNones {
+    width: 60%;
+    margin: auto;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.linkCreate {
+        color: #000;
+    text-align: center;
+    font-family: Raleway;
+    font-size: 12.845px;
+    font-style: normal;
+    border: 0.5px solid #000;
+    font-weight: 400;
+    padding: 10px 0;
+    width: 45%;
+    line-height: normal;
+    letter-spacing: 0.128px;
+}
+
+
+.linkCreate:hover {
+    border-radius: 4px;
+}
+
+.buttonsCreate {
+    width: 415px;
+    margin-top: 20px;
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 1100px) {
+    .boxNones,.buttonsCreate {
+        width: 100%;
+    }
+    .linkCreate {
+        width: 47%;
+    }
+}
+
+
+
+.nowTime {
+text-align: center;
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: 141.4%; /* 28.28px */
+letter-spacing: 0.1px;
+}
+
+.createPleace {
+text-align: center;
+font-family: Raleway;
+font-size: 13px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.13px;
+}
+
+.noneStyle {
+    background:none;
+    padding: 10px 0px 7px 0px;;
+}
+.titleCompany {
+    color: #000;
+text-align: justify;
+font-family: Raleway;
+font-size: 19px;
+font-style: normal;
+font-weight: 700;
+line-height: 141.4%; /* 26.866px */
+letter-spacing: -0.095px;
+}
+.logoCompanyProfil > img {
+    border-radius:3px;
+}
+.noneStyle:hover {
+    background:none;
 }
