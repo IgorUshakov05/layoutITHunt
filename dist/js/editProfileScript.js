@@ -5,6 +5,16 @@ document.querySelectorAll('.itemContact').forEach((elem) => {
         url: (elem.querySelector('a').textContent).trim()
     });
 });
+
+$('#contactsContainer').delegate('.removeLink', 'click', function() {
+    let contactUrl = $(this).closest('li').find('.group a').text().trim();
+    myContacts = myContacts.filter((elem) => elem.url !== contactUrl);
+    $(this).closest('li').remove();
+});
+
+
+
+
 $('#description').on('input', () => {
     $('.scoreSymbol').text(`${description.value.length}/1000`);
 
@@ -40,12 +50,7 @@ $("#specialist").on("input", function () {
     });
 })
 
-$('.removeLink').on('click', function() {
-    let contactUrl = $(this).parent().find('.group').find('a').text().trim();
-    console.log(contactUrl)
-    myContacts = myContacts.filter((elem) => elem.url !== contactUrl);
-    $(this).parent().remove();
-});
+
 
 $("#specialist").on("keydown", function (e) {
     if (e.which === 9) {  // Check for Tab key
@@ -168,11 +173,8 @@ if (myContacts.length >= 6) {
 }
 myContacts.push({
     type: mediaGlobal,
-    url: value.trim()
+    url: value
 })
-
-
-
 
 console.log(myContacts)
 $('.listInfoBottomContact').append(output)

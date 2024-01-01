@@ -1707,9 +1707,11 @@ letter-spacing: 0.15px;
     margin-top: 7px;
 }
 
-.removeLink {
+..removeLink {
     width: 20%;
+    display: flex;
     background: white;
+    justify-content: flex-end;
 }
 .listInfoBottom > li {
     display: flex;
