@@ -1582,7 +1582,7 @@ text-decoration-style: solid;
 .MoreInfo {
     width: 67%;
 }
-.listInfoBottom > li > a:hover{
+.group > a:hover{
     color:var(--indexColor);
 }
 .topInfo {
@@ -1696,25 +1696,32 @@ letter-spacing: 0.15px;
     letter-spacing: 0.15px;
 }
 .contacts,.portfolio {
-    width: 45%;
+    width: 48%;
 }
 
 .contactsHR {
     width: 100%;
 }
 .listInfoBottom {
+    overflow: hidden;
     margin-top: 7px;
+}
+
+.removeLink {
+    width: 20%;
+    background: white;
 }
 .listInfoBottom > li {
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: space-between;
     margin-top: 10px;
 }
 .addPortfolio {
     margin-top: 13px;
     font-family: Ubuntu;
     width: 100%;
+    user-select: none;
     font-size: 13.4px;
     background:none;
     border:none;
@@ -1722,13 +1729,35 @@ letter-spacing: 0.15px;
     align-items: center;
 }
 
+.addPortfolio:hover > span,.addPortfolio:hover > svg > * {
+    color:#5412E0;
+    stroke: #5412E0;
+}
+
 .addPortfolio > span {
     white-space: nowrap;
+    margin-left: 3px;
 }
 .listInfoBottomHR {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+.addPortfolioContact {
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom:0;
+    top: 0;
+    padding: 20px;
+    background: white;
+    display:none;
+    border-radius:4px;
+    margin: auto;
+    max-width: 420px;
+    height: fit-content;
+    width: fit-content;
 }
 .listInfoBottomHR > li {
     width: 48%;
@@ -1754,11 +1783,17 @@ letter-spacing: 0.15px;
 .settingsOpen > div:nth-child(2) {
     width: 100%;
 }
-.listInfoBottom > li > svg {
+.group> svg {
     min-height: 19px;
     min-width: 19px;
 }
-.listInfoBottom > li > a {
+.group {
+    display: flex;
+    max-width: 80%;
+    align-items: center;
+    justify-content: space-between;
+}
+.group > a {
     font-family: Ubuntu;
     font-size: 13px;
     font-style: normal;
@@ -1871,7 +1906,7 @@ letter-spacing: 0.15px;
     line-height: 141.4%; /* 14.14px */
     letter-spacing: -0.05px;
     top: -6px;
-    left: 12px;
+    left: 5px;
     background: white;
 }
 .metaRow {
@@ -4139,6 +4174,13 @@ box-shadow: 0px 1px 6.2px -1px rgba(191, 198, 255, 0.77);
     opacity: 1;
     max-width: 90%;
 }
+@media(max-width: 1100px) {
+    .addPortfolioContact {
+        width: 83%;
+        max-width: 83%;
+
+    }
+}
 
 .titleRemove {
 font-family: Raleway;
@@ -4182,11 +4224,28 @@ letter-spacing: 0.114px;
     outline: none;
 }
 
-#removeChatUser {
+#removeChatUser, #addContact {
     color:white;
     background:#F8221D;
     height: 40px;
     border-radius:3px;
+}
+#addContact {
+    background: #5412E0;
+    border:none;
+text-align: center;
+font-family: Raleway;
+font-size: 15px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+width: 50%;
+letter-spacing: 0.114px;
+    outline: none;
+}
+
+#addContact:disabled {
+    opacity: 0.6;
 }
 
 .notFaundPage {
@@ -5340,4 +5399,75 @@ letter-spacing: -0.095px;
 }
 .noneStyle:hover {
     background:none;
+}
+
+.inputLink {
+    display:flex;
+    height: 40px;
+    margin-top: 10px;
+    align-items:center;
+}
+
+.openMySelected {
+border: 0.5px solid #404040;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 0 10px;
+}
+.inputContact {
+border: 0.5px solid #404040;
+border-left:0;
+outline: none;
+
+    height: 104%;
+    box-sizing:border-box;
+    padding: 14px;
+    color: #000;
+    border-radius: 0 4px 4px 0;
+text-align: justify;
+font-family: Raleway;
+font-size: 13px;
+font-style: normal;
+font-weight: 300;
+line-height: 127.9%; /* 16.627px */
+letter-spacing: 0.13px;
+width: 100%;
+}
+
+.selectTypeMedia {
+    position: relative;
+    height: 100%;
+    aspect-ratio:1/1;
+border: 0.5px solid #404040;
+    border-radius: 4px 0 0 4px;
+    display: flex;
+    align-items: center;
+    border-right:0;
+
+    justify-content: center;
+}
+#selected {
+    width:fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+}
+
+.myOption {
+    border: 0.5px solid #404040;
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 40px;
+    background-color:white;
+    border-radius:  4px
+}
+.myOption > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
 }
