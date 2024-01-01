@@ -17,7 +17,7 @@ const userChat = require('./pageRoutes/privateChat')
 const deleteAccount = require('./pageRoutes/deleteAccount')
 const specialists = require('./pageRoutes/specialist')
 const createCompany = require('./pageRoutes/createCompany')
-const settings = require('./pageRoutes/settings');
+const settingsSpecialist = require('./pageRoutes/settingsSpecialist');
 const vacancies = require('./pageRoutes/vacancies');
 
 
@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist')));
 app.set('views', path.join(__dirname, 'dist'));
 
-app.use(index,login,myprofileProfessional,HisprofileHR,myprofileHR,registration,company,chat,vacancia,fastWorkItem,userChat,settings,deleteAccount,createCompany, fastWork,specialists,vacancies)
+app.use(index,login,myprofileProfessional,HisprofileHR,myprofileHR,registration,company,chat,vacancia,fastWorkItem,userChat,settingsSpecialist,deleteAccount,createCompany, fastWork,specialists,vacancies)
 app.get('/robots.txt',(req,res)=>{
     res.sendFile(path.join(__dirname,'robots.txt'))
 })
