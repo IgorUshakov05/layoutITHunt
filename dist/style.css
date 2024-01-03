@@ -1041,12 +1041,44 @@ width: 100%;
     position: absolute;
     top: 60px;
 }
+.containerCreateVacancy {
+    width: 443px;
+    height: 100vh;
+    justify-content: flex-start;
+    margin: 0 auto;
+    flex-direction: column;
+}
+.createVacancyDiv {
+    position: static;
+}
 .topLigin {
     display: flex;
     width: 100%;
     justify-content: space-between;
     align-items: center;
 }
+.firstStage {
+    color: #000;
+font-family: Raleway;
+font-size: 21.289px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+letter-spacing: 0.213px;
+}
+
+.firstStageDescription {
+    color: #000;
+font-family: Raleway;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+margin-bottom: 15px;
+margin-top: 10px;
+line-height: normal;
+letter-spacing: 0.14px;
+}
+
 .quest {
     margin-top: 30px;
     font-size: 14px;
@@ -1638,14 +1670,13 @@ letter-spacing: 0.15px;
 
 .age {
     font-family: Ubuntu;
-    font-size: 14px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 300;
-    line-height: 127.9%; /* 11.919px */
     letter-spacing: 0.093px;
 }
 .descriptionInfo{
-    margin-top: 12px;
+    margin-top: 10px;
 }
 .city {
     width: fit-content;
@@ -1707,8 +1738,10 @@ letter-spacing: 0.15px;
     margin-top: 7px;
 }
 
-..removeLink {
+.removeLink {
     width: 20%;
+    cursor:pointer;
+    opacity: 0;
     display: flex;
     background: white;
     justify-content: flex-end;
@@ -1719,7 +1752,7 @@ letter-spacing: 0.15px;
     justify-content: space-between;
     margin-top: 10px;
 }
-.addPortfolio {
+.addPortfolio,.addContact {
     margin-top: 13px;
     font-family: Ubuntu;
     width: 100%;
@@ -1731,12 +1764,12 @@ letter-spacing: 0.15px;
     align-items: center;
 }
 
-.addPortfolio:hover > span,.addPortfolio:hover > svg > * {
+.addPortfolio:hover > span,.addPortfolio:hover > svg > *,.addPortfolio:hover > span,.addPortfolio:hover > svg > * {
     color:#5412E0;
     stroke: #5412E0;
 }
 
-.addPortfolio > span {
+.addPortfolio > span,.addContact > span {
     white-space: nowrap;
     margin-left: 3px;
 }
@@ -1746,11 +1779,12 @@ letter-spacing: 0.15px;
     justify-content: space-between;
 }
 
-.addPortfolioContact {
+.addPortfolioContact,.addPortfolioModal {
     position: fixed;
     right: 0;
     left: 0;
     bottom:0;
+    display:none;
     top: 0;
     padding: 20px;
     background: white;
@@ -1761,6 +1795,9 @@ letter-spacing: 0.15px;
     height: fit-content;
     width: fit-content;
 }
+/* .addPortfolioModal,.blackBack {
+    display:block !important;
+} */
 .listInfoBottomHR > li {
     width: 48%;
     overflow: hidden;
@@ -1791,7 +1828,7 @@ letter-spacing: 0.15px;
 }
 .group {
     display: flex;
-    max-width: 80%;
+    max-width: 85%;
     align-items: center;
     justify-content: space-between;
 }
@@ -2026,7 +2063,9 @@ letter-spacing: 0.15px;
     .metaRow {
         flex-direction: column;
     }
-
+    .containerCreateVacancy {
+        width: 100%;
+    }
     .Rows {
         width: 100%;
     }
@@ -2295,9 +2334,10 @@ letter-spacing: 0.075px;
 }
 .lineCreateLevel {
     margin-top: 4px;
-    width: 463px;
+    width: 443px;
     border:none;
 height: 19px;
+margin: 0 auto;
 }
 .lineCreateLevel::-webkit-progress-bar {
     background-color:#E2D4FF ; 
@@ -2379,7 +2419,7 @@ box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
 
 @media (max-width: 973px) {
     .lineCreateLevel {
-        width: 80%;
+        width: 85%;
     }
     .rightSide {
     margin-left: 11px;}
@@ -3290,8 +3330,12 @@ letter-spacing: 0.065px;
 }
 .buttonsElements {
     height: 100%;
+    margin-top: 10px;
     display: flex;
+    justify-content: end;
 }
+
+
 
 
 
@@ -4177,10 +4221,9 @@ box-shadow: 0px 1px 6.2px -1px rgba(191, 198, 255, 0.77);
     max-width: 90%;
 }
 @media(max-width: 1100px) {
-    .addPortfolioContact {
+    .addPortfolioContact,.addPortfolioModal {
         width: 83%;
         max-width: 83%;
-
     }
 }
 
@@ -4226,13 +4269,13 @@ letter-spacing: 0.114px;
     outline: none;
 }
 
-#removeChatUser, #addContact {
+#removeChatUser, #addContact, #addPort {
     color:white;
     background:#F8221D;
     height: 40px;
     border-radius:3px;
 }
-#addContact {
+#addContact,#addPort {
     background: #5412E0;
     border:none;
 text-align: center;
@@ -4246,9 +4289,11 @@ letter-spacing: 0.114px;
     outline: none;
 }
 
-#addContact:disabled {
+#addContact:disabled,#addPort:disabled {
     opacity: 0.6;
 }
+
+
 
 .notFaundPage {
     overflow:hidden;
@@ -4441,6 +4486,8 @@ letter-spacing: 0.117px;
 .logoCompany {
     width: 41px;
     height: 41px;
+    min-width: 41px;
+    max-height: 41px;
 }
 
 .logoCompany > img {
@@ -4727,11 +4774,33 @@ letter-spacing: -0.065px;
     }
 }
 
+.writeAndIzbrannoe {
+    display: flex;
+    align-items:center;
+    width: 100%;
+    justify-content: space-between;
+}
+.writeAndIzbrannoe > div {
+    cursor: pointer;
+}
+
+.inFavorite {
+    margin-left: 10px;
+}
+
+.inFavorite > span,.addCompany > span {
+    font-size: 12px;
+}
+
 .hardOrNoMob {
     display: none;
     margin-left: 0px;
     font-size: 12px;
 }
+
+
+
+
 
 @media (max-width: 1100px) {
     .topInfoPriceAndTitle {
@@ -4752,13 +4821,18 @@ letter-spacing: -0.065px;
         align-items: flex-start !important;
     }
     .buttonsElements {
-        margin-top: 10px;
         width: 100%;
         display: flex;
         justify-content: space-between;
     }
     .buttonsElements > button {
         width: 47%;
+    }
+    .buttonsElementsProfileDesc {
+        display: none;
+    }
+    .buttonsElementsProfile {
+        display: block;
     }
     .priceItem {
         font-size: 18px !important;
@@ -4846,6 +4920,9 @@ letter-spacing: 0.084px;
     .boxShadow,.boxFilter {
         box-shadow:  0px 1px 4px 0px rgba(151, 149, 255, 0.25);
      }
+     .buttonsElementsProfileDesc {
+        display: none;
+    }
 }
 
 .addCompany {
@@ -5405,12 +5482,12 @@ letter-spacing: -0.095px;
 
 .inputLink {
     display:flex;
-    height: 40px;
+    height: 50px;
     margin-top: 10px;
     align-items:center;
 }
 
-.openMySelected {
+.openMySelected,.openMySelectedPortfolio {
 border: 0.5px solid #404040;
 height: 100%;
 display: flex;
@@ -5418,15 +5495,15 @@ justify-content: center;
 align-items: center;
 padding: 0 10px;
 }
-.inputContact {
+.inputContact,.inputPortfolio {
 border: 0.5px solid #404040;
 border-left:0;
 outline: none;
 
-    height: 104%;
+    height: 102%;
     box-sizing:border-box;
     padding: 14px;
-    color: #000;
+    color: #000;    
     border-radius: 0 4px 4px 0;
 text-align: justify;
 font-family: Raleway;
@@ -5438,7 +5515,7 @@ letter-spacing: 0.13px;
 width: 100%;
 }
 
-.selectTypeMedia {
+.selectTypeMedia,.selectTypeMediaPort {
     position: relative;
     height: 100%;
     aspect-ratio:1/1;
@@ -5450,7 +5527,7 @@ border: 0.5px solid #404040;
 
     justify-content: center;
 }
-#selected {
+#selected,#selectedPort {
     width:fit-content;
     display: flex;
     align-items: center;
@@ -5458,18 +5535,152 @@ border: 0.5px solid #404040;
     height: fit-content;
 }
 
-.myOption {
+.myOption,.myOptionPort {
     border: 0.5px solid #404040;
     display: none;
     position: absolute;
     width: 100%;
-    top: 40px;
+    top: 55px;
     background-color:white;
     border-radius:  4px
 }
-.myOption > div {
+.canelssContact {
+    text-align: right;
+    padding: 0 50px;
+    color: #5412E0;
+}
+.myOption > div,.myOptionPort > div{
     display: flex;
+    cursor:pointer;
     align-items: center;
     justify-content: center;
     padding: 6px;
+    margin: 8px 0;
+}
+
+.itemContact:hover > .removeLink,.itemPortfolio:hover > .removeLink {
+    opacity: 1;
+}
+
+
+
+.logoCompanyProfile {
+    max-width: 35px;
+    max-height: 35px;
+    width: 35px;
+    height: 35px;
+}
+
+.logoCompanyProfile > img {
+    width:35px;
+    height:35px;
+}
+
+.titleCompanyAndPhotoProfile {
+    padding: 0;
+}
+
+.whitespace {
+    white-space: nowrap;
+    overflow: hidden;
+    margin-left: 5px !important;
+    line-height: 0;
+}
+
+.boxSelection {
+    display: flex;
+    align-items: center;
+    display: none;
+    justify-content: space-between;
+}
+
+.canesSelect {
+    color: #000;
+text-align: justify;
+font-family: Raleway;
+font-size: 12px;
+cursor: pointer;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+letter-spacing: 0.12px;
+}
+
+.boxInput {
+    position: relative;
+margin-top: 7px;
+}
+
+.specialisationSelectInput {
+    border-radius: 4px;
+border: 0.5px solid #404040;
+outline:none;
+width: 100%;
+box-sizing:border-box;
+padding: 13px;
+}
+
+.leftSelection {
+    display: flex;
+    align-items:center;
+}
+.leftSelection > p {
+    margin-left: 10px;
+    color: #000;
+text-align: justify;
+font-family: Raleway;
+font-size: 13px;
+font-style: normal;
+font-weight: 400;
+line-height: 127.9%; /* 16.627px */
+letter-spacing: 0.13px;
+}
+
+.listSpecialMy {
+    padding: 0 17px 14px 17px;
+    border-radius: 4px;
+    margin-top: 14px;
+}
+
+.listSpecialMy > li:not(:nth-child(1)) {
+    margin-top: 14px;
+}
+.ParentlistSpecial {
+    position: absolute;
+filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.25));
+    background:white;
+    display: none;
+    top: 100%;
+    width: 100%;
+}
+.listSpecialMy > li > label:focus,.listSpecialMy > li > label:hover {
+    color: #4900E3;
+}
+
+.listSpecialMy > li > label {
+    color: #000;
+font-family: Raleway;
+font-size: 13px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.13px;color: #000;
+font-family: Raleway;
+font-size: 13px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.13px;
+}
+
+
+
+.forLabel {
+    color: #000;
+font-family: Raleway;
+font-size: 15px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+letter-spacing: 0.15px;
 }
