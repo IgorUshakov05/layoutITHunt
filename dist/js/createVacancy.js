@@ -26,7 +26,7 @@ input.addEventListener('input', function() {
     });
 
     // If no items found, hide the parent container; otherwise, show it
-    if (!found) {
+    if (!found || filter.length == 0) {
         parentListSpecial.style.display = "none";
     } else {
         parentListSpecial.style.display = "block";
@@ -49,3 +49,40 @@ $('.canesSelect').on('click', () => {
     allData.special = ''
     $('.selectImg').attr('src','')
 })
+let isBold = false;
+let isItaly = false;
+
+function removePlaceholder() {
+    $('.placeholderMy').remove()
+}
+
+
+function toggleFormat(type) {
+    if (type === 'bold') {
+        $('.placeholderMy').remove()
+        $('.boldenText').toggleClass('activeEdit');
+        $('#output').append('<b>')
+    } else if (type === 'italic') {
+        $('.cursiveText').toggleClass('activeEdit');
+        setFocusAtEnd(document.getElementById('output'));
+        $('#output').append('<i>')
+    }
+}
+
+function setFocusAtEnd(element) {
+    var range, selection;
+    if (document.createRange) {
+        range = document.createRange();
+        range.selectNodeContents(element);
+        range.collapse(false);
+        selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+    } else if (document.selection) {
+        range = document.body.createTextRange();
+        range.moveToElementText(element);
+        range.collapse(false);
+        range.select();
+    }
+}
+ 

@@ -1347,6 +1347,7 @@ margin: 10px 0 0 17px;
         width: 95%;
         box-shadow:none;
     }
+    
     .element > p {
         display: none;
     }
@@ -2058,7 +2059,10 @@ letter-spacing: 0.15px;
 
 
 
-
+.myProgress {
+margin: auto;
+margin-top: 20px;
+}
 @media (max-width:600px) {
     .metaRow {
         flex-direction: column;
@@ -2347,7 +2351,12 @@ margin: 0 auto;
     border-radius:30px 0 0 30px;
     background-color:#5412E0 ;
 }
-
+.onProgress {
+    z-index: 10;
+    position: absolute;
+    right: 0;
+    left: 0;
+}
 .createCompanyMain {
     border-radius: 4px;
 background: #FFF;
@@ -2418,9 +2427,7 @@ box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
 }
 
 @media (max-width: 973px) {
-    .lineCreateLevel {
-        width: 85%;
-    }
+    
     .rightSide {
     margin-left: 11px;}
    .createCompanyMainBlock {
@@ -2433,6 +2440,11 @@ box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
    }
 }
 
+@media (max-width: 600px) {
+    .lineCreateLevel {
+        width: 85%;
+    }
+}
 .descriptionCompany {
     width: 100%;
 }
@@ -2923,6 +2935,12 @@ margin-left: -8px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    margin-top: 8px;
+ }
+
+ .borderNone {
+    border:none;
+    background:none;
  }
 
  .elemExpiriens {
@@ -5606,9 +5624,10 @@ line-height: normal;
 letter-spacing: 0.12px;
 }
 
-.boxInput {
+.boxInput,.groupExpresive {
     position: relative;
 margin-top: 7px;
+margin-bottom: 15px;
 }
 
 .specialisationSelectInput {
@@ -5636,16 +5655,20 @@ line-height: 127.9%; /* 16.627px */
 letter-spacing: 0.13px;
 }
 
-.listSpecialMy {
+.listSpecialMy, .listExpressive {
     padding: 0 17px 14px 17px;
     border-radius: 4px;
     margin-top: 14px;
 }
 
-.listSpecialMy > li:not(:nth-child(1)) {
+.listSpecialMy > li:not(:nth-child(1)),.listExpressive > li:not(:nth-child(1)) {
     margin-top: 14px;
 }
 .ParentlistSpecial {
+    z-index: 99;
+}
+
+.ParentlistSpecial,.ParentlistExpressive {
     position: absolute;
 filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.25));
     background:white;
@@ -5653,11 +5676,54 @@ filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.25));
     top: 100%;
     width: 100%;
 }
-.listSpecialMy > li > label:focus,.listSpecialMy > li > label:hover {
+
+.skillsList {
+    margin-top: 10px;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.removeSkill {
+    position: absolute;
+    cursor: pointer;
+    right: 10px;
+    display: none;
+    height: 13px;
+    background: #4900E3;
+    padding:  0 0 0 4px;
+    aspect-ratio: 1/1;
+}
+.slillItem:hover > .removeSkill { 
+    display: block;
+}
+.slillItem {
+    margin: 7px 7px 0 0 ;
+    position:relative;
+    border-radius: 4px;
+    padding: 7px 12px;
+    display: flex;
+    align-items: center;
+    background: #4900E3;
+
+    /* text */
+    color: #FFF;
+text-align: justify;
+font-family: Raleway;
+font-size: 13px;
+font-style: normal;
+font-weight: 500;
+letter-spacing: 0.065px;
+}
+
+#addQuest {
+    color:#5412E0;
+}
+
+.listSpecialMy > li > label:focus,.listSpecialMy > li > label:hover,.listExpressive > li > label:hover {
     color: #4900E3;
 }
 
-.listSpecialMy > li > label {
+.listSpecialMy > li > label,.listExpressive > li > label {
     color: #000;
 font-family: Raleway;
 font-size: 13px;
@@ -5683,4 +5749,96 @@ font-style: normal;
 font-weight: 700;
 line-height: normal;
 letter-spacing: 0.15px;
+}
+.noneHover:hover, li:hover > .noneHover {
+    color: black !important;
+}
+
+.nextStageBattonVacancy {
+    padding: 10px 32px;
+}
+
+.canelVacancy  {
+    color: #5412E0;
+font-family: Raleway;
+font-size: 13px;
+font-style: normal;
+font-weight: 500;
+line-height: 141.4%; /* 18.382px */
+letter-spacing: 0.065px;
+}
+.buttonsVacansy {
+    margin-top: 25px;
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+    .nextStageBattonVacancy {
+        padding: 10px 30px;
+        width: fit-content;
+    }
+    
+}
+.elemExpiriens {
+    margin-top: 4px;
+}
+
+.finaly {
+    white-space: nowrap;
+    background: #00AE1C;
+}
+
+.groupEditText {
+    display: flex;
+    justify-content: start;
+}
+.groupEditText > div {
+    width: 34px;
+    display: flex;
+    cursor: pointer;
+    align-items:center;
+    justify-content: center;
+    aspect-ratio:1/1;
+    border-radius: 4px;
+
+    color: #000;
+font-family: Raleway;
+font-size: 15px;
+font-style: normal;
+}
+.groupEditText > div:not(:nth-child(1)) {
+    margin-left: 4px;
+}
+.MytextArea {
+    margin-top: 10px;
+}
+
+.activeEdit {
+    background:rgb(213, 213, 213);
+}
+.boldenText {
+    font-weight: bold;
+}
+.cursiveText {
+    font-style: italic;
+}
+.placeholderMy {
+    color: #404040;
+font-family: Raleway;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 114.286%; /* 13.714px */
+letter-spacing: 0.12px;
+}
+#output {
+    outline:none;
+    white-space: pre-line;
+    margin-top:5px;
+    padding: 12px;
+    font-size: 12px;
+    border-radius: 4px;
+border: 0.5px solid #000;
 }

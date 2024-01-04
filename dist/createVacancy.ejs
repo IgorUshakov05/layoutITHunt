@@ -11,14 +11,17 @@
     <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon">
     <link rel="stylesheet" href="/style.css">
     <script src="/js/jquery.js"></script>
-    <title>Удаление акканута</title>
+    <title>ITHunt - создание вакансии</title>
 </head>
 <body>
 <main>
-    <%- include('./header.ejs', { isLoggedIn, active: 'profile'}) %>
-    <div class="container containerCreateVacancy"  style="margin-top: 15px;">
-            <progress class="lineCreateLevel" id="progress" max="100" value="30"></progress>
-        <div class="login createVacancyDiv" style="margin-top: 15px;">
+    
+    <div class="lineStage" style="margin-top:20px;">
+        <progress class="lineCreateLevel" id="progress" max="100" value="30"></progress>
+    </div>
+    <div class="container containerCreateVacancy"  style="margin-top: 5px;">
+       
+        <div class="login createVacancyDiv">
             <div class="oneStage" id="oneStage">
                 <h1 class="firstStage">Первый шаг</h1>
                 <p class="firstStageDescription">Давайте определимся какой специалист вам нужен и какие навыки от него требуются</p>
@@ -61,16 +64,209 @@
                         </div>
                 </div>    
 
-                        </div>
+                </div>
+                <label for="specialisationSelect" class="forLabel">Навыки</label>
+                <div class="groupExpresive">
+
+                    <input class="specialisationSelectInput" placeholder="Оптимизация контента" type="text" name="expresive" id="expresive">
+                    <div class="ParentlistExpressive">
+                        <ul class="listExpressive">
+                            <li onclick=""><label>JavaScript</label></li>
+                            <li onclick=""><label>SEO-специалист</label></li>
+                            <li><label class="noneHover">Навык не найден. </label><label id="addQuest">Добавим?</la></li>
+                        </ul>
+                            </div>
+                            <ul class="skillsList">
+                                <li class="slillItem"><span>JavaScript</span>
+                                    <span class="removeSkill">
+                                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
+                                            <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
+                                            </svg>
+                                            
+                                    </span></li>
+                                <li class="slillItem"><span>SQL</span>
+                                        <span class="removeSkill">
+                                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
+                                                <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
+                                                </svg>
+                                                
+                                    </span></li>
+                                <li class="slillItem"><span>TypeScript</span>
+                                                <span class="removeSkill">
+                                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
+                                                        <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
+                                                        </svg>
+                                                        
+                                    </span></li>
+                                    <li class="slillItem"><span>HTML/CSS</span>
+                                        <span class="removeSkill">
+                                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
+                                                <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
+                                            </svg>
+                                        </span>
+                                    </li>
+                                    <li class="slillItem"><span>Python</span>
+                                        <span class="removeSkill">
+                                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
+                                                <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
+                                            </svg>
+                                        </span>
+                                    </li>
+                                    <li class="slillItem"><span>React</span>
+                                        <span class="removeSkill">
+                                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
+                                                <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
+                                            </svg>
+                                        </span>
+                                    </li>
+                                    <li class="slillItem"><span>Node.js</span>
+                                        <span class="removeSkill">
+                                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
+                                                <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
+                                            </svg>
+                                        </span>
+                                    </li>
+                                    <li class="slillItem"><span>Git</span>
+                                        <span class="removeSkill">
+                                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
+                                                <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
+                                            </svg>
+                                        </span>
+                                    </li>
+                                    <li class="slillItem"><span>MongoDB</span>
+                                        <span class="removeSkill">
+                                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
+                                                <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
+                                            </svg>
+                                        </span>
+                                    </li>
+                                    <li class="slillItem"><span>Vue.js</span>
+                                        <span class="removeSkill">
+                                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
+                                                <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
+                                            </svg>
+                                        </span>
+                                    </li>
+                            </ul>
+                    </div>
+                    <div class="buttonsVacansy">
+                        <a href="/hrMe" class="canelVacancy nextStageBattonVacancy">Отмена</a>
+                        <button id="nextStage" class="showMoreButton nextStageBattonVacancy" title="Далее">Продолжить</button>
+                    </div>
             </div>
-            <div class="twoStage" style="display: none;" id="twoStage">
-                
+        
+            <div class="twoStage" id="twoStage">
+                <h1 class="firstStage">Второй шаг</h1>
+                <p class="firstStageDescription">Уточним способ работы, необходимый опыт сотрудника и уровень заработной платы
+                </p>
+                <label for="specialisationSelect" class="forLabel">Способ работы</label>
+                <div class="wayWork">
+                    <div class="wayWorkItem">
+ 
+                            <input type="checkbox" id="distant" name="interest" value="Удаленная">
+                            <label class="titleWork" for="distant">Удаленная</label>
+                        </div>
+ 
+                            <div class="wayWorkItem">
+                                <input type="checkbox" id="fullday" name="interest" value="Полный день">
+                                <label class="titleWork" for="fullday">Полный день</label>
+                            </div>
+                            
+                            <div class="wayWorkItem">
+                                <input type="checkbox" id="partTime" name="interest" value="Частичная работа">
+                            <label class="titleWork" for="partTime">Частичная работа</label>
+                        </div>
+ 
+                      <div class="wayWorkItem">
+                        <input type="checkbox" id="office" name="interest" value="Офисная">
+                        <label class="titleWork" for="office">Офисная</label>
+                      </div>
+                      <div class="wayWorkItem">
+                        <input type="checkbox" id="flexeble" name="interest" value="Гибкий график">
+                        <label class="titleWork" for="flexeble">Гибкий график</label>
+                    </div>
+                    <div class="wayWorkItem">
+                        <input type="checkbox" id="shift" name="interest" value="Сменный график">
+                        <label class="titleWork" for="shift">Сменный график</label>
+                    </div>
+                </div>
+                <div class="mt-20"></div>
+                <label for="specialisationSelect" class="forLabel">Опыт</label>
+                <div class="NoWrapExirient">
+                   
+                    <div class="elemExpiriens">
+                        <input type="radio" id="OneTwo" name="radioExpiriens" value="OneTwo" />
+                        <label class="elemExpiriensLabel" for="OneTwo">0-2</label>
+                    </div>
+
+                        <div class="elemExpiriens">
+                            <input type="radio" id="ThreeFour" name="radioExpiriens" value="ThreeFour" />
+                            <label class="elemExpiriensLabel" for="ThreeFour">3-5</label>
+                        </div>
+                        
+                        <div class="elemExpiriens">
+                            <input type="radio" id="SixEight" name="radioExpiriens" value="SixEight" />
+                        <label class="elemExpiriensLabel" for="SixEight">6-8</label>
+                    </div>
+
+                    <div class="elemExpiriens">
+                        <input type="radio" id="EightPlus" name="radioExpiriens" value="EightPlus" />
+                        <label class="elemExpiriensLabel" for="EightPlus">8+</label>
+                    </div>
+
+                    <div class="elemExpiriens">
+                        <input type="radio" id="noExpencion" name="radioExpiriens" value="noExpencion" />
+                        <label class="elemExpiriensLabel" for="noExpencion">Без опыта</label>
+                    </div>
+            </div>
+            <div class="specialisationSelect">
+                <div class="zp">
+                    <h1>Зарплата </h1>
+                    <h1 class="itemP">Ꝑ</h1>
+                </div>
+               <div class="toForT">
+                <input class="descrtopSearchDesctop priceTo" placeholder="от" type="number" name="min" id="min"><input class="descrtopSearchDesctop priceDo" type="number" placeholder="до" name="max" id="max">
+               </div>
+               <div class="wayWorkItem" style="margin-left: 0;">
+                <input type="checkbox" id="zarplata" name="zarplata" value="Dogovornaya">
+            <label class="titleWork" for="zarplata">Договорная</label>
+        </div>
+            </div>
+            <div class="buttonsVacansy">
+                <button class="canelVacancy borderNone nextStageBattonVacancy" id="toOneStage">Назад</button>
+                <button id="nextStage" class="showMoreButton nextStageBattonVacancy" title="Загрузить больше вакансий">Продолжить</button>
+            </div>
+            </div>
+            <div id="threeStage" class="threeStage">
+                <h1 class="firstStage">Третий шаг</h1>
+                <p class="firstStageDescription">Подробно опишите обязанности и условия потенциального специалиста и преимущества вакансии</p>
+                <label for="specialisationSelect" class="forLabel">Описание</label>
+                <div class="MytextArea">
+                    <div class="groupEditText">
+                        <div class="boldenText" onclick="toggleFormat('bold')">Ж</div>
+                        <div class="cursiveText" onclick="toggleFormat('italic')">К</div>
+                        <div class="listText" onclick="createList()"><svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.58398 1.58435H14.584" stroke="black"/><path d="M4.58398 11.5844H14.584" stroke="black"/><path d="M4.58398 6.58435H14.584" stroke="black"/><circle cx="1.58398" cy="1.58435" r="1" fill="black"/><circle cx="1.58398" cy="6.58435" r="1" fill="black"/><circle cx="1.58398" cy="11.5844" r="1" fill="black"/></svg></div></div>
+                    <div id="output" contenteditable="true" oninput="handleInput()" onclick="removePlaceholder()"><p class="placeholderMy">Тут уже есть какой-то текст</p></div>
+                </div>
+                <div class="buttonsVacansy">
+                    <button class="canelVacancy borderNone nextStageBattonVacancy" id="toThreeStage">Назад</button>
+                    <button id="nextStage" class="showMoreButton nextStageBattonVacancy finaly" title="Загрузить больше вакансий">Сохранить изменения</button>
+                </div>
             </div>
         </div>
 
     </div>
 </main>
-<script src="/js/header.js"></script>
 <script src="/js/createVacancy.js"></script>
 </body>
 </html>
