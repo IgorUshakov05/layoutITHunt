@@ -5,7 +5,9 @@ const listItems = document.querySelectorAll('.listSpecialMy li');
 // Select the parent container
 const parentListSpecial = document.querySelector('.ParentlistSpecial');
 let allData = {
-    special: ''
+    special: '',
+    expirience: [],
+
 }
 // Add event listener for input changes
 input.addEventListener('input', function() {
@@ -40,6 +42,7 @@ function select(pic,title) {
     $('.noneMake').toggle()
     $('.selectImg').attr('src',pic)
     allData.special = title
+    makeOneVisible()
 }
 
 $('.canesSelect').on('click', () => {
@@ -48,9 +51,9 @@ $('.canesSelect').on('click', () => {
     $('.noneMake').toggle()
     allData.special = ''
     $('.selectImg').attr('src','')
+    makeOneVisible()
 })
-let isBold = false;
-let isItaly = false;
+
 
 function removePlaceholder() {
     $('.placeholderMy').remove()
@@ -59,14 +62,46 @@ function removePlaceholder() {
 
 function toggleFormat(type) {
     if (type === 'bold') {
-        $('.placeholderMy').remove()
         $('.boldenText').toggleClass('activeEdit');
-        $('#output').append('<b>')
+        $('.placeholderMy').remove();
+        if ($('.boldenText').hasClass('activeEdit')) {
+            $('.cursiveText').removeClass('activeEdit');
+            $('#output').append(`<b>${handleInput()}</b>`);
+            console.log("have");
+        } else {
+            // Убираем курсив, если класса 'activeEdit' нет
+            $('#output').append('<span></span>');
+            console.log("No have");
+        }
+        setFocusAtEnd(document.getElementById('output'));
     } else if (type === 'italic') {
         $('.cursiveText').toggleClass('activeEdit');
+        $('.placeholderMy').remove();
+
+        // Проверяем конкретный класс 'activeEdit'
+        if ($('.cursiveText').hasClass('activeEdit')) {
+            $('.boldenText').removeClass('activeEdit');
+            $('#output').append(`<i>${handleInput()}</i>`);
+            console.log("have");
+        } else {
+            // Убираем курсив, если класса 'activeEdit' нет
+            $('#output').append('<span>.</span>');
+            console.log("No have");
+        }
+        
         setFocusAtEnd(document.getElementById('output'));
-        $('#output').append('<i>')
     }
+}
+
+
+function handleInput() {
+    let outputContent = $('#output').html();
+    console.log(outputContent)
+    return outputContent
+}
+
+function createList() {
+    $('.listText').toggleClass('activeEdit');
 }
 
 function setFocusAtEnd(element) {
@@ -86,3 +121,16 @@ function setFocusAtEnd(element) {
     }
 }
  
+
+$('#nextStageTwo').on('click',() => {
+
+})
+
+const makeOneVisible = () => {
+    if (allData.special !== '' && allData.expirience.length !== 0) {
+        $('#nextStageTwo').removeAttr('disabled')
+    }
+    else {
+        $('#nextStageTwo').attr('disabled',true)
+    }
+}

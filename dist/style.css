@@ -5604,6 +5604,9 @@ border: 0.5px solid #404040;
     margin-left: 5px !important;
     line-height: 0;
 }
+.buttonsVacansy > button:disabled {
+    cursor:not-allowed;
+}
 
 .boxSelection {
     display: flex;
