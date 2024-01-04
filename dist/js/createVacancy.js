@@ -7,7 +7,14 @@ const parentListSpecial = document.querySelector('.ParentlistSpecial');
 let allData = {
     special: '',
     expirience: [],
-
+    wayOfWorking: [],
+    expirienceLife:'',
+    salary: {
+        min: 0,
+        max: 0,
+        agreement: false
+    },
+    description: ''
 }
 // Add event listener for input changes
 input.addEventListener('input', function() {
@@ -35,7 +42,6 @@ input.addEventListener('input', function() {
     }
 });
 
-
 function select(pic,title) {
     $('.boxSelection').css('display', 'flex')
     $('.titleJobItem').text(title)
@@ -44,6 +50,33 @@ function select(pic,title) {
     allData.special = title
     makeOneVisible()
 }
+
+$('input[name="interest"]').change(function () {
+    allData.wayOfWorking = [];
+
+    // Проходим по всем выбранным чекбоксам и добавляем их значение в массив
+    $('input[name="interest"]:checked').each(function () {
+        allData.wayOfWorking.push($(this).val());
+    });
+    makeOneVisibleTwoStage()
+});
+
+$('input[name="radioExpiriens"]').change(function () {
+    // Обновляем переменную expirienceLife с выбранным значением
+    allData.expirienceLife = $('input[name="radioExpiriens"]:checked').val();
+
+    // Выводим результат в консоль (можно изменить на ваше действие)
+    makeOneVisibleTwoStage()
+
+});
+
+$('input[name="zarplata"]').change(function () {
+    // Обновляем переменную allData.salary.agreement в зависимости от выбранной радиокнопки
+    allData.salary.agreement = ($('input[name="zarplata"]:checked').val() === 'true');
+
+    // Выводим результат в консоль (можно изменить на ваше действие)
+    makeOneVisibleTwoStage();
+});
 
 $('.canesSelect').on('click', () => {
     $('.boxSelection').css('display', 'none')
@@ -54,11 +87,18 @@ $('.canesSelect').on('click', () => {
     makeOneVisible()
 })
 
+$('#min').on('input', () => {
+    allData.salary.min = $('#min').val()
+    makeOneVisibleTwoStage()
+})
+$('#max').on('input', () => {
+    allData.salary.max = $('#max').val()
+    makeOneVisibleTwoStage()
+})
 
 function removePlaceholder() {
     $('.placeholderMy').remove()
 }
-
 
 function toggleFormat(type) {
     if (type === 'bold') {
@@ -93,12 +133,33 @@ function toggleFormat(type) {
     }
 }
 
-
 function handleInput() {
-    let outputContent = $('#output').html();
-    console.log(outputContent)
-    return outputContent
+    let outputContent = $('#output').text(); // Используем text(), чтобы получить только текст, а не HTML
+    allData.description = outputContent;
+    makeOneVisibleLastStage()
+    $('.tips').text(`Осталось символов: ${3000 - outputContent.length}`);
+    if (outputContent.length >= 3000) {
+        // Если достигнут, ограничиваем ввод
+        $('#output').text(outputContent.substring(0, 3000));
+    }
+    return outputContent;
 }
+
+// Добавляем обработчик события input для отслеживания изменений в тексте
+$('#output').on('input', handleInput);
+
+// Добавляем обработчики событий для отслеживания изменений через ctrl+a и удаления текста
+$('#output').on('keyup', function (event) {
+    if (event.ctrlKey && (event.key === 'a' || event.key === 'A')) {
+        handleInput();
+    }
+});
+
+$('#output').on('keydown', function (event) {
+    if (event.key === 'Backspace' || event.key === 'Delete') {
+        handleInput();
+    }
+});
 
 function createList() {
     $('.listText').toggleClass('activeEdit');
@@ -121,7 +182,6 @@ function setFocusAtEnd(element) {
     }
 }
  
-
 $('#nextStageTwo').on('click',() => {
 
 })
@@ -134,3 +194,59 @@ const makeOneVisible = () => {
         $('#nextStageTwo').attr('disabled',true)
     }
 }
+
+const makeOneVisibleTwoStage = () => {
+    if (allData.expirienceLife !== '' && allData.wayOfWorking.length !== 0 && (allData.salary.max && allData.salary.min || allData.salary.agreement)) {
+        $('#nextStageThree').removeAttr('disabled')
+    }
+    else {
+        $('#nextStageThree').attr('disabled',true)
+    }
+}
+
+const makeOneVisibleLastStage = () => {
+    if (allData.description.length >= 10) {
+        $('#nextStageFinalyAndEnd').removeAttr('disabled')
+    }
+    else {
+        $('#nextStageFinalyAndEnd').attr('disabled',true)
+    }
+}
+
+//Первый экран
+$('#nextStageTwo').on('click',() => {
+    $('.oneStage').height('0')
+    $('#progress').attr('value', '30')
+    $('.twoStage').height('fit-content')
+})
+
+//Первый экран - на первый экран
+$('#toOneStage').on('click', () => {
+    $('.oneStage').height('fit-content')
+    $('#progress').attr('value', '30')
+    $('.twoStage').height('0')
+})
+
+//Второй экран
+$('#nextStageThree').on('click',() => {
+    $('.twoStage').height('0')
+    $('#progress').attr('value', '90')
+    $('.threeStage').height('fit-content')
+})
+
+
+$('#toThreeStage').on('click', () => {
+    $('.twoStage').height('fit-content')
+    $('#progress').attr('value', '60')
+    $('.threeStage').height('0')
+})
+
+
+
+//Финал!
+$('#nextStageFinalyAndEnd').on('click', () => {
+    $('.threeStage').height('0')
+    $('#progress').attr('value', '100')
+    $('.lineCreateLevel').addClass('filalyProgress');
+    $('.finalyStage').height('fit-content')
+})
