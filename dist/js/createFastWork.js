@@ -7,8 +7,7 @@ const parentListSpecial = document.querySelector('.ParentlistSpecial');
 let allData = {
     special: '',
     expirience: ['JavaScript'],
-    wayOfWorking: [],
-    expirienceLife:'',
+    level: '',
     salary: {
         min: 0,
         max: 0,
@@ -61,9 +60,8 @@ $('input[name="interest"]').change(function () {
     makeOneVisibleTwoStage()
 });
 
-$('input[name="radioExpiriens"]').change(function () {
-    // Обновляем переменную expirienceLife с выбранным значением
-    allData.expirienceLife = $('input[name="radioExpiriens"]:checked').val();
+$('input[name="Level"]').change(function () {
+    allData.level = $('input[name="Level"]:checked').val();
 
     // Выводим результат в консоль (можно изменить на ваше действие)
     makeOneVisibleTwoStage()
@@ -196,7 +194,7 @@ const makeOneVisible = () => {
 }
 
 const makeOneVisibleTwoStage = () => {
-    if (allData.expirienceLife !== '' && allData.wayOfWorking.length !== 0 && (allData.salary.max && allData.salary.min || allData.salary.agreement)) {
+    if (allData.level !== '' && (allData.salary.max && allData.salary.min || allData.salary.agreement)) {
         $('#nextStageThree').removeAttr('disabled')
     }
     else {

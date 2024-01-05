@@ -1050,6 +1050,7 @@ width: 100%;
 }
 .createVacancyDiv {
     position: static;
+    margin: 0 auto;
 }
 .topLigin {
     display: flex;
@@ -5829,14 +5830,25 @@ font-style: normal;
 }
 .placeholderMy {
     color: #404040;
-font-family: Raleway;
-font-size: 12px;
-font-style: normal;
-font-weight: 400;
-line-height: 114.286%; /* 13.714px */
-letter-spacing: 0.12px;
+    font-family: Raleway;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    margin-top: -10px;
+    padding: 0 12px;
+    letter-spacing: 0.12px;
+    display: flex;
+    flex-direction: column;
 }
+
+.placeholderMy>li {
+    line-height: 16px;
+    list-style-type: disc;
+
+}
+
 #output {
+    aspect-ratio: 1/1;
     outline:none;
     white-space: pre-line;
     margin-top:5px;
