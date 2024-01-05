@@ -2,6 +2,7 @@
 const input = document.getElementById('specialisationSelect');
 // Select all the list items
 const listItems = document.querySelectorAll('.listSpecialMy li');
+
 // Select the parent container
 const parentListSpecial = document.querySelector('.ParentlistSpecial');
 let allData = {

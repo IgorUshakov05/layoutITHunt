@@ -5828,6 +5828,14 @@ font-style: normal;
 .cursiveText {
     font-style: italic;
 }
+.allSpecial {
+    display: flex;
+    flex-wrap: wrap;
+   margin: 0;
+}
+.allSpecial > div {
+    margin: 0 5px 5px 0;
+}
 .placeholderMy {
     color: #404040;
     font-family: Raleway;
@@ -5889,4 +5897,8 @@ letter-spacing: 0.054px;
 
 .filalyProgress::-webkit-progress-value {
     background-color:#00AE1C !important;
+}
+
+.allSpecial:has(.selectedSpecial) {
+    margin-bottom: 6px;
 }
