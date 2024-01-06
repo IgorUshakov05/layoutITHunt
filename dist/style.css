@@ -1684,13 +1684,13 @@ letter-spacing: 0.15px;
     width: fit-content;
     display: flex;
     margin-top: 7px;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-around;
 }
+
 .city > p {
     margin-left: 6px;
     text-align: justify;
-    font-family: Raleway;
     font-size: 13px;
     font-style: normal;
     font-weight: 400;
@@ -3272,6 +3272,15 @@ height: inherit;
     display: none;
 }
 }
+
+.noMob {
+    margin-top: 17px;
+    display:block;
+}
+.personArticle:not(:nth-child(1)) {
+    margin-top: 30px;
+}
+
 .showFullText {
     color: #4900E3;
 text-align: justify;
@@ -3400,7 +3409,7 @@ letter-spacing: -0.095px;
 }
 
 
-.Infavorites:hover {
+.Infavorites:hover,.beActive:hover {
     border-color: #4900E3;
     color: #4900E3;
 }
@@ -5369,10 +5378,18 @@ display: none;
 .specialnostText{
     font-size: 13px;
     font-style: normal;
-    white-space: nowrap;
+    white-space: normal;
     font-weight: 400;
     line-height: 141.4%; /* 18.382px */
     letter-spacing: -0.065px;
+}
+.expitiens {
+font-family: Ubuntu;
+font-size: 14px;
+font-style: normal;
+font-weight: 300;
+line-height: 127.9%; /* 15.348px */
+letter-spacing: 0.12px;
 }
 
 .firstNameAndLastNameText {
@@ -5718,7 +5735,9 @@ font-style: normal;
 font-weight: 500;
 letter-spacing: 0.065px;
 }
-
+.leftTopInfoSpec {
+    width: 120px;
+}
 #addQuest {
     color:#5412E0;
 }
@@ -5901,4 +5920,154 @@ letter-spacing: 0.054px;
 
 .allSpecial:has(.selectedSpecial) {
     margin-bottom: 6px;
+}
+
+.imgProfile {
+    width: 120px;
+    height: 120px;
+    border-radius: 4px;
+}
+
+.imgProfile > img {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+.personArticle {
+    border-radius: 4px;
+    padding: 16px;
+    box-sizing: border-box;
+    background: #FFF;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.topInfoSpec {
+    display: flex;align-items: stretch;
+}
+
+.rightTopInfoSpec {
+    margin-left: 15px;
+    width: 100%;    
+    display: flex;
+    justify-content: space-between;
+align-items: stretch;
+flex-direction: column;
+}
+
+
+.userLFName {
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    letter-spacing: 0.25px;
+}
+
+@media (max-width: 500px) {
+    .userLFName {
+        font-size: 20px;
+    }
+    .rightTopInfoSpec {
+        margin-left: 10px;
+    }
+    .imgProfile {
+        width: 100px;
+        height: 100px;
+    }
+    .leftTopInfoSpec {
+        width: 100px;
+
+    }
+    .specialnostText {
+        font-size: 14px;
+    }
+}
+
+
+.specialnostText {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.16px;
+}
+.rightright {
+    display: flex;
+    height: 36px;
+}
+.rightright > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.flexBeetwin {
+    display: flex;
+    justify-content: space-between;
+}
+.inFavoritePerson {
+    width: 140px;
+    border-radius: 4px;
+    border: 0.5px solid #000;
+    padding: 8px 0;
+}
+
+.textMy {
+    color: #FFF;
+    text-align: center;
+    font-family: Raleway;
+    font-size: 12.845px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.128px;
+}
+
+.rightright > button {
+    margin-right: 10px;
+}
+
+.typing {
+    border: none;
+    background: #00AE1C;
+}
+.beActive {
+    background:none;
+    color: black;
+}
+
+.mobrightright {
+    margin-top: 20px;
+    display: none;
+    justify-content: space-between;
+    width: 100%;
+}
+.mobrightright > * {
+    width: 47%;
+}
+@media (max-width: 800px) {
+    .rightright {
+        display: none;
+    }
+    .mobrightright {
+        display: flex;
+    }
+}
+.cityPerson {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+}
+.cityPerson > p {
+
+    margin-left: 5px;
+    font-size: 14px;
+    display: inline;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 127.9%; /* 15.348px */
+    letter-spacing: 0.12px;
+}
+.point {
+    width: 11px;
+    height: 15px;
 }

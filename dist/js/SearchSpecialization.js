@@ -6,6 +6,24 @@ const allData = {
     skills: [],
     expiriens: ''
 }
+const firstAndLastName = document.getElementById('firstAndLastName')
+$('#firstAndLastName').on('input', () => {
+    try {
+
+    let value = firstAndLastName.value.trim().split(' ').filter((elem) => {
+        return elem.trim() !== '' 
+    })
+    console.log(value)
+    allData.firstName = value[0][0].toUpperCase()+value[0].slice(1,value[0].length);
+    allData.lastName = value[1][0].toUpperCase()+value[1].slice(1,value[1].length)
+    console.log(allData.firstName, ' ', allData.lastName)
+    firstAndLastName.value = `${allData.firstName||''} ${allData.lastName|| ''}`
+}
+catch(e) {
+    allData.lastName = `Ошибка`
+}
+}) 
+
 const listItems = document.querySelectorAll('.listSpecialMy li');
 const parentListSpecial = document.querySelector('.ParentlistSpecial');
 input.addEventListener('input', function() {
