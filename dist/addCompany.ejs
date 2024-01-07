@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon">
+    <meta name="author" content="ITHunt">
+    <script>
+    
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/js/jquery.js"></script>
+    <title>Добавить компанию</title>
+</head>
+<body>
+    <%- include('./header.ejs', { isLoggedIn, active: 'profile'}) %>
+    <main>
+        <div class="createOrInvite">
+            <div class="topBlock">
+                <div class="arrowBack">
+                    <a href="/hrMe">
+                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24.5 12.5H3M3 12.5L13.5 23M3 12.5L13.5 2" stroke="#5412E0" stroke-width="3"/>
+                    </svg>
+                </a>
+                </div>
+                <div class="addOrganization"><span class="addOrg">Добавим организацию</span></div>
+                <div class="arrowBack" style="opacity: 0;"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24.5 12.5H3M3 12.5L13.5 23M3 12.5L13.5 2" stroke="#5412E0" stroke-width="3"/>
+                    </svg>
+                    </div>
+                
+            </div>
+            <div class="toCreateOrToInvite">
+                <div class="create">
+                <a href="/create-company">
+                    <svg class="createSvg" overflow="visible"  width="113.22" height="187" viewBox="0 0 105.22 187" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path style="width: 99.22px;margin: auto;" d="M1 162.917V24.0832L48.3901 1.07867C49.7933 0.397562 51.4312 0.397562 52.8343 1.07867L100.224 24.0832V58.7916V93.5V162.917L52.8343 185.921C51.4312 186.602 49.7933 186.602 48.3901 185.921L1 162.917Z" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="7.63 7.63"/>
+                        <path d="M15.8158 46.9129L6.08789 42.3469V54.3183L15.8158 58.8843V46.9129Z" fill="#E3E3E3"/>
+                        <path d="M46.347 62.1782L36.6191 57.6122V69.5836L46.347 74.1496V62.1782Z" fill="#E3E3E3"/>
+                        <path d="M31.0814 54.5456L21.3535 49.9796V61.951L31.0814 66.517V54.5456Z" fill="#E3E3E3"/>
+                        <path d="M15.8158 65.9946L6.08789 61.4286V73.4L15.8158 77.966V65.9946Z" fill="#E3E3E3"/>
+                        <path d="M46.347 81.2599L36.6191 76.6939V88.6653L46.347 93.2313V81.2599Z" fill="#E3E3E3"/>
+                        <path d="M31.0814 73.6272L21.3535 69.0612V81.0326L31.0814 85.5986V73.6272Z" fill="#E3E3E3"/>
+                        <path d="M15.8158 85.0762L6.08789 80.5102V92.4816L15.8158 97.0476V85.0762Z" fill="#E3E3E3"/>
+                        <path d="M46.347 100.341L36.6191 95.7755V107.747L46.347 112.313V100.341Z" fill="#E3E3E3"/>
+                        <path d="M31.0814 92.7088L21.3535 88.1428V100.114L31.0814 104.68V92.7088Z" fill="#E3E3E3"/>
+                        <path d="M15.8158 102.886L6.08789 98.3197V110.291L15.8158 114.857V102.886Z" fill="#E3E3E3"/>
+                        <path d="M46.347 118.151L36.6191 113.585V125.556L46.347 130.122V118.151Z" fill="#E3E3E3"/>
+                        <path d="M31.0814 110.518L21.3535 105.952V117.924L31.0814 122.49V110.518Z" fill="#E3E3E3"/>
+                        <path d="M15.8158 121.967L6.08789 117.401V129.373L15.8158 133.939V121.967Z" fill="#E3E3E3"/>
+                        <path d="M46.347 137.233L36.6191 132.667V144.638L46.347 149.204V137.233Z" fill="#E3E3E3"/>
+                        <path d="M31.0814 129.6L21.3535 125.034V137.005L31.0814 141.571V129.6Z" fill="#E3E3E3"/>
+                        <path d="M86.6113 47.6937L96.6113 43V55.3063L86.6113 60V47.6937Z" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="7.63 7.63"/>
+                        <path d="M55.6998 62.1783L65.4277 57.6123V69.5837L55.6998 74.1497V62.1783Z" fill="#E3E3E3"/>
+                        <path d="M70.9655 54.5456L80.6934 49.9796V61.951L70.9655 66.517V54.5456Z" fill="#E3E3E3"/>
+                        <path d="M86.2311 65.9946L95.959 61.4286V73.4L86.2311 77.966V65.9946Z" fill="#E3E3E3"/>
+                        <path d="M55.6998 81.2599L65.4277 76.6939V88.6653L55.6998 93.2313V81.2599Z" fill="#E3E3E3"/>
+                        <path d="M70.9655 73.6272L80.6934 69.0612V81.0327L70.9655 85.5987V73.6272Z" fill="#E3E3E3"/>
+                        <path d="M86.2311 85.0762L95.959 80.5102V92.4816L86.2311 97.0476V85.0762Z" fill="#E3E3E3"/>
+                        <path d="M55.6998 100.342L65.4277 95.7755V107.747L55.6998 112.313V100.342Z" fill="#E3E3E3"/>
+                        <path d="M70.9655 92.7089L80.6934 88.1429V100.114L70.9655 104.68V92.7089Z" fill="#E3E3E3"/>
+                        <path d="M86.2311 102.886L95.959 98.3197V110.291L86.2311 114.857V102.886Z" fill="#E3E3E3"/>
+                        <path d="M55.6998 118.151L65.4277 113.585V125.556L55.6998 130.122V118.151Z" fill="#E3E3E3"/>
+                        <path d="M70.9655 110.518L80.6934 105.952V117.924L70.9655 122.49V110.518Z" fill="#E3E3E3"/>
+                        <path d="M86.2311 121.967L95.959 117.401V129.373L86.2311 133.939V121.967Z" fill="#E3E3E3"/>
+                        <path d="M55.6998 137.233L65.4277 132.667V144.638L55.6998 149.204V137.233Z" fill="#E3E3E3"/>
+                        <path d="M70.9655 129.6L80.6934 125.034V137.005L70.9655 141.571V129.6Z" fill="#E3E3E3"/>
+                        <path class="moveElem" d="M105.611 41.6264L119.611 35V52.3736L105.611 59V41.6264Z" fill="#5412E0"/>
+                        <path d="M30.6113 147.712L21.3535 143.748V167.036L30.6113 171V147.712Z" fill="#5412E0"/>
+                        <path class="moveElem" opacity="0.3" d="M119.611 35L142.111 68L105.611 59.5V42L119.611 35Z" fill="url(#paint0_linear_0_1)"/>
+                        <path class="moveElem" d="M157.283 60.4541L221.61 90.588L221.626 104.951L210.581 114.133L146.253 83.9988L140.125 66.7724L157.283 60.4541Z" fill="url(#paint1_linear_0_1)"/>
+                        <path class="moveElem" d="M221.707 90.6335L211.369 100.146L146.917 69.9539L157.412 60.5147L221.707 90.6335Z" fill="#F9F7FF"/>
+                        <path class="moveElem" d="M210.678 114.178L211.375 100.149L146.917 69.9539L146.22 83.9832L210.678 114.178Z" fill="#E3E3E3"/>
+                        <path class="moveElem" d="M213.974 102.425L218.971 98.1865L218.891 103.716L213.893 107.955L213.974 102.425Z" fill="#4900E3"/>
+                        <defs>
+                        <linearGradient id="paint0_linear_0_1" x1="143.611" y1="67" x2="106.611" y2="44.5" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#4900E3"/>
+                        <stop offset="1" stop-color="#4900E3" stop-opacity="0"/>
+                        </linearGradient>
+                        <linearGradient id="paint1_linear_0_1" x1="195.952" y1="92.0936" x2="148.996" y2="71.0042" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#EAEAEA"/>
+                        <stop offset="1" stop-color="#5412E0"/>
+                        </linearGradient>
+                        </defs>
+                        </svg>
+                        <span class="textOfCorparation">Регистрация компании</span>
+                        
+                        </a>                                      
+                        </div>
+                <div class="invite">
+                    <a href="/find-company">
+
+                    <svg class="inviteSvg" width="179" height="210" viewBox="0 0 179 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="70.4922" cy="70.4922" r="70.4922" transform="matrix(0.898718 -0.438528 0.880063 0.474856 -36 161.826)" fill="#5412E0"/>
+                        <circle class="rMini" cx="59.3742" cy="59.3742" r="59.3742" transform="matrix(0.898718 -0.438528 0.880063 0.474856 -16.2227 161.229)" fill="white"/>
+                        <path d="M39 162.917V24.0832L86.3901 1.07867C87.7933 0.397562 89.4312 0.397562 90.8343 1.07867L138.224 24.0832V58.7916V93.5V162.917L90.8343 185.921C89.4312 186.602 87.7933 186.602 86.3901 185.921L39 162.917Z" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="7.63 7.63"/>
+                        <path d="M53.8158 46.9129L44.0879 42.3469V54.3183L53.8158 58.8843V46.9129Z" fill="#E3E3E3"/>
+                        <path d="M84.347 62.1782L74.6191 57.6122V69.5836L84.347 74.1496V62.1782Z" fill="#E3E3E3"/>
+                        <path d="M69.0814 54.5456L59.3535 49.9796V61.951L69.0814 66.517V54.5456Z" fill="#E3E3E3"/>
+                        <path d="M53.8158 65.9946L44.0879 61.4286V73.4L53.8158 77.966V65.9946Z" fill="#E3E3E3"/>
+                        <path d="M84.347 81.2598L74.6191 76.6938V88.6653L84.347 93.2313V81.2598Z" fill="#E3E3E3"/>
+                        <path d="M69.0814 73.6272L59.3535 69.0612V81.0326L69.0814 85.5986V73.6272Z" fill="#E3E3E3"/>
+                        <path d="M53.8158 85.0761L44.0879 80.5101V92.4816L53.8158 97.0475V85.0761Z" fill="#E3E3E3"/>
+                        <path d="M84.347 100.342L74.6191 95.7755V107.747L84.347 112.313V100.342Z" fill="#E3E3E3"/>
+                        <path d="M69.0814 92.7088L59.3535 88.1428V100.114L69.0814 104.68V92.7088Z" fill="#E3E3E3"/>
+                        <path d="M53.8158 102.886L44.0879 98.3197V110.291L53.8158 114.857V102.886Z" fill="#E3E3E3"/>
+                        <path d="M84.347 118.151L74.6191 113.585V125.556L84.347 130.122V118.151Z" fill="#E3E3E3"/>
+                        <path d="M69.0814 110.518L59.3535 105.952V117.924L69.0814 122.49V110.518Z" fill="#E3E3E3"/>
+                        <path d="M53.8158 121.967L44.0879 117.401V129.373L53.8158 133.939V121.967Z" fill="#E3E3E3"/>
+                        <path d="M84.347 137.233L74.6191 132.667V144.638L84.347 149.204V137.233Z" fill="#E3E3E3"/>
+                        <path d="M69.0814 129.6L59.3535 125.034V137.005L69.0814 141.571V129.6Z" fill="#E3E3E3"/>
+                        <path d="M93.6998 62.1783L103.428 57.6123V69.5837L93.6998 74.1497V62.1783Z" fill="#E3E3E3"/>
+                        <path d="M108.965 54.5456L118.693 49.9796V61.951L108.965 66.517V54.5456Z" fill="#E3E3E3"/>
+                        <path d="M124.001 47.566L133.729 43V54.9714L124.001 59.5374V47.566Z" fill="#E3E3E3"/>
+                        <path d="M124.231 65.9946L133.959 61.4286V73.4L124.231 77.966V65.9946Z" fill="#E3E3E3"/>
+                        <path d="M93.6998 81.2598L103.428 76.6938V88.6653L93.6998 93.2313V81.2598Z" fill="#E3E3E3"/>
+                        <path d="M108.965 73.6273L118.693 69.0613V81.0327L108.965 85.5987V73.6273Z" fill="#E3E3E3"/>
+                        <path d="M124.231 85.0763L133.959 80.5103V92.4817L124.231 97.0477V85.0763Z" fill="#E3E3E3"/>
+                        <path d="M93.6998 100.342L103.428 95.7755V107.747L93.6998 112.313V100.342Z" fill="#E3E3E3"/>
+                        <path d="M108.965 92.7088L118.693 88.1428V100.114L108.965 104.68V92.7088Z" fill="#E3E3E3"/>
+                        <path d="M124.231 102.886L133.959 98.3197V110.291L124.231 114.857V102.886Z" fill="#E3E3E3"/>
+                        <path d="M93.6998 118.151L103.428 113.585V125.557L93.6998 130.122V118.151Z" fill="#E3E3E3"/>
+                        <path d="M108.965 110.518L118.693 105.952V117.924L108.965 122.49V110.518Z" fill="#E3E3E3"/>
+                        <path d="M124.231 121.967L133.959 117.401V129.373L124.231 133.939V121.967Z" fill="#E3E3E3"/>
+                        <path d="M93.6998 137.233L103.428 132.667V144.638L93.6998 149.204V137.233Z" fill="#E3E3E3"/>
+                        <path d="M108.965 129.6L118.693 125.034V137.005L108.965 141.571V129.6Z" fill="#E3E3E3"/>
+                        <path opacity="0.3" d="M68.6113 147.712L59.3535 143.748V167.036L68.6113 171V147.712Z" fill="#5412E0"/>
+                        <path d="M49.5 146L59.3535 143.748V167.036L49.5 169.288V146Z" fill="#E3E3E3"/>
+                        </svg>
+                        <span class="textOfCorparation">Вступить в компанию</span>
+                        </a>
+
+                        </div>
+            </div>
+            <div class="toBackMovile">
+                <a href="/hrMe">
+                    <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 5L1 5" stroke="black" stroke-width="0.5"/>
+                        <path d="M6 1L1 5L6 9" stroke="black" stroke-width="0.5"/>
+                        </svg>
+<span>Назад</span>                        
+                </a>
+            </div>
+        </div>
+    </main>
+    <%- include('./footer.ejs') %>
+    <script>
+        $('.inviteSvg').hover(() => {
+            $('.rMini').attr('r', '0')
+        },
+        () => {
+            $('.rMini').attr('r', '59.3742')
+        }
+        )
+    </script>
+    <script src="/js/header.js"></script>
+</body>
+</html>

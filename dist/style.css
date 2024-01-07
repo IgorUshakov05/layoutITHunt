@@ -6071,3 +6071,130 @@ flex-direction: column;
     width: 11px;
     height: 15px;
 }
+
+.createOrInvite {
+    margin: auto;
+    width: 802px;
+    position: relative;
+    margin-top: 70px;
+    height:fit-content;
+}
+
+.addOrg {
+    color: #5412E0;
+text-align: center;
+font-family: Raleway;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: 141.4%; /* 28.28px */
+letter-spacing: 0.1px;
+}
+
+.topBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.arrowBack {
+    cursor: pointer;
+}
+.toCreateOrToInvite {
+    margin-top: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.toCreateOrToInvite > div {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.createSvg {
+    position: relative;
+}
+.moveElem {
+    position: absolute;
+}
+.createSvg:hover > .moveElem {
+    transform: translate(-10px,4px);
+}
+
+
+
+.textOfCorparation {
+    color: #5412E0;
+text-align: center;
+font-family: Raleway;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 141.4%; /* 28.28px */
+letter-spacing: 0.1px;
+}
+.toCreateOrToInvite > div {
+    min-height: 250px;
+    height: 258px;
+}
+.toCreateOrToInvite > div > a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+}
+
+.toBackMovile {
+    display:none;
+    width: fit-content;
+    margin:auto;
+    margin-bottom: 50px;
+}
+.toBackMovile > a > svg {
+    margin-right: 10px;
+}
+@media (max-width: 850px) {
+    .createOrInvite {
+        width: 85%;
+        margin-top:40px;
+    }
+    .addOrg {
+        color: black;
+    }
+    .toBackMovile {
+        display: block;
+    }
+    .toCreateOrToInvite {
+        flex-direction: column;
+    }
+    .toCreateOrToInvite > div {
+        margin-bottom: 35px;
+    }
+    .toCreateOrToInvite > div {
+        width: 100%;
+        height: 250px
+    }
+    .arrowBack {
+        display: none;
+    }
+    .topBlock {
+        justify-content: center;
+    }
+    .toCreateOrToInvite {
+        margin-top: 34px;
+    }
+    .textOfCorparation {
+        color: #000;
+text-align: center;
+font-family: Raleway;
+font-size: 17px;
+font-style: normal;
+font-weight: 300;
+line-height: 141.4%; /* 16.968px */
+letter-spacing: 0.06px;
+    }
+
+}

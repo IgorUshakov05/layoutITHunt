@@ -52,7 +52,7 @@
                     </div>
 <% let company = {url: '/company', pic: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/800px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png', title: "MTC Group"} %>
 
-                    <% if(company)  {%>
+                    <% if(!company)  {%>
                   
             <a href="<%= company.url %>">
                 <div class="titleCompanyAndPhoto titleCompanyAndPhotoProfile">
