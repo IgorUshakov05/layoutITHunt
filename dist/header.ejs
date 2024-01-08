@@ -32,6 +32,9 @@
             <a href="/chats">
                 <h2 class="<%= active ==='chat'?'activeMenu':'' %>">Чат</h2>
             </a>
+            <a href="/inbox">
+                <h2 class="<%= active ==='inbox'?'activeMenu':'' %>">Входящие</h2>
+            </a>
         </nav>
         <% if (!isLoggedIn) { %>
         <a class="profile" href="/login">
