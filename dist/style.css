@@ -6244,9 +6244,20 @@ letter-spacing: 0.06px;
     display: flex;
     align-items: center;
     width: 100%;
-    margin-left: 10px;
+    margin-left: 15px;
     justify-content: space-between;
 }
+
+.countContainer > h1 {
+    color: #000;
+font-family: Raleway;
+font-size: 17px;
+font-style: normal;
+font-weight: 400;
+line-height: 141.4%; /* 24.038px */
+letter-spacing: 0.085px;
+}
+
 .count {
     display: flex;
     align-items:center;
@@ -6256,7 +6267,9 @@ letter-spacing: 0.06px;
 .itemInbox:hover {
     background:#EFEFEF;
 }
-
+.activeLink {
+    background:#D9D9D9;
+}
 .itemInbox:hover > svg > .toWhite {
     fill: white;
 }
