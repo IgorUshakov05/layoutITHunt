@@ -37,7 +37,7 @@
                 
             </div>
             <div class="toCreateOrToInvite">
-                <div class="create">
+                <div class="create" style="user-select: none;">
                 <a href="/create-company">
                     <svg class="createSvg" overflow="visible"  width="113.22" height="187" viewBox="0 0 105.22 187" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path style="width: 99.22px;margin: auto;" d="M1 162.917V24.0832L48.3901 1.07867C49.7933 0.397562 51.4312 0.397562 52.8343 1.07867L100.224 24.0832V58.7916V93.5V162.917L52.8343 185.921C51.4312 186.602 49.7933 186.602 48.3901 185.921L1 162.917Z" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="7.63 7.63"/>
@@ -94,10 +94,10 @@
                         </a>                                      
                         </div>
                 <div class="invite">
-                    <a href="/find-company">
+                    <a href="/find-company" style="user-select: none;">
 
                     <svg class="inviteSvg" width="179" height="210" viewBox="0 0 179 210" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="70.4922" cy="70.4922" r="70.4922" transform="matrix(0.898718 -0.438528 0.880063 0.474856 -36 161.826)" fill="#5412E0"/>
+                        <circle cx="70.4922" cy="70.4922" r="70.4922" class="WowG" transform="matrix(0.898718 -0.438528 0.880063 0.474856 -36 161.826)" fill="#5412E0"/>
                         <circle class="rMini" cx="59.3742" cy="59.3742" r="59.3742" transform="matrix(0.898718 -0.438528 0.880063 0.474856 -16.2227 161.229)" fill="white"/>
                         <path d="M39 162.917V24.0832L86.3901 1.07867C87.7933 0.397562 89.4312 0.397562 90.8343 1.07867L138.224 24.0832V58.7916V93.5V162.917L90.8343 185.921C89.4312 186.602 87.7933 186.602 86.3901 185.921L39 162.917Z" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="7.63 7.63"/>
                         <path d="M53.8158 46.9129L44.0879 42.3469V54.3183L53.8158 58.8843V46.9129Z" fill="#E3E3E3"/>
@@ -153,9 +153,12 @@
     <script>
         $('.inviteSvg').hover(() => {
             $('.rMini').attr('r', '0')
+            $('.WowG').attr('r', '59.4922')
+           
         },
         () => {
             $('.rMini').attr('r', '59.3742')
+            $('.WowG').attr('r', '70.4922')
         }
         )
     </script>
