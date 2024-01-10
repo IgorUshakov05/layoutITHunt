@@ -18,61 +18,47 @@
             </div>
             <div class="createCompanyMain" id="windowSendCompany">
                 <div class="createOne" id="OneStageElem">
-                    <div class="photoCompany">
-                        <div class="leftSide">
-                            <img src="/assets/pictures/EnablePhoto.png" alt="изображение компании" id="avatarCompany">
-                                <input class="setPhotoInput" type="file" name="image" id="avatarCompany1" accept="image/*">
+                    <div class="topBlock">
+                        <div class="arrowBack">
+                            <a href="/hrMe">
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24.5 12.5H3M3 12.5L13.5 23M3 12.5L13.5 2" stroke="#5412E0" stroke-width="3"/>
+                            </svg>
+                        </a>
                         </div>
-                        <div class="rightSide">
-                            <p style="word-spacing: none;">Установите фотографию</p>
-                            <div class="setInputPhoto">
-                                <input class="setPhotoInput" type="file" id="avatarCompany2" name="image" accept="image/*">
-                            <div class="svgShka">
-                                <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M11.1547 9.70492L13.2434 4.63234C13.4549 4.11871 13.0773 3.55481 12.5218 3.55481H4.06456C3.74833 3.55481 3.46335 3.74565 3.34295 4.03807L1.25424 9.11065C1.04274 9.62428 1.42038 10.1882 1.97585 10.1882H10.4331C10.7493 10.1882 11.0343 9.99734 11.1547 9.70492Z" stroke="white" stroke-width="0.613169"></path>
-                                    <path d="M1.2002 7.06666V1.21368C1.2002 0.782683 1.54959 0.433289 1.98059 0.433289H3.83947C4.13506 0.433289 4.40528 0.600295 4.53748 0.864681L4.88648 1.56269C5.01867 1.82707 5.2889 1.99408 5.58449 1.99408H10.1748C10.6058 1.99408 10.9552 2.34348 10.9552 2.77448V2.77448" stroke="white" stroke-width="0.613169" stroke-linecap="round"></path>
-                                </svg>
-
+                        <div class="addOrganization"><span class="addOrg">Добавим организацию</span></div>
+                        <div class="arrowBack" style="opacity: 0;"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24.5 12.5H3M3 12.5L13.5 23M3 12.5L13.5 2" stroke="#5412E0" stroke-width="3"/>
+                            </svg>
                             </div>
-                            <p class="setInputPhotoText">Загрузите изображение</p>
-                        </div>
-                            <p class="IHeed setMyPhoto">Разрешение фотографии должно быть 1:1</p>
-                        </div>
+                        
                     </div>
-                    <div class="inputs inputsCompany">
-                        <input type="text" placeholder="Наименование компании" required  name="nameCompany" id="nameCompany">
-                        <div class="groupInput">
-                            <div class="leftInputs">
-                                <div class="inputs">
-                                    <input class="100%" type="number" maxlength="12" required placeholder="ИНН" id="innCompany" name="innCompany">
-                                </div>
-                             </div>
-                            <div class="rigthInputs">
-                                <div class="inputs">
-                                <input class="100%" type="text" required placeholder="Ссылка официальный на сайт " id="websiteCompany" name="websiteCompany">
+                    <div class="data">
+                        <label class="labelText">Наименование</label>
+                    <input class="specialisationSelectInput" style="margin-bottom:5px;" placeholder="ITHunt" type="text" name="nameCompany" id="nameCompany">
+                    <div class="labelTextCompany"></div>
+                    <label class="labelText">Установите логотип компании</label>
+                    <div class="setLogo">
+                            <div class="leftFishPhoto">
+                                <img width="137" height="137" src="/assets/pictures/FishPhto.png" alt="Логотип компании">
                             </div>
+                            <div class="leftInputImg">
+                                <p>Соотношение сторон 1:1</p>
+                                <p>Допускаемые форматы изображения могут включать JPEG, PNG</p>
+                                <div class="addCompany">
+                                    <input type="file" id="imageUpload" name="imageUpload" accept="image/jpeg, image/png">
+                                    <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15.6409 14.7641L19.0568 6.4684C19.2683 5.95477 18.8906 5.39087 18.3351 5.39087H4.94839C4.63215 5.39087 4.34718 5.58171 4.22677 5.87413L0.810877 14.1699C0.59938 14.6835 0.977016 15.2474 1.53249 15.2474H14.9193C15.2355 15.2474 15.5205 15.0566 15.6409 14.7641Z" stroke="white" stroke-width="0.613169"/>
+                                        <path d="M0.947266 10.6091V1.53296C0.947266 1.10196 1.29666 0.752563 1.72766 0.752563H5.10332C5.39891 0.752563 5.66914 0.91957 5.80133 1.18396L6.52953 2.64035C6.66172 2.90474 6.93194 3.07175 7.22754 3.07175H14.6618C15.0928 3.07175 15.4422 3.42114 15.4422 3.85214V4.23134" stroke="white" stroke-width="0.613169" stroke-linecap="round"/>
+                                        </svg>
+                                        <span>Загрузить изображение</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="groupInput">
-                            <div class="leftInputs">
-                                <div class="inputs">
-                                    <input required class="100%" type="text" id="addresCompany" name="addresCompany" placeholder="Местоположение">
-                                </div>
-                             </div>
-                            <div class="rigthInputs">
-                                <div class="inputs">
-                                <input required class="100%" type="text" placeholder="Контактный телефон" id="numberCompany" name="numberCompany">
-                            </div>
-                            </div>
-                        </div>
-                        <textarea required placeholder="Описание" class="descriptionCompany" name="description" id="descriptionCompany" cols="30" rows="10"></textarea>
                     </div>
                     <div class="bottomElem">
-                            <div class="canel">
-                            <a href="/me">Отмена</a>
-                        </div>
                         <div class="nextStageCompany">
-                            <button disabled id="toTwoStage" class="submitButton submitButtonComp">Продолжить создание</button>
+                            <button disabled id="toTwoStage" class="submitButton submitButtonComp">Продолжить</button>
                         </div>
                     </div>   
                 </div>

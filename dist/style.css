@@ -2364,8 +2364,8 @@ background: #FFF;
 margin: auto;
 margin-top: 15px;
 padding:36px;
+width: 443px;
 box-sizing:border-box;
-width: 718px;
 box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
 }
 
@@ -2494,7 +2494,7 @@ box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
     width: 100%;
     right: 0;
     margin-top: 20px;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 .canel {
@@ -2506,7 +2506,7 @@ box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
 }
 
 .nextStageCompany {
-    width: 38%;
+    width: 100%;
 }
 .createTwo {
     display: none;
@@ -2550,9 +2550,7 @@ box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
         flex-direction: column-reverse;
         align-items: center;
     }
-    .nextStageCompany {
-        width: 100%;
-    }
+    
     .canel {
         width: 100%;
         margin-top: 20px;
@@ -6272,4 +6270,61 @@ letter-spacing: 0.085px;
 }
 .itemInbox:hover > svg > .toWhite {
     fill: white;
+}
+
+.arrowBack {
+    width: 25px;
+    height: 25px;
+}
+
+.data {
+    margin-top: 31px;
+    color: #000;
+font-family: Raleway;
+font-size: 15px;
+font-style: normal;
+font-weight: 400;
+line-height: 141.4%; /* 21.21px */
+letter-spacing: 0.075px;
+}
+.labelTextCompany {
+    margin-top: 14px;
+}
+
+.leftFishPhoto {
+    width: 137px;
+    height: 137px;
+
+}
+.addCompany {
+    position: relative;
+}
+
+.addCompany > input[type=file] {
+    position: absolute;
+    opacity: 0;
+}
+
+.setLogo {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start
+}
+
+.leftInputImg > p {
+    color: #404040;
+font-size: 13px;
+font-style: normal;
+font-weight: 300;
+line-height: 111.9%; /* 14.547px */
+letter-spacing: -0.065px;
+}
+
+.leftInputImg {
+    margin-left: 10px;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
 }
