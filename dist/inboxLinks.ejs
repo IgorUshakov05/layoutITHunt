@@ -1,6 +1,6 @@
 <div noindex class="personalInfo filterAlways noShadow">
     <span class="chatsItem inboxText">Входящие</span>
-    <nav class="inboxNav" style="margin-top: 7px;">
+    <nav class="inboxNav <%= isMain ? '' : 'noneMob' %>" style="margin-top: 7px;">
         <div class="topNavInbox">
 
         <a class="itemInbox <%= active=='1'?'activeLink':'' %>" href="/inbox/vacancies"><svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -14,7 +14,7 @@
             <rect x="8" y="29" width="25" height="2" fill="#D9D9D9"/>
             <rect x="8" y="34" width="18" height="2" fill="#D9D9D9"/>
             </svg>
-            <span class="countContainer"><h1>Входящие</h1><div class="count"><span>2</span></div></a>
+            <span class="countContainer"><h1>Вакансии</h1><div class="count"><span>2</span></div></a>
         
             <a class="itemInbox <%= active=='2'?'activeLink':'' %>" href="/inbox/fast-work"><svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect class="toWhite" width="41" height="41" rx="4" fill="#EFEFEF"/>
@@ -23,7 +23,6 @@
                 </svg>
                 
                 <span class="countContainer"><h1>Фаст-Ворк</h1><div class="count"><span>2</span></div></a>
-
                 <a class="itemInbox <%= active=='3'?'activeLink':'' %>" href="/inbox/company">
                     <svg width="41" height="47" viewBox="0 0 41 47" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect y="4.99998" class="toWhite" width="41" height="41" rx="4" fill="#EAEAEA"/>
@@ -67,7 +66,7 @@
             
              <div style="margin-top: 20px;" class="topNavInbox">
 
-                <a class="itemInbox <%= active=='4'?'activeLink':'' %>" href="/inbox"><svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <a class="itemInbox <%= active=='4'?'activeLink':'' %>" href="/inbox/other"><svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect class="toWhite" width="39" height="39" rx="4" fill="#EFEFEF"/>
                     <circle cx="10.5" cy="20.5" r="3.5" fill="white" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="3 3"/>
                     <circle cx="20.5" cy="20.5" r="3.5" fill="white" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="3 3"/>

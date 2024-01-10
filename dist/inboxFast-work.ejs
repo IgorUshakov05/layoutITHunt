@@ -11,19 +11,13 @@
     <meta name="author" content="ITHunt">
     <link rel="stylesheet" href="/style.css">
     <script src="/js/jquery.js"></script>
-    <script>
-        if(window.screen.width >= 1100) {
-        window.location.href="/inbox/other"
-    }
-</script>
-
-    <title>Входящие уведомления</title>
+    <title>Входящие уведомления - Фаст-Ворк</title>
 </head>
 <body>
     <%- include('./header.ejs', { isLoggedIn, active: 'other'}) %>
     <main  class="main">
         <div class="twoBlocks mt20">
-            <%- include('./inboxLinks', {active: "", isMain: true}) %>
+            <%- include('./inboxLinks', {active: "2", isMain: false }) %>
             <div class="MoreInfo">
                 
              
