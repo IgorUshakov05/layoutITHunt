@@ -6299,10 +6299,13 @@ letter-spacing: 0.075px;
 }
 .leftFishPhoto > img {
 width: 100%;
+border-radius: 7px;
 height:100%;
 }
+
 .addCompany {
     position: relative;
+    max-width: 190px;
 }
 
 .addCompany > input[type=file] {
