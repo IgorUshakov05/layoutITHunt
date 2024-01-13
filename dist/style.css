@@ -2511,7 +2511,7 @@ box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
     width: 100%;
 }
 .createTwo {
-    display: none;
+    height: 0;
 }
 .buttonsСompany {
     width: 60%;
@@ -6312,7 +6312,9 @@ height:100%;
     position: absolute;
     opacity: 0;
 }
-
+#oneStage,#TwoStageElem,#lastStage {
+    overflow: hidden;
+}
 .setLogo {
     display: flex;
     align-items: stretch;

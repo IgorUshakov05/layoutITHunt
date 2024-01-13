@@ -1,4 +1,22 @@
 const formData = new FormData();
+const oneStage = document.getElementById('oneStage')
+const twoStage =document.getElementById('TwoStageElem')
+const verifyOne = () => {
+  if (formData.get('image') && formData.get('title').length >= 3 && formData.get('description').length >= 10) {
+    document.getElementById('toTwoStage').removeAttribute('disabled')
+  }
+  else {
+    document.getElementById('toTwoStage').setAttribute('disabled',true)
+  }
+}
+const verifyTwo = () => {
+  if (formData.get('image') && formData.get('title').length >= 3 && formData.get('description').length >= 10) {
+    document.getElementById('toTwoStage').removeAttribute('disabled')
+  }
+  else {
+    document.getElementById('toTwoStage').setAttribute('disabled',true)
+  }
+}
 
 document.getElementById('nameCompany').addEventListener('input', function() {
     if (this.value.length > 100) {
@@ -8,7 +26,9 @@ document.getElementById('nameCompany').addEventListener('input', function() {
     console.log(formData.get('description'));
     console.log(formData.get('title'));
     console.log(formData.get('image'));
+    verifyOne()
 });
+
 
 
 document.getElementById('descriptionCompany').addEventListener('input', function() {
@@ -21,6 +41,7 @@ document.getElementById('descriptionCompany').addEventListener('input', function
   console.log(formData.get('image'));
   console.log(formData.get('title'));
   document.getElementById('reminder').textContent =` Осталось символов: ${Math.max(0, remainingCharacters)}`;
+  verifyOne()
 });
 
 
@@ -80,4 +101,10 @@ document.getElementById('imageUpload').addEventListener('change', function() {
       });
     };
     reader.readAsDataURL(file);
+    verifyOne()
   });
+
+document.getElementById('toTwoStage').addEventListener('click', () => {
+  oneStage.style.height='0'
+  twoStage.style.height='fit-content'
+})
