@@ -1,5 +1,6 @@
 let data = {
-    inn: 0
+    inn: 0,
+    img: ''
 }
 $('#nameCompany').on('input', function ()  {
     if ($('#nameCompany').val().length > 0) {
@@ -20,6 +21,7 @@ $('.seleced').on('click', function() {
 
     console.log(companyTitle, inn, src);  // Выводим результат в консоль
     data.inn = inn
+    data.img = src
     $('.bigBox').append(`
     <div class="specialisationSelectInput selecteCompany"  style="margin-top: 12px;">
                             <div class="infoSelectCOmpany">
@@ -49,6 +51,20 @@ $('#bigBox').on('click', '.selectNo', () => {
     $('.grupAbsolute').toggle();
     $('#toTwoStage').attr('disabled',true)
     data.inn = 0
+    data.img = ''
     $('.selecteCompany').remove()
 });
 
+
+$('#toTwoStage').on('click', () => {
+    if(data.inn==0) {
+        return false
+    }
+    else {
+        $('.here').attr('href',data.img)
+    $('.windowFinally').css('display', 'flex')
+    $('.data').css('height', '0').css('overflow', 'hidden')
+    $('.createCompanyMain').css('background', "#5412E0").css('box-shadow', 'none')
+    $('.addOrg').css('color','white')
+}
+})
