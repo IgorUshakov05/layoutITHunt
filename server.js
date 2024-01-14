@@ -17,6 +17,7 @@ const fastWorkItem = require('./pageRoutes/fastworkItem')
 const chat = require('./pageRoutes/chat')
 const inbox = require('./pageRoutes/inbox')
 const inboxOther = require('./pageRoutes/inboxOther')
+const findCompany = require('./pageRoutes/findCompany')
 const inboxCompany = require('./pageRoutes/inboxCompany')
 const inboxFastWork = require('./pageRoutes/inboxFast-work')
 const inboxVacansy = require('./pageRoutes/inboxVacansy')
@@ -38,7 +39,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist')));
 app.set('views', path.join(__dirname, 'dist'));
 
-app.use(index,login,myprofileProfessional,inboxOther,inboxFastWork,inboxVacansy,inboxCompany,inbox,addCompany,createVacancy,createFastWork,HisprofileHR,settingsHR,myprofileHR,registration,company,chat,vacancia,fastWorkItem,userChat,settingsSpecialist,deleteAccount,createCompany, fastWork,specialists,vacancies)
+app.use(index,login,myprofileProfessional,inboxOther,findCompany,inboxFastWork,inboxVacansy,inboxCompany,inbox,addCompany,createVacancy,createFastWork,HisprofileHR,settingsHR,myprofileHR,registration,company,chat,vacancia,fastWorkItem,userChat,settingsSpecialist,deleteAccount,createCompany, fastWork,specialists,vacancies)
 app.get('/robots.txt',(req,res)=>{
     res.sendFile(path.join(__dirname,'robots.txt'))
 })

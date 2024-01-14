@@ -121,7 +121,8 @@
         <div class="group">
         <%- contantsPic[element.type] %>
         <a href="<%= element.type === 'gm' ? 'mailto:' + element.url : (element.type === 'tel' ? 'tel:' + element.url : element.url) %>" target="_blank">
-            <%= element.url %>
+            <%=   element.url.split('/')[element.url.split('/').length-1] %>
+
         </a>
 </div>
     </li>
