@@ -98,90 +98,24 @@ $('#max').on('input', () => {
 })
 
 function removePlaceholder() {
-    $('.placeholderMy').remove()
+    $('.placeholderMy').remove();
+    $('#output').text(''); // Очищаем содержимое элемента #output
 }
 
-function toggleFormat(type) {
-    if (type === 'bold') {
-        $('.boldenText').toggleClass('activeEdit');
-        $('.placeholderMy').remove();
-        if ($('.boldenText').hasClass('activeEdit')) {
-            $('.cursiveText').removeClass('activeEdit');
-            $('#output').append(`<b>${handleInput()}</b>`);
-            console.log("have");
-        } else {
-            // Убираем курсив, если класса 'activeEdit' нет
-            $('#output').append('<span></span>');
-            console.log("No have");
-        }
-        setFocusAtEnd(document.getElementById('output'));
-    } else if (type === 'italic') {
-        $('.cursiveText').toggleClass('activeEdit');
-        $('.placeholderMy').remove();
 
-        // Проверяем конкретный класс 'activeEdit'
-        if ($('.cursiveText').hasClass('activeEdit')) {
-            $('.boldenText').removeClass('activeEdit');
-            $('#output').append(`<i>${handleInput()}</i>`);
-            console.log("have");
-        } else {
-            // Убираем курсив, если класса 'activeEdit' нет
-            $('#output').append('<span>.</span>');
-            console.log("No have");
-        }
-        
-        setFocusAtEnd(document.getElementById('output'));
-    }
-}
 
 function handleInput() {
-    let outputContent = $('#output').text(); // Используем text(), чтобы получить только текст, а не HTML
-    allData.description = outputContent;
-    makeOneVisibleLastStage()
-    $('.tips').text(`Осталось символов: ${3000 - outputContent.length}`);
-    if (outputContent.length >= 3000) {
-        // Если достигнут, ограничиваем ввод
-        $('#output').text(outputContent.substring(0, 3000));
-    }
-    return outputContent;
-}
+    let outputContent = $('#output').text();
+    let remainingChars = 3000 - outputContent.length;
+    $('.tips').text(`Осталось символов: ${remainingChars}`);
+  }
+  
 
 // Добавляем обработчик события input для отслеживания изменений в тексте
 $('#output').on('input', handleInput);
 
-// Добавляем обработчики событий для отслеживания изменений через ctrl+a и удаления текста
-$('#output').on('keyup', function (event) {
-    if (event.ctrlKey && (event.key === 'a' || event.key === 'A')) {
-        handleInput();
-    }
-});
 
-$('#output').on('keydown', function (event) {
-    if (event.key === 'Backspace' || event.key === 'Delete') {
-        handleInput();
-    }
-});
 
-function createList() {
-    $('.listText').toggleClass('activeEdit');
-}
-
-function setFocusAtEnd(element) {
-    var range, selection;
-    if (document.createRange) {
-        range = document.createRange();
-        range.selectNodeContents(element);
-        range.collapse(false);
-        selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
-    } else if (document.selection) {
-        range = document.body.createTextRange();
-        range.moveToElementText(element);
-        range.collapse(false);
-        range.select();
-    }
-}
  
 $('#nextStageTwo').on('click',() => {
 
