@@ -252,8 +252,8 @@
                 <label for="specialisationSelect" class="forLabel">Описание</label>
                 <div class="MytextArea">
                     <div class="groupEditText">
-                        <div class="boldenText" onclick="toggleFormat('bold')">Ж</div>
-                        <div class="cursiveText" onclick="toggleFormat('italic')">К</div>
+                        <div class="boldenText" onclick="makeBold()">Ж</div>
+                        <div class="cursiveText" onclick="makeItalic()">К</div>
                         <div class="listText" onclick="createList()"><svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.58398 1.58435H14.584" stroke="black"/><path d="M4.58398 11.5844H14.584" stroke="black"/><path d="M4.58398 6.58435H14.584" stroke="black"/><circle cx="1.58398" cy="1.58435" r="1" fill="black"/><circle cx="1.58398" cy="6.58435" r="1" fill="black"/><circle cx="1.58398" cy="11.5844" r="1" fill="black"/></svg></div></div>
                     <div id="output" contenteditable="true" oninput="handleInput()" onclick="removePlaceholder()">
                         <ul class="placeholderMy">

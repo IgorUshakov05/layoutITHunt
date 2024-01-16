@@ -5894,7 +5894,7 @@ font-style: normal;
 border: 0.5px solid #000;
 }
 .login > div {
-    overflow: hidden;
+    overflow-y: clip;
     
 }
 
@@ -6322,7 +6322,7 @@ height:100%;
     opacity: 0;
 }
 #oneStage,#TwoStageElem,#lastStage {
-    overflow: hidden;
+    overflow-y: clip;
 }
 .setLogo {
     display: flex;

@@ -99,8 +99,38 @@ $('#max').on('input', () => {
 
 function removePlaceholder() {
     $('.placeholderMy').remove();
-    $('#output').text(''); // Очищаем содержимое элемента #output
 }
+function toggleFormattingCommand(command, className) {
+    const editableElement = document.getElementById("output");
+
+    document.getSelection().modify('move', 'forward', 'line');
+    document.getSelection().modify('extend', 'forward', 'line');
+
+    if (document.queryCommandState(command)) {
+        document.execCommand('removeFormat');
+        editableElement.classList.remove(className);
+    } else {
+        document.execCommand(command, false, null);
+        editableElement.classList.add(className);
+    }
+}
+
+function makeBold() {
+    $('.boldenText').addClass("activeLink");
+    toggleFormattingCommand('bold', 'boldenText');
+}
+
+function createList() {
+    $('.listText').addClass("activeLink");
+    toggleFormattingCommand('insertUnorderedList', 'listText');
+}
+
+function makeItalic() {
+    $('#output').css('background', 'white')
+    $('.cursiveText').addClass("activeLink");
+    toggleFormattingCommand('italic', 'cursiveText');
+}
+
 
 
 
