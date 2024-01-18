@@ -6578,3 +6578,15 @@ letter-spacing: 0.13px;
     background:red;
     cursor: pointer;
 }
+
+.save {
+    margin-right: 10px;
+}
+
+.canelSkill:hover,.canelSkill:active {
+    color: #4900E3;
+}
+
+.save:hover, .save:active {
+    color: #4900E3;
+}
