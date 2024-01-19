@@ -3,7 +3,7 @@ $('.removeMySkill').on('click', () => {
     $('.d-none').show()
 })
 
-$('#canelSkill').on('click', () => {
+$('.canelSkill').on('click', () => {
     console.log("Нажимается");
     $('.mySkills').show()
     $('.d-none').hide()

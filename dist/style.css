@@ -6556,23 +6556,24 @@ background:none;
     margin-top:10px;
 }
 
-.removeMySkill {
+.grup,.removeMySkill {
     color: #000;
 font-family: Raleway;
 font-size: 13px;
+cursor:pointer;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
 letter-spacing: 0.13px;
 }
+.grup {
+    display: flex;
+}
 .d-none {
     display:none;
 }
 
-.removeMySkill:hover, .removeMySkill:active {
-    color:red;
-    cursor: pointer;
-}
+
 
 .canelSkillDelete > li:hover, .canelSkillDelete > li:active {
     background:red;
