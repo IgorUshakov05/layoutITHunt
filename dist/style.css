@@ -6511,12 +6511,13 @@ margin-top:4px;
 padding: 10px 15px;
 justify-content: center;
 align-items: center;
+user-select: none;
 gap: 10px;
 border-radius: 4px;
 background: #4900E3;
 
 color: #FFF;
-text-align: justify;
+text-align: left;
 font-family: Raleway;
 font-size: 13px;
 font-style: normal;
@@ -6573,15 +6574,31 @@ letter-spacing: 0.13px;
     display:none;
 }
 
+.canelSkillDelete > li {
+    position:relative;
+}
 
 
 .canelSkillDelete > li:hover, .canelSkillDelete > li:active {
     background:red;
+    color: red;
+    padding:10px 20px;
     cursor: pointer;
 }
 
-.save {
-    margin-right: 10px;
+.canelSkillDelete > li:hover::before {
+    content: 'Удалить';
+    position: absolute;
+    right: 0;
+    text-align: center;
+    left:0;
+    color: white;
+    margin:auto;
+}
+
+
+.canelSkill {
+    margin-right:10px;
 }
 
 .canelSkill:hover,.canelSkill:active {
@@ -6590,4 +6607,102 @@ letter-spacing: 0.13px;
 
 .save:hover, .save:active {
     color: #4900E3;
+}
+
+.expiriensItem {
+    padding: 17px 19px;
+    border-radius: 4px;
+background: #FFF;
+margin-top:10px;
+box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.leftInfoExp,.topInfoExpiriensItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor:pointer;
+}
+.TimeJob,.titleCompanyExp,.MyVacExp,.decriptMyLazzy {
+    font-size: 14px;
+    font-style: normal;
+    transition: ease 0.2s;
+    font-family: Raleway;
+    font-weight: 400;
+    cursor:text;
+    line-height: normal;
+    letter-spacing: 0.13px;
+}
+.timeJobAndShowAll {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.TimeJob {
+    margin-right: 10px;
+}
+
+.boldEn {
+    font-weight: 700;
+}
+
+
+.rotate180 {
+    transform: rotate(200grad);
+}
+
+@media (max-width:620px) {
+    .timeJobAndShowAll {
+        display:none;
+    }
+    .boldEn {
+        font-weight: 400;
+    }
+    .leftInfoExp, .topInfoExpiriensItem {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .titleCompanyExp {
+        margin-top:4px;
+    }
+    .MyVacExp {
+        color: #000;
+font-family: Raleway;
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+letter-spacing: 0.12px;
+    }
+}
+
+.editExp,.removeExp {
+    color: #929292;
+font-family: Raleway;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.11px;
+background:none;
+border:none;
+padding:8px 12px;
+}
+.removeExp {
+    border-radius: 4px;
+border: 0.5px solid #929292;
+}
+.editExp {
+    margin-right: 5px;
+}
+.bottomElementExp {
+    margin-top:10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.middleInfoExp {
+    margin-top:10px;
+    display:none;
 }
