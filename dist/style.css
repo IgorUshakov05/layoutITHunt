@@ -6706,3 +6706,45 @@ border: 0.5px solid #929292;
     margin-top:10px;
     display:none;
 }
+
+.educationMyClick {
+    display: flex;
+    justify-content: space-between;
+    align-items:top;
+}
+
+.educationMyClick > div {
+    width: 47%;
+}
+
+@media (max-width:1100px) {
+    .educationMyClick {
+        flex-direction: column;
+    }
+    .educationMyClick > div {
+        width: 100%;
+    }
+}
+
+.educationalInstitution,.educationalInstitutionType {
+font-family: Raleway;
+font-size: 13px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.13px;
+}
+
+.educationalInstitutionType {
+    font-weight: 700;
+}
+
+.eduSchool {
+    padding: 12px 19px;
+    border-radius: 4px;
+    margin-top:10px;
+
+background: #FFF;
+box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
