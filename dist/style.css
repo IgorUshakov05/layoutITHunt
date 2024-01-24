@@ -1795,6 +1795,7 @@ letter-spacing: 0.15px;
     display:none;
     border-radius:4px;
     margin: auto;
+    box-sizing: border-box;
     max-width: 420px;
     height: fit-content;
     width: fit-content;
@@ -4250,8 +4251,8 @@ box-shadow: 0px 1px 6.2px -1px rgba(191, 198, 255, 0.77);
 }
 @media(max-width: 1100px) {
     .addPortfolioContact,.addPortfolioModal {
-        width: 83%;
-        max-width: 83%;
+        width: 88%;
+        max-width: 88%;
     }
 }
 
@@ -5554,6 +5555,11 @@ line-height: 127.9%; /* 16.627px */
 letter-spacing: 0.13px;
 width: 100%;
 }
+.borderAll {
+    border: 0.5px solid #404040;
+    border-radius:4px;
+    font-size:14px;
+}
 
 .selectTypeMedia,.selectTypeMediaPort {
     position: relative;
@@ -5998,11 +6004,32 @@ flex-direction: column;
 
 
 .specialnostText {
-    font-size: 16px;
+    font-size: 13px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     line-height: normal;
     letter-spacing: 0.16px;
+}
+
+.addExpiriens {
+    border:none;
+    position:absolute;
+    border-radius: 4px;
+background: #FFF;
+box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+    right: 0;
+    margin:auto;
+    width: 830px;
+    padding:23px;
+    box-sizing:border-box;
+    left: 0;
+    top:0;
+    bottom:0;
+}
+@media (max-width: 1100px) {
+    .addExpiriens {
+        width: 88%;
+    }
 }
 .rightright {
     display: flex;
@@ -6724,9 +6751,12 @@ border: 0.5px solid #929292;
     .educationMyClick > div {
         width: 100%;
     }
+    .exucation {
+        margin-top:15px;
+    }
 }
 
-.educationalInstitution,.educationalInstitutionType {
+.educationalInstitution,.educationalInstitutionType,.onclickCount {
 font-family: Raleway;
 font-size: 13px;
 font-style: normal;
@@ -6734,11 +6764,18 @@ font-weight: 400;
 line-height: normal;
 letter-spacing: 0.13px;
 }
-
-.educationalInstitutionType {
+.onclickCount {
+    font-family: Ubuntu;
+}
+.educationalInstitutionType,.onclickCount {
     font-weight: 700;
 }
-
+.f-size {
+    font-size:12px;
+}
+.mt-5 {
+    margin-top:3px;
+}
 .eduSchool {
     padding: 12px 19px;
     border-radius: 4px;
@@ -6748,3 +6785,140 @@ background: #FFF;
 box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
+.onClick {
+    position:relative;
+    display: flex;
+    cursor:pointer;
+    justify-content: space-between;
+    align-items:center;
+}
+
+.myListOnClick {
+    position:absolute;
+    top: 100%;
+    border-radius:  0 0 4px 4px;
+    width: 100%;
+background: #FFF;
+right: 0;
+display:none;
+left:0;
+border-top: 1px solid black;
+box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+max-height: 150px;
+overflow: auto;
+}
+.w-100 {
+    width: 100%;
+}
+.mt-50 {
+    margin-top:50px;
+}
+.mb-20 {
+    margin-bottom: 20px;
+}
+.onClick {
+    z-index: 99;
+}
+.favoriteVac {
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+}
+
+.vacansyaLink {
+    padding: 7px 19px;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+.descriptionAddExiriens {
+    color: #000;
+font-family: Raleway;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+margin-top:9px;
+letter-spacing: 0.14px;
+}
+
+.topInputs {
+    margin-top:20px;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+.topInputs > * {
+   width: 31.5%;
+}
+
+.setTerm {
+    border: 0.5px solid #404040;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    border-radius:4px;
+}
+
+.setTerm > * {
+    width: 50%;
+}
+.termBlock {
+    text-align: center;
+    height: 100%;
+}
+
+.termInput {
+    border:none;
+    border-right:0.5px solid #404040;
+    border-radius:0;
+}
+
+.descripeJob {
+    margin-top: 15px;
+    resize: none;
+}
+.borderAll {
+    text-align: left;
+}
+.canelsButton {
+    display: flex;
+    width: 100%;
+align-items:center;
+margin-top: 10px;
+    justify-content: end;
+}
+.canelsButton > * {
+    padding: 10px 24px;
+    background:none;
+    margin:0;
+    border: none;
+    color: #5412E0;
+    font-family: Raleway;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 141.4%; /* 18.382px */
+    letter-spacing: 0.065px;
+    width: fit-content;
+    height: fit-content;
+}
+
+.sendJobTitle {
+    background:#5412E0;
+    color:white;
+    border-radius: 4px;
+}
+@media (max-width: 700px) {
+    .topInputs {
+        flex-direction: column;
+    }
+    .topInputs > * {
+        width: 100%;
+    }
+    .topInputs > *:not(:nth-child(1)) {
+        margin-top: 12px;
+    }
+}

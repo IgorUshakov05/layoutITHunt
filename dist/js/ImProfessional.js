@@ -19,3 +19,21 @@ $('.topInfoExpiriensItem').on('click', function() {
     $(this).find('.timeJobAndShowAll').find('.expand').find('.rotatePls').toggleClass('rotate180');
   });
   
+$('.onClick').on('click', function(){
+    $(this).find('.myListOnClick').toggle()
+    $(this).find('.rot').toggleClass('rotate180');
+})
+
+const addExpiriensModal = document.getElementById('addExpiriens')
+const closeAddExpiriens = document.getElementById('closeAddExpiriens')
+const openAddExpiriendModal = document.getElementById('openAddExpiriendModal')
+
+closeAddExpiriens.addEventListener('click', () => {
+    addExpiriensModal.close()
+    $('.blackBack').css('display', 'none')
+})
+
+openAddExpiriendModal.addEventListener('click', () => {
+    $('.blackBack').css('display', 'block')
+    addExpiriensModal.show()
+})
