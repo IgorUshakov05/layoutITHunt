@@ -6848,6 +6848,7 @@ letter-spacing: 0.14px;
     display: flex;
     justify-content: space-between;
     align-items:center;
+    position:relative;
 }
 
 .topInputs > * {
@@ -6911,6 +6912,83 @@ margin-top: 10px;
     color:white;
     border-radius: 4px;
 }
+
+
+.w-fitContent {
+    width:40%;
+}
+.w-fitContent > * {
+    width: 100%;
+}
+.selectSkills {
+    width:100%;
+    z-index: 99;
+    position: absolute;
+    right: 0;
+    left:0;
+    top:100%;
+    background: #FFF;
+    padding: 0 17px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    border-radius:4px;
+filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.25));
+}
+.selectSkill {
+    color: #000;
+    cursor: pointer;
+font-family: Raleway;
+font-size: 13px;
+font-style: normal;
+font-weight: 400;
+margin:14px 0;
+line-height: normal;
+letter-spacing: 0.13px;
+}
+
+.selectSkill:hover {
+    color: #503093;
+}
+.addingValue {
+    margin-top:20px;
+}
+.ligthText {
+font-family: Raleway;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.12px;
+}
+
+.listAddingSkillItem:hover {
+    color: #4900E3;
+}
+.listAddingSkillItem:hover::before {
+    content:'Удалить';
+    position: absolute;
+    color: white;
+}
+.listAddingSkillItem {
+    display: inline-flex;
+padding: 10px 15px;
+cursor: pointer;
+justify-content: center;
+position: relative;
+align-items: center;
+gap: 10px;
+border-radius: 4px;
+background: #4900E3;
+color: #FFF;
+text-align: justify;
+font-family: Raleway;
+font-size: 13px;
+font-style: normal;
+margin-top:5px;
+font-weight: 500;
+line-height: 141.4%; /* 18.382px */
+letter-spacing: 0.065px;
+}
 @media (max-width: 700px) {
     .topInputs {
         flex-direction: column;
@@ -6921,4 +6999,7 @@ margin-top: 10px;
     .topInputs > *:not(:nth-child(1)) {
         margin-top: 12px;
     }
+    .w-fitContent {
+    width:100%;
+}
 }

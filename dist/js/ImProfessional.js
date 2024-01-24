@@ -37,3 +37,19 @@ openAddExpiriendModal.addEventListener('click', () => {
     $('.blackBack').css('display', 'block')
     addExpiriensModal.show()
 })
+
+
+const addSkillButton = document.getElementById('addSkillButton')
+const closeSkillModal = document.getElementById('closeSkillModal')
+const addSkill = document.getElementById('addSkill')
+
+addSkill.addEventListener('click', () => {
+    addSkill.close()
+    $('.blackBack').css('display', 'none')
+})
+
+addSkillButton.addEventListener('click', () => {
+    $('.blackBack').css('display', 'block')
+    addSkill.show()
+})
+

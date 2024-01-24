@@ -147,7 +147,7 @@
         </div>
         <div class="MoreInfo mb-20">
             <div class="blackBack">
-                <dialog id="addExpiriens" class="addExpiriens" open>
+                <dialog id="addExpiriens" class="addExpiriens" close>
                 <span class="myVacancyText">Опыт работы</span>
                 <p class="descriptionAddExiriens">Добавьте опыт работы как можно точнее, первое на что смотрит работодатель это навыки и опыт</p>
                 <div class="topInputs">
@@ -163,6 +163,65 @@
                 <textarea placeholder="Расскажите подробно чем вы занимались на работе" name="descriptipm" id="" cols="30" rows="10" class="descripeJob inputContact borderAll"></textarea>
                 <div class="canelsButton">
                     <button id="closeAddExpiriens" class="canel">Отмена</button>
+                    <button class="sendJobTitle">Добавить</button>
+                    </div>
+                </dialog>
+
+                <dialog id="addSkill" class="addExpiriens" close>
+                <span class="myVacancyText">Опыт работы</span>
+                <p class="descriptionAddExiriens">Добавьте навыки которыми вы обладаете. Вписывая навык, выберете его из списка</p>
+<span class="descriptionAddExiriens">Если не нашли нужный навык, <a href="" type="" style="color:#5412E0; font-size: 14px;">напишите нам</a> и мы его добавим</span>
+                <div class="topInputs w-fitContent">
+                    <input placeholder="JavaScript" type="text" name="jobTitle" id="jobTitle" class="inputContact borderAll">    
+                    <div class="selectSkills">
+                        <ul class="listSelectSkills">
+                            <li class="selectSkill">JavaSctipt</li>
+                            <li class="selectSkill">HTML</li>
+                            <li class="selectSkill">CSS</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="addingValue" class="addingValue">
+                    <p class="ligthText">Добавленные</p>
+                        <ul class="listAddingSkill">
+                            <li class="listAddingSkillItem">JavaSctipt</li>
+                            <li class="listAddingSkillItem">HTML</li>
+                            <li class="listAddingSkillItem">CSS</li>
+
+                            <li class="listAddingSkillItem">JavaSctipt</li>
+                            <li class="listAddingSkillItem">HTML</li>
+                            <li class="listAddingSkillItem">CSS</li>
+                            <li class="listAddingSkillItem">JavaSctipt</li>
+                            <li class="listAddingSkillItem">HTML</li>
+                            <li class="listAddingSkillItem">CSS</li>
+                            <li class="listAddingSkillItem">JavaSctipt</li>
+                            <li class="listAddingSkillItem">HTML</li>
+                            <li class="listAddingSkillItem">CSS</li>
+                            <li class="listAddingSkillItem">JavaSctipt</li>
+                            <li class="listAddingSkillItem">HTML</li>
+                            <li class="listAddingSkillItem">CSS</li>
+                            <li class="listAddingSkillItem">JavaSctipt</li>
+                            <li class="listAddingSkillItem">HTML</li>
+                            <li class="listAddingSkillItem">CSS</li>
+                            <li class="listAddingSkillItem">JavaSctipt</li>
+                            <li class="listAddingSkillItem">HTML</li>
+                            <li class="listAddingSkillItem">CSS</li>
+                            <li class="listAddingSkillItem">JavaSctipt</li>
+                            <li class="listAddingSkillItem">HTML</li>
+                            <li class="listAddingSkillItem">CSS</li>
+                            <li class="listAddingSkillItem">JavaSctipt</li>
+                            <li class="listAddingSkillItem">HTML</li>
+                            <li class="listAddingSkillItem">CSS</li>
+                            <li class="listAddingSkillItem">JavaSctipt</li>
+                            <li class="listAddingSkillItem">HTML</li>
+                            <li class="listAddingSkillItem">CSS</li>
+
+
+
+                        </ul>
+                    </div>
+                <div class="canelsButton">
+                    <button id="closeSkillModal" class="canel">Отмена</button>
                     <button class="sendJobTitle">Добавить</button>
                     </div>
                 </dialog>
@@ -190,7 +249,7 @@
                     </ul>
                 </div>
                 <div class="addSkill">
-                    <button class="addSkillButton">
+                    <button class="addSkillButton" id="addSkillButton">
                         <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M9.62305 0.75V9V17.25" stroke="#4900E3" stroke-linecap="round"/>
 <path d="M17.75 9.12314H9.5H1.25" stroke="#4900E3" stroke-linecap="round"/>
