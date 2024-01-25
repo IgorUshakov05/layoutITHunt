@@ -168,7 +168,7 @@
                 </dialog>
 
                 <dialog id="addSkill" class="addExpiriens" close>
-                <span class="myVacancyText">Опыт работы</span>
+                <span class="myVacancyText">Навыки</span>
                 <p class="descriptionAddExiriens">Добавьте навыки которыми вы обладаете. Вписывая навык, выберете его из списка</p>
 <span class="descriptionAddExiriens">Если не нашли нужный навык, <a href="" type="" style="color:#5412E0; font-size: 14px;">напишите нам</a> и мы его добавим</span>
                 <div class="topInputs w-fitContent">
@@ -223,6 +223,31 @@
                 <div class="canelsButton">
                     <button id="closeSkillModal" class="canel">Отмена</button>
                     <button class="sendJobTitle">Добавить</button>
+                </div>
+                </dialog>
+                <dialog id="addEuctionModal" class="addExpiriens modalEdu" close>
+                    <p class="descriptionAddExiriens" style="margin-top: 0;">Выберете уровень образования</p>
+                    <div class="mySpecialEdu">
+                        <div class="selectedEdu">
+                            <p class="titleEdu">Профессионwdawdawdальное образование</p>
+                            <div class="butForSelectEdu">
+                                <svg class="rotatePls" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path d="M0.920898 1L6.93536 7L12.9498 1" stroke="#5412E0" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <ul class="listEduRus">
+                                <li class="typeEdu">Общее образование</li>
+                                <li class="typeEdu">Профессиональное образование</li>
+                                <li class="typeEdu">Дополнительное образование</li>
+                                <li class="typeEdu">Профессиональное обучение</li>
+                            </ul>
+                        </div>    
+                    </div>
+                    <p class="descriptionAddExiriens" style="margin-top: 20px;">Название курса</p>
+                    <input type="text" id="addCurse" class="addCurse">
+                    <div class="canelsButton">
+                        <button id="closeEduModal" class="canel">Отмена</button>
+                        <button class="sendJobTitle">Добавить</button>
                     </div>
                 </dialog>
             </div>
@@ -310,7 +335,6 @@
                             <div class="bottomElementExp">
                                 <p class="TimeJob">12 месяц</p>
                                 <div class="buttonsEditAndDelete">
-                                    <button class="editExp">Изменить</button>
                                     <button class="removeExp">Удалить</button>
                                     </div>
                                 </div>
@@ -338,7 +362,6 @@
                             <div class="bottomElementExp">
                                 <p class="TimeJob">12 месяц</p>
                                 <div class="buttonsEditAndDelete">
-                                    <button class="editExp">Изменить</button>
                                     <button class="removeExp">Удалить</button>
                                     </div>
                                 </div>
@@ -368,7 +391,6 @@
                             <div class="bottomElementExp">
                                 <p class="TimeJob">12 месяц</p>
                                 <div class="buttonsEditAndDelete">
-                                    <button class="editExp">Изменить</button>
                                     <button class="removeExp">Удалить</button>
                                     </div>
                                 </div>
@@ -387,19 +409,31 @@
                     <div class="oneBlock">
                     <div class="exucation">
                         <p class="myVacancyText">Образование</p>
-                        <div class="eduSchool">
+                        <div class="eduSchool clickNoEdu">
+                            <div class="removeEdu">
+                                <p class="rmText">Удалить</p>
+                            </div>
                             <p class="educationalInstitution">Профессиональное образование </p>
                             <p class="educationalInstitutionType">Информационные технологии и системы дермоида</p>
+                            <button class="rmText paddAndBor">Удалить</button>
                             </div>
-                            <div class="eduSchool">
+                            <div class="eduSchool clickNoEdu">
+                                <div class="removeEdu">
+                            <p class="rmText">Удалить</p>
+                            </div>
                             <p class="educationalInstitution">Профессиональное образование </p>
                             <p class="educationalInstitutionType">Информационные технологии и системы дермоида</p>
+                            <button class="rmText paddAndBor">Удалить</button>
                             </div>
-                            <div class="eduSchool">
-                            <p class="educationalInstitution">Профессиональное образование </p>
+                            <div class="eduSchool clickNoEdu">
+                                <div class="removeEdu">
+                            <p class="rmText">Удалить</p>
+                            </div>
+                            <p class="educationalInstitution">Профессиuihayugwdyualwydg8oahuwdlyiguaowhudligyauwodональное образование </p>
                             <p class="educationalInstitutionType">Информационные технологии и системы дермоида</p>
+                            <button class="rmText paddAndBor">Удалить</button>
                             </div>
-                            <div class="addNewVacansy">
+                            <div class="addNewVacansy" id="addEdButton">
                         <div class="svgPlus"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M9.12305 0.75V9V17.25" stroke="white" stroke-linecap="round"></path>
 <path d="M17.25 9.12314H9H0.75" stroke="white" stroke-linecap="round"></path>
@@ -428,7 +462,7 @@
                                 <p class="educationalInstitution">Вакансии</p>
                                 <p class="onclickCount">200 откликов</p>
                             </div>
-                            <div class="expand rot mb-20"><svg class="rotatePls" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <div class="expand rot"><svg class="rotatePls" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M0.920898 1L6.93536 7L12.9498 1" stroke="#5412E0" stroke-width="2"/>
 </svg>
 </div>
@@ -525,7 +559,7 @@
                                 <p class="educationalInstitution">Фаст-Ворк</p>
                                 <p class="onclickCount">200 откликов</p>
                             </div>
-                            <div class="expand rot mb-20"><svg class="rotatePls" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <div class="expand rot"><svg class="rotatePls" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M0.920898 1L6.93536 7L12.9498 1" stroke="#5412E0" stroke-width="2"/>
 </svg>
 </div>

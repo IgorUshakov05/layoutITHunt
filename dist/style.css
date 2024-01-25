@@ -6026,6 +6026,9 @@ box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
     top:0;
     bottom:0;
 }
+.modalEdu {
+    width: 400px;
+}
 @media (max-width: 1100px) {
     .addExpiriens {
         width: 88%;
@@ -6780,11 +6783,54 @@ letter-spacing: 0.13px;
     padding: 12px 19px;
     border-radius: 4px;
     margin-top:10px;
-
+position:relative;
+overflow: hidden;
 background: #FFF;
 box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
+.removeEdu {
+    position: absolute;
+    right: 0;
+    top:0;
+    background:white;
+    padding: 12px 10px;
+    display: none;
+}
+.rmText {
+    color:red;
+    cursor:pointer;
+    font-size: 12px;
+}
+.paddAndBor {
+    padding: 10px 10px;
+    text-align: center;
+    font-size: 13px;
+    border:1px solid red;
+    border-radius:4px;
+    margin-top: 10px;
+    width: 100%;
+    background:none;
+}
+.paddAndBor {
+    display: none;
+}
+
+.eduSchool:hover > .removeEdu {
+    display: block;
+}
+.activeRm {
+    display: none;
+} 
+@media (max-width: 700px) {
+    .removeEdu {
+        display: none !important;
+    }
+    
+    .activeRm {
+        display: block;
+    }
+}
 .onClick {
     position:relative;
     display: flex;
@@ -6888,7 +6934,7 @@ letter-spacing: 0.14px;
     display: flex;
     width: 100%;
 align-items:center;
-margin-top: 10px;
+margin-top: 20px;
     justify-content: end;
 }
 .canelsButton > * {
@@ -7002,4 +7048,94 @@ letter-spacing: 0.065px;
     .w-fitContent {
     width:100%;
 }
+}
+
+.removeExp:hover {
+    border-color:red;
+    color:red;
+}
+
+.removeExp:active {
+    border-color:red;
+    color:white;
+    background:red;
+}
+
+
+.onClick {
+    overflow: visible;
+}
+
+
+.selectedEdu {
+    position: relative;
+    margin-top: 8px;
+    border-radius: 4px;
+border: 1px solid #5412E0;
+background: #FFF;
+padding: 12px;
+box-sizing:border-box;
+}
+.butForSelectEdu {
+    position: absolute;
+    right:0;
+    cursor: pointer;
+    height: fit-content;
+    top:0;
+    bottom: 0;
+    padding: 0 12px;
+    background:white;
+    margin: auto;
+}
+.titleEdu {
+    color: #000;
+    font-family: Raleway;
+    font-size: 14px;
+    white-space: nowrap;
+    font-style: normal;
+    overflow: hidden;
+    max-width: 100%;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.16px;
+}
+
+.addCurse {
+    background:none;
+    border:none;
+    width: 100%;
+    border-bottom:0.5px solid black;
+    padding: 12px;
+    outline: none;
+    box-sizing:border-box;
+}
+
+.listEduRus {
+    position: absolute;
+    right: 0;
+    border-radius: 4px;
+    background: #FFF;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    left: 0;
+    display: none;
+    top: 100%;
+    margin-top: 10px;
+    z-index: 99;
+}
+
+.typeEdu {
+    padding: 0 17px;
+    margin: 20px 0;
+    color: #000;
+    font-family: Raleway;
+    font-size: 13px;
+    cursor: pointer;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.13px;
+}
+
+.typeEdu:hover {
+    color: #5811f1;
 }
