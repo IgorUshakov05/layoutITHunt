@@ -3418,6 +3418,17 @@ letter-spacing: -0.095px;
     border-color: #4900E3;
     color: #4900E3;
 }
+
+.rejectQuery:hover {
+    color: red;
+    border: 0.5px solid red;
+}
+
+.responseQuery:hover {
+    color: green;
+    border: 0.5px solid green;
+}
+
 .addingFavorite {
     background-color:#4900E3;
     border-color:#4900E3;
@@ -7155,6 +7166,7 @@ font-weight: 400;
 letter-spacing: 0.075px;
 outline: none;
 width: 100%;
+height: 100%;
 }
 
 .inputSearchUser {
@@ -7163,7 +7175,7 @@ width: 100%;
 .topInputAndLastAndFirst {
     display: flex;
     justify-content: space-between;
-    align-items:center;
+    align-items:stretch;
 }
 .selectLastOrFirst {
     position: relative;
@@ -7303,8 +7315,18 @@ letter-spacing: 0.12px;
     justify-content: space-around;
     align-items: flex-start;
 }
-.toprightInfUs > *, .locaton > * {
+.toprightInfUs > * {
     display: inline-block;
+}
+
+.locaton {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.locationText {
+    margin-left: 5px;
 }
 
 @media (max-width:770px) {
@@ -7380,3 +7402,312 @@ letter-spacing: 0.128px;
     color:red;
     border:0.5px solid red;
  }
+
+ .myVacListForSelect,.filterToExp {
+    width: 100%;
+    border-radius: 4px;
+    background: #FFF;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 12px 15px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.defaultAll {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    cursor:pointer;
+}
+
+
+ .listVacansySelect {
+    position:absolute;
+    top: 99%;
+    border-radius: 0 0 4px 4px;
+    background: #FFF;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+    right: 0;
+    z-index: 99;
+    display: none;
+    left: 0;
+ }
+ .itemVacForSelect {
+    padding: 12px 15px;
+    cursor:pointer;
+ }
+ .itemVacForSelect:hover {
+    background:#E2D4FF;
+ }
+ .selectedVac {
+font-family: Raleway;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 141.4%; /* 18.382px */
+letter-spacing: 0.065px;
+ }
+
+.w-fitContentMy {
+    width: fit-content;
+}
+
+.noAbs {
+    position: relative;
+    margin:0;
+    color: #5412E0;
+text-align: right;
+font-family: Ubuntu;
+font-size: 12px;
+font-style: normal;
+font-weight: 300;
+line-height: 141.4%; /* 18.382px */
+letter-spacing: -0.065px;
+    padding: 0;
+    background:none;
+}
+.itemZayancaVac {
+    margin-top: 14px;
+    background: #FFF;
+filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.13));
+}
+.titleVacansyZayavca {
+    padding: 17px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    background:#F7F3FF;
+}
+.titleVacancyZa {
+    color: #5412E0;
+font-family: Raleway;
+font-size: 15px;
+font-style: normal;
+font-weight: 400;
+line-height: 141.4%; /* 21.21px */
+letter-spacing: -0.075px;
+}
+
+.photoUserZayavca {
+    width: 104px;
+    border-radius:4px;
+    height: 104px;
+}
+
+.photoUserZayavca > img {
+    border-radius:inherit;
+}
+.topElems {
+    display: flex;
+}
+
+.descriptionUser {
+    margin-top: 17px;
+}
+
+.nameDolzCity {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 14px;
+}
+
+.surename {
+font-family: Raleway;
+font-size: 25px;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+letter-spacing: 0.25px;
+}
+
+.Dolznost {
+font-family: Raleway;
+font-size: 16.024px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+letter-spacing: 0.16px;
+}
+
+.otherInfo {
+    padding: 17px 22px;
+}
+.countSkill {
+    margin-top: 20px;
+}
+.countSkill >span {
+    font-family: Ubuntu;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 127.9%; /* 15.348px */
+    letter-spacing: 0.12px;
+}
+.m-8 {
+    margin-left: -8px;
+    margin-top: 0px;
+}
+.colorHunt {
+    color: #5412E0;
+font-family: Ubuntu;
+font-size: 12px;
+font-style: normal;
+font-weight: 300;
+line-height: 127.9%; /* 15.348px */
+letter-spacing: 0.12px;
+}
+
+.dot {
+    width: 15px;
+    aspect-ratio: 1/1;
+    box-sizing: border-box;
+    background:#4900E3;
+    border-radius: 50%;
+}
+.textLegent {
+font-family: Ubuntu;
+font-size: 12px;
+font-style: normal;
+font-weight: 300;
+line-height: 127.9%; /* 15.348px */
+letter-spacing: 0.12px;
+}
+
+.dot.two {
+    border: 0.4px solid black;
+    background: none;
+}
+
+.dot.three {
+    background:#DDD;
+}
+
+.countSkill,.dotAndText,.legenda {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+}
+.textLegent {
+    margin: auto 20px auto 4px;
+}
+
+.countSkill {
+    align-items: start;
+}
+.mr0 {
+    margin-right: 0;
+}
+@media (max-width: 800px) {
+    .countSkill {
+        flex-direction: column;
+    }
+    .legenda { 
+        margin-top: 10px;
+    }
+}
+
+.targetSkill {
+    background: #4900E3;
+    color: white;
+}
+
+.noneSkill {
+    background: none;
+    color: black;
+    border: 1px solid black;
+}
+.flexed {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+}
+.filterToExp {
+    background:#ECECEC;
+    margin-left: 20px;
+    box-shadow:none;
+}
+.activeFilter {
+    background:#4900E3;
+    color:white;
+}
+.makeBlack {
+    fill: white;
+}
+.sendMEssageButtonOrNoInvite {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 22px 17px 22px ;
+}
+
+
+.ml10 {
+    margin-right: 10px;
+}
+.defaultButton {
+    color: #000;
+text-align: center;
+font-family: Raleway;
+font-size: 13px;
+min-width:100px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.128px;
+border-radius: 4px;
+border: 0.5px solid #000;
+background:none;
+padding: 11px 15px;
+}
+@media (max-width: 1100px) {
+    .flexed {
+        flex-direction: column;
+        width: 100%;
+    }
+    .filterToExp {
+        margin: 15px 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .sendMessageOrNo {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+    }
+    .inFavoriteButton {
+        display: none;
+    }
+
+    .defaultButton {
+        width: 45%;
+        margin: 0;
+    }
+}
+
+.textRequest {
+    padding: 0 22px 15px 22px;
+    display: none;
+}
+
+.responseUser, .rejectUser {
+    display: none;
+}
+
+.bnone {
+    border:none;
+}
+
+.sendReject:active {
+    background:#00AE1C;
+    color: white;
+    border: 0.5px solid #00AE1C;
+}
+
+.sendRejectNigat:active {
+    background:red;
+    color: white;
+    border: 0.5px solid red;
+}

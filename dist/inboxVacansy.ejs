@@ -6,7 +6,6 @@
     <meta name="description" content="Найдите работу или предложите её в IT-сфере с помощью нашего сайта. Мы предлагаем широкий выбор вакансий для различных специализаций.">
     <meta name="keywords" content="IT, работа, вакансии, поиск работы, ITHunt, специалисты, программист, разработчик, тестировщик, веб-дизайнер">
     <meta name="robots" content="index, follow">
-    
     <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon">
     <meta name="author" content="ITHunt">
     <link rel="stylesheet" href="/style.css">
@@ -14,17 +13,169 @@
     <title>Входящие уведомления - Вакансии</title>
 </head>
 <body>
+    <% let userSkills = ["Vue", "React", "Git", "Linux", "Docker", "AWS","AWD","MongoDB", "React Native", "Redux", "Express", "Webpack", "Nginx", "Angular", "SQL"] %>
+<% let vacansySkills = ["Vue", "React", "HTML", "CSS", "JS", "AWD", "Python", "Node.js", "Git"] %>
+<% let grup = [
+  ...userSkills.filter(skill => vacansySkills.includes(skill)),
+  ...vacansySkills.filter(skill => !userSkills.includes(skill)).filter(skill => !userSkills.includes(skill)),
+  ...userSkills.filter(skill => !vacansySkills.includes(skill))
+] %>
     <%- include('./header.ejs', { isLoggedIn, active: 'other'}) %>
     <main  class="main">
         <div class="twoBlocks mt20">
             <%- include('./inboxLinks', {active: "1", isMain: false }) %>
-            <div class="MoreInfo">
-                
-             
+            <div class="MoreInfo mt35">
+                <div class="topInputAndLastAndFirst">
+                    <div class="inputSearchUser flexed">
+                        <div class="myVacListForSelect">
+                            <div class="defaultAll">
+                                <span class="selectedVac">
+                                    Все вакансии
+                                </span>
+                                <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 1L7.01447 7L13.0289 1" stroke="#5412E0" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <ul class="listVacansySelect">
+                                <li class="itemVacForSelect selectedVac">FrontEnd</li>
+                                <li class="itemVacForSelect selectedVac">BackEnd</li>
+                                <li class="itemVacForSelect selectedVac">FullStack</li>
+                            </ul>
+                        </div>
+                        <div class="myVacListForSelect filterToExp">
+                            <div class="defaultAll">
+                                <span class="selectedVac">
+                                    Совпадения навыков
+                                </span>
+                                <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 0.5L0 4.5H6L3 0.5Z" fill="black" class="makeWhite"/>
+</svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="selectLastOrFirst">
+                        <div class="lastSelect divLF selectedRadio">
+                            <input value="last" type="radio" class="inpCheck" name="lastOrFirst" id="FirstID" checked >
+                            <label for="FirstID">Последние</label>
+                        </div>
+                        <div class="firstSelect divLF">
+                            <input value="first" type="radio" class="inpCheck" name="lastOrFirst" id="lastID">
+                            <label for="lastID">Давние</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="toDay">
+                    <p class="countList">Количество заявок (12)</p>
+                </div>
+                <div class="listZayavoc">
+                    <article class="itemZayancaVac">
+                        <div class="titleVacansyZayavca">
+                            <p class="titleVacancyZa">Инфо-безопастность</p>
+                            <div class="timeLastSeen noAbs">3 минуты назад</div>
+                        </div>
+                        <div class="otherInfo">
+                            <a href="/awdawfuawd">
+                                <div class="topElems">
+                                    <div class="photoUserZayavca">
+                                        <img width="104" height="104" src="/assets/pictures/person.jpg" alt="Фото пользователя">
+                                    </div>
+                                    <div class="nameDolzCity">
+                                        <div class="topBlockInfo">
+                                            <h1 class="surename">Ушаков Ярослав</h1>
+                                            <h2 class="Dolznost">Веб-дизайнер</h2>
+                                        </div>
+                                        <div class="locaton">
+                                            <svg width="11" height="15" viewBox="0 0 11 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 0C8.53757 0 11 2.26228 11 5.05312C11 9.61016 5.5 14.4375 5.5 14.4375C5.5 14.4375 0 9.65067 0 5.05312C0 2.26228 2.46243 0 5.5 0Z" fill="#5412E0"/>
+                                                <path d="M5.5 8.25002C7.01878 8.25002 8.25 7.0188 8.25 5.50002C8.25 3.98123 7.01878 2.75002 5.5 2.75002C3.98122 2.75002 2.75 3.98123 2.75 5.50002C2.75 7.0188 3.98122 8.25002 5.5 8.25002Z" fill="white"/>
+                                                </svg>
+                                            <p class="locationText">Ростов на Дону</p>                                    
+                                        </div>   
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="middleInfoVacansya noMob">
+                                <div class="descriptionVacansy">
+                                <p class="descriptionVacansyText">Мы понимаем, что в процессе поиска работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы и предоставить необходимую помощь в кратчайшие сроки. Мы ценим ваше время и стремимся обеспечить гладкое и безопасное пользование нашей платформой. Мы понимаем, что в процессе поиска работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы </p>
+                                </div>
+                                <div class="showFull"><span class="showFullText">Показать полностью</span></div>
+                            </div>
+                            <div class="bttomSkillCount">
+                                <div class="countSkill">
+                                    <span>Совпадений <span class="colorHunt"><%- userSkills.filter(skill => vacansySkills.includes(skill)).length%>/<%-vacansySkills.length %></span></span>
+                                    <div class="legenda">
+                                        <div class="dotAndText ">
+                                            <div class="dot one"></div>
+                                            <p class="textLegent">Совпадения</p>
+                                        </div>
+                                        <div class="dotAndText ">
+                                            <div class="dot two"></div>
+                                            <p class="textLegent">Отсутствие</p>
+                                        </div>
+                                        <div class="dotAndText ">
+                                            <div class="dot three"></div>
+                                            <p class="textLegent mr0">Прочие</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="listStacks m-8">
+                                    <% grup.forEach(item => { %>
+                                        <li class="abilityItem <%= vacansySkills.includes(item) === userSkills.includes(item) ? 'targetSkill' : (userSkills.includes(item) ? '' : 'noneSkill') %>">
+                                            <h5 class="ability"><%= item %></h5>
+                                        </li>
+                                    <% })%>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="textRequest">
+                            <textarea name="textRequest" id="textRequestMy" placeholder="Сообщение..." cols="30" rows="10" class="textareaTwoCard textRequestForUserSpec"></textarea>    
+                        </div>
+                        <div class="sendMEssageButtonOrNoInvite defaulUser">
+                            <div class="inFavoriteButton">
+                                <button type="button" class="Infavorites defaultButton inFav">В избранное</button>    
+                            </div>    
+                            <div class="sendMessageOrNo">
+                                <button type="button"  class="defaultButton ml10 rejectQuery">Отклонить</button><button type="button"  class="defaultButton responseQuery sendResponse">Пригласить</button>    
+                            </div>
+                        </div>
+                        <div class="sendMEssageButtonOrNoInvite responseUser">
+                            <div class="inFavoriteButton">
+                                <button type="button" class="Infavorites defaultButton inFav">В избранное</button>    
+                            </div>    
+                            <div class="sendMessageOrNo">
+                                <button type="button"  class="defaultButton ml10 bnone">Назад</button><button type="button"  class="defaultButton responseQuery sendReject">Отправить</button>    
+                            </div>
+                        </div>
+                        <div class="sendMEssageButtonOrNoInvite rejectUser">
+                            <div class="inFavoriteButton">
+                                <button type="button" class="Infavorites defaultButton inFav">В избранное</button>    
+                            </div>    
+                            <div class="sendMessageOrNo">
+                                <button type="button"  class="defaultButton ml10 bnone">Назад</button><button type="button"  class="defaultButton responseQuery sendReject sendRejectNigat">Отказать</button>    
+                            </div>
+                        </div>
+                    </article>
+                </div>
          </div>
      </div>
     </main>
 <%- include('./footer.ejs') %>
 <script src="/js/header.js"></script>
+<script src="/js/inboxVacansy.js"></script>
+<script>
+
+    document.querySelectorAll('.inpCheck').forEach(function(item) {
+item.addEventListener('change', function() {
+  document.querySelector('.lastSelect').classList.remove('selectedRadio');
+  document.querySelector('.firstSelect').classList.remove('selectedRadio');
+  let thisValue = this.value;
+  if (thisValue === 'last') {
+    document.querySelector('.lastSelect').classList.add('selectedRadio');
+  } else {
+    document.querySelector('.firstSelect').classList.add('selectedRadio');
+  }
+});
+});
+</script>
 </body>
 </html>

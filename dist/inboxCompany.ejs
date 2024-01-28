@@ -6,7 +6,7 @@
     <meta name="description" content="Найдите работу или предложите её в IT-сфере с помощью нашего сайта. Мы предлагаем широкий выбор вакансий для различных специализаций.">
     <meta name="keywords" content="IT, работа, вакансии, поиск работы, ITHunt, специалисты, программист, разработчик, тестировщик, веб-дизайнер">
     <meta name="robots" content="index, follow">
-    
+
     <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon">
     <meta name="author" content="ITHunt">
     <link rel="stylesheet" href="/style.css">
@@ -45,11 +45,11 @@
                         <a href="/sesideHr">
                             <div class="topInfoInvite">
                                 <div class="leftinf">
-                                    <img src="http://localhost:3000/assets/pictures/person.jpg" width="53" height="53" alt="Фото пользователя">
+                                    <img src="/assets/pictures/person.jpg" width="53" height="53" alt="Фото пользователя">
                                 </div>
                                 <div class="rightInfUs">
                                     <div class="toprightInfUs">
-                                        <h1 class="userNameCompany">Ушаков Игорь</h1>
+                                        <h1 class="userNameCompany">Губарев Кирилл</h1>
                                 </div>
                             <div class="locaton">
                                 <svg width="11" height="15" viewBox="0 0 11 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="rightInfUs">
                                     <div class="toprightInfUs">
-                                        <h1 class="userNameCompany">Ушаков Игорь</h1>
+                                        <h1 class="userNameCompany">Шишкин Никита</h1>
                                 </div>
                             <div class="locaton">
                                 <svg width="11" height="15" viewBox="0 0 11 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -132,5 +132,20 @@
 <%- include('./footer.ejs') %>
 <script src="/js/header.js"></script>
 <script src="/js/inviteCompany.js"></script>
+<script>
+    document.querySelectorAll('.inpCheck').forEach(function(item) {
+item.addEventListener('change', function() {
+  document.querySelector('.lastSelect').classList.remove('selectedRadio');
+  document.querySelector('.firstSelect').classList.remove('selectedRadio');
+  let thisValue = this.value;
+  if (thisValue === 'last') {
+    document.querySelector('.lastSelect').classList.add('selectedRadio');
+  } else {
+    document.querySelector('.firstSelect').classList.add('selectedRadio');
+  }
+});
+});
+
+</script>
 </body>
 </html>
