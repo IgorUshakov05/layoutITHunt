@@ -1145,7 +1145,7 @@ letter-spacing: 0.14px;
     line-height: 141.4%; /* 21.21px */
     letter-spacing: 0.075px;
 }
-.roles >label{
+.roles >label,.flexcenter{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -5979,6 +5979,8 @@ letter-spacing: 0.054px;
     display: flex;align-items: stretch;
 }
 
+
+
 .rightTopInfoSpec {
     margin-left: 15px;
     width: 100%;    
@@ -7472,6 +7474,21 @@ letter-spacing: -0.065px;
 filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.13));
 }
 
+.isHardItem {
+    width: 25px;
+    margin-left: 10px;
+    aspect-ratio: 1/1;
+    border-radius:50%;
+    background: #E2D4FF;
+font-family: Ubuntu;
+font-size: 15.308px;
+color: black;
+font-style: normal;
+font-weight: 700;
+line-height: 141.4%; /* 21.645px */
+letter-spacing: 0.077px;
+}
+
 .itemZayancaVac:nth-child(1) {
     margin-top: 14px;
 }
@@ -7485,6 +7502,9 @@ filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.13));
 .titleVacancyZa {
     color: #5412E0;
 font-family: Raleway;
+display: flex;
+align-items:center;
+justify-content: space-between;
 font-size: 15px;
 font-style: normal;
 font-weight: 400;
