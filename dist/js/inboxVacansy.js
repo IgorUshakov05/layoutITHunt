@@ -47,6 +47,7 @@ $('.sendResponse').on('click', function() {
 })
 
 $('.bnone').on('click', function() {
+    $(this).parent().parent().parent().find('.textRequest').css('display','none')
     $(this).parent().parent().parent().find('.responseUser').css('display','none')
     $(this).parent().parent().parent().find('.defaulUser').toggle()
     $(this).parent().parent().parent().find('.rejectUser').css('display','none')

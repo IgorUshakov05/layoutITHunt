@@ -7735,3 +7735,9 @@ padding: 11px 15px;
     color: white;
     border: 0.5px solid red;
 }
+.byPremium {
+    margin-top:10px;
+}
+.PremiumPic {
+    width: 100%;
+}
