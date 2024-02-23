@@ -7738,6 +7738,89 @@ padding: 11px 15px;
 .byPremium {
     margin-top:10px;
 }
-.PremiumPic {
-    width: 100%;
+
+.huntPremium {
+    display: flex;
+    background: linear-gradient(111deg, #4206c2 0%, #520fe1 15.58%, #4a01e3 70.29%, #6d28ff 100%);
+    border-radius: 4px;
+    justify-content: space-between;
+}
+
+.titleHuntPremium {
+font-family: Raleway;
+font-weight: 700;
+font-size: 15px;
+letter-spacing: 0.01em;
+color:white;
+}
+.oneBlockPrem {
+        width: 70%;
+    padding: 9px 11px;
+}
+.threeBloks {
+    border-bottom: .1em solid white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32%;
+
+}
+.TwoBlockPrem {
+    width: 30%;
+    padding: 0;
+    border-left:1px solid white;
+}
+.pricePrem {
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    font-family: 'Ubuntu';
+    font-weight: 700;
+    color: white
+}
+.links {
+    padding: 3px;
+    display: flex;
+    box-sizing:border-box;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.threeBloks:nth-child(3){
+    border-bottom:0;
+}
+
+.links > p {
+    font-size: 12px;
+    color: white;
+    font-family: 'Ubuntu';
+}
+
+.pu {
+    font-size: 13px;
+    margin-left:2px;
+    color: white;
+    font-weight: 700;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
+}
+
+.blockadd {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 5px;
+}
+.IHateThisText {
+    color: white;
+    text-align: center;
+    font-size: 13px;
 }
