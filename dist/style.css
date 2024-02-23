@@ -7793,6 +7793,24 @@ color:white;
     font-weight: 700;
     color: white
 }
+.youNeedIs {
+    padding: 30px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    height: fit-content;
+    background: white;
+    z-index: 99;
+    width: 720px;
+    border-radius: 10px;
+    max-width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
 .links {
     padding: 3px;
     display: flex;
@@ -7829,6 +7847,7 @@ color:white;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     flex-direction: column;
     margin-top: 5px;
 }
@@ -7836,4 +7855,34 @@ color:white;
     color: white;
     text-align: center;
     font-size: 12.5px;
+}
+.mt-10 {
+    margin-top: 10px;
+}
+.reverseColor:active {
+    color: white;
+    background: #5412E0;
+    border: 1px solid #5412E0;
+}
+.toBlocksToColumn {
+    width: 48%;
+}
+.toBlocksToColumn > img {
+    width: 100%;
+}
+
+@media (max-width: 650px) {
+    .youNeedIs {
+        flex-direction: column;
+        padding: 20px 30px;
+    }
+    .mtNone {
+        margin-top: 0;
+    }
+    .toBlocksToColumn {
+        width: 100%;
+    }
+    .toBlocksToColumn > img {
+        display: none;
+    }
 }

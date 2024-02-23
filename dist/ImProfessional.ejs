@@ -15,7 +15,22 @@
 </head>
 <body>
     <%- include('./header.ejs', { isLoggedIn, active: 'profile'}) %>
+    <div class="blackBack" id="AboutPrime">
+<div class="youNeedIs">
+    <div class="toBlocksToColumn">
+        <img src="/assets/pictures/DemoProfilePremium.png" alt="Демо профиль премиум">
+        <span class="myVacancyText mt-10 mtNone">Стильная шапка</span>
+        <p class="descript">Все работодатели и специалисты видят вашу шапку, которая выделит вас среди других, но решать вам, насколько важно внимание на вашем профиле</p>
+    </div>
+    <div class="toBlocksToColumn">
+        <img src="/assets/pictures/DemoCardPremium.png" alt="Демо профиль премиум">
+        <span class="myVacancyText mt-10">Стильная карточка</span>
+        <p class="descript">Когда работодатель оценивает кандидатов, отправивших заявки или рассматриваемых для найма, необычный вид карточки привлекает внимание. Мы привлекаем внимание, а вы вызываете восторг</p>
+        <button class="Infavorites w-100 mt-10 reverseColor" id="closeModalThis" style="padding: 10px 0;">Понятно</button>
+    </div>
+</div>
 
+    </div>
 <main class="main">
     <div class="twoBlocks">
 
@@ -122,6 +137,7 @@
                                         </linearGradient>
                                         </defs>
                                         </svg>
+                                <div class="discount" id="modalAbout" style="aspect-ratio: 1/1; cursor:pointer;"><span style="font-family: Ubuntu;">?</span></div>
                                         
 <p class="IHateThisText">Обратите на себя внимания</p>                                        
                                 </div>

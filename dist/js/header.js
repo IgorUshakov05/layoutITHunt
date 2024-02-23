@@ -106,3 +106,10 @@ $(document).ready(function() {
     });
     
 });
+
+$('#modalAbout').on('click', () => {
+    $('#AboutPrime').css('display', 'block')
+})
+$('#closeModalThis').on('click', () => {
+    $('#AboutPrime').css('display', 'none')
+})
