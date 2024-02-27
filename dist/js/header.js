@@ -15,7 +15,10 @@ $(document).ready(function() {
         $burgerButton.toggleClass("rotate-burger"); // Добавление/удаление класса для поворота иконки бургера
     });
 
-
+    $('.fromDevelopers').on('click', function() {
+        $(this).children('.fromUs').children('.fullDev').toggleClass('rotate')
+        $(this).children('.fromUsText').toggle()
+    })
     $main.on('click touchstart', function () {
         $mobileMenu.css('display', 'none')
         $('body').css('overflow-y', 'auto');

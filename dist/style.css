@@ -98,7 +98,6 @@ img {
 
 html, body {
     width: 100%;
-    height: 100%;
 
     overflow-x: hidden;
 }
@@ -338,6 +337,7 @@ border-radius: 6px;
 .main {
     width: 87%;
     margin: auto;
+    height: 100%;
     max-width: 1280px;
 }
 
@@ -2798,7 +2798,7 @@ height: fit-content;
 }
 
 input.descrtopSearchDesctop:focus {
-    border-bottom: 1px solid #4900E3;
+    border-bottom: 1px solid var(--indexColor);
 }
 
 @media (max-width: 1100px) {
@@ -2822,8 +2822,8 @@ input.descrtopSearchDesctop:focus {
         border-bottom-left-radius: 0;
     }
     .descrtopSearchDesctop:focus {
-        border: 1px solid #4900E3;
-        border-bottom: 1px solid #4900E3;
+        border: 1px solid var(--indexColor);
+        border-bottom: 1px solid var(--indexColor);
     }
     .optionsSelectSpec {
         width: 100%;
@@ -2900,8 +2900,8 @@ letter-spacing: -0.055px;
 }
 
 .wayWorkItem > input:checked {
-    background:#4900E3;
-    border: #4900E3;
+    background:var(--indexColor);
+    border: var(--indexColor);
 }
 
 .wayWorkItem {
@@ -2935,7 +2935,7 @@ margin-left: -8px;
     margin-left: 10px;
     }
     .wayWorkItem > input:checked + label {
-        background-color: #4900E3;
+        background-color: var(--indexColor);
         color: white; /* Задайте желаемый цвет фона при выборе */
       }
  }
@@ -2989,7 +2989,7 @@ margin-left: -8px;
  }
 
  .elemExpiriens > input:checked + label {
-    background-color: #4900E3;
+    background-color: var(--indexColor);
     color: white; /* Задайте желаемый цвет фона при выборе */
   }
 
@@ -3193,7 +3193,7 @@ margin-left: 5px;
 
 
 .adressJobText:hover {
-    color: #4900E3;
+    color: var(--indexColor);
 }
 .listMethods  {
     margin-top: 7px;
@@ -3250,7 +3250,7 @@ font-weight: 700;
     margin-top: 6px;
 }
 .activeMenu {
-    color:#4900E3;
+    color:var(--indexColor);
 }
 .descriptionVacansyText {
 font-family: Raleway;
@@ -3290,7 +3290,7 @@ height: inherit;
 }
 
 .showFullText {
-    color: #4900E3;
+    color: var(--indexColor);
 text-align: justify;
 font-family: Raleway;
 user-select: none;
@@ -3418,8 +3418,8 @@ letter-spacing: -0.095px;
 
 
 .Infavorites:hover,.beActive:hover {
-    border-color: #4900E3;
-    color: #4900E3;
+    border-color: var(--indexColor);
+    color: var(--indexColor);
 }
 
 .rejectQuery:hover {
@@ -3433,14 +3433,14 @@ letter-spacing: -0.095px;
 }
 
 .addingFavorite {
-    background-color:#4900E3;
-    border-color:#4900E3;
+    background-color:var(--indexColor);
+    border-color:var(--indexColor);
     color: white;
 }
 
 .addingFavorite {
-    background-color:#4900E3  !important;
-    border-color:#4900E3  !important;
+    background-color:var(--indexColor)  !important;
+    border-color:var(--indexColor)  !important;
     color: white !important;
 }
 .Respond {
@@ -3714,9 +3714,9 @@ height: 100%;
 }
 
 .toActivs:active {
-    background: #4900E3;
+    background: var(--indexColor);
     color: white;
-    border-color: #4900E3;
+    border-color: var(--indexColor);
 }
 
 .btt {
@@ -4586,7 +4586,7 @@ letter-spacing: 0.11px;
 }
 .showAllVacansy {
     border-radius: 0px 0px 4px 4px;
-background: #4900E3;
+background: var(--indexColor);
 display: none;
 font-family: Raleway;
 text-align: center;
@@ -5135,13 +5135,13 @@ letter-spacing: -0.065px;
     letter-spacing: 0.128px;
 }
 .removeVacancy {
-color:#4900E3;
+color:var(--indexColor);
 background:none;
 border:none;
 padding: 9px 35px;
 margin-left: 15px;
 border-radius: 4px;
-border: 0.5px solid#4900E3;  
+border: 0.5px solid var(--indexColor);  
 }
 
 .descriptionVacansyProfile {
@@ -5165,7 +5165,7 @@ letter-spacing: -0.065px;
 }
 
 .removeVacancy:active {
-    background:#4900E3;
+    background:var(--indexColor);
     color: white;
 }
 .countClick:hover {
@@ -5747,7 +5747,7 @@ filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.25));
     right: 10px;
     display: none;
     height: 13px;
-    background: #4900E3;
+    background: var(--indexColor);
     padding:  0 0 0 4px;
     aspect-ratio: 1/1;
 }
@@ -5761,7 +5761,7 @@ filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.25));
     padding: 7px 12px;
     display: flex;
     align-items: center;
-    background: #4900E3;
+    background: var(--indexColor);
 
     /* text */
     color: #FFF;
@@ -5780,7 +5780,7 @@ letter-spacing: 0.065px;
 }
 
 .listSpecialMy > li > label:focus,.listSpecialMy > li > label:hover,.listExpressive > li > label:hover {
-    color: #4900E3;
+    color: var(--indexColor);
 }
 
 .listSpecialMy > li > label,.listExpressive > li > label {
@@ -6564,7 +6564,7 @@ align-items: center;
 user-select: none;
 gap: 10px;
 border-radius: 4px;
-background: #4900E3;
+background: var(--indexColor);
 
 color: #FFF;
 text-align: left;
@@ -6652,11 +6652,11 @@ letter-spacing: 0.13px;
 }
 
 .canelSkill:hover,.canelSkill:active {
-    color: #4900E3;
+    color: var(--indexColor);
 }
 
 .save:hover, .save:active {
-    color: #4900E3;
+    color: var(--indexColor);
 }
 
 .expiriensItem {
@@ -7028,7 +7028,7 @@ letter-spacing: 0.12px;
 }
 
 .listAddingSkillItem:hover {
-    color: #4900E3;
+    color: var(--indexColor);
 }
 .listAddingSkillItem:hover::before {
     content:'Удалить';
@@ -7044,7 +7044,7 @@ position: relative;
 align-items: center;
 gap: 10px;
 border-radius: 4px;
-background: #4900E3;
+background: var(--indexColor);
 color: #FFF;
 text-align: justify;
 font-family: Raleway;
@@ -7232,7 +7232,7 @@ letter-spacing: 0.128px;
 
 
 .selectedRadio {
-    background:#4900E3;
+    background:var(--indexColor);
 }
 .selectedRadio > label {
     color: white;
@@ -7589,7 +7589,7 @@ letter-spacing: 0.12px;
     width: 15px;
     aspect-ratio: 1/1;
     box-sizing: border-box;
-    background:#4900E3;
+    background:var(--indexColor);
     border-radius: 50%;
 }
 .textLegent {
@@ -7635,7 +7635,7 @@ letter-spacing: 0.12px;
 }
 
 .targetSkill {
-    background: #4900E3;
+    background: var(--indexColor);
     color: white;
 }
 
@@ -7655,7 +7655,7 @@ letter-spacing: 0.12px;
     box-shadow:none;
 }
 .activeFilter {
-    background:#4900E3;
+    background:var(--indexColor);
     color:white;
 }
 .makeBlack {
@@ -7941,7 +7941,7 @@ color:white;
     width: 100%;
     box-sizing:border-box;
     display: flex;
-    border: 0.5px solid #4900E3;
+    border: 0.5px solid var(--indexColor);
     border-radius: 4px;
     align-items: center;
     justify-content: center;
@@ -7952,7 +7952,7 @@ color:white;
 }
 
 .buttonGoBye >.tarif > h2 > * {
-    color:  #4900E3;
+    color:  var(--indexColor);
     font-size:13.4px;
     font-weight: 700;
 }
@@ -7960,12 +7960,12 @@ color:white;
     font-size:12px !important;
 }
 .buttonGoBye >.tarif > h2 > .lines {
-    background:#4900E3;
+    background:var(--indexColor);
     margin: 0 5px;
 }
 .buttonGoBye:hover, .activeAlways {
-    border-color:#4900E3;
-    background:#4900E3;
+    border-color:var(--indexColor);
+    background:var(--indexColor);
 }
 .buttonGoBye:hover >.tarif > h2 > *,.activeAlways > .tarif > h2 > * {
     color: white;
@@ -7987,7 +7987,7 @@ color:white;
     margin-top: 30px;
     background:#F9F7FF;
     position: relative;
-    border: 0.5px dashed #4900E3;
+    border: 0.5px dashed var(--indexColor);
     padding: 13px 19px;
     box-sizing: border-box;
 }
@@ -8012,14 +8012,75 @@ color:white;
 }
 .conditionBuyPremium {
     border-radius: 4px 0 0 4px;
-    background:red;
+    background: linear-gradient(to bottom left, #B600E3, #4901E4 87.5%, #4900E3);
+    background-size: cover; 
     height: 100%;
     padding: 0;
     display: block !important;
+    width: 31%;
+    position: relative; 
+    box-sizing: border-box;
 }
 .gorizontaline {
     width: 100%;
-    height: 1px;
+    background:white;
+    height: 0.3px;
+}
+.adventeg {
+    padding: 10px 25px;
+}
+
+.firstAdventeg {
+    display: flex;
+    align-items:center;
+}
+.descriptionAdmentage {
+    margin-left: 10px;
+
+}
+.descriptionAdventeg{
+    font-weight: 300;
+font-size: 12px;
+line-height: 134%;
+letter-spacing: 0.01em;
+color:white;
+margin-top: 3px;
+}
+
+.titleAdventeg {
+    font-size: 15px;
+    margin-top: 13px;
+    color: white;
+    font-weight: 700;
+}
+.p25 {
+    padding: 25px;
+    box-sizing: border-box;
+}
+.fromDevelopers {
+    padding: 17px 25px;
+    border-radius:4px;
+    border: 0.5px solid white;
+    background: linear-gradient(132deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 100%);}
+.fromDevelopers > * {
+color: white;
+}
+.fromUs {
+    font-weight: 600;
+font-size: 15px;
+line-height: 128%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+letter-spacing: 0.01em;
+}
+.fromUsText {
+    font-style: italic;
+font-weight: 300;
+margin-top: 5px;
+font-size: 12px;
+line-height: 134%;
+letter-spacing: 0.01em;
 }
 .backGo{
     background: none;
@@ -8033,11 +8094,31 @@ letter-spacing: 0.01em;
 text-align: center;
 color: white;
 }
+.fullDev {
+        display: none;
+    }
 .topBlockBack {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 25px;
+}
+.bottomPoliceLink {
+    font-weight: 400;
+font-size: 12px;
+line-height: 134%;
+justify-content: flex-end;
+display: flex;
+align-items: center;
+letter-spacing: 0.01em;
+text-align: right;
+color: white;
+}
+.bottomPolice {
+    margin-top: 20px;
+}
+.linkRef {
+    margin-left: 4px;
 }
 @media (max-width: 650px) {
     .youNeedIs {
@@ -8050,10 +8131,28 @@ color: white;
     .toBlocksToColumn {
         width: 100%;
     }
+    .fullDev {
+        display: block;
+    }
     .toBlocksToColumn > img {
         display: none;
     }
     .inTwoBlocks {
         flex-direction: column;
+    }
+    .fromDevelopers,.p25,.adventeg,.topBlockBack{
+        padding: 15px;
+    }
+    .fromUsText {
+        display:none;
+    }
+    
+}
+@media (max-width: 1100px) {
+    .conditionBuyPremium {
+        width: 100%;
+    }
+    .conditionBuyPremium {
+        border-radius: 4px;
     }
 }
