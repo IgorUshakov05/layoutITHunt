@@ -2426,7 +2426,7 @@ box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
 .leftInputs, .rigthInputs {
     width: 49%;
 }
-.rigth > h1 {
+.titleTarifMy {
     font-size: 21.29px;
     font-weight: 700;
 }
@@ -7973,6 +7973,72 @@ color:white;
 .buttonGoBye:hover >.tarif > h2 > .lines,.activeAlways>.tarif > h2 > .lines {
     background:white;
 }
+.inTwoBlocks {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+.teamSoom {
+    margin-left: 10px;
+}
+.commingSoon {
+    width: 100%;
+    border-radius:4px;
+    margin-top: 30px;
+    background:#F9F7FF;
+    position: relative;
+    border: 0.5px dashed #4900E3;
+    padding: 13px 19px;
+    box-sizing: border-box;
+}
+.descriptionTextForCommingSoon {
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 134%;
+    letter-spacing: 0.01em;
+}
+
+@media (max-width: 800px) {
+    .tarifs  {
+    
+        flex-direction: column;
+    }
+    .itemPremium {
+        width: 100%;
+    }
+    .itemPremium:not(:nth-child(1)) {
+        margin-top: 15px;
+    }
+}
+.conditionBuyPremium {
+    border-radius: 4px 0 0 4px;
+    background:red;
+    height: 100%;
+    padding: 0;
+    display: block !important;
+}
+.gorizontaline {
+    width: 100%;
+    height: 1px;
+}
+.backGo{
+    background: none;
+    border:none;
+    outline: none;
+}
+.WebHuntPremium {
+font-weight: 500;
+font-size: 23px;
+letter-spacing: 0.01em;
+text-align: center;
+color: white;
+}
+.topBlockBack {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+}
 @media (max-width: 650px) {
     .youNeedIs {
         flex-direction: column;
@@ -7986,5 +8052,8 @@ color:white;
     }
     .toBlocksToColumn > img {
         display: none;
+    }
+    .inTwoBlocks {
+        flex-direction: column;
     }
 }
