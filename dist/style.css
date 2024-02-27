@@ -2426,7 +2426,10 @@ box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
 .leftInputs, .rigthInputs {
     width: 49%;
 }
-
+.rigth > h1 {
+    font-size: 21.29px;
+    font-weight: 700;
+}
 .groupInput {
     width: 100%;
     display: flex;
@@ -7870,7 +7873,106 @@ color:white;
 .toBlocksToColumn > img {
     width: 100%;
 }
+.mounthColor {
+    margin-top:20px;
+}
+.mounthColorElem {
+    display: flex;
+    justify-content: space-between;
+}
 
+.mounthColorElem > li {
+    width: 22%;
+    height: 15px;
+    border-radius:4px;
+    background: #EFEFEF;
+}
+
+.mounthColorElem:not(:nth-child(1)) > li {
+    margin-top: 13px;
+}
+
+.itemPremium {
+    border:1px solid #B7B7B7;
+    border-radius:4px;
+    width: 32%;
+    padding: 13px 19px;
+    box-sizing:border-box;
+}
+.activeAll > li,.activeMounth {
+    background:#4900E3 !important;
+}
+
+.tarif {
+    margin-top: 3px;
+}
+
+.tarif > h2  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: fit-content;
+}
+
+.Months {
+    font-family: 'Ubuntu';
+    font-size: 15px;
+    font-weight: 200;
+}
+.always {
+    font-size: 14px !important;
+    font-weight: 300 !important;
+}
+.topInfotitle {
+    position: relative;
+}
+.topInfotitle > .discount  {
+    top: 0;
+}
+.lines {
+    margin: 0 10px;
+    height: 13px;
+    background: black;
+    width: 1px;
+}
+.buttonGoBye {
+    padding: 10px;
+    margin-top:20px;
+    width: 100%;
+    box-sizing:border-box;
+    display: flex;
+    border: 0.5px solid #4900E3;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+}
+
+.itemPremium:hover {
+    box-shadow: 0 2px 31px -11px #c9afff;
+}
+
+.buttonGoBye >.tarif > h2 > * {
+    color:  #4900E3;
+    font-size:13.4px;
+    font-weight: 700;
+}
+.buttonGoBye >.tarif > h2 > .always {
+    font-size:12px !important;
+}
+.buttonGoBye >.tarif > h2 > .lines {
+    background:#4900E3;
+    margin: 0 5px;
+}
+.buttonGoBye:hover, .activeAlways {
+    border-color:#4900E3;
+    background:#4900E3;
+}
+.buttonGoBye:hover >.tarif > h2 > *,.activeAlways > .tarif > h2 > * {
+    color: white;
+}
+.buttonGoBye:hover >.tarif > h2 > .lines,.activeAlways>.tarif > h2 > .lines {
+    background:white;
+}
 @media (max-width: 650px) {
     .youNeedIs {
         flex-direction: column;

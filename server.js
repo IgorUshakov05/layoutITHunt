@@ -28,6 +28,7 @@ const userChat = require('./pageRoutes/privateChat')
 const deleteAccount = require('./pageRoutes/deleteAccount')
 const specialists = require('./pageRoutes/specialist')
 const createCompany = require('./pageRoutes/createCompany')
+const buyPremium = require('./pageRoutes/buyPremium');
 const settingsSpecialist = require('./pageRoutes/settingsSpecialist');
 const vacancies = require('./pageRoutes/vacancies');
 
@@ -40,7 +41,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist')));
 app.set('views', path.join(__dirname, 'dist'));
 
-app.use(index,login,myprofileProfessional,seeSideProf,inboxOther,findCompany,inboxFastWork,inboxVacansy,inboxCompany,inbox,addCompany,createVacancy,createFastWork,HisprofileHR,settingsHR,myprofileHR,registration,company,chat,vacancia,fastWorkItem,userChat,settingsSpecialist,deleteAccount,createCompany, fastWork,specialists,vacancies)
+app.use(index,buyPremium,login,myprofileProfessional,seeSideProf,inboxOther,findCompany,inboxFastWork,inboxVacansy,inboxCompany,inbox,addCompany,createVacancy,createFastWork,HisprofileHR,settingsHR,myprofileHR,registration,company,chat,vacancia,fastWorkItem,userChat,settingsSpecialist,deleteAccount,createCompany, fastWork,specialists,vacancies)
 app.get('/robots.txt',(req,res)=>{
     res.sendFile(path.join(__dirname,'robots.txt'))
 })
