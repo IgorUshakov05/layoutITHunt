@@ -7,6 +7,10 @@
     font-family: Ubuntu;
     src: url('/assets/font/Ubutu/Ubuntu/Ubuntu-Regular.ttf') format('truetype'); /* Формат должен быть 'truetype', а не 'ttf' */
 }
+@font-face {
+    font-family: Inter;
+    src: url('/assets/font/Inter/Inter-VariableFont_slnt,wght.ttf') format('truetype'); /* Формат должен быть 'truetype', а не 'ttf' */
+}
 
 img, button,svg {
     outline: none;
@@ -199,7 +203,7 @@ section {
 
 .textHello {
     color: #FFF;
-    font-size: 50.111px;
+    font-size: 46px;
     font-style: normal;
     font-weight: 700;
     line-height: 109.9%; /* 63.864px */
@@ -8120,10 +8124,140 @@ color: white;
 .linkRef {
     margin-left: 4px;
 }
+
+.solidBorder {
+    border: 0.5px solid #B7B7B7;
+}
+.goToCreateCompany {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    font-size: 13px;
+    position: absolute;
+    top: 13px;
+    right: 19px;
+    width: fit-content;
+    justify-content: space-between;
+}
+.textGoCompany  {
+    color: #4900E3;
+    margin-right: 4px;
+}
+
+.groupInfoUser {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.TitleAndPrice {
+    margin-top: 20px;
+}
+.rowList,.priceAndHall,.priceAndMonth {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+.rowList {
+    margin-top: 15px;
+}
+.verticalLine {
+    margin: 0 6px;
+}
+.Ꝑ {
+    font-weight: 400;
+font-size: 10px;
+letter-spacing: 0.01em;
+text-align: center;
+color: #000;
+}
+
+.mrl-5 {
+    margin: 0 5px
+}
+.priceMonth{
+    font-family: Ubuntu;
+    font-weight: 400;
+    font-size: 11px;
+    text-align: center;
+    color: #000;
+}
+.itemCountSpec {
+    border: 0.50px solid #b7b7b7;
+border-radius: 4px;
+    padding:6px 12px;
+    position: relative;
+}
+
+.countItem {
+    font-family: Inter;
+    font-weight: 700;
+font-size: 40px;
+letter-spacing: 0.01em;
+color: #4900e3;
+}
+.month{
+    font-family: Ubuntu;
+    font-size:11px;
+}
+.relative {
+    top:0;
+    position: relative;
+    width: fit-content;
+}
+
+.textCountPersonal {
+    font-family: 'Raleway';
+    font-weight: 500;
+font-size: 10px;
+line-height: 100%;
+letter-spacing: 0.01em;
+color: #000;
+}
+.Hall {
+    position: relative;
+}
+.colorWhite {
+    color: white;
+}
+.lastItem {
+    background:#4900E3;
+    border: 1px solid #4900E3;
+}
+@media (max-width: 800px) {
+    .rowList {
+        flex-direction: column;
+    }
+    .itemCountSpec {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
 @media (max-width: 650px) {
+    /* На */
+.TitleAndPrice {
+    margin-top: 0;
+}
+.priceMonth {
+    font-size: 16px;
+}
+.priceAndHall {
+    position: absolute;
+    bottom: 14px;
+    right: 12px;
+}
+.Ꝑ {
+    font-size: 13px;
+}
+.month {
+    font-size: 14px;
+}
     .youNeedIs {
         flex-direction: column;
         padding: 20px 30px;
+    }
+    .goToCreateCompany {
+        display: none;
     }
     .mtNone {
         margin-top: 0;

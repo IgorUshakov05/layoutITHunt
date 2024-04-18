@@ -13,8 +13,8 @@
     <title>ITHunt - Фаст-ворк</title>
 </head>
 <body>
-    <%- include('./header.ejs', { isLoggedIn, active: 'profile'}) %>
-
+<%- include('./header.ejs', { isLoggedIn, active: 'profile'}) %>
+<% let role = 'sec' %>
 <main class="main">
      <div class="twoBlocks">
         <div class="personalInfo conditionBuyPremium">
@@ -39,7 +39,11 @@
                     </div>
                     <div class="descriptionAdmentage">
                         <h1 class="titleAdventeg">Отключить рекламу</h1>
-                        <h2 class="descriptionAdventeg">Уберите рекламу, расширьте список вакансий и сделайте контент более полезным</h2>
+                        <% if (role=='spec') { %>
+                            <h2 class="descriptionAdventeg">Уберите рекламу, расширьте список вакансий и сделайте контент более полезным</h2>
+                        <%} else {%>
+                            <h2 class="descriptionAdventeg">Уберите рекламу, расширьте список специалистов и сделайте контент более полезным</h2>
+                        <%}%>
                     </div>
                 </div>
                 <div class="firstAdventeg">
@@ -48,7 +52,11 @@
                     </div>
                     <div class="descriptionAdmentage">
                         <h1 class="titleAdventeg">Обратите на себя внимания</h1>
-                        <h2 class="descriptionAdventeg">Подчеркните свои навыки и опыт с функцией, которая выделяет вас в глазах работодателей</h2>
+                        <% if (role=='spec') { %>
+                            <h2 class="descriptionAdventeg">Подчеркните свои навыки и опыт с функцией, которая выделяет вас в глазах работодателей</h2>
+                        <%} else {%>
+                            <h2 class="descriptionAdventeg">Подчеркните свою вакансию и Фаст-Ворк с функцией, которая выделяет вас в глазах специалистов</h2>
+                        <%}%>
                     </div>
                 </div>
             </div>
@@ -189,8 +197,10 @@
                     </a>
                 </article>
             </div>
-            <div class="commingSoon">
-                <div class="discount" style="background: #4900E3; top: 13px; right: 19px; padding: 5px 10px;"><span style="font-family: Ubuntu;color:white; font-size: 12px;">Уже скоро</span></div>
+            <div class="commingSoon <%= role !== 'spec' ? 'solidBorder' : '' %>">
+
+                <% if (role=='spec') { %> 
+                <div class="discount " style="background: #4900E3; top: 13px; right: 19px; padding: 5px 10px;"><span style="font-family: Ubuntu;color:white; font-size: 12px;">Уже скоро</span></div>
                 <div class="inTwoBlocks">
                     <div class="imgPicTure">
                         <img src="/assets/pictures/commintSoon.png" alt="Скоро">
@@ -201,6 +211,111 @@
                         <p class="descriptionTextForCommingSoon mt-5">Заказчики  получают доступ к разнообразным командам и разработчикам, что делает процесс подбора наилучшей группы для конкретного проекта гораздо более удобным и адаптивным. Функция 'Команды' открывает новые перспективы для успешного взаимодействия в мире веб-разработки, предоставляя всем участникам возможность достигнуть максимального потенциала в совместной работе</p>
                     </div>
                 </div>
+                <%} else {%>
+                    <a href="" class="goToCreateCompany"><span class="textGoCompany">Перейти к созданию</span>
+                            <svg width="8" height="10" viewBox="0 0 8 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 5L0.5 9.33013L0.5 0.669872L8 5Z" fill="#4900E3"/>
+                                </svg>
+                        </a>
+                    <div class="teamSoom">
+                        <h2 class="titleTarifMy">Создайте компанию</h2>
+                        <p class="descriptionTextForCommingSoon mt-10">Создавайте свою компанию и добавьте коллег из разных офисов, обеспечивая централизованное управление. Публикуйте вакансии от имени компании, привлекая таланты из различных мест. Управляйте заданиями, устанавливайте сроки выполнения и отслеживайте прогресс. Возможность размещения объявлений и создания общего чата для сотрудников содействует эффективному взаимодействию в команде.</p>
+                    </div>
+                    <div class="teamSoom rowList">
+                        <div class="itemCountSpec">
+                            <div class="priceAndHall">
+                                <div class="priceAndMonth mobBottom">
+                                    <p class="priceMonth">349<p class="Ꝑ">Ꝑ</p></p><p class="verticalLine">|</p><p class="month">Месяц</p>
+                                    
+                                </div>
+                       
+                            </div>
+                            <div class="TitleAndPrice">
+                                <div class="countPersonal">
+                                    <p class="textCountPersonal">Количество сотрудников</p>
+                                    <p class="countItem">5</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="itemCountSpec mrl-5">
+                            <div class="Hall">
+                                <div class="discount" style="top:0;background-color: #4900E3;"><span style="font-family: Ubuntu; color: white;">10%</span></div>
+    
+                            </div>
+                            <div class="priceAndHall">
+                                <div class="priceAndMonth mobBottom">
+                                    <p class="priceMonth">1 260<p class="Ꝑ">Ꝑ</p></p><p class="verticalLine">|</p><p class="month">Месяц</p>
+                                    
+                                </div>
+                       
+                            </div>
+                            <div class="TitleAndPrice">
+                                <div class="countPersonal">
+                                    <p class="textCountPersonal">Количество сотрудников</p>
+                                    <p class="countItem">20</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="itemCountSpec mrl-5">
+                            <div class="Hall">
+                                <div class="discount" style="top:0;background-color: #4900E3;"><span style="font-family: Ubuntu; color: white;">20%</span></div>
+    
+                            </div>
+                            <div class="priceAndHall">
+                                <div class="priceAndMonth mobBottom">
+                                    <p class="priceMonth">2 800<p class="Ꝑ">Ꝑ</p></p><p class="verticalLine">|</p><p class="month">Месяц</p>
+                                    
+                                </div>
+                       
+                            </div>
+                            <div class="TitleAndPrice">
+                                <div class="countPersonal">
+                                    <p class="textCountPersonal">Количество сотрудников</p>
+                                    <p class="countItem">50</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="itemCountSpec mrl-5">
+                            <div class="Hall">
+                                <div class="discount" style="top:0;background-color: #4900E3;"><span style="font-family: Ubuntu; color: white;">30%</span></div>
+    
+                            </div>
+                            <div class="priceAndHall">
+                                <div class="priceAndMonth mobBottom">
+                                    <p class="priceMonth">4 900<p class="Ꝑ">Ꝑ</p></p><p class="verticalLine">|</p><p class="month">Месяц</p>
+                                    
+                                </div>
+                       
+                            </div>
+                            <div class="TitleAndPrice">
+                                <div class="countPersonal">
+                                    <p class="textCountPersonal">Количество сотрудников</p>
+                                    <p class="countItem">100</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="itemCountSpec lastItem">
+                            <div class="Hall">
+                                <div class="discount"><span style="font-family: Ubuntu;">40%</span></div>
+                            </div>
+                            <div class="priceAndHall">
+                                <div class="priceAndMonth mobBottom">
+                                    <p class="priceMonth colorWhite">9 900<p class="colorWhite Ꝑ">Ꝑ</p></p><p class="verticalLine colorWhite">|</p><p class="month colorWhite">Месяц</p>
+                                    
+                                </div>
+                       
+                            </div>
+                            <div class="TitleAndPrice">
+                                <div class="countPersonal">
+                                    <p class="textCountPersonal colorWhite">Количество сотрудников</p>
+                                    <p class="countItem colorWhite">200</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                <%}%>
+                
             </div>
         </div>
     </div>
