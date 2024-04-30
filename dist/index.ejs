@@ -12,7 +12,7 @@
     <script src="/js/jquery.js"></script>
     <title>WebHunt - поиск работы для IT-специалистов</title>
 </head>
-<body>
+<body style="height: 100vh;">
     <%- include('./header.ejs', { isLoggedIn, active: 'index'}) %>
 
 
@@ -37,11 +37,26 @@
             </div>
             <div class="right">
                 <div class="logo">
-                    <svg width="235" height="281" viewBox="0 0 235 281" fill="none" xmlns="http://www.w3.org/2000/svg" alt="ITHunt Logo">
-                        <path d="M9.2971 276.885C0.317044 270.656 -1.91333 258.327 4.31542 249.347L110.43 96.3607L142.949 118.917L36.8351 271.903C30.6063 280.883 18.2772 283.113 9.2971 276.885Z" fill="white"/>
-                        <path d="M235 94.2979C235 103.851 227.255 111.596 217.702 111.596H169.704V260.296C169.704 271.178 160.882 280 150 280C139.118 280 130.296 271.178 130.296 260.296V111.596H82.2979C72.7445 111.596 65 103.851 65 94.2979C65 84.7445 72.7445 77 82.2979 77H217.702C227.255 77 235 84.7445 235 94.2979Z" fill="white"/>
-                        <circle cx="149.774" cy="30.8418" r="30.7081" transform="rotate(90.25 149.774 30.8418)" fill="white"/>
-                    </svg>
+                    <svg width="309" height="246" viewBox="0 0 309 246" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0H3.55173C54.5529 0 95.8975 41.3446 95.8975 92.3458V245.071H92.3458C41.3446 245.071 0 203.727 0 152.726V0Z" fill="url(#paint0_linear_4392_5819)"/>
+                        <path d="M309.005 -5.34058e-05H305.454C254.452 -5.34058e-05 213.108 41.3446 213.108 92.3457V245.071H216.659C267.661 245.071 309.005 203.727 309.005 152.726V-5.34058e-05Z" fill="url(#paint1_linear_4392_5819)"/>
+                        <path d="M106.554 123.944H152.727C180.189 123.944 202.451 146.207 202.451 173.669V245.071H156.279C128.816 245.071 106.554 222.809 106.554 195.347V123.944Z" fill="url(#paint2_linear_4392_5819)"/>
+                        <defs>
+                        <linearGradient id="paint0_linear_4392_5819" x1="48.446" y1="87.1132" x2="51.9004" y2="249.066" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="white"/>
+                        <stop offset="1" stop-color="#4900E3"/>
+                        </linearGradient>
+                        <linearGradient id="paint1_linear_4392_5819" x1="260.559" y1="87.1131" x2="257.105" y2="249.066" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="white"/>
+                        <stop offset="1" stop-color="#4900E3"/>
+                        </linearGradient>
+                        <linearGradient id="paint2_linear_4392_5819" x1="155" y1="167" x2="155.844" y2="247.073" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="white"/>
+                        <stop offset="1" stop-color="#4900E3"/>
+                        </linearGradient>
+                        </defs>
+                        </svg>
+                        
                 </div>
             </div>
         </div>
@@ -345,9 +360,9 @@
         <% if(!isLoggedIn) {%>
         <a class="profile" href="/login">
             <button class="join lazzy">
-                <svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9 1V17" stroke="white" stroke-width="2" stroke-linecap="round"></path>
-                    <path d="M17 9L1 9" stroke="white" stroke-width="2" stroke-linecap="round"></path>
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 1V17" stroke="#4900E3" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M17 9L1 9" stroke="#4900E3" stroke-width="2" stroke-linecap="round"/>
                 </svg>
                 Присоединиться
             </button>
@@ -356,7 +371,7 @@
             <p class="thanks">У вас все получится!</p>
 <%}%>
     </div>
-    <div class="quetion">
+    <div id="questions" class="quetion">
             <h2>Часто задаваемые вопросы</h2>
             <div class="block">
             <div class="picure">
