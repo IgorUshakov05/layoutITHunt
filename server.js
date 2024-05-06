@@ -10,6 +10,7 @@ const HisprofileHR = require('./pageRoutes/SeeSideHr')
 const registration = require('./pageRoutes/registration')
 const seeSideProf = require('./pageRoutes/seeSideProf')
 const settingsHR = require('./pageRoutes/settingsHR');
+const chatCompany = require('./pageRoutes/companyChat');
 const createVacancy = require('./pageRoutes/createVacancy')
 const addCompany = require('./pageRoutes/addCompany')
 const createFastWork = require('./pageRoutes/createFastWork')
@@ -42,7 +43,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist')));
 app.set('views', path.join(__dirname, 'dist'));
 
-app.use(index,buyPremium,privacy,login,myprofileProfessional,seeSideProf,inboxOther,findCompany,inboxFastWork,inboxVacansy,inboxCompany,inbox,addCompany,createVacancy,createFastWork,HisprofileHR,settingsHR,myprofileHR,registration,company,chat,vacancia,fastWorkItem,userChat,settingsSpecialist,deleteAccount,createCompany, fastWork,specialists,vacancies)
+app.use(index,buyPremium,privacy,login,chatCompany,myprofileProfessional,seeSideProf,inboxOther,findCompany,inboxFastWork,inboxVacansy,inboxCompany,inbox,addCompany,createVacancy,createFastWork,HisprofileHR,settingsHR,myprofileHR,registration,company,chat,vacancia,fastWorkItem,userChat,settingsSpecialist,deleteAccount,createCompany, fastWork,specialists,vacancies)
 app.get('/robots.txt',(req,res)=>{
     res.sendFile(path.join(__dirname,'robots.txt'))
 })

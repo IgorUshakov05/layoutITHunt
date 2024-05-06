@@ -3567,8 +3567,6 @@ letter-spacing: -0.095px;
 }
 .mt20 {
     margin-top: 10px;
-    height: 80%;
-    width: 87%;
 }
 .MoreInfo.userChatSelect.NoneChat {
      max-height: 500px;
@@ -8150,6 +8148,31 @@ letter-spacing: 0.01em;
 text-align: center;
 color: white;
 }
+.panelForHR > a {
+    width: 48%;
+    text-align: center;
+    box-sizing: border-box;
+}
+.panelForHR {
+    margin-top: 15px;
+    align-items: stretch; 
+}
+.editCompany {
+    background: none;
+    border:1px solid #5412E0;
+    color:#5412E0;
+}
+.editCompany:hover{ 
+    background: #5412E0;
+    border:1px solid #5412E0;
+    color:white;
+}
+.showMoreButton.flex {
+    justify-content: center;
+}
+.showMoreButton.flex > img {
+    margin-right: 7px;
+}
 .fullDev {
         display: none;
     }
@@ -8416,6 +8439,9 @@ color: #000;
 
 .contentCenter > svg {
     width: 100%;
+}
+.medias {
+    width: 87%;
 }
 @media (max-width: 1100px) {
     .contentCenter {
