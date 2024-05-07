@@ -9,11 +9,10 @@
         <%}%>
     </div>
     <% if(users) {%>
+        <input type="text" class="searchChat" placeholder="Найти" name="person" oninput="searchChat()" id="SearchChat">
 
         <div class="chatList">
-            <div class="inputSeatchChat">
-                <input type="text" class="searchChat" placeholder="Найти" name="person" oninput="searchChat()" id="SearchChat">
-            </div>
+      
             <ul class="listPersonAll">
                 <% users.forEach((el) => {%>
                     <li class="itemChat">
@@ -44,8 +43,9 @@
             <div class="plane">
                 <svg width="164" height="52" style="width: 100%; height: 100%" viewBox="0 0 164 52" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M36 36.5L163 27.5L39 51L36 36.5Z" fill="black" fill-opacity="0.09"/>
-                    <path d="M163.5 27.5L58.5 0.5L40.5 13M163.5 27.5L36 36.5M163.5 27.5L39 50.5L36 36.5M163.5 27.5L40.5 13M163.5 27.5L41.1187 18.5567M36 36.5L1.5 39L33.5 18L41.1187 18.5567M36 36.5L163 27.5L39 51L36 36.5ZM40.5 13L41.1187 18.5567" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                </svg>
+                    <path d="M163.5 27.5L58.5 0.5L40.5 13M163.5 27.5L36 36.5M163.5 27.5L40.5 13M163.5 27.5L41.1187 18.5567M36 36.5L1.5 39L33.5 18L41.1187 18.5567M36 36.5L163 27.5L39 51L36 36.5ZM40.5 13L41.1187 18.5567" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
+                    </svg>
+                    
             </div>
             <div class="btt">
                 <a class="toActivs" href="/vacancies">К вакансиям</a>

@@ -1319,7 +1319,7 @@ input[type="password"]::-moz-focus-inner
 .signToGoogle > button>svg {
     margin-right: 15px;
 }
-.inputs > input,.passForGlases> input {
+.inputs > input,.passForGlases> input,.inputs > textarea {
     width: 100%;
     height: 50px;
     padding: 17px;
@@ -1337,14 +1337,12 @@ outline: none;
 transition: 0ms;
 }
 
-.inputs > input::placeholder,.passForGlases> input::placeholder {
-    color: black;
-}
+
 .inputs > input:focus::placeholder,.passForGlases> input:focus::placeholder {
     color: #737373;
 }
 
-.inputs > input:focus, .passForGlases> input:focus {
+.inputs > input:focus, .passForGlases> input:focus,.specialisationSelectInput:focus {
     border: 2px solid #5412E0 !important;
 }
 
@@ -1355,6 +1353,7 @@ transition: 0ms;
 margin: 10px 0 0 17px;
 
 }
+
 .newPassword {
     color: #000;
     font-size: 13px;
@@ -1647,7 +1646,7 @@ text-decoration-style: solid;
     position: relative;
     padding: 10px 18px 0px 18px;
     background: #FFF;
-    box-shadow: 0px 1px 4px 0px rgba(151, 149, 255, 0.25);
+    border: 1px solid rgba(151, 149, 255, 0.25);
 }
 .textInfoAbout {
     margin-left: 12px;
@@ -2889,7 +2888,7 @@ word-wrap: nowrap;
 font-weight: 400;
 line-height: normal;
 white-space: nowrap;
-margin-left: 10px;
+margin-left: 6px;
 }
 input[type="checkbox"] {
     background-color: #fff; /* Задайте желаемый цвет фона */
@@ -2929,16 +2928,19 @@ letter-spacing: -0.055px;
 }
 
 .wayWorkItem > input {
-    width: 15px;
+    width: 21px;
     aspect-ratio:1/1;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    border:1px solid black;
+    border:none;
+    background: #f3f3f3;
     cursor: pointer;
-    border-radius: 2px;
+    border-radius: 4px;
 }
-
+.wayWorkItem > input:hover {
+    background: #e9e9e9;
+}
 .wayWorkItem > input:checked {
     background:var(--indexColor);
     border: var(--indexColor);
@@ -3000,7 +3002,7 @@ margin-left: -8px;
  }
 
  .elemExpiriensLabel {
-    padding: 7px 24px;
+    padding: 10px 24px;
     border-radius: 20.489px;
     background: #DDD;
     color: #000;
@@ -3009,7 +3011,7 @@ margin-left: -8px;
     font-style: normal;
     word-wrap: nowrap;
     font-weight: 400;
-    line-height: normal;
+    line-height: 82%;
     white-space: nowrap;
  }
 
@@ -3297,7 +3299,7 @@ font-family: Raleway;
 font-size: 13px;
 font-style: normal;
 font-weight: 300;
-line-height: 122.9%; /* 15.977px */
+line-height: 147%; /* 15.977px */
 letter-spacing: -0.065px;
 height: inherit;
 }
@@ -3633,12 +3635,10 @@ height: 100%;
 }
 .flexItemChat {
     display: flex;
-    padding: 10px;
+    padding: 8px 10px;
     align-items: center;
 }
-.flexItemChat {
-    padding-top: 0;
-}
+
 .contentChatItem {
     overflow: hidden;
     height: 100%;
@@ -3743,8 +3743,8 @@ height: 100%;
 .plane {
     width: fit-content;
     height: fit-content;
-    margin: auto;
-    margin-top: 50px;
+    width: 70%;
+    margin: 76px auto;
 }
 
 .toActivs {
@@ -3798,6 +3798,7 @@ height: 100%;
 @media (max-width: 1100px) {
     .userChatSelect {
         display: none;
+        border:none;
     }
 }
 
@@ -4145,6 +4146,8 @@ background: #EFEFEF;
 }
 .boxMessage {
     margin-top: 8px;
+    width: 100%;
+    margin: 8px auto;
 }
 
 .myMessage:before {
@@ -4243,12 +4246,17 @@ box-shadow: 0px 1px 6.2px -1px rgba(191, 198, 255, 0.77);
     .middleInfoUser {
         display: none;
     }
-
+    .main2 {
+        width: 100%;
+    }
     .topInfoAboutUser {
         padding: 10px 0;
         box-shadow: none;
         filter: none;
+        width: 87%;
+        margin: auto;
     }
+    
     .backToListChats {
         display: flex;
     }
@@ -4265,7 +4273,10 @@ box-shadow: 0px 1px 6.2px -1px rgba(191, 198, 255, 0.77);
     .openMethodsMEnu {
         display: flex;
     }
-
+.boxMessage {
+    width: 87%;
+    margin: 8px auto;
+}
     .someChat {
         width: 100%;
         right: 0;
@@ -4276,7 +4287,7 @@ box-shadow: 0px 1px 6.2px -1px rgba(191, 198, 255, 0.77);
     }
     .searchMessageModalWindow {
         width: 100%;
-        margin: none;
+        margin: auto;
     }
 }
 
@@ -5862,6 +5873,12 @@ letter-spacing: 0.15px;
     color: black !important;
 }
 
+
+.twoBlocks.mt20 {
+    height: 78vh;
+}
+
+
 .nextStageBattonVacancy {
     padding: 10px 32px;
 }
@@ -6850,6 +6867,10 @@ letter-spacing: 0.13px;
 .mt-5 {
     margin-top:3px;
 }
+.mt-5px {
+    margin-top: 5px;
+}
+
 .eduSchool {
     padding: 12px 19px;
     border-radius: 4px;
@@ -7835,7 +7856,7 @@ color:white;
     background: black;
     border-radius: 19px;
     position: absolute;
-    right: 0px;
+    right: 3px;
     top: 5px;
     font-size: 10px;
     color: white;
@@ -8148,7 +8169,7 @@ letter-spacing: 0.01em;
 text-align: center;
 color: white;
 }
-.panelForHR > a {
+.panelForHR > a,.panelForHR > button {
     width: 48%;
     text-align: center;
     box-sizing: border-box;
@@ -8181,6 +8202,13 @@ color: white;
     justify-content: space-between;
     align-items: center;
     padding: 25px;
+}
+.w50Pic {
+    width: 120px;
+    height:120px;
+}
+.ohidden {
+    overflow: hidden;
 }
 .bottomPoliceLink {
     font-weight: 400;
@@ -8415,7 +8443,15 @@ color: #000;
     }
     
 }
-
+.leftText {
+    text-align:right;
+    font-family: 'Ubuntu';
+    width: 100%;
+    font-size: 12px;
+}
+.mt-30px {
+    margin-top: 30px;
+}
 .toContent {
     position: fixed;
     bottom: 20px;

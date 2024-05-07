@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Найдите работу или предложите её в IT-сфере с помощью нашего сайта. Мы предлагаем широкий выбор вакансий для различных специализаций.">
+    <meta name="keywords" content="IT, работа, вакансии, поиск работы, ITHunt, специалисты, программист, разработчик, тестировщик, веб-дизайнер">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="ITHunt - MTS Group">
+    <meta property="og:description" content="МТС — российская компания, предоставляющая телекоммуникационные услуги, цифровые и медийные сервисы в России, Армении и Белоруссии под торговой маркой «МТС»">
+    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/800px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon">
+    <meta name="author" content="ITHunt">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/js/jquery.js"></script>
+    <title>Компания - МТС</title>
+</head>
+<body>
+    <%- include('./header.ejs', { isLoggedIn, active: 'vacancies'}) %>
+
+<main class="main">
+    <div class="twoBlocks">
+        
+       <div class="personalInfo filterAlways noShadow">
+        <div class="boxShadow">
+            <h1 class="username setPhoto">Установите логотип компании</h1>
+            <div class="setLogo mt-10">
+                <div class="leftFishPhoto w50Pic">
+                    <img width="137" height="137" src="/assets/pictures/FishPhto.png" id="companyLogo" alt="Логотип компании">
+                </div>
+                <div class="leftInputImg ohidden">
+                    <p>Соотношение сторон 1:1</p>
+                    <p>Допускаемые форматы изображения могут включать JPEG, PNG</p>
+                    <div class="addCompany">
+                        <input type="file" id="imageUpload" name="imageUpload" accept="image/jpeg, image/png">
+                        <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.6409 14.7641L19.0568 6.4684C19.2683 5.95477 18.8906 5.39087 18.3351 5.39087H4.94839C4.63215 5.39087 4.34718 5.58171 4.22677 5.87413L0.810877 14.1699C0.59938 14.6835 0.977016 15.2474 1.53249 15.2474H14.9193C15.2355 15.2474 15.5205 15.0566 15.6409 14.7641Z" stroke="white" stroke-width="0.613169"/>
+                            <path d="M0.947266 10.6091V1.53296C0.947266 1.10196 1.29666 0.752563 1.72766 0.752563H5.10332C5.39891 0.752563 5.66914 0.91957 5.80133 1.18396L6.52953 2.64035C6.66172 2.90474 6.93194 3.07175 7.22754 3.07175H14.6618C15.0928 3.07175 15.4422 3.42114 15.4422 3.85214V4.23134" stroke="white" stroke-width="0.613169" stroke-linecap="round"/>
+                            </svg>
+                            <span id="titleFile">Загрузить изображение</span>
+                    </div>
+                </div>
+            </div>
+
+        <div class="inputs mt-30px">
+            <h1 class="username setPhoto">Установите логотип компании</h1>
+
+            <input required minlength="2" class="mt-5px" maxlength="50" type="text" placeholder="Название компании" name="email" id="titleCompany">
+            <h1 class="username setPhoto mt-30px">Описание</h1>
+            <textarea class="specialisationSelectInput mt-10" placeholder="Кратко, но информативно опишите компанию" type="text" name="descriptionCompany" id="descriptionCompany"></textarea>
+            <h1 class="username setPhoto leftText">Осталось символов: 250</h1>
+            <div class="panelForHR flex mt-30px">
+                <button class="showMoreButton editCompany">Отменить</button>
+                <button class="showMoreButton flex">Сохранить</button>
+            </div>
+        </div>
+
+</div>
+
+       </div>
+       <div class="MoreInfo">
+        <div class="listVacas">
+            <article class="vakansiaItem">
+                <div class="topInfoPriceAndTitle">
+                    <div class="titleAndTypeJob">
+                        <h2><span><a href="/vacancia"  class="titleJob">Веб-дизайнер</a></span></h2>
+                        <h4><span  class="methodJob">Удаленно</span></h4>
+                    </div>
+                    <div class="priceJob">
+                        <h3> 
+                            <span class="priceItem"><%= (123123).toLocaleString("no-NO") %></span>
+                            <span class="p">Ꝑ</span></h3>
+                    </div>
+                </div>
+                <div class="middleInfoVacansya">
+                    <div class="descriptionVacansy">
+                    <p class="descriptionVacansyText">
+                        Мы понимаем, что в процессе поиска работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы и предоставить необходимую помощь в кратчайшие сроки. Мы ценим ваше время и стремимся обеспечить гладкое и безопасное пользование нашей платформой. Мы понимаем, что в процессе поиска работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы  работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы и предоставить необходимую помощь в кратчайшие сроки. Мы ценим ваше время и стремимся обеспечить гладкое и безопасное пользование нашей платформой. Мы понимаем, что в процессе поиска работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы  работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы и предоставить необходимую помощь в кратчайшие сроки. Мы ценим ваше время и стремимся обеспечить гладкое и безопасное пользование нашей платформой. Мы понимаем, что в процессе поиска работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы </p>
+                    </div>
+                    <div class="showFull"><span class="showFullText">Показать полностью</span></div>
+                </div>
+                <div class="stackForJob">
+                    <ul class="listStacks">
+                        <li class="abilityItem">
+                            <h5 class="ability">HTML</h5>
+                        </li>
+                        <li class="abilityItem">
+                            <h5 class="ability">JavaScript</h5>
+                        </li>
+                        <li class="abilityItem">
+                            <h5 class="ability">React</h5>
+                        </li>
+                        <li class="abilityItem">
+                            <h5 class="ability">Node.js</h5>
+                        </li>
+                        <li class="abilityItem">
+                            <h5 class="ability">Python</h5>
+                        </li>
+                        <li class="abilityItem">
+                            <h5 class="ability">Java</h5>
+                        </li>
+                        <li class="abilityItem">
+                            <h5 class="ability">PHP</h5>
+                        </li>
+                        <li class="abilityItem">
+                            <h5 class="ability">Angular</h5>
+                        </li>
+                        <li class="abilityItem">
+                            <h5 class="ability">Vue.js</h5>
+                        </li>
+                        <li class="abilityItem">
+                            <h5 class="ability">TypeScript</h5>
+                        </li>
+                        <li class="abilityItem">
+                            <h5 class="ability">Java</h5>
+                        </li>
+                        <li class="abilityItem">
+                            <h5 class="ability">JavaScript</h5>
+                        </li>
+                        <li class="abilityItem">
+                            <h5 class="ability">HTML</h5>
+                        </li>
+                        <li class="abilityItem">
+                            <h5 class="ability">CSS</h5>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bottomInfo">
+                    <a href ="#">
+                        <div class="companyInfo">
+                            <div class="img">
+                                <img width="40" height="40" alt="Логотип компании" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/200px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png">
+                            </div>
+                            <div class="titleCompanyAndDate">
+                                <div class="titleCompany"><span class="styleTitleCompany">MTC</span></div>
+                                <div class="titleCompany"><span class="styleTimeCompany">35 часов назад</span></div>
+                            </div>
+                        </div>
+                    </a>
+                        <div class="buttonsElements">
+                            <!-- addingFavorite - класс добавленого в избранное -->
+                            <button class="Infavorites ">В избранное</button>
+                            <button class="Respond"><a href="/vacancia">Откликнуться</a></button>                        
+                        </div>
+                </div>
+            </article>
+        </div>
+        <div class="showMore">
+            <button id="getMore" class="showMoreButton" title="Загрузить больше вакансий">Смотреть еще вакансии</button>
+        </div>
+    </div>
+</div>
+</main>
+
+
+<%- include('./footer.ejs') %>
+<script src="/js/header.js"></script>
+</body>
+</html>
