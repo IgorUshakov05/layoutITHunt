@@ -6042,16 +6042,31 @@ letter-spacing: 0.054px;
     background: #FFF;
     box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
 }
-
+.changeCountTeam {
+    font-size: 15px; 
+    font-weight: 700;
+}
+.flex.price {
+    align-items: center;
+}
+.changeCountTeamDescription {
+    font-size: 14px;
+    margin-top: 12px;
+    font-weight: 500;
+    white-space: initial;
+}
+.mt0 {
+    margin-top: 0;
+}
 .premiumUser:before {
     content: '';
     left: 0;
     position: absolute;
     top: 0;
+    border-radius:4px;
     bottom: 0;
     background:#4900E3;
     width: 5px;
-    border-radius: inherit;
 }
 .topInfoSpec {
     display: flex;align-items: stretch;
@@ -6182,12 +6197,55 @@ box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
 .mobrightright > * {
     width: 47%;
 }
+.textBlock {
+    margin-left: 8px;
+}
+
+.alignItemsCenter {
+    align-items: Center !important;
+}
+.linkRemoveCompany {
+    width: fit-content;
+    border-radius: 4px;
+  
+    padding: 7px 19px;
+    margin-top: 20px;
+    border: 1px solid #E53935;
+}
+.removeTextButton {
+    margin-left: 10px;
+    font-size: 13px;
+    color: #E53935;
+}
+.pic  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.linkRemoveCompany:hover {
+    background:#E53935;  
+}
+
+.linkRemoveCompany:hover > a > .alignItemsCenter > .removeTextButton {
+    color:white;
+    
+}
+.linkRemoveCompany:hover > a > .alignItemsCenter > .pic > svg  > path{
+    stroke:white;
+    
+}
 @media (max-width: 800px) {
     .rightright {
         display: none;
     }
     .mobrightright {
         display: flex;
+    }
+    .diplayPic {
+        display: none;
+    }
+    .textBlock {
+        margin-left: 0px;
     }
 }
 .cityPerson {
@@ -8405,6 +8463,21 @@ color: #000;
     margin-left: 20px;
         margin-top:4px;
      }
+     .commingSoonLink {
+        cursor: pointer;
+     }
+.commingSoonBlock {
+    width: fit-content;
+    border-radius: 20px;
+    background:#DDDDDD;
+    }
+    .commingSoonLink:hover {
+    background:#F0F4FF;
+    }
+     .commingSoonLink:hover > .countContainer > .commingSoonBlock  {
+    background:#00AE1C;
+
+    }
 @media (max-width: 650px) {
     /* На */
 .TitleAndPrice {
@@ -8413,6 +8486,8 @@ color: #000;
 .priceMonth {
     font-size: 16px;
 }
+
+
 .priceAndHall {
     position: absolute;
     bottom: 14px;
