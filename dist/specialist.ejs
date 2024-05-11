@@ -18,6 +18,7 @@
     {
         firstname: "Игорь",
         lastname: "Ушаков",
+        isPremium: true,
         avatar: "/assets/pictures/person.jpg",
         specialnost: "Веб-дизайнер",
         linkProfile: "/profesionalMe",
@@ -35,6 +36,7 @@
         linkProfile: "/annaprofile",
         description: "Опытный графический дизайнер с фокусом на современных тенденциях и пользовательских интерфейсах.",
         city: "Москва",
+        isPremium: false,
         expiriens:"5 года",
         chat: "/user1chat",
         skills: ["Adobe Photoshop", "Illustrator", "InDesign", "Sketch", "Figma"]
@@ -47,6 +49,7 @@
         linkProfile: "/petrprofile",
         description: "Стремлюсь к созданию современных и отзывчивых интерфейсов с использованием новейших технологий.",
         city: "Санкт-Петербург",
+        isPremium: false,
         expiriens:"2 года",
         chat: "/user2chat",
         skills: ["JavaScript", "React", "Angular", "HTML", "CSS", "Responsive Design"]
@@ -60,6 +63,7 @@
         description: "SEO-эксперт с фокусом на увеличении посещаемости и улучшении юзабилити веб-сайтов.",
         city: "Краснодар",
         expiriens:"4 года",
+        isPremium: true,
         chat: "/user3chat",
         skills: ["SEO", "Google Analytics", "Keyword Research", "Link Building", "Content Strategy"]
     },
@@ -71,6 +75,7 @@
         linkProfile: "/dmitryprofile",
         description: "Работаю над созданием мощных и масштабируемых серверных решений для различных проектов.",
         city: "Новосибирск",
+        isPremium: true,
         expiriens:"3 года",
         chat: "/user4chat",
         skills: ["Node.js", "Python", "MySQL", "MongoDB", "Docker", "RESTful APIs"]
@@ -83,6 +88,7 @@
         linkProfile: "/mariaprofile",
         description: "Занимаюсь разработкой пользовательских интерфейсов и созданием уникального пользовательского опыта.",
         city: "Екатеринбург",
+        isPremium: false,
         chat: "/user5chat",
         expiriens:"5 лет",
         skills: ["UI/UX Design", "Wireframing", "Prototyping", "User Testing", "Sketch", "Adobe XD"]
@@ -278,7 +284,7 @@
         </div>
         <div class="MoreInfo">
             <% users.forEach(user => { %>
-                <article class="personArticle">
+                <article class="<%= user.isPremium ?'premiumUser ':'' %> personArticle">
                 <div class="topInfoSpec">
                     <div class="leftTopInfoSpec">
                         <div class="imgProfile">

@@ -1,0 +1,47 @@
+<div class="personalInfo chatLeft <%= priv===true?'priv':''%>">
+
+    <% if(users) {%>
+        <div class="chatList" style="margin-top: 0;">
+      
+            <ul class="listPersonAll">
+                <% users.forEach((el) => {%>
+                    <li class="itemChat">
+                        <a href="/person" class="flexItemChat">
+                            <div class="leftPhoto">
+                                <img class="personPhoto" width="43" height="43" src="<%= el.photoUser %>" alt="Фото профиля">
+                            </div>
+                            <div class="contentChatItem">
+                                <span class="personName"><%= el.username%></span>
+                                <div class="whoType">
+
+                                    <span><%= el.city%></span>
+                                </div>
+
+                            </div>
+                        </a>
+                    </li>
+                <% })%>
+            </ul>
+
+        </div>
+    <% } else {%>
+        <div class="notChat">
+            <h1 class="textOfNotChat">Список чатов пуст</h1>
+            <p class="textOfNotChatP">Начните общение с заявки на работу или проект</p>
+
+            <div class="plane">
+                <svg width="164" height="52" style="width: 100%; height: 100%" viewBox="0 0 164 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M36 36.5L163 27.5L39 51L36 36.5Z" fill="black" fill-opacity="0.09"/>
+                    <path d="M163.5 27.5L58.5 0.5L40.5 13M163.5 27.5L36 36.5M163.5 27.5L40.5 13M163.5 27.5L41.1187 18.5567M36 36.5L1.5 39L33.5 18L41.1187 18.5567M36 36.5L163 27.5L39 51L36 36.5ZM40.5 13L41.1187 18.5567" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
+                    </svg>
+                    
+            </div>
+            <div class="btt">
+                <a class="toActivs" href="/vacancies">К вакансиям</a>
+                <a class="toActivs" href="/fast-work">К Фаст-Ворку</a>
+            </div>
+        </div>
+    <% }%>
+
+
+</div>
