@@ -3132,7 +3132,7 @@ padding: 12px 25px;
 
 .sendForm {
     border-radius: 4px;
-background: #00AE1C;
+background: #5412E0;
 padding: 12px 25px;
 box-sizing:border-box;
 color:white; 
@@ -4671,7 +4671,7 @@ margin-top: 10px;
 
 
 .boxShadow,.boxFilter {
-   box-shadow:0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 1px 4px 0px rgba(151, 149, 255, 0.25);
    padding: 20px;
 }
 
@@ -4975,10 +4975,13 @@ letter-spacing: 0.084px;
 }
 
 @media (max-width: 1100px) {
-    .companyPadding {
+    .companyPadding,.panelForHR.flex {
         padding: 0px 10px 10px 10px;
     }
+
 }
+
+
 
 
 .boxShadowPerson {
@@ -8607,4 +8610,52 @@ color: #000;
     .d-onnone {
         display: none;
     }
+}
+
+
+@media (max-width: 550px) {
+    .panelForHR.flex  {
+        flex-direction: column;
+        margin-top: 8px;
+    }
+    .panelForHR > a, .panelForHR > button {
+        width: 100%;
+    }
+    .showMoreButton.flex {
+        margin-top: 10px;
+    }
+}
+
+.inputsSelectTypeWork {
+    display: flex;
+    margin-top: 12px;
+    justify-content: space-between;
+}
+
+label.elemExpiriensLabel {
+    width: 100%;
+    text-align: center;
+}
+.selectTypeWork {
+    position: relative;
+}
+.typeWork.specialisationSelect {
+    margin-top: 0;
+}
+.selectTypeWork > label {
+    border-radius: 4px;
+    padding: 15px;
+}
+
+
+.selectTypeWork > input {
+    width:100%;
+    opacity:0; 
+    position: absolute;
+    top: 0;
+    bottom:0;
+}
+.elemExpiriens {
+    margin-top: 4px;
+    width: 48%;
 }
