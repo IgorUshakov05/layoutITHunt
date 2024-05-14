@@ -5592,7 +5592,7 @@ font-family: Raleway;
 font-size: 19px;
 font-style: normal;
 font-weight: 700;
-line-height: 141.4%; /* 26.866px */
+line-height: 112.4%; /* 26.866px */
 letter-spacing: -0.095px;
 }
 .logoCompanyProfil > img {
@@ -8261,6 +8261,7 @@ color: white;
     color:white;
 }
 .showMoreButton.flex {
+    align-items:center !important;
     justify-content: center;
 }
 .showMoreButton.flex > img {
@@ -8658,4 +8659,14 @@ label.elemExpiriensLabel {
 .elemExpiriens {
     margin-top: 4px;
     width: 48%;
+}
+
+.nun {
+    padding: 11px 20px;
+}
+.wrapNo {
+    flex-wrap:nowrap;
+}
+.w24 {
+    width: 22%;
 }

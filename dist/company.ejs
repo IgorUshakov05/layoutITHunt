@@ -228,26 +228,26 @@
 </div>
 <div class="specialisationSelect">
     <h1>Опыт работы</h1>
-    <div class="NoWrapExirient">
+    <div class="NoWrapExirient wrapNo">
         
-            <div class="elemExpiriens">
+            <div class="elemExpiriens w24">
                 <input type="radio" id="OneTwo" name="radioExpiriens" value="OneTwo" />
-                <label class="elemExpiriensLabel" for="OneTwo">0-2</label>
+                <label class="elemExpiriensLabel nun" for="OneTwo">0-2</label>
             </div>
 
-                <div class="elemExpiriens">
+                <div class="elemExpiriens w24">
                     <input type="radio" id="ThreeFour" name="radioExpiriens" value="ThreeFour" />
-                    <label class="elemExpiriensLabel" for="ThreeFour">3-5</label>
+                    <label class="elemExpiriensLabel nun" for="ThreeFour">3-5</label>
                 </div>
                 
-                <div class="elemExpiriens">
+                <div class="elemExpiriens w24">
                     <input type="radio" id="SixEight" name="radioExpiriens" value="SixEight" />
-                <label class="elemExpiriensLabel" for="SixEight">6-8</label>
+                <label class="elemExpiriensLabel nun" for="SixEight">6-8</label>
             </div>
 
-          <div class="elemExpiriens">
+          <div class="elemExpiriens w24">
             <input type="radio" id="EightPlus" name="radioExpiriens" value="EightPlus" />
-            <label class="elemExpiriensLabel" for="EightPlus">8+</label>
+            <label class="elemExpiriensLabel nun" for="EightPlus">8+</label>
           </div>
     </div>
 </div>
@@ -269,6 +269,8 @@
 
        </div>
        <div class="MoreInfo">
+        <% var items = 0 %>
+        <% if(items) { %>
         <div class="listVacas">
             <article class="vakansiaItem">
                 <div class="topInfoPriceAndTitle">
@@ -469,6 +471,15 @@
         <div class="showMore">
             <button id="getMore" class="showMoreButton" title="Загрузить больше вакансий">Смотреть еще вакансии</button>
         </div>
+        <% } else { %>
+            <div class="boxNones">
+                <h1 class="nowTime">Похожу у компании нет работы</h1>
+                <p class="createPleace">На данный момент компания не имеет открытых вакансий или фаст-ворков</p>
+                <div class="imgNones">
+                <img src="/assets/pictures/vacansyNotFound.png" width="415" height="230" alt="">
+                    </div>
+                </div>
+        <% } %>
     </div>
 </div>
 </main>
