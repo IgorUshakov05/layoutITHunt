@@ -19,30 +19,32 @@
             </div>
             <div class="createCompanyMain" id="windowSendCompany">
 
-                <div class="topBlock">
-                    <div class="arrowBack">
-                        <a href="/add-company">
-                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M24.5 12.5H3M3 12.5L13.5 23M3 12.5L13.5 2" stroke="#5412E0" stroke-width="3"/>
-                        </svg>
-                    </a>
-                    </div>
-                    <div class="addOrganization"><span class="addOrg">Добавим организацию</span></div>
-                    <div class="arrowBack" style="opacity: 0;"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M24.5 12.5H3M3 12.5L13.5 23M3 12.5L13.5 2" stroke="#5412E0" stroke-width="3"/>
-                        </svg>
-                        </div>
-                    
-                </div>
+               
+
                 <div class="createOne" id="OneStageElem">
-                    <div class="data" id="oneStage">
-                        <label class="labelText">Наименование</label>
+                    <div class="topBlock">
+                        <div class="arrowBack">
+                            <a href="/add-company">
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24.5 12.5H3M3 12.5L13.5 23M3 12.5L13.5 2" stroke="#5412E0" stroke-width="3"/>
+                            </svg>
+                        </a>
+                        </div>
+                        <div class="addOrganization"><span class="addOrg">Регистрация компании</span></div>
+                        <div class="arrowBack" style="opacity: 0;"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24.5 12.5H3M3 12.5L13.5 23M3 12.5L13.5 2" stroke="#5412E0" stroke-width="3"/>
+                            </svg>
+                            </div>
+                        
+                    </div>
+                    <div class="mt35"></div>
+                        <p class="labelText">Наименование</p>
                     <input class="specialisationSelectInput" style="margin-bottom:5px;" placeholder="ITHunt" type="text" name="nameCompany" id="nameCompany">
                     <div class="labelTextCompany"></div>
-                    <label class="labelText">Установите логотип компании</label>
+                    <p class="labelText">Установите логотип компании</p>
                     <div class="setLogo">
                             <div class="leftFishPhoto">
-                                <img width="137" height="137" src="/assets/pictures/FishPhto.png" id="companyLogo" alt="Логотип компании">
+                                <p>Для просмотра загрузите файл</p>
                             </div>
                             <div class="leftInputImg">
                                 <p>Соотношение сторон 1:1</p>
@@ -58,7 +60,7 @@
                             </div>
                         </div>
                         <div class="data">
-                            <label class="labelText">Описание</label>
+                            <p class="labelText">Описание</p>
                         <textarea class="specialisationSelectInput" placeholder="Кратко, но информативно опишите компанию" type="text" name="descriptionCompany" id="descriptionCompany"></textarea>
                         <div id="reminder" class="reminder">Осталось символов: 250</div>
                     </div>
@@ -69,36 +71,212 @@
                     </div>   
                 </div>
                 <div class="createTwo" id="TwoStageElem">
-                    <div id="understage">
-
-                        <label for="post" id="removes">Укажите доменную почту</label>
-                        <div class="inputs emailCompany " id="setIsNotValid">
-                            <input class="100%" type="email" id="postCompany" placeholder="Почта" name="post">
+                    <div class="topBlock">
+                        <div class="arrowBack">
+                            <a href="/add-company">
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24.5 12.5H3M3 12.5L13.5 23M3 12.5L13.5 2" stroke="#5412E0" stroke-width="3"/>
+                            </svg>
+                        </a>
                         </div>
-                        <div class="bottomElem" id="removess">
-                            <div class="nextStageCompany getCode" id="parentButtonGetCode">
-                                <button id="getCodePass" class="submitButton submitButtonComp" disabled>Получить код</button>
+                        <div class="addOrganization"><span class="addOrg">Подтверждение</span></div>
+                        <div class="arrowBack" style="opacity: 0;"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24.5 12.5H3M3 12.5L13.5 23M3 12.5L13.5 2" stroke="#5412E0" stroke-width="3"/>
+                            </svg>
                             </div>
-                        </div>  
+                        
                     </div>
-                    <div class="textWarning" id="textWarning">
-                        <p>Введите код, который мы отправили вам на почту</p>
-                            <div class="labls">
-                                <input class="inputBox" type="number" maxlength="6" id="removeAccountInput">
-                                <div class="box start"></div>
-                                <div class="box"></div>
-                                <div class="box"></div>
-                                <div class="box"></div>
-                                <div class="box"></div>
-                                <div class="box end"></div>
-                            </div>
-                            <div class="nextStageCompany getCode" id="parentButtonGetCode">
-                                <button id="postCodeVerefy" class="submitButton submitButtonComp" disabled>Отправить код</button>
-                            </div>
+                    <div class="mt20"></div>
+                    <p for="" class="labelText">
+                        Чтобы подтвердить что вы являетесь владельцем компании, необходимо предоставить документы указанные ниже
+                     </p>
+
+                   <div class="listDocuments">
+                    <div class="documents">
+                        <div class="flex center"><p class="stageNumber">1</p><p class="textDocuments">Свидетельство о государственной регистрации (ЮЛ/ИП)</p></div>
+                        <div class="uploadFile">
+                            <p class="upoloadFiltHere">Переместите файл сюда</p>
+                            <input type="file" class="uploadFileInput">
+                            <p class="upoloadFiltHere description">Форматы: JPEG PDF PNG . Размер файла не более 10МБ</p>
+                        </div>
+                    </div>
+                    <div class="documents">
+                        <div class="flex center"><p class="stageNumber">2</p><p class="textDocuments">Свидетельство о постановке на налоговый учет (ЮЛ/ИП)</p></div>
+                        <div class="uploadFile">
+                            <p class="upoloadFiltHere">Переместите файл сюда</p>
+                            <input type="file" class="uploadFileInput">
+                            <p class="upoloadFiltHere description">Форматы: JPEG PDF PNG . Размер файла не более 10МБ</p>
+                        </div>
+                    </div>
+                    <div class="documents">
+                        <div class="flex center"><p class="stageNumber">3</p><p class="textDocuments">Лист записи ЕГРЮЛ/ЕГРИП</p></div>
+                        <div class="uploadFile">
+                            <p class="upoloadFiltHere">Переместите файл сюда</p>
+                            <input type="file" class="uploadFileInput">
+                            <p class="upoloadFiltHere description">Форматы: JPEG PDF PNG . Размер файла не более 10МБ</p>
+                        </div>
+                    </div>
+                    <div class="acceptRule">
+                        <div class="flex">
+                            <input type="checkbox" class="acceptRuleInput" name="accept" id="accept">
+                        <p class="acceptP">Я соглашаюсь на <a>Обработку персональных данных</a> и <a>Правила добавления компании</a></p>
+                        </div>
+                    </div>
+                   </div>
+                    <div class="nextStageCompany">
+                        <button disabled id="toTwoStage" class="submitButton submitButtonComp">Перейти к покупке</button>
                     </div>
                 </div>
-                <div class="createThree" id="lastStage"></div>
-            </div>
+                <div class="createThree" id="ThreeStageElem">
+                    <div class="topBlock">
+                        <div class="arrowBack">
+                            <a href="/add-company">
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24.5 12.5H3M3 12.5L13.5 23M3 12.5L13.5 2" stroke="#5412E0" stroke-width="3"/>
+                            </svg>
+                        </a>
+                        </div>
+                        <div class="addOrganization"><span class="addOrg">Подтверждение</span></div>
+                        <div class="arrowBack" style="opacity: 0;"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24.5 12.5H3M3 12.5L13.5 23M3 12.5L13.5 2" stroke="#5412E0" stroke-width="3"/>
+                            </svg>
+                            </div>
+                        
+                    </div>
+                    <div class="mt20"></div>
+                    <p class="labelText">
+                        Выберете какое количество сотрудников будет добавлено в компанию, можете добавить другие офисы, но если офис один, добавьте сотрудников внутри него
+                    </p>
+
+                    <div class="listTarif mt20">
+                        <ul class="listCountPersonal">
+                            <li class="itemCountPersonal">
+                                
+                                <div class="priceAndHall">
+                                    <div class="priceAndMonth mobBottom">
+                                        <p class="priceMonth">349</p><p class="Ꝑ">Ꝑ</p><p></p><p class="verticalLine">|</p><p class="month">Месяц</p>
+                                    </div>
+                           
+                                </div>
+                                <input type="radio" name="tariff" value="349">
+                                <div class="TitleAndPrice m5">
+                                    <div class="countPersonal flex">
+                                        <p class="textCountPersonal ">Количество сотрудников</p>
+                                        <p class="countItem">5</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="itemCountPersonal">
+                                
+                                <div class="priceAndHall">
+                                    <div class="priceAndMonth mobBottom">
+                                        <p class="priceMonth">1 260</p><p class="Ꝑ">Ꝑ</p><p></p><p class="verticalLine">|</p><p class="month">Месяц</p>
+                                        <div class="Hall">
+                                            <div class="discount noAbsolute" style="top:0;background-color: #4900E3;"><span style="font-family: Ubuntu; color: white;">10%</span></div>
+                
+                                        </div>
+                                    </div>
+                           
+                                </div>
+                                <input type="radio" name="tariff" value="1260">
+                                <div class="TitleAndPrice m5">
+                                    <div class="countPersonal flex">
+                                        <p class="textCountPersonal ">Количество сотрудников</p>
+                                        <p class="countItem">20</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="itemCountPersonal">
+                                
+                                <div class="priceAndHall">
+                                    <div class="priceAndMonth mobBottom">
+                                        <p class="priceMonth">2 800</p><p class="Ꝑ">Ꝑ</p><p></p><p class="verticalLine">|</p><p class="month">Месяц</p>
+                                        <div class="Hall">
+                                            <div class="discount noAbsolute" style="top:0;background-color: #4900E3;"><span style="font-family: Ubuntu; color: white;">20%</span></div>
+                
+                                        </div>
+                                    </div>
+                           
+                                </div>
+                                <input type="radio" name="tariff" value="2800">
+                                <div class="TitleAndPrice m5">
+                                    <div class="countPersonal flex">
+                                        <p class="textCountPersonal ">Количество сотрудников</p>
+                                        <p class="countItem">50</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="itemCountPersonal">
+                                
+                                <div class="priceAndHall">
+                                    <div class="priceAndMonth mobBottom">
+                                        <p class="priceMonth">4 900</p><p class="Ꝑ">Ꝑ</p><p></p><p class="verticalLine">|</p><p class="month">Месяц</p>
+                                        <div class="Hall">
+                                            <div class="discount noAbsolute" style="top:0;background-color: #4900E3;"><span style="font-family: Ubuntu; color: white;">30%</span></div>
+                
+                                        </div>
+                                    </div>
+                           
+                                </div>
+                                <input type="radio" name="tariff" value="4900" checked>
+                                <div class="TitleAndPrice m5">
+                                    <div class="countPersonal flex">
+                                        <p class="textCountPersonal ">Количество сотрудников</p>
+                                        <p class="countItem">100</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="itemCountPersonal lastItem">
+                                
+                                <div class="priceAndHall">
+                                    <div class="priceAndMonth mobBottom">
+                                        <p class="priceMonth colorWhite">9 900</p><p class="Ꝑ colorWhite">Ꝑ</p><p></p><p class="verticalLine colorWhite">|</p><p class="month colorWhite">Месяц</p>
+                                        <div class="Hall">
+                                            <div class="discount noAbsolute" style="top:0;background-color: black;"><span style="font-family: Ubuntu; color: white;">40%</span></div>
+                
+                                        </div>
+                                    </div>
+                           
+                                </div>
+                                <input type="radio" name="tariff" value="9900" >
+                                <div class="TitleAndPrice m5">
+                                    <div class="countPersonal ">
+                                        <p class="textCountPersonal colorWhite">Количество сотрудников</p>
+                                        <p class="countItem colorWhite">200</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nextStageCompany">
+                        <button disabled id="toTwoStage" class="submitButton submitButtonComp">Перейти к покупке</button>
+                    </div>
+                </div>
+                <div class="competeRegestration">
+                    <div class="topBlock">
+                        <div class="addOrganization w100"><span class="addOrg complete">Заявка отправлена</span></div>
+                    </div>
+                    <div class="mt20"></div>
+                    <div class="setLogo">
+                        <div class="leftFishPhoto complete">
+                            <img src="/assets/pictures/companyExample.png" alt="Фото">
+                        </div>
+                        <div class="leftInputImg start">
+                            <h1 class="titleComplite">MTS Group</h1>
+                            <h2 class="descriptionComplite">В мире технологий мы ищем вдохновение. Наша цель — сделать вашу жизнь проще и интереснее. Мы стремимся к инновациям, готовым изменить стандарты. Творчество — ключ к успеху. Доверьтесь нам, вместе мы создадим продукты, открывающие новые горизонты возможностей.</h2>
+                        </div>
+                    </div>
+                    <div class="imgBlock">
+
+                    <img src="/assets/pictures/court.png" alt="Вынос решения">
+                </div>
+                <p class="labelText">
+                    Мы проверим вашу заявку и в случае утверждения вашей заявки, компания будет автоматически добавлена в профиль. В случае отказа, мы опишем причину, для устранения ошибки    
+                </p>
+                <div class="nextStageCompany">
+                    <a href="/" id="toTwoStage" class="submitButton submitButtonComp">На главную</a>
+                </div>
+                </div>
             </div>
         </div>
         </div>

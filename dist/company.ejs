@@ -16,6 +16,7 @@
     <script src="/js/jquery.js"></script>
     <title>Компания - МТС</title>
 </head>
+<% isActive = 0 %>
 <body>
     <%- include('./header.ejs', { isLoggedIn, active: 'vacancies'}) %>
 
@@ -35,13 +36,75 @@
             </h2>
             <div class="panelForHR flex">
                 <a href="/editComapny" class="showMoreButton editCompany">Редактировать</a>
-                <a href="/chat" class="showMoreButton flex">
+                <% if(!isActive)  {%>
+                <span class="showMoreButton flex noneActiveCompany">
                     <img src="/assets/pictures/chatCompanyIcon.svg" alt="Пульс">
+Чат компании</span>
+<% }else {%>
+    <a href="/chat-company" class="showMoreButton flex">
+        <img src="/assets/pictures/chatCompanyIcon.svg" alt="Пульс">
 Чат компании</a>
+    <% } %>
             </div>
 </div>
-<div class="boxFilter boxShadowPerson">
 
+<% if(!isActive) { %>
+<div class="warning">
+    <div class="flex centerItems">
+        <div class="warningPic">
+            <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.5" width="26" height="26" rx="4" fill="url(#paint0_linear_4918_7045)"/>
+                <g clip-path="url(#clip0_4918_7045)">
+                <path d="M10.7656 4.78946H11.602C13.7868 4.78946 15.558 6.56064 15.558 8.74549V15.2882H14.7217C12.5368 15.2882 10.7656 13.517 10.7656 11.3321V4.78946Z" fill="url(#paint1_linear_4918_7045)"/>
+                <path d="M10.7656 4.78946H11.602C13.7868 4.78946 15.558 6.56064 15.558 8.74549V15.2882H14.7217C12.5368 15.2882 10.7656 13.517 10.7656 11.3321V4.78946Z" fill="url(#paint2_linear_4918_7045)"/>
+                <path d="M10.7656 20.5263H11.5991C13.7839 20.5263 15.5551 18.7551 15.5551 16.5703V15.7368H14.7217C12.5368 15.7368 10.7656 17.508 10.7656 19.6929V20.5263Z" fill="url(#paint3_linear_4918_7045)"/>
+                <path d="M10.7656 20.5263H11.6015C13.785 20.5263 15.5551 19.7183 15.5551 18.7216V15.7368H14.7192C12.5357 15.7368 10.7656 16.5448 10.7656 17.5416V20.5263Z" fill="url(#paint4_linear_4918_7045)"/>
+                </g>
+                <defs>
+                <linearGradient id="paint0_linear_4918_7045" x1="0.5" y1="5.34054" x2="26.7002" y2="5.88857" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FBC02D"/>
+                <stop offset="0.691992" stop-color="#FBC02D"/>
+                <stop offset="1" stop-color="#FFD15F"/>
+                </linearGradient>
+                <linearGradient id="paint1_linear_4918_7045" x1="11.3322" y1="5.82477" x2="18.5071" y2="11.144" gradientUnits="userSpaceOnUse">
+                <stop stop-color="white"/>
+                <stop offset="0.54" stop-color="#FFE8AE"/>
+                <stop offset="1" stop-color="#FBC02D"/>
+                </linearGradient>
+                <linearGradient id="paint2_linear_4918_7045" x1="11.3322" y1="5.82477" x2="18.5071" y2="11.144" gradientUnits="userSpaceOnUse">
+                <stop stop-color="white"/>
+                <stop offset="0.54" stop-color="#FFE8AE"/>
+                <stop offset="1" stop-color="#FBC02D"/>
+                </linearGradient>
+                <linearGradient id="paint3_linear_4918_7045" x1="12.4762" y1="16.0789" x2="15.5733" y2="20.983" gradientUnits="userSpaceOnUse">
+                <stop stop-color="white"/>
+                <stop offset="0.54" stop-color="#FFE8AE"/>
+                <stop offset="1" stop-color="#FBC02D"/>
+                </linearGradient>
+                <linearGradient id="paint4_linear_4918_7045" x1="12.4762" y1="16.0789" x2="15.5733" y2="20.983" gradientUnits="userSpaceOnUse">
+                <stop stop-color="white"/>
+                <stop offset="0.54" stop-color="#FFE8AE"/>
+                <stop offset="1" stop-color="#FBC02D"/>
+                </linearGradient>
+                <clipPath id="clip0_4918_7045">
+                <rect width="19.1579" height="17.1053" fill="white" transform="translate(3.92188 4.44736)"/>
+                </clipPath>
+                </defs>
+                </svg>
+        </div>
+        <div class="dateForDelete flex">
+            <p>Компания удалится через</p>
+            <div class="dateDelete">
+                <p>6 дней</p>
+            </div>
+        </div>
+    </div>
+    <div class="textWarningItem">
+        <p>В течение следующих 7 дней ваша компания временно не будет отображаться для других пользователей. Вы и ваши сотрудники не сможете публиковать вакансии и общаться в чате компании. По истечению 7 дней компания будет удалена. Однако, чтобы избежать удаления вашей компании и продолжить её функционирование, необходимо совершить платеж.</p>
+    </div>
+</div>
+<% } %>
+<div class="boxFilter boxShadowPerson">
 <div class="openFilter">
     <div class="picFilter">
         <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
