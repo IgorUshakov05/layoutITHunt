@@ -21,6 +21,7 @@ const inbox = require('./pageRoutes/inbox')
 const inboxOther = require('./pageRoutes/inboxOther')
 const findCompany = require('./pageRoutes/findCompany')
 const inboxCompany = require('./pageRoutes/inboxCompany')
+const court = require('./pageRoutes/court')
 const inboxFastWork = require('./pageRoutes/inboxFast-work')
 const inboxVacansy = require('./pageRoutes/inboxVacansy')
 const company = require('./pageRoutes/company')
@@ -44,7 +45,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist')));
 app.set('views', path.join(__dirname, 'dist'));
 
-app.use(index,buyPremium,privacy,EditCompany,login,chatCompany,myprofileProfessional,seeSideProf,inboxOther,findCompany,inboxFastWork,inboxVacansy,inboxCompany,inbox,addCompany,createVacancy,createFastWork,HisprofileHR,settingsHR,myprofileHR,registration,company,chat,vacancia,fastWorkItem,userChat,settingsSpecialist,deleteAccount,createCompany, fastWork,specialists,vacancies)
+app.use(index,buyPremium,privacy,EditCompany,court,login,chatCompany,myprofileProfessional,seeSideProf,inboxOther,findCompany,inboxFastWork,inboxVacansy,inboxCompany,inbox,addCompany,createVacancy,createFastWork,HisprofileHR,settingsHR,myprofileHR,registration,company,chat,vacancia,fastWorkItem,userChat,settingsSpecialist,deleteAccount,createCompany, fastWork,specialists,vacancies)
 app.get('/robots.txt',(req,res)=>{
     res.sendFile(path.join(__dirname,'robots.txt'))
 })

@@ -122,6 +122,7 @@ header {
 ._header,.content {
     max-width: 1280px;
 }
+
 .burger {
     height: 40%;
     aspect-ratio: 1/1 !important;
@@ -2411,7 +2412,7 @@ margin-top: 15px;
 padding:36px;
 width: 443px;
 box-sizing:border-box;
-box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
+box-shadow: 0 0 7px 2px rgba(222, 219, 255, 0.51);
 }
 
 .photoCompany {
@@ -7313,6 +7314,8 @@ font-weight: 500;
 line-height: 141.4%; /* 18.382px */
 letter-spacing: 0.065px;
 }
+
+.max::-webkit-progress-value { background: #01E325; }
 @media (max-width: 700px) {
     .topInputs {
         flex-direction: column;
@@ -8154,6 +8157,10 @@ color:white;
     margin-top: 13px;
 }
 
+.mounthColorElem > li:not(.activeMounth) {
+    border:1px solid gray;
+}
+
 .itemPremium {
     border:1px solid #B7B7B7;
     border-radius:4px;
@@ -8216,7 +8223,7 @@ color:white;
 .buttonGoBye >.tarif > h2 > * {
     color:  var(--indexColor);
     font-size:13.4px;
-    font-weight: 700;
+    font-weight: 500;
 }
 .buttonGoBye >.tarif > h2 > .always {
     font-size:12px !important;
@@ -8911,12 +8918,12 @@ margin-top: 10px;
 }
 .leftFishPhoto.complete {
     background: none;
-    width: 74px;
     height: 74px;
     padding: 0;
 }
 .leftInputImg.start {
     justify-content: flex-start;
+    border:none;
 }
 
 .descriptionComplite {
@@ -8945,4 +8952,29 @@ color: #000;
 
 .imgBlock > img {
     width: 100%;
+}
+
+.addOrg.complete {
+    color: #5412E0;
+}
+
+.mtAlways20 {
+    margin-top: 20px !important;
+}
+.twoBlocks.mt20 {
+    height: 85%;
+}
+
+.itemPremium.active {
+    border-color: #4900E3;
+}
+.itemPremium.active > .buttonGoBye {
+    background: #4900E3 !important;
+}
+.itemPremium.active > .buttonGoBye > .tarif > h2 > * {
+    color: white;
+}
+
+.itemPremium.active > .buttonGoBye > .tarif > h2 >  .lines {
+    background: white;
 }
