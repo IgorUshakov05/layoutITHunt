@@ -1,28 +1,36 @@
-function searchMessages() {
-    document.getElementById('newMessageLine').remove()
-    var input, filter, messages, message, text, i, matches;
-    input = document.getElementById('searchInput');
-    filter = input.value.toUpperCase().trim();
-    messages = Array.from(document.querySelectorAll('.boxMessage'));
-    matches = 0;
-        messages.forEach((msg) => {
-            message = msg.querySelector('.hisMessage');
-            text = message.textContent || message.innerText;
-            if (text.toUpperCase().indexOf(filter) > -1) {
-                msg.style.display = '';
-                matches++;
-            } else {
-                msg.style.display = 'none';
-            }
-        });
-        
-        if((input.value.trim()).length === 0) {
-            document.getElementById('score').innerText = '0';
-        }
-        else {
-            document.getElementById('score').innerText = matches;
-        }
+let input = document.getElementById('searchInput');
+input.addEventListener('input', function(e) {
+    let value = e.target.value;
+
+    // Получаем все элементы сообщений
+    let messages = document.querySelectorAll('.boxMessage');
+    input.focus()
+
+    // Фильтруем сообщения, оставляя только те, в которых есть введенный текст
+    let filteredMessages = Array.from(messages).filter(message => {
+        let messageText = message.querySelector('.hisMessage').textContent;
+        return messageText.includes(value);
+    });
+
+    // Скрываем все сообщения
+    messages.forEach(message => message.style.display = 'none');
+
+    // Показываем отфильтрованные сообщения
+    filteredMessages.forEach(message => message.style.display = 'flex');
+    document.getElementById('score').innerText = filteredMessages.length
+    // Если введенный текст пустой, показываем все сообщения
+    if (value === '') {
+        messages.forEach(message => message.style.display = 'flex');
+        document.getElementById('score').innerText = '0'
+    
     }
+});
+
+document.addEventListener('keydown', (e) => {
+    console.log(e.key)
+})
+
+
 let close = `<svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M1 1L9 9M17 17L9 9M9 9L17 1L1 17" stroke="#5412E0"/>
 </svg>` //Крестик 
@@ -43,16 +51,49 @@ $('body').on('click', () => {
     $('body').css('overflow-y', 'hidden')
 })
 
+document.addEventListener('keydown', function(searchInputevent) {
+    if (event.ctrlKey && event.code === 'KeyF') {
+        event.preventDefault();
+        input.focus()
+        console.log('Вы нажали Ctrl + F');
+        // Показ всех сообщений
+        document.getElementById('score').innerText = '0'
+    
+        $('.searchMessageModalWindow').addClass('showModalWind')
+        $('.whereMyMessage').eq(0).addClass('crest').eq(0).html(close)
+        $('.openMethodsMEnu').addClass('crest').html(close)
+        $('.windowMethodsChatMobile').removeClass('showModalWind')
+    }
+    if(event.code === 'Escape') {
+        event.preventDefault();
+        document.getElementById('score').innerText = '0'
+        let messages = Array.from(document.querySelectorAll('.boxMessage'));
+        messages.forEach((msg) => {
+                msg.style.display = '';
+        });
+    input.value = ''
+    $('.searchMessageModalWindow').removeClass('showModalWind')
+    $('.whereMyMessage').eq(0).removeClass('crest').html(ScaleGlass)
+    $('.openMethodsMEnu').html(etc).removeClass('crest')
+    $('.windowMethodsChatMobile').removeClass('showModalWind')
+    }
+});
+
+
 //При наатии на лупу ПК
 
 $('.whereMyMessage').eq(0).on('click', () => {
 // При закрытии
 if($('.whereMyMessage').hasClass('crest')) {
+    input.focus()
+
     // Показ всех сообщений
     let messages = Array.from(document.querySelectorAll('.boxMessage'));
         messages.forEach((msg) => {
                 msg.style.display = '';
         });
+        document.getElementById('score').innerText = '0'
+    input.value = ''
     $('.searchMessageModalWindow').removeClass('showModalWind')
     $('.whereMyMessage').eq(0).removeClass('crest').html(ScaleGlass)
     $('.openMethodsMEnu').html(etc).removeClass('crest')

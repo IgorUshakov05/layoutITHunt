@@ -280,7 +280,7 @@ section {
 }
 
 .profile {
-    text-align: center;
+    text-align: right;
     width:180px;
     white-space: nowrap;
     overflow: hidden;
@@ -1633,7 +1633,7 @@ text-decoration-style: solid;
 }
 
 .MoreInfo {
-    width: 67%;
+    width: 66%;
 }
 .group > a:hover{
     color:var(--indexColor);
@@ -4384,7 +4384,7 @@ box-shadow: 0px 1px 6.2px -1px rgba(191, 198, 255, 0.77);
         max-width: 80%;
     }
     .searchMessageModalWindow {
-        width: 100%;
+        width: 88%;
         margin: auto;
     }
 }
@@ -8962,7 +8962,7 @@ color: #000;
     margin-top: 20px !important;
 }
 .twoBlocks.mt20 {
-    height: 85%;
+    height: 80%;
 }
 
 .itemPremium.active {
@@ -8977,4 +8977,133 @@ color: #000;
 
 .itemPremium.active > .buttonGoBye > .tarif > h2 >  .lines {
     background: white;
+}
+.listInbox {
+    margin-top: 35px;
+}
+
+.textDay {
+    font-family: Ubuntu;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 141%;
+    letter-spacing: 0.01em;
+    color: #404040;
+}
+.textNoti {
+    display: flex;
+    align-items: center;
+}
+.textNoti > svg {
+    margin-right: 5px;
+}
+.textNoti > span {
+    font-family: Ubuntu;
+    margin-left: 2px;
+}
+.messageNotification {
+    padding: 14px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+.warningNotification {
+    background: rgba(214, 214, 214, 0.34);
+}
+
+.svgAndText,.titleNotificationAndTimeAgo {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.spanText {
+    font-family: Raleway;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: -0.01em;
+    color: #5412e0;
+}
+.timeNotification {
+    font-family: Ubuntu;
+font-weight: 300;
+font-size: 12px;
+line-height: 141%;
+letter-spacing: -0.01em;
+text-align: right;
+white-space: nowrap;
+color: #a2a2a2;
+}
+.messageNotificationTitleAndText {
+    margin-left: 10px;
+    width: 100%;
+}
+.titleNotificationAndTimeAgo {
+    justify-content: space-between;
+}
+
+@media (max-width: 800px) {
+    .messageNotification {
+        padding: 15px 10px;
+    }
+}
+.w50 {
+    width: 46%;
+}
+.textNotification {
+    margin-top: 5px;
+}
+.toTechSupport {
+font-family: Raleway;
+font-weight: 400;
+display: flex;
+margin-top: 5px;
+align-items:center;
+font-size: 12px;
+line-height: 141%;
+width: fit-content;
+letter-spacing: -0.01em;
+text-align: center;
+color: #4900e3;
+}
+
+.textNoti {
+    font-family: Raleway;
+font-weight: 400;
+font-size: 12px;
+line-height: 141%;
+letter-spacing: -0.01em;
+text-align: justify;
+color: #000;
+}
+
+.toTechSupport > svg {
+    margin-left: 5px;
+}
+.flex.notofication {
+    flex-wrap: wrap;
+}
+@media (max-width: 1100px) {
+    .flex.notofication {
+        flex-direction: column;
+    }
+    .flex.notofication  > .w50 {
+        width: 100%;
+    }
+}
+
+.toDay:not(:nth-child(1)) {
+    margin-top: 30px;
+}
+
+.toReplyPremium {
+    border-radius: 4px;
+    padding: 11px 18px;
+    background: #4900e3;
+font-weight: 400;
+font-size: 12px;
+line-height: 141%;
+letter-spacing: -0.01em;
+text-align: center;
+color: white;
 }
