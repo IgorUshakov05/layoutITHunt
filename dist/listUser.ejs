@@ -6,7 +6,9 @@
             <ul class="listPersonAll">
                 <% users.forEach((el) => {%>
                     <li class="itemChat">
-                        <a href="/person" class="flexItemChat">
+                        <a href="/person" class="flexItemChat justifyBetween">
+                            <div class="flex">
+
                             <div class="leftPhoto">
                                 <img class="personPhoto" width="43" height="43" src="<%= el.photoUser %>" alt="Фото профиля">
                             </div>
@@ -18,6 +20,12 @@
                                 </div>
 
                             </div>
+                        </div>
+                        <% if (el.creator) {%>
+                            <div class="isCreator">
+                                <p class="isCreatorText">Владелец</p>
+                            </div>
+                            <% }%>
                         </a>
                     </li>
                 <% })%>
