@@ -4,27 +4,46 @@ input.addEventListener('input', function(e) {
 
     // Получаем все элементы сообщений
     let messages = document.querySelectorAll('.boxMessage');
-    input.focus()
 
-    // Фильтруем сообщения, оставляя только те, в которых есть введенный текст
-    let filteredMessages = Array.from(messages).filter(message => {
-        let messageText = message.querySelector('.hisMessage').textContent;
-        return messageText.includes(value);
+    // Скрываем все сообщения с классом eventMessage
+    messages.forEach(message => {
+        if (message.classList.contains('eventMessage')) {
+            message.style.display = 'none';
+        }
     });
+    messages.forEach(message => {
+            message.style.display = 'none';
+     });
 
-    // Скрываем все сообщения
-    messages.forEach(message => message.style.display = 'none');
+  // Фильтруем сообщения, оставляя только те, в которых есть введенный текст
+let filteredMessages = Array.from(messages).filter(message => {
+    let messageText = message.querySelector('.hisMessage');
+    return messageText && messageText.textContent.includes(value);
+});
+
 
     // Показываем отфильтрованные сообщения
-    filteredMessages.forEach(message => message.style.display = 'flex');
-    document.getElementById('score').innerText = filteredMessages.length
-    // Если введенный текст пустой, показываем все сообщения
+    filteredMessages.forEach(message => {
+        console.log(message);
+        if (!message.classList.contains('eventMessage')) {
+            message.style.display = 'flex';
+        }
+    });
+
+    // Обновляем счетчик сообщений
+    document.getElementById('score').innerText = filteredMessages.length;
+
+    // Если введенный текст пустой, показываем все сообщения, кроме тех, у которых есть класс eventMessage
     if (value === '') {
-        messages.forEach(message => message.style.display = 'flex');
-        document.getElementById('score').innerText = '0'
-    
+        messages.forEach(message => {
+            if (!message.classList.contains('eventMessage')) {
+                message.style.display = 'flex';
+            }
+        });
+        document.getElementById('score').innerText = '0';
     }
 });
+
 
 document.addEventListener('keydown', (e) => {
     console.log(e.key)

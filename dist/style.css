@@ -9235,9 +9235,16 @@ letter-spacing: 0.01em;
 .topEventInfoMessage {
     display: flex;
     padding: 0 15px;
+    justify-content: space-between;
     align-items: center;
 }
 
+.elemOfEvent > p{
+    padding: 7px 12px;
+font-size: 12px;
+line-height: 141%;
+letter-spacing: 0.01em;
+}
 .textMessageEvent {
     width: 100%;
     background: linear-gradient(89deg, #4208be 0%, #6a2eea 100%);
@@ -9254,4 +9261,197 @@ line-height: 141%;
 letter-spacing: 0.01em;
 text-align: justify;
 color: white;
+}
+.textCount {
+    display: flex;
+    align-items:center;
+    width: fit-content;
+    padding: 10px 15px 0 15px;
+    justify-content:space-between;
+
+}
+
+.textCount > p {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 141%;
+    letter-spacing: 0.01em;
+    text-align: justify;
+}
+.usersReady,.listUserReady {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.listUserReady {
+    display: flex;
+    padding: 0 15px;
+    flex-wrap: wrap;
+}
+
+.imgReady {
+    height: 34px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: linear-gradient(to right, #00FF38 0%, #6D28FF 100%, #14FF00 100%);
+    background-clip: border-box;
+    padding: 1.5px;
+    box-sizing: border-box;
+}
+.groupElems.flex {
+    align-items:Center;
+    margin-bottom: 5px;
+}
+.itemUserReady {
+    margin: 5px 8px 0 0;
+}
+.imgReady > img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.textCount > * {
+    color:white;
+}
+.coutPeopleRead {
+    font-family: Ubuntu;
+font-weight: 500;
+font-size: 12px;
+line-height: 141%;
+margin-left: 5px;
+letter-spacing: 0.01em;
+text-align: justify;
+}
+.createEventModal {
+    width: 560px;
+}
+
+.canelsEvent {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 141%;
+    border-radius: 4px;
+    color: #5412E0;
+    border: none;
+    outline: none;
+    padding: 10px 50px;
+    letter-spacing: 0.01em;
+    width: fit-content;
+    background: white;
+}
+.blockElemBlock {
+    margin-top: 20px;
+}
+.subTitle {
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    color: #000;
+    margin-bottom: 9px;
+}
+.blockElemBlock > * {
+    display: block;
+    width: 100%;
+}
+.iconVariant {
+    display: flex;
+}
+
+
+#createEvent {
+font-weight: 500;
+font-size: 13px;
+line-height: 141%;
+border-radius: 4px;
+color: white;
+border: none;
+outline: none;
+padding: 10px 50px;
+letter-spacing: 0.01em;
+background: #00ae1c;
+}
+
+.active > label > svg > g>rect {
+    fill: #5412E0;
+}
+
+.active > label > svg > g>path {
+    stroke: white;
+}
+
+.iconEventChange {
+    position: relative;
+    margin-right: 10px;
+}
+.inputForLabel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    left: 0;
+}
+
+
+.inputTitle {
+    width: 100%;
+    margin-left: 20px;
+}
+
+.inputingtitle:focus {
+    border: 1px solid #5412E0;
+}
+.inputTime {
+    display: flex;
+    justify-content: space-between;
+}
+.inputingtitle {
+ 
+    outline: none;
+    border: 0.50px solid #b4b4b4;
+border-radius: 4px;
+height: 39px;
+padding: 10px 15px;
+font-family: Raleway;
+font-weight: 300;
+font-size: 13px;
+color: #000;
+box-sizing:border-box;
+}
+
+.blockElemBlock.inputTitle.w50 {
+    width: 50%;
+}
+.inputTime > input {
+    width: 47%;
+}
+.mobFlex {
+    align-items:flex-end;
+}
+@media (max-width: 500px) {
+    .inputTitle {
+        margin-left: 0;
+        margin-top: 10px;
+
+    }
+    .mobFlex {
+        flex-direction:column-reverse;
+    }
+    .buttonRemoves.mobFlex {
+        text-align:center;
+    }
+    .buttonRemoves.mobFlex > button {
+        width: 100%;
+    }
+    .canelss.canelsEvent {
+        margin-top: 15px;
+}
+.blockElemBlock.inputTitle.w50 {
+    width: 100%;
+}
+.blockElemBlock {
+    margin-top: 20px;
+    width: 100%;
+}
 }

@@ -19,18 +19,95 @@
     <div class="blackBack">
         <div class="modalWindowRemoveUser removeChatNone">
             <h1 class="titleRemove">Удалить чат?</h1>
-            <p class="descriptionRemove">Вы действительно хотите удалить все сообщения с <b>Игорь</b>? Все сообщения будут удалены</p>
+            <p class="descriptionRemove">Вы действительно хотите удалить все сообщения? Все сообщения будут удалены</p>
             <div class="buttonRemoves">
                 <button  class="canelss">Назад</button>
                 <button id="removeChatUser">Удалить чат</button>
             </div>
         </div>
-        <div class="modalWindowRemoveUser blockUs">
-            <h1 class="titleRemove">Заблокировать Игорь?</h1>
-            <p class="descriptionRemove">Вы действительно хотите заблокировать <b>Игорь</b>?</p>
-            <div class="buttonRemoves">
-                <button class="canelss">Назад</button>
-                <button id="removeChatUser">Заблокировать</button>
+        <div class="modalWindowRemoveUser blockUs createEventModal">
+            <h1 class="titleRemove">Создайте объявление</h1>
+            <div class="flex mobFlex">
+                <div class="blockElemBlock">
+                    <span class="subTitle">Иконка</span>
+                    <div class="flex iconVariant">
+                        <div class="iconEventChange ">
+                            <label for="iconOne">
+                                <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_3898_5535)">
+                                    <rect width="39" height="39" rx="4" fill="#F6F4FF"/>
+                                    <path d="M26 14L26 21M26 14L30 14L30 21L26 21M26 14V14C20.3499 13.0029 14.8241 11.3981 9.51879 9.21362L9.05427 9.02235C9.0284 9.01169 9 9.03071 9 9.05869L9 23.1844C9 23.8457 9.63045 24.3249 10.2676 24.1479L18 22L21.5 21.5M26 21L21.5 21.5M26 21L27.5 27L27.5556 27.6676C27.7605 30.1256 24.28 30.84 23.5 28.5V28.5L21.5 21.5" stroke="#1E005E" stroke-width="0.5"/>
+                                    </g>
+                                    <defs>
+                                    <clipPath id="clip0_3898_5535">
+                                    <rect width="39" height="39" rx="4" fill="white"/>
+                                    </clipPath>
+                                    </defs>
+                                    </svg>
+                            </label>
+                            <input type="radio" name="icon" id="iconOne" class="inputForLabel">
+                        </div>
+                        <div class="iconEventChange active">
+                            <label for="iconTwo">
+                                <svg width="41" height="39" viewBox="0 0 41 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_5317_6551)">
+                                    <rect x="0.703125" width="39" height="39" rx="4" fill="#F6F4FF"/>
+                                    <path d="M33.9555 20C33.9555 27.0381 28.1619 32.75 21.0071 32.75C13.8522 32.75 8.05859 27.0381 8.05859 20C8.05859 12.9619 13.8522 7.25 21.0071 7.25C28.1619 7.25 33.9555 12.9619 33.9555 20Z" stroke="#1E005E" stroke-width="0.5"/>
+                                    <path d="M18.179 13.1815L19.8404 22.1815C19.9279 22.6558 20.3415 23 20.8238 23H21.1897C21.672 23 22.0855 22.6558 22.1731 22.1815L23.8344 13.1815C23.9479 12.5669 23.476 12 22.851 12H19.1624C18.5374 12 18.0656 12.5669 18.179 13.1815Z" stroke="#1E005E" stroke-width="0.5"/>
+                                    <path d="M22.7876 27C22.7876 27.9629 21.994 28.75 21.0071 28.75C20.0202 28.75 19.2266 27.9629 19.2266 27C19.2266 26.0371 20.0202 25.25 21.0071 25.25C21.994 25.25 22.7876 26.0371 22.7876 27Z" stroke="#1E005E" stroke-width="0.5"/>
+                                    </g>
+                                    <defs>
+                                    <clipPath id="clip0_5317_6551">
+                                    <rect x="0.703125" width="39.5954" height="39" rx="4" fill="white"/>
+                                    </clipPath>
+                                    </defs>
+                                    </svg>
+                                    
+                            </label>
+                            <input type="radio" name="icon" id="iconTwo" class="inputForLabel">
+                        </div>
+                        <div class="iconEventChange">
+                            <label for="iconThree">
+                                <svg width="40" height="39" viewBox="0 0 40 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_5317_6556)">
+                                    <rect x="0.40625" width="39" height="39" rx="4" fill="#F6F4FF"/>
+                                    <path d="M33.6587 20C33.6587 27.0381 27.865 32.75 20.7102 32.75C13.5554 32.75 7.76172 27.0381 7.76172 20C7.76172 12.9619 13.5554 7.25 20.7102 7.25C27.865 7.25 33.6587 12.9619 33.6587 20Z" stroke="#1E005E" stroke-width="0.5"/>
+                                    <path d="M14.6211 20.5L19.9005 25L27.8196 16" stroke="#1E005E" stroke-width="0.5"/>
+                                    </g>
+                                    <defs>
+                                    <clipPath id="clip0_5317_6556">
+                                    <rect x="0.40625" width="39.5954" height="39" rx="4" fill="white"/>
+                                    </clipPath>
+                                    </defs>
+                                    </svg>
+                                    
+                            </label>
+                            <input type="radio" name="icon" id="iconThree" class="inputForLabel">
+                        </div>
+                    </div>
+                </div>
+                <div class="blockElemBlock inputTitle">
+                    <span class="subTitle">Наименование</span>
+                    <input type="text" max="50" min="1" class="inputingtitle">
+                </div>
+            </div>
+            <div class="flex mobFlex">
+                <div class="blockElemBlock">
+                    <span class="subTitle">Описание</span>
+                 
+                </div>
+                <div class="blockElemBlock inputTitle w50">
+                    <span class="subTitle">Дата и время</span>
+                    <div class="inputTime">
+                        <input type="text" max="50" min="1" class="inputingtitle">
+                        <input type="text" max="50" min="1" class="inputingtitle">
+                </div>
+
+                </div>
+            </div>
+            <div class="buttonRemoves mobFlex">
+                <button class="canelss canelsEvent">Отменить</button>
+                <button id="createEvent">Создать</button>
             </div>
         </div>
     </div>
@@ -70,7 +147,7 @@
                                 </svg>
 
                             </button>
-                            <button type="button" class="blockUser" title="Заблокировать">
+                            <button type="button" class="blockUser" title="Создать событие">
                                 <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M19 14.5V8.68407C19 8.27165 18.7468 7.90154 18.3624 7.75206L15.1429 6.5L2.36245 1.52984C1.70691 1.27491 1 1.75848 1 2.46185V17.6876C1 18.3479 1.62871 18.8269 2.26538 18.6517L15.1429 15.1071M19 14.5L15.1429 15.1071M19 14.5V20.0714C19 21.1365 18.1365 22 17.0714 22V22C16.0063 22 15.1429 21.1365 15.1429 20.0714V15.1071" stroke="black"/>
                                     </svg>
@@ -94,11 +171,12 @@
                 </div>
                 </div>
                 <% if(event) { %>
-                    <div class="events flex">
+                    <div class="events flex" id="123412">
+                        
                         <div class="iconEvent">
                             <img src="/assets/pictures/eventPictures/galochka.svg" alt="Галочка">
                         </div>
-                        <a class="titleEventAndDesctipt">
+                        <a class="titleEventAndDesctipt" href="#123412">
                             <h1 class="titleEvent">Сдача отчетов</h1>
                             <p class=descEvent>Приятно, граждане, наблюдать, как многие известные личности лишь добавляют фракционных разногласий и указаны как претенденты на роль ключевых факторов. Значимость этих проблем настолько очевидна, что повышение уровня гражданского сознания выявляет срочную потребность прогресса профессионального сообщества. Являясь всего лишь частью общей картины, активно развивающиеся страны третьего мира набирают популярность среди определенных слоев населения, а значит, должны быть ассоциативно распределены по отраслям. Вот вам яркий пример современных тенденций — существующая теория является качественно новой ступенью стандартных подходов. Задача организации, в особенности же курс на социально-ориентированный национальный проект не даёт нам иного выбора, кроме определения форм воздействия. Есть над чем задуматься: представители современных социальных резервов неоднозначны и будут ограничены исключительно образом мышления.</p>
                         </a>
@@ -114,7 +192,7 @@
                     </div>
                 <% } %>
                 <div class="searchMessageModalWindow">
-                    <input class="searchInputMessage" type="search" id="searchInput" oninput="searchMessages()" placeholder="Что ищем?"><p id="score">0</p>
+                    <input class="searchInputMessage" type="search" id="searchInput" placeholder="Что ищем?"><p id="score">0</p>
                 </div>
                 <div class="<%= event?'someChat mt70':'someChat'%>">
                    <div class="boxMessage">
@@ -133,17 +211,46 @@
                         </span>
                     </span>
                    </div>
-                   <div class="boxMessage eventMessage">
+                   <div class="boxMessage eventMessage" id="123412">
                     <div class="topEventInfoMessage">
+                        <div class="groupElems flex">
+
                         <div class="iconEvent">
                             <img src="/assets/pictures/eventPictures/galochka.svg" alt="Галочка">
                         </div>
                         <a class="titleEventAndDesctipt">
                             <h1 class="titleEvent">Сдача отчетов</h1>
                         </a>
+                        
+                    </div>
+                    <div class="dateForDelete flex">
+                        <p>Событие через</p>
+                        <div class="dateDelete elemOfEvent">
+                            <p>21:23:59</p>
+                        </div>
+                    </div>
                     </div>
                     <div class="textMessageEvent">
                         <p>Приятно, граждане, наблюдать, как многие известные личности лишь добавляют фракционных разногласий и указаны как претенденты на роль ключевых факторов. Значимость этих проблем настолько очевидна, что повышение уровня гражданского сознания выявляет срочную потребность прогресса профессионального сообщества. Являясь всего лишь частью общей картины, активно развивающиеся страны третьего мира набирают популярность среди определенных слоев населения, а значит, должны быть ассоциативно </p>
+                    </div>
+                    <div class="isReady">
+                        <span class="textCount"><p>Не ознакомились </p><p class="coutPeopleRead">5/10</p></span>
+                        <div class="usersReady">
+                            <ul class="listUserReady">
+                                <li class="itemUserReady">
+                                    <div class="imgReady"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/200px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png" alt=""></div>
+                                </li>
+                                <li class="itemUserReady">
+                                    <div class="imgReady"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/200px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png" alt=""></div>
+                                </li>
+                                <li class="itemUserReady">
+                                    <div class="imgReady"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/200px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png" alt=""></div>
+                                </li>
+                                <li class="itemUserReady">
+                                    <div class="imgReady"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/200px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png" alt=""></div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     </div>
                     <div class="boxMessage rigthMess">
@@ -242,12 +349,12 @@
                         </svg>
                         <span>Поиск сообщений</span>
                     </button>
-                    <button type="button" class="blockUser" title="Заблокировать">
+                    <button type="button" class="blockUser" title="Создать событие">
                         <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M19 14.5V8.68407C19 8.27165 18.7468 7.90154 18.3624 7.75206L15.1429 6.5L2.36245 1.52984C1.70691 1.27491 1 1.75848 1 2.46185V17.6876C1 18.3479 1.62871 18.8269 2.26538 18.6517L15.1429 15.1071M19 14.5L15.1429 15.1071M19 14.5V20.0714C19 21.1365 18.1365 22 17.0714 22V22C16.0063 22 15.1429 21.1365 15.1429 20.0714V15.1071" stroke="black"/>
                             </svg>
                             
-                        <span>Заблокировать</span>
+                        <span>Создать событие</span>
                     </button>
                     <button type="button" class="buttonremoveChat" title="Удалить чат">
                         <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -271,12 +378,29 @@
                         </svg>
                     </butto>
                 </div>
-            </>
-        </div>
+        </di>
     </div>
 </main>
 <script src="js/header.js"></script>
 <script src="js/searchMessage.js"></script>
 <script src="js/searchChat.js"></script>
+<script>
+const inputs = document.querySelectorAll('.inputForLabel');
+
+inputs.forEach(input => {
+  input.addEventListener('change', () => {
+    const parent = input.parentElement;
+    
+    // Удаляем класс active со всех родителей
+    inputs.forEach(input => {
+      input.parentElement.classList.remove('active');
+    });
+    
+    // Добавляем класс active к родителю активного элемента input
+    parent.classList.add('active');
+  });
+});
+
+</script>
 </body>
 </html>
