@@ -1062,7 +1062,7 @@ width: 100%;
     box-sizing: border-box;
     padding: 25px;
     background: #FFF;
-    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
+    box-shadow:0 0 7px 2px rgba(222, 219, 255, 0.51);
     position: absolute;
     top: 60px;
 }
@@ -2200,7 +2200,7 @@ bottom: 0;
 }
 .buttonsRemove {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 30px;
     display: flex;
     flex-direction: column-reverse;
 }
@@ -2235,14 +2235,45 @@ bottom: 0;
     color: black;
 }
 
-.buttonsRemove > .canel > a {
+.buttonsRemove > .canel > a,.nextStage.end {
     font-size: 14px;
 }
 
-.buttonsRemove > .canel > a:hover {
+.buttonsRemove > .canel > a:hover,.nextStage.end:hover {
     color: #4f4f4f;
 }
+.nextStage.end {
+    display: flex;
+    justify-content: center !important;
+    align-items: center;
+    font-size: 15px;
 
+} 
+
+.removeAccount {
+    background: none;
+    color: #FF0000;
+    border:1px solid #FF0000;
+}
+.removeAccount:hover {
+    border:1px solid #ff0000da;
+    color: #ff0000da;
+    background: none;
+}
+
+.removeAccount:active {
+    border:1px solid #FF0000;
+    color: white;
+    background: #FF0000;
+}
+.removeAccount:disabled:active {
+    border:1px solid #ff000050;
+    color: white;
+    background: #ff000050;
+}
+.nextStage.end:hover {
+    color: white;
+}
 .textWarning > *{
     margin-top: 20px;
     font-family: Raleway;
@@ -2343,8 +2374,10 @@ button.canelRemove {
     background: none;
 }
 
-button.canelRemove> a {
+
+button.canelRemove {
     font-size: 14px;
+    color: #5412E0;
 }
 
 .sendRemoveAccount:disabled {
@@ -9345,6 +9378,14 @@ text-align: justify;
     width: 560px;
 }
 
+.myEmail.flex {
+    justify-content: flex-start;
+}
+
+.postHash {
+    margin-left: 10px;
+}
+
 .canelsEvent {
     font-weight: 500;
     font-size: 13px;
@@ -9436,6 +9477,9 @@ font-weight: 300;
 font-size: 13px;
 color: #000;
 box-sizing:border-box;
+}
+.buttonsOnRemove.center {
+    align-items:center;
 }
 
 .blockElemBlock.inputTitle.w50 {

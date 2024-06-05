@@ -28,6 +28,7 @@ const company = require('./pageRoutes/company')
 const vacancia = require('./pageRoutes/vacansyaItem')
 const userChat = require('./pageRoutes/privateChat')
 const deleteAccount = require('./pageRoutes/deleteAccount')
+const deleteAccountComplite = require('./pageRoutes/deleteAccountComplite')
 const specialists = require('./pageRoutes/specialist')
 const createCompany = require('./pageRoutes/createCompany')
 const buyPremium = require('./pageRoutes/buyPremium');
@@ -49,7 +50,7 @@ app.use((req,res,next) => {
     next()
 })
 // app.set('view cache', true);
-app.use(index,buyPremium,privacy,EditCompany,court,login,chatCompany,myprofileProfessional,seeSideProf,inboxOther,findCompany,inboxFastWork,inboxVacansy,inboxCompany,inbox,addCompany,createVacancy,createFastWork,HisprofileHR,settingsHR,myprofileHR,registration,company,chat,vacancia,fastWorkItem,userChat,settingsSpecialist,deleteAccount,createCompany, fastWork,specialists,vacancies)
+app.use(index,buyPremium,privacy,EditCompany,deleteAccountComplite,court,login,chatCompany,myprofileProfessional,seeSideProf,inboxOther,findCompany,inboxFastWork,inboxVacansy,inboxCompany,inbox,addCompany,createVacancy,createFastWork,HisprofileHR,settingsHR,myprofileHR,registration,company,chat,vacancia,fastWorkItem,userChat,settingsSpecialist,deleteAccount,createCompany, fastWork,specialists,vacancies)
 app.get('/robots.txt',(req,res)=>{
     res.sendFile(path.join(__dirname,'robots.txt'))
 })

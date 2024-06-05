@@ -16,17 +16,6 @@
     <div class="container">
         <div class="login" id="login">
             <div class="oneStage" id="oneStage">
-                <h2 class="h2Warning">Удаление аккаунта</h2>
-                <div class="textWarning flex center">
-                    <img src="/assets/pictures/trash.svg" alt="Удаление аккаунта">
-                        <p style="margin-top: 20px; margin-left: 15px;">Вы уверены, что хотите удалить свой аккаунт? Помните, что это действие нельзя будет отменить, и все данные, связанные с вашим аккаунтом, будут безвозвратно удалены. Это включает в себя историю покупок, сохраненные настройки, а также другую личную информацию</p>
-                </div>
-                <div class="buttonsRemove">
-
-                    <button class="nextStage" id="remove">Продолжить удаление</button>
-                </div>
-            </div>
-            <div class="twoStage" style="display: none;" id="twoStage">
                 <h2 class="h2Warning">Подтвердить удаление аккаунта</h2>
                 <div class="textWarning">
                     <p>Для дальнейшего удаления будет необходимо ввести код подтверждения с почты на который был зарегистрирован ваш аккаунт</p>
@@ -41,17 +30,37 @@
                                 </div>
                             <div class="postHash">ig****@gmail.com</div>
                             </div>
-                            <button type="submit" class="sendRemoveAccount" id="goRemove">Отправить код</button>
+                            <div type="submit" class="sendRemoveAccount">Код отправлен</div>
+                        </div>
+                        <div class="input-box">
+                            <input type="number" maxlength="6" id="codeVery" class="square-input">
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                        </div>
+                        <div class="buttonsRemove">
+
+                            <button class="nextStage removeAccount" id="remove" disabled>Удалить аккаунт</button>
                         </div>
                 </div>
             </div>
-            <!-- <div class="succsess">
-                <p class="succsessMessage">Аккаунт успешно удален!</p>
-            </div> -->
+            <div class="twoStage" id="twoStage">
+                <h2 class="h2Warning">Аккаунт был успешно удален</h2>
+                <div class="textWarning">
+                        <p style="margin-top: 20px;">Понимаем, что удаление аккаунта - серьезное решение, но надеемся, что оно обдумано. Мы уважаем ваш выбор, но помните, что с нашей помощью вы можете найти как специалиста, так и работу. Будем рады видеть вас снова в нашем сообществе, где мы всегда готовы помочь вам в этом</p>
+                </div>
+                <div class="buttonsRemove">
+                    <a class="nextStage end flex center" href="/">На главную</a>
+                </div>
+            </div>
+            
         </div>
 
     </div>
 </main>
-<script src="/js/remove.js"></script>
+<script src="/js/removeComplite.js"></script>
 </body>
 </html>
