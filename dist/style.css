@@ -9288,7 +9288,25 @@ color: white;
     padding: 0 15px;
     flex-wrap: wrap;
 }
-
+.imReading:active {
+    border:0.2px solid white;
+    background: none;
+    color: white; 
+}
+.imReading:hover {
+    opacity: .9; 
+}
+.imReading {
+    height: 100%;
+    padding: 8px 10px;
+    font-weight: 500;
+    margin-left: 15px;
+    font-size: 13px;
+    box-sizing: border-box;
+    color: #692CE8;
+    background: white;
+    border-radius: 4px;
+}
 .imgReady {
     height: 34px;
     aspect-ratio: 1;
