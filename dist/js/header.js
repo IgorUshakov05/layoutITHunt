@@ -92,11 +92,17 @@ $(document).ready(function() {
         $('.blockUs').addClass('BlockModal')
         $('.windowMethodsChatMobile').removeClass('showModalWind')
     })
-
+    $('.settingEvent').on('click', () => {
+        $('.blackBack').addClass('BlockModal')
+        $('.unpdateEventClick').addClass('BlockModal')
+        $('.windowMethodsChatMobile').removeClass('showModalWind')
+    })
     $('.canelss').on('click', () => {
         $('.blackBack').removeClass('BlockModal')
         $('.blockUs').removeClass('BlockModal')
         $('.removeChatNone').removeClass('BlockModal')
+        $('.unpdateEventClick').removeClass('BlockModal')
+
         $('.windowMethodsChatMobile').removeClass('showModalWind')
     })
 

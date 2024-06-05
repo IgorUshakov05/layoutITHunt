@@ -99,15 +99,106 @@
                 <div class="blockElemBlock inputTitle w50">
                     <span class="subTitle">Дата и время</span>
                     <div class="inputTime">
-                        <input type="text" max="50" min="1" class="inputingtitle">
-                        <input type="text" max="50" min="1" class="inputingtitle">
+                        <input placeholder="дд/мм/гггг" type="date" max="50" min="1" class="inputingtitle">
+                        <input type="time" placeholder="мм/чч" max="50" min="1" class="inputingtitle">
                 </div>
 
                 </div>
             </div>
+            <div class="descriptionEventTextArea">
+                <textarea name="description" id="descriptionEvent" class="inputingtitle"></textarea>
+            </div>
             <div class="buttonRemoves mobFlex">
                 <button class="canelss canelsEvent">Отменить</button>
                 <button id="createEvent">Создать</button>
+            </div>
+        </div>
+        <div class="modalWindowRemoveUser unpdateEventClick updateEventModal">
+            <h1 class="titleRemove">Внести изменения</h1>
+            <div class="flex mobFlex">
+                <div class="blockElemBlock">
+                    <span class="subTitle">Иконка</span>
+                    <div class="flex iconVariant">
+                        <div class="iconEventChange ">
+                            <label for="iconOne">
+                                <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_3898_5535)">
+                                    <rect width="39" height="39" rx="4" fill="#F6F4FF"/>
+                                    <path d="M26 14L26 21M26 14L30 14L30 21L26 21M26 14V14C20.3499 13.0029 14.8241 11.3981 9.51879 9.21362L9.05427 9.02235C9.0284 9.01169 9 9.03071 9 9.05869L9 23.1844C9 23.8457 9.63045 24.3249 10.2676 24.1479L18 22L21.5 21.5M26 21L21.5 21.5M26 21L27.5 27L27.5556 27.6676C27.7605 30.1256 24.28 30.84 23.5 28.5V28.5L21.5 21.5" stroke="#1E005E" stroke-width="0.5"/>
+                                    </g>
+                                    <defs>
+                                    <clipPath id="clip0_3898_5535">
+                                    <rect width="39" height="39" rx="4" fill="white"/>
+                                    </clipPath>
+                                    </defs>
+                                    </svg>
+                            </label>
+                            <input type="radio" name="icon" id="iconOne" class="inputForLabel">
+                        </div>
+                        <div class="iconEventChange active">
+                            <label for="iconTwo">
+                                <svg width="41" height="39" viewBox="0 0 41 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_5317_6551)">
+                                    <rect x="0.703125" width="39" height="39" rx="4" fill="#F6F4FF"/>
+                                    <path d="M33.9555 20C33.9555 27.0381 28.1619 32.75 21.0071 32.75C13.8522 32.75 8.05859 27.0381 8.05859 20C8.05859 12.9619 13.8522 7.25 21.0071 7.25C28.1619 7.25 33.9555 12.9619 33.9555 20Z" stroke="#1E005E" stroke-width="0.5"/>
+                                    <path d="M18.179 13.1815L19.8404 22.1815C19.9279 22.6558 20.3415 23 20.8238 23H21.1897C21.672 23 22.0855 22.6558 22.1731 22.1815L23.8344 13.1815C23.9479 12.5669 23.476 12 22.851 12H19.1624C18.5374 12 18.0656 12.5669 18.179 13.1815Z" stroke="#1E005E" stroke-width="0.5"/>
+                                    <path d="M22.7876 27C22.7876 27.9629 21.994 28.75 21.0071 28.75C20.0202 28.75 19.2266 27.9629 19.2266 27C19.2266 26.0371 20.0202 25.25 21.0071 25.25C21.994 25.25 22.7876 26.0371 22.7876 27Z" stroke="#1E005E" stroke-width="0.5"/>
+                                    </g>
+                                    <defs>
+                                    <clipPath id="clip0_5317_6551">
+                                    <rect x="0.703125" width="39.5954" height="39" rx="4" fill="white"/>
+                                    </clipPath>
+                                    </defs>
+                                    </svg>
+                                    
+                            </label>
+                            <input type="radio" name="icon" id="iconTwo" class="inputForLabel">
+                        </div>
+                        <div class="iconEventChange">
+                            <label for="iconThree">
+                                <svg width="40" height="39" viewBox="0 0 40 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_5317_6556)">
+                                    <rect x="0.40625" width="39" height="39" rx="4" fill="#F6F4FF"/>
+                                    <path d="M33.6587 20C33.6587 27.0381 27.865 32.75 20.7102 32.75C13.5554 32.75 7.76172 27.0381 7.76172 20C7.76172 12.9619 13.5554 7.25 20.7102 7.25C27.865 7.25 33.6587 12.9619 33.6587 20Z" stroke="#1E005E" stroke-width="0.5"/>
+                                    <path d="M14.6211 20.5L19.9005 25L27.8196 16" stroke="#1E005E" stroke-width="0.5"/>
+                                    </g>
+                                    <defs>
+                                    <clipPath id="clip0_5317_6556">
+                                    <rect x="0.40625" width="39.5954" height="39" rx="4" fill="white"/>
+                                    </clipPath>
+                                    </defs>
+                                    </svg>
+                                    
+                            </label>
+                            <input type="radio" name="icon" id="iconThree" class="inputForLabel">
+                        </div>
+                    </div>
+                </div>
+                <div class="blockElemBlock inputTitle">
+                    <span class="subTitle">Наименование</span>
+                    <input type="text" max="50" min="1" class="inputingtitle">
+                </div>
+            </div>
+            <div class="flex mobFlex">
+                <div class="blockElemBlock">
+                    <span class="subTitle">Описание</span>
+                 
+                </div>
+                <div class="blockElemBlock inputTitle w50">
+                    <span class="subTitle">Дата и время</span>
+                    <div class="inputTime">
+                        <input placeholder="дд/мм/гггг" type="date" max="50" min="1" class="inputingtitle">
+                        <input type="time" placeholder="мм/чч" max="50" min="1" class="inputingtitle">
+                </div>
+
+                </div>
+            </div>
+            <div class="descriptionEventTextArea">
+                <textarea name="description" id="descriptionEvent" class="inputingtitle"></textarea>
+            </div>
+            <div class="buttonRemoves mobFlex">
+                <button class="canelss canelsEvent">Отменить</button>
+                <button id="updateEvent">Сохранить</button>
             </div>
         </div>
     </div>
