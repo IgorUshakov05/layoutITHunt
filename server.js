@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
+const api = require('./api/authtorizationRoutes/authRoute')
 const index = require('./pageRoutes/indexPage')
 const login = require('./pageRoutes/login')
 const myprofileProfessional = require('./pageRoutes/MeProfile')
@@ -49,8 +50,10 @@ app.use((req,res,next) => {
     console.log(req.path)
     next()
 })
+app.use('/api', api)
 // app.set('view cache', true);
 app.use(index,buyPremium,privacy,EditCompany,deleteAccountComplite,court,login,chatCompany,myprofileProfessional,seeSideProf,inboxOther,findCompany,inboxFastWork,inboxVacansy,inboxCompany,inbox,addCompany,createVacancy,createFastWork,HisprofileHR,settingsHR,myprofileHR,registration,company,chat,vacancia,fastWorkItem,userChat,settingsSpecialist,deleteAccount,createCompany, fastWork,specialists,vacancies)
+
 app.get('/robots.txt',(req,res)=>{
     res.sendFile(path.join(__dirname,'robots.txt'))
 })
@@ -63,15 +66,15 @@ app.get('*',  (req,res) => {
 })
 start = (PORT) => {
     try {
-        // mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true })
-            // .then(() => {
-                // console.log('Подключение к базе данных успешно');
+        mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true })
+            .then(() => {
+                console.log('Подключение к базе данных успешно');
 
                 app.listen(PORT, () => {
                     console.log(`Server start ${process.env.SERVER_PORT}`);
                 });
-            // })
-            // .catch((err) => console.error('Ошибка подключения к базе данных:', err));
+            })
+            .catch((err) => console.error('Ошибка подключения к базе данных:', err));
 
     }
     catch (e) {

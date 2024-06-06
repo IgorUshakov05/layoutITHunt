@@ -10,7 +10,6 @@ const inputs = document.querySelectorAll('.square-input');
 const firstStapButton = document.getElementById('nextOne')
 
 
-
 firstStapButton.addEventListener('click', () => {
     document.getElementById('firstScreen').style.display = 'none'
     document.getElementById('secondStap').style.display = 'block'

@@ -91,15 +91,21 @@
 
                 </div>
                 <div class="roles">
-                    <label for="creatorWork">
-                        <input class="select" type="radio" name="role" value="creatorWork" id="creatorWork" required>
-                        <span>Я работодатель</span>
-                    </label>
-                    <label for="worker">
-                        <input class="select" type="radio" name="role" value="worker" id="worker" required>
-                        <span>Я специалист</span>
-                    </label>
-                </div>
+                    <div class="relative flexcenter">
+                        <input class="select roleUser" type="radio" name="role" value="creatorWork" id="creatorWork" required>
+                        <label for="creatorWork">
+                            <span>Я работодатель</span>
+                          </label>
+                    </div>
+                    <div class="relative flexcenter">
+                        <input class="select roleUser" type="radio" name="role" value="worker" id="worker" required>
+                        <label for="worker">
+                            <span>Я специалист</span>
+                          </label>
+                    </div>
+               
+                  </div>
+                  
 
 
                 <button type="button" id="nextOne" class="submitButton submitButtonReg">Продолжить</button>

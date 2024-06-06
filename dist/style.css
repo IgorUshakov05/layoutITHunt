@@ -448,9 +448,7 @@ input#true {
     margin-top: 7px;
 }
 
-#secondStap, #theerdStap{
-    display: none;
-}
+
 
 #last {
     display: none;
@@ -1157,10 +1155,14 @@ letter-spacing: 0.14px;
     justify-content: space-between;
 }
 .select {
-    display: none;
+    /* display: none; */
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
 }
 
-.roles >label> span {
+.roles >.relative>label> span {
     color: #000;
     font-size: 15px;
     font-style: normal;
@@ -1168,17 +1170,31 @@ letter-spacing: 0.14px;
     line-height: 141.4%; /* 21.21px */
     letter-spacing: 0.075px;
 }
-.roles >label,.flexcenter{
+.roles >.relative>label {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+}
+.roles >.relative>label,.flexcenter{
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.roles > label {
+.roles >.relative {
     width: 48%;
+    position: relative;
     border-radius: 4px;
     background: #E2D4FF;
 }
+.select:checked ~ label {
+    background: #5412E0;
+  }
+
+  .select:checked ~ label > span{
+    color: white;
+  }
+  
 .toggle-password,.toggle-password1 {
 position: absolute;
     cursor: pointer;

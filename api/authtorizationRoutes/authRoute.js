@@ -1,0 +1,20 @@
+const {Router} = require('express');
+const router = Router()
+const registration = require('../authorization/registration')
+const login = require('../authorization/login')
+const { body } = require('express-validator');
+
+router.post('/registration',
+    body('mail').isEmail(),
+    body('password').isLength({ min: 6 }),
+    body('surname').isLength({ min: 2 }),
+    body('name').isLength({ min: 2 }),
+    body('role').isIn(['worker', 'creatorWork']),
+    body('birthDay') .isDate({format: 'DD-MM-YYYY'})
+    .withMessage('Введенное значение не является датой.'),
+    body('reply_password').custom((value, { req }) => {
+        return value === req.body.password;
+      }), registration)
+router.post('/login', login)
+
+module.exports = router
