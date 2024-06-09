@@ -2,6 +2,7 @@ const {Router} = require('express');
 const router = Router()
 const registration = require('../authorization/registration')
 const login = require('../authorization/login')
+const post = require('../authorization/verefyPost')
 const { body } = require('express-validator');
 
 router.post('/registration',
@@ -16,5 +17,8 @@ router.post('/registration',
         return value === req.body.password;
       }), registration)
 router.post('/login', login)
+router.post('/post_verefy', 
+  body('mail').isEmail(),
+  post)
 
 module.exports = router

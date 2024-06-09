@@ -46,10 +46,6 @@ const schema = new mongoose.Schema({
     type: String,
     default: null,
   },
-  age: {
-    type: Number,
-    default: null,
-  },
   // contacts: [contactSchema],
   portfolio: {
     type: Object,

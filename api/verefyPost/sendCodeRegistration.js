@@ -2,6 +2,7 @@ const nodemailer = require("nodemailer");
 // Import NodeMailer (after npm install)
 
 async function sendCode({userPost,code,username}) {
+
     let html = `<!DOCTYPE html>
     <html lang="ru">
     <head>
@@ -157,6 +158,7 @@ async function sendCode({userPost,code,username}) {
       pass: "rn434CgTa8kDL0cbszKx",
     },
   });
+  try {
 
   // Define and send message inside transporter.sendEmail() and await info about send from promise:
   let info = await transporter.sendMail({
@@ -167,25 +169,29 @@ async function sendCode({userPost,code,username}) {
     attachments: [
       {
         filename: "image.png",
-        path: "./assets/logo.png",
+        path: "./api/verefyPost/assets/logo.png",
         cid: "logo", // уникальный идентификатор для изображения
       },
       {
         filename: "image3.png",
-        path: "./assets/vk.png",
+        path: "./api/verefyPost/assets/vk.png",
         cid: "vk", // уникальный идентификатор для изображения
       },
       {
         filename: "image4.png",
-        path: "./assets/telegram.png",
+        path: "./api/verefyPost/assets/telegram.png",
         cid: "telegram", // уникальный идентификатор для изображения
       },
     ],
   });
-
   console.log(info.messageId); // Random ID generated after successful send (optional)
+  return true
+}
+catch(e) {
+  console.log(e)
+  return false
+}
 }
 
 
-module.exports = {sendCode}
-sendCode({userPost:'igorushakov111@gmail.com',code:'237194',username: "Игорь"})
+module.exports = sendCode
