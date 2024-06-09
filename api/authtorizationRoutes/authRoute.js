@@ -3,6 +3,7 @@ const router = Router()
 const registration = require('../authorization/registration')
 const login = require('../authorization/login')
 const post = require('../authorization/verefyPost')
+const acceptCodeFromPost = require('../authorization/acceptCodePost')
 const { body } = require('express-validator');
 
 router.post('/registration',
@@ -19,6 +20,12 @@ router.post('/registration',
 router.post('/login', login)
 router.post('/post_verefy', 
   body('mail').isEmail(),
+  body('username').isLength({ min: 2 }),
   post)
+
+  router.post('/accept_code', 
+  body('mail').isEmail(),
+  body('code').isLength({ min: 6,max:6 }),
+  acceptCodeFromPost)
 
 module.exports = router
