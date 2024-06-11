@@ -25,7 +25,7 @@ router.post('/post_verefy',
 
   router.post('/accept_code', 
   body('mail').isEmail(),
-  body('code').isLength({ min: 6,max:6 }),
+  body('codeUser').isLength({ min: 6,max:6 }),
   acceptCodeFromPost)
 
 module.exports = router

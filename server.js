@@ -3,6 +3,7 @@ const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
 const api = require("./api/authtorizationRoutes/authRoute");
+const apiSkill = require("./api/Skills Offered/skillsOffered");
 const index = require("./pageRoutes/indexPage");
 const login = require("./pageRoutes/login");
 const myprofileProfessional = require("./pageRoutes/MeProfile");
@@ -49,7 +50,16 @@ app.use((req, res, next) => {
   console.log(req.path);
   next();
 });
-app.use("/api", api);
+app.use(
+  "/api",
+  (req, res, next) => {
+    console.log(req.headers.authorization);
+      if(req.headers.authorization !== 'augwod89h1h9awdh9py0y82hjd') return res.status(401).json({message:"Не авторизован"})
+    next();
+  },
+  api,
+  apiSkill
+);
 // app.set('view cache', true);
 app.use(
   index,

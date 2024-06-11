@@ -11,7 +11,6 @@ async function Registration(req, res) {
   const data = await req.body;
   data.password = await hashPassword(data.password);
   let userInsertToDataBase = await registrationUser(data);
-  console.log(userInsertToDataBase);
   if (!!!userInsertToDataBase) {
     return res.json({ error: "Пользователь существует" });
   }

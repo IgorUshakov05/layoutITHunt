@@ -20,9 +20,10 @@ const schema = new mongoose.Schema({
     required: true,
     default: false,
   },
-  time: {
-    type: String,
-    required: true
+  count_try: {
+    type: Number,
+    required: true,
+    default: 0
   }
 });
 module.exports = mongoose.model("CodeVerefyPost", schema);
