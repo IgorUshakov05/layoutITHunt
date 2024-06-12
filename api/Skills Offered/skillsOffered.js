@@ -1,13 +1,13 @@
 const {Router} = require('express')
 const router = Router()
-const createSkillToDataBase = require('../../database/Request/sendNewSkill')
+const createNewSpecial = require('../../database/Request/sendNewSkill')
 
-router.post('/skillsOffered',async(req,res) => {
-    let {skill} = req.body
-    if(!skill.trim()) {
+router.post('/specialOffered',async(req,res) => {
+    let {special} = req.body
+    if(!special.trim()) {
         return res.status(401).json({message: "Введите текст"})
     }
-    let createUser = await createSkillToDataBase(skill)
+    let createUser = await createNewSpecial(special)
     if(!createUser) {
         return res.status(401).json({message: "Такая заявка существует"})
     }

@@ -1,17 +1,16 @@
 const {v4} = require('uuid')
-const modelSkill = require('../Schema/skillOfUser')
-const newSkill = async (data) => {
+const modelSkill = require('../Schema/userSpecial')
+const newSpecial = async (data) => {
     try {
-        let newSkill = await new modelSkill({
+        let newSpecial = await new modelSkill({
             id: v4(),
             skill: data
         })
-        let saveSkill = await newSkill.save()
+        let saveSpecial = await newSpecial.save()
         return true
     }
     catch(e) {
         return false
     }
 }
-newSkill('Abakan')
-module.exports = newSkill
+module.exports = newSpecial

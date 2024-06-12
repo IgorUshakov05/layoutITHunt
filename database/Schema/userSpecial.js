@@ -11,4 +11,4 @@ const schema = new mongoose.Schema({
     unique: true
   }
 });
-module.exports = mongoose.model("SkillOfUser", schema);
+module.exports = mongoose.model("userSpecial", schema);
