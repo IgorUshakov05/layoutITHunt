@@ -12,9 +12,9 @@ async function Registration(req, res) {
   data.password = await hashPassword(data.password);
   let userInsertToDataBase = await registrationUser(data);
   if (!!!userInsertToDataBase) {
-    return res.json({ error: "Пользователь существует" });
+    return res.status(400).json({ error: "Пользователь существует" });
   }
-  return await res.json(userInsertToDataBase);
+  return await res.status(200).json({message:"Успех!"});
 }
 
 module.exports = Registration;

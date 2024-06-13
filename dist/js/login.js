@@ -14,6 +14,11 @@ else if(errorValue === '2') {
     document.getElementById('findAcc').style.display = "block"
     document.getElementById('quest').style.marginTop = "15px"
 }
+else if(errorValue === '3') {
+    document.getElementById('findAcc').innerText = 'Пользователь уже существует'
+    document.getElementById('findAcc').style.display = "block"
+    document.getElementById('quest').style.marginTop = "15px"
+}
     else{
 
     document.getElementById('findAcc').style.display = "none"

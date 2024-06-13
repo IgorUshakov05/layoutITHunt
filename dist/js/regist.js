@@ -9,9 +9,10 @@ const replypassword = document.getElementById("replypassword");
 const buttonGetCode = document.getElementById("nextOneGetCode");
 const inputs = document.querySelectorAll(".square-input");
 //Кноки для перехода на этапы
-const sendMyCode = document.getElementById('sendMyCode')
+const sendMyCode = document.getElementById("sendMyCode");
 const firstStapButton = document.getElementById("nextOne");
 
+const finish = document.getElementById("last");
 const firstScreen = document.getElementById("firstScreen");
 const emailPlace = document.getElementById("emailPlace");
 const sendCode = document.getElementById("nextOneGetCode");
@@ -20,6 +21,76 @@ function validateEmail(email) {
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
 }
+
+function validatePassword(password) {
+  const regex = /^(?=.*[A-Za-z]).{6,}$/;
+  if (regex.test(password)) {
+    document.getElementById("password-error-message").style.display = "none";
+    return true;
+  }
+  document.getElementById("password-error-message").style.display = "block";
+  return false;
+}
+function validatePasswords() {
+  const password = data.password;
+  const reply_password = data.reply_password;
+  const isCheckboxChecked = document.getElementById("true").checked;
+
+  if (
+    validatePassword(password) &&
+    validatePassword(reply_password) &&
+    password === reply_password &&
+    isCheckboxChecked
+  ) {
+    finish.removeAttribute("disabled");
+  } else {
+    finish.setAttribute("disabled", "");
+  }
+}
+
+function validatePassword(password) {
+  const regex = /^(?=.*[A-Za-z]).{6,}$/;
+  if (regex.test(password)) {
+    document.getElementById("password-error-message").style.display = "none";
+    return true;
+  }
+  document.getElementById("password-error-message").style.display = "block";
+  return false;
+}
+
+replypassword.addEventListener("input", function (e) {
+  let value = e.target.value.trim();
+  if (!value) {
+    data.reply_password = "";
+    validatePasswords();
+    return;
+  }
+  if (validatePassword(value)) {
+    data.reply_password = value;
+  } else {
+    data.reply_password = ""; // Обнуляем пароль, если он не проходит валидацию
+  }
+  validatePasswords();
+});
+
+password.addEventListener("input", function (e) {
+  let value = e.target.value.trim();
+  if (!value) {
+    data.password = "";
+    validatePasswords();
+    return;
+  }
+  if (validatePassword(value)) {
+    data.password = value;
+  } else {
+    data.password = ""; // Обнуляем пароль, если он не проходит валидацию
+  }
+  validatePasswords();
+});
+
+document.getElementById("true").addEventListener("change", function (e) {
+  validatePasswords();
+});
 
 function validateFirstStap() {
   if (
@@ -37,10 +108,10 @@ function validateFirstStap() {
   return false;
 }
 
-firstStapButton.addEventListener('click',() => {
-    firstScreen.remove()
-    document.getElementById('emailPlace').style.height = 'auto'
-})
+firstStapButton.addEventListener("click", () => {
+  firstScreen.remove();
+  document.getElementById("emailPlace").style.height = "auto";
+});
 
 let data = {
   surname: "",
@@ -64,11 +135,33 @@ email.addEventListener("input", function (e) {
 });
 
 replypassword.addEventListener("input", function (e) {
-  data.reply_password = e.target.value.trim();
+  let value = e.target.value.trim();
+  if (!value) {
+    data.reply_password = "";
+    validatePasswords();
+    return;
+  }
+  if (validatePassword(value)) {
+    data.reply_password = value;
+  } else {
+    data.reply_password = ""; // Обнуляем пароль, если он не проходит валидацию
+  }
+  validatePasswords();
 });
 
 password.addEventListener("input", function (e) {
-  data.password = e.target.value.trim();
+  let value = e.target.value.trim();
+  if (!value) {
+    data.password = "";
+    validatePasswords();
+    return;
+  }
+  if (validatePassword(value)) {
+    data.password = value;
+  } else {
+    data.password = ""; // Обнуляем пароль, если он не проходит валидацию
+  }
+  validatePasswords();
 });
 
 lastname.addEventListener("input", function (e) {
@@ -143,6 +236,7 @@ code.addEventListener("keydown", function (e) {
 });
 sendCode.addEventListener("click", post_verefy);
 function post_verefy() {
+  sendCode.setAttribute("disabled", "");
   email.value = "";
   fetch("/api/post_verefy", {
     method: "POST",
@@ -156,57 +250,84 @@ function post_verefy() {
       console.log(response.status);
       if (response.status === 200 || response.status === 409) {
         emailPlace.remove();
-        document.getElementById('codeInputs').style.height = 'auto'
+        document.getElementById("codeInputs").style.height = "auto";
       }
       return response.json();
     })
     .catch(() => {
       document.getElementById("errorEmailSend");
       return (document.getElementById("errorEmailSend").innerText = "Ошибка");
+    })
+    .finally(() => {
+      sendCode.removeAttribute("disabled");
     });
 }
 
-sendMyCode.addEventListener('click',verefyMailFetch)
+sendMyCode.addEventListener("click", verefyMailFetch);
 function verefyMailFetch() {
+    if(verefyMail.code === '' || verefyMail.code === undefined) {
+        makeColor("red", "square");
+        setTimeout(() => {
+          makeColor("black", "square");
+        }, 1000);
+    }
+  sendMyCode.setAttribute("disabled", "");
   fetch("/api/accept_code", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: "augwod89h1h9awdh9py0y82hjd",
     },
-    body: JSON.stringify({ mail: verefyMail.mail.trim(), codeUser: Number(verefyMail.code)}),
+    body: JSON.stringify({
+      mail: verefyMail.mail.trim(),
+      codeUser: Number(verefyMail.code),
+    }),
   })
     .then((obj) => {
-        if(obj.status===202) {
-            makeColor('green', 'square')
-            setTimeout(() => {
-                document.getElementById('theerdStap').style.height = 'auto'
-                return document.getElementById('codeInputs').remove()
-            
-            },1000)
-        }
-        else {
-
-            makeColor('red', 'square')
+      if (obj.status === 202) {
+        makeColor("green", "square");
         setTimeout(() => {
-            makeColor('black', 'square')
-        },1000)
-    }
+          document.getElementById("theerdStap").style.height = "auto";
+          return document.getElementById("codeInputs").remove();
+        }, 1000);
+      } else {
+        makeColor("red", "square");
+        setTimeout(() => {
+        sendMyCode.removeAttribute("disabled");
+
+          makeColor("black", "square");
+        }, 1000);
+      }
     })
     .catch(() => {
-        makeColor('red', 'square')
-        setTimeout(() => {
-            makeColor('black', 'square')
-        },1000)
+      makeColor("red", "square");
+      sendMyCode.removeAttribute("disabled");
+      setTimeout(() => {
+        makeColor("black", "square");
+      }, 1000);
     });
 }
 
-
 const makeColor = (color, className) => {
-    let elements = document.querySelectorAll(`.${className}`);
-    for (let i = 0; i < elements.length; i++) {
-      elements[i].style.border = `1px solid ${color}`;
-      elements[i].style.color = color;
+  let elements = document.querySelectorAll(`.${className}`);
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].style.border = `1px solid ${color}`;
+    elements[i].style.color = color;
+  }
+};
 
-    }
-  };
+finish.addEventListener("click", () => {
+  fetch("/api/registration", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "augwod89h1h9awdh9py0y82hjd",
+    },
+    body: JSON.stringify(data),
+  }).then((obj) => {
+    if (obj.status === 200) {
+      return (window.location.href = "/");
+    } else if (obj.status === 400)
+      return (window.location.href = "/login?error=3");
+  });
+});

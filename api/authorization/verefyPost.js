@@ -39,5 +39,5 @@ async function verifyPostRoute(req, res) {
 module.exports = verifyPostRoute;
 
 function generateCode() {
-  return Math.floor(Math.random() * 999999);
+  return Math.floor(100000 + Math.random() * 900000);
 }
