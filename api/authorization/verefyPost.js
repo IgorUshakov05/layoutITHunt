@@ -14,14 +14,14 @@ async function verifyPostRoute(req, res) {
     let findMail = await CodeForPostRegistration.findOne({ mail });
     console.log(findMail);
     if (findMail) {
-      return res.status(409).json({ message: "Code already sent" });
+      return res.status(409).json({ message: "Код уже был отправлен" });
     }
 
     let code = await generateCode();
 
     let sendCodeVar = await sendCode({ userPost: mail, code, username });
     if (!sendCodeVar) {
-      return res.status(500).json({ message: "Failed to send code" });
+      return res.status(500).json({ message: "Ошибка при отправке" });
     }
 
     let codeToBase = await new CodeForPostRegistration({
@@ -29,10 +29,10 @@ async function verifyPostRoute(req, res) {
       code,
       time: new Date().getTime(),
     }).save();
-    return res.status(200).json({ message: "Code sent" });
+    return res.status(200).json({ message: "Код отправлен" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Ошибка при отправке" });
   }
 }
 

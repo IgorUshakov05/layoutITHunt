@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const cookieParser = require('cookie-parser')
 const mongoose = require("mongoose");
 const api = require("./api/authtorizationRoutes/authRoute");
 const apiSkill = require("./api/Skills Offered/skillsOffered");
@@ -41,15 +42,19 @@ const EditCompany = require("./pageRoutes/EditCompany");
 
 require("dotenv").config();
 app.set("view engine", "ejs");
+app.use(cookieParser())
 app.set("trust proxy", true);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "dist")));
 app.set("views", path.join(__dirname, "dist"));
 app.use((req, res, next) => {
+  res.cookie('cookieName', 'cookieValue')
+  console.log('Cookies: ', req.cookies)
   console.log(req.path);
   next();
-});
+})
+
 app.use(
   "/api",
   (req, res, next) => {

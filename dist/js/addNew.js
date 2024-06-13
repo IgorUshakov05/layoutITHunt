@@ -21,7 +21,6 @@ button.addEventListener('click', () => {
   })
   .then(response =>  response.json())
   .then(data => {
-      console.log(data);
       document.getElementById('parentForAppend').innerHTML = `<div class="textHelp">
                         <div class="green"></div>
                         <p>${data.message}</p>
