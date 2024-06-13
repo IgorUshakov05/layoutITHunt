@@ -3339,6 +3339,10 @@ letter-spacing: 0.15px;
     width: 100%;
 }
 
+#emailPlace,#codeInputs,#theerdStap {
+    height:0;
+    overflow: hidden;
+}
 .titleJob {
     text-align: justify;
     font-family: Raleway;

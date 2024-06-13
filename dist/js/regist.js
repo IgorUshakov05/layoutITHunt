@@ -39,6 +39,7 @@ function validateFirstStap() {
 
 firstStapButton.addEventListener('click',() => {
     firstScreen.remove()
+    document.getElementById('emailPlace').style.height = 'auto'
 })
 
 let data = {
@@ -155,6 +156,7 @@ function post_verefy() {
       console.log(response.status);
       if (response.status === 200 || response.status === 409) {
         emailPlace.remove();
+        document.getElementById('codeInputs').style.height = 'auto'
       }
       return response.json();
     })
@@ -172,14 +174,39 @@ function verefyMailFetch() {
       "Content-Type": "application/json",
       Authorization: "augwod89h1h9awdh9py0y82hjd",
     },
-    body: JSON.stringify(verefyMail),
+    body: JSON.stringify({ mail: verefyMail.mail.trim(), codeUser: Number(verefyMail.code)}),
   })
-    .then((obj) => obj.json())
     .then((obj) => {
-      return (document.getElementById("notCode").innerText = obj.message);
+        if(obj.status===202) {
+            makeColor('green', 'square')
+            setTimeout(() => {
+                document.getElementById('theerdStap').style.height = 'auto'
+                return document.getElementById('codeInputs').remove()
+            
+            },1000)
+        }
+        else {
+
+            makeColor('red', 'square')
+        setTimeout(() => {
+            makeColor('black', 'square')
+        },1000)
+    }
     })
     .catch(() => {
-      return (document.getElementById("notCode").innerText =
-        "Произошла ошибка");
+        makeColor('red', 'square')
+        setTimeout(() => {
+            makeColor('black', 'square')
+        },1000)
     });
 }
+
+
+const makeColor = (color, className) => {
+    let elements = document.querySelectorAll(`.${className}`);
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].style.border = `1px solid ${color}`;
+      elements[i].style.color = color;
+
+    }
+  };
