@@ -2587,7 +2587,7 @@ box-shadow: 0 0 7px 2px rgba(222, 219, 255, 0.51);
 }
 
 .submitButtonComp:disabled,.nextStageCompany:disabled,.submitButton:disabled {
-    background: rgba(84, 18, 224, 0.35);
+    background: rgba(84, 18, 224, 0.35) !important;
 }
 
 .bottomElem {

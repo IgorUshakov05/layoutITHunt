@@ -1,7 +1,8 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
-const cookieParser = require('cookie-parser')
+const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const api = require("./api/authtorizationRoutes/authRoute");
 const apiSkill = require("./api/Skills Offered/skillsOffered");
@@ -40,31 +41,32 @@ const privacy = require("./pageRoutes/privacy-policy");
 const vacancies = require("./pageRoutes/vacancies");
 const EditCompany = require("./pageRoutes/EditCompany");
 
-require("dotenv").config();
 app.set("view engine", "ejs");
-app.use(cookieParser())
+app.use(cookieParser());
 app.set("trust proxy", true);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "dist")));
 app.set("views", path.join(__dirname, "dist"));
-app.use((req, res, next) => {
-  res.cookie('cookieName', 'cookieValue')
-  console.log('Cookies: ', req.cookies)
+app.use((req, res,next) => {
   console.log(req.path);
-  next();
-})
+  console.log("Cookies access: ", req.cookies.access);
+  next()
+});
 
 app.use(
   "/api",
   (req, res, next) => {
     console.log(req.headers.authorization);
-      if(req.headers.authorization !== 'augwod89h1h9awdh9py0y82hjd') return res.status(401).json({message:"Не авторизован"})
+    if (req.headers.authorization !== "augwod89h1h9awdh9py0y82hjd")
+      return res.status(401).json({ message: "Не авторизован" });
     next();
   },
   api,
   apiSkill
 );
+
+
 // app.set('view cache', true);
 app.use(
   index,

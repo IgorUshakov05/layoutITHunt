@@ -1,6 +1,6 @@
-const { query, validationResult } = require("express-validator");
+const { validationResult } = require("express-validator");
 const { hashPassword } = require("../password/password");
-
+const { createAccessToken } = require("../tokens/accessToken");
 const registrationUser = require("../../database/Request/registration");
 
 async function Registration(req, res) {
@@ -14,7 +14,20 @@ async function Registration(req, res) {
   if (!!!userInsertToDataBase) {
     return res.status(400).json({ error: "Пользователь существует" });
   }
-  return await res.status(200).json({message:"Успех!"});
+  let accessTokenCookie = await createAccessToken({
+    userID: userInsertToDataBase.id,
+    userMAIL: userInsertToDataBase.mail,
+    userROLE: userInsertToDataBase.role,
+  });
+  // let access = createAccessToken()
+  return await res
+    .clearCookie("access")
+    .status(200)
+    .cookie("access", accessTokenCookie, {
+      httpOnly: true,
+      maxAge: 3600000,
+    })
+    .json({ message: "Успех!" });
 }
 
 module.exports = Registration;
