@@ -1,7 +1,7 @@
 const {Router} = require('express')
 const router = Router()
 
-router.get('/court',(req,res) => {
+router.get('/court',isAuth(req,res) => {
     res.render('court')
 })
 

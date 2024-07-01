@@ -21,6 +21,10 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  dateRegistration: {
+    type: String,
+    required: true,
+  },
   status: {
     type: String,
     default: null,
@@ -61,7 +65,7 @@ const schema = new mongoose.Schema({
   },
   avatar: {
     type: String,
-    default: "/assets/pictures/defaultAvatar.png",
+    default: null,
   },
 });
 module.exports = mongoose.model("User", schema);

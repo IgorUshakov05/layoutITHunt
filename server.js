@@ -48,11 +48,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "dist")));
 app.set("views", path.join(__dirname, "dist"));
-app.use((req, res,next) => {
-  console.log(req.path);
-  console.log("Cookies access: ", req.cookies.access);
-  next()
-});
 
 app.use(
   "/api",
@@ -67,15 +62,13 @@ app.use(
 );
 
 
+
 // app.set('view cache', true);
 app.use(
-  index,
   buyPremium,
-  privacy,
   EditCompany,
   deleteAccountComplite,
   court,
-  login,
   chatCompany,
   myprofileProfessional,
   seeSideProf,
@@ -91,19 +84,26 @@ app.use(
   HisprofileHR,
   settingsHR,
   myprofileHR,
-  registration,
   company,
   chat,
-  vacancia,
-  fastWorkItem,
   userChat,
   settingsSpecialist,
   deleteAccount,
   createCompany,
-  fastWork,
-  specialists,
-  vacancies
+  
 );
+
+app.use(
+  index,
+  registration,
+  privacy,
+  login,
+  vacancies,
+  vacancia,
+  specialists,
+  fastWork,
+  fastWorkItem,
+)
 
 app.get("/robots.txt", (req, res) => {
   res.sendFile(path.join(__dirname, "robots.txt"));
@@ -125,7 +125,7 @@ start = (PORT) => {
       .then(() => {
         console.log("Подключение к базе данных успешно");
 
-        app.listen(PORT, () => {
+        app.listen(PORT, '0.0.0.0', () => {
           console.log(`Server start ${process.env.SERVER_PORT}`);
         });
       })
