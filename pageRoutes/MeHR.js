@@ -1,8 +1,13 @@
 const {Router} = require('express')
 const router = Router()
+const {decodeAccessToken} = require('../api/tokens/accessToken')
+
 
 router.get('/hrMe',(req,res) => {
-    res.render('ImHR', { isLoggedIn:false})
+    let access = req.cookies.access;
+    let user = decodeAccessToken(access)
+    console.log(user)
+    res.render('ImHR', { isLoggedIn:!!user, id:user.userID})
 })
 
 

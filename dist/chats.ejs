@@ -13,8 +13,7 @@
     <title>Список чатов</title>
 </head>
 <body style="overflow-y: hidden !important;">
-<%- include('./header.ejs', { isLoggedIn, username, active: 'chat'}) %>
-
+<%- include('./header.ejs', { isLoggedIn, active: 'chat', id}) %>
 <main class="main">
     <div class="twoBlocks mt20">
     <% let users = [

@@ -12,7 +12,7 @@ const myprofileProfessional = require("./pageRoutes/MeProfile");
 const myprofileHR = require("./pageRoutes/MeHR");
 const HisprofileHR = require("./pageRoutes/SeeSideHr");
 const registration = require("./pageRoutes/registration");
-const seeSideProf = require("./pageRoutes/seeSideProf");
+const User = require("./pageRoutes/User");
 const settingsHR = require("./pageRoutes/settingsHR");
 const chatCompany = require("./pageRoutes/companyChat");
 const createVacancy = require("./pageRoutes/createVacancy");
@@ -61,8 +61,10 @@ app.use(
   apiSkill
 );
 
-
-
+app.get("/404", (req, res) => {
+  res.render("pageNotFaund");
+});
+ 
 // app.set('view cache', true);
 app.use(
   buyPremium,
@@ -71,7 +73,6 @@ app.use(
   court,
   chatCompany,
   myprofileProfessional,
-  seeSideProf,
   inboxOther,
   findCompany,
   inboxFastWork,
@@ -90,31 +91,27 @@ app.use(
   settingsSpecialist,
   deleteAccount,
   createCompany,
-  
-);
-
-app.use(
-  index,
-  registration,
-  privacy,
   login,
+  registration,
+  index,
+  privacy,
   vacancies,
   vacancia,
   specialists,
   fastWork,
   fastWorkItem,
-)
+);
 
 app.get("/robots.txt", (req, res) => {
   res.sendFile(path.join(__dirname, "robots.txt"));
 });
 
-app.get("/404", (req, res) => {
-  res.render("pageNotFaund");
-});
+app.use(User)
+
 app.get("*", (req, res) => {
   res.redirect("/404");
 });
+
 start = (PORT) => {
   try {
     mongoose

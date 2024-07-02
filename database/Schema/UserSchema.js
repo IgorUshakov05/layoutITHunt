@@ -27,7 +27,7 @@ const schema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: null,
+    default: 'Не ищу работу',
   },
   role: {
     type: String,
@@ -37,6 +37,10 @@ const schema = new mongoose.Schema({
     type: String,
     unique: true,
     required: true,
+  },
+  job: {
+    type: String,
+    default: ''
   },
   password: {
     type: String,
@@ -48,7 +52,7 @@ const schema = new mongoose.Schema({
   },
   description: {
     type: String,
-    default: null,
+    default: '',
   },
   // contacts: [contactSchema],
   portfolio: {
@@ -57,15 +61,15 @@ const schema = new mongoose.Schema({
   },
   city: {
     type: String,
-    default: null,
+    default: '',
   },
   skills: {
     type: Object,
-    default: null,
+    default: [],
   },
   avatar: {
     type: String,
-    default: null,
+    default: '',
   },
 });
 module.exports = mongoose.model("User", schema);

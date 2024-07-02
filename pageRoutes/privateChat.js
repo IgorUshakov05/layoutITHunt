@@ -1,8 +1,12 @@
 const {Router} = require('express');
 const router = Router()
+const {decodeAccessToken} = require('../api/tokens/accessToken')
 
 router.get('/person', (req,res) => {
-    res.render('userChat', { isLoggedIn:false, username: "Igor"})
+    let access = req.cookies.access;
+    let user = decodeAccessToken(access)
+    console.log(user)
+    res.render('userChat', { isLoggedIn:!!user, id:user.userID})
 })
 
 module.exports = router
