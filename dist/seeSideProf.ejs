@@ -11,7 +11,7 @@
     <meta name="author" content="ITHunt">
     <link rel="stylesheet" href="/style.css">
     <script src="/js/jquery.js"></script>
-    <title>Ярослав Ушаков</title>
+    <title><%=title%></title>
 </head>
 <body>
     <%- include('./header.ejs', { isLoggedIn, active: 'profile'}) %>
@@ -23,7 +23,7 @@
             <div class="allInfoProfile" style="margin-top: 0;">
             <div class="topInfo">
                 <div class="photoBlock">
-                    <img width="110" src="./assets/pictures/Author.png" alt="Фото профиля">
+                    <img width="110" src="<%=  avatar %>" alt="Фото профиля">
                 </div>
                 <div class="textInfoAbout">
                     <div style="margin-top: 10px" class="topInfoChild">

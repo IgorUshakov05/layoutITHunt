@@ -1,7 +1,9 @@
 const {Router} = require('express')
 const router = Router()
 const {decodeAccessToken} = require('../api/tokens/accessToken')
-router.get('/',async(req,res) => {
+const {isAuthNotRequire} = require('../api/middlewares/authNotRequire')
+
+router.get('/',isAuthNotRequire,async(req,res) => {
     let access = req.cookies.access;
     let user = decodeAccessToken(access)
     console.log(user)

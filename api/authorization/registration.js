@@ -61,8 +61,7 @@ async function Registration(req, res) {
         httpOnly: true, 
         secure: true 
       })
-    
-      .json({ message: "Успех!" });
+      .redirect('/');
   } catch (error) {
     console.error("Ошибка регистрации:", error);
     return res.status(500).json({ error: "Ошибка регистрации" });

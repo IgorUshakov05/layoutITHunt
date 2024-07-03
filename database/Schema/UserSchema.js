@@ -69,7 +69,7 @@ const schema = new mongoose.Schema({
   },
   avatar: {
     type: String,
-    default: '',
+    default: './assets/pictures/defaultAvatar.png',
   },
 });
 module.exports = mongoose.model("User", schema);

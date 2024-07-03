@@ -2185,6 +2185,10 @@ align-items: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 50%;
+}
+.photoBlock > img {
+    border-radius: inherit;
 }
 .scoreSymbol {
     position: absolute;

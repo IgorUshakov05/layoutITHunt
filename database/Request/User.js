@@ -10,4 +10,15 @@ const searchUserId = async(id) => {
     }
 }
 
-module.exports = {searchUserId}
+
+const searchUserEmail = async(email) => {
+    try {
+        let result = await UserSchema.findOne({mail:email})
+        return result
+    }
+    catch(e) {
+        return false
+    }
+}
+
+module.exports = {searchUserId,searchUserEmail}

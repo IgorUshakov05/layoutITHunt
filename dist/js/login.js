@@ -30,22 +30,33 @@ document.getElementById('myForm').addEventListener('submit', function (event) {
     const formData = { email:email.value, password:password.value };
     console.log(formData); // Corrected the variable name here
 
-    fetch('/signing', {
+    fetch('/api/login', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'augwod89h1h9awdh9py0y82hjd'
         },
         body: JSON.stringify(formData)
     })
         .then(response => {
             if (response.status === 200) {
-                window.location.href = '/'; // Redirect to the specified URL
+                return window.location.href = '/'; // Redirect to the specified URL
+            }
+            else if(response.status === 404) {
+                email.value=''
+                password.value = ''
+                return document.getElementById("error").innerText = "Пользователь не найден"
+            }
+            else if(response.status === 401) {
+                email.value=''
+                password.value = ''
+                return document.getElementById("error").innerText = "Пароль неверный"
             }
             return response.json()
-        }).then(data => {
-        document.getElementById("error").innerText = "Данные не корректны"
-    })
+        })
         .catch(error => {
+                   email.value=''
+                password.value = ''
             console.error('Error:', error);
         });
 

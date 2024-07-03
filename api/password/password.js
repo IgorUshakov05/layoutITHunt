@@ -6,8 +6,8 @@ const hashPassword = async (password) => {
   return hash;
 };
 
-const dehashPassword = async (UserPassword, DBPassword) => {
-  let hash = await bcrypt.compareSync(UserPassword, DBPassword);
+const dehashPassword =  (UserPassword, DBPassword) => {
+  let hash =  bcrypt.compareSync(UserPassword, DBPassword);
   return hash;
 };
 
