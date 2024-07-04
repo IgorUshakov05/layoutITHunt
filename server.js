@@ -40,6 +40,7 @@ const settingsSpecialist = require("./pageRoutes/settingsSpecialist");
 const privacy = require("./pageRoutes/privacy-policy");
 const vacancies = require("./pageRoutes/vacancies");
 const EditCompany = require("./pageRoutes/EditCompany");
+const googleAuthLogin = require('./api/googleAuth/login');
 
 app.set("view engine", "ejs");
 app.use(cookieParser());
@@ -64,7 +65,7 @@ app.use(
 app.get("/404", (req, res) => {
   res.render("pageNotFaund");
 });
- 
+app.use(googleAuthLogin)
 // app.set('view cache', true);
 app.use(
   buyPremium,

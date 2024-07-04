@@ -5,6 +5,8 @@ const login = require("../authorization/login");
 const post = require("../authorization/verefyPost");
 const acceptCodeFromPost = require("../authorization/acceptCodePost");
 const { body } = require("express-validator");
+const passport = require('passport');
+// const {passport} = require('../googleAuth/login')
 
 router.post(
   "/registration",
@@ -40,5 +42,7 @@ router.post(
   body("codeUser").isLength({ min: 6, max: 6 }),
   acceptCodeFromPost
 );
+
+
 
 module.exports = router;
