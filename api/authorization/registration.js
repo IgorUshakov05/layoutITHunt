@@ -8,6 +8,7 @@ const { newToken } = require("../../database/Request/Refresh");
 
 async function Registration(req, res) {
   try {
+    console.log(req.user)
     const result = await validationResult(req);
     if (!result.isEmpty()) {
       return await res.send({ errors: result.array() });

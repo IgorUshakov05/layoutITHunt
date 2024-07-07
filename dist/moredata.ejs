@@ -24,34 +24,37 @@
                     <path d="M24.5 12.5H3M3 12.5L13.5 23M3 12.5L13.5 2" stroke="#5412E0" stroke-width="3"/>
                 </svg>
             </div>
-            <form id="myForm" action="/appendData" method="post">
                 <div id="firstScreen"  class="firstStap">
                     <div class="inputs inputsReg">
-                        <p style="font-size: 13px; color: red" id="errorMessage"></p>
+                        <div id="errorMessage" style="color: red; display: none;">Год не может быть больше текущего.</div>
                         <label for="lastname">Дата рождения</label>
-                        <input required minlength="10" min="10" max="10" maxlength="10" type="text" placeholder="o1.02.2002" name="date" id="date">
+                        <input tabindex="1" required minlength="15" min="15" max="15" maxlength="10" type="date" placeholder="o1.02.2002" name="date" id="date">
                     </div>
                     <div class="roles">
-                        <label for="creatorWork">
-                            <input class="select" type="radio" name="role" value="creatorWork" id="creatorWork" required>
-                            <span>Я работодатель</span>
-                        </label>
-                        <label for="worker">
-                            <input class="select" type="radio" name="role" value="worker" id="worker" required>
-                            <span>Я специалист</span>
-                        </label>
-                    </div>
+                        <div class="relative flexcenter">
+                            <input tabindex="2" class="select roleUser" type="radio" name="role" value="creatorWork" id="creatorWork" required>
+                            <label for="creatorWork">
+                                <span>Я работодатель</span>
+                              </label>
+                        </div>
+                        <div class="relative flexcenter">
+                            <input tabindex="3" class="select roleUser" type="radio" name="role" value="worker" id="worker" required>
+                            <label for="worker">
+                                <span>Я специалист</span>
+                              </label>
+                        </div>
+                   
+                      </div>
 
 
-                    <input required type="checkbox" id="true" name="policy" value="true">
+                    <input tabindex="4" required type="checkbox" id="true" name="policy" value="true">
                     <label style="font-size:14px;" for="privacyPolicy">Я ознакомил(ась)ся с <a href="/privacy-policy" style="font-size:14px; color: #5412E0;" target="_blank">политикой конфиденциальности</a></label>
-                    <button style="background: #009718;" type="submit" class="submitButton">Завершить регистрацию</button>
+                    <button tabindex="5" disabled style="background: #009718;" type="submit" class="submitButton" id="registrationMe">Завершить регистрацию</button>
                 </div>
-            </form>
         </div>
     </div>
 </main>
-<script src="/js/appendData.js">
+<script src="/js/appendLittleData.js">
 </script>
 </body>
 </html>

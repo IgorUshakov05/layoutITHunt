@@ -2,8 +2,10 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
+const passport = require('passport');
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
+const session = require('express-session');
 const api = require("./api/authtorizationRoutes/authRoute");
 const apiSkill = require("./api/Skills Offered/skillsOffered");
 const index = require("./pageRoutes/indexPage");
@@ -37,10 +39,12 @@ const specialists = require("./pageRoutes/specialist");
 const createCompany = require("./pageRoutes/createCompany");
 const buyPremium = require("./pageRoutes/buyPremium");
 const settingsSpecialist = require("./pageRoutes/settingsSpecialist");
+const moreInfo = require("./pageRoutes/moreInfo");
 const privacy = require("./pageRoutes/privacy-policy");
 const vacancies = require("./pageRoutes/vacancies");
 const EditCompany = require("./pageRoutes/EditCompany");
 const googleAuthLogin = require('./api/googleAuth/login');
+const googleAuthRegistration = require('./api/googleAuth/registration');
 
 app.set("view engine", "ejs");
 app.use(cookieParser());
@@ -50,6 +54,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "dist")));
 app.set("views", path.join(__dirname, "dist"));
 
+app.use(session({
+  secret: process.env.secretSession,
+  resave: false,
+  saveUninitialized: true,
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(
   "/api",
   (req, res, next) => {
@@ -65,7 +77,7 @@ app.use(
 app.get("/404", (req, res) => {
   res.render("pageNotFaund");
 });
-app.use(googleAuthLogin)
+app.use(googleAuthLogin,googleAuthRegistration)
 // app.set('view cache', true);
 app.use(
   buyPremium,
@@ -93,6 +105,7 @@ app.use(
   deleteAccount,
   createCompany,
   login,
+  moreInfo,
   registration,
   index,
   privacy,

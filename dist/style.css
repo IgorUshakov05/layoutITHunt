@@ -9573,3 +9573,6 @@ box-sizing:border-box;
     height: 200px;
     resize: none;
 }
+button.submitButton:focus {
+    border: 1px solid black;
+}

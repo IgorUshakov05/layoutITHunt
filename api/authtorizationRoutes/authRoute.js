@@ -1,12 +1,11 @@
 const { Router } = require("express");
 const router = Router();
 const registration = require("../authorization/registration");
+const registration_with_google = require("../authorization/registration_with_google.js");
 const login = require("../authorization/login");
 const post = require("../authorization/verefyPost");
 const acceptCodeFromPost = require("../authorization/acceptCodePost");
 const { body } = require("express-validator");
-const passport = require('passport');
-// const {passport} = require('../googleAuth/login')
 
 router.post(
   "/registration",
@@ -23,6 +22,16 @@ router.post(
   }),
   registration
 );
+
+router.post(
+  "/registration_with_google",
+  body("role").isIn(["worker", "creatorWork"]),
+  body("birthDay")
+    .isDate({ format: "DD-MM-YYYY" })
+    .withMessage("Введенное значение не является датой."),
+    registration_with_google
+);
+
 router.post(
   "/login",
   body("email").isEmail(),

@@ -46,7 +46,7 @@ async function Login(req, res) {
     console.log(email, password);
     let saveToken = newToken(refreshTokenCookie);
     if (!saveToken) {
-      return res.status(500).json({ error: "Ошибка регистрации" });
+      return res.status(500).json({ error: "Ошибка входа" });
     }
     let sliceToken = await refreshTokenCookie.slice(0, 6)+refreshTokenCookie.slice(-6)
 
@@ -56,12 +56,10 @@ async function Login(req, res) {
       .cookie("access", accessTokenCookie, {
         maxAge: 3600000, // 1 час
         httpOnly: true, // Куки доступны только для сервера
-        secure: true // Куки передаются только по HTTPS
       })
       .cookie("refresh", sliceToken, { 
         maxAge: 3600000 * 7, // 1 неделя
         httpOnly: true, 
-        secure: true 
       })
       .redirect('/');
   }

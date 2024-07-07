@@ -1,33 +1,30 @@
 const UserSchema = require("../../database/Schema/UserSchema");
 const CodeForPostRegistration = require("../../database/Schema/CodeForPostRegistration");
-let { v4 } = require("uuid");
-const createUser = async (data) => {
+const { v4 } = require("uuid");
+
+const createUser = async (data, isVerefy = false) => {
   try {
-    let { surname, name, birthDay, role, mail, password } = data;
-    let verefyMail = await CodeForPostRegistration.findOne({
-      mail,
-      active: true,
-    });
-    if (!verefyMail) {
-      return false;
+    const { surname, name, birthDay, role, mail, password, avatar } = data;
+
+    if (!isVerefy) {
+      const verefyMail = await CodeForPostRegistration.findOne({ mail, active: true });
+      if (!verefyMail) {
+        return false;
+      }
     }
-    let findUserMail = await UserSchema.findOne({ mail });
+
+    const findUserMail = await UserSchema.findOne({ mail });
     if (findUserMail) {
       return false;
     }
-    const day =
-      new Date().getDate() <= 9
-        ? "0" + new Date().getDate()
-        : new Date().getDate();
-    const month =
-      new Date().getMonth() <= 9
-        ? "0" + (new Date().getMonth() + 1)
-        : new Date().getMonth() + 1;
+
+    const day = new Date().getDate().toString().padStart(2, '0');
+    const month = (new Date().getMonth() + 1).toString().padStart(2, '0');
     const year = new Date().getFullYear();
 
-    const formattedDate = day + "-" + month + "-" + year;
+    const formattedDate = `${day}-${month}-${year}`;
 
-    const user = await new UserSchema({
+    const user = new UserSchema({
       id: v4(),
       surname,
       name,
@@ -36,13 +33,13 @@ const createUser = async (data) => {
       mail,
       dateRegistration: formattedDate,
       password,
+      avatar
     });
 
-    let result = await user.save();
-    console.log(result);
+    const result = await user.save();
     return result;
   } catch (e) {
-    console.log(e);
+    console.error(e);
     return false;
   }
 };
