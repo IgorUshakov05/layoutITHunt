@@ -149,6 +149,7 @@ header {
     width: 30px;
     display: none;
     justify-content: center;
+    cursor: pointer;
     flex-wrap: wrap;
     align-content: space-between
 }
@@ -1871,6 +1872,7 @@ letter-spacing: 0.15px;
     justify-content: space-between;
     align-items: end;
     position: absolute;
+    cursor: pointer;
     right: 10px;
 }
 .settingsOpen > div {

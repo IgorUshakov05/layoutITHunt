@@ -22,7 +22,7 @@ router.get("/:id",isAuthNotRequire, async (req, res, next) => {
     if (decodeAccess.userID === id) {
       if (result.role === "worker") {
         return res.render("ImProfessional.ejs", {
-          isLoggedIn: true,
+          isLoggedIn: result,
           id:result.id, 
           name: result.name,
           surname: result.surname,
@@ -37,7 +37,7 @@ router.get("/:id",isAuthNotRequire, async (req, res, next) => {
         });
       }
       return res.render("ImHR.ejs", {
-        isLoggedIn: true,
+        isLoggedIn: result,
         id:result.id, 
         name: result.name,
         surname: result.surname,
@@ -55,7 +55,7 @@ router.get("/:id",isAuthNotRequire, async (req, res, next) => {
 
   if (result.role === "worker") {
     return res.render("seeSideProf.ejs", {
-      isLoggedIn: true,
+      isLoggedIn: result,
       id:result.id, 
       name: result.name,
       surname: result.surname,
@@ -69,7 +69,7 @@ router.get("/:id",isAuthNotRequire, async (req, res, next) => {
     });
   } else {
     res.render("SeSideHr.ejs", {
-      isLoggedIn: true,
+      isLoggedIn: result,
       id:result.id, 
       name: result.name,
       surname: result.surname,

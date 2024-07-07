@@ -15,7 +15,7 @@
 
 </head>
 <body>
-<%- include('./header.ejs', { isLoggedIn, active: 'profile'}) %>
+    <%- include('./header.ejs', { isLoggedIn, active: 'profile', id}) %>
     <div class="blackBack" id="AboutPrime">
 <div class="youNeedIs">
     <div class="toBlocksToColumn">
@@ -173,7 +173,8 @@
             <div class="meiddleInfo">
                 <div class="descriptionInfo">
                     <p class="aboutMe">Обо мне</p>
-                    <p class="descript"><%=description||"Придумайте уникальное описание своего профиля"%></div>
+                    <p class="descript"><%=description||"Придумайте уникальное описание своего профиля"%></p>
+                    </div>
             </div>
             <div class="theerdSty">
                 <div class="city">

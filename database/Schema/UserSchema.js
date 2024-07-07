@@ -27,7 +27,7 @@ const schema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: 'Не ищу работу',
+    default: 'В поиске',
   },
   role: {
     type: String,
