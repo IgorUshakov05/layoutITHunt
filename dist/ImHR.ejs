@@ -84,7 +84,7 @@
                             <p class="userActive"><%=status %></p>
                         </div>
                     <div class="topInfoChild">
-                        <h2 style="margin-bottom: 4px" class="age"><%= age %> лет</h2>
+                        <h2 style="margin-bottom: 4px" class="age"><%=age%> <%=(age%10===0||age<20)?"лет":"года"%></h2>
                     </div>
                 </div>
             </div>
@@ -223,11 +223,11 @@
                 "gm": '<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 6.58325L13.4209 9.25134V15.0756H15.9263C16.512 15.0756 17 14.6038 17 14.0018V6.58325Z" fill="#4CAF50"/><path d="M2 6.58325L5.56287 9.26761V15.0918H3.07374C2.48806 15.0918 2 14.62 2 14.0181V6.58325Z" fill="#1E88E5"/><path d="M13.4207 4.7937L9.49989 7.73836L5.5791 4.7937V9.25136L9.49989 12.196L13.4207 9.25136V4.7937Z" fill="#E53935"/><path d="M2 5.18405V6.58317L5.56287 9.26753V4.7936L4.45659 3.96389C4.19629 3.76867 3.87091 3.65479 3.52927 3.65479C2.68329 3.65479 2 4.33808 2 5.18405Z" fill="#C62828"/><path d="M17 5.18405V6.58317L13.4209 9.25126V4.7936L14.5434 3.96389C14.8037 3.76867 15.1291 3.65479 15.4708 3.65479C16.3167 3.65479 17 4.33808 17 5.18405Z" fill="#FBC02D"/></svg>'
             } %>
             <% let contacts = [
-                // {type: "vk", url: "https://vk.com/feed"},
-                // {type: "teleg", url: "https://t.me/fullstack"},
-                // {type: "gm", url: "igorushakov111@gmail.com"},
-                // {type: "other", url : "awdawda.com"},
-                // {type: "tel", url: "89875584481"},
+                {type: "vk", url: "https://vk.com/feed"},
+                {type: "teleg", url: "https://t.me/fullstack"},
+                {type: "gm", url: "igorushakov111@gmail.com"},
+                {type: "other", url : "awdawda.com"},
+                {type: "tel", url: "89875584481"},
 
             ] %>
             <div class="lastInfo">

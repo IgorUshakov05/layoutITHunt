@@ -1690,6 +1690,7 @@ text-decoration-style: solid;
 .textInfoAbout {
     margin-left: 12px;
     display: flex;
+    overflow:auto;
     flex-direction: column;
     justify-content: space-between;
 }

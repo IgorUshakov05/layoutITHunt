@@ -62,7 +62,7 @@
                 </div>
             
                     <div class="topInfoChild">
-                        <h2 style="margin-bottom: 4px" class="age"><%age%> лет</h2>
+                        <h2 style="margin-bottom: 4px" class="age"><%=age%> <%=(age%10===0||age<20)?"лет":"года"%></h2>
                     </div>
                 </div>
             </div>
@@ -274,8 +274,8 @@
             
             <% if(!vacancy.length&&!fastWork.length) { %>
               <div class="boxNones">
-                <h1 class="nowTime">Самое время найти специалиста</h1>
-                <p class="createPleace">Создайте вакансию или заказ, который заинтересует специалиста</p>
+                <h1 class="nowTime">Вакансий и фаст-ворков нет</h1>
+                <p class="createPleace">Добавьте в избранное или напишите, чтобы не потерять</p>
                 <div class="imgNones">
                 <img src="/assets/pictures/yaroslavSercher.png" width="415" height="230" alt="">
                     </div>
