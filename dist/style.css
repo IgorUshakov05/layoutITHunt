@@ -1690,7 +1690,7 @@ text-decoration-style: solid;
 .textInfoAbout {
     margin-left: 12px;
     display: flex;
-    overflow:auto;
+    overflow:hidden;
     flex-direction: column;
     justify-content: space-between;
 }
@@ -1741,7 +1741,7 @@ letter-spacing: 0.15px;
     width: fit-content;
     display: flex;
     margin-top: 7px;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-around;
 }
 
@@ -5799,31 +5799,32 @@ letter-spacing: -0.095px;
 }
 
 .openMySelected,.openMySelectedPortfolio {
-border: 0.5px solid #404040;
-height: 100%;
-display: flex;
-justify-content: center;
-align-items: center;
-padding: 0 10px;
+    break-after: avoid;
+    border: 0.5px solid #404040;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    height: 100%;
+    display: flex;
 }
 .inputContact,.inputPortfolio {
-border: 0.5px solid #404040;
-border-left:0;
-outline: none;
-
-    height: 102%;
-    box-sizing:border-box;
+    border: 0.5px solid #404040;
+    border-left: 0;
+    outline: none;
+    height: 100%;
+    box-sizing: border-box;
     padding: 14px;
-    color: #000;    
+    color: #000;
     border-radius: 0 4px 4px 0;
-text-align: justify;
-font-family: Raleway;
-font-size: 13px;
-font-style: normal;
-font-weight: 300;
-line-height: 127.9%; /* 16.627px */
-letter-spacing: 0.13px;
-width: 100%;
+    text-align: justify;
+    font-family: Raleway;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 127.9%;
+    letter-spacing: 0.13px;
+    width: 100%;
 }
 .borderAll {
     border: 0.5px solid #404040;
@@ -5840,6 +5841,7 @@ border: 0.5px solid #404040;
     display: flex;
     align-items: center;
     border-right:0;
+    box-sizing: border-box;
 
     justify-content: center;
 }

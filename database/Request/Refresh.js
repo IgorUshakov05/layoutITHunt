@@ -35,6 +35,27 @@ const searchToken = async (token) => {
   }
 };
 
+const deleteTokenCookie = async (token) => {
+  try {
+    const firstSix = token.slice(0, 6);
+    const lastSix = token.slice(-6);
+
+    const searchToken = await modeltoken.deleteOne({
+      token: { $regex: `${firstSix}.*${lastSix}`, $options: "i" },
+    });
+
+    // Нет необходимости вызывать toArray()
+
+    if (searchToken) {
+      return searchToken.token;
+    }
+
+    return false;
+  } catch (e) {
+    return false;
+  }
+}
+
 const deleteToken = async (id) => {
   try {
     let deleteToken = modeltoken.deleteOne({ id });
@@ -46,4 +67,4 @@ const deleteToken = async (id) => {
   }
 };
 
-module.exports = { newToken, searchToken,deleteToken };
+module.exports = { newToken, searchToken,deleteToken,deleteTokenCookie };

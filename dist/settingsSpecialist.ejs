@@ -203,7 +203,7 @@
                             </svg>
                             <input class="setPhotoInput" type="file" name="image1" accept="image/*" onchange="previewImage(this)">
                         </div>
-                        <img id="preview" style="border-radius: 100%;" class="photoUsera" width="120" height="120" src="" >
+                        <img id="preview" style="border-radius: 100%;" class="photoUsera" width="120" height="120" src="<%=avatar%>" >
                     </div>
                     <div class="textInfoAbout">
                         <div style="margin-top: 10px" class="topInfoChild">
@@ -230,11 +230,11 @@
                         <div class="Rows">
                             <div class="inputData">
                                 <label for="name">Имя</label>
-                                <input class="inputDatas" placeholder="Игорь" type="text" name="name" id="name">
+                                <input class="inputDatas" placeholder="<%=name%>" type="text" name="name" id="name">
                             </div>
                             <div class="inputData">
                                 <label for="surname">Фамилия</label>
-                                <input class="inputDatas" placeholder="Ушаков" type="text" name="surname" id="surname">
+                                <input class="inputDatas" placeholder="<%=surname%>" type="text" name="surname" id="surname">
                             </div>
                         </div>
                         <div class="Rows">
@@ -391,7 +391,7 @@
                 </div>
             </div>
             <ul class="settingsMenu">
-                <li><a href="/profesionalMe">Перейти в профиль</a></li>
+                <li><a href="/<%=id%>">Перейти в профиль</a></li>
                 <li><a href="/delete">Удалить аккаунт</a></li>
                 <li><a href="/login">Выйти из аккаунта</a></li>
             </ul>

@@ -12,7 +12,6 @@ const index = require("./pageRoutes/indexPage");
 const login = require("./pageRoutes/login");
 const registration = require("./pageRoutes/registration");
 const User = require("./pageRoutes/User");
-const settingsHR = require("./pageRoutes/settingsHR");
 const chatCompany = require("./pageRoutes/companyChat");
 const createVacancy = require("./pageRoutes/createVacancy");
 const addCompany = require("./pageRoutes/addCompany");
@@ -35,7 +34,8 @@ const deleteAccountComplite = require("./pageRoutes/deleteAccountComplite");
 const specialists = require("./pageRoutes/specialist");
 const createCompany = require("./pageRoutes/createCompany");
 const buyPremium = require("./pageRoutes/buyPremium");
-const settingsSpecialist = require("./pageRoutes/settingsSpecialist");
+const setting = require("./pageRoutes/Setting");
+const setSetting = require('./api/setting/routes')
 const moreInfo = require("./pageRoutes/moreInfo");
 const privacy = require("./pageRoutes/privacy-policy");
 const vacancies = require("./pageRoutes/vacancies");
@@ -68,7 +68,8 @@ app.use(
     next();
   },
   api,
-  apiSkill
+  apiSkill,
+  setSetting
 );
 
 app.get("/404", (req, res) => {
@@ -91,11 +92,10 @@ app.use(
   addCompany,
   createVacancy,
   createFastWork,
-  settingsHR,
+  setting,
   company,
   chat,
   userChat,
-  settingsSpecialist,
   deleteAccount,
   createCompany,
   login,

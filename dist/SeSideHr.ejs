@@ -58,7 +58,7 @@
                         <circle cx="3.76701" cy="4.17302" r="3.49455" fill="#00AE1C"/>
                     </svg>
 
-                    <p class="userActive">Расширяю связи</p>
+                    <p class="userActive"><%-status%></p>
                 </div>
             
                     <div class="topInfoChild">
@@ -66,7 +66,12 @@
                     </div>
                 </div>
             </div>
-<% let company = {url: '/company', pic: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/800px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png', title: "MTC Group"} %>
+<% let company = 
+null
+%>
+<!-- // {
+//     url: '/company', pic: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/800px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png', title: "MTC Group"
+// } -->
             <div class="meiddleInfo descriptionInfo">
                 <% if(company) { %>
                 <a href="<%= company.url %>">
@@ -78,12 +83,14 @@
                     </div>
                     </a>
                     <% } %>
-                    
+                    <%if(description) {%>
                 <div class="descriptionInfo">
                     <p class="aboutMe">Обо мне</p>
-                    <p class="descript"><%=description||"Придумайте уникальное описание своего профиля"%></p>
+                    <p class="descript"><%=description||"Описание отсутствует"%></p>
                 </div>
+                <%}%>
             </div>
+            <%if(city) {%>
             <div class="theerdSty">
                 <div class="city">
 <div class="svgCity"><svg width="14" height="19" viewBox="0 0 14 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -91,9 +98,10 @@
         <path d="M7 10.5C8.933 10.5 10.5 8.93303 10.5 7.00003C10.5 5.06703 8.933 3.50003 7 3.50003C5.067 3.50003 3.5 5.06703 3.5 7.00003C3.5 8.93303 5.067 10.5 7 10.5Z" fill="white"/>
     </svg>
 </div>
-                    <p>Поселок Сельский</p>
+                    <p><%=city%></p>
                 </div>
             </div>
+            <%}%>
             <% let contantsPic = {
                 "vk":'<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1330_2403)"><path d="M0 9.12C0 4.82078 0 2.67119 1.33559 1.33559C2.67119 0 4.82078 0 9.12 0H9.88C14.1792 0 16.3288 0 17.6644 1.33559C19 2.67119 19 4.82078 19 9.12V9.88C19 14.1792 19 16.3288 17.6644 17.6644C16.3288 19 14.1792 19 9.88 19H9.12C4.82078 19 2.67119 19 1.33559 17.6644C0 16.3288 0 14.1792 0 9.88V9.12Z" fill="#0077FF"/><path d="M10.1093 13.688C5.77893 13.688 3.30897 10.7192 3.20605 5.77924H5.37522C5.44647 9.40507 7.0456 10.9409 8.31227 11.2576V5.77924H10.3548V8.90632C11.6057 8.77174 12.9197 7.34674 13.363 5.77924H15.4056C15.0651 7.7109 13.6401 9.1359 12.6268 9.72174C13.6401 10.1967 15.2631 11.4397 15.8806 13.688H13.6322C13.1493 12.1838 11.9461 11.0201 10.3548 10.8617V13.688H10.1093Z" fill="white"/></g><defs><clipPath id="clip0_1330_2403"><rect width="19" height="19" rx="2" fill="white"/></clipPath></defs></svg>',
                 "teleg":'<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 19C14.7467 19 19 14.7467 19 9.5C19 4.25329 14.7467 0 9.5 0C4.25329 0 0 4.25329 0 9.5C0 14.7467 4.25329 19 9.5 19Z" fill="url(#paint0_linear_1330_2392)"/><path fill-rule="evenodd" clip-rule="evenodd" d="M4.30006 9.39971C7.0695 8.19311 8.91623 7.39764 9.84025 7.01331C12.4785 5.91597 13.0267 5.72536 13.384 5.71906C13.4626 5.71768 13.6383 5.73715 13.7521 5.82951C13.8483 5.9075 13.8747 6.01284 13.8874 6.08678C13.9 6.16072 13.9158 6.32916 13.9032 6.46077C13.7603 7.96294 13.1416 11.6083 12.8269 13.2908C12.6938 14.0027 12.4315 14.2414 12.1777 14.2647C11.626 14.3155 11.2071 13.9002 10.6728 13.5499C9.83663 13.0018 9.36428 12.6606 8.55267 12.1258C7.61473 11.5077 8.22276 11.168 8.75729 10.6128C8.89718 10.4675 11.3279 8.25656 11.375 8.056C11.3808 8.03091 11.3863 7.93741 11.3308 7.88804C11.2752 7.83867 11.1932 7.85555 11.1341 7.86898C11.0502 7.88801 9.71448 8.77087 7.1269 10.5176C6.74776 10.7779 6.40435 10.9047 6.09666 10.8981C5.75747 10.8908 5.10498 10.7063 4.61993 10.5486C4.02499 10.3553 3.55215 10.253 3.59332 9.92457C3.61477 9.7535 3.85035 9.57854 4.30006 9.39971Z" fill="white"/><defs><linearGradient id="paint0_linear_1330_2392" x1="9.5" y1="0" x2="9.5" y2="18.8591" gradientUnits="userSpaceOnUse"><stop stop-color="#2AABEE"/><stop offset="1" stop-color="#229ED9"/></linearGradient></defs></svg>',
@@ -102,13 +110,14 @@
                 "gm": '<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 6.58325L13.4209 9.25134V15.0756H15.9263C16.512 15.0756 17 14.6038 17 14.0018V6.58325Z" fill="#4CAF50"/><path d="M2 6.58325L5.56287 9.26761V15.0918H3.07374C2.48806 15.0918 2 14.62 2 14.0181V6.58325Z" fill="#1E88E5"/><path d="M13.4207 4.7937L9.49989 7.73836L5.5791 4.7937V9.25136L9.49989 12.196L13.4207 9.25136V4.7937Z" fill="#E53935"/><path d="M2 5.18405V6.58317L5.56287 9.26753V4.7936L4.45659 3.96389C4.19629 3.76867 3.87091 3.65479 3.52927 3.65479C2.68329 3.65479 2 4.33808 2 5.18405Z" fill="#C62828"/><path d="M17 5.18405V6.58317L13.4209 9.25126V4.7936L14.5434 3.96389C14.8037 3.76867 15.1291 3.65479 15.4708 3.65479C16.3167 3.65479 17 4.33808 17 5.18405Z" fill="#FBC02D"/></svg>'
             } %>
             <% let contacts = [
-                {type: "vk", url: "https://vk.com/feed"},
-                {type: "teleg", url: "https://tme.com"},
-                {type: "gm", url: "igorushakov111@gmail.com"},
-                {type: "other", url : "awdawda.com"},
-                {type: "tel", url: "89875584481"},
+                // {type: "vk", url: "https://vk.com/feed"},
+                // {type: "teleg", url: "https://tme.com"},
+                // {type: "gm", url: "igorushakov111@gmail.com"},
+                // {type: "other", url : "awdawda.com"},
+                // {type: "tel", url: "89875584481"},
 
             ] %>
+            <%if(contacts.length) {%>
             <div class="lastInfo">
                 <div class="contacts contactsHR">
                     <p class="lastText">Контакты</p>
@@ -127,6 +136,7 @@
                     </ul>
                 </div>
             </div>
+            <%}%>
             </div>   
         </div>
         <% let fastWork = [
