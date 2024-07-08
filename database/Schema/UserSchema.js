@@ -48,7 +48,7 @@ const schema = new mongoose.Schema({
   },
   premium: {
     type: String,
-    default: null,
+    default: "",
   },
   description: {
     type: String,

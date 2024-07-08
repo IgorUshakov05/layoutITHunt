@@ -16,14 +16,14 @@ router.get("/:id",isAuthNotRequire, async (req, res, next) => {
     return res.render("pageNotFaund");
   }
   console.log(result);
+  let decodeAccess = await decodeAccessToken(access);
   const age = calculateAge(result.birthDay);
   if (access) {
-    let decodeAccess = await decodeAccessToken(access);
     if (decodeAccess.userID === id) {
       if (result.role === "worker") {
         return res.render("ImProfessional.ejs", {
-          isLoggedIn: result,
-          id:result.id, 
+          isLoggedIn: decodeAccess,
+          id:decodeAccess.userID, 
           name: result.name,
           surname: result.surname,
           job: result.job,
@@ -32,21 +32,24 @@ router.get("/:id",isAuthNotRequire, async (req, res, next) => {
           city: result.city,
           status: result.status,
           avatar:result.avatar,
+      premium:result.premium,
+
 
           description: result.description,
         });
       }
       return res.render("ImHR.ejs", {
-        isLoggedIn: result,
-        id:result.id, 
+        isLoggedIn: decodeAccess,
+        id:decodeAccess.userID, 
         name: result.name,
         surname: result.surname,
         job: result.job,
         title: "Мой профиль",
         avatar:result.avatar,
-
         age,
         city: result.city,
+      premium:result.premium,
+
         status: result.status,
         description: result.description,
       });
@@ -55,8 +58,8 @@ router.get("/:id",isAuthNotRequire, async (req, res, next) => {
 
   if (result.role === "worker") {
     return res.render("seeSideProf.ejs", {
-      isLoggedIn: result,
-      id:result.id, 
+      isLoggedIn: decodeAccess,
+      id:decodeAccess.userID, 
       name: result.name,
       surname: result.surname,
       job: result.job,
@@ -64,18 +67,21 @@ router.get("/:id",isAuthNotRequire, async (req, res, next) => {
       title: `${result.surname} ${result.name}`,
       age,
       city: result.city,
+      premium:result.premium,
+
       status: result.status,
       description: result.description,
     });
   } else {
     res.render("SeSideHr.ejs", {
-      isLoggedIn: result,
-      id:result.id, 
+      isLoggedIn: decodeAccess,
+      id:decodeAccess.userID, 
       name: result.name,
       surname: result.surname,
       job: result.job,
       title: `${result.surname} ${result.name}`,
       age,
+      premium:result.premium,
       city: result.city,
       avatar:result.avatar,
 

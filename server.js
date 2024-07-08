@@ -10,9 +10,6 @@ const api = require("./api/authtorizationRoutes/authRoute");
 const apiSkill = require("./api/Skills Offered/skillsOffered");
 const index = require("./pageRoutes/indexPage");
 const login = require("./pageRoutes/login");
-const myprofileProfessional = require("./pageRoutes/MeProfile");
-const myprofileHR = require("./pageRoutes/MeHR");
-const HisprofileHR = require("./pageRoutes/SeeSideHr");
 const registration = require("./pageRoutes/registration");
 const User = require("./pageRoutes/User");
 const settingsHR = require("./pageRoutes/settingsHR");
@@ -85,7 +82,6 @@ app.use(
   deleteAccountComplite,
   court,
   chatCompany,
-  myprofileProfessional,
   inboxOther,
   findCompany,
   inboxFastWork,
@@ -95,9 +91,7 @@ app.use(
   addCompany,
   createVacancy,
   createFastWork,
-  HisprofileHR,
   settingsHR,
-  myprofileHR,
   company,
   chat,
   userChat,

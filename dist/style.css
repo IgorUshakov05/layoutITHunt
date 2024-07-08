@@ -1709,7 +1709,6 @@ letter-spacing: 0.15px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    max-width: 98%;
     text-overflow: ellipsis;
     letter-spacing: 0.16px;
     white-space: nowrap;
@@ -1774,8 +1773,11 @@ letter-spacing: 0.15px;
 }
 .lastInfo {
     display: flex;
-    margin-top: 20px;
     justify-content: space-between;
+}
+.contacts,.portfolio {
+    margin-top: 20px;
+
 }
 .lastText {
     font-family: Raleway;

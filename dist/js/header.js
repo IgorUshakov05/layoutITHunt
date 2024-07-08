@@ -110,7 +110,7 @@ $(document).ready(function() {
         $('.allInfoProfile').toggle(); // This line toggles the visibility of elements with the class .allInfoProfile
         console.log("hello");
         $('.settingsMenu').toggle()
-        $('body').css('overflow', 'scroll')
+        // $('body').css('overflow', 'scroll')
         $('.settingsOpen').toggleClass('rotate90'); // This line toggles the class rotate on elements with the class settingsOpen
     });
     
