@@ -7345,6 +7345,7 @@ margin-top: 20px;
     position: absolute;
     right: 0;
     left:0;
+    display: none;
     top:100%;
     background: #FFF;
     padding: 0 17px;
@@ -7379,6 +7380,9 @@ font-weight: 400;
 line-height: normal;
 letter-spacing: 0.12px;
 }
+.listAddingSkill {
+    margin-left: -5px !important;
+}
 
 .listAddingSkillItem:hover {
     color: var(--indexColor);
@@ -7391,6 +7395,7 @@ letter-spacing: 0.12px;
 .listAddingSkillItem {
     display: inline-flex;
 padding: 10px 15px;
+margin-left:5px;
 cursor: pointer;
 justify-content: center;
 position: relative;

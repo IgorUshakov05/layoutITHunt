@@ -1,8 +1,12 @@
 const mongoose = require("mongoose");
-// const contactSchema = new mongoose.Schema({
-//     type: { type: String, default: 'other' },
-//     url: { type: String, required: true },
-//   });
+const contactSchema = new mongoose.Schema({
+    type: { type: String, default: '' },
+    url: { type: String, required: true },
+  });
+const portfolioSchema = new mongoose.Schema({
+    type: { type: String, default: '' },
+    url: { type: String, required: true },
+  });
 const schema = new mongoose.Schema({
   id: {
     type: String,
@@ -54,11 +58,8 @@ const schema = new mongoose.Schema({
     type: String,
     default: '',
   },
-  // contacts: [contactSchema],
-  portfolio: {
-    type: Object,
-    default: [],
-  },
+  contacts: [contactSchema],
+  portfolio: [portfolioSchema],
   city: {
     type: String,
     default: '',

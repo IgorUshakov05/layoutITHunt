@@ -16,7 +16,7 @@ router.get("/setting",isAuthNotRequire, async (req, res, next) => {
   let result = await searchUserId(decodeAccess.userID);
   console.log(result);
   if (result === null) {
-    return res.render("/");
+    return res.redirect("/");
   }
   console.log(result);
   const age = calculateAge(result.birthDay);
@@ -28,6 +28,8 @@ router.get("/setting",isAuthNotRequire, async (req, res, next) => {
           name: result.name,
           surname: result.surname,
           job: result.job,
+          contacts:result.contacts,
+          portfolios:result.portfolio,
           title: "Мой профиль",
           age,
           city: result.city,
@@ -46,6 +48,7 @@ router.get("/setting",isAuthNotRequire, async (req, res, next) => {
         avatar:result.avatar,
         age,
         city: result.city,
+        contacts:result.contacts,
         status: result.status,
         description: result.description,
       });

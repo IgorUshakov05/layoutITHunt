@@ -20,6 +20,7 @@ const fastWork = require("./pageRoutes/fastWork");
 const fastWorkItem = require("./pageRoutes/fastworkItem");
 const chat = require("./pageRoutes/chat");
 const inbox = require("./pageRoutes/inbox");
+const skills = require('./api/skills/routes');
 const inboxOther = require("./pageRoutes/inboxOther");
 const findCompany = require("./pageRoutes/findCompany");
 const inboxCompany = require("./pageRoutes/inboxCompany");
@@ -62,14 +63,14 @@ app.use(passport.session());
 app.use(
   "/api",
   (req, res, next) => {
-    console.log(req.headers.authorization);
     if (req.headers.authorization !== "augwod89h1h9awdh9py0y82hjd")
       return res.status(401).json({ message: "Не авторизован" });
     next();
   },
   api,
   apiSkill,
-  setSetting
+  setSetting,
+  skills
 );
 
 app.get("/404", (req, res) => {

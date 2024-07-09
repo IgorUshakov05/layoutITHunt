@@ -8,7 +8,7 @@ const isAuthNotRequire = async (req, res, next) => {
   let refresh = req.cookies.refresh;
   let access = req.cookies.access;
   console.log(access, refresh);
-  if (!access || !refresh) {
+  if (!access && !refresh) {
     return next();
   }
   let decodeAccess = await decodeAccessToken(access);
