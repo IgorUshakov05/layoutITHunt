@@ -162,24 +162,13 @@
             <div class="mySkills">
                 <span class="myVacancyText">Навыки</span>
                 <div class="skillsInProfile">
+                    <%if(skills) {%>
                     <ul class="skillsInProfileList">
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>awd</li>
-                        <li>Lorem ipsum dolor sit amet consectetur</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>Lorem ipsum dolor sit amet.</li>
-                        <li>awd</li>
-                        <li>awd</li>
+                        <% skills.forEach(function(skill) { %>
+                        <li><%=skill.title%></li>
+                    <%})%>
                     </ul>
+                    <%}%>
                 </div>
             </div>
             <div class="mySkills d-none">

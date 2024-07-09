@@ -289,58 +289,23 @@
                 <dialog id="addSkill" class="addExpiriens" close>
                 <span class="myVacancyText">Навыки</span>
                 <p class="descriptionAddExiriens">Добавьте навыки которыми вы обладаете. Вписывая навык, выберете его из списка</p>
-<span class="descriptionAddExiriens">Если не нашли нужный навык, <a href="" type="" style="color:#5412E0; font-size: 14px;">напишите нам</a> и мы его добавим</span>
+<span class="descriptionAddExiriens">Если не нашли нужный навык, <a href="mailto:team@webhunt.ru" target="_blank" type="email" style="color:#5412E0; font-size: 14px;">напишите нам</a> и мы его добавим</span>
                 <div class="topInputs w-fitContent">
                     <input placeholder="JavaScript" type="text" name="jobTitle" id="findSkill" class="inputContact borderAll">    
                     <div class="selectSkills">
                         <ul class="listSelectSkills">
-                            <li class="selectSkill">JavaSctipt</li>
-                            <li class="selectSkill">HTML</li>
-                            <li class="selectSkill">CSS</li>
+                          
                         </ul>
                     </div>
                 </div>
                 <div id="addingValue" class="addingValue">
                     <p class="ligthText">Добавленные</p>
                         <ul class="listAddingSkill">
-                            <li class="listAddingSkillItem">JavaSctipt</li>
-                            <li class="listAddingSkillItem">HTML</li>
-                            <li class="listAddingSkillItem">CSS</li>
-                            <li class="listAddingSkillItem">JavaSctipt</li>
-                            <li class="listAddingSkillItem">HTML</li>
-                            <li class="listAddingSkillItem">CSS</li>
-                            <li class="listAddingSkillItem">JavaSctipt</li>
-                            <li class="listAddingSkillItem">HTML</li>
-                            <li class="listAddingSkillItem">CSS</li>
-                            <li class="listAddingSkillItem">JavaSctipt</li>
-                            <li class="listAddingSkillItem">HTML</li>
-                            <li class="listAddingSkillItem">CSS</li>
-                            <li class="listAddingSkillItem">JavaSctipt</li>
-                            <li class="listAddingSkillItem">HTML</li>
-                            <li class="listAddingSkillItem">CSS</li>
-                            <li class="listAddingSkillItem">JavaSctipt</li>
-                            <li class="listAddingSkillItem">HTML</li>
-                            <li class="listAddingSkillItem">CSS</li>
-                            <li class="listAddingSkillItem">JavaSctipt</li>
-                            <li class="listAddingSkillItem">HTML</li>
-                            <li class="listAddingSkillItem">CSS</li>
-                            <li class="listAddingSkillItem">JavaSctipt</li>
-                            <li class="listAddingSkillItem">HTML</li>
-                            <li class="listAddingSkillItem">CSS</li>
-                            <li class="listAddingSkillItem">JavaSctipt</li>
-                            <li class="listAddingSkillItem">HTML</li>
-                            <li class="listAddingSkillItem">CSS</li>
-                            <li class="listAddingSkillItem">JavaSctipt</li>
-                            <li class="listAddingSkillItem">HTML</li>
-                            <li class="listAddingSkillItem">CSS</li>
-
-
-
                         </ul>
                     </div>
                 <div class="canelsButton">
                     <button id="closeSkillModal" class="canel">Отмена</button>
-                    <button class="sendJobTitle">Добавить</button>
+                    <button class="sendJobTitle" id="sendSkillsToProfile">Добавить</button>
                 </div>
                 </dialog>
                 <dialog id="addEuctionModal" class="addExpiriens modalEdu" close>
@@ -372,24 +337,13 @@
             <div class="mySkills">
                 <span class="myVacancyText">Мои навыки <span class="removeMySkill">Удалить</span></span>
                 <div class="skillsInProfile">
+                    <%if(skills) {%>
                     <ul class="skillsInProfileList">
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>awd</li>
-                        <li>Lorem ipsum dolor sit amet consectetur</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>Lorem ipsum dolor sit amet.</li>
-                        <li>awd</li>
-                        <li>awd</li>
+                        <% skills.forEach(function(skill) { %>
+                        <li><%=skill.title%></li>
+                    <%})%>
                     </ul>
+                    <%}%>
                 </div>
                 <div class="addSkill">
                     <button class="addSkillButton" id="addSkillButton">
@@ -405,28 +359,17 @@
                     <p class="myVacancyText">Мои навыки</p>
                     <div class="grup ">
                         <span class="canelSkill" id="canelSkill">Закрыть</span>
-                        <span class="save">Сохранить</span>
+                        <span id="save" class="save">Сохранить</span>
                     </div>
                     </div>
                 <div class="skillsInProfile">
+                    <%if(skills) {%>
                     <ul class="skillsInProfileList canelSkillDelete">
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>awd</li>
-                        <li>Lorem ipsum dolor sit amet consectetur</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>awd</li>
-                        <li>Lorem ipsum dolor sit amet.</li>
-                        <li>awd</li>
-                        <li>awd</li>
+                        <% skills.forEach(function(skill) { %>
+                        <li><%=skill.title%></li>
+                    <%})%>
                     </ul>
+                    <%}%>
                 </div>
             </div>
 

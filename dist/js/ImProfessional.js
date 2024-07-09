@@ -2,10 +2,75 @@ $(".removeMySkill").on("click", () => {
   $(".mySkills").hide();
   $(".d-none").show();
 });
+
+const sendSkillsToProfile = document.getElementById("sendSkillsToProfile");
+let deletes = [];
+$(document).on("click", ".canelSkillDelete > li", function (e) {
+  console.log(this.innerText, deletes);
+  deletes.push(this.innerText);
+  this.remove();
+});
+
+
+let save = document.getElementById('save')
+save.addEventListener('click', () => {
+  if(!deletes.length) {
+    return false
+  }
+
+  fetch(`/api/setSkills`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "augwod89h1h9awdh9py0y82hjd",
+    },
+    body: JSON.stringify({ skills:deletes }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      if (data) {
+        window.location.reload();
+      }
+      return data;
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+})
+sendSkillsToProfile.addEventListener("click", () => {
+  fetch(`/api/setSkills`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "augwod89h1h9awdh9py0y82hjd",
+    },
+    body: JSON.stringify({ skills: dataUser.userSkills }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      if (data) {
+        window.location.reload();
+      }
+      return data;
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+});
 let findSkill = document.getElementById("findSkill");
 $(".canelSkill").on("click", () => {
   $(".mySkills").show();
   $(".d-none").hide();
+  while (deletes.length > 0) {
+    const item = deletes.shift();
+    $('.canelSkillDelete').append(`<li>${item}</li>`);
+}
 });
 let dataUser = {
   userSkills: [],
@@ -38,6 +103,9 @@ findSkill.addEventListener("input", async function (e) {
 
       // Обновляем UI, используя полученные данные
       // Например:
+      if (!data.items) {
+        return;
+      }
       data.items.map((item) => {
         if (!skills.includes(item)) {
           skills.push(item);
@@ -66,16 +134,13 @@ $(document).on("click", ".selectSkill", function (e) {
     window.location.reload();
     return false;
   }
-  const uniqueSkills = dataUser.userSkills.reduce((unique, item) => {
-    if (!unique.includes(item.title)) {
-      unique.push(item.title);
-    }
-    return unique;
-  }, []);
-  
-  
-  dataUser.userSkills.push({title:this.innerText})
-  console.log(uniqueSkills);
+
+  dataUser.userSkills.push({ title: this.innerText });
+
+  dataUser.userSkills = Array.from(
+    new Set(dataUser.userSkills.map((item) => JSON.stringify(item)))
+  ).map((item) => JSON.parse(item));
+
   $(".selectSkills").hide();
   $(".listSelectSkills").hide();
   $(".listAddingSkill").html(
@@ -90,9 +155,13 @@ $(document).on("click", ".listAddingSkillItem", function (e) {
   const skillTitle = $(this).text(); // Получаем название навыка
   console.log(skillTitle);
   dataUser.userSkills = dataUser.userSkills.filter((item) => {
-      return item.title !== skillTitle; // Фильтрация списка навыков
+    return item.title !== skillTitle; // Фильтрация списка навыков
   });
-  $('.listAddingSkill').html(dataUser.userSkills.map(item => `<li class="listAddingSkillItem">${item.title}</li>`).join('')); // Обновляем список навыков
+  $(".listAddingSkill").html(
+    dataUser.userSkills
+      .map((item) => `<li class="listAddingSkillItem">${item.title}</li>`)
+      .join("")
+  ); // Обновляем список навыков
 });
 
 $(".topInfoExpiriensItem").on("click", function () {
@@ -134,11 +203,15 @@ const addSkill = document.getElementById("addSkill");
 
 closeSkillModal.addEventListener("click", () => {
   addSkill.close();
+  dataUser.userSkills = [];
+  $(".youNeedIs").show();
+  $(".listAddingSkill").html("");
   $(".blackBack").css("display", "none");
 });
 
 addSkillButton.addEventListener("click", () => {
   $(".blackBack").css("display", "block");
+  $(".youNeedIs").hide();
   addSkill.show();
 });
 

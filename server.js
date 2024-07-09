@@ -70,7 +70,7 @@ app.use(
   api,
   apiSkill,
   setSetting,
-  skills
+  skills,
 );
 
 app.get("/404", (req, res) => {

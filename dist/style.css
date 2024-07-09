@@ -7398,6 +7398,7 @@ padding: 10px 15px;
 margin-left:5px;
 cursor: pointer;
 justify-content: center;
+user-select:none;
 position: relative;
 align-items: center;
 gap: 10px;

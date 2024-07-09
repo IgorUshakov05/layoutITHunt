@@ -1,4 +1,3 @@
-const SkillScheme = require('../../database/Schema/Skills');
 const { v4 } = require('uuid');
 
 const sendSkill = async (title) => {

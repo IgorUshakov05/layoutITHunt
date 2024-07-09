@@ -1,12 +1,24 @@
 const mongoose = require("mongoose");
 const contactSchema = new mongoose.Schema({
-    type: { type: String, default: '' },
-    url: { type: String, required: true },
-  });
+  type: { type: String, default: "" },
+  url: { type: String, required: true },
+});
 const portfolioSchema = new mongoose.Schema({
-    type: { type: String, default: '' },
-    url: { type: String, required: true },
-  });
+  type: { type: String, default: "" },
+  url: { type: String, required: true },
+});
+const skillsScheme = new mongoose.Schema({
+  id: {
+    type: String,
+    required: true,
+    unique: false,
+  },
+  title: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+});
 const schema = new mongoose.Schema({
   id: {
     type: String,
@@ -31,7 +43,7 @@ const schema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: 'Ищу работу',
+    default: "Ищу работу",
   },
   role: {
     type: String,
@@ -44,7 +56,7 @@ const schema = new mongoose.Schema({
   },
   job: {
     type: String,
-    default: ''
+    default: "",
   },
   password: {
     type: String,
@@ -56,21 +68,18 @@ const schema = new mongoose.Schema({
   },
   description: {
     type: String,
-    default: '',
+    default: "",
   },
   contacts: [contactSchema],
   portfolio: [portfolioSchema],
   city: {
     type: String,
-    default: '',
+    default: "",
   },
-  skills: {
-    type: Object,
-    default: [],
-  },
+  skills: [skillsScheme],
   avatar: {
     type: String,
-    default: './assets/pictures/defaultAvatar.png',
+    default: "./assets/pictures/defaultAvatar.png",
   },
 });
 module.exports = mongoose.model("User", schema);
