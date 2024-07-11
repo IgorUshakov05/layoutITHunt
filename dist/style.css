@@ -2040,7 +2040,7 @@ letter-spacing: 0.15px;
     align-items: center;
 }
 .allInfoProfile {
-    overflow:hidden;
+    /* overflow:hidden; */
     margin-top: 15px;
 }
 .setInputPhotoText {
@@ -2214,7 +2214,7 @@ bottom: 0;
 .citys {
     z-index: 6;
 }
-.CitisGet {
+.CitisGet,.CityGet  {
     background: white;
     margin-top: 5px;
     display: none;
@@ -2222,23 +2222,25 @@ bottom: 0;
     position: relative;
     z-index: 123;
     border: 0.5px solid #B7B7B7;
-    padding: 5px;
+    padding: 5px 0;
     font-size: 12px;
 }
-.CitisGet > ul > li > * {
+.CitisGet > ul > li > *,.CityGet > ul > li>* {
     cursor:pointer;
 }
 
 
-.CitisGet > ul > li:not(:first-child) {
+.CitisGet > ul > li:not(:first-child),.CityGet > ul > li:not(:first-child) {
     margin-top: 6px;
 }
-.CitisGet > ul > li {
-    padding: 5px;
+.CitisGet > ul > li,.CityGet > ul > li {
+    padding: 5px 10px;
     display: none;
 }
-.CitisGet > ul > li:hover {
-    background-color: rgba(0, 0, 0, 0.195);
+.CityGet > ul > li {
+    display: block;
+}
+.CitisGet > ul > li:hover,.CityGet > ul > li:hover {
     color: rgba(84, 18, 224);
 }
 .buttonsRemove {

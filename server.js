@@ -31,6 +31,7 @@ const company = require("./pageRoutes/company");
 const vacancia = require("./pageRoutes/vacansyaItem");
 const userChat = require("./pageRoutes/privateChat");
 const deleteAccount = require("./pageRoutes/deleteAccount");
+const city = require('./api/city/routes')
 const deleteAccountComplite = require("./pageRoutes/deleteAccountComplite");
 const specialists = require("./pageRoutes/specialist");
 const createCompany = require("./pageRoutes/createCompany");
@@ -71,6 +72,7 @@ app.use(
   apiSkill,
   setSetting,
   skills,
+  city
 );
 
 app.get("/404", (req, res) => {

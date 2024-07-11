@@ -1,3 +1,163 @@
+let address = document.getElementById("address");
+const CityGet = document.getElementById("CityGet");
+let timerId;
+let cityOfServer = [];
+
+address.addEventListener("input", function (e) {
+  let value = e.target.value.trim(); // Убираем пробелы в начале и конце строки
+  if (value.length === 0) {
+    cityOfServer = []; // Очищаем массив при пустом значении
+    displayCities([]); // Отображаем пустой список
+    return;
+  }
+  if (value.length >= 3) {
+    const searchTerm = value.toLowerCase();
+    const filteredCities = cityOfServer.filter((city) =>
+      city.toLowerCase().includes(searchTerm)
+    );
+    displayCities(filteredCities);
+    return;
+  }
+
+  // Если запущен таймер, очищаем его
+  if (timerId) {
+    clearTimeout(timerId);
+  }
+
+  // Запускаем таймер для задержки запроса
+  timerId = setTimeout(() => {
+    const ul = document.getElementById("listCity");
+    // Очищаем предыдущие элементы списка
+    ul.innerHTMl = "";
+    CityGet.style.display = "none";
+    fetch("/api/areas", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "augwod89h1h9awdh9py0y82hjd",
+      },
+      body: JSON.stringify({ city: value }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        CityGet.style.display = "block";
+        const ul = document.getElementById("listCity");
+        // Очищаем предыдущие элементы списка
+        while (ul.firstChild) {
+          ul.removeChild(ul.firstChild);
+        }
+        // Обновляем массив cityOfServer с новыми данными
+        cityOfServer = data.path;
+
+        // Отображаем полученные города
+        displayCities(cityOfServer);
+      })
+      .catch((error) => {
+        CityGet.style.display = "none";
+        console.error("Fetch error:", error);
+      });
+  }, 500);
+});
+
+// Функция для отображения городов из массива cityOfServer
+function displayCities(cities) {
+  const ul = document.getElementById("listCity");
+  // Очищаем предыдущие элементы списка
+  while (ul.firstChild) {
+    ul.removeChild(ul.firstChild);
+  }
+  // Создаем элементы li для каждого города в массиве
+  cities.forEach((city) => {
+    const li = document.createElement("li");
+    const label = document.createElement("label");
+    label.textContent = city; // Устанавливаем текст метки из массива
+    li.appendChild(label); // Добавляем метку в элемент li
+    ul.appendChild(li); // Добавляем элемент li в список ul
+  });
+  let lisity = document.getElementById("listCity").childNodes;
+
+  for (let i = 0; i < lisity.length; i++) {
+    lisity[i].addEventListener("click", function () {
+      console.log(this.textContent); // Выводим текст элемента списка при клике
+      address.value=this.textContent
+      data.city = this.textContent
+      CityGet.style.display = "none";
+    });
+  }
+
+  // Показываем элементы
+  ul.style.display = "block";
+}
+
+document.getElementById("specialist").addEventListener("input", function () {
+  var inputValue = this.value.toLowerCase();
+  var citisGet = document.querySelector(".CitisGet");
+
+  if (inputValue.length === 0) {
+    citisGet.style.display = "none";
+    return;
+  }
+
+  citisGet.style.display = "block";
+
+  var labels = citisGet.querySelectorAll("li label");
+  labels.forEach(function (label) {
+    var text = label.textContent.toLowerCase();
+    if (text.includes(inputValue)) {
+      label.parentElement.style.display = "block";
+    } else {
+      label.parentElement.style.display = "none";
+    }
+  });
+});
+
+let specialsForRequest = [
+  "Аналитик",
+  "SEO-специалист",
+  "Графический дизайнер",
+  "Системный администратор",
+  "Администратор БД",
+  "HR",
+  "FrontEnd",
+  "Менеджер продаж",
+  "Тестировщик",
+  "Продукт менеджер",
+  "BackEnd",
+  "FullStack",
+  "TeamLeader",
+  "Верстальщик",
+  "Инфобез-специалист",
+  "Веб-дизайнер",
+  "Маркетолог",
+  "Копирайтер",
+];
+
+let listItems = document.getElementById("myListForSelect").children;
+
+for (let i = 0; i < listItems.length; i++) {
+  listItems[i].addEventListener("click", function (e) {
+    let value = listItems[i].querySelector("label").innerText;
+    if (specialsForRequest.includes(value)) {
+      console.log(value + " is in specialsForRequest");
+      data.job = value;
+      let citisGetItems = document.querySelectorAll(".CitisGet li");
+      citisGetItems.forEach(function (item) {
+        item.addEventListener("click", function () {
+          var labelText = item.querySelector("label").innerText;
+          document.getElementById("specialist").value = labelText;
+          document.querySelector(".CitisGet").style.display = "none";
+        });
+      });
+      return;
+    }
+  });
+}
+
 let data = {
   name: "",
   surname: "",
@@ -9,48 +169,49 @@ let data = {
   contacts: [],
   portfolio: [],
 };
-let Username = document.getElementById('name')
-Username.addEventListener('input', function(e) {
-    let value = this.value
-    console.log(value)
-    if(value.split(' ').length > 0) {
-        this.value = value.split(' ')[0]
-    }
-    this.value = this.value.slice(0,1).toUpperCase()+this.value.slice(1,this.value.length).toLocaleLowerCase()
-    data.name =  this.value
-})
-let dateInput = document.getElementById("birthDay")
+let Username = document.getElementById("name");
+Username.addEventListener("input", function (e) {
+  let value = this.value;
+  console.log(value);
+  if (value.split(" ").length > 0) {
+    this.value = value.split(" ")[0];
+  }
+  this.value =
+    this.value.slice(0, 1).toUpperCase() +
+    this.value.slice(1, this.value.length).toLocaleLowerCase();
+  data.name = this.value;
+});
+let dateInput = document.getElementById("birthDay");
 dateInput.addEventListener("input", function (e) {
-    let value = e.target.value.trim();
-    if (!value) {
-      data.birthDay = "";
-      validateFirstStap();
-      return;
-    }
-    data.birthDay = value.split("-").reverse().join("-");
-  });
+  let value = e.target.value.trim();
+  if (!value) {
+    data.birthDay = "";
+    validateFirstStap();
+    return;
+  }
+  data.birthDay = value.split("-").reverse().join("-");
+});
 
+let Surname = document.getElementById("surname");
+Surname.addEventListener("input", function (e) {
+  let value = this.value;
+  console.log(value);
+  if (value.split(" ").length > 0) {
+    this.value = value.split(" ")[0];
+  }
+  this.value =
+    this.value.slice(0, 1).toUpperCase() +
+    this.value.slice(1, this.value.length).toLocaleLowerCase();
+  data.surname = this.value;
+});
 
-let Surname = document.getElementById('surname')
-Surname.addEventListener('input', function(e) {
-    let value = this.value
-    console.log(value)
-    if(value.split(' ').length > 0) {
-        this.value = value.split(' ')[0]
-    }
-     this.value = this.value.slice(0,1).toUpperCase()+this.value.slice(1,this.value.length).toLocaleLowerCase()
-    data.surname =  this.value
-})
-
-let Status = document.getElementById('status')
-Status.addEventListener('change', function(e) {
-    let value = this.value
-    if(value === '1') data.status = 'Ищу специалиста'
-    else if(value === '2') data.status = 'Не в поиске'
-    else data.status = 'Расширяю связи'
-})
-
-
+let Status = document.getElementById("status");
+Status.addEventListener("change", function (e) {
+  let value = this.value;
+  if (value === "1") data.status = "Ищу специалиста";
+  else if (value === "2") data.status = "Не в поиске";
+  else data.status = "Расширяю связи";
+});
 
 let myContacts = [];
 document.querySelectorAll(".itemContact").forEach((elem) => {
@@ -96,8 +257,8 @@ $("#description").on("input", () => {
   if (description.value.length >= 1000) {
     description.value = description.value.slice(0, 1000);
     return false;
-} else {
-      data.description = description.value
+  } else {
+    data.description = description.value;
     return true;
   }
 });
@@ -121,23 +282,6 @@ let portfolioPic = {
   dri: '<svg width="19" height="19" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12.5" cy="12.5" r="11.5" fill="#EF568F" stroke="#E82B6D" stroke-width="2"/><path d="M8.5 2C11.5 6 14.5 10.5 17.5 22" stroke="#E82B6D" stroke-width="2"/><path d="M1 11C9 12 16.9 9.4 20.5 5" stroke="#E82B6D" stroke-width="2"/><path d="M23.5 13.2134C15.5 11.5 8.5 14.5 5 20.5" stroke="#E82B6D" stroke-width="2"/></svg>',
 };
 
-$("#specialist").on("input", function () {
-  var inputValue = $(this).val().toLowerCase();
-  if (inputValue.length === 0) {
-    $(".CitisGet").css("display", "none");
-    return false;
-  }
-  $(".CitisGet").css("display", "block");
-  $(".CitisGet li label").each(function () {
-    var text = $(this).text().toLowerCase();
-    if (text.includes(inputValue)) {
-      $(this).parent().show();
-    } else {
-      $(this).parent().hide();
-    }
-  });
-});
-
 //Контакты
 function selectPortfolio(media = "teleg") {
   let { svg, domain, type } = getMediaIcon(media);
@@ -156,12 +300,6 @@ $("#specialist").on("keydown", function (e) {
     e.preventDefault();
     $(".CitisGet li:visible:first label").click();
   }
-});
-
-$(".CitisGet li").on("click", function () {
-  var labelText = $(this).find("label").text();
-  $("#specialist").val(labelText);
-  $(".CitisGet").hide();
 });
 
 var mediaGlobal = "teleg";
@@ -504,4 +642,54 @@ function previewImage(input) {
   } else {
     preview.src = "";
   }
+}
+const sendAvatar = async () => {
+  const file = document.getElementById("avatar").files[0] ||document.getElementById("avatar1").files[0];
+
+  if (
+    !file ||
+    !(
+      file.type === "image/jpeg" ||
+      file.type === "image/png"
+    )
+  ) {
+    alert("Please select an image file.");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("avatar", file);
+
+  try {
+    const response = await fetch("http://localhost:3001/upload/avatar", {
+      method: "POST",
+      headers: {
+        Authorization: "ILOVEPORN"
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Image upload failed.");
+    }
+
+    const data = await response.json();
+    console.log("Image uploaded successfully:", data);
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    alert("Error uploading image. Please try again.");
+  }
+};
+
+
+
+let sendDataToWebHunt = () => {
+  fetch("/api/setSettings", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "augwod89h1h9awdh9py0y82hjd",
+    },
+    body: JSON.stringify(data)
+  }).then((obj) => obj.json()).then((obj) => console.log(obj))
 }

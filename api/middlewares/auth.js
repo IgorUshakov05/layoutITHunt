@@ -9,7 +9,7 @@ const isAuth = async (req, res, next) => {
   let refresh = req.cookies.refresh;
   let access = req.cookies.access;
   console.log(access, refresh);
-  if (!access || !refresh) {
+  if (!access && !refresh) {
     return await logout(res,next);
   }
   let decodeAccess = await decodeAccessToken(access);

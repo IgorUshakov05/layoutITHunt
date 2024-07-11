@@ -1,10 +1,12 @@
 const {Router} = require('express')
 const router = Router()
+const {decodeAccessToken} = require('../tokens/accessToken')
 const {updateInfoUser} = require('./Request/updateUserInfo')
+const {isAuth} = require('../middlewares/auth')
 
-router.post('/setSettings', async(req,res) => {
+router.post('/setSettings', isAuth, async(req,res) => {
     let data = req.body
-    let id = "8b7885b0-afc1-427b-a1f5-61b156338969"
+    let id = decodeAccessToken(req.cookies.access).userID
     console.log(data)
     let update = await updateInfoUser(id, req.body)
     console.log(update)

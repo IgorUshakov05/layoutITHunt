@@ -194,6 +194,7 @@
             </div>
             
             <div class="allInfoProfile ">
+                <form id="avatarForm" method="post" enctype="multipart/form-data">
                 <div class="topInfo">
                     <div class="photoBlock">
                         <div class="svgPhotoNew">
@@ -201,7 +202,12 @@
                                 <path d="M1 26V9.44444C1 7.78759 2.34315 6.44444 4 6.44444H14.534V3C14.534 1.89543 15.4294 1 16.534 1H26.8641C27.9686 1 28.8641 1.89543 28.8641 3V6.44444H39C40.6569 6.44444 42 7.78759 42 9.44445V26C42 27.6569 40.6569 29 39 29H4C2.34315 29 1 27.6569 1 26Z" stroke="white"/>
                                 <path d="M22.0693 12.0081C13.7899 12.0081 14.1661 23 22.0693 23C30.3488 23 29.5961 11.6536 22.0693 12.0081Z" stroke="white"/>
                             </svg>
-                            <input class="setPhotoInput" type="file" name="image1" accept="image/*" onchange="previewImage(this)">
+                            <input class="setPhotoInput" type="file" name="image1"
+                            accept="image/png, image/jpeg"
+                            name="avatar"
+                            id="avatar"
+                            placeholder="Аватар"
+                             onchange="previewImage(this)">
                         </div>
                         <img id="preview" style="border-radius: 100%;" class="photoUsera" width="120" height="120" src="<%=avatar%>" >
                     </div>
@@ -210,7 +216,13 @@
                             <h1 class="username setPhoto">Установите фотографию</h1>
                         </div>
                         <div class="setInputPhoto">
-                            <input class="setPhotoInput" type="file" name="image1" accept="image/*" onchange="previewImage(this)">    
+                            <input class="setPhotoInput" name="image1" 
+                            accept="image/png, image/jpeg"
+                            name="avatar"
+                            type="file"
+                            id="avatar1"
+                            placeholder="Аватар"
+                             onchange="previewImage(this)">    
                             <div class="svgShka">
                                 <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M11.1547 9.70492L13.2434 4.63234C13.4549 4.11871 13.0773 3.55481 12.5218 3.55481H4.06456C3.74833 3.55481 3.46335 3.74565 3.34295 4.03807L1.25424 9.11065C1.04274 9.62428 1.42038 10.1882 1.97585 10.1882H10.4331C10.7493 10.1882 11.0343 9.99734 11.1547 9.70492Z" stroke="white" stroke-width="0.613169"/>
@@ -225,6 +237,7 @@
                         </div>
                     </div>
                 </div>
+            </form>
                 <div class="metaData">
                     <div class="metaRow">
                         <div class="Rows">
@@ -258,7 +271,7 @@
                             <label for="specialist">Специализация</label>
                             <input class="inputDatas" type="text" placeholder="FullStack" name="specialist" id="specialist">
                        <div class="CitisGet">
-                        <ul>
+                        <ul id="myListForSelect">
                             <li><label>Аналитик</label></li>
                             <li><label>SEO-специалист</label></li>
                             <li><label>Графический дизайнер</label></li>
@@ -285,11 +298,10 @@
                         <div class="inputData citys">
                             <label for="address">Адрес</label>
                             <input placeholder="Россия, Нижегородская область, Арзамас" class="inputDatas" type="text" name="address" id="address">
-                            <!-- <div class="CitisGet">
-                                <ul>
-                                    <li><label>Россия, Нижегородская область, Арзамас</label></li>
+                            <div class="CityGet" id="CityGet">
+                                <ul id="listCity">
                                 </ul>
-                            </div> -->
+                            </div>
                         </div>
                         <div class="inputData textAreaData">
                             <label for="description">Обо мне</label>
@@ -386,7 +398,7 @@
                 </div>
                 <div class="resetAndSend saveChange">
                     <button type="reset" class="resetForm canelChange"><a href="/profesionalMe">Отмена</a></button>
-                    <button type="submit" class="sendForm">Применить</button>
+                    <button type="submit" class="sendForm" id="sendForm">Применить</button>
                 </div>
             </div>
             <ul class="settingsMenu">
