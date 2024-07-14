@@ -2,6 +2,7 @@ let address = document.getElementById("address");
 const CityGet = document.getElementById("CityGet");
 let timerId;
 let cityOfServer = [];
+const formData = new FormData();
 
 address.addEventListener("input", function (e) {
   let value = e.target.value.trim(); // Убираем пробелы в начале и конце строки
@@ -84,8 +85,8 @@ function displayCities(cities) {
   for (let i = 0; i < lisity.length; i++) {
     lisity[i].addEventListener("click", function () {
       console.log(this.textContent); // Выводим текст элемента списка при клике
-      address.value=this.textContent
-      data.city = this.textContent
+      address.value = this.textContent;
+      data.city = this.textContent;
       CityGet.style.display = "none";
     });
   }
@@ -159,6 +160,7 @@ for (let i = 0; i < listItems.length; i++) {
 }
 
 let data = {
+  avatar: "",
   name: "",
   surname: "",
   birthDay: "",
@@ -606,6 +608,11 @@ $("#addPort").on("click", () => {
 function previewImage(input) {
   const preview = document.getElementById("preview");
   const file = input.files[0];
+  console.log(file);
+
+  if (!file || !(file.type === "image/jpeg" || file.type === "image/png")) {
+    return;
+  }
 
   if (file) {
     const reader = new FileReader();
@@ -635,6 +642,10 @@ function previewImage(input) {
         );
 
         preview.src = canvas.toDataURL("image/png");
+        if (formData.get("avatar")) {
+          formData.delete("avatar");
+        }
+        formData.append("avatar", file);
       };
     };
 
@@ -644,27 +655,11 @@ function previewImage(input) {
   }
 }
 const sendAvatar = async () => {
-  const file = document.getElementById("avatar").files[0] ||document.getElementById("avatar1").files[0];
-
-  if (
-    !file ||
-    !(
-      file.type === "image/jpeg" ||
-      file.type === "image/png"
-    )
-  ) {
-    alert("Please select an image file.");
-    return;
-  }
-
-  const formData = new FormData();
-  formData.append("avatar", file);
-
   try {
-    const response = await fetch("http://localhost:3001/upload/avatar", {
+    const response = await fetch("https://s3.webhunt.ru/upload/avatar", {
       method: "POST",
       headers: {
-        Authorization: "ILOVEPORN"
+        Authorization: "ILOVEPORN",
       },
       body: formData,
     });
@@ -672,24 +667,31 @@ const sendAvatar = async () => {
     if (!response.ok) {
       throw new Error("Image upload failed.");
     }
-
     const data = await response.json();
-    console.log("Image uploaded successfully:", data);
+    return data.title; // Возвращаем URL
   } catch (error) {
     console.error("Error uploading image:", error);
     alert("Error uploading image. Please try again.");
   }
 };
 
-
-
-let sendDataToWebHunt = () => {
-  fetch("/api/setSettings", {
+let sendDataToWebHunt = async () => {
+  if (formData.get("avatar")) {
+    const url = await sendAvatar();
+    data.avatar = url; //  Записываем URL в data.avatar
+  }
+  await fetch("/api/setSettings", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: "augwod89h1h9awdh9py0y82hjd",
     },
-    body: JSON.stringify(data)
-  }).then((obj) => obj.json()).then((obj) => console.log(obj))
-}
+    body: JSON.stringify(data),
+  })
+    .then((obj) => obj.json())
+    .then((obj) => {
+      console.log(data,obj)
+        window.location.href = (document.querySelector(".profile").children[0].href);
+    });
+};
+

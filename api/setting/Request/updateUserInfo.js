@@ -7,6 +7,7 @@ const updateInfoUser = async (id, data) => {
       surname,
       city,
       status,
+      avatar,
       birthDay,
       job,
       description,
@@ -17,6 +18,7 @@ const updateInfoUser = async (id, data) => {
       ...(name && { name }),
       ...(surname && { surname }),
       ...(city && { city }),
+      ...(avatar && { avatar }),
       ...(status && { status }),
       ...(birthDay && { birthDay }),
       ...(job && { job }),
@@ -27,8 +29,7 @@ const updateInfoUser = async (id, data) => {
 
     let findUser = await UserSchema.findOneAndUpdate({ id }, updateData);
 
-    console.log(findUser, data);
-    // let update = await findUser.updateOne({data})
+    let update = await findUser.updateOne({data})
     return findUser;
   } catch (e) {
     return false;
