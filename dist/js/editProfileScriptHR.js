@@ -95,69 +95,9 @@ function displayCities(cities) {
   ul.style.display = "block";
 }
 
-document.getElementById("specialist").addEventListener("input", function () {
-  var inputValue = this.value.toLowerCase();
-  var citisGet = document.querySelector(".CitisGet");
 
-  if (inputValue.length === 0) {
-    citisGet.style.display = "none";
-    return;
-  }
 
-  citisGet.style.display = "block";
 
-  var labels = citisGet.querySelectorAll("li label");
-  labels.forEach(function (label) {
-    var text = label.textContent.toLowerCase();
-    if (text.includes(inputValue)) {
-      label.parentElement.style.display = "block";
-    } else {
-      label.parentElement.style.display = "none";
-    }
-  });
-});
-
-let specialsForRequest = [
-  "Аналитик",
-  "SEO-специалист",
-  "Графический дизайнер",
-  "Системный администратор",
-  "Администратор БД",
-  "HR",
-  "FrontEnd",
-  "Менеджер продаж",
-  "Тестировщик",
-  "Продукт менеджер",
-  "BackEnd",
-  "FullStack",
-  "TeamLeader",
-  "Верстальщик",
-  "Инфобез-специалист",
-  "Веб-дизайнер",
-  "Маркетолог",
-  "Копирайтер",
-];
-
-let listItems = document.getElementById("myListForSelect").children;
-
-for (let i = 0; i < listItems.length; i++) {
-  listItems[i].addEventListener("click", function (e) {
-    let value = listItems[i].querySelector("label").innerText;
-    if (specialsForRequest.includes(value)) {
-      console.log(value + " is in specialsForRequest");
-      data.job = value;
-      let citisGetItems = document.querySelectorAll(".CitisGet li");
-      citisGetItems.forEach(function (item) {
-        item.addEventListener("click", function () {
-          var labelText = item.querySelector("label").innerText;
-          document.getElementById("specialist").value = labelText;
-          document.querySelector(".CitisGet").style.display = "none";
-        });
-      });
-      return;
-    }
-  });
-}
 
 let data = {
   avatar: "",
@@ -169,7 +109,6 @@ let data = {
   description: "",
   city: "",
   contacts: [],
-  portfolio: [],
 };
 let Username = document.getElementById("name");
 Username.addEventListener("input", function (e) {
@@ -210,9 +149,9 @@ Surname.addEventListener("input", function (e) {
 let Status = document.getElementById("status");
 Status.addEventListener("change", function (e) {
   let value = this.value;
-  if (value === "1") return data.status = "Ищу работу";
+  if (value === "1") return data.status = "Ищу специалиста";
   if (value === "2") return data.status = "Открыт к предложениям";
-  else data.status = "Не ищу работу";
+  else data.status = "Не ищу специалиста";
 });
 
 let myContacts = [];
@@ -228,16 +167,7 @@ document.querySelectorAll(".itemContact").forEach((elem) => {
 });
 
 let myPort = [];
-document.querySelectorAll(".itemPortfolio").forEach((elem) => {
-  myPort.push({
-    type: elem.classList[1],
-    url: elem.querySelector("a").textContent.trim(),
-  });
-  data.portfolio.push({
-    type: elem.classList[1],
-    url: elem.querySelector("a").textContent.trim(),
-  });
-});
+
 
 $("#contactsContainer").delegate(".removeLink", "click", function () {
   let contactUrl = $(this).closest("li").find(".group a").text().trim();
@@ -591,18 +521,10 @@ $("#addPort").on("click", () => {
     type: globalPort,
     url: value,
   });
-  data.portfolio.push({
-    type: globalPort,
-    url: value,
-  });
 
   console.log(myPort);
-  $(".listInfoBottomPortfolio").append(output);
   $(".blackBack").css("display", "none");
   $("#addContact").attr("disabled", true);
-  $("#addPort").attr("disabled", true);
-  $(".addPortfolioModal").css("display", "none");
-  $(".inputPortfolio").val("");
 });
 
 function previewImage(input) {

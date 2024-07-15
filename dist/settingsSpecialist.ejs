@@ -258,9 +258,10 @@
                             <div class="inputData">
                                 <label for="status">Статус</label>
                                 <select id="status" name="status" class="inputDatas">
-                                    <option value="Search">Ищу работу</option>
-                                    <option value="Open" selected>Открыт к предложениям</option>
-                                    <option value="noSearch">Не ищу работу</option>
+                                    <option>Выберете</option>
+                                    <option value="1">Ищу работу</option>
+                                    <option value="2">Открыт к предложениям</option>
+                                    <option value="3">Не ищу работу</option>
                                 </select>
 
                             </div>
@@ -297,7 +298,7 @@
                         </div>
                         <div class="inputData citys">
                             <label for="address">Адрес</label>
-                            <input placeholder="Россия, Нижегородская область, Арзамас" class="inputDatas" type="text" name="address" id="address">
+                            <input placeholder="<%-city?city.split(',')[2]:'Арзамас'%>" class="inputDatas" type="text" name="address" id="address">
                             <div class="CityGet" id="CityGet">
                                 <ul id="listCity">
                                 </ul>
@@ -305,7 +306,7 @@
                         </div>
                         <div class="inputData textAreaData">
                             <label for="description">Обо мне</label>
-                            <textarea maxlength="1000" class="inputDatas textAreaInfo"  placeholder="Да, верстальщик тоже не плохо" name="description" id="description"></textarea>
+                            <textarea maxlength="1000" class="inputDatas textAreaInfo"  placeholder="Подчеркните впечатляющий опыт и достижения" name="description" id="description"></textarea>
                             <p class="scoreSymbol">0/1000</p>
                         </div>
                     </div>
@@ -397,8 +398,8 @@
                         </div>
                 </div>
                 <div class="resetAndSend saveChange">
-                    <button type="reset" class="resetForm canelChange"><a href="/profesionalMe">Отмена</a></button>
-                    <button type="submit" class="sendForm" id="sendForm" onclick="sendDataToWebHunt()">Применить</button>
+                    <button type="reset" class="resetForm canelChange"><a href="/<%-id%>">Отмена</a></button>
+                    <button type="submit" class="sendForm" id="sendForm">Применить</button>
                 </div>
             </div>
             <ul class="settingsMenu">
