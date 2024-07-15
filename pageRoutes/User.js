@@ -1,6 +1,5 @@
 let {
   decodeAccessToken,
-  createAccessToken,
 } = require("../api/tokens/accessToken");
 const { isAuthNotRequire } = require("../api/middlewares/authNotRequire");
 const { Router } = require("express");

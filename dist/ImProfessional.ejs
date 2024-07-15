@@ -176,8 +176,8 @@
             <div class="meiddleInfo">
                 <div class="descriptionInfo">
                     <p class="aboutMe">Обо мне</p>
-                    <p class="descript"><%=description||"Придумайте уникальное описание своего профиля"%></p>
-                    </div>
+                    <pre class="descript"><%= description.split('\n').filter(line => line.trim() !== '').join('\n') || "Придумайте уникальное описание своего профиля" %></pre>
+                </div>
             </div>
             <div class="theerdSty">
                 <div class="city">

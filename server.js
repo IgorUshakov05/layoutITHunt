@@ -11,6 +11,7 @@ const apiSkill = require("./api/Skills Offered/skillsOffered");
 const index = require("./pageRoutes/indexPage");
 const login = require("./pageRoutes/login");
 const registration = require("./pageRoutes/registration");
+const setExp = require("./api/expiriens/routes");
 const User = require("./pageRoutes/User");
 const chatCompany = require("./pageRoutes/companyChat");
 const createVacancy = require("./pageRoutes/createVacancy");
@@ -70,6 +71,7 @@ app.use(
   },
   api,
   apiSkill,
+  setExp,
   setSetting,
   skills,
   city

@@ -10,21 +10,24 @@ router.post(
   body('surname').isLength({ min: 2 }).optional(),
   body('name').isLength({ min: 2 }).optional(),
   body("birthDay")
-    .optional()
-    .isDate({ format: "DD-MM-YYYY" }) // Валидация даты в первую очередь
-    .withMessage("Введенное значение не является датой.")
-    .custom((value) => {
-      if (value === undefined || value === "") {
-        return true; // Пропускаем валидацию, если значение пустое
-      } else {
-        const date = new Date(value);
-        if (isNaN(date.getTime())) {
-          return Promise.reject("Введенное значение не является датой.");
-        }
-        return date < new Date();
+  .optional()
+  .isDate({ format: "DD-MM-YYYY" }) 
+  .withMessage("Введенное значение не является датой.")
+  .custom((value) => {
+    if (value === undefined || value === "") {
+      return true; // Пропускаем валидацию, если значение пустое
+    } else {
+      const date = new Date(value);
+      if (isNaN(date.getTime())) {
+        return Promise.reject("Введенное значение не является датой.");
       }
-    })
-    .withMessage("Дата рождения должна быть меньше текущей."),
+      // Сравнение только дат, без времени
+      const today = new Date();
+      today.setHours(0, 0, 0, 0); // Обнуляем время в today
+      return date < today;
+    }
+  })
+  .withMessage("Дата рождения должна быть меньше текущей."),
   isAuth, // Middleware для аутентификации
   async (req, res) => {
     const errors = validationResult(req);

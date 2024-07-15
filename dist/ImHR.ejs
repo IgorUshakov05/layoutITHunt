@@ -20,7 +20,22 @@
 </head>
 <body>
     <%- include('./header.ejs', { isLoggedIn, active: 'profile', id}) %>
-
+    <div class="blackBack" id="AboutPrime">
+        <div class="youNeedIs">
+            <div class="toBlocksToColumn">
+                <img src="/assets/pictures/DemoProfilePremium.png" alt="Демо профиль премиум">
+                <span class="myVacancyText mt-10 mtNone">Стильная шапка</span>
+                <p class="descript">Все работодатели и специалисты видят вашу шапку, которая выделит вас среди других, но решать вам, насколько важно внимание на вашем профиле</p>
+            </div>
+            <div class="toBlocksToColumn">
+                <img src="/assets/pictures/DemoCardPremium.png" alt="Демо профиль премиум">
+                <span class="myVacancyText mt-10">Стильная карточка</span>
+                <p class="descript">Когда работодатель оценивает кандидатов, отправивших заявки или рассматриваемых для найма, необычный вид карточки привлекает внимание. Мы привлекаем внимание, а вы вызываете восторг</p>
+                <button class="Infavorites w-100 mt-10 reverseColor" id="closeModalThis" style="padding: 10px 0;">Понятно</button>
+            </div>
+        </div>
+        
+            </div>
 <main class="main">
     <div class="blackBack">
         <div class="modalWindowRemoveUser" style="display: block;">
@@ -200,7 +215,7 @@
                 <div class="descriptionInfo">
                     <p class="aboutMe">Обо мне</p>
 
-                    <p class="descript"><%=description||"Придумайте уникальное описание своего профиля"%></p>
+                    <pre class="descript"><%= description.split('\n').filter(line => line.trim() !== '').join('\n') || "Придумайте уникальное описание своего профиля" %></pre>
 
                 </div>
             </div>
