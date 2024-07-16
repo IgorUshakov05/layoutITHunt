@@ -209,8 +209,7 @@ sendMyExp.addEventListener("click", () => {
         return (window.location.href = "/login");
       }
       if (obj.status === 400) {
-        errors();
-        return (window.location.href = "/login");
+        return errors();
       }
       if (obj.status === 201) {
         sendMyExp.disabled = false;
@@ -220,6 +219,9 @@ sendMyExp.addEventListener("click", () => {
     .then((obj) => {
       console.log(obj);
       success(obj.result);
+    })
+    .catch((e)=>{
+      errors()
     });
 });
 function escapeHtml(unsafe) {
@@ -252,8 +254,7 @@ ${escapeHtml(data.company)}
                             </div>
                         </div>
                         <div class="middleInfoExp"> 
-                            <pre class="decriptMyLazzy">
-                            ${escapeHtml(data.description)}</pre>
+                            <pre class="decriptMyLazzy">${escapeHtml(data.description.trim())}</pre>
                             <div class="bottomElementExp">
                                 <p class="TimeJob">${data.date} ${getEnding(
     data.date,

@@ -123,3 +123,16 @@ $('#closeModalThis').on('click', () => {
     $('#AboutPrime').css('display', 'none')
     $('.youNeedIs').css('display', 'none')
 })
+$(document).on("click",".topInfoExpiriensItem", function () {
+    $(this).parent().find(".middleInfoExp").toggle();
+  
+    $(this).find(".MyVacExp").toggleClass("boldEn");
+    $(this).find(".titleCompanyExp").toggleClass("boldEn");
+    $(this).find(".timeJobAndShowAll").find(".TimeJob").toggleClass("boldEn");
+  
+    $(this)
+      .find(".timeJobAndShowAll")
+      .find(".expand")
+      .find(".rotatePls")
+      .toggleClass("rotate180");
+  });

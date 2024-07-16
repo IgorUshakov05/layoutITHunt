@@ -225,36 +225,39 @@ return unsafe
                     </ul>
                 </div>
             </div>
-
+            <%if(expiriens.length) {%>
             <div class="expiriensJob mt-20">
                 <span class="myVacancyText">Опыт работы</span>
-                <div class="expiriensItem">
-                    <div class="topInfoExpiriensItem">
-                        <p class="MyVacExp">
-                            Веб-аналитический разум
-                        </p>
-                        <p class="titleCompanyExp">
-                            ООО КомплектСтрой.РФ
-                        </p>
-                        <div class="timeJobAndShowAll">
-                            <p class="TimeJob">12 месяц</p>
-                            <div class="expand"><svg class="rotatePls" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0.920898 1L6.93536 7L12.9498 1" stroke="#5412E0" stroke-width="2"/>
-</svg>
-</div>
-                            </div>
-                        </div>
-                        <div class="middleInfoExp"> 
-                            <p class="decriptMyLazzy">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem accusantium odit, vero totam esse iste rerum voluptatibus debitis cumque, dolores vitae! Quae impedit tempore delectus deleniti iste reprehenderit tenetur nostrum? Iusto cupiditate dolor fuga doloribus architecto totam doloremque expedita! Expedita eligendi non aliquid eius minima, labore quibusdam numquam, dolores obcaecati laboriosam cumque! Voluptatum quaerat sapiente minima tempore illo doloribus a nemo vitae libero inventore error praesentium suscipit autem magni aliquam consequuntur nostrum iure, labore, explicabo natus non excepturi odit. Sequi quasi animi in laborum saepe omnis aperiam accusamus debitis alias accusantium eos laboriosam voluptatum atque, velit placeat, fugiat numquam recusandae.</p>
-                            <div class="bottomElementExp">
-                                <p class="TimeJob">12 месяц</p>
-                                </div>
-                            </div> 
-                            
-                    </div>
+                <% expiriens.forEach(exp => { %>
+    <div class="expiriensItem">
+        <div class="topInfoExpiriensItem">
+            <p class="MyVacExp">
+                <%- escapeHtml(exp.special) %>
+            </p>
+            <p class="titleCompanyExp">
+                <%- escapeHtml(exp.company) %>
+            </p>
+            <div class="timeJobAndShowAll">
+                <p class="TimeJob"><%- exp.date %> <%- getEnding(exp.date, exp.typeData) %></p>
+                <div class="expand">
+                    <svg class="rotatePls" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.920898 1L6.93536 7L12.9498 1" stroke="#5412E0" stroke-width="2"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="middleInfoExp">
+            <pre class="decriptMyLazzy"><%- escapeHtml((exp.description).trim()).replace(/\n/g, '<br>').replace(/ {2}/g, ' &nbsp;') %></pre>
+            <div class="bottomElementExp">
+                <p class="TimeJob"><%- exp.date %> <%- getEnding(exp.date, exp.typeData) %></p>
+            </div>
+        </div>
+    </div>
+<% }); %>
                    
                 </div>
-                <div class="educationMyClick">
+                <%}%>
+                <div class="educationMyClick mt-20">
                     <div class="oneBlock">
                     <div class="exucation">
                         <p class="myVacancyText">Образование</p>

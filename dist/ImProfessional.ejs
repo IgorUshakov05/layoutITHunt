@@ -420,7 +420,7 @@ function escapeHtml(unsafe) {
             </div>
         </div>
         <div class="middleInfoExp">
-            <pre class="decriptMyLazzy"><%- escapeHtml(exp.description).replace(/\n/g, '<br>').replace(/ {2}/g, ' &nbsp;') %></pre>
+            <pre class="decriptMyLazzy"><%- escapeHtml((exp.description).trim()).replace(/\n/g, '<br>').replace(/ {2}/g, ' &nbsp;') %></pre>
             <div class="bottomElementExp">
                 <p class="TimeJob"><%- exp.date %> <%- getEnding(exp.date, exp.typeData) %></p>
                 <div class="buttonsEditAndDelete">
@@ -445,7 +445,7 @@ function escapeHtml(unsafe) {
         </div>
 
          
-                <div class="educationMyClick mt-10">
+                <div class="educationMyClick mt-12">
                     <div class="oneBlock">
                     <div class="exucation">
                         <p class="myVacancyText">Образование</p>
