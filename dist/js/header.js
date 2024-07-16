@@ -121,4 +121,5 @@ $('#modalAbout').on('click', () => {
 })
 $('#closeModalThis').on('click', () => {
     $('#AboutPrime').css('display', 'none')
+    $('.youNeedIs').css('display', 'none')
 })

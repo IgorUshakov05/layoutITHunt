@@ -34,6 +34,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
           city: result.city,
           status: result.status,
           avatar: result.avatar,
+          expiriens: result.expiriens,
           premium: result.premium,
           description: result.description,
         });
@@ -73,7 +74,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       premium: result.premium,
       status: result.status,
       portfolios: result.portfolio,
-
+      expiriens: result.expiriens,
       description: result.description,
     });
   } else {

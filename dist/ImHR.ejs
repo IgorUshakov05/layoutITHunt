@@ -99,7 +99,7 @@
                             <p class="userActive"><%=status %></p>
                         </div>
                     <div class="topInfoChild">
-                        <h2 style="margin-bottom: 4px" class="age"><%=age%> <%=(age%10===0||age<20)?"лет":"года"%></h2>
+                        <h3 style="margin-bottom: 4px" class="age"><%=age%> <%=(age % 10 === 1 && age % 100 !== 11) ? "год" : (age % 10 >= 2 && age % 10 <= 4 && (age % 100 < 12 || age % 100 > 14)) ? "года" : "лет";%></h3>
                     </div>
                 </div>
             </div>

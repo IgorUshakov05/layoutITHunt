@@ -164,7 +164,7 @@ $(document).on("click", ".listAddingSkillItem", function (e) {
   ); // Обновляем список навыков
 });
 
-$(".topInfoExpiriensItem").on("click", function () {
+$(document).on("click",".topInfoExpiriensItem", function () {
   $(this).parent().find(".middleInfoExp").toggle();
 
   $(this).find(".MyVacExp").toggleClass("boldEn");

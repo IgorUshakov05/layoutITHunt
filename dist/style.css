@@ -7290,6 +7290,7 @@ letter-spacing: 0.14px;
 .termBlock {
     text-align: center;
     height: 100%;
+    cursor: pointer;
 }
 
 .termInput {

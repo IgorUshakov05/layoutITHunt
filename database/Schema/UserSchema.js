@@ -12,6 +12,7 @@ const expiriensSchema = new mongoose.Schema({
   company: { type: String, required: true },
   typeData: { type: String, required: true },
   special: { type: String, required: true },
+  date:{ type: String, required: true },
   description: { type: String, required: true },
 });
 const skillsScheme = new mongoose.Schema({

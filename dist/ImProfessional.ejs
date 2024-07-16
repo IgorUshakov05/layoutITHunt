@@ -60,7 +60,7 @@
 
                         <p class="userActive"><%=status %></p>
                     </div>
-                    <h3 style="margin-bottom: 4px" class="age"><%=age%> <%=(age%10===0||age<20)?"лет":"года"%></h3>
+                    <h3 style="margin-bottom: 4px" class="age"><%=age%> <%=(age % 10 === 1 && age % 100 !== 11) ? "год" : (age % 10 >= 2 && age % 10 <= 4 && (age % 100 < 12 || age % 100 > 14)) ? "года" : "лет";%></h3>
                     </div>
                 </div>
             </div>
@@ -271,18 +271,18 @@
                 <p class="descriptionAddExiriens">Добавьте опыт работы как можно точнее, первое на что смотрит работодатель это навыки и опыт</p>
                 <div class="topInputs">
                     <input placeholder="Должность" type="text" name="jobTitle" id="jobTitle" class="inputContact borderAll">    
-                    <input placeholder="Название компании" type="text" name="jobTitle" id="jobTitle" class="inputContact borderAll"> 
+                    <input placeholder="Название компании" type="text" name="jobTitle" id="companytitle" class="inputContact borderAll"> 
                     <div class="setTerm">
-                        <input placeholder="3" type="text" style="text-align: center; font-family: Ubuntu;" name="jobTitle" id="jobTitle" class="inputContact borderAll termInput">
-                        <div class="termBlock">
+                        <input placeholder="3" type="number" style="text-align: center; font-family: Ubuntu;" name="srokTitle" id="srokTitle" class="inputContact borderAll termInput">
+                        <div class="termBlock" id="switchTypeDate">
                             <span class="termValue">Года</span>    
                         </div>   
                     </div>   
                 </div>
-                <textarea placeholder="Расскажите подробно чем вы занимались на работе" name="descriptipm" id="" cols="30" rows="10" class="descripeJob inputContact borderAll"></textarea>
+                <textarea placeholder="Расскажите подробно чем вы занимались на работе" name="descriptipm" id="descriptJob" cols="30" rows="10" class="descripeJob inputContact borderAll"></textarea>
                 <div class="canelsButton">
                     <button id="closeAddExpiriens" class="canel">Отмена</button>
-                    <button class="sendJobTitle">Добавить</button>
+                    <button class="sendJobTitle" id="sendMyExp" disabled>Добавить</button>
                     </div>
                 </dialog>
 
@@ -372,102 +372,80 @@
                     <%}%>
                 </div>
             </div>
-
-            <div class="expiriensJob mt-20">
-                <span class="myVacancyText">Опыт работы</span>
-                <div class="expiriensItem">
-                    <div class="topInfoExpiriensItem">
-                        <p class="MyVacExp">
-                            Веб-аналитический разум
-                        </p>
-                        <p class="titleCompanyExp">
-                            ООО КомплектСтрой.РФ
-                        </p>
-                        <div class="timeJobAndShowAll">
-                            <p class="TimeJob">12 месяц</p>
-                            <div class="expand"><svg class="rotatePls" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0.920898 1L6.93536 7L12.9498 1" stroke="#5412E0" stroke-width="2"/>
-</svg>
-</div>
-                            </div>
-                        </div>
-                        
-                        <div class="middleInfoExp"> 
-                            <p class="decriptMyLazzy">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem accusantium odit, vero totam esse iste rerum voluptatibus debitis cumque, dolores vitae! Quae impedit tempore delectus deleniti iste reprehenderit tenetur nostrum? Iusto cupiditate dolor fuga doloribus architecto totam doloremque expedita! Expedita eligendi non aliquid eius minima, labore quibusdam numquam, dolores obcaecati laboriosam cumque! Voluptatum quaerat sapiente minima tempore illo doloribus a nemo vitae libero inventore error praesentium suscipit autem magni aliquam consequuntur nostrum iure, labore, explicabo natus non excepturi odit. Sequi quasi animi in laborum saepe omnis aperiam accusamus debitis alias accusantium eos laboriosam voluptatum atque, velit placeat, fugiat numquam recusandae.</p>
-                            <div class="bottomElementExp">
-                                <p class="TimeJob">12 месяц</p>
-                                <div class="buttonsEditAndDelete">
-                                    <button class="removeExp">Удалить</button>
-                                    </div>
-                                </div>
-                            </div> 
-                            
-                    </div>
-                    <div class="expiriensItem">
-                    <div class="topInfoExpiriensItem">
-                        <p class="MyVacExp">
-                            Веб-аналитический разум
-                        </p>
-                        <p class="titleCompanyExp">
-                            ООО КомплектСтрой.РФ
-                        </p>
-                        <div class="timeJobAndShowAll">
-                            <p class="TimeJob">12 месяц</p>
-                            <div class="expand"><svg class="rotatePls" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0.920898 1L6.93536 7L12.9498 1" stroke="#5412E0" stroke-width="2"/>
-</svg>
-</div>
-                            </div>
-                        </div>
-                        <div class="middleInfoExp"> 
-                            <p class="decriptMyLazzy">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem accusantium odit, vero totam esse iste rerum voluptatibus debitis cumque, dolores vitae! Quae impedit tempore delectus deleniti iste reprehenderit tenetur nostrum? Iusto cupiditate dolor fuga doloribus architecto totam doloremque expedita! Expedita eligendi non aliquid eius minima, labore quibusdam numquam, dolores obcaecati laboriosam cumque! Voluptatum quaerat sapiente minima tempore illo doloribus a nemo vitae libero inventore error praesentium suscipit autem magni aliquam consequuntur nostrum iure, labore, explicabo natus non excepturi odit. Sequi quasi animi in laborum saepe omnis aperiam accusamus debitis alias accusantium eos laboriosam voluptatum atque, velit placeat, fugiat numquam recusandae.</p>
-                            <div class="bottomElementExp">
-                                <p class="TimeJob">12 месяц</p>
-                                <div class="buttonsEditAndDelete">
-                                    <button class="removeExp">Удалить</button>
-                                    </div>
-                                </div>
-                            </div> 
-                            
-                    </div>
-
-
-                    <div class="expiriensItem">
-                    <div class="topInfoExpiriensItem">
-                        <p class="MyVacExp">
-                            Веб-аналитический разум
-                        </p>
-                        <p class="titleCompanyExp">
-                            ООО КомплектСтрой.РФ
-                        </p>
-                        <div class="timeJobAndShowAll">
-                            <p class="TimeJob">12 месяц</p>
-                            <div class="expand"><svg class="rotatePls" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0.920898 1L6.93536 7L12.9498 1" stroke="#5412E0" stroke-width="2"/>
-</svg>
-</div>
-                            </div>
-                        </div>
-                        <div class="middleInfoExp"> 
-                            <p class="decriptMyLazzy">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem accusantium odit, vero totam esse iste rerum voluptatibus debitis cumque, dolores vitae! Quae impedit tempore delectus deleniti iste reprehenderit tenetur nostrum? Iusto cupiditate dolor fuga doloribus architecto totam doloremque expedita! Expedita eligendi non aliquid eius minima, labore quibusdam numquam, dolores obcaecati laboriosam cumque! Voluptatum quaerat sapiente minima tempore illo doloribus a nemo vitae libero inventore error praesentium suscipit autem magni aliquam consequuntur nostrum iure, labore, explicabo natus non excepturi odit. Sequi quasi animi in laborum saepe omnis aperiam accusamus debitis alias accusantium eos laboriosam voluptatum atque, velit placeat, fugiat numquam recusandae.</p>
-                            <div class="bottomElementExp">
-                                <p class="TimeJob">12 месяц</p>
-                                <div class="buttonsEditAndDelete">
-                                    <button class="removeExp">Удалить</button>
-                                    </div>
-                                </div>
-                            </div> 
-                            
-                    </div>
-                <div id="openAddExpiriendModal" class="addNewVacansy">
-                        <div class="svgPlus"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M9.12305 0.75V9V17.25" stroke="white" stroke-linecap="round"></path>
-<path d="M17.25 9.12314H9H0.75" stroke="white" stroke-linecap="round"></path>
-</svg>
-</div><span>Добавить опыт рыботы</span>
-                        </div>
+            <%
+            function getEnding(date, type) {
+  if (type === "y") {
+    return date % 10 === 1 && date % 100 !== 11
+      ? "год"
+      : date % 10 >= 2 && date % 10 <= 4 && (date % 100 < 12 || date % 100 > 14)
+      ? "года"
+      : "лет";
+  } else {
+    return date % 10 === 1 && date % 100 !== 11
+      ? "месяц"
+      : date % 10 >= 2 && date % 10 <= 4 && (date % 100 < 12 || date % 100 > 14)
+      ? "месяца"
+      : "месяцев";
+  }
+}
+function escapeHtml(unsafe) {
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+}
+%>
+<div class="expiriensJob mt-20">
+    <span class="myVacancyText">Опыт работы</span>
+    <div id="parentForExp">
+        <% if (expiriens.length) { %>
+            <% expiriens.forEach(exp => { %>
+    <div class="expiriensItem">
+        <div class="topInfoExpiriensItem">
+            <p class="MyVacExp">
+                <%- escapeHtml(exp.special) %>
+            </p>
+            <p class="titleCompanyExp">
+                <%- escapeHtml(exp.company) %>
+            </p>
+            <div class="timeJobAndShowAll">
+                <p class="TimeJob"><%- exp.date %> <%- getEnding(exp.date, exp.typeData) %></p>
+                <div class="expand">
+                    <svg class="rotatePls" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.920898 1L6.93536 7L12.9498 1" stroke="#5412E0" stroke-width="2"/>
+                    </svg>
                 </div>
-                <div class="mt-50 educationMyClick">
+            </div>
+        </div>
+        <div class="middleInfoExp">
+            <pre class="decriptMyLazzy"><%- escapeHtml(exp.description).replace(/\n/g, '<br>').replace(/ {2}/g, ' &nbsp;') %></pre>
+            <div class="bottomElementExp">
+                <p class="TimeJob"><%- exp.date %> <%- getEnding(exp.date, exp.typeData) %></p>
+                <div class="buttonsEditAndDelete">
+                    <button class="removeExp" data-id="<%- exp.id %>">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<% }); %>
+
+            <% } %>
+        </div>
+        </div>
+        <div id="openAddExpiriendModal" class="mt-10 addNewVacansy">
+            <div class="svgPlus">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9.12305 0.75V9V17.25" stroke="white" stroke-linecap="round"></path>
+                    <path d="M17.25 9.12314H9H0.75" stroke="white" stroke-linecap="round"></path>
+                </svg>
+            </div>
+            <span>Добавить опыт работы</span>
+        </div>
+
+         
+                <div class="educationMyClick mt-10">
                     <div class="oneBlock">
                     <div class="exucation">
                         <p class="myVacancyText">Образование</p>
@@ -722,6 +700,7 @@
     </div>
 </main>
     <script src="/js/header.js"></script>
+    <script src="/js/createExp.js"></script>
     <script src="/js/ImProfessional.js"></script>
     <script src="/js/searchFavorite.js"></script>
 </body>
