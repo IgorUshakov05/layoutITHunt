@@ -7,27 +7,83 @@ const { body, validationResult } = require("express-validator");
 
 router.post(
   "/setSettings",
-  body('surname').isLength({ min: 2 }).optional(),
-  body('name').isLength({ min: 2 }).optional(),
-  body("birthDay")
-  .optional()
-  .isDate({ format: "DD-MM-YYYY" }) 
-  .withMessage("Введенное значение не является датой.")
-  .custom((value) => {
-    if (value === undefined || value === "") {
-      return true; // Пропускаем валидацию, если значение пустое
-    } else {
-      const date = new Date(value);
-      if (isNaN(date.getTime())) {
-        return Promise.reject("Введенное значение не является датой.");
+  body("job")
+    .custom((value, { req }) => {
+      if (value === undefined || value === "") {
+        return true;
       }
-      // Сравнение только дат, без времени
-      const today = new Date();
-      today.setHours(0, 0, 0, 0); // Обнуляем время в today
-      return date < today;
-    }
-  })
-  .withMessage("Дата рождения должна быть меньше текущей."),
+      const validJobs = [
+        "Аналитик",
+        "SEO-специалист",
+        "Графический дизайнер",
+        "Системный администратор",
+        "Администратор БД",
+        "HR",
+        "FrontEnd",
+        "Менеджер продаж",
+        "Тестировщик",
+        "Продукт менеджер",
+        "BackEnd",
+        "FullStack",
+        "TeamLeader",
+        "Верстальщик",
+        "Инфобез-специалист",
+        "Веб-дизайнер",
+        "Маркетолог",
+        "Копирайтер",
+      ];
+      if (!validJobs.includes(value)) {
+        throw new Error('Недопустимое значение для поля "job".');
+      }
+      return true;
+    })
+    .withMessage('Недопустимое значение для поля "job".'),
+  body("surname").isLength({ min: 2 }).optional(),
+  body("name").isLength({ min: 2 }).optional(),
+  body("birthDay")
+    .optional()
+    .isDate({ format: "DD-MM-YYYY" })
+    .withMessage("Введенное значение не является датой.")
+    .custom((value) => {
+      if (value === undefined || value === "") {
+        return true; // Пропускаем валидацию, если значение пустое
+      } else {
+        // Разбиваем строку на части
+        const [day, month, year] = value.split("-").map(Number);
+
+        // Проверяем валидность полученных значений
+        if (
+          !day ||
+          !month ||
+          !year ||
+          day > 31 ||
+          month > 12 ||
+          year < 1000 ||
+          year > 9999
+        ) {
+          return Promise.reject("Введенное значение не является датой.");
+        }
+
+        // Создаем объект Date с учетом нашего формата
+        const date = new Date(year, month - 1, day); // month - 1, так как месяцы начинаются с 0
+
+        // Проверяем, что день и месяц соответствуют введенным (например, дата 31-02-2021 некорректна)
+        if (
+          date.getFullYear() !== year ||
+          date.getMonth() + 1 !== month ||
+          date.getDate() !== day
+        ) {
+          return Promise.reject("Введенное значение не является датой.");
+        }
+
+        // Сравнение только дат, без времени
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Обнуляем время в today
+
+        return date < today;
+      }
+    })
+    .withMessage("Дата рождения должна быть меньше текущей."),
   isAuth, // Middleware для аутентификации
   async (req, res) => {
     const errors = validationResult(req);

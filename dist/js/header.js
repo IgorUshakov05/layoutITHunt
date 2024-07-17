@@ -118,6 +118,7 @@ $(document).ready(function() {
 
 $('#modalAbout').on('click', () => {
     $('#AboutPrime').css('display', 'block')
+    $('.youNeedIs').css('display', 'flex')
 })
 $('#closeModalThis').on('click', () => {
     $('#AboutPrime').css('display', 'none')

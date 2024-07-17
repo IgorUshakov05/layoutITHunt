@@ -24,7 +24,25 @@ const skillsScheme = new mongoose.Schema({
   title: {
     type: String,
     required: true,
-    unique: true,
+    unique: false,
+  },
+});
+
+const eduScheme = new mongoose.Schema({
+  id: {
+    type: String,
+    required: true,
+    unique: false,
+  },
+  type: {
+    type: String,
+    required: true,
+    unique: false,
+  },
+  course: {
+    type: String,
+    required: true,
+    unique: false,
   },
 });
 const schema = new mongoose.Schema({
@@ -89,6 +107,7 @@ const schema = new mongoose.Schema({
     type: String,
     default: "./assets/pictures/defaultAvatar.png",
   },
-  expiriens:[expiriensSchema]
+  expiriens:[expiriensSchema],
+  education: [eduScheme]
 });
 module.exports = mongoose.model("User", schema);

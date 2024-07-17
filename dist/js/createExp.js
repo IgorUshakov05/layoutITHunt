@@ -27,6 +27,7 @@ function validateForm() {
     date &&
     date.toString().length <= 2
   ) {
+    console.log("awd")
     sendMyExp.disabled = false; // Включаем кнопку
     return true;
   } else {

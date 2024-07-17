@@ -1769,6 +1769,7 @@ letter-spacing: 0.15px;
     font-size: 12px;
     font-style: normal;
     font-weight: 300;
+    white-space: pre-wrap;
     line-height: 127.9%; /* 15.348px */
     letter-spacing: 0.12px;
 }
@@ -8182,7 +8183,7 @@ color:white;
     width: 720px;
     border-radius: 10px;
     max-width: 80%;
-    display: flex;
+    display: none;
     justify-content: space-between;
     align-items: flex-start;
 }

@@ -188,7 +188,6 @@ dateInput.addEventListener("input", function (e) {
   let value = e.target.value.trim();
   if (!value) {
     data.birthDay = "";
-    validateFirstStap();
     return;
   }
   data.birthDay = value.split("-").reverse().join("-");

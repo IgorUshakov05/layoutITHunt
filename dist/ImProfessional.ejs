@@ -312,7 +312,7 @@
                     <p class="descriptionAddExiriens" style="margin-top: 0;">Выберете уровень образования</p>
                     <div class="mySpecialEdu">
                         <div class="selectedEdu">
-                            <p class="titleEdu">Профессионwdawdawdальное образование</p>
+                            <p class="titleEdu">Профессиональное образование</p>
                             <div class="butForSelectEdu">
                                 <svg class="rotatePls" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                                  <path d="M0.920898 1L6.93536 7L12.9498 1" stroke="#5412E0" stroke-width="2"/>
@@ -330,7 +330,7 @@
                     <input type="text" id="addCurse" class="addCurse">
                     <div class="canelsButton">
                         <button id="closeEduModal" class="canel">Отмена</button>
-                        <button class="sendJobTitle">Добавить</button>
+                        <button class="sendJobTitle" id="sendEduData" disabled>Добавить</button>
                     </div>
                 </dialog>
             </div>
@@ -445,34 +445,25 @@ function escapeHtml(unsafe) {
         </div>
 
          
-                <div class="educationMyClick mt-12">
-                    <div class="oneBlock">
+                <div class="educationMyClick mt-20">
+                        <div class="oneBlock">
                     <div class="exucation">
                         <p class="myVacancyText">Образование</p>
-                        <div class="eduSchool clickNoEdu">
+                        <div id="parentEdu">
+                            <%if(education.length) {%>
+                            <%education.forEach(edu => {%>
+                                <div class="eduSchool clickNoEdu">
                             <div class="removeEdu">
-                                <p class="rmText">Удалить</p>
+                                <p class="rmText" data-id="<%-edu.id%>">Удалить</p>
                             </div>
-                            <p class="educationalInstitution">Профессиональное образование </p>
-                            <p class="educationalInstitutionType">Информационные технологии и системы дермоида</p>
-                            <button class="rmText paddAndBor">Удалить</button>
+                            <p class="educationalInstitution"><%-edu.type%></p>
+                            <p class="educationalInstitutionType"><%-edu.course%></p>
+                            <button class="rmText paddAndBor" data-id="<%-edu.id%>">Удалить</button>
                             </div>
-                            <div class="eduSchool clickNoEdu">
-                                <div class="removeEdu">
-                            <p class="rmText">Удалить</p>
-                            </div>
-                            <p class="educationalInstitution">Профессиональное образование </p>
-                            <p class="educationalInstitutionType">Информационные технологии и системы дермоида</p>
-                            <button class="rmText paddAndBor">Удалить</button>
-                            </div>
-                            <div class="eduSchool clickNoEdu">
-                                <div class="removeEdu">
-                            <p class="rmText">Удалить</p>
-                            </div>
-                            <p class="educationalInstitution">Профессиuihayugwdyualwydg8oahuwdlyiguaowhudligyauwodональное образование </p>
-                            <p class="educationalInstitutionType">Информационные технологии и системы дермоида</p>
-                            <button class="rmText paddAndBor">Удалить</button>
-                            </div>
+                            <%});%>
+                            <%}%>
+                        </div>
+
                             <div class="addNewVacansy" id="addEdButton">
                         <div class="svgPlus"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M9.12305 0.75V9V17.25" stroke="white" stroke-linecap="round"></path>
@@ -494,6 +485,7 @@ function escapeHtml(unsafe) {
                                     <div class="inputSearchFavorite">
                                         <input id="searchPeople" oninput="searchFavorite()" type="text"  class="searchChat searchChatFavorite" placeholder="Фамилия, Имя, Специализация"> </div> <div class="dadysIsNotActive"> <div class="myDady"> <div class="infoUser"> <a class="inherit" href="/user/1232"> <div class="letInfo"><img width="41" height="41" src="/assets/pictures/Author.png" alt="Фото пользователя"></div> <div class="rightInfo"> <div class="firstNameAndLastName"> <span class="firstNameAndLastNameText">Ушаков Игорь</span> </div> <div class="specialnost"> <span class="specialnostText">awdawd</span> </div> </div> </a> </div> <div class="removeUser openMethodsMEnu"> <span class="removeUserFavorite">Удалить</span> </div> </div> </div> <div class="addNewVacansy allSelect"  style="margin-top: 0;"> <span>Показать всех</span> </div> </div> </div>
                 </div>
+                    
                     <div class="twoBlock">
                     <div class="exucation">
                         <p class="myVacancyText">Мои отклики</p>
@@ -701,6 +693,7 @@ function escapeHtml(unsafe) {
 </main>
     <script src="/js/header.js"></script>
     <script src="/js/createExp.js"></script>
+    <script src="/js/education.js"></script>
     <script src="/js/ImProfessional.js"></script>
     <script src="/js/searchFavorite.js"></script>
 </body>
