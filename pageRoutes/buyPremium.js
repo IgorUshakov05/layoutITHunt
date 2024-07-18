@@ -11,7 +11,7 @@ router.get('/buy-premium', isAuth,async(req,res) => {
   let access = req.cookies.access;
     let user = decodeAccessToken(access)
     console.log(user)
-    res.render('buy-premium', { isLoggedIn:!!user, id:user.userID})
+    res.render('buy-premium', { isLoggedIn:!!user, id:user.userID, role: user.userROLE})
 })
 
 module.exports = router

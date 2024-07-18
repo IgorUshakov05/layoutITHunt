@@ -89,8 +89,8 @@ const schema = new mongoose.Schema({
     required: true,
   },
   premium: {
-    type: String,
-    default: "",
+    type: Boolean,
+    default: false,
   },
   description: {
     type: String,

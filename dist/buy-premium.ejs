@@ -22,7 +22,6 @@
 <body>
     <%- include('./header.ejs', { isLoggedIn, active: 'profile', id}) %>
 
-<% let role = 'sec' %>
 <main class="main">
      <div class="twoBlocks">
         <div class="personalInfo conditionBuyPremium">
@@ -47,7 +46,7 @@
                     </div>
                     <div class="descriptionAdmentage">
                         <h1 class="titleAdventeg">Отключить рекламу</h1>
-                        <% if (role=='spec') { %>
+                        <% if (role=='worker') { %>
                             <h2 class="descriptionAdventeg">Уберите рекламу, расширьте список вакансий и сделайте контент более полезным</h2>
                         <%} else {%>
                             <h2 class="descriptionAdventeg">Уберите рекламу, расширьте список специалистов и сделайте контент более полезным</h2>
@@ -60,7 +59,7 @@
                     </div>
                     <div class="descriptionAdmentage">
                         <h1 class="titleAdventeg">Обратите на себя внимания</h1>
-                        <% if (role=='spec') { %>
+                        <% if (role=='worker') { %>
                             <h2 class="descriptionAdventeg">Подчеркните свои навыки и опыт с функцией, которая выделяет вас в глазах работодателей</h2>
                         <%} else {%>
                             <h2 class="descriptionAdventeg">Подчеркните свою вакансию и Фаст-Ворк с функцией, которая выделяет вас в глазах специалистов</h2>
@@ -122,11 +121,11 @@
                             <li></li>
                         </ul>
                     </div> 
-                    <a href="" class="buttonGoBye">
+                    <button id="short" class="buttonGoBye">
                         <div class="tarif">
                             <h2><span class="Months">299</span><span class="p always">Ꝑ</span><span class="lines"></span><span class="Months">Месяц</span></h2>
                         </div>
-                    </a>
+                    </button>
                 </article>
                 <article class="itemPremium">
                     <div class="topInfotitle">
@@ -134,7 +133,7 @@
                         
                         <div class="rigth">
 
-                        <h1 class="titleTarifMy">Шорт</h1>   
+                        <h1 class="titleTarifMy">Миддл</h1>   
                         <div class="tarif">
                             <h2><span class="Months">807</span><span class="p always">Ꝑ</span><span class="lines"></span><span class="Months">3 Месяца</span></h2>
                         </div>
@@ -160,11 +159,11 @@
                             <li></li>
                         </ul>
                     </div> 
-                    <a href="" class="buttonGoBye">
+                    <button id="middle" class="buttonGoBye">
                         <div class="tarif">
-                            <h2><span class="Months">2870</span><span class="p always">Ꝑ</span><span class="lines"></span><span class="Months">12 Месяцев</span></h2>
+                            <h2><span class="Months">807</span><span class="p always">Ꝑ</span><span class="lines"></span><span class="Months">3 Месяца</span></h2>
                         </div>
-                    </a>
+                    </button>
                 </article>
                 <article class="itemPremium">
                     <div class="topInfotitle">
@@ -172,7 +171,7 @@
                         
                         <div class="rigth">
 
-                        <h1 class="titleTarifMy">Шорт</h1>   
+                        <h1 class="titleTarifMy">Лонг</h1>   
                         <div class="tarif">
                             <h2><span class="Months">2870</span><span class="p always">Ꝑ</span><span class="lines"></span><span class="Months">12 Месяцев</span></h2>
                         </div>
@@ -198,17 +197,17 @@
                             <li></li>
                         </ul>
                     </div>
-                    <a href="" class="buttonGoBye">
+                    <button id="long" class="buttonGoBye">
                         <div class="tarif">
                             <h2><span class="Months">2870</span><span class="p always">Ꝑ</span><span class="lines"></span><span class="Months">12 Месяцев</span></h2>
                         </div>
-                    </a>
+                    </button>
                 </article>
             </div>
-            <div class="commingSoon <%= role !== 'spec' ? 'solidBorder' : '' %>">
+            <div class="commingSoon <%= role !== 'worker' ? 'solidBorder' : '' %>">
 
-                <% if (role=='spec') { %> 
-                <div class="discount " style="background: #4900E3; top: 13px; right: 19px; padding: 5px 10px;"><span style="font-family: Ubuntu;color:white; font-size: 12px;">Уже скоро</span></div>
+                <% if (role=='worker') { %> 
+                <div class="discount " style="background: #4900E3; top: 13px !important; right: 19px !important; padding: 5px 10px;"><span style="font-family: Ubuntu;color:white; font-size: 12px;">Уже скоро</span></div>
                 <div class="inTwoBlocks">
                     <div class="imgPicTure">
                         <img src="/assets/pictures/commintSoon.png" alt="Скоро">
@@ -330,12 +329,12 @@
 </main>
 
 <%- include('./footer.ejs') %>
+<script src="/js/premium.js"></script>
 <script src="/js/header.js"></script>
 <script>
     document.location.search.slice(8) ==='2870'?document.querySelectorAll('.itemPremium')[2].className  = 'itemPremium active':''
     document.location.search.slice(8) ==='807'?document.querySelectorAll('.itemPremium')[1].className  = 'itemPremium active':''
     document.location.search.slice(8) ==='299'?document.querySelectorAll('.itemPremium')[0].className  = 'itemPremium active':''
-
 </script>
 </body>
 </html>

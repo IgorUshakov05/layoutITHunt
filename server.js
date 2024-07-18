@@ -34,6 +34,8 @@ const vacancia = require("./pageRoutes/vacansyaItem");
 const userChat = require("./pageRoutes/privateChat");
 const deleteAccount = require("./pageRoutes/deleteAccount");
 const city = require('./api/city/routes')
+const payment = require('./api/payment/routes')
+const paymentHook = require('./api/payment/routerWebHooks')
 const deleteAccountComplite = require("./pageRoutes/deleteAccountComplite");
 const specialists = require("./pageRoutes/specialist");
 const createCompany = require("./pageRoutes/createCompany");
@@ -74,6 +76,7 @@ app.use(
   apiSkill,
   expiriens,
   education,
+  payment,
   setSetting,
   skills,
   city
@@ -83,6 +86,7 @@ app.get("/404", (req, res) => {
   res.render("pageNotFaund");
 });
 app.use(googleAuthLogin,googleAuthRegistration)
+app.use(paymentHook)
 // app.set('view cache', true);
 app.use(
   buyPremium,
@@ -120,6 +124,7 @@ app.use(
 app.get("/robots.txt", (req, res) => {
   res.sendFile(path.join(__dirname, "robots.txt"));
 });
+
 
 app.use(User)
 

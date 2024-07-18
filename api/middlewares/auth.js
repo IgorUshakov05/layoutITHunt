@@ -13,7 +13,6 @@ const isAuth = async (req, res, next) => {
     return await logout(res,next);
   }
   let decodeAccess = await decodeAccessToken(access);
-  console.log(decodeAccess);
   if (!decodeAccess) {
     let findToken = await searchToken(refresh);
     let decodeRefresh = decodeRefreshToken(findToken);
@@ -22,9 +21,7 @@ const isAuth = async (req, res, next) => {
       await deleteToken(findToken.id);
       return await logout(res,next);
     }
-    console.log(decodeRefresh, " - из базы");
     let searchUser = await searchUserId(decodeRefresh.userID)
-    console.log(searchUser)
     const accessTokenCookie = await createAccessToken({
       userID: searchUser.id,
       userMAIL: searchUser.mail,
