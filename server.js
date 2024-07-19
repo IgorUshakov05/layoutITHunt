@@ -23,6 +23,7 @@ const fastWorkItem = require("./pageRoutes/fastworkItem");
 const chat = require("./pageRoutes/chat");
 const inbox = require("./pageRoutes/inbox");
 const skills = require('./api/skills/routes');
+const favorite = require('./api/favorite/routes');
 const inboxOther = require("./pageRoutes/inboxOther");
 const findCompany = require("./pageRoutes/findCompany");
 const inboxCompany = require("./pageRoutes/inboxCompany");
@@ -76,6 +77,7 @@ app.use(
   apiSkill,
   expiriens,
   education,
+  favorite,
   payment,
   setSetting,
   skills,

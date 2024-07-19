@@ -7,6 +7,9 @@ const portfolioSchema = new mongoose.Schema({
   type: { type: String, default: "" },
   url: { type: String, required: true },
 });
+const favoriteScheme = new mongoose.Schema({
+  person: { type: String, default: "", required: true },
+});
 const expiriensSchema = new mongoose.Schema({
   id: { type: String, required: true },
   company: { type: String, required: true },
@@ -107,7 +110,8 @@ const schema = new mongoose.Schema({
     type: String,
     default: "./assets/pictures/defaultAvatar.png",
   },
+  favorite:[favoriteScheme],
   expiriens:[expiriensSchema],
-  education: [eduScheme]
+  education: [eduScheme],
 });
 module.exports = mongoose.model("User", schema);

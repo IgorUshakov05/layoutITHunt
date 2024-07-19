@@ -1,6 +1,4 @@
-let {
-  decodeAccessToken,
-} = require("../api/tokens/accessToken");
+let { decodeAccessToken } = require("../api/tokens/accessToken");
 const { isAuthNotRequire } = require("../api/middlewares/authNotRequire");
 const { Router } = require("express");
 const router = Router();
@@ -33,7 +31,8 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
           portfolios: result.portfolio,
           city: result.city,
           status: result.status,
-          education:result.education,
+          favorite: result.favorite,
+          education: result.education,
           avatar: result.avatar,
           expiriens: result.expiriens,
           premium: result.premium,
@@ -51,6 +50,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
         age,
         city: result.city,
         premium: result.premium,
+        favorite: result.favorite,
         contacts: result.contacts,
         portfolios: result.portfolio,
         status: result.status,
@@ -73,7 +73,9 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       city: result.city,
       skills: result.skills,
       premium: result.premium,
-      education:result.education,
+      education: result.education,
+      favorite: result.favorite,
+      im:decodeAccess.userROLE || null,
       status: result.status,
       portfolios: result.portfolio,
       expiriens: result.expiriens,
@@ -91,8 +93,9 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       premium: result.premium,
       city: result.city,
       avatar: result.avatar,
+      favorite: result.favorite,
       portfolios: result.portfolio,
-
+      im:decodeAccess.userROLE || null,
       contacts: result.contacts,
       status: result.status,
       description: result.description,

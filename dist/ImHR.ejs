@@ -289,10 +289,10 @@
         ] %>
 
         <% let userFavorite = [
-                    // {url: '231231231', lastname: "Ушаков", firstname: "Игорь", special: "Веб-разработчик"},
-                    // {url: '65746324', lastname: "Губарев", firstname: "Кирилл", special: "Веб-аналитик"},
-                    // {url: '1235234', lastname: "Ушаков", firstname: "Ярослав", special: "Веб-дизайнер"},
-                    // {url: '524234234', lastname: "Тимченко", firstname: "Ваня", special: "Веб-разум"},
+                    {id: '231231231', lastname: "Ушаков", name: "Игорь", job: "Веб-разработчики", avatar:""},
+                    {id: '65746324', lastname: "Губарев", name: "Кирилл", job: "Веб-аналитик", avatar:""},
+                    {id: '1235234', lastname: "Ушаков", name: "Ярослав", job: "Веб-дизайнер", avatar:""},
+                    {id: '524234234', lastname: "Тимченко", name: "Ваня", job: "Веб-разум",avatar: ""},
                 ] %>
         <div class="MoreInfo bottoMargin">
             <% if(vacancy.length) { %>
@@ -453,14 +453,14 @@
                 <% userFavorite.forEach(element => { %>
                     <div class="myDady">
                     <div class="infoUser">
-                        <a class="inherit" href="/user/<%= element.url%>">
-                            <div class="letInfo"><img width="41" height="41" src="/assets/pictures/Author.png" alt="Фото пользователя"></div>
+                        <a class="inherit" href="/<%= element.id%>">
+                            <div class="letInfo"><img width="41" height="41" src="<%-element.avatar%>" alt="Фото пользователя"></div>
                             <div class="rightInfo">
                                 <div class="firstNameAndLastName">
-                                    <span class="firstNameAndLastNameText"><%= element.lastname%> <%= element.firstname%></span>
+                                    <span class="firstNameAndLastNameText"><%= element.lastname%> <%= element.name%></span>
                                 </div>    
                                 <div class="specialnost">
-                                    <span class="specialnostText"><%= element.special%></span>
+                                    <span class="specialnostText"><%= element.job%></span>
                                 </div>
                             </div>
                         </a>
