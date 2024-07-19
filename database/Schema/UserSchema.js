@@ -72,7 +72,7 @@ const schema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: "Ищу работу",
+    default: "В поиске",
   },
   role: {
     type: String,

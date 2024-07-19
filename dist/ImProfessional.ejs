@@ -447,7 +447,7 @@ function escapeHtml(unsafe) {
          
                 <div class="educationMyClick mt-20">
                         <div class="oneBlock">
-                    <div class="exucation">
+                    <div class="exucation" style="margin-bottom: 20px;">
                         <p class="myVacancyText">Образование</p>
                         <div id="parentEdu">
                             <%if(education.length) {%>
@@ -472,22 +472,57 @@ function escapeHtml(unsafe) {
 </div><span>Добавить образование</span>
                         </div>
                     </div>
-                    <div class="favoriteSpecialist w-100 mt-20"> 
-                        <div class="top"> 
-                            <h1 class="inLine">
-                                <span class="myVacancyText">Избранные специалисты</span>
-                            </h1>
-                            <div class="clute">
-                                <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="17" height="17" rx="8.5" fill="#5412E0"/> <rect x="4" y="4" width="9" height="9" rx="4.5" fill="white"/> </svg> 
+                    <% if(favorite.length) { %>
+            <div class="favoriteSpecialist w-100">
+                <div class="top">
+                    <h1 class="inLine"><span class="myVacancyText">Избранные специалисты</span></h1>
+                    <div class="clute">
+                        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="17" height="17" rx="8.5" fill="#5412E0"/>
+<rect x="4" y="4" width="9" height="9" rx="4.5" fill="white"/>
+</svg>
+
+                        </div>
+                </div>
+                <div class="myFavoritePersonalist">
+                    <div class="inputSearchFavorite">
+                    <input id="searchPeople" oninput="searchFavorite()" type="text"  class="searchChat searchChatFavorite" placeholder="Фамилия, Имя, Специализация">
+                </div>
+                
+                <div class="dadysIsNotActive">
+                <% favorite.forEach(element => { %>
+                    <div class="myDady">
+                    <div class="infoUser">
+                        <a class="inherit" href="/<%= element.id%>">
+                            <div class="letInfo"><img width="41" height="41" src="<%-element.avatar%>" alt="Фото пользователя"></div>
+                            <div class="rightInfo">
+                                <div class="firstNameAndLastName">
+                                    <span class="firstNameAndLastNameText"><%= element.surname%> <%= element.name%></span>
+                                </div>    
+                                <div class="specialnost">
+                                    <span class="specialnostText"><%= element.job%></span>
                                 </div>
-                                </div>
-                                <div class="myFavoritePersonalist">
-                                    <div class="inputSearchFavorite">
-                                        <input id="searchPeople" oninput="searchFavorite()" type="text"  class="searchChat searchChatFavorite" placeholder="Фамилия, Имя, Специализация"> </div> <div class="dadysIsNotActive"> <div class="myDady"> <div class="infoUser"> <a class="inherit" href="/user/1232"> <div class="letInfo"><img width="41" height="41" src="/assets/pictures/Author.png" alt="Фото пользователя"></div> <div class="rightInfo"> <div class="firstNameAndLastName"> <span class="firstNameAndLastNameText">Ушаков Игорь</span> </div> <div class="specialnost"> <span class="specialnostText">awdawd</span> </div> </div> </a> </div> <div class="removeUser openMethodsMEnu"> <span class="removeUserFavorite">Удалить</span> </div> </div> </div> <div class="addNewVacansy allSelect"  style="margin-top: 0;"> <span>Показать всех</span> </div> </div> </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="removeUser openMethodsMEnu">
+                        <span class="removeUserFavorite">Удалить</span>
+                        </div>
+                </div>
+               <% }); %>
+               
+            </div>
+
+                <div class="addNewVacansy allSelect" style="margin-top: 0;">
+                    <span>Показать всех</span>
+                </div>             
+                </div>
+            </div>
+            <% } %>
                 </div>
                     
                     <div class="twoBlock">
-                    <div class="exucation">
+                    <div class="exucation" style="margin-bottom: 20px;">
                         <p class="myVacancyText">Мои отклики</p>
                         <div class="eduSchool onClick">
                             <div class="countAndOther">

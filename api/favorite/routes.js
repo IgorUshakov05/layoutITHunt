@@ -6,9 +6,7 @@ const router = Router()
 
 router.post('/favorite', isAuth, async (req,res) => {
     const { userID, userROLE } = await decodeAccessToken(req.cookies.access);
-    if(userROLE!=='creatorWork') {
-        return res.json({error:"Не достаточно прав"})
-    }
+    
     console.log(req.headers.referer)
     const id = await req.headers.referer.split('/')[3];
     console.log(id)

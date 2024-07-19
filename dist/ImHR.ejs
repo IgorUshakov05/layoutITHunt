@@ -288,12 +288,7 @@
             // {title: "Веб-дизайнер",time:'5 дней назад',price: 131220,clicks: 2, stack: ["HTML", "CSS", "JS", "Vue", "Angular"], place: "Абакан Чехова 25 1", description:"loreawdia iwda iwdiaiwhdglaiwhdlg iahjw djlahwdg u jahwiuhajlw f;il haw;odyg hauwdkgkauwdgagwdoialhwbdia hwduoahwgd iahw ydi hawg 7d8o jagkwvduyagcwvdu gwadj afwgdijlkfh 9yoihfjk lyhk lg9oawyd a8wyd  a'wd hjaw0' 'p aowdljawdui", hard: 4}
         ] %>
 
-        <% let userFavorite = [
-                    {id: '231231231', lastname: "Ушаков", name: "Игорь", job: "Веб-разработчики", avatar:""},
-                    {id: '65746324', lastname: "Губарев", name: "Кирилл", job: "Веб-аналитик", avatar:""},
-                    {id: '1235234', lastname: "Ушаков", name: "Ярослав", job: "Веб-дизайнер", avatar:""},
-                    {id: '524234234', lastname: "Тимченко", name: "Ваня", job: "Веб-разум",avatar: ""},
-                ] %>
+    
         <div class="MoreInfo bottoMargin">
             <% if(vacancy.length) { %>
             <div class="myVacancy" >
@@ -368,7 +363,7 @@
             </div>
             <% } %>
             <% if(fastWork.length) { %>
-            <div class="myVacancy mt-20">
+            <div class="myVacancy mt-20" style="margin-bottom: 20px;">
                 <h1 class="inLine"><span class="myVacancyText">Мои Фаст-Ворки</span><span class="vacancyIter">  (<%=fastWork.length%>)</span><div class="closeFast"><svg width="22" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12L11 3L20 12" stroke="black" stroke-width="3"/></svg></div></h1>
                 <div class="fastBox">
                     <% fastWork.forEach(element => { %>
@@ -432,8 +427,8 @@
                         </a>
             </div>
             <% } %>
-            <% if(userFavorite.length) { %>
-            <div class="favoriteSpecialist  mt-20">
+            <% if(favorite.length) { %>
+            <div class="favoriteSpecialist">
                 <div class="top">
                     <h1 class="inLine"><span class="myVacancyText">Избранные специалисты</span></h1>
                     <div class="clute">
@@ -450,14 +445,14 @@
                 </div>
                 
                 <div class="dadysIsNotActive">
-                <% userFavorite.forEach(element => { %>
+                <% favorite.forEach(element => { %>
                     <div class="myDady">
                     <div class="infoUser">
                         <a class="inherit" href="/<%= element.id%>">
                             <div class="letInfo"><img width="41" height="41" src="<%-element.avatar%>" alt="Фото пользователя"></div>
                             <div class="rightInfo">
                                 <div class="firstNameAndLastName">
-                                    <span class="firstNameAndLastNameText"><%= element.lastname%> <%= element.name%></span>
+                                    <span class="firstNameAndLastNameText"><%= element.surname%> <%= element.name%></span>
                                 </div>    
                                 <div class="specialnost">
                                     <span class="specialnostText"><%= element.job%></span>
@@ -479,7 +474,7 @@
                 </div>
             </div>
             <% } %>
-            <% if(!vacancy.length&&!fastWork.length&&!userFavorite.length) { %>
+            <% if(!vacancy.length&&!fastWork.length&&!favorite.length) { %>
               <div class="boxNones">
                 <h1 class="nowTime">Самое время найти специалиста</h1>
                 <p class="createPleace">Создайте вакансию или заказ, который заинтересует специалиста</p>

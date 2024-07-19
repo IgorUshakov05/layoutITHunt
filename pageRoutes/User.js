@@ -3,20 +3,22 @@ const { isAuthNotRequire } = require("../api/middlewares/authNotRequire");
 const { Router } = require("express");
 const router = Router();
 const { searchUserId } = require("../database/Request/User");
+const { findUsersByFavorites } = require("../database/Request/User");
 
 router.get("/:id", isAuthNotRequire, async (req, res, next) => {
   let access = req.cookies.access;
   let id = req.params.id;
   let result = await searchUserId(id);
-  console.log(id);
   if (result === null) {
     return res.render("pageNotFaund");
   }
-  console.log(result);
   let decodeAccess = await decodeAccessToken(access);
   const age = calculateAge(result.birthDay);
   if (access) {
     if (decodeAccess.userID === id) {
+      let favorites = await findUsersByFavorites(result.favorite)
+      console.log(favorites)
+      console.log(result);
       if (result.role === "worker") {
         return res.render("ImProfessional.ejs", {
           isLoggedIn: decodeAccess,
@@ -31,7 +33,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
           portfolios: result.portfolio,
           city: result.city,
           status: result.status,
-          favorite: result.favorite,
+          favorite: favorites,
           education: result.education,
           avatar: result.avatar,
           expiriens: result.expiriens,
@@ -50,7 +52,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
         age,
         city: result.city,
         premium: result.premium,
-        favorite: result.favorite,
+        favorite: favorites,
         contacts: result.contacts,
         portfolios: result.portfolio,
         status: result.status,

@@ -169,18 +169,18 @@ return unsafe
             </div>
         </div>
         <div class="MoreInfo mb-20">
+            <%if(skills.length) {%>
             <div class="mySkills">
                 <span class="myVacancyText">Навыки</span>
                 <div class="skillsInProfile">
-                    <%if(skills) {%>
                     <ul class="skillsInProfileList">
                         <% skills.forEach(function(skill) { %>
                         <li><%=skill.title%></li>
                     <%})%>
                     </ul>
+                    </div>
+                    </div>
                     <%}%>
-                </div>
-            </div>
             <%if(expiriens.length) {%>
             <div class="expiriensJob mt-20">
                 <span class="myVacancyText">Опыт работы</span>
@@ -235,7 +235,10 @@ return unsafe
                 </div>
     </div>
 </main>
+<%if(im) {%>
 <script src="/js/favorite.js"></script>
+<%}%>
+
     <script src="/js/header.js"></script>
 </body>
 </html>

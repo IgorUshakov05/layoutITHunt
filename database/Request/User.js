@@ -10,6 +10,28 @@ const searchUserId = async(id) => {
     }
 }
 
+const findUsersByFavorites = async (favorites) => {
+    try {
+      const personIds = favorites.map(fav => fav.person);
+  
+      const users = await UserSchema.find({id: personIds}).select('avatar job id name surname'); // Предполагаем, что в вашей схеме есть поле id
+
+      // Если id является вашим собственным полем, его не нужно преобразовывать
+      const usersWithSelectedFields = users.map(user => ({
+        id: user.id,
+        avatar: user.avatar,
+        job: user.job || "Не определено",
+        surname: user.surname,
+        name: user.name
+      }));
+  
+      return usersWithSelectedFields;
+    } catch (e) {
+      console.error("Ошибка при поиске пользователей:", e);
+      throw e; // или обрабатываем ошибку соответствующим образом
+    }
+  };
+  
 
 const searchUserEmail = async(email) => {
     try {
@@ -21,4 +43,4 @@ const searchUserEmail = async(email) => {
     }
 }
 
-module.exports = {searchUserId,searchUserEmail}
+module.exports = {searchUserId,searchUserEmail,findUsersByFavorites}
