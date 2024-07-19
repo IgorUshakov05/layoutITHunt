@@ -13,10 +13,12 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
     return res.render("pageNotFaund");
   }
   let decodeAccess = await decodeAccessToken(access);
+  var favorites;
   const age = calculateAge(result.birthDay);
   if (access) {
+    let findMyProf = await searchUserId(decodeAccess.userID)
+    favorites = await findUsersByFavorites(findMyProf.favorite)
     if (decodeAccess.userID === id) {
-      let favorites = await findUsersByFavorites(result.favorite)
       console.log(favorites)
       console.log(result);
       if (result.role === "worker") {
@@ -62,6 +64,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
   }
 
   if (result.role === "worker") {
+    console.log(favorites,id)
     return res.render("seeSideProf.ejs", {
       isLoggedIn: decodeAccess,
       id: decodeAccess.userID,
@@ -76,7 +79,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       skills: result.skills,
       premium: result.premium,
       education: result.education,
-      favorite: result.favorite,
+      isFav:favorites.some(item => item.id === id),
       im:decodeAccess.userROLE || null,
       status: result.status,
       portfolios: result.portfolio,
@@ -95,7 +98,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       premium: result.premium,
       city: result.city,
       avatar: result.avatar,
-      favorite: result.favorite,
+      isFav:favorites.some(item => item.id === id),
       portfolios: result.portfolio,
       im:decodeAccess.userROLE || null,
       contacts: result.contacts,
