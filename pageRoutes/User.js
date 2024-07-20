@@ -13,7 +13,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
     return res.render("pageNotFaund");
   }
   let decodeAccess = await decodeAccessToken(access);
-  var favorites;
+  var favorites = null;
   const age = calculateAge(result.birthDay);
   if (access) {
     let findMyProf = await searchUserId(decodeAccess.userID)
@@ -79,7 +79,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       skills: result.skills,
       premium: result.premium,
       education: result.education,
-      isFav:favorites.some(item => item.id === id),
+      isFav:favorites?favorites.some(item => item.id === id):null,
       im:decodeAccess.userROLE || null,
       status: result.status,
       portfolios: result.portfolio,
@@ -98,7 +98,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       premium: result.premium,
       city: result.city,
       avatar: result.avatar,
-      isFav:favorites.some(item => item.id === id),
+      isFav:favorites?favorites.some(item => item.id === id):null,
       portfolios: result.portfolio,
       im:decodeAccess.userROLE || null,
       contacts: result.contacts,

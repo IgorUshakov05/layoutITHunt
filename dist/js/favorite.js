@@ -1,6 +1,26 @@
+
 let button = document.getElementById('inFavorite');
 let isCooldown = false;
+$(document).ready(function(){
+  let userData = {
+    id: null
+  }
+  $(document).on('click','.removeUserFavorite',  function () {
+    let value = $(this).attr('data-id')
+    userData.id=value
+    console.log(userData.id)
+    })
+ });
 
+  // fetch("/api/favorite", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     Authorization: "augwod89h1h9awdh9py0y82hjd",
+  //   },
+  //   body: JSON.stringify({id:value})
+   
+  // }).then((obj) => obj.json()).then((obj) => console.log(obj));
 button.addEventListener('click', () => {
   if (isCooldown) return; // Если кнопка на cooldown'е, выходим из функции
 

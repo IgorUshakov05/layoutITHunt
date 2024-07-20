@@ -5,15 +5,15 @@ let { decodeAccessToken } = require("../tokens/accessToken");
 const router = Router()
 
 router.post('/favorite', isAuth, async (req,res) => {
-    const { userID, userROLE } = await decodeAccessToken(req.cookies.access);
+    const { userID } = await decodeAccessToken(req.cookies.access);
     
     console.log(req.headers.referer)
-    const id = await req.headers.referer.split('/')[3];
+    const id = await req.body.id ||req.headers.referer.split('/')[3];
     console.log(id)
     if(!id) {
         return res.json({error:"Не верный параметр"})
     }
-    let saveFavoriteUser = await setFavorite(userID, id)
+    let saveFavoriteUser = await setFavorite(userID, id, Boolean(req.body.id))
     if(saveFavoriteUser.success !== true) {
         return res.json({error:"Ошибка сервера"})
     }

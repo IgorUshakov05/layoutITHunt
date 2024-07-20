@@ -1,6 +1,6 @@
 const UserSchema = require("../../database/Schema/UserSchema");
 
-const setFavorite = async (Myid, idUser) => {
+const setFavorite = async (Myid, idUser, requireDel=false) => {
   try {
     let findUser = await UserSchema.findOne({ id: idUser });
     let Hr = await UserSchema.findOne({ id: Myid });
@@ -12,7 +12,7 @@ const setFavorite = async (Myid, idUser) => {
     const isFavorite = Hr.favorite.some(item => item.person === idUser);
 
     let result;
-    if (isFavorite) {
+    if (isFavorite || requireDel) {
       // Удаляем idUser из массива favorite
       result = await UserSchema.findOneAndUpdate(
         { id: Myid },
