@@ -95,6 +95,11 @@ const schema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  chatList: {
+    type: String,
+    require: true,
+    unique: true
+  },
   description: {
     type: String,
     default: "",

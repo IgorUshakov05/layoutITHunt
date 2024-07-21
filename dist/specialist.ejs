@@ -13,7 +13,7 @@
     <title>ITHunt - Специалисты</title>
 </head>
 <body>
-    <%- include('./header.ejs', { isLoggedIn, active: 'specialists'}) %>
+    <%- include('./header.ejs', { isLoggedIn, active: 'specialists',chat:chatList}) %>
 <% let users = [
     {
         firstname: "Игорь",

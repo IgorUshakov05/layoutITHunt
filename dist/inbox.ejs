@@ -19,7 +19,7 @@
     <title>Входящие уведомления</title>
 </head>
 <body>
-    <%- include('./header.ejs', { isLoggedIn, active: 'inbox'}) %>
+    <%- include('./header.ejs', { isLoggedIn, active: 'inbox',chat:chatList}) %>
     <main  class="main">
         <div class="twoBlocks mt20">
             <%- include('./inboxLinks', {active: "", isMain: true}) %>

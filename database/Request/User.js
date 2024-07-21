@@ -14,13 +14,14 @@ const findUsersByFavorites = async (favorites) => {
     try {
       const personIds = favorites.map(fav => fav.person);
   
-      const users = await UserSchema.find({id: personIds}).select('avatar job id name surname'); // Предполагаем, что в вашей схеме есть поле id
+      const users = await UserSchema.find({id: personIds}).select('avatar job id name surname role'); // Предполагаем, что в вашей схеме есть поле id
 
       // Если id является вашим собственным полем, его не нужно преобразовывать
       const usersWithSelectedFields = users.map(user => ({
         id: user.id,
         avatar: user.avatar,
-        job: user.job || "Не определено",
+        role: user.role,
+        job: user.job,
         surname: user.surname,
         name: user.name
       }));

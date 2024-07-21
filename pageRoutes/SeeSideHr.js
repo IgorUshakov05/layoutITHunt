@@ -7,7 +7,7 @@ router.get('/SeSideHr',isAuthNotRequire,(req,res) => {
     let access = req.cookies.access;
     let user = decodeAccessToken(access)
     console.log(user)
-    res.render('SeSideHr', { isLoggedIn:!!user, id:user.userID})
+    res.render('SeSideHr', { isLoggedIn:!!user, id:user.userID,chatList: user.chatList || null})
 })
 
 

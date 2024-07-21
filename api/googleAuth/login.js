@@ -56,6 +56,7 @@ router.get(
       const accessTokenCookie = await createAccessToken({
         userID: findOfEmail.id,
         userMAIL: findOfEmail.mail,
+        chatList: findOfEmail.chatList,
         userROLE: findOfEmail.role,
       });
 

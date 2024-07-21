@@ -13,7 +13,7 @@
     <title>Чат компании</title>
 </head>
 <body style="overflow-y: hidden !important; height:100vh;">
-<%- include('./header.ejs', { isLoggedIn, active: 'chat', id}) %>
+<%- include('./header.ejs', { isLoggedIn, active: 'chat', id,chat:chatList}) %>
 
 <% let role="creator" %>
 <main class="main main2">

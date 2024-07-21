@@ -21,7 +21,7 @@
       ...vacansySkills.filter(skill => !userSkills.includes(skill)).filter(skill => !userSkills.includes(skill)),
       ...userSkills.filter(skill => !vacansySkills.includes(skill))
     ] %>
-    <%- include('./header.ejs', { isLoggedIn, active: 'inbox'}) %>
+    <%- include('./header.ejs', { isLoggedIn, active: 'inbox',chat:chatList}) %>
     <main  class="main">
         <div class="twoBlocks mt20">
             <%- include('./inboxLinks', {active: "2", isMain: false }) %>

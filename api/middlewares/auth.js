@@ -25,6 +25,7 @@ const isAuth = async (req, res, next) => {
     const accessTokenCookie = await createAccessToken({
       userID: searchUser.id,
       userMAIL: searchUser.mail,
+      chatList: searchUser.chatList,
       userROLE: searchUser.role,
     });
     let source = await req.headers["user-agent"];
@@ -33,13 +34,14 @@ const isAuth = async (req, res, next) => {
       await deleteToken(findToken.id);
       return await logout(res,next);
     }
-    res
-    .status(200)
-    .cookie("access", accessTokenCookie, {
+    await res.status(200)
+    await res.cookie("access", accessTokenCookie, {
       maxAge: 3600000, // 1 час
       httpOnly: true, // Куки доступны только для сервера
       secure: true // Куки передаются только по HTTPS
     })
+    console.log("Токен отправлен",accessTokenCookie)
+    return await next();
   }
   await next();
 };

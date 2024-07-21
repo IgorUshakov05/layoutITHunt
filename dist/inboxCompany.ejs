@@ -14,7 +14,7 @@
     <title>Входящие уведомления - Компания</title>
 </head>
 <body>
-    <%- include('./header.ejs', { isLoggedIn, active: 'inbox'}) %>
+    <%- include('./header.ejs', { isLoggedIn, active: 'inbox',chat:chatList}) %>
     <main  class="main">
         <div class="twoBlocks mt20">
             <%- include('./inboxLinks', {active: "3", isMain: false }) %>

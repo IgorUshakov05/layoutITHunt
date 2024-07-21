@@ -41,7 +41,7 @@
             <a href="/fast-work">
                 <h2 class="<%= active ==='fast-work'?'activeMenu':'' %>">Фаст-Ворк</h2>
             </a>
-            <a href="/chats">
+            <a href="<%=chat?`/chats/${chat}`:'/login'%>">
                 <h2 class="<%= active ==='chat'?'activeMenu':'' %>">Чат</h2>
             </a>
             <a href="/inbox">

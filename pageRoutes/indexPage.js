@@ -7,7 +7,7 @@ router.get('/',isAuthNotRequire,async(req,res) => {
     let access = req.cookies.access;
     let user = decodeAccessToken(access)
     console.log(user)
-    res.render('index', { isLoggedIn:!!user, id:user.userID})
+    res.render('index', { isLoggedIn:!!user, id:user.userID,chatList: user.chatList || null})
 })
 
 

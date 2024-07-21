@@ -2,12 +2,12 @@ let {
   decodeAccessToken,
   createAccessToken,
 } = require("../api/tokens/accessToken");
-const {isAuthNotRequire} = require('../api/middlewares/authNotRequire')
+const {isAuth} = require('../api/middlewares/auth')
 const { Router } = require("express");
 const router = Router();
 const { searchUserId } = require("../database/Request/User");
 
-router.get("/setting",isAuthNotRequire, async (req, res, next) => {
+router.get("/setting",isAuth, async (req, res, next) => {
   let access = req.cookies.access;
   if(!access) {
     return res.redirect('/')
@@ -27,6 +27,7 @@ router.get("/setting",isAuthNotRequire, async (req, res, next) => {
           id:decodeAccess.userID, 
           name: result.name,
           surname: result.surname,
+          chatList: decodeAccess.chatList,
           job: result.job,
           contacts:result.contacts,
           portfolios:result.portfolio,
@@ -46,6 +47,7 @@ router.get("/setting",isAuthNotRequire, async (req, res, next) => {
         job: result.job,
         title: "Мой профиль",
         avatar:result.avatar,
+        chatList: decodeAccess.chatList,
         age,
         city: result.city,
         contacts:result.contacts,

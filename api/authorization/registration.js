@@ -27,6 +27,7 @@ async function Registration(req, res) {
     const accessTokenCookie = await createAccessToken({
       userID: userInsertToDataBase.id,
       userMAIL: userInsertToDataBase.mail,
+      chatList: findOfEmail.chatList,
       userROLE: userInsertToDataBase.role,
     });
 

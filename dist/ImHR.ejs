@@ -19,7 +19,7 @@
 
 </head>
 <body>
-    <%- include('./header.ejs', { isLoggedIn, active: 'profile', id}) %>
+    <%- include('./header.ejs', { isLoggedIn, active: 'profile', id,chat:chatList}) %>
     <div class="blackBack" id="AboutPrime">
         <div class="youNeedIs">
             <div class="toBlocksToColumn">
@@ -430,7 +430,7 @@
             <% if(favorite.length) { %>
             <div class="favoriteSpecialist">
                 <div class="top">
-                    <h1 class="inLine"><span class="myVacancyText">Избранные специалисты</span></h1>
+                    <h1 class="inLine"><span class="myVacancyText">Избранные пользователи</span></h1>
                     <div class="clute">
                         <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="17" height="17" rx="8.5" fill="#5412E0"/>
@@ -455,7 +455,7 @@
                                     <span class="firstNameAndLastNameText"><%= element.surname%> <%= element.name%></span>
                                 </div>    
                                 <div class="specialnost">
-                                    <span class="specialnostText"><%= element.job%></span>
+                                    <span class="specialnostText"><%= element.role==='creatorWork'?'HR':element.job?element.job:'Неопределенно'%></span>
                                 </div>
                             </div>
                         </a>

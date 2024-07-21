@@ -6,26 +6,33 @@ const { searchUserId } = require("../database/Request/User");
 const { findUsersByFavorites } = require("../database/Request/User");
 
 router.get("/:id", isAuthNotRequire, async (req, res, next) => {
-  let access = req.cookies.access;
-  let id = req.params.id;
-  let result = await searchUserId(id);
+  try {
+
+    let access = req.cookies.access;
+    let id = req.params.id;
+    let result = await searchUserId(id);
   if (result === null) {
     return res.render("pageNotFaund");
   }
   let decodeAccess = await decodeAccessToken(access);
+  if(!decodeAccess) {
+    return res.redirect('/login')
+  }
   var favorites = null;
   const age = calculateAge(result.birthDay);
   if (access) {
     let findMyProf = await searchUserId(decodeAccess.userID)
-    favorites = await findUsersByFavorites(findMyProf.favorite)
+    favorites = await findUsersByFavorites(findMyProf.favorite) || []
     if (decodeAccess.userID === id) {
       console.log(favorites)
       console.log(result);
       if (result.role === "worker") {
+        console.log(favorites)
         return res.render("ImProfessional.ejs", {
           isLoggedIn: decodeAccess,
           id: decodeAccess.userID,
           name: result.name,
+          chatList: decodeAccess.chatList,
           surname: result.surname,
           contacts: result.contacts,
           job: result.job,
@@ -49,6 +56,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
         name: result.name,
         surname: result.surname,
         job: result.job,
+        chatList: decodeAccess.chatList,
         title: "Мой профиль",
         avatar: result.avatar,
         age,
@@ -62,7 +70,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       });
     }
   }
-
+  
   if (result.role === "worker") {
     console.log(favorites,id)
     return res.render("seeSideProf.ejs", {
@@ -72,6 +80,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       surname: result.surname,
       contacts: result.contacts,
       job: result.job,
+      chatList: result.chatList || null,
       avatar: result.avatar,
       title: `${result.surname} ${result.name}`,
       age,
@@ -91,6 +100,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       isLoggedIn: decodeAccess,
       id: decodeAccess.userID,
       name: result.name,
+      chatList: result.chatList || null,
       surname: result.surname,
       job: result.job,
       title: `${result.surname} ${result.name}`,
@@ -106,6 +116,10 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       description: result.description,
     });
   }
+}
+catch(e) {
+  return false
+}
 });
 
 module.exports = router;
