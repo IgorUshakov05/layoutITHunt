@@ -14,6 +14,7 @@ const registration = require("./pageRoutes/registration");
 const expiriens = require("./api/expiriens/routes");
 const education = require("./api/education/routes");
 const User = require("./pageRoutes/User");
+const deleteChat = require("./api/chat/delete");
 const chatCompany = require("./pageRoutes/companyChat");
 const createVacancy = require("./pageRoutes/createVacancy");
 const addCompany = require("./pageRoutes/addCompany");
@@ -26,6 +27,9 @@ const skills = require('./api/skills/routes');
 const favorite = require('./api/favorite/routes');
 const inboxOther = require("./pageRoutes/inboxOther");
 const findCompany = require("./pageRoutes/findCompany");
+const WebSocket = require('ws');
+const http = require('http');
+const {handleMessageSocketConnection} = require("./api/chat/websoket/routes");
 const inboxCompany = require("./pageRoutes/inboxCompany");
 const court = require("./pageRoutes/court");
 const inboxFastWork = require("./pageRoutes/inboxFast-work");
@@ -46,6 +50,7 @@ const setSetting = require('./api/setting/routes')
 const moreInfo = require("./pageRoutes/moreInfo");
 const privacy = require("./pageRoutes/privacy-policy");
 const vacancies = require("./pageRoutes/vacancies");
+const chatRouter = require('./api/chat/routes')
 const EditCompany = require("./pageRoutes/EditCompany");
 const googleAuthLogin = require('./api/googleAuth/login');
 const googleAuthRegistration = require('./api/googleAuth/registration');
@@ -64,6 +69,7 @@ app.use(session({
   saveUninitialized: true,
 }));
 
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(
@@ -75,6 +81,7 @@ app.use(
   },
   api,
   apiSkill,
+  deleteChat,
   expiriens,
   education,
   favorite,
@@ -83,7 +90,22 @@ app.use(
   skills,
   city
 );
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ noServer: true }); // Используем noServer
+handleMessageSocketConnection(wss);
 
+server.on('upgrade', (request, socket, head) => {
+    // Проверка на допустимый URL
+    const url = new URL(request.url, `http://${request.headers.host}`);
+    if (url.pathname !== '/chat') {
+        socket.destroy();
+        return;
+    }
+
+    wss.handleUpgrade(request, socket, head, (ws) => {
+        wss.emit('connection', ws, request);
+    });
+});
 app.get("/404", (req, res) => {
   res.render("pageNotFaund");
 });
@@ -94,6 +116,7 @@ app.use(
   buyPremium,
   EditCompany,
   deleteAccountComplite,
+  chatRouter,
   court,
   chatCompany,
   inboxOther,
@@ -144,7 +167,7 @@ start = (PORT) => {
       .then(() => {
         console.log("Подключение к базе данных успешно");
 
-        app.listen(PORT, '0.0.0.0', () => {
+        server.listen(PORT, '0.0.0.0', () => {
           console.log(`Server start ${process.env.SERVER_PORT}`);
         });
       })

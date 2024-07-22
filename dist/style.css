@@ -4158,6 +4158,7 @@ aspect-ratio: 1/1;
     width: 100%;
     right: 0;
     left: 0;
+    z-index: 99;
     box-sizing: border-box;
     padding: 35px 15px;
     background: #FFF;

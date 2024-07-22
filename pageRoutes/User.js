@@ -15,7 +15,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
     return res.render("pageNotFaund");
   }
   let decodeAccess = await decodeAccessToken(access);
-  if(!decodeAccess) {
+  if(!decodeAccess && access) {
     return res.redirect('/login')
   }
   var favorites = null;

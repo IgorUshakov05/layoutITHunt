@@ -24,7 +24,6 @@ let filteredMessages = Array.from(messages).filter(message => {
 
     // Показываем отфильтрованные сообщения
     filteredMessages.forEach(message => {
-        console.log(message);
         if (!message.classList.contains('eventMessage')) {
             message.style.display = 'flex';
         }
@@ -45,9 +44,6 @@ let filteredMessages = Array.from(messages).filter(message => {
 });
 
 
-document.addEventListener('keydown', (e) => {
-    console.log(e.key)
-})
 
 
 let close = `<svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -74,7 +70,6 @@ document.addEventListener('keydown', function(searchInputevent) {
     if (event.ctrlKey && event.code === 'KeyF') {
         event.preventDefault();
         input.focus()
-        console.log('Вы нажали Ctrl + F');
         // Показ всех сообщений
         document.getElementById('score').innerText = '0'
     

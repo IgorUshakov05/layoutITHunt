@@ -10,5 +10,4 @@ router.get('/SeSideHr',isAuthNotRequire,(req,res) => {
     res.render('SeSideHr', { isLoggedIn:!!user, id:user.userID,chatList: user.chatList || null})
 })
 
-
 module.exports = router
