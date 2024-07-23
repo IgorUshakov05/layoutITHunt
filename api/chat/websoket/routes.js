@@ -55,47 +55,76 @@ async function handleMessageSocketConnection(wss) {
                 return;
             }
 
-            const { content, url } = parsedMessage;
+            const { type, content, url } = parsedMessage;
 
             // Проверяем наличие содержания и URL комнаты
-            if (!content || !url) {
-                ws.send(JSON.stringify({ error: "Empty message or room" }));
+            if (!url) {
+                ws.send(JSON.stringify({ error: "Room URL not provided" }));
                 return;
             }
 
-            // Создаем комнату, если её нет
-            if (!rooms[url]) {
-                rooms[url] = new Set();
-            }
-            rooms[url].add(ws);
+            if (type === 'message') {
+                if (!content) {
+                    ws.send(JSON.stringify({ error: "Empty message content" }));
+                    return;
+                }
 
-            ws.currentRoom = url;
+                // Создаем комнату, если её нет
+                if (!rooms[url]) {
+                    rooms[url] = new Set();
+                }
+                rooms[url].add(ws);
 
-            // Сохраняем сообщение и рассылаем его другим клиентам
-            try {
-                const result = await addMessageToChat(url, userID, content);
+                ws.currentRoom = url;
 
-                rooms[url].forEach((client) => {
-                    if (client.readyState === WebSocket.OPEN) {
-                        client.send(
-                            JSON.stringify({
-                                result: result,
-                                fromCurrentUser: client === ws,
-                            })
-                        );
-                    }
-                });
-            } catch (error) {
-                console.error("Failed to save message:", error);
-                ws.send(JSON.stringify({ error: "Failed to save message" }));
+                // Сохраняем сообщение и рассылаем его другим клиентам
+                try {
+                    const result = await addMessageToChat(url, userID, content);
+
+                    rooms[url].forEach((client) => {
+                        if (client.readyState === WebSocket.OPEN) {
+                            client.send(
+                                JSON.stringify({
+                                    type: 'message',
+                                    result: result,
+                                    fromCurrentUser: client === ws,
+                                })
+                            );
+                        }
+                    });
+                } catch (error) {
+                    console.error("Failed to save message:", error);
+                    ws.send(JSON.stringify({ error: "Failed to save message" }));
+                }
             }
         });
+
+        // Отправка статуса пользователя
+        const sendStatus = (url, isActive) => {
+            if (!rooms[url]) return;
+            rooms[url].forEach((client) => {
+                if (client.readyState === WebSocket.OPEN) {
+                    client.send(
+                        JSON.stringify({
+                            type: 'status',
+                            result: { isActive }
+                        })
+                    );
+                }
+            });
+        };
+
+        // Обработка подключения клиента
+        if (ws.currentRoom) {
+            sendStatus(ws.currentRoom, true);
+        }
 
         // Обработка отключения клиента
         ws.on("close", async () => {
             console.log("Client disconnected");
             if (ws.currentRoom) {
-                return await leave(ws.currentRoom, ws);
+                sendStatus(ws.currentRoom, false);
+                await leave(ws.currentRoom, ws);
             }
         });
     });
@@ -107,7 +136,7 @@ const leave = async (room, socket) => {
     // Проверяем, существует ли комната
     if (!rooms[room]) return;
     let remove = await deleteChatIfEmpty(room)
-    if(remove) console.log("Удаение")
+    if(remove) console.log("Удаление")
     // Удаляем сокет из комнаты
     rooms[room].delete(socket);
 

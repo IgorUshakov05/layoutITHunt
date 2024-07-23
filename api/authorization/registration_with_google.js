@@ -39,6 +39,7 @@ async function Registration(req, res) {
     const accessTokenCookie = await createAccessToken({
       userID: userInsertToDataBase.id,
       userMAIL: userInsertToDataBase.mail,
+      chatList: userInsertToDataBase.chatList,
       userROLE: userInsertToDataBase.role,
     });
 
@@ -47,7 +48,6 @@ async function Registration(req, res) {
     
     const refreshTokenCookie = await createRefreshToken({
       userID: userInsertToDataBase.id,
-      chatList: userInsertToDataBase.chatList,
       userMAIL: userInsertToDataBase.mail,
       browser: ua.source,
       ip: req.ip,

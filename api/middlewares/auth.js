@@ -86,6 +86,5 @@ catch(e) {
 module.exports = { isAuth };
 
 const logout = async (res,next) => {
-  await res.redirect("/login");
-  return await next()
+  return await res.redirect("/login");
 };

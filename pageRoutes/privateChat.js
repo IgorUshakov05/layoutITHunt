@@ -4,6 +4,7 @@ const { isAuth } = require("../api/middlewares/auth");
 const { decodeAccessToken } = require("../api/tokens/accessToken");
 const findChat = require("../database/Request/PrivateChatSearch");
 const { searchUserId } = require("../database/Request/User");
+let searchChatList = require("../database/Request/chatList");
 
 router.get("/chat/:id", isAuth, async (req, res) => {
   try {
@@ -23,13 +24,18 @@ router.get("/chat/:id", isAuth, async (req, res) => {
     );
     let findUserById = await searchUserId(notMe[0].userID);
     console.log(findUserById);
-    console.log(userChat.mesages)
+    let searchChats = await searchChatList(user.chatList);
+    const currentUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+    console.log(userChat.mesages);
     res.render("userChat", {
       isLoggedIn: !!user,
-      messages:userChat.mesages,
+      messages: userChat.mesages,
       id: user.userID,
-      chatList: user.chatList || null,
       personUser: findUserById,
+      isLoggedIn: !!user,
+      currentUrl ,
+      chat: user.chatList || null,
+      chats: searchChats || [],
     });
   } catch (e) {
     console.log(e);

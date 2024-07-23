@@ -2,37 +2,38 @@
 
     <div class="topChat"><span class="chatsItem">Чаты</span>
         <!--onlyNewActyve - когда работает-->
-        <% if(users) {%>
+        <% if(chats) {%>
         <span class="onlyNew">Только новые</span>
     <% } else {%>
             <span class="onlyNew">Все</span>
         <%}%>
     </div>
-    <% if(users) {%>
+    <% if(chats) {%>
         <input type="text" class="searchChat" placeholder="Найти" name="person" oninput="searchChat()" id="SearchChat">
 
         <div class="chatList">
       
             <ul class="listPersonAll">
-                <% users.forEach((el) => {%>
+                <% chats.forEach((el) => {
+                    const link = currentUrl.includes(el.chatId) ? `/${el.id}` : `/chat/${el.chatId}`;
+                %>
                     <li class="itemChat">
-                        <a href="/person" class="flexItemChat">
+                        <a href="<%- link %>" class="flexItemChat">
                             <div class="leftPhoto">
-                                <img class="personPhoto" width="43" height="43" src="<%= el.photoUser %>" alt="Фото профиля">
+                                <img class="personPhoto" width="43" height="43" src="<%- el.avatar %>" alt="Фото профиля">
                             </div>
                             <div class="contentChatItem">
-                                <span class="personName"><%= el.username%></span>
+                                <span class="personName"><%= el.name %> <%= el.surname %></span>
                                 <div class="whoType">
-
                                     <span>Вы:</span>
-                                    <span><%= el.message%></span>
+                                    <span><%= el.message || 'awdaw' %></span>
                                 </div>
-
                             </div>
                         </a>
                     </li>
-                <% })%>
+                <% }) %>
             </ul>
+            
 
         </div>
     <% } else {%>
