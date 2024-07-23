@@ -38,7 +38,7 @@
     </div>
     <div class="twoBlocks mt20">
 
-            <%- include('./listChats', {chats, priv:true})%>
+            <%- include('./listChats', {chats, priv:true,id})%>
             <div class="MoreInfo  userChatSelect blockChat chatCompanyBlock">
                 <div class="topInfoAboutUser">
                     <div class="backToListChats">
@@ -54,7 +54,7 @@
                             <div class="avatarUserOnChatLeft"><a href="/<%-personUser.id%>"><img class="personPhoto" src="<%-personUser.avatar%>" alt="Фото пользователя"></a></div>
                             <div class="avatarUserOnChatRigth">
                                 <h1 class="userNamePrivateChat"><a href="/<%-personUser.id%>"><%-personUser.surname%> <%-personUser.name%></a></h1>
-                                <span class="lastTime">40 минут назад</span>
+                                <span class="lastTime">Оффлайн</span>
                             </div>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                 <div class="someChat">
                     <% messages.forEach(message => { %>
                         <% if (message.userID === id) { %>
-                          <div class="boxMessage rigthMess">
+                          <div data-id="<%-message.id%>" class="boxMessage rigthMess">
                             <span class="hisMessage myMessage">
                               <span><%= message.content %></span>
                               <span class="bottomTime bottomTimeLeft">
@@ -107,7 +107,7 @@
                             </span>
                           </div>
                         <% } else { %>
-                          <div class="boxMessage">
+                          <div data-id="<%-message.id%>" class="boxMessage">
                             <span class="hisMessage">
                               <span><%= message.content %></span>
                               <span class="bottomTime">

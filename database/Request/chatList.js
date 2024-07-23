@@ -1,23 +1,33 @@
-const chatList = require('../Schema/ChatOfUser')
-const { searchUserId } = require('./User')
+const chatList = require('../Schema/ChatOfUser');
+const itemChat = require('../Schema/PrivateChat');
+const { searchUserId } = require('./User');
 
 const searchChatList = async (id) => {
     try {
-        let newSpecial = await chatList.findOne({ id })
-        await console.log(newSpecial, ' - чат лист')
+        let newSpecial = await chatList.findOne({ id });
+        console.log(newSpecial, ' - чат лист');
         if (!newSpecial || !newSpecial.chats) {
-            return false
+            return false;
         }
-        let users = []
+
+        let users = [];
         for (const item of newSpecial.chats) {
-            let { surname, name, avatar, id } = await searchUserId(item.userID)
-            users.push({ surname, name, avatar, id, chatId: item.chatId })
+            let { surname, name, avatar, id } = await searchUserId(item.userID);
+
+            // Поиск последнего сообщения для чата
+            let lastMessageData = await itemChat.findOne(
+                { id: item.chatId },
+            );
+
+            console.log(lastMessageData.mesages.reverse()[0] , ' чат')
+            users.push({ surname, name, avatar, id, chatId: item.chatId, lastMessage:lastMessageData.mesages[0]});
         }
-        return users
+        
+        return users;
     } catch (e) {
-        console.error(e)
-        return false
+        console.error(e);
+        return false;
     }
 }
 
-module.exports = searchChatList
+module.exports = searchChatList;

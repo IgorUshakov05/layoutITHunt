@@ -55,7 +55,7 @@ async function handleMessageSocketConnection(wss) {
                 return;
             }
 
-            const { type, content, url } = parsedMessage;
+            const { type, content, url, status } = parsedMessage;
 
             // Проверяем наличие содержания и URL комнаты
             if (!url) {
@@ -97,46 +97,115 @@ async function handleMessageSocketConnection(wss) {
                     ws.send(JSON.stringify({ error: "Failed to save message" }));
                 }
             }
-        });
+            else if (type === 'isOffline') {
+                if (!status) {
+                    ws.send(JSON.stringify({ error: "Empty message content" }));
+                    return;
+                }
 
-        // Отправка статуса пользователя
-        const sendStatus = (url, isActive) => {
-            if (!rooms[url]) return;
+                // Создаем комнату, если её нет
+                if (!rooms[url]) {
+                    rooms[url] = new Set();
+                }
+                rooms[url].add(ws);
+
+                ws.currentRoom = url;
+
+                // Сохраняем сообщение и рассылаем его другим клиентам
+                try {
+                    rooms[url].forEach((client) => {
+                        if (client.readyState === WebSocket.OPEN) {
+                            client.send(
+                                JSON.stringify({
+                                    type: 'isOffline',
+                                    status: status?'Онлайн':'Оффлайн',
+                                    fromCurrentUser: client !== ws,
+                                })
+                            );
+                        }
+                    });
+                } catch (error) {
+                    console.error("Failed to save message:", error);
+                    ws.send(JSON.stringify({ error: "Failed to save message" }));
+                }
+            }
+            else if (type === 'typing') {
+                if (!status) {
+                    ws.send(JSON.stringify({ error: "Empty message content" }));
+                    return;
+                }
+
+                // Создаем комнату, если её нет
+                if (!rooms[url]) {
+                    rooms[url] = new Set();
+                }
+                rooms[url].add(ws);
+
+                ws.currentRoom = url;
+
+                // Сохраняем сообщение и рассылаем его другим клиентам
+                try {
+                    if(status) {
+                        rooms[url].forEach((client) => {
+                            if (client.readyState === WebSocket.OPEN) {
+                                client.send(
+                                    JSON.stringify({
+                                        type: 'typing',
+                                        status: 'Печатает',
+                                        fromCurrentUser: client !== ws,
+                                    })
+                                );
+                            }
+                        });
+                    }
+                    else {
+                         rooms[url].forEach((client) => {
+                        if (client.readyState === WebSocket.OPEN) {
+                            client.send(
+                                JSON.stringify({
+                                    type: 'isOffline',
+                                    status: status?'Онлайн':'Оффлайн',
+                                    fromCurrentUser: client !== ws,
+                                })
+                            );
+                        }
+                    });
+                    }
+                    
+                } catch (error) {
+                    console.error("Failed to save message:", error);
+                    ws.send(JSON.stringify({ error: "Failed to save message" }));
+                }
+            }
+
+        // Обработка отключения клиента
+        ws.on("close", async () => {
             rooms[url].forEach((client) => {
                 if (client.readyState === WebSocket.OPEN) {
                     client.send(
                         JSON.stringify({
-                            type: 'status',
-                            result: { isActive }
+                            type: 'isOffline',
+                            status: 'Оффлайн',
+                            fromCurrentUser: client !== ws,
                         })
                     );
                 }
             });
-        };
-
-        // Обработка подключения клиента
-        if (ws.currentRoom) {
-            sendStatus(ws.currentRoom, true);
-        }
-
-        // Обработка отключения клиента
-        ws.on("close", async () => {
             console.log("Client disconnected");
             if (ws.currentRoom) {
-                sendStatus(ws.currentRoom, false);
                 await leave(ws.currentRoom, ws);
             }
         });
     });
 }
-
+    )}
 // Функция для выхода из комнаты
 const leave = async (room, socket) => {
-    console.log(room, ' удаление')
+    console.log(room, ' удаление');
     // Проверяем, существует ли комната
     if (!rooms[room]) return;
-    let remove = await deleteChatIfEmpty(room)
-    if(remove) console.log("Удаление")
+    let remove = await deleteChatIfEmpty(room);
+    if (remove) console.log("Удаление");
     // Удаляем сокет из комнаты
     rooms[room].delete(socket);
 

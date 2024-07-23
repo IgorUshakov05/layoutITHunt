@@ -24,7 +24,7 @@ async function updateUserChatList(userId, chatId, otherUserId) {
         userID: otherUserId,
         chatId
       };
-  
+      
       const newChatIntoMy = {
         userID: userId,
         chatId

@@ -34,7 +34,7 @@ const messagesScheme = new Schema({
     type: String,
     required: true,
   },
-});
+}, { timestamps: true });
 
 // Схема для списка чатов пользователя
 const ChatUserSchema = new Schema({
