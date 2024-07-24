@@ -8,9 +8,7 @@ const router = Router();
 router.get("/chats/:id", isAuth, async (req, res) => {
   let access = req.cookies.access;
   console.log(req.params.id);
-  if (!req.params.id || !access) {
-    return res.redirect("/login"); // return here to stop further execution
-  }
+ 
   let user = await decodeAccessToken(access);
   if (!user) {
     return await res.redirect("/login");

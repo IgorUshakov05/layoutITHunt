@@ -5,7 +5,6 @@ const { searchUserId } = require('./User');
 const searchChatList = async (id) => {
     try {
         let newSpecial = await chatList.findOne({ id });
-        console.log(newSpecial, ' - чат лист');
         if (!newSpecial || !newSpecial.chats) {
             return false;
         }
@@ -18,6 +17,7 @@ const searchChatList = async (id) => {
             let lastMessageData = await itemChat.findOne(
                 { id: item.chatId },
             );
+            console.log(lastMessageData, ' - ласт месс')
 
             console.log(lastMessageData.mesages.reverse()[0] , ' чат')
             users.push({ surname, name, avatar, id, chatId: item.chatId, lastMessage:lastMessageData.mesages[0]});

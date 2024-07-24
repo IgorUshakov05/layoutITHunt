@@ -206,9 +206,6 @@ const leave = async (room, socket) => {
     if (!rooms[room]) return;
     let remove = await deleteChatIfEmpty(room);
     if (remove) console.log("Удаление");
-    // Удаляем сокет из комнаты
-    rooms[room].delete(socket);
-
     // Если комната пуста, удаляем её
     if (rooms[room].size === 0) {
         delete rooms[room];
