@@ -317,6 +317,7 @@ const makeColor = (color, className) => {
 };
 
 finish.addEventListener("click", () => {
+  finish.setAttribute('disabled', '');
   fetch("/api/registration", {
     method: "POST",
     headers: {
@@ -329,5 +330,7 @@ finish.addEventListener("click", () => {
       return (window.location.href = "/");
     } else if (obj.status === 400)
       return (window.location.href = "/login?error=3");
+  }).finally(() => {
+    finish.removeAttribute('disabled');
   });
 });

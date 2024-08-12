@@ -82,22 +82,22 @@
                 <div id="firstScreen"  class="firstStap">
                 <div class="inputs inputsReg">
                     <label for="lastname">Фамилия</label>
-                    <input required minlength="2" maxlength="39" type="text" placeholder="Павлов" name="lastname" id="lastname">
+                    <input required minlength="2" autocomplete="off" maxlength="39" type="text" placeholder="Павлов" name="lastname" id="lastname">
                     <label for="surname">Имя</label>
-                    <input required minlength="2" maxlength="39" type="text" placeholder="Павел" name="surname" id="surname">
+                    <input required minlength="2" autocomplete="off" maxlength="39" type="text" placeholder="Павел" name="surname" id="surname">
                     <label for="date">Дата рождения</label>
-                    <input required minlength="10" maxlength="10" type="date" placeholder="o1.02.2002" name="date" id="date">
+                    <input required minlength="10" autocomplete="off" maxlength="10" type="date" placeholder="o1.02.2002" name="date" id="date">
 
                 </div>
                 <div class="roles">
                     <div class="relative flexcenter">
-                        <input class="select roleUser" type="radio" name="role" value="creatorWork" id="creatorWork" required>
+                        <input autocomplete="off" class="select roleUser" type="radio" name="role" value="creatorWork" id="creatorWork" required>
                         <label for="creatorWork">
                             <span>Я работодатель</span>
                           </label>
                     </div>
                     <div class="relative flexcenter">
-                        <input class="select roleUser" type="radio" name="role" value="worker" id="worker" required>
+                        <input autocomplete="off" class="select roleUser" type="radio" name="role" value="worker" id="worker" required>
                         <label for="worker">
                             <span>Я специалист</span>
                           </label>
@@ -113,7 +113,7 @@
                     <div id="emailPlace">
                     <div class="inputs inputsReg">
                         <label for="lastname">Укажите почту для привязки аккаунта</label>
-                        <input required minlength="5" maxlength="255" type="email" placeholder="Почта" name="email" id="email">
+                        <input  autocomplete="off" required minlength="5" maxlength="255" type="email" placeholder="Почта" name="email" id="email">
                     <button type="button" id="nextOneGetCode" class="submitButton submitButtonReg emailVerefy" disabled>Получить код</button>
                     </div>
                     </div>
@@ -121,7 +121,7 @@
                         <div style="margin-top: 35px;"></div>
 
                     <div class="input-box">
-                        <input type="number" maxlength="6" id="codeVery" class="square-input">
+                        <input autocomplete="off" type="number" maxlength="6" id="codeVery" class="square-input">
                         <div class="square"></div>
                         <div class="square"></div>
                         <div class="square"></div>
@@ -139,7 +139,7 @@
                     <p style="margin-bottom: -10px; font-size: 15px;">Придумайте пароль</p>
                     <div class="inputs">
                         <div class="passForGlases">
-                            <input minlength="6" maxlength="20" required type="password" name="password1" id="password" placeholder="Пароль">
+                            <input autocomplete="off" minlength="6" maxlength="20" required type="password" name="password1" id="password" placeholder="Пароль">
                             <span class="toggle-password" onclick="togglePasswordVisibility()">
                 <svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 <ellipse cx="12.9381" cy="9.82362" rx="4.39827" ry="5.65491" fill="#5412E0"/>
@@ -152,7 +152,7 @@
                         Минимальная длина 6 символов</p>
                     <div class="inputs">
                         <div class="passForGlases">
-                            <input minlength="6" maxlength="20" required type="password" name="password2" id="replypassword" placeholder="Пароль">
+                            <input autocomplete="off" minlength="6" maxlength="20" required type="password" name="password2" id="replypassword" placeholder="Пароль">
                             <span class="toggle-password1" onclick="togglePasswordVisibility()">
                 <svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 <ellipse cx="12.9381" cy="9.82362" rx="4.39827" ry="5.65491" fill="#5412E0"/>
@@ -163,7 +163,7 @@
 
                         </div>
                     </div>
-                    <input required type="checkbox" id="true" name="policy">
+                    <input required type="checkbox" id="true" name="policy" autocomplete="off">
                     <label style="font-size:14px;" for="privacyPolicy">Я ознакомил(ась)ся с <a href="/privacy-policy" style="font-size:14px; color: #5412E0;" target="_blank">политикой конфиденциальности</a></label>
                     <button style="background: #009718;" id="last" type="submit" class="submitButton" disabled>Завершить регистрацию</button>
                 </div>

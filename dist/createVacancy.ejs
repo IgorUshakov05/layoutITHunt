@@ -1,356 +1,844 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="robots" content="index">
-    <meta name="googlebot" content="index">
-    <meta name="author" content="ITHunt">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon">
-    <link rel="stylesheet" href="/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index" />
+    <meta name="googlebot" content="index" />
+    <meta name="author" content="ITHunt" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
     <script src="/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css"
+      rel="stylesheet"
+    />
     <title>ITHunt - создание вакансии</title>
-</head>
-<body>
-<main>
-    
-    <div class="lineStage" style="margin-top:20px;">
-        <progress class="lineCreateLevel" id="progress" max="100" value="30"></progress>
-    </div>
-    <div class="container containerCreateVacancy"  style="margin-top: 20px;">
-       
+  </head>
+  <body>
+    <main>
+      <div class="lineStage" style="margin-top: 20px">
+        <progress
+          class="lineCreateLevel"
+          id="progress"
+          max="100"
+          value="30"
+        ></progress>
+      </div>
+      <div class="container containerCreateVacancy" style="margin-top: 20px">
         <div class="login createVacancyDiv">
-            <div class="oneStage" id="oneStage">
-                <h1 class="firstStage">Первый шаг</h1>
-                <p class="firstStageDescription">Давайте определимся какой специалист вам нужен и какие навыки от него требуются</p>
-                <label for="specialisationSelect" class="forLabel">Специализация</label>
-                <div class="boxInput">
-                    <div class="boxSelection">
-                        <div class="leftSelection">
-                            <img class="selectImg" height="40" width="40" src="" alt="Иконка специальности"><p class="titleJobItem"></p>
-                        </div>
-                        <div class="rightSelection">
-                            <span class="canesSelect">Отменить</span>
-                        </div>
-                    </div>
-                <div class="noneMake">
-
-                <input class="specialisationSelectInput" placeholder="Веб-дизайнер" type="text" name="specialisationSelect" id="specialisationSelect">
+          <div class="oneStage" id="oneStage">
+            <h1 class="firstStage">Первый шаг</h1>
+            <p class="firstStageDescription">
+              Давайте определимся какой специалист вам нужен и какие навыки от
+              него требуются
+            </p>
+            <label for="specialisationSelect" class="forLabel"
+              >Специализация</label
+            >
+            <div class="boxInput">
+              <div class="boxSelection">
+                <div class="leftSelection">
+                  <img
+                    class="selectImg"
+                    height="40"
+                    width="40"
+                    src=""
+                    alt="Иконка специальности"
+                  />
+                  <p class="titleJobItem"></p>
+                </div>
+                <div class="rightSelection">
+                  <span class="canesSelect">Отменить</span>
+                </div>
+              </div>
+              <div class="noneMake">
+                <input
+                  class="specialisationSelectInput"
+                  placeholder="FullStack"
+                  type="text"
+                  name="specialisationSelect"
+                  id="specialisationSelect"
+                />
                 <div class="ParentlistSpecial">
-                    <ul class="listSpecialMy">
-                        <li onclick="select('/assets/pictures/analytics.webp','Аналитик')"><label>Аналитик</label></li>
-                        <li onclick="select('/assets/pictures/seo.webp','SEO-специалист')"><label>SEO-специалист</label></li>
-                        <li onclick="select('/assets/pictures/disigner.webp','Графический дизайнер')"><label>Графический дизайнер</label></li>
-                        <li onclick="select('/assets/pictures/sysadm.webp','Системный администратор')"><label>Системный администратор</label></li>
-                        <li onclick="select('/assets/pictures/database.webp','Администратор БД')"><label>Администратор БД</label></li>
-                        <li onclick="select('/assets/pictures/hr.webp','HR')"><label>HR</label></li>
-                        <li onclick="select('/assets/pictures/frontend.webp','FrontEnd')"><label>FrontEnd</label></li>
-                        <li onclick="select('/assets/pictures/meneger.webp','Менеджер продаж')"><label>Менеджер продаж</label></li>
-                        <li onclick="select('/assets/pictures/tester.webp','Тестировщик')"><label>Тестировщик</label></li>
-                        <li onclick="select('/assets/pictures/product.webp','Продукт менеджер')"><label>Продукт менеджер</label></li>
-                        <li onclick="select('/assets/pictures/backend.webp','BackEnd')"><label>BackEnd</label></li>
-                        <li onclick="select('/assets/pictures/fullstack.webp','FullStack')"><label>FullStack</label></li>
-                        <li onclick="select('/assets/pictures/teamleader.webp','TeamLeader')"><label>TeamLeader</label></li>
-                        <li onclick="select('/assets/pictures/Верстальщик.webp','Верстальщик')"><label>Верстальщик</label></li>
-                        <li onclick="select('/assets/pictures/soft.webp','Инфобез-специалист')"><label>Инфобез-специалист</label></li>
-                        <li onclick="select('/assets/pictures/web-disigner.webp','Веб-дизайнер')"><label>Веб-дизайнер</label></li>
-                        <li onclick="select('/assets/pictures/marketolog.webp','Маркетолог')"><label>Маркетолог</label></li>
-                        <li onclick="select('/assets/pictures/copy.webp','Копирайтер')"><label>Копирайтер</label></li>
-                    </ul>
-                    
-                    
-                        </div>
-                </div>    
-
+                  <ul class="listSpecialMy">
+                    <li
+                      onclick="select('/assets/pictures/analytics.webp','Аналитик')"
+                    >
+                      <label>Аналитик</label>
+                    </li>
+                    <li
+                      onclick="select('/assets/pictures/seo.webp','SEO-специалист')"
+                    >
+                      <label>SEO-специалист</label>
+                    </li>
+                    <li
+                      onclick="select('/assets/pictures/disigner.webp','Графический дизайнер')"
+                    >
+                      <label>Графический дизайнер</label>
+                    </li>
+                    <li
+                      onclick="select('/assets/pictures/sysadm.webp','Системный администратор')"
+                    >
+                      <label>Системный администратор</label>
+                    </li>
+                    <li
+                      onclick="select('/assets/pictures/database.webp','Администратор БД')"
+                    >
+                      <label>Администратор БД</label>
+                    </li>
+                    <li onclick="select('/assets/pictures/hr.webp','HR')">
+                      <label>HR</label>
+                    </li>
+                    <li
+                      onclick="select('/assets/pictures/frontend.webp','FrontEnd')"
+                    >
+                      <label>FrontEnd</label>
+                    </li>
+                    <li
+                      onclick="select('/assets/pictures/meneger.webp','Менеджер продаж')"
+                    >
+                      <label>Менеджер продаж</label>
+                    </li>
+                    <li
+                      onclick="select('/assets/pictures/tester.webp','Тестировщик')"
+                    >
+                      <label>Тестировщик</label>
+                    </li>
+                    <li
+                      onclick="select('/assets/pictures/product.webp','Продукт менеджер')"
+                    >
+                      <label>Продукт менеджер</label>
+                    </li>
+                    <li
+                      onclick="select('/assets/pictures/backend.webp','BackEnd')"
+                    >
+                      <label>BackEnd</label>
+                    </li>
+                    <li
+                      onclick="select('/assets/pictures/fullstack.webp','FullStack')"
+                    >
+                      <label>FullStack</label>
+                    </li>
+                    <li
+                      onclick="select('/assets/pictures/teamleader.webp','TeamLeader')"
+                    >
+                      <label>TeamLeader</label>
+                    </li>
+                    <li
+                      onclick="select('/assets/pictures/Верстальщик.webp','Верстальщик')"
+                    >
+                      <label>Верстальщик</label>
+                    </li>
+                    <li
+                      onclick="select('/assets/pictures/soft.webp','Инфобез-специалист')"
+                    >
+                      <label>Инфобез-специалист</label>
+                    </li>
+                    <li
+                      onclick="select('/assets/pictures/web-disigner.webp','Веб-дизайнер')"
+                    >
+                      <label>Веб-дизайнер</label>
+                    </li>
+                    <li
+                      onclick="select('/assets/pictures/marketolog.webp','Маркетолог')"
+                    >
+                      <label>Маркетолог</label>
+                    </li>
+                    <li
+                      onclick="select('/assets/pictures/copy.webp','Копирайтер')"
+                    >
+                      <label>Копирайтер</label>
+                    </li>
+                  </ul>
                 </div>
-                <label for="specialisationSelect" class="forLabel">Навыки</label>
-                <div class="groupExpresive">
-
-                    <div class="ParentlistExpressive">
-                        <ul class="listExpressive">
-                            <li onclick=""><label>JavaScript</label></li>
-                            <li onclick=""><label>SEO-специалист</label></li>
-                            <li><label class="noneHover">Навык не найден. </label><label id="addQuest">Добавим?</la></li>
-                        </ul>
-                            </div>
-                            <ul class="skillsList">
-                                <li class="slillItem"><span>JavaScript</span>
-                                    <span class="removeSkill">
-                                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
-                                            <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
-                                            </svg>
-                                            
-                                    </span></li>
-                                <li class="slillItem"><span>SQL</span>
-                                        <span class="removeSkill">
-                                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
-                                                <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
-                                                </svg>
-                                                
-                                    </span></li>
-                                <li class="slillItem"><span>TypeScript</span>
-                                                <span class="removeSkill">
-                                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
-                                                        <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
-                                                        </svg>
-                                                        
-                                    </span></li>
-                                    <li class="slillItem"><span>HTML/CSS</span>
-                                        <span class="removeSkill">
-                                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
-                                                <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="slillItem"><span>Python</span>
-                                        <span class="removeSkill">
-                                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
-                                                <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="slillItem"><span>React</span>
-                                        <span class="removeSkill">
-                                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
-                                                <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="slillItem"><span>Node.js</span>
-                                        <span class="removeSkill">
-                                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
-                                                <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="slillItem"><span>Git</span>
-                                        <span class="removeSkill">
-                                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
-                                                <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="slillItem"><span>MongoDB</span>
-                                        <span class="removeSkill">
-                                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
-                                                <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
-                                            </svg>
-                                        </span>
-                                    </li>
-                                    <li class="slillItem"><span>Vue.js</span>
-                                        <span class="removeSkill">
-                                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1 1L12 12" stroke="white" stroke-linecap="round"/>
-                                                <path d="M12 1L6.5 6.5L1 12" stroke="white" stroke-linecap="round"/>
-                                            </svg>
-                                        </span>
-                                    </li>
-                            </ul>
-                    </div>
-                    <div class="buttonsVacansy">
-                        <a href="/hrMe" class="canelVacancy nextStageBattonVacancy">Отмена</a>
-                        <button disabled id="nextStageTwo" class="showMoreButton nextStageBattonVacancy" title="Далее">Продолжить</button>
-                    </div>
+              </div>
             </div>
-        
-            <div class="twoStage twoStageVacansy" id="twoStage">
-                <h1 class="firstStage">Второй шаг</h1>
-                <p class="firstStageDescription">Уточним способ работы, необходимый опыт сотрудника и уровень заработной платы
-                </p>
-                <label for="specialisationSelect" class="forLabel">Способ работы</label>
-                <div class="wayWork">
-                    <div class="wayWorkItem">
- 
-                            <input type="checkbox" id="distant" name="interest" value="Удаленная">
-                            <label class="titleWork" for="distant">Удаленная</label>
-                        </div>
- 
-                            <div class="wayWorkItem">
-                                <input type="checkbox" id="fullday" name="interest" value="Полный день">
-                                <label class="titleWork" for="fullday">Полный день</label>
-                            </div>
-                            
-                            <div class="wayWorkItem">
-                                <input type="checkbox" id="partTime" name="interest" value="Частичная работа">
-                            <label class="titleWork" for="partTime">Частичная работа</label>
-                        </div>
- 
-                      <div class="wayWorkItem">
-                        <input type="checkbox" id="office" name="interest" value="Офисная">
-                        <label class="titleWork" for="office">Офисная</label>
-                      </div>
-                      <div class="wayWorkItem">
-                        <input type="checkbox" id="flexeble" name="interest" value="Гибкий график">
-                        <label class="titleWork" for="flexeble">Гибкий график</label>
-                    </div>
-                    <div class="wayWorkItem">
-                        <input type="checkbox" id="shift" name="interest" value="Сменный график">
-                        <label class="titleWork" for="shift">Сменный график</label>
-                    </div>
-                </div>
-                <div class="mt-20"></div>
-                <label for="specialisationSelect" class="forLabel">Опыт</label>
-                <div class="NoWrapExirient">
-                   
-                    <div class="elemExpiriens">
-                        <input type="radio" id="OneTwo" name="radioExpiriens" value="OneTwo" />
-                        <label class="elemExpiriensLabel" for="OneTwo">0-2</label>
-                    </div>
-
-                        <div class="elemExpiriens">
-                            <input type="radio" id="ThreeFour" name="radioExpiriens" value="ThreeFour" />
-                            <label class="elemExpiriensLabel" for="ThreeFour">3-5</label>
-                        </div>
-                        
-                        <div class="elemExpiriens">
-                            <input type="radio" id="SixEight" name="radioExpiriens" value="SixEight" />
-                        <label class="elemExpiriensLabel" for="SixEight">6-8</label>
-                    </div>
-
-                    <div class="elemExpiriens">
-                        <input type="radio" id="EightPlus" name="radioExpiriens" value="EightPlus" />
-                        <label class="elemExpiriensLabel" for="EightPlus">8+</label>
-                    </div>
-
-                    <div class="elemExpiriens">
-                        <input type="radio" id="noExpencion" name="radioExpiriens" value="noExpencion" />
-                        <label class="elemExpiriensLabel" for="noExpencion">Без опыта</label>
-                    </div>
-            </div>
-            <div class="specialisationSelect">
-                <div class="zp">
-                    <h1>Зарплата </h1>
-                    <h1 class="itemP">Ꝑ</h1>
-                </div>
-               <div class="toForT">
-                <input class="descrtopSearchDesctop priceTo" placeholder="от" type="number" name="min" id="min"><input class="descrtopSearchDesctop priceDo" type="number" placeholder="до" name="max" id="max">
-               </div>
-               <div class="wayWorkItem" style="margin-left: 0;">
-                <input type="checkbox" id="zarplata" name="zarplata" value="true">
-            <label class="titleWork" for="zarplata">Договорная</label>
-        </div>
+            <label for="specialisationSelect" class="forLabel">Навыки</label>
+            <div class="groupExpresive">
+              <input
+                class="specialisationSelectInput"
+                placeholder="JavaScript"
+                type="text"
+                name="specialisationSelect"
+                id="inputSkills"
+              />
+              <div class="ParentlistExpressive">
+                <ul class="listExpressive"></ul>
+              </div>
+              <ul class="skillsList"></ul>
             </div>
             <div class="buttonsVacansy">
-                <button class="canelVacancy borderNone nextStageBattonVacancy" id="toOneStage">Назад</button>
-                <button id="nextStageThree" class="showMoreButton nextStageBattonVacancy" disabled>Продолжить</button>
+              <a href="/<%- id%>" class="canelVacancy nextStageBattonVacancy"
+                >Отмена</a
+              >
+              <button
+                disabled
+                id="nextStageTwo"
+                class="showMoreButton nextStageBattonVacancy"
+                title="Далее"
+              >
+                Продолжить
+              </button>
             </div>
-            </div>
-            <div id="threeStage" class="threeStage threeStageVacansy">
-                <h1 class="firstStage">Третий шаг</h1>
-                <p class="firstStageDescription">Подробно опишите обязанности и условия потенциального специалиста и преимущества вакансии</p>
-                <label for="specialisationSelect" class="forLabel">Описание</label>
-                <div class="MytextArea">
-                    <div class="groupEditText">
-                        <div class="boldenText" onclick="makeBold()">Ж</div>
-                        <div class="cursiveText" onclick="makeItalic()">К</div>
-                        <div class="listText" onclick="createList()"><svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.58398 1.58435H14.584" stroke="black"/><path d="M4.58398 11.5844H14.584" stroke="black"/><path d="M4.58398 6.58435H14.584" stroke="black"/><circle cx="1.58398" cy="1.58435" r="1" fill="black"/><circle cx="1.58398" cy="6.58435" r="1" fill="black"/><circle cx="1.58398" cy="11.5844" r="1" fill="black"/></svg></div></div>
-                    <div id="output" contenteditable="true" oninput="handleInput()" onclick="removePlaceholder()">
-                        <ul class="placeholderMy">
-                            <li>Обязанности</li>
-                            <li>Условия</li>
-                            <li>Преимущества</li>
-                        </ul>
-                    </div>
-                    <p class="tips">Осталось символов: 0</p>
-                </div>
-                <div class="buttonsVacansy">
-                    <button class="canelVacancy borderNone nextStageBattonVacancy" id="toThreeStage">Назад</button>
-                    <button id="nextStageFinalyAndEnd" class="showMoreButton nextStageBattonVacancy finaly" >Сохранить изменения</button>
-                </div>
-            </div>
-            <div id="finalyStage" class="finalyStage">
-                <h1 class="firstStage">Вакансия готова!</h1>
-                <p class="firstStageDescription">Для большей эффективности поделитесь ссылкой на вакансию в своих соц сетях </p>
-                <div class="svgFinaly">
-                    <svg width="393" style="width: 100%;" height="210" viewBox="0 0 393 210" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g opacity="0.3">
-                        <path d="M1 31C1 28.7909 2.79086 27 5 27H288C290.209 27 292 28.7909 292 31V197.056C292 199.265 290.209 201.056 288 201.056H5.00001C2.79087 201.056 1 199.265 1 197.056V31Z" fill="#F9F8FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="12.7852" y="160.262" width="29.0093" height="29.0093" rx="14.5047" fill="#E8E8E8"/>
-                        <rect x="47.2344" y="181.112" width="69.8037" height="8.15888" fill="#E8E8E8"/>
-                        <rect x="12.7852" y="59.6355" width="267.43" height="8.15888" fill="#E8E8E8"/>
-                        <rect x="12.7852" y="73.2336" width="267.43" height="8.15888" fill="#E8E8E8"/>
-                        <rect x="12.7852" y="86.8318" width="146.558" height="8.15888" fill="#E8E8E8"/>
-                        <rect x="142.42" y="171.14" width="55.2991" height="18.1308" fill="#E8E8E8"/>
-                        <rect x="202.252" y="171.14" width="77.9626" height="18.1308" fill="#E8E8E8"/>
-                        <rect x="47.2344" y="162.075" width="54.3925" height="15.4112" fill="#E8E8E8"/>
-                        <rect x="12.7852" y="38.7852" width="134.168" height="15.4112" fill="#E3E3E3"/>
-                        <rect x="225.822" y="38.7852" width="54.3925" height="15.4112" fill="#E3E3E3"/>
-                        <rect x="12.7852" y="104.056" width="64.8038" height="18.1308" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="12.7852" y="130.346" width="52.0256" height="18.1308" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="73.9375" y="130.346" width="52.9383" height="18.1308" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="183.467" y="104.056" width="52.9383" height="18.1308" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="86.7168" y="104.056" width="87.6221" height="18.1308" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="136.004" y="130.346" width="40.1601" height="18.1308" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="245.531" y="104.056" width="34.6837" height="18.1308" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        </g>
-                        <g opacity="0.3">
-                        <path d="M101 31C101 28.7909 102.791 27 105 27H388C390.209 27 392 28.7909 392 31V197.056C392 199.265 390.209 201.056 388 201.056H105C102.791 201.056 101 199.265 101 197.056V31Z" fill="#F9F8FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="112.785" y="160.262" width="29.0093" height="29.0093" rx="14.5047" fill="#E8E8E8"/>
-                        <rect x="147.234" y="181.112" width="69.8037" height="8.15888" fill="#E8E8E8"/>
-                        <rect x="112.785" y="59.6355" width="267.43" height="8.15888" fill="#E8E8E8"/>
-                        <rect x="112.785" y="73.2336" width="267.43" height="8.15888" fill="#E8E8E8"/>
-                        <rect x="112.785" y="86.8318" width="146.558" height="8.15888" fill="#E8E8E8"/>
-                        <rect x="242.42" y="171.14" width="55.2991" height="18.1308" fill="#E8E8E8"/>
-                        <rect x="302.252" y="171.14" width="77.9626" height="18.1308" fill="#E8E8E8"/>
-                        <rect x="147.234" y="162.075" width="54.3925" height="15.4112" fill="#E8E8E8"/>
-                        <rect x="112.785" y="38.7852" width="134.168" height="15.4112" fill="#E3E3E3"/>
-                        <rect x="325.822" y="38.7852" width="54.3925" height="15.4112" fill="#E3E3E3"/>
-                        <rect x="112.785" y="104.056" width="64.8038" height="18.1308" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="112.785" y="130.346" width="52.0256" height="18.1308" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="173.938" y="130.346" width="52.9383" height="18.1308" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="283.467" y="104.056" width="52.9383" height="18.1308" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="186.717" y="104.056" width="87.6221" height="18.1308" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="236.004" y="130.346" width="40.1601" height="18.1308" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="345.531" y="104.056" width="34.6837" height="18.1308" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        </g>
-                        <path d="M36 21C36 18.7909 37.7909 17 40 17H353C355.209 17 357 18.7909 357 21V205C357 207.209 355.209 209 353 209H40C37.7909 209 36 207.209 36 205V21Z" fill="#F9F8FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="49" y="164" width="32" height="32" rx="16" fill="#E8E8E8"/>
-                        <rect x="87" y="187" width="77" height="9" fill="#E8E8E8"/>
-                        <rect x="49" y="53" width="295" height="9" fill="#E8E8E8"/>
-                        <rect x="49" y="68" width="295" height="9" fill="#E8E8E8"/>
-                        <rect x="49" y="83" width="161.667" height="9" fill="#E8E8E8"/>
-                        <rect x="192" y="176" width="61" height="20" fill="#E8E8E8"/>
-                        <rect x="258" y="176" width="86" height="20" fill="#E8E8E8"/>
-                        <rect x="87" y="166" width="60" height="17" fill="#E8E8E8"/>
-                        <rect x="49" y="30" width="148" height="17" fill="#E3E3E3"/>
-                        <rect x="284" y="30" width="60" height="17" fill="#E3E3E3"/>
-                        <rect x="49" y="102" width="71.4846" height="20" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="49" y="131" width="57.3891" height="20" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="116.457" y="131" width="58.3959" height="20" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="237.277" y="102" width="58.3959" height="20" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="130.553" y="102" width="96.6553" height="20" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="184.922" y="131" width="44.3003" height="20" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <rect x="305.74" y="102" width="38.2594" height="20" rx="4" fill="#F9F7FF" stroke="#4900E3" stroke-width="0.5" stroke-dasharray="6 6"/>
-                        <circle cx="345.5" cy="23.5" r="23.5" fill="#01E325"/>
-                        <path d="M333 22.5L342.5 32L358 16" stroke="white" stroke-width="3"/>
-                        </svg>
-                        
-                </div>
-                <div class="buttonsVacansy">
-                    <a href="/hrMe"  style="width: 100%;">
+          </div>
 
-                   <button id="nextStageFinaly" style="width: 100%;" class="showMoreButton nextStageBattonVacancy finaly">В профиль</button>
-                </a>
+          <div class="twoStage twoStageVacansy" id="twoStage">
+            <h1 class="firstStage">Второй шаг</h1>
+            <p class="firstStageDescription">
+              Уточним способ работы, необходимый опыт сотрудника и уровень
+              заработной платы
+            </p>
+            <label for="specialisationSelect" class="forLabel"
+              >Способ работы</label
+            >
+            <div class="wayWork">
+              <div class="wayWorkItem">
+                <input
+                  type="checkbox"
+                  id="distant"
+                  name="interest"
+                  value="Удаленная"
+                />
+                <label class="titleWork" for="distant">Удаленная</label>
+              </div>
 
-                </div>
+              <div class="wayWorkItem">
+                <input
+                  type="checkbox"
+                  id="fullday"
+                  name="interest"
+                  value="Полный день"
+                />
+                <label class="titleWork" for="fullday">Полный день</label>
+              </div>
+
+              <div class="wayWorkItem">
+                <input
+                  type="checkbox"
+                  id="partTime"
+                  name="interest"
+                  value="Частичная работа"
+                />
+                <label class="titleWork" for="partTime">Частичная работа</label>
+              </div>
+
+              <div class="wayWorkItem">
+                <input
+                  type="checkbox"
+                  id="office"
+                  name="interest"
+                  value="Офисная"
+                />
+                <label class="titleWork" for="office">Офисная</label>
+              </div>
+              <div class="wayWorkItem">
+                <input
+                  type="checkbox"
+                  id="flexeble"
+                  name="interest"
+                  value="Гибкий график"
+                />
+                <label class="titleWork" for="flexeble">Гибкий график</label>
+              </div>
+              <div class="wayWorkItem">
+                <input
+                  type="checkbox"
+                  id="shift"
+                  name="interest"
+                  value="Сменный график"
+                />
+                <label class="titleWork" for="shift">Сменный график</label>
+              </div>
             </div>
+            <div class="mt-20"></div>
+            <label for="specialisationSelect" class="forLabel">Опыт</label>
+            <div class="NoWrapExirient">
+              <div class="elemExpiriens">
+                <input
+                  type="radio"
+                  id="OneTwo"
+                  name="radioExpiriens"
+                  value="OneTwo"
+                />
+                <label class="elemExpiriensLabel" for="OneTwo">0-2</label>
+              </div>
+
+              <div class="elemExpiriens">
+                <input
+                  type="radio"
+                  id="ThreeFour"
+                  name="radioExpiriens"
+                  value="ThreeFour"
+                />
+                <label class="elemExpiriensLabel" for="ThreeFour">3-5</label>
+              </div>
+
+              <div class="elemExpiriens">
+                <input
+                  type="radio"
+                  id="SixEight"
+                  name="radioExpiriens"
+                  value="SixEight"
+                />
+                <label class="elemExpiriensLabel" for="SixEight">6-8</label>
+              </div>
+
+              <div class="elemExpiriens">
+                <input
+                  type="radio"
+                  id="EightPlus"
+                  name="radioExpiriens"
+                  value="EightPlus"
+                />
+                <label class="elemExpiriensLabel" for="EightPlus">8+</label>
+              </div>
+
+              <div class="elemExpiriens">
+                <input
+                  type="radio"
+                  id="noExpencion"
+                  name="radioExpiriens"
+                  value="noExpencion"
+                />
+                <label class="elemExpiriensLabel" for="noExpencion"
+                  >Без опыта</label
+                >
+              </div>
+            </div>
+            <div class="specialisationSelect">
+              <div class="zp">
+                <h1>Зарплата</h1>
+                <h1 class="itemP">Ꝑ</h1>
+              </div>
+              <div class="toForT">
+                <input
+                  class="descrtopSearchDesctop priceTo"
+                  placeholder="от"
+                  type="number"
+                  name="min"
+                  id="min"
+                /><input
+                  class="descrtopSearchDesctop priceDo"
+                  type="number"
+                  placeholder="до"
+                  name="max"
+                  id="max"
+                />
+              </div>
+              <div class="wayWorkItem" style="margin-left: 0">
+                <input
+                  type="checkbox"
+                  id="zarplata"
+                  name="zarplata"
+                  value="true"
+                />
+                <label class="titleWork" for="zarplata">Договорная</label>
+              </div>
+            </div>
+            <div class="buttonsVacansy">
+              <button
+                class="canelVacancy borderNone nextStageBattonVacancy"
+                id="toOneStage"
+              >
+                Назад
+              </button>
+              <button
+                id="nextStageThree"
+                class="showMoreButton nextStageBattonVacancy"
+                disabled
+              >
+                Продолжить
+              </button>
+            </div>
+          </div>
+          <div id="threeStage" class="threeStage threeStageVacansy">
+            <h1 class="firstStage">Третий шаг</h1>
+            <p class="firstStageDescription">
+              Подробно опишите обязанности и условия потенциального специалиста
+              и преимущества вакансии
+            </p>
+            <label for="specialisationSelect" class="forLabel">Описание</label>
+            <div class="MytextArea">
+              <div id="editor-container"></div>
+              <p class="tips">
+                Осталось символов: <span id="charCount">5000</span>
+              </p>
+            </div>
+            <div class="buttonsVacansy">
+              <button
+                class="canelVacancy borderNone nextStageBattonVacancy"
+                id="toThreeStage"
+              >
+                Назад
+              </button>
+              <button
+                id="nextStageFinalyAndEnd"
+                class="showMoreButton nextStageBattonVacancy finaly"
+                disabled
+                >
+                Сохранить изменения
+              </button>
+            </div>
+          </div>
+          <div id="finalyStage" class="finalyStage">
+            <h1 class="firstStage">Вакансия готова!</h1>
+            <p class="firstStageDescription">
+              Для большей эффективности поделитесь ссылкой на вакансию в своих
+              соц сетях
+            </p>
+            <div class="svgFinaly">
+              <svg
+                width="393"
+                style="width: 100%"
+                height="210"
+                viewBox="0 0 393 210"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g opacity="0.3">
+                  <path
+                    d="M1 31C1 28.7909 2.79086 27 5 27H288C290.209 27 292 28.7909 292 31V197.056C292 199.265 290.209 201.056 288 201.056H5.00001C2.79087 201.056 1 199.265 1 197.056V31Z"
+                    fill="#F9F8FF"
+                    stroke="#4900E3"
+                    stroke-width="0.5"
+                    stroke-dasharray="6 6"
+                  />
+                  <rect
+                    x="12.7852"
+                    y="160.262"
+                    width="29.0093"
+                    height="29.0093"
+                    rx="14.5047"
+                    fill="#E8E8E8"
+                  />
+                  <rect
+                    x="47.2344"
+                    y="181.112"
+                    width="69.8037"
+                    height="8.15888"
+                    fill="#E8E8E8"
+                  />
+                  <rect
+                    x="12.7852"
+                    y="59.6355"
+                    width="267.43"
+                    height="8.15888"
+                    fill="#E8E8E8"
+                  />
+                  <rect
+                    x="12.7852"
+                    y="73.2336"
+                    width="267.43"
+                    height="8.15888"
+                    fill="#E8E8E8"
+                  />
+                  <rect
+                    x="12.7852"
+                    y="86.8318"
+                    width="146.558"
+                    height="8.15888"
+                    fill="#E8E8E8"
+                  />
+                  <rect
+                    x="142.42"
+                    y="171.14"
+                    width="55.2991"
+                    height="18.1308"
+                    fill="#E8E8E8"
+                  />
+                  <rect
+                    x="202.252"
+                    y="171.14"
+                    width="77.9626"
+                    height="18.1308"
+                    fill="#E8E8E8"
+                  />
+                  <rect
+                    x="47.2344"
+                    y="162.075"
+                    width="54.3925"
+                    height="15.4112"
+                    fill="#E8E8E8"
+                  />
+                  <rect
+                    x="12.7852"
+                    y="38.7852"
+                    width="134.168"
+                    height="15.4112"
+                    fill="#E3E3E3"
+                  />
+                  <rect
+                    x="225.822"
+                    y="38.7852"
+                    width="54.3925"
+                    height="15.4112"
+                    fill="#E3E3E3"
+                  />
+                  <rect
+                    x="12.7852"
+                    y="104.056"
+                    width="64.8038"
+                    height="18.1308"
+                    rx="4"
+                    fill="#F9F7FF"
+                    stroke="#4900E3"
+                    stroke-width="0.5"
+                    stroke-dasharray="6 6"
+                  />
+                  <rect
+                    x="12.7852"
+                    y="130.346"
+                    width="52.0256"
+                    height="18.1308"
+                    rx="4"
+                    fill="#F9F7FF"
+                    stroke="#4900E3"
+                    stroke-width="0.5"
+                    stroke-dasharray="6 6"
+                  />
+                  <rect
+                    x="73.9375"
+                    y="130.346"
+                    width="52.9383"
+                    height="18.1308"
+                    rx="4"
+                    fill="#F9F7FF"
+                    stroke="#4900E3"
+                    stroke-width="0.5"
+                    stroke-dasharray="6 6"
+                  />
+                  <rect
+                    x="183.467"
+                    y="104.056"
+                    width="52.9383"
+                    height="18.1308"
+                    rx="4"
+                    fill="#F9F7FF"
+                    stroke="#4900E3"
+                    stroke-width="0.5"
+                    stroke-dasharray="6 6"
+                  />
+                  <rect
+                    x="86.7168"
+                    y="104.056"
+                    width="87.6221"
+                    height="18.1308"
+                    rx="4"
+                    fill="#F9F7FF"
+                    stroke="#4900E3"
+                    stroke-width="0.5"
+                    stroke-dasharray="6 6"
+                  />
+                  <rect
+                    x="136.004"
+                    y="130.346"
+                    width="40.1601"
+                    height="18.1308"
+                    rx="4"
+                    fill="#F9F7FF"
+                    stroke="#4900E3"
+                    stroke-width="0.5"
+                    stroke-dasharray="6 6"
+                  />
+                  <rect
+                    x="245.531"
+                    y="104.056"
+                    width="34.6837"
+                    height="18.1308"
+                    rx="4"
+                    fill="#F9F7FF"
+                    stroke="#4900E3"
+                    stroke-width="0.5"
+                    stroke-dasharray="6 6"
+                  />
+                </g>
+                <g opacity="0.3">
+                  <path
+                    d="M101 31C101 28.7909 102.791 27 105 27H388C390.209 27 392 28.7909 392 31V197.056C392 199.265 390.209 201.056 388 201.056H105C102.791 201.056 101 199.265 101 197.056V31Z"
+                    fill="#F9F8FF"
+                    stroke="#4900E3"
+                    stroke-width="0.5"
+                    stroke-dasharray="6 6"
+                  />
+                  <rect
+                    x="112.785"
+                    y="160.262"
+                    width="29.0093"
+                    height="29.0093"
+                    rx="14.5047"
+                    fill="#E8E8E8"
+                  />
+                  <rect
+                    x="147.234"
+                    y="181.112"
+                    width="69.8037"
+                    height="8.15888"
+                    fill="#E8E8E8"
+                  />
+                  <rect
+                    x="112.785"
+                    y="59.6355"
+                    width="267.43"
+                    height="8.15888"
+                    fill="#E8E8E8"
+                  />
+                  <rect
+                    x="112.785"
+                    y="73.2336"
+                    width="267.43"
+                    height="8.15888"
+                    fill="#E8E8E8"
+                  />
+                  <rect
+                    x="112.785"
+                    y="86.8318"
+                    width="146.558"
+                    height="8.15888"
+                    fill="#E8E8E8"
+                  />
+                  <rect
+                    x="242.42"
+                    y="171.14"
+                    width="55.2991"
+                    height="18.1308"
+                    fill="#E8E8E8"
+                  />
+                  <rect
+                    x="302.252"
+                    y="171.14"
+                    width="77.9626"
+                    height="18.1308"
+                    fill="#E8E8E8"
+                  />
+                  <rect
+                    x="147.234"
+                    y="162.075"
+                    width="54.3925"
+                    height="15.4112"
+                    fill="#E8E8E8"
+                  />
+                  <rect
+                    x="112.785"
+                    y="38.7852"
+                    width="134.168"
+                    height="15.4112"
+                    fill="#E3E3E3"
+                  />
+                  <rect
+                    x="325.822"
+                    y="38.7852"
+                    width="54.3925"
+                    height="15.4112"
+                    fill="#E3E3E3"
+                  />
+                  <rect
+                    x="112.785"
+                    y="104.056"
+                    width="64.8038"
+                    height="18.1308"
+                    rx="4"
+                    fill="#F9F7FF"
+                    stroke="#4900E3"
+                    stroke-width="0.5"
+                    stroke-dasharray="6 6"
+                  />
+                  <rect
+                    x="112.785"
+                    y="130.346"
+                    width="52.0256"
+                    height="18.1308"
+                    rx="4"
+                    fill="#F9F7FF"
+                    stroke="#4900E3"
+                    stroke-width="0.5"
+                    stroke-dasharray="6 6"
+                  />
+                  <rect
+                    x="173.938"
+                    y="130.346"
+                    width="52.9383"
+                    height="18.1308"
+                    rx="4"
+                    fill="#F9F7FF"
+                    stroke="#4900E3"
+                    stroke-width="0.5"
+                    stroke-dasharray="6 6"
+                  />
+                  <rect
+                    x="283.467"
+                    y="104.056"
+                    width="52.9383"
+                    height="18.1308"
+                    rx="4"
+                    fill="#F9F7FF"
+                    stroke="#4900E3"
+                    stroke-width="0.5"
+                    stroke-dasharray="6 6"
+                  />
+                  <rect
+                    x="186.717"
+                    y="104.056"
+                    width="87.6221"
+                    height="18.1308"
+                    rx="4"
+                    fill="#F9F7FF"
+                    stroke="#4900E3"
+                    stroke-width="0.5"
+                    stroke-dasharray="6 6"
+                  />
+                  <rect
+                    x="236.004"
+                    y="130.346"
+                    width="40.1601"
+                    height="18.1308"
+                    rx="4"
+                    fill="#F9F7FF"
+                    stroke="#4900E3"
+                    stroke-width="0.5"
+                    stroke-dasharray="6 6"
+                  />
+                  <rect
+                    x="345.531"
+                    y="104.056"
+                    width="34.6837"
+                    height="18.1308"
+                    rx="4"
+                    fill="#F9F7FF"
+                    stroke="#4900E3"
+                    stroke-width="0.5"
+                    stroke-dasharray="6 6"
+                  />
+                </g>
+                <path
+                  d="M36 21C36 18.7909 37.7909 17 40 17H353C355.209 17 357 18.7909 357 21V205C357 207.209 355.209 209 353 209H40C37.7909 209 36 207.209 36 205V21Z"
+                  fill="#F9F8FF"
+                  stroke="#4900E3"
+                  stroke-width="0.5"
+                  stroke-dasharray="6 6"
+                />
+                <rect
+                  x="49"
+                  y="164"
+                  width="32"
+                  height="32"
+                  rx="16"
+                  fill="#E8E8E8"
+                />
+                <rect x="87" y="187" width="77" height="9" fill="#E8E8E8" />
+                <rect x="49" y="53" width="295" height="9" fill="#E8E8E8" />
+                <rect x="49" y="68" width="295" height="9" fill="#E8E8E8" />
+                <rect x="49" y="83" width="161.667" height="9" fill="#E8E8E8" />
+                <rect x="192" y="176" width="61" height="20" fill="#E8E8E8" />
+                <rect x="258" y="176" width="86" height="20" fill="#E8E8E8" />
+                <rect x="87" y="166" width="60" height="17" fill="#E8E8E8" />
+                <rect x="49" y="30" width="148" height="17" fill="#E3E3E3" />
+                <rect x="284" y="30" width="60" height="17" fill="#E3E3E3" />
+                <rect
+                  x="49"
+                  y="102"
+                  width="71.4846"
+                  height="20"
+                  rx="4"
+                  fill="#F9F7FF"
+                  stroke="#4900E3"
+                  stroke-width="0.5"
+                  stroke-dasharray="6 6"
+                />
+                <rect
+                  x="49"
+                  y="131"
+                  width="57.3891"
+                  height="20"
+                  rx="4"
+                  fill="#F9F7FF"
+                  stroke="#4900E3"
+                  stroke-width="0.5"
+                  stroke-dasharray="6 6"
+                />
+                <rect
+                  x="116.457"
+                  y="131"
+                  width="58.3959"
+                  height="20"
+                  rx="4"
+                  fill="#F9F7FF"
+                  stroke="#4900E3"
+                  stroke-width="0.5"
+                  stroke-dasharray="6 6"
+                />
+                <rect
+                  x="237.277"
+                  y="102"
+                  width="58.3959"
+                  height="20"
+                  rx="4"
+                  fill="#F9F7FF"
+                  stroke="#4900E3"
+                  stroke-width="0.5"
+                  stroke-dasharray="6 6"
+                />
+                <rect
+                  x="130.553"
+                  y="102"
+                  width="96.6553"
+                  height="20"
+                  rx="4"
+                  fill="#F9F7FF"
+                  stroke="#4900E3"
+                  stroke-width="0.5"
+                  stroke-dasharray="6 6"
+                />
+                <rect
+                  x="184.922"
+                  y="131"
+                  width="44.3003"
+                  height="20"
+                  rx="4"
+                  fill="#F9F7FF"
+                  stroke="#4900E3"
+                  stroke-width="0.5"
+                  stroke-dasharray="6 6"
+                />
+                <rect
+                  x="305.74"
+                  y="102"
+                  width="38.2594"
+                  height="20"
+                  rx="4"
+                  fill="#F9F7FF"
+                  stroke="#4900E3"
+                  stroke-width="0.5"
+                  stroke-dasharray="6 6"
+                />
+                <circle cx="345.5" cy="23.5" r="23.5" fill="#01E325" />
+                <path
+                  d="M333 22.5L342.5 32L358 16"
+                  stroke="white"
+                  stroke-width="3"
+                />
+              </svg>
+            </div>
+            <div class="buttonsVacansy">
+              <a href="/<%- id%>" style="width: 100%">
+                <button
+                  id="nextStageFinaly"
+                  style="width: 100%"
+                  class="showMoreButton nextStageBattonVacancy finaly"
+                >
+                  В профиль
+                </button>
+              </a>
+            </div>
+          </div>
         </div>
-
-    </div>
-</main>
-<script src="/js/createVacancy.js"></script>
-</body>
+      </div>
+    </main>
+    <script src="/js/createVacancy.js"></script>
+  </body>
 </html>
-
-
