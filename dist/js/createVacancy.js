@@ -244,31 +244,32 @@ const makeOneVisibleTwoStage = () => {
   let isActive =
     allData.expirienceLife !== "" && // Проверка, что опыт жизни не пуст
     allData.wayOfWorking.length !== 0 && // Проверка, что способ работы выбран
-    ((allData.salary.max &&
-      allData.salary.min &&
-      allData.salary.max > allData.salary.min) ||
-      allData.salary.agreement); // Проверка диапазона зарплаты или соглашения
+    (allData.salary.min > 0 ||
+      allData.salary.max > 0 ||
+      allData.salary.agreement);
   if (isActive) {
     $("#nextStageThree").removeAttr("disabled"); // Включить кнопку
   } else {
     $("#nextStageThree").attr("disabled", true); // Отключить кнопку
   }
-  return isActive
+  return isActive;
 };
 
 const makeOneVisibleLastStage = () => {
-  if (
+  let isActive =
     allData.description.length >= 10 &&
     quill.getText().length >= 10 &&
     specialList.includes(allData.special) &&
     allData.skills.length <= 100 &&
-    allData.salary.min <= allData.salary.max &&
-    (allData.salary.agreement || allData.salary.min === 0 && allData.salary.max === 0)
-  ) {
+    (allData.salary.min > 0 ||
+      allData.salary.max > 0 ||
+      allData.salary.agreement);
+  if (isActive) {
     $("#nextStageFinalyAndEnd").removeAttr("disabled");
   } else {
     $("#nextStageFinalyAndEnd").attr("disabled", true);
   }
+  return isActive;
 };
 
 //Первый экран
@@ -299,12 +300,6 @@ $("#toThreeStage").on("click", () => {
 });
 
 //Финал!
-$("#nextStageFinalyAndEnd").on("click", () => {
-  $(".threeStage").height("0");
-  $("#progress").attr("value", "100");
-  $(".lineCreateLevel").addClass("filalyProgress");
-  $(".finalyStage").height("fit-content");
-});
 
 var quill = new Quill("#editor-container", {
   theme: "snow",
@@ -321,19 +316,19 @@ var quill = new Quill("#editor-container", {
 let charCount = document.getElementById("charCount");
 var charCountElem = document.getElementById("charCount");
 quill.on("text-change", (delta, oldDelta, source) => {
-  makeOneVisibleLastStage()
+  makeOneVisibleLastStage();
   // Получаем текущий текст из редактора
   let value = quill.getText();
-  if (value.length === 0) { 
+  if (value.length === 0) {
     allData.description = "";
   }
-    if (value.length >= maxLength) {
-      // Проверяем, не превышает ли длина текста максимальное значение
-      // Если превышает, обрезаем текст до максимальной длины
-      quill.deleteText(maxLength, value.length - maxLength);
-      // Обновляем значение переменной после обрезки
-      value = quill.getText();
-    }
+  if (value.length >= maxLength) {
+    // Проверяем, не превышает ли длина текста максимальное значение
+    // Если превышает, обрезаем текст до максимальной длины
+    quill.deleteText(maxLength, value.length - maxLength);
+    // Обновляем значение переменной после обрезки
+    value = quill.getText();
+  }
 
   // Обновляем счетчик оставшихся символов
   charCount.innerText = maxLength - value.length;
@@ -347,12 +342,43 @@ quill.on("text-change", (delta, oldDelta, source) => {
   allData.description = quill.root.innerHTML;
 });
 
+document
+  .getElementById("nextStageFinalyAndEnd")
+  .addEventListener("click", async () => {
+    const button = document.getElementById("nextStageFinalyAndEnd");
+    try {
+      button.setAttribute("disabled", "disabled");
 
-$("#nextStageFinalyAndEnd").on("click", () => {
-  let is = makeOneVisibleLastStage()
-  if(!is) return false;
-  $(".threeStage").height("0");
-  $("#progress").attr("value", "100");
-  $(".lineCreateLevel").addClass("filalyProgress");
-  $(".finalyStage").height("fit-content");
-});
+      const is = makeOneVisibleLastStage();
+      console.log(is);
+      if (!is) {
+        button.setAttribute("disabled", "disabled");
+        return false;
+      }
+
+      console.log("Fetch Create Vacancy");
+      const response = await fetch("/api/create-vacancy", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "augwod89h1h9awdh9py0y82hjd",
+        },
+        body: JSON.stringify(allData),
+      });
+
+      if (response.status !== 201) {
+        console.log(response);
+        return false;
+      }
+
+      const data = await response.json();
+      console.log(data);
+      console.log("Отрисовка");
+      $(".threeStage").height("0");
+      $("#progress").attr("value", "100");
+      $(".lineCreateLevel").addClass("filalyProgress");
+      $(".finalyStage").height("fit-content");
+    } finally {
+      console.log("Finished");
+    }
+  });
