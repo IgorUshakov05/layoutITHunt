@@ -26,7 +26,6 @@ const isAuthNotRequire = async (req, res, next) => {
     }
 
     let searchUser = await searchUserId(decodeRefresh.userID);
-    console.log(searchUser);
     const accessTokenCookie = await createAccessToken({
       userID: searchUser.id,
       userMAIL: searchUser.mail,

@@ -1,61 +1,79 @@
 const mongoose = require("mongoose");
-const skillsScheme = new Schema({
+
+const skillsSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
   },
 });
-const typeWorkSchema = new Schema({
+
+const typeWorkSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
   },
 });
-const priceSchema = new Schema({
-  minPrice:{
+
+const priceSchema = new mongoose.Schema({
+  minPrice: {
     type: Number,
     required: false,
-    unique: false,
   },
-  maxPrice:{
+  maxPrice: {
     type: Number,
     required: false,
-    unique: false,
   },
-  agrement:{
+  agreement: {
     type: Boolean,
     required: false,
-    unique: false,
-  } 
+  },
 });
-const schema = new mongoose.Schema({
+
+const responseSchema = new mongoose.Schema({
+  userID: {
+    type: String,
+    required: false,
+  },
+  message: {
+    type: String,
+    required: false,
+  },
+  request: {
+    type: Boolean,
+    required: false,
+    default: false,
+  }
+});
+
+const vacancySchema = new mongoose.Schema({
   id: {
     type: String,
     required: true,
-    unique: false,
   },
   userID: {
     type: String,
     required: true,
-    unique: false,
   },
   special: {
     type: String,
-    required: true,
-    unique: true,
+    required: false,
   },
-  skills: [skillsScheme],
+  skills: [skillsSchema],
   typeWork: [typeWorkSchema],
-  expirient:{
+  experience: {
     type: String,
     required: true,
-    unique: false,
-  }, 
-  price: [priceSchema],
+  },
+  price: priceSchema,
   description: {
     type: String,
     required: true,
-    unique: false,
-  }
+  },
+  dateAndTimeCreated: {
+    type: String,
+    required: true,
+  },
+  responses: [responseSchema],
 });
-module.exports = mongoose.model("Skill", schema);
+
+module.exports = mongoose.model("Vacancy", vacancySchema);

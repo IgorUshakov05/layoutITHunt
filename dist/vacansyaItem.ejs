@@ -11,7 +11,8 @@
     <title>Вакансия FrontEnd разработчика</title>
 </head>
 <body>
-<%- include('./header.ejs', { isLoggedIn, username, active: 'vacancies',chat:chatList}) %>
+    <%- include('./header.ejs', { isLoggedIn, active: 'profile', id,chat:chatList}) %>
+
 
 
 <main class="main">

@@ -1,7 +1,9 @@
 const { Router } = require("express");
 const { check, validationResult } = require("express-validator");
 const router = Router();
-
+const { decodeAccessToken } = require("../tokens/accessToken");
+const {createVacancy} = require("../../database/Request/Vacancy");
+const { searchUserId } = require("../../database/Request/User");
 const specialList = [
   "Аналитик",
   "SEO-специалист",
@@ -33,7 +35,7 @@ const wayOfWorkingOptions = [
 ];
 
 const expirienceLifeOptions = [
-  "noExpencion",
+  "noExperience",
   "EightPlus",
   "SixEight",
   "ThreeFour",
@@ -57,18 +59,18 @@ router.post(
       .isIn(expirienceLifeOptions)
       .withMessage("Неверный опыт работы"),
     check("salary.min")
-      .isFloat({ min: 0 })
-      .withMessage("Минимальная зарплата должна быть больше или равна 0"),
+      .optional(),
     check("salary.max")
-      .isFloat({ min: 0 })
-      .withMessage("Максимальная зарплата должна быть больше или равна 0"),
+      .optional(),
     check("salary").custom((salary) => {
       const { min, max, agreement } = salary;
-      if (agreement || min > 0 || max > 0) {
+      const minValue = min === "" ? 0 : min;
+      const maxValue = max === "" ? 0 : max;
+      if (minValue > 0 || maxValue > 0 || agreement) {
         return true;
       }
       throw new Error(
-        'Зарплата должна быть либо указана, либо указано "agreement"'
+        'Необходимо указать либо "min", либо "max", либо "agreement".'
       );
     }),
     check("description")
@@ -76,12 +78,46 @@ router.post(
       .withMessage("Описание должно быть не менее 10 символов"),
   ],
   async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+    try {
+      let access = await req.cookies.access;
+      if (!access) return res.redirect("/login");
+      const decodeAccess = await decodeAccessToken(access);
+      if (!decodeAccess) return res.redirect("/login");
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        console.log(errors.array());
+        return res.status(400).json({ errors: errors.array() });
+      }
+      let findUser = await searchUserId(decodeAccess.userID);
+      console.log(findUser);
+      console.log(req.body);
+      if (!findUser) return res.redirect("/login");
+      const result = await createVacancy({
+        userID: decodeAccess.userID,
+        special: req.body.special,
+        skills: req.body.skills, // ['React']
+        typeWork: req.body.wayOfWorking, // ['Гибкий график']
+        experience: req.body.expirienceLife, // 'OneTwo'
+        price: {
+          minPrice: req.body.salary.min,
+          maxPrice: req.body.salary.max,
+          agreement: req.body.salary.agreement,
+        },
+        description: req.body.description, // '<h1>Awdaawdawdawd</h1>'
+      });
+
+      console.log(result);
+      if (result.success) {
+        res.status(201).json({
+          message: "Vacancy created successfully",
+          vacancy: result.data,
+        });
+      } else {
+        res.status(500).json({ message: result.error });
+      }
+    } catch (err) {
+      res.status(500).json({ message: err.message });
     }
-    console.log(req.body);
-    res.status(201).json({ message: "Vacancy created successfully" });
   }
 );
 
