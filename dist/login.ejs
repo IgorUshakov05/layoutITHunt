@@ -71,9 +71,9 @@
     <form id="myForm" action="/signing" method="post">
     <div class="inputs">
     <span id="error" style="color: red; font-size: 13.5px; line-height: 25px"></span>
-        <input required minlength="5" maxlength="254" type="email" placeholder="Почта" name="email" id="email">
+        <input required minlength="5" maxlength="254" type="email" placeholder="Почта" name="email" id="email" autocomplete="email">
         <div class="passForGlases">
-            <input minlength="4" maxlength="20" required type="password" name="password" id="password" placeholder="Пароль">
+            <input minlength="4" maxlength="20" required type="password" name="password" id="password" autocomplete="new-password" placeholder="Пароль">
             <span class="toggle-password" onclick="togglePasswordVisibility()">
                 <svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 <ellipse cx="12.9381" cy="9.82362" rx="4.39827" ry="5.65491" fill="#5412E0"/>

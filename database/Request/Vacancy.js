@@ -27,7 +27,6 @@ async function createVacancy({
     responses,
     dateAndTimeCreated: now,
   });
-
   try {
     const savedVacancy = await newVacancy.save();
     return { success: true, data: savedVacancy };

@@ -54,8 +54,23 @@ let oneStageHideAndShoTwoStage = () => {
   document.getElementById("oneStage").style.display = "none";
   document.getElementById("twoStage").style.display = "block";
 };
-
+const list = document.querySelector(".listExpressive");
 let timeoutId;
+inputSkills.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    console.log("Вы нажали Enter");
+    event.preventDefault();
+     if (!allData.skills.includes(this.value)) {
+       allData.skills.push(this.value);
+       appendElementUI(this.value);
+     }
+     this.value = "";
+     document.querySelector(".ParentlistExpressive").style.display = "none";
+     list.innerHTML = "";
+     clearTimeout(timeoutId);
+     return;
+  }
+});
 inputSkills.addEventListener("input", async function (e) {
   clearTimeout(timeoutId); // Очищаем предыдущий таймаут
   let value = e.target.value.trim();
@@ -88,7 +103,7 @@ inputSkills.addEventListener("input", async function (e) {
       }
 
       // Обновляем UI, используя полученные данные
-      const list = document.querySelector(".listExpressive");
+      
       document.querySelector(".ParentlistExpressive").style.display = "block";
       list.innerHTML = "";
 
