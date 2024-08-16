@@ -27,8 +27,7 @@ var agreement = vacancy.price.agreement;
 </head>
 <body>
     <%- include('./header.ejs', { isLoggedIn, active: 'profile', id,chat:chatList}) %>
-
-
+<%let exp = vacancy.experience === "OneTwo"?'Опыт 0-2 года':vacancy.experience==="ThreeFour"?"Опыт 3-5 лет":vacancy.experience==="SixEight"?"Опыт 6-8 лет":vacancy.experience==="EightPlus"?"Опыт 8+ лет":'Без опыта'%>
 
 <main class="main">
     <div class="twoBlocks">
@@ -86,6 +85,7 @@ var agreement = vacancy.price.agreement;
 </h2>
 
             </div>
+            <%if(from.city) {%>
             <a href="https://www.google.com/maps/search/<%-(from.city)%>" target="_blank">
                 <h3 style="margin-top:0px;display: flex; align-items:center;"><svg class="methodJob" width="14" height="19" viewBox="0 0 14 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M7 0C10.866 0 14 2.87926 14 6.43125C14 12.2311 7 18.375 7 18.375C7 18.375 0 12.2827 0 6.43125C0 2.87926 3.134 0 7 0Z" fill="#5412E0"/>                 
@@ -93,9 +93,13 @@ var agreement = vacancy.price.agreement;
                 </svg>
                 <span style="margin-left: 5px;" class="methodJob"><%-from.city.split(',').pop().trim()%></span></h3>
             </a>
+            <%}%>
             <div class="stackForJob" style="margin-top:5px;">
                 <ul class="listStacks">
                     
+                     <li class="abilityItem">
+                        <h5 class="ability"><%= exp%></h5>
+                    </li>
                     <%vacancy.skills.forEach(skill => {%>
                     <li class="abilityItem">
                         <h5 class="ability"><%= skill.title%></h5>
@@ -111,8 +115,13 @@ var agreement = vacancy.price.agreement;
 
                 </div>
                 <div class="listMethods">
-                    <span class="itemMethod">Удаленный</span>
-                    <span class="itemMethod">Офисная работа</span>
+                    <%vacancy.typeWork.forEach(element => {%>
+                        <%if(element.title === 'Офисная' && from.city) {%>
+                                <a href="https://www.google.com/maps/search/<%-(from.city)%>" class="itemMethod"><%-element.title%></a>
+                            <%} else {%>
+                                <span class="itemMethod"><%-element.title%></span>
+                        <%}%>
+                    <%});%>
                 </div>
             <div class="buttonsVacant">
                 <a href="/vacancies">Назад</a>

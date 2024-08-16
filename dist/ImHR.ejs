@@ -286,6 +286,8 @@
                 <h1 class="inLine"><span class="myVacancyText">Мои вакансии</span><span class="vacancyIter">  (<%=vacancys.length%>)</span><div class="closeVacancy"><svg width="22" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12L11 3L20 12" stroke="black" stroke-width="3"/></svg></div></h1>
                 <div class="vacancyBox">
                     <% vacancys.forEach(element => { %>
+                            <%let exp = element.experience === "OneTwo"?'Опыт 0-2 года':element.experience==="ThreeFour"?"Опыт 3-5 лет":element.experience==="SixEight"?"Опыт 6-8 лет":element.experience==="EightPlus"?"Опыт 8+ лет":'Без опыта'%>
+
     <div class="myVac">
         <div class="topFlex">
             <div class="clickShow">
@@ -331,6 +333,9 @@
         </div>
         <div class="stackForJob">
             <ul class="listStacks">
+                 <li class="abilityItem abilityItemProf">
+                    <h5 class="ability"><%= exp %></h5>
+                </li>
                 <% element.skills.forEach(skill => { %>
                 <li class="abilityItem abilityItemProf">
                     <h5 class="ability"><%= skill.title %></h5>

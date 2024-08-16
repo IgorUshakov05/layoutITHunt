@@ -148,15 +148,16 @@ null
        
         ] %>
 
-   
-
-
+        
+        
+        
         <div class="MoreInfo bottoMargin">
             <% if(vacancys.length) { %>
-            <div class="myVacancy" >
-                <h1 class="inLine"><span class="myVacancyText">Вакансии</span><span class="vacancyIter">  (<%=vacancys.length%>)</span><div class="closeVacancy"><svg width="22" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12L11 3L20 12" stroke="black" stroke-width="3"/></svg></div></h1>
-                <div class="vacancyBox">
-                    <% vacancys.forEach(element => { %>
+                <div class="myVacancy" >
+                    <h1 class="inLine"><span class="myVacancyText">Вакансии</span><span class="vacancyIter">  (<%=vacancys.length%>)</span><div class="closeVacancy"><svg width="22" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12L11 3L20 12" stroke="black" stroke-width="3"/></svg></div></h1>
+                    <div class="vacancyBox">
+                        <% vacancys.forEach(element => { %>
+                            <%let exp = element.experience === "OneTwo"?'Опыт 0-2 года':element.experience==="ThreeFour"?"Опыт 3-5 лет":element.experience==="SixEight"?"Опыт 6-8 лет":element.experience==="EightPlus"?"Опыт 8+ лет":'Без опыта'%>
                     <article class="myVac">
                         <div class="topFlex">
                         <div class="clickShow"><p class="titleVacansyProf"><%=element.special %></p>
@@ -201,6 +202,9 @@ null
                         <pre class="descriptionVacansyProfilePRE"><%- element.description.replace('<script>', ' ') %></pre>
                         <div class="stackForJob">
                 <ul class="listStacks">
+                    <li class="abilityItem abilityItemProf">
+                        <h5 class="ability"><%= exp %></h5>
+                    </li>
                     <% element.skills.forEach(skill => { %>
                 <li class="abilityItem abilityItemProf">
                     <h5 class="ability"><%= skill.title %></h5>
@@ -262,7 +266,7 @@ null
                         <div class="buttonsElements buttonsElementsProfile">
                             <!-- addingFavorite - класс добавленого в избранное -->
                             <button class="Infavorites" style="padding: 10px 17px;">В избранное</button>
-                            <button class="Respond" style="padding: 10px 17px;"><a href="/vacancia">Откликнуться</a></button>                        
+                            <button class="Respond" style="padding: 10px 17px;"><a href="/vacancia/<%-element.id%>">Откликнуться</a></button>                        
                         </div>
                                 </div>
                                 

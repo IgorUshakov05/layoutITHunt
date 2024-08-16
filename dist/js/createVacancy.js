@@ -321,7 +321,6 @@ var quill = new Quill("#editor-container", {
   placeholder: "Придумайте описание вакансии",
   modules: {
     toolbar: [
-      [{ header: "1" }, { header: "2" }],
       ["bold", "italic"],
       [{ list: "ordered" }, { list: "bullet" }],
       ["clean"],

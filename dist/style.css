@@ -4823,7 +4823,13 @@ input[type="number"] {
   line-height: 141.4%; /* 26.866px */
   letter-spacing: -0.095px;
 }
-
+.personalInfo.chatLeft {
+    background: none;
+}
+.itemChat {
+  background: white;
+  border-radius: 4px;
+}
 .descriptionCompanyInVacansy {
   color: #000;
   margin-top: 12px;

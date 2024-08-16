@@ -10,7 +10,7 @@ router.get("/vacancia/:id", isAuthNotRequire, async (req, res) => {
   let user = await decodeAccessToken(access);
   let findVacancy = await searchVacancyById(req.params.id);
   let findFromUser = await searchUserId(findVacancy.data.userID);
-  console.log(findFromUser);
+  console.log(findVacancy);
   return await res.render("vacansyaItem", {
     isLoggedIn: !!user,
     id: user.userID,
