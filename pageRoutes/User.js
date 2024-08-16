@@ -49,7 +49,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
             description: result.description,
           });
         }
-        let vacancys = await searchVacancyByUserId(decodeAccess.userID);
+        let vacancys = await searchVacancyByUserId(result.id);
         console.log(vacancys);
         return res.render("ImHR.ejs", {
           isLoggedIn: decodeAccess,
@@ -98,7 +98,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
         description: result.description,
       });
     } else {
-      let vacancys = await searchVacancyByUserId(decodeAccess.userID);
+      let vacancys = await searchVacancyByUserId(result.id);
       console.log(vacancys);
       res.render("SeSideHr.ejs", {
         isLoggedIn: decodeAccess,

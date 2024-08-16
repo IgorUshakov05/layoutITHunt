@@ -4805,6 +4805,7 @@ input[type="number"] {
 }
 .titleCompanyAndPhoto {
   display: flex;
+  overflow: hidden;
   cursor: pointer;
   align-items: center;
 }
@@ -4874,6 +4875,7 @@ input[type="number"] {
 .boxFilter {
   box-shadow: 0px 1px 4px 0px rgba(151, 149, 255, 0.25);
   padding: 20px;
+  background: white;
 }
 
 .toMoreVacansyA > div {
@@ -5460,8 +5462,12 @@ input[type="number"] {
 .placeAndTime {
   margin-top: 15px;
 }
+.places {
+  display: flex;
+    flex-wrap: wrap;
+}
 
-.placeJob > span {
+.placeJob >div>  span {
   font-family: Raleway;
   font-size: 14px;
   font-style: normal;
@@ -9659,6 +9665,8 @@ button.submitButton:focus {
 
 .descriptionVacansyProfilePRE {
   white-space: pre-wrap;
+      word-break: break-all;
+    overflow-wrap: break-word;
 }
 .descriptionVacansyProfilePRE > *, .descriptionVacansyProfilePRE >*>*, .descriptionVacansyProfilePRE > * > * > *   {
   font-size: 13px;

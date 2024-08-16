@@ -9,7 +9,7 @@ router.post('/favorite', isAuth, async (req,res) => {
     
     console.log(req.headers.referer)
     const id = await req.body.id ||req.headers.referer.split('/')[3];
-    console.log(id)
+    console.log(id,userID)
     if(!id) {
         return res.json({error:"Не верный параметр"})
     }

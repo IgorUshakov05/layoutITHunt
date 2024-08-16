@@ -1,14 +1,29 @@
+<% 
+var minPrice = vacancy.price.minPrice;
+var maxPrice = vacancy.price.maxPrice;
+var agreement = vacancy.price.agreement;
+%>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="ITHunt - MTS Gr">
-    <meta property="og:description" content="Описание страницы">
-    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/800px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png">
+    <meta name="description" content="Описание вакансии <%- vacancy.special %> разработчика в компании <%- from.name %>. Зарплата: <%= minPrice ? (minPrice.toLocaleString('ru-RU') + (maxPrice ? ' - ' + maxPrice.toLocaleString('ru-RU') : '')) : 'Договорная' %>.">
+    <meta name="keywords" content="вакансия, <%- vacancy.special %> разработчик, работа, <%- from.name %>, программирование, разработка, зарплата">
+    <meta name="author" content="<%- from.name %>">
+    <meta property="og:title" content="Вакансия <%- vacancy.special %> разработчика в компании <%- from.name %>">
+    <meta property="og:description" content="Подробнее о вакансии <%- vacancy.special %> разработчика в компании <%- from.name %>. Зарплата: <%= minPrice ? (minPrice.toLocaleString('ru-RU') + (maxPrice ? ' - ' + maxPrice.toLocaleString('ru-RU') : '')) : 'Договорная' %>. Узнайте о требованиях и условиях работы.">
+    <meta property="og:image" content="<%-from.avatar%>">
+    <meta property="og:url" content="/<%= vacancy.id %>">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="<%- from.name %>">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Вакансия <%- vacancy.special %> разработчика в компании <%- from.name %>">
+    <meta name="twitter:description" content="Подробнее о вакансии <%- vacancy.special %> разработчика в компании <%- from.name %>. Зарплата: <%= minPrice ? (minPrice.toLocaleString('ru-RU') + (maxPrice ? ' - ' + maxPrice.toLocaleString('ru-RU') : '')) : 'Договорная' %>. Узнайте о требованиях и условиях работы.">
     <link rel="stylesheet" href="/style.css">
     <script src="/js/jquery.js"></script>
-    <title>Вакансия FrontEnd разработчика</title>
+    <title>Вакансия <%- vacancy.special %> от <%- from.name %> <%-from.surname%></title>
 </head>
 <body>
     <%- include('./header.ejs', { isLoggedIn, active: 'profile', id,chat:chatList}) %>
@@ -22,19 +37,19 @@
 
             <div class="titleCompanyAndPhoto">
                 <div class="logoCompany">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/800px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png" width="41" height="41" alt="Логотип компании">
+                    <img src="<%- from.avatar %>" width="41" height="41" alt="Логотип компании">
                 </div>
-                <p>MTC Group</p>
+                <p><%-from.name%> <%-from.surname%></p>
             </div>
-<p class="descriptionCompanyInVacansy">МТС — российская компания, предоставляющая телекоммуникационные услуги, цифровые и медийные сервисы в России, Армении и Белоруссии под торговой маркой «МТС»</p>
+<p class="descriptionCompanyInVacansy"><%-from.description%></p>
 <div class="showAllVacansy">
-    <a href="/company">
+    <a href="/<%-from.id%>">
         <span class="seeAllVacansy">Посмотреть все вакансии</span>
     </a>
 </div>
 </div>
 <div class="toMoreVacansy">
-    <a class="toMoreVacansyA" href="/company">
+    <a class="toMoreVacansyA" href="/<%-from.id%>">
         <p>Посмотреть все вакансии</p>
         <div class="toArrow">
             <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,69 +61,52 @@
     </a>
 </div>     
 </div>
+
     <div class="MoreInfo">
         <div class="oneCard">
             <div class="topInfoVacancy">
-                <h1 class="titleVacansy">Ифно-безопастонсть специалист</h1>
-                <h2><span class="priceItem"><%= (100000).toLocaleString("no-NO") %></span><span class="p">Ꝑ</span></h2>
+                <h1 class="titleVacansy"><%= vacancy.special %></h1>
+                <h2>
+    <span class="priceItem">
+        <% if (minPrice) { %>
+            <% if (!maxPrice) { %> от <% } %>
+            <%= minPrice.toLocaleString("no-NO") %>
+            <span class="p">Ꝑ</span>
+        <% } %>
+        <% if (minPrice && maxPrice) { %> - <% } %>
+        <% if (maxPrice) { %>
+            <% if (!minPrice) { %> до <% } %>
+            <%= maxPrice.toLocaleString("no-NO") %>
+            <span class="p">Ꝑ</span>
+        <% } %>
+    </span>
+    <% if (agreement &&(!maxPrice && !minPrice)) { %>
+    <span>Договорная</span>
+<% } %>
+</h2>
+
             </div>
-            <a href="https://www.google.com/maps/search/Ростов в Плену" target="_blank">
+            <a href="https://www.google.com/maps/search/<%-(from.city)%>" target="_blank">
                 <h3 style="margin-top:0px;display: flex; align-items:center;"><svg class="methodJob" width="14" height="19" viewBox="0 0 14 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M7 0C10.866 0 14 2.87926 14 6.43125C14 12.2311 7 18.375 7 18.375C7 18.375 0 12.2827 0 6.43125C0 2.87926 3.134 0 7 0Z" fill="#5412E0"/>                 
                     <path d="M7 10.5C8.933 10.5 10.5 8.93303 10.5 7.00003C10.5 5.06703 8.933 3.50003 7 3.50003C5.067 3.50003 3.5 5.06703 3.5 7.00003C3.5 8.93303 5.067 10.5 7 10.5Z" fill="white"/>
                 </svg>
-                <span style="margin-left: 5px;" class="methodJob">Ростов в Плену</span></h3>
+                <span style="margin-left: 5px;" class="methodJob"><%-from.city.split(',').pop().trim()%></span></h3>
             </a>
             <div class="stackForJob" style="margin-top:5px;">
                 <ul class="listStacks">
+                    
+                    <%vacancy.skills.forEach(skill => {%>
                     <li class="abilityItem">
-                        <h5 class="ability">HTML</h5>
+                        <h5 class="ability"><%= skill.title%></h5>
                     </li>
-                    <li class="abilityItem">
-                        <h5 class="ability">JavaScript</h5>
-                    </li>
-                    <li class="abilityItem">
-                        <h5 class="ability">React</h5>
-                    </li>
-                    <li class="abilityItem">
-                        <h5 class="ability">Node.js</h5>
-                    </li>
-                    <li class="abilityItem">
-                        <h5 class="ability">Python</h5>
-                    </li>
-                    <li class="abilityItem">
-                        <h5 class="ability">Java</h5>
-                    </li>
-                    <li class="abilityItem">
-                        <h5 class="ability">PHP</h5>
-                    </li>
-                    <li class="abilityItem">
-                        <h5 class="ability">Angular</h5>
-                    </li>
-                    <li class="abilityItem">
-                        <h5 class="ability">Vue.js</h5>
-                    </li>
-                    <li class="abilityItem">
-                        <h5 class="ability">TypeScript</h5>
-                    </li>
-                    <li class="abilityItem">
-                        <h5 class="ability">Java</h5>
-                    </li>
-                    <li class="abilityItem">
-                        <h5 class="ability">JavaScript</h5>
-                    </li>
-                    <li class="abilityItem">
-                        <h5 class="ability">HTML</h5>
-                    </li>
-                    <li class="abilityItem">
-                        <h5 class="ability">CSS</h5>
-                    </li>
+                    <%})%>
                 </ul>
             </div>
             <div class="descriptionVacansyItem">
                 <h4 class="descriptionVacansyItemText">
-   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum inventore nam, natus debitis molestiae adipisci dolores officia, dolore nostrum quae dolorum quod! Illum molestias, nulla amet eaque omnis culpa quam at repellat doloribus adipisci cumque reprehenderit et, laboriosam excepturi animi magni voluptates neque soluta, vitae tempore. Soluta neque accusantium ipsam ad sit sunt rem quam? Dolorum hic ratione, iure maiores est recusandae laudantium provident eos accusamus rerum placeat maxime aliquam cumque qui eveniet, nobis iste ex reiciendis fugiat. In unde nulla nihil delectus illo saepe quam accusamus blanditiis necessitatibus, ipsum labore, ducimus autem est facilis, tenetur sint id excepturi atque. Recusandae assumenda consequuntur ipsum exercitationem inventore corporis cumque necessitatibus perferendis libero iure velit, voluptatem facilis, doloribus illo, ad explicabo rerum vel harum non accusantium optio ex a. Excepturi doloribus dolore adipisci necessitatibus soluta deleniti quaerat quis modi magnam, nisi ipsam consequuntur, optio cumque minima voluptates! Porro accusantium deserunt vel ratione iure officia cumque! Corporis commodi, aliquid reiciendis quam aliquam deserunt nesciunt? Quos harum rem commodi perferendis distinctio sit quo minima, quae necessitatibus iure beatae nesciunt facere fuga ducimus cum perspiciatis nihil odit deserunt voluptate, nulla temporibus vero repudiandae? Ea aperiam quidem nesciunt, laudantium itaque modi ullam error cum eligendi minus earum rem odio architecto? Ipsa id assumenda, nam dolore officiis, consequuntur dignissimos ipsam mollitia, laboriosam similique velit quidem possimus molestiae! Error aut, ad esse est nostrum adipisci officia fuga, reprehenderit eveniet harum doloremque aspernatur magnam voluptatum ab tempora eligendi voluptates odit assumenda maiores libero sed? Beatae enim sint eligendi numquam?
-</>
+                    <pre class="descriptionVacansyProfilePRE"><%- vacancy.description.replace('<script>', ' ') %></pre>
+                </h4>
 
 
                 </div>

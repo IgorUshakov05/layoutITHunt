@@ -30,7 +30,6 @@
         <button class="Infavorites w-100 mt-10 reverseColor" id="closeModalThis" style="padding: 10px 0;">Понятно</button>
     </div>
 </div>
-
     </div>
 <main class="main">
     <div class="twoBlocks">
@@ -333,6 +332,14 @@
                         <button class="sendJobTitle" id="sendEduData" disabled>Добавить</button>
                     </div>
                 </dialog>
+                <div class="modalWindowRemoveUser" style="display: block;">
+            <h1 class="titleRemove">Удалить из избранных?</h1>
+            <p class="descriptionRemove">Вы действительно хотите удалить <b>Игорь</b>?</p>
+            <div class="buttonRemoves">
+                <button class="canelss">Назад</button>
+                <button id="removeChatUser">Удалить</button>
+            </div>
+        </div>
             </div>
             <div class="mySkills">
                 <span class="myVacancyText">Мои навыки <span class="removeMySkill">Удалить</span></span>
@@ -506,7 +513,7 @@ function escapeHtml(unsafe) {
                         </a>
                     </div>
                     <div class="removeUser openMethodsMEnu">
-                        <span class="removeUserFavorite">Удалить</span>
+                        <span class="removeUserFavorite" data-id="<%= element.id %>">Удалить</span>
                         </div>
                 </div>
                <% }); %>

@@ -14,7 +14,11 @@ async function createVacancy({
 }) {
   const formattedSkills = skills.map((skill) => ({ title: skill }));
   const formattedTypeWork = typeWork.map((workType) => ({ title: workType }));
-  const now = Temporal.Now.instant();
+
+  // Использование PlainDateTime для работы с датой и временем
+  const now = Temporal.Now.plainDateTimeISO();
+  const addDate = now.add({ days: 30 });
+
   const newVacancy = new Vacancy({
     id: v4(),
     userID,
@@ -25,24 +29,27 @@ async function createVacancy({
     price,
     description,
     responses,
-    dateAndTimeCreated: now,
+    dateAndTimeCreated: addDate.toString(), // Сохраняем дату как строку
   });
+
   try {
     const savedVacancy = await newVacancy.save();
     return { success: true, data: savedVacancy };
   } catch (err) {
+    console.log(err);
     return { success: false, error: err.message };
   }
 }
 
 async function searchVacancyById(id) {
   try {
-    const vacancy = await Vacancy.find({ id });
+    const vacancy = await Vacancy.findOne({ id });
     if (!vacancy) {
       return { success: false, message: "Вакансии с таким id не найдено" };
     }
     return { success: true, data: vacancy };
   } catch (err) {
+    console.log(err);
     return { success: false, error: err.message };
   }
 }
@@ -57,6 +64,7 @@ async function searchVacancyByUserId(id) {
     }
     return { success: true, data: vacancy };
   } catch (err) {
+    console.log(err);
     return { success: false, error: err.message };
   }
 }

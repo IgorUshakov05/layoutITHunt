@@ -148,25 +148,42 @@ null
        
         ] %>
 
-        <% let vacancy = [
-            // {title: "Администратор баз данных",time:'12 дней назад',price: 235,clicks: 5, proglosh: 3, stack: ["HTML", "CSS", "JS", "Vue", "Angular"], place: "Арзамас", description:"loreawdia iwda iwdiaiwhdglaiwhdlg iahjw djlahwdg u jahwiuhajlw f;il haw;odyg hauwdkgkauwdgagwdoialhwbdia hwduoahwgd iahw ydi hawg 7d8o jagkwvduyagcwvdu gwadj afwgdijlkfh 9yoihfjk lyhk lg9oawyd a8wyd  a'wd hjaw0' 'p aowdljawdui"},
-            // {title: "FrontEnd",time:'12 дней назад',price: 252000,clicks: 12412, stack: ["HTML", "CSS", "JS", "Vue", "Angular"], place: "Удаленно", description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus magnam dolore porro est quos voluptatibus voluptatum placeat alias sunt dignissimos commodi voluptas quo et consectetur eligendi eos repudiandae architecto, iusto ducimus vel? Hic animi saepe veniam voluptatibus? Ducimus, aliquam. Harum cum suscipit quidem facilis soluta quod ipsa ducimus voluptatum, dignissimos vero natus quas labore voluptates molestiae, ullam dolor illum sint blanditiis libero tenetur voluptas officiis et perferendis. Cupiditate accusamus possimus ipsam perferendis deleniti, nostrum quos debitis deserunt, aliquid eligendi obcaecati eveniet iste, iusto corporis officia recusandae velit a facilis. Suscipit neque quisquam hic placeat eos doloribus quasi fugit, laborum voluptas nostrum necessitatibus odit magni doloremque praesentium, autem incidunt aspernatur tempora iure optio modi quia libero? Illo, non! Eos exercitationem maxime facilis similique debitis quidem quae quos quia, odit ullam iste rem blanditiis veniam sint dolorem fugit provident mollitia maiores voluptatibus ipsam ad tempora delectus autem sequi! Repellat quas eius alias iure quisquam veritatis? Accusantium iure assumenda fuga possimus dolorem laborum veniam labore sapiente exercitationem autem expedita natus, deserunt accusamus a eveniet molestias at? Nihil, asperiores reprehenderit ad repellendus harum non adipisci quidem sint voluptate sunt fugit vero? Porro culpa, repellendus tempora non laboriosam quae ad, tenetur adipisci nemo assumenda reiciendis provident! Dolorem provident tempora repellat ab perferendis, nobis vel? Qui neque maiores eum perspiciatis id animi earum, quis sint consequuntur quidem mollitia velit nam praesentium ipsam maxime natus? Dolore perferendis eaque nesciunt quaerat vero libero numquam tenetur debitis. Laudantium repellendus modi corrupti cumque quibusdam tempora ut ab tempore optio distinctio labore est ipsa culpa porro error dolor, repudiandae quo totam eos rem debitis quae. Quam ipsum, neque sapiente provident hic delectus doloribus necessitatibus, earum velit, esse eum debitis modi possimus aperiam est tenetur eaque harum porro eveniet. Velit alias facilis quis ut ipsa quas eligendi blanditiis, exercitationem ducimus voluptatem repellat?"},
-            // {title: "Веб-дизайнер",time:'5 дней назад',price: 131220,clicks: 2, stack: ["HTML", "CSS", "JS", "Vue", "Angular"], place: "Абакан Чехова 25 1", description:"loreawdia iwda iwdiaiwhdglaiwhdlg iahjw djlahwdg u jahwiuhajlw f;il haw;odyg hauwdkgkauwdgagwdoialhwbdia hwduoahwgd iahw ydi hawg 7d8o jagkwvduyagcwvdu gwadj afwgdijlkfh 9yoihfjk lyhk lg9oawyd a8wyd  a'wd hjaw0' 'p aowdljawdui"}
-        ] %>
+   
 
 
         <div class="MoreInfo bottoMargin">
-            <% if(vacancy.length) { %>
+            <% if(vacancys.length) { %>
             <div class="myVacancy" >
-                <h1 class="inLine"><span class="myVacancyText">Вакансии</span><span class="vacancyIter">  (<%=vacancy.length%>)</span><div class="closeVacancy"><svg width="22" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12L11 3L20 12" stroke="black" stroke-width="3"/></svg></div></h1>
+                <h1 class="inLine"><span class="myVacancyText">Вакансии</span><span class="vacancyIter">  (<%=vacancys.length%>)</span><div class="closeVacancy"><svg width="22" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12L11 3L20 12" stroke="black" stroke-width="3"/></svg></div></h1>
                 <div class="vacancyBox">
-                    <% vacancy.forEach(element => { %>
+                    <% vacancys.forEach(element => { %>
                     <article class="myVac">
                         <div class="topFlex">
-                        <div class="clickShow"><p class="titleVacansyProf"><%=element.title %></p><div class="priceInMyVac"><p style="font-family: Ubuntu;"><%= (element.price).toLocaleString("no-NO") %></p><span class="p">Ꝑ</span></div></div>
+                        <div class="clickShow"><p class="titleVacansyProf"><%=element.special %></p>
+                             <div class="priceInMyVac">
+                    <%if(element.price.minPrice) {%>
+                    <p style="font-family: Ubuntu;"><%if(!element.price.maxPrice) {%>
+                        от
+                        <%}%>
+                        <%= (element.price.minPrice).toLocaleString("no-NO") %></p>
+                    <span class="p">Ꝑ </span>
+                        <%}%> 
+                        <%if(element.price.minPrice && element.price.maxPrice ) {%>
+                            -
+                        <%}%>
+                          <%if(element.price.maxPrice) {%>
+                   <p style="font-family: Ubuntu;"><%if(!element.price.minPrice) {%>
+                        до
+                        <%}%> <%= (element.price.maxPrice).toLocaleString("no-NO") %></p>
+                    <span class="p">Ꝑ </span>
+                        <%}%> 
+                        <%if(element.price.agreement) {%>
+                            <span>Договорная</span>
+                            <%}%>
+                </div>
+                            </div>
                         <div class="inviteAndClick mobNone">
-                            <a href=""><span class="countClick"><%= element.clicks%> откликов</f></a>
-                            <a href=""><span class="countClick leftmaring"><%= element.proglosh%> приглашений</4></a> 
+                            <a href=""><span class="countClick"><%= element.responses.length%> откликов</f></a>
                       </div>
                             
                         <div class="arrow">
@@ -177,39 +194,70 @@ null
 <div class="buttonsElements buttonsElementsProfile buttonsElementsProfileDesc">
                             <!-- addingFavorite - класс добавленого в избранное -->
                             <button class="Infavorites">В избранное</button>
-                            <button class="Respond"><a href="/vacancia">Откликнуться</a></button>                        
+                            <button class="Respond"><a href="/vacancia/<%-element.id%>">Откликнуться</a></button>                        
                         </div>
                         </div>
                         <div class="descriptionVacansyProfile">
-                        <p><%=element.description %></p>
+                        <pre class="descriptionVacansyProfilePRE"><%- element.description.replace('<script>', ' ') %></pre>
                         <div class="stackForJob">
                 <ul class="listStacks">
-                    <% (element.stack).forEach(element => { %>
-                    <li class="abilityItem abilityItemProf">
-                        <h5 class="ability"><%= element %></h5>
-                    </li>
-                    <% }) %>
+                    <% element.skills.forEach(skill => { %>
+                <li class="abilityItem abilityItemProf">
+                    <h5 class="ability"><%= skill.title %></h5>
+                </li>
+                <% }) %>
                 </ul>
                         </div>
                         <div class="placeAndTime">
                             <div class="placeJob">
-                                <svg width="14" height="19" viewBox="0 0 14 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="svgPlace" width="14" height="19" viewBox="0 0 14 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" clip-rule="evenofdd" d="M7 0C10.866 0 14 2.87926 14 6.43125C14 12.2311 7 18.375 7 18.375C7 18.375 0 12.2827 0 6.43125C0 2.87926 3.134 0 7 0Z" fill="#5412E0"/>
 <path d="M7 10.5C8.933 10.5 10.5 8.933 10.5 7C10.5 5.067 8.933 3.5 7 3.5C5.067 3.5 3.5 5.067 3.5 7C3.5 8.933 5.067 10.5 7 10.5Z" fill="white"/>
-                        </svg><span><%= element.place %></span></div>
+                        </svg>
+                            <div class="places">
+                                <%element.typeWork.forEach(element => {%>
+                                    <span>
+                                        <%-element.title%>,
+                                        </span>
+                                        <%});%>
+                                        </div>
+                        </div>
                         <div class="time">
                             <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="7.5" cy="7.5" r="7.25" stroke="black" stroke-width="0.5"/>
                         <path d="M7.5 1.40747V7.50006H11.8333" stroke="black" stroke-width="0.5"/>
                         </svg>
-                        <time>12 дней</time></div>
+                        
+                        <time>
+  <%- (() => {
+    const d = new Date(element.dateAndTimeCreated) - new Date();
+    const days = Math.floor(d / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
+     let result = '';
+
+    if (days > 0) {
+      return result += `${days} дней `;
+    }
+    if (hours > 0) {
+      return result += `${hours} часов `;
+    }
+    if (minutes > 0) {
+      return result += `${minutes} минут`;
+    }
+
+    return result.trim() || '0 минут';
+    
+  })() %>
+</time>
+                        </div>
                             </div>
                          
                         </div>
                         <div class="bottomMobile">
                                 <div class="inviteAndClick">
-                            <a href=""><span class="countClick"><%= element.clicks%> откликов</f></a>
-                            <a href=""><span class="countClick leftmaring"><%= element.proglosh%> приглашений</4></a> 
+                            <a href=""><span class="countClick"><%= element.responses.length%> откликов</f></a>
+                          
                         </div>
                         <div class="buttonsElements buttonsElementsProfile">
                             <!-- addingFavorite - класс добавленого в избранное -->
@@ -233,7 +281,7 @@ null
                         <div class="topFlex">
                         <div class="clickShow"><p class="titleVacansyProf"><%=element.title %><span class="hardOrNo" style="font-weight: 300;font-size: 15px;color: <%=element.hard <= 2 ? '#A4A4A4' : (element.hard <= 4 ? '#000000' : '#4900E3') %>;"><%=element.hard %></span></p><div class="priceInMyVac"><p style="font-family: Ubuntu;"><%= (element.price).toLocaleString("no-NO") %></p><span class="p">Ꝑ</span></div></div>
                         <div class="inviteAndClick mobNone">
-                            <a href=""><span class="countClick"><%=element.clicks %> откликов</f></a>
+                            <a href=""><span class="countClick"><%=element.responses.length %> откликов</f></a>
                         </div>
                         <div class="arrow">
                             <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -269,7 +317,7 @@ null
                         </div>
                         <div class="bottomMobile">
                                 <div class="inviteAndClick">
-                                    <a href=""><span class="countClick"><%=element.clicks %> откликов</f></a>
+                                    <a href=""><span class="countClick"><%=element.responses.length %> откликов</f></a>
                         </div>
                                                 <div class="buttonsElements buttonsElementsProfile">
                             <!-- addingFavorite - класс добавленого в избранное -->
@@ -284,7 +332,7 @@ null
             </article>
             <% } %>
             
-            <% if(!vacancy.length&&!fastWork.length) { %>
+            <% if(!vacancys.length&&!fastWork.length) { %>
               <div class="boxNones">
                 <h1 class="nowTime">Вакансий и фаст-ворков нет</h1>
                 <p class="createPleace">Добавьте в избранное или напишите, чтобы не потерять</p>
