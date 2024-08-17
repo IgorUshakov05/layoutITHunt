@@ -1,4 +1,5 @@
 const FavoriteVacancySchema = require("../Schema/FavoriteVacancyOfUserSchema");
+const VacancySchema = require("../Schema/Vakancy");
 
 async function isFavoriteVacancy(userID, vacancyID) {
   try {
@@ -48,7 +49,8 @@ async function electedVacancy(userID, vacancyID) {
 async function findFAllFavoriteOfId(userID) {
   try {
     console.log(userID);
-    if(!userID) return { success: false, error: "User ID is required", data: [] };
+    if (!userID)
+      return { success: false, error: "User ID is required", data: [] };
     let electedVacancyAdd = await FavoriteVacancySchema.findOne({ userID });
     return { success: true, data: electedVacancyAdd };
   } catch (err) {
@@ -57,4 +59,26 @@ async function findFAllFavoriteOfId(userID) {
   }
 }
 
-module.exports = { isFavoriteVacancy, electedVacancy, findFAllFavoriteOfId };
+async function getMyFavorites(userID) {
+  try {
+    let electedVacancyAdd = await FavoriteVacancySchema.findOne({ userID });
+    console.log(electedVacancyAdd);
+    if (!electedVacancyAdd)
+      return { success: false, error: "User ID is required", data: [] };
+    let vacancies = electedVacancyAdd.vacancyID.map((item) => item.id);
+    let vacanciesData = await VacancySchema.find(
+      { id: { $in: vacancies } },
+      { special: 1, id: 1, _id: 0 }
+    );
+    return { success: true, data: vacanciesData };
+  } catch (e) {
+    return { success: false, error: err.message, data: [] };
+  }
+}
+
+module.exports = {
+  isFavoriteVacancy,
+  electedVacancy,
+  findFAllFavoriteOfId,
+  getMyFavorites,
+};

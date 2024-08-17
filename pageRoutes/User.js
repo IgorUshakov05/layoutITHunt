@@ -5,7 +5,10 @@ const router = Router();
 const { searchUserId } = require("../database/Request/User");
 const { findUsersByFavorites } = require("../database/Request/User");
 const { searchVacancyByUserId } = require("../database/Request/Vacancy");
-const { findFAllFavoriteOfId } = require("../database/Request/FavoriteVacancy");
+const {
+  findFAllFavoriteOfId,
+  getMyFavorites,
+} = require("../database/Request/FavoriteVacancy");
 router.get("/:id", isAuthNotRequire, async (req, res, next) => {
   try {
     let access = req.cookies.access;
@@ -24,10 +27,11 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       let findMyProf = await searchUserId(decodeAccess.userID);
       favorites = (await findUsersByFavorites(findMyProf.favorite)) || [];
       if (decodeAccess.userID === id) {
-        console.log(favorites);
-        console.log(result);
         if (result.role === "worker") {
-          console.log(favorites);
+          console.log("Мой профиль")
+          let myFavoritesVacancy = await getMyFavorites(result.id);
+          console.log("Мой профиль");
+          console.log(myFavoritesVacancy);
           return res.render("ImProfessional.ejs", {
             isLoggedIn: decodeAccess,
             id: decodeAccess.userID,
@@ -45,13 +49,13 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
             favorite: favorites,
             education: result.education,
             avatar: result.avatar,
+            myFV:myFavoritesVacancy.data, 
             expiriens: result.expiriens,
             premium: result.premium,
             description: result.description,
           });
         }
         let vacancys = await searchVacancyByUserId(result.id);
-        console.log(vacancys);
         return res.render("ImHR.ejs", {
           isLoggedIn: decodeAccess,
           id: decodeAccess.userID,
@@ -75,7 +79,6 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
     }
 
     if (result.role === "worker") {
-      console.log(favorites, id);
       return res.render("seeSideProf.ejs", {
         isLoggedIn: decodeAccess,
         id: decodeAccess.userID,
@@ -103,10 +106,8 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       let findAllFV = await findFAllFavoriteOfId(decodeAccess.userID);
 
       if (!findAllFV.success) {
-        findAllFV = { data: { vacancyID:[] } }; // Обеспечиваем, что data будет пустым массивом в случае ошибки
+        findAllFV = { data: { vacancyID: [] } }; // Обеспечиваем, что data будет пустым массивом в случае ошибки
       }
-
-      await console.log(findAllFV.data, " - найденные избранные");
       res.render("SeSideHr.ejs", {
         isLoggedIn: decodeAccess,
         id: decodeAccess.userID,
