@@ -125,7 +125,11 @@ var agreement = vacancy.price.agreement;
                 </div>
             <div class="buttonsVacant">
                 <a href="/vacancies">Назад</a>
-                <button id="addToFavorites" class="Infavorites">В избранное</button>
+                <%if(isLoggedIn) {%>
+                    <button id="addToFavorites" class="<%-isFav?'Infavorites addingFavorite': 'Infavorites'%>">В избранное</button>
+                <%} else {%>
+                    <a href="/login" style="margin-right: 0;" class="<%-isFav?'Infavorites addingFavorite': 'Infavorites'%>">В избранное</a>
+                    <%}%>
             </div>
         </div>
         <div class="oneCard twoCard">

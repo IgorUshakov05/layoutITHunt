@@ -2,8 +2,12 @@ const { Router } = require("express");
 const { check, validationResult } = require("express-validator");
 const router = Router();
 const { decodeAccessToken } = require("../tokens/accessToken");
-const {createVacancy} = require("../../database/Request/Vacancy");
+const { createVacancy } = require("../../database/Request/Vacancy");
+const {
+  electedVacancy,
+} = require("../../database/Request/FavoriteVacancy");
 const { searchUserId } = require("../../database/Request/User");
+const { searchVacancyById } = require('../../database/Request/Vacancy')
 const specialList = [
   "Аналитик",
   "SEO-специалист",
@@ -58,10 +62,8 @@ router.post(
     check("expirienceLife")
       .isIn(expirienceLifeOptions)
       .withMessage("Неверный опыт работы"),
-    check("salary.min")
-      .optional(),
-    check("salary.max")
-      .optional(),
+    check("salary.min").optional(),
+    check("salary.max").optional(),
     check("salary").custom((salary) => {
       const { min, max, agreement } = salary;
       const minValue = min === "" ? 0 : min;
@@ -120,5 +122,29 @@ router.post(
     }
   }
 );
+
+router.post("/favorite-vacancy", async (req, res) => {
+  try {
+    let access = await req.cookies.access;
+    if (!access) return res.redirect("/login");
+    const decodeAccess = await decodeAccessToken(access);
+    if (!decodeAccess) return res.redirect("/login");
+    let vacancyID = req.body.vacancyId;
+    if (!vacancyID)
+      return res.status(400).json({ message: "Вакансия не найдена",result: false });
+    let findVacancyInDatabase = await searchVacancyById(vacancyID);
+    console.log(findVacancyInDatabase);
+    if(!findVacancyInDatabase.success) return res.status(400).json({ message: "Вакансия не найдена", result: false });
+    let addVacancyOrDelete = await electedVacancy(
+      decodeAccess.userID,
+      vacancyID
+    );
+    return res
+      .status(200)
+      .json({ message: "Успех!", result: addVacancyOrDelete.isNew });
+  } catch (err) {
+    res.status(500).json({ message: err.message, result: false });
+  }
+});
 
 module.exports = router;

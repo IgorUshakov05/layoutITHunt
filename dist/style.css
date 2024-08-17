@@ -3694,6 +3694,9 @@ input[type="number"] {
   font-weight: 400;
   line-height: normal;
   letter-spacing: 0.128px;
+  width: 100%;
+  display: inherit;
+  height: 100%;
 }
 
 .showMore {
@@ -9677,6 +9680,8 @@ button.submitButton:focus {
 .descriptionVacansyProfilePRE > *, .descriptionVacansyProfilePRE >*>*, .descriptionVacansyProfilePRE > * > * > *   {
   font-size: 13px;
   line-height: 20px;
+  background:none !important;
+  color:black !important; 
 }
 
 .descriptionVacansyProfilePRE > h1,

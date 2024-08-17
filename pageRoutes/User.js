@@ -4,7 +4,8 @@ const { Router } = require("express");
 const router = Router();
 const { searchUserId } = require("../database/Request/User");
 const { findUsersByFavorites } = require("../database/Request/User");
-const {searchVacancyByUserId} = require("../database/Request/Vacancy");
+const { searchVacancyByUserId } = require("../database/Request/Vacancy");
+const { findFAllFavoriteOfId } = require("../database/Request/FavoriteVacancy");
 router.get("/:id", isAuthNotRequire, async (req, res, next) => {
   try {
     let access = req.cookies.access;
@@ -99,7 +100,13 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       });
     } else {
       let vacancys = await searchVacancyByUserId(result.id);
-      console.log(vacancys);
+      let findAllFV = await findFAllFavoriteOfId(decodeAccess.userID);
+
+      if (!findAllFV.success) {
+        findAllFV = { data: { vacancyID:[] } }; // Обеспечиваем, что data будет пустым массивом в случае ошибки
+      }
+
+      await console.log(findAllFV.data, " - найденные избранные");
       res.render("SeSideHr.ejs", {
         isLoggedIn: decodeAccess,
         id: decodeAccess.userID,
@@ -118,6 +125,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
         im: decodeAccess.userROLE || null,
         contacts: result.contacts,
         status: result.status,
+        myFavorites: findAllFV.data.vacancyID,
         description: result.description,
       });
     }

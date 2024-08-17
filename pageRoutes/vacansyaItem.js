@@ -3,13 +3,19 @@ const router = Router();
 const { decodeAccessToken } = require("../api/tokens/accessToken");
 const { isAuthNotRequire } = require("../api/middlewares/authNotRequire");
 const { searchVacancyById } = require("../database/Request/Vacancy");
-const {searchUserId} = require("../database/Request/User")
+const { isFavoriteVacancy } = require("../database/Request/FavoriteVacancy");
+const { searchUserId } = require("../database/Request/User");
 
 router.get("/vacancia/:id", isAuthNotRequire, async (req, res) => {
   let access = req.cookies.access;
   let user = await decodeAccessToken(access);
   let findVacancy = await searchVacancyById(req.params.id);
+  if (!findVacancy.success || !req.params.id) return res.redirect("/404");
   let findFromUser = await searchUserId(findVacancy.data.userID);
+  let isFavoriteVacancyVar = false;
+  if (findFromUser) {
+    isFavoriteVacancyVar = await isFavoriteVacancy(user.userID, req.params.id);
+  }
   console.log(findVacancy);
   return await res.render("vacansyaItem", {
     isLoggedIn: !!user,
@@ -17,6 +23,7 @@ router.get("/vacancia/:id", isAuthNotRequire, async (req, res) => {
     chatList: user.chatList || null,
     vacancy: findVacancy.data,
     from: findFromUser,
+    isFav: isFavoriteVacancyVar,
   });
 });
 

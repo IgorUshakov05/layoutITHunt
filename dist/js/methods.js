@@ -1,22 +1,48 @@
-const addToFavorites = document.getElementById('addToFavorites')
+const addToFavorites = document.getElementById("addToFavorites");
 
 function makeInFuture() {
-    addToFavorites.className = 'Infavorites addingFavorite'
+  addToFavorites.className = "Infavorites addingFavorite";
 }
 
 function removeFuture() {
-    addToFavorites.className = 'Infavorites'
+  addToFavorites.className = "Infavorites";
 }
 
-$('.titleCompanyAndPhoto').on('click',() => {
-    $('.descriptionCompanyInVacansy').toggle()
-})
+$(".titleCompanyAndPhoto").on("click", () => {
+  $(".descriptionCompanyInVacansy").toggle();
+});
 
-addToFavorites.addEventListener('click', () => {
-    if(addToFavorites.classList[1] === 'addingFavorite') {
-        removeFuture()    
+const setButtonState = (enabled) => {
+  addToFavorites.disabled = !enabled;
+};
+
+// Обработчик клика на кнопку
+addToFavorites.addEventListener("click", async () => {
+  setButtonState(false);
+  try {
+    let value = window.location.pathname.split("/").pop();
+    let response = await fetch("/api/favorite-vacancy", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "augwod89h1h9awdh9py0y82hjd",
+      },
+      body: JSON.stringify({
+        vacancyId: value,
+      }),
+    });
+
+    let data = await response.json();
+
+    if (!data.result) {
+      removeFuture();
+    } else {
+      makeInFuture();
     }
-    else {
-        makeInFuture()
-    }
-})
+  } catch (error) {
+    console.error("Ошибка:", error);
+  } finally {
+    // Возвращаем кнопку в активное состояние через 4 секунды
+    setTimeout(() => setButtonState(true), 4000);
+  }
+});
