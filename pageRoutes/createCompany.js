@@ -8,7 +8,9 @@ router.get('/create-company', async(req,res) => {
     let decodeAccess = await decodeAccessToken(access)
 console.log(decodeAccess)
     if(!decodeAccess||decodeAccess.userROLE !== 'creatorWork') return res.redirect('/')
-    res.render('createCompany')
+    res.render('createCompany', {
+        FILE_SERVER:process.env.FILE_SERVER_PATH 
+    })
 })
 
 module.exports = router

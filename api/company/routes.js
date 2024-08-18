@@ -9,11 +9,11 @@ router.post(
   [
     check("title")
       .isString()
-      .isLength({ min: 3, max: 50 })
+      .isLength({ min: 3, max: 250 })
       .withMessage("Title must be between 3 and 50 characters"),
     check("INN")
       .isString()
-      .isLength({ min: 10, max: 15 })
+      .isLength({ min: 10, max: 20 })
       .withMessage("INN must be between 10 and 15 characters"),
     check("description")
       .isString()

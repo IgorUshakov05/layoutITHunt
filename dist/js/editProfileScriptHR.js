@@ -95,10 +95,6 @@ function displayCities(cities) {
   ul.style.display = "block";
 }
 
-
-
-
-
 let data = {
   avatar: "",
   name: undefined,
@@ -148,8 +144,8 @@ Surname.addEventListener("input", function (e) {
 let Status = document.getElementById("status");
 Status.addEventListener("change", function (e) {
   let value = this.value;
-  if (value === "1") return data.status = "Ищу специалиста";
-  if (value === "2") return data.status = "Открыт к предложениям";
+  if (value === "1") return (data.status = "Ищу специалиста");
+  if (value === "2") return (data.status = "Открыт к предложениям");
   else data.status = "Не ищу специалиста";
 });
 
@@ -166,7 +162,6 @@ document.querySelectorAll(".itemContact").forEach((elem) => {
 });
 
 let myPort = [];
-
 
 $("#contactsContainer").delegate(".removeLink", "click", function () {
   let contactUrl = $(this).closest("li").find(".group a").text().trim();
@@ -575,9 +570,10 @@ function previewImage(input) {
     preview.src = "";
   }
 }
+
 const sendAvatar = async () => {
   try {
-    const response = await fetch("https://s3.webhunt.ru/upload/avatar", {
+    const response = await fetch(`${window.conf.FILE_SERVER}/upload/avatar`, {
       method: "POST",
       headers: {
         Authorization: "ILOVEPORN",
@@ -589,18 +585,19 @@ const sendAvatar = async () => {
       throw new Error("Image upload failed.");
     }
     const data = await response.json();
+    console.log(data);
     return data.title; // Возвращаем URL
   } catch (error) {
     console.error("Error uploading image:", error);
   }
 };
-let sendForm = document.getElementById('sendForm')
-sendForm.addEventListener('click', sendDataToWebHunt)
+let sendForm = document.getElementById("sendForm");
+sendForm.addEventListener("click", sendDataToWebHunt);
 async function sendDataToWebHunt() {
-  sendForm.setAttribute('disabled', '')
+  sendForm.setAttribute("disabled", "");
   if (formData.get("avatar")) {
     const url = await sendAvatar();
-    data.avatar = url; 
+    data.avatar = url;
   }
 
   try {
@@ -615,16 +612,17 @@ async function sendDataToWebHunt() {
 
     if (!response.ok) {
       setTimeout(() => {
-        sendForm.removeAttribute('disabled')
+        sendForm.removeAttribute("disabled");
       }, 1000);
     }
-    if(response.status === 201) {
+    if (response.status === 201) {
       const result = await response.json();
-      console.log("Ответ от сервера:", result); 
-      return window.location.href = document.querySelector(".profile").children[0].href; // Перенаправление
+      console.log("Ответ от сервера:", result);
+      return (window.location.href =
+        document.querySelector(".profile").children[0].href); // Перенаправление
     }
     setTimeout(() => {
-      sendForm.removeAttribute('disabled')
+      sendForm.removeAttribute("disabled");
     }, 1000);
     return;
   } catch (error) {
@@ -632,5 +630,3 @@ async function sendDataToWebHunt() {
     // Обработайте ошибку (например, покажите сообщение пользователю)
   }
 }
-
-

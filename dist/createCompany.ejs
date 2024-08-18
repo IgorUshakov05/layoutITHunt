@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="robots" content="noindex, nofollow">
     <script src="/js/jquery.js"></script>
+     <script>
+        window.conf = {
+            FILE_SERVER: "<%-FILE_SERVER%>"
+        }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon">
     <link rel="stylesheet" href="/style.css">
@@ -20,6 +25,7 @@
             <div class="createCompanyMain" id="windowSendCompany">
 
                
+                    <div class="mt35"></div>
 
                 <div class="createOne" id="OneStageElem">
                     <div class="topBlock">
@@ -37,7 +43,6 @@
                             </div>
                         
                     </div>
-                    <div class="mt35"></div>
                         <p class="labelText">Наименование</p>
                     <input class="specialisationSelectInput" style="margin-bottom:5px;" placeholder="WebHunt" type="text" name="nameCompany" id="nameCompany">
                     <div class="labelTextCompany"></div>
@@ -53,7 +58,7 @@
                                 <p>Соотношение сторон 1:1</p>
                                 <p>Допускаемые форматы изображения могут включать JPEG, PNG</p>
                                 <div class="addCompany">
-                                    <input type="file" id="imageUpload" name="imageUpload" accept="image/jpeg, image/png">
+                                    <input type="file" id="imageUpload" name="company" accept="image/jpeg, image/png">
                                     <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M15.6409 14.7641L19.0568 6.4684C19.2683 5.95477 18.8906 5.39087 18.3351 5.39087H4.94839C4.63215 5.39087 4.34718 5.58171 4.22677 5.87413L0.810877 14.1699C0.59938 14.6835 0.977016 15.2474 1.53249 15.2474H14.9193C15.2355 15.2474 15.5205 15.0566 15.6409 14.7641Z" stroke="white" stroke-width="0.613169"/>
                                         <path d="M0.947266 10.6091V1.53296C0.947266 1.10196 1.29666 0.752563 1.72766 0.752563H5.10332C5.39891 0.752563 5.66914 0.91957 5.80133 1.18396L6.52953 2.64035C6.66172 2.90474 6.93194 3.07175 7.22754 3.07175H14.6618C15.0928 3.07175 15.4422 3.42114 15.4422 3.85214V4.23134" stroke="white" stroke-width="0.613169" stroke-linecap="round"/>
@@ -95,39 +100,39 @@
                      </p>
 
                    <div class="listDocuments">
-                    <div class="documents">
+                    <div class="documents" id="oneDrag">
                         <div class="flex center"><p class="stageNumber">1</p><p class="textDocuments">Свидетельство о государственной регистрации (ЮЛ/ИП)</p></div>
                         <div class="uploadFile">
                             <p class="upoloadFiltHere">Переместите файл сюда</p>
-                            <input type="file" class="uploadFileInput">
-                            <p class="upoloadFiltHere description">Форматы: JPEG PDF PNG . Размер файла не более 10МБ</p>
+                            <input type="file" class="uploadFileInput" accept=".pdf" id="registration">
+                            <p class="upoloadFiltHere description">Форматы: PDF . Размер файла не более 10МБ</p>
                         </div>
                     </div>
-                    <div class="documents">
+                    <div class="documents" id="twoDrag">
                         <div class="flex center"><p class="stageNumber">2</p><p class="textDocuments">Свидетельство о постановке на налоговый учет (ЮЛ/ИП)</p></div>
                         <div class="uploadFile">
                             <p class="upoloadFiltHere">Переместите файл сюда</p>
-                            <input type="file" class="uploadFileInput">
-                            <p class="upoloadFiltHere description">Форматы: JPEG PDF PNG . Размер файла не более 10МБ</p>
+                            <input type="file" class="uploadFileInput" accept=".pdf" id="NU">
+                            <p class="upoloadFiltHere description">Форматы: PDF . Размер файла не более 10МБ</p>
                         </div>
                     </div>
-                    <div class="documents">
+                    <div class="documents" id="threeDrag">
                         <div class="flex center"><p class="stageNumber">3</p><p class="textDocuments">Лист записи ЕГРЮЛ/ЕГРИП</p></div>
                         <div class="uploadFile">
                             <p class="upoloadFiltHere">Переместите файл сюда</p>
-                            <input type="file" class="uploadFileInput">
-                            <p class="upoloadFiltHere description">Форматы: JPEG PDF PNG . Размер файла не более 10МБ</p>
+                            <input type="file" class="uploadFileInput" accept=".pdf" id="listWrite">
+                            <p class="upoloadFiltHere description">Форматы: PDF . Размер файла не более 10МБ</p>
                         </div>
                     </div>
                     <div class="acceptRule">
-                        <div class="flex">
+                        <div class="flex" style="align-items:center;">
                             <input type="checkbox" class="acceptRuleInput" name="accept" id="accept">
                         <p class="acceptP">Я соглашаюсь на <a>Обработку персональных данных</a> и <a>Правила добавления компании</a></p>
                         </div>
                     </div>
                    </div>
                     <div class="nextStageCompany">
-                        <button disabled id="toTwoStage" class="submitButton submitButtonComp">Перейти к покупке</button>
+                        <button disabled id="toThreeStage" class="submitButton submitButtonComp">Последний шаг!</button>
                     </div>
                 </div>
                 <div class="createThree" id="ThreeStageElem">
@@ -161,7 +166,7 @@
                                     </div>
                            
                                 </div>
-                                <input type="radio" name="tariff" value="349">
+                                <input type="radio" name="tariff" value="5">
                                 <div class="TitleAndPrice m5">
                                     <div class="countPersonal flex">
                                         <p class="textCountPersonal ">Количество сотрудников</p>
@@ -181,7 +186,7 @@
                                     </div>
                            
                                 </div>
-                                <input type="radio" name="tariff" value="1260">
+                                <input type="radio" name="tariff" value="20">
                                 <div class="TitleAndPrice m5">
                                     <div class="countPersonal flex">
                                         <p class="textCountPersonal ">Количество сотрудников</p>
@@ -201,7 +206,7 @@
                                     </div>
                            
                                 </div>
-                                <input type="radio" name="tariff" value="2800">
+                                <input type="radio" name="tariff" value="50">
                                 <div class="TitleAndPrice m5">
                                     <div class="countPersonal flex">
                                         <p class="textCountPersonal ">Количество сотрудников</p>
@@ -221,7 +226,7 @@
                                     </div>
                            
                                 </div>
-                                <input type="radio" name="tariff" value="4900" checked>
+                                <input type="radio" name="tariff" value="100" checked>
                                 <div class="TitleAndPrice m5">
                                     <div class="countPersonal flex">
                                         <p class="textCountPersonal ">Количество сотрудников</p>
@@ -241,7 +246,7 @@
                                     </div>
                            
                                 </div>
-                                <input type="radio" name="tariff" value="9900" >
+                                <input type="radio" name="tariff" value="200" >
                                 <div class="TitleAndPrice m5">
                                     <div class="countPersonal ">
                                         <p class="textCountPersonal colorWhite">Количество сотрудников</p>
@@ -252,7 +257,7 @@
                         </ul>
                     </div>
                     <div class="nextStageCompany">
-                        <a href="/court" disabled id="toTwoStage" class="submitButton submitButtonComp">Перейти к покупке</a>
+                        <button disabled id="finaly" class="submitButton submitButtonComp">Перейти к покупке</button>
                     </div>
                 </div>
             </div>

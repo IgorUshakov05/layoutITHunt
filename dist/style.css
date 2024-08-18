@@ -9747,3 +9747,15 @@ li[data-list='bullet'] {
 .agreement {
   font-size: 15px;
 }
+
+.createTwo, .createThree {
+  display: none;
+}
+
+.documents.active > .uploadFile {
+  border: 1px solid green;
+} 
+
+.documents.error > .uploadFile {
+  border: 1px solid red;
+}
