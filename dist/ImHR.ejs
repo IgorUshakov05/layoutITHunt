@@ -20,8 +20,9 @@
 </head>
 <body>
     <%- include('./header.ejs', { isLoggedIn, active: 'profile', id,chat:chatList}) %>
-    <div class="blackBack" id="AboutPrime">
-        <div class="youNeedIs">
+<main class="main">
+    <div class="blackBack">
+          <div class="youNeedIs">
             <div class="toBlocksToColumn">
                 <img src="/assets/pictures/DemoProfilePremium.png" alt="Демо профиль премиум">
                 <span class="myVacancyText mt-10 mtNone">Стильная шапка</span>
@@ -34,11 +35,7 @@
                 <button class="Infavorites w-100 mt-10 reverseColor" id="closeModalThis" style="padding: 10px 0;">Понятно</button>
             </div>
         </div>
-        
-            </div>
-<main class="main">
-    <div class="blackBack">
-        <div class="modalWindowRemoveUser" style="display: block;">
+        <div class="modalWindowRemoveUser" style="display: none;">
             <h1 class="titleRemove">Удалить из избранных?</h1>
             <p class="descriptionRemove">Вы действительно хотите удалить <b>Игорь</b>?</p>
             <div class="buttonRemoves">

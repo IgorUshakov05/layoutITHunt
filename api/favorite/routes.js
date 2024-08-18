@@ -10,7 +10,7 @@ router.post('/favorite', isAuth, async (req,res) => {
     console.log(req.headers.referer)
     const id = await req.body.id ||req.headers.referer.split('/')[3];
     console.log(id,userID)
-    if(!id) {
+    if(!id || userID === id) {
         return res.json({error:"Не верный параметр"})
     }
     let saveFavoriteUser = await setFavorite(userID, id, Boolean(req.body.id))

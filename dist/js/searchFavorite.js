@@ -54,10 +54,12 @@ $(".closeFast").on("click", function () {
 });
 
 $(".canelss").on("click", function () {
-  $(".blackBack").toggle();
+  $(".blackBack").hide();
+  $(".modalWindowRemoveUser").hide();
 });
 $(".removeUserFavorite").on("click", function () {
-  $(".blackBack").toggle();
+  $(".blackBack").show();
+  $(".modalWindowRemoveUser").show();
   console.log($(this).attr("data-id"));
   url = $(this).attr("data-id");
 });

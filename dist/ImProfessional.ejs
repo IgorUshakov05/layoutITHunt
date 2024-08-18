@@ -16,21 +16,6 @@
 </head>
 <body>
     <%- include('./header.ejs', { isLoggedIn, active: 'profile', id,chat:chatList}) %>
-    <div class="blackBack" id="AboutPrime">
-<div class="youNeedIs">
-    <div class="toBlocksToColumn">
-        <img src="/assets/pictures/DemoProfilePremium.png" alt="Демо профиль премиум">
-        <span class="myVacancyText mt-10 mtNone">Стильная шапка</span>
-        <p class="descript">Все работодатели и специалисты видят вашу шапку, которая выделит вас среди других, но решать вам, насколько важно внимание на вашем профиле</p>
-    </div>
-    <div class="toBlocksToColumn">
-        <img src="/assets/pictures/DemoCardPremium.png" alt="Демо профиль премиум">
-        <span class="myVacancyText mt-10">Стильная карточка</span>
-        <p class="descript">Когда работодатель оценивает кандидатов, отправивших заявки или рассматриваемых для найма, необычный вид карточки привлекает внимание. Мы привлекаем внимание, а вы вызываете восторг</p>
-        <button class="Infavorites w-100 mt-10 reverseColor" id="closeModalThis" style="padding: 10px 0;">Понятно</button>
-    </div>
-</div>
-    </div>
 <main class="main">
     <div class="twoBlocks">
 
@@ -265,6 +250,19 @@
         </div>
         <div class="MoreInfo mb-20">
             <div class="blackBack">
+                <div class="youNeedIs">
+    <div class="toBlocksToColumn">
+        <img src="/assets/pictures/DemoProfilePremium.png" alt="Демо профиль премиум">
+        <span class="myVacancyText mt-10 mtNone">Стильная шапка</span>
+        <p class="descript">Все работодатели и специалисты видят вашу шапку, которая выделит вас среди других, но решать вам, насколько важно внимание на вашем профиле</p>
+    </div>
+    <div class="toBlocksToColumn">
+        <img src="/assets/pictures/DemoCardPremium.png" alt="Демо профиль премиум">
+        <span class="myVacancyText mt-10">Стильная карточка</span>
+        <p class="descript">Когда работодатель оценивает кандидатов, отправивших заявки или рассматриваемых для найма, необычный вид карточки привлекает внимание. Мы привлекаем внимание, а вы вызываете восторг</p>
+        <button class="Infavorites w-100 mt-10 reverseColor" id="closeModalThis" style="padding: 10px 0;">Понятно</button>
+    </div>
+</div>
                 <dialog id="addExpiriens" class="addExpiriens" close>
                 <span class="myVacancyText">Опыт работы</span>
                 <p class="descriptionAddExiriens">Добавьте опыт работы как можно точнее, первое на что смотрит работодатель это навыки и опыт</p>
@@ -332,7 +330,7 @@
                         <button class="sendJobTitle" id="sendEduData" disabled>Добавить</button>
                     </div>
                 </dialog>
-                <div class="modalWindowRemoveUser" style="display: block;">
+                <div class="modalWindowRemoveUser">
             <h1 class="titleRemove">Удалить из избранных?</h1>
             <p class="descriptionRemove">Вы действительно хотите удалить <b>Игорь</b>?</p>
             <div class="buttonRemoves">
@@ -529,7 +527,7 @@ function escapeHtml(unsafe) {
                 </div>
                     
                     <div class="twoBlock">
-                    <div class="exucation" style="margin-bottom: 20px;">
+                    <div class="exucation" style="margin-bottom: 20px; z-index: 99; position: relative;">
                         <p class="myVacancyText">Мои отклики</p>
                         <div class="eduSchool onClick">
                             <div class="countAndOther">
@@ -726,7 +724,7 @@ function escapeHtml(unsafe) {
                             </ul>
                             </div>
                         </div>
-                        <div class="exucation" style="margin-bottom: 20px;">
+                        <div class="exucation" style="margin-bottom: 20px; z-index: 1; position: relative;">
                         <p class="myVacancyText">Избранные публикации</p>
                         <%if(myFV.length) {%>
                         <div class="eduSchool onClick">
@@ -748,7 +746,35 @@ function escapeHtml(unsafe) {
                                             <p class="educationalInstitution"><%-item.special%></p>
                                             <p class="onclickCount mt-5">MTC</p>
                                         </div>
-                                        <h2><span class="educationalInstitution onclickCount"><%= (100000).toLocaleString("no-NO") %></span><span class="p f-size">Ꝑ</span></h2>
+                                        <h2 style="font-family: Ubuntu;">
+    <% if (item.price.minPrice) { %>
+        <% if (!item.price.maxPrice) { %>
+            <span class="agreement">от</span> 
+        <% } %>
+        <span class="educationalInstitution onclickCount">
+            <%= (item.price.minPrice).toLocaleString("no-NO") %>
+        </span>
+        <span class="p f-size">Ꝑ</span>
+    <% } %>
+    
+    <% if (item.price.minPrice && item.price.maxPrice) { %>
+        -
+    <% } %>
+
+    <% if (item.price.maxPrice) { %>
+        <% if (!item.price.minPrice) { %>
+            <span class="agreement">до</span> 
+        <% } %>
+        <span class="educationalInstitution onclickCount">
+            <%= (item.price.maxPrice).toLocaleString("no-NO") %>
+        </span>
+        <span class="p f-size">Ꝑ</span>
+    <% } %>
+
+    <% if (item.price.agreement &&(!item.price.maxPrice && !item.price.minPrice) ) { %>
+        <span class="agreement">Договорная</span>
+    <% } %>
+</h2>
 
                                     </a>
                                 </li>  

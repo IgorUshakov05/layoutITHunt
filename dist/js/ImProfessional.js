@@ -192,7 +192,7 @@ const addSkill = document.getElementById("addSkill");
 closeSkillModal.addEventListener("click", () => {
   addSkill.close();
   dataUser.userSkills = [];
-  $(".youNeedIs").show();
+  $(".youNeedIs").css('display','none');
   $(".listAddingSkill").html("");
   $(".blackBack").css("display", "none");
 });
@@ -201,6 +201,7 @@ addSkillButton.addEventListener("click", () => {
   $(".blackBack").css("display", "block");
   $(".youNeedIs").hide();
   addSkill.show();
+  $(".modalWindowRemoveUser").hide();
 });
 
 const addEdButton = document.getElementById("addEdButton");

@@ -68,7 +68,7 @@ async function getMyFavorites(userID) {
     let vacancies = electedVacancyAdd.vacancyID.map((item) => item.id);
     let vacanciesData = await VacancySchema.find(
       { id: { $in: vacancies } },
-      { special: 1, id: 1, _id: 0 }
+      { special: 1, id: 1, price:1, _id: 0 }
     );
     return { success: true, data: vacanciesData };
   } catch (e) {

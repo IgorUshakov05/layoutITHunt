@@ -16,7 +16,7 @@
     <script src="/js/jquery.js"></script>
     <title>Компания - МТС</title>
 </head>
-<% isActive = 0 %>
+<% isActive = false %>
 <body>
     <%- include('./header.ejs', { isLoggedIn, active: 'vacancies',chat:chatList}) %>
 
@@ -39,11 +39,12 @@
                 <% if(!isActive)  {%>
                 <span class="showMoreButton flex noneActiveCompany">
                     <img src="/assets/pictures/chatCompanyIcon.svg" alt="Пульс">
-Чат компании</span>
+                    <span  style="white-space: nowrap;">Чат компании</span>
+</span>
 <% }else {%>
     <a href="/chat-company" class="showMoreButton flex">
         <img src="/assets/pictures/chatCompanyIcon.svg" alt="Пульс">
-Чат компании</a>
+        <span style="white-space: nowrap;">Чат компании</span></a>
     <% } %>
             </div>
 </div>

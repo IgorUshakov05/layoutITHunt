@@ -178,7 +178,7 @@ null
                         <%}%> <%= (element.price.maxPrice).toLocaleString("no-NO") %></p>
                     <span class="p">Ꝑ </span>
                         <%}%> 
-                        <%if(element.price.agreement) {%>
+                        <%if(element.price.agreement && (!element.price.maxPrice && !element.price.minPrice)) {%>
                             <span>Договорная</span>
                             <%}%>
                 </div>

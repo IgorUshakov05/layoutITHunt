@@ -1,9 +1,16 @@
 const {Router} = require('express')
 const router = Router()
 const {isAuth} = require('../api/middlewares/auth');
+const {decodeAccessToken} = require('../api/tokens/accessToken')
 
-router.get('/editComapny',isAuth,(req,res) => {
-    res.render('EditCompany', { isLoggedIn:false})
+router.get('/editComapny',isAuth,async (req,res) => {
+     let access = await req.cookies.access;
+    let user =  decodeAccessToken(access)
+    res.render("EditCompany", {
+      isLoggedIn: !!user,
+      id: user.userID,
+      chatList: user.chatList || null,
+    });
 })
 
 

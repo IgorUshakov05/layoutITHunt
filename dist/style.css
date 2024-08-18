@@ -4275,6 +4275,7 @@ input[type="number"] {
   margin-left: 5px;
   font-size: 12.6px;
   font-style: normal;
+  word-wrap: break-word;
   font-weight: 400;
   line-height: 125.031%; /* 17.504px */
   border-radius: 4px 4px 4px 0;
@@ -4311,6 +4312,7 @@ input[type="number"] {
 }
 .myMessage {
   background-color: #5412e0;
+  word-wrap: break-word;
 }
 .myMessage > span {
   color: white;
@@ -4332,6 +4334,10 @@ input[type="number"] {
 }
 .bottomTimeLeft {
   text-align: left;
+}
+
+#innCompany {
+  font-family: 'Ubuntu';
 }
 
 .myMessage {
@@ -7190,7 +7196,7 @@ textarea.specialisationSelectInput {
 }
 .educationalInstitutionType,
 .onclickCount {
-  font-weight: 700;
+  font-weight: 500;
 }
 .f-size {
   font-size: 12px;
@@ -7285,6 +7291,11 @@ textarea.specialisationSelectInput {
 .mb-20 {
   margin-bottom: 20px;
 }
+
+.p.f-size {
+  font-weight: 500;
+}
+
 .onClick {
   z-index: 99;
 }
@@ -8535,10 +8546,14 @@ textarea.specialisationSelectInput {
   margin-top: 15px;
   align-items: stretch;
 }
-.editCompany {
+.showMoreButton.editCompany {
   background: none;
   border: 1px solid #5412e0;
   color: #5412e0;
+  line-height: 100% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .editCompany:hover {
   background: #5412e0;
@@ -9727,4 +9742,8 @@ li[data-list='bullet'] {
 .wayWork.vac {
     justify-content: space-between;
 }
+}
+
+.agreement {
+  font-size: 15px;
 }

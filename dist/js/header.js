@@ -117,11 +117,11 @@ $(document).ready(function() {
 });
 
 $('#modalAbout').on('click', () => {
-    $('#AboutPrime').css('display', 'block')
+    $(".blackBack").css("display", "block");
     $('.youNeedIs').css('display', 'flex')
 })
 $('#closeModalThis').on('click', () => {
-    $('#AboutPrime').css('display', 'none')
+    $(".blackBack").css("display", "none");
     $('.youNeedIs').css('display', 'none')
 })
 $(document).on("click",".topInfoExpiriensItem", function () {

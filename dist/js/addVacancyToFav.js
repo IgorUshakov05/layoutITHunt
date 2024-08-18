@@ -34,8 +34,7 @@ $(document).on("click", ".InfavoritesVacancy", async function () {
   } catch (error) {
     console.error("Ошибка:", error);
   } finally {
-    // Возвращаем кнопку в активное состояние через 4 секунды
-    setTimeout(() => setButtonState(true), 4000);
+    setTimeout(() => setButtonState(true), 1000);
   }
 });
 
