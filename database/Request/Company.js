@@ -9,7 +9,10 @@ async function createCompany({
   description,
   avatar,
   creatorID,
-  countStaffs
+  countStaffs,
+  certificate_of_state_registration = null, // Замените на null, если данные отсутствуют
+  tax_registration_certificate = null, // Замените на null, если данные отсутствуют
+  egrul_egrip_record_sheet = null, // Замените на null, если данные отсутствуют
 }) {
   try {
     let findFirst = await CompanySchema.findOne({
@@ -18,19 +21,30 @@ async function createCompany({
     if (findFirst) return { success: false, error: "Company already exists" };
 
     const now = Temporal.Now.plainDateTimeISO();
-    const company = await new CompanySchema({
+    const nextPayDay = now.add({ months: 1 });
+    const company = new CompanySchema({
       id: v4(),
       title,
       INN,
       description,
       avatar,
+      nextPayDay,
       creatorID,
       userList: [{ userID: creatorID }],
       dataCreated: now,
       countStaffs,
+      documents: [
+        {
+          certificate_of_state_registration,
+          tax_registration_certificate,
+          egrul_egrip_record_sheet,
+        },
+      ],
     });
+
     const user = await UserSchema.findOne({ id: creatorID });
     if (!user) return { success: false, error: "User not found" };
+
     let saveCompany = await company.save();
     return { success: true, data: saveCompany };
   } catch (error) {
@@ -38,4 +52,29 @@ async function createCompany({
     return { success: false, error: "Error" };
   }
 }
-module.exports = createCompany;
+
+async function findCompanyOfUser(userID) {
+  try {
+    let findFirst = await CompanySchema.findOne({ creatorID: userID });
+    if (findFirst) return { success: false, error: "Company already exists" };
+    return { success: true, data: findFirst };
+  } catch (error) {
+    console.error(error);
+    return { success: false, error: "Error" };
+  }
+}
+
+async function findCompanyOfUserAndINN(userID, INN) {
+  try {
+    let findFirst = await CompanySchema.findOne({
+      $or: [{ INN }, { creatorID: userID }],
+    });
+    if (findFirst) return { success: false, error: "Company already exists" };
+    if (findFirst) return { success: false, error: "Company already exists" };
+    return { success: true, data: findFirst };
+  } catch (error) {
+    console.error(error);
+    return { success: false, error: "Error" };
+  }
+}
+module.exports = { createCompany, findCompanyOfUser, findCompanyOfUserAndINN };

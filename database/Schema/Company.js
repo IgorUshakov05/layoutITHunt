@@ -4,7 +4,22 @@ const listHRSchema = new mongoose.Schema({
   userID: {
     type: String,
     required: true,
-  }
+  },
+});
+
+const documentSchema = new mongoose.Schema({
+  certificate_of_state_registration: {
+    type: String,
+    required: true,
+  },
+  tax_registration_certificate: {
+    type: String,
+    required: true,
+  },
+  egrul_egrip_record_sheet: {
+    type: String,
+    required: true,
+  },
 });
 
 const vacancySchema = new mongoose.Schema({
@@ -17,6 +32,7 @@ const vacancySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  documents: [documentSchema],
   creatorID: {
     type: String,
     required: true,
@@ -47,6 +63,11 @@ const vacancySchema = new mongoose.Schema({
   dataCreated: {
     type: String,
     required: true,
+  },
+  nextPayDay: {
+    type: String,
+    required: true,
+    default: "",
   },
   isFreez: {
     type: Boolean,

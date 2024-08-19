@@ -39,7 +39,6 @@ const vacancia = require("./pageRoutes/vacansyaItem");
 const userChat = require("./pageRoutes/privateChat");
 const deleteAccount = require("./pageRoutes/deleteAccount");
 const city = require('./api/city/routes')
-const companyRoute = require("./api/company/routes");
 const payment = require('./api/payment/routes')
 const createVacancyPOST = require('./api/vakancy/routes')
 const paymentHook = require('./api/payment/routerWebHooks')
@@ -86,7 +85,6 @@ app.use(
   deleteChat,
   createVacancyPOST,
   expiriens,
-  companyRoute,
   education,
   favorite,
   payment,

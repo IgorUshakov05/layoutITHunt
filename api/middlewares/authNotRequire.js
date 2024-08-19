@@ -35,7 +35,7 @@ const isAuthNotRequire = async (req, res, next) => {
 
     let source = req.headers["user-agent"];
     let ua = useragent.parse(source);
-    if (decodeRefresh.browser !== ua.source) {
+    if (decodeRefresh.browser !== ua.browser) {
       await deleteToken(findToken.id);
       return logout(res, next);
     }

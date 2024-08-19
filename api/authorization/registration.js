@@ -37,7 +37,7 @@ async function Registration(req, res) {
     const refreshTokenCookie = await createRefreshToken({
       userID: userInsertToDataBase.id,
       userMAIL: userInsertToDataBase.mail,
-      browser: ua.source, // Используйте ua.browser вместо ua.source
+      browser: ua.browser, // Используйте ua.browser вместо ua.browser
       ip: req.ip,
     });
     if (!refreshTokenCookie) {

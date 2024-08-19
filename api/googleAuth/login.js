@@ -66,7 +66,7 @@ router.get(
       const refreshTokenCookie = await createRefreshToken({
         userID: findOfEmail.id,
         userMAIL: findOfEmail.mail,
-        browser: ua.source, // Используйте ua.browser вместо ua.source
+        browser: ua.browser, // Используйте ua.browser вместо ua.browser
         ip: req.ip,
       });
       if (!refreshTokenCookie) {

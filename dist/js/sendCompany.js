@@ -8,7 +8,6 @@ const toThirdStageBtn = document.getElementById("toThreeStage");
 const finalyStage = document.getElementById("finaly");
 // Действия кнопок
 toSecondStageBtn.addEventListener("click", () => {
-  alert("Hello");
   firstStage.style.display = "none";
   secondStage.style.display = "block";
 });
@@ -22,10 +21,10 @@ const data = {
   INN: "",
   description: "",
   companyICON: "",
-  creatorID: "",
   countStaffs: null,
 };
 const formData = new FormData();
+const formData1 = new FormData();
 // Валидация этапов
 function firstStageValidation() {
   if (
@@ -46,9 +45,9 @@ function firstStageValidation() {
 
 function secondStageValidation() {
   if (
-    formData.has("registration") &&
-    formData.has("NU") &&
-    formData.has("listWrite") &&
+    formData1.has("registration") &&
+    formData1.has("NU") &&
+    formData1.has("listWrite") &&
     aprove
   ) {
     toThirdStageBtn.removeAttribute("disabled");
@@ -141,26 +140,7 @@ imageUpload.addEventListener("change", (event) => {
     firstStageValidation();
   }
 });
-const sendAvatar = async () => {
-  try {
-    const response = await fetch(`${window.conf.FILE_SERVER}/upload/company`, {
-      method: "POST",
-      headers: {
-        Authorization: "ILOVEPORN",
-      },
-      body: formData,
-    });
 
-    if (!response.ok) {
-      throw new Error("Image upload failed.");
-    }
-    const dataSERV = await response.json();
-    data.companyICON = dataSERV.title;
-    return data.title; // Возвращаем URL
-  } catch (error) {
-    console.error("Error uploading image:", error);
-  }
-};
 // Функция для преобразования Data URL в Blob
 function convertDataURIToBlob(dataURI) {
   const byteString = atob(dataURI.split(",")[1]);
@@ -173,11 +153,9 @@ function convertDataURIToBlob(dataURI) {
   return new Blob([ab], { type: mimeString });
 }
 
-// Функция для обработки события drop
 function handleDrop(event) {
   event.preventDefault(); // Предотвращаем действие по умолчанию
 
-  // Получаем файлы из события
   const files = event.dataTransfer.files;
   if (files.length > 0) {
     const file = files[0];
@@ -196,11 +174,10 @@ function handleDrop(event) {
     }
 
     const input = document.getElementById(inputId);
-    formData.delete(inputId); // Удаляем старое значение из formData
+    formData1.delete(inputId); // Удаляем старое значение из formData
 
-    // Проверяем тип файла
     if (file.type === "application/pdf") {
-      formData.append(inputId, file);
+      formData1.append(inputId, file);
       input.previousElementSibling.innerText = file.name;
       console.log(file.name, input.previousElementSibling);
       this.classList.add("active");
@@ -209,6 +186,7 @@ function handleDrop(event) {
       input.value = "";
       input.previousElementSibling.innerText = "Ошибка";
       this.classList.remove("active");
+      formData1.remove(inputId);
       this.classList.add("error");
       alert("Пожалуйста, загрузите PDF-файл.");
     }
@@ -216,18 +194,16 @@ function handleDrop(event) {
   }
 }
 
-// Функция для обработки события dragover
 function handleDragOver(event) {
   event.preventDefault(); // Необходим для того, чтобы событие drop сработало
 }
 
-// Функция для обработки события change на input
 function handleInputChange(event) {
   const file = event.target.files[0];
   const parentElement = event.target.closest(".documents");
-  let nameFilt = this.previousElementSibling;
+  const nameFilt = this.previousElementSibling;
   if (file && file.type === "application/pdf") {
-    formData.append(event.target.id, file);
+    formData1.append(event.target.id, file);
     nameFilt.innerText = file.name;
     parentElement.classList.add("active");
     parentElement.classList.remove("error");
@@ -241,7 +217,7 @@ function handleInputChange(event) {
   secondStageValidation();
 }
 
-// Добавляем обработчики событий для элементов
+// Добавляем обработчики событий
 document.getElementById("oneDrag").addEventListener("drop", handleDrop);
 document.getElementById("oneDrag").addEventListener("dragover", handleDragOver);
 
@@ -253,7 +229,6 @@ document
   .getElementById("threeDrag")
   .addEventListener("dragover", handleDragOver);
 
-// Добавляем обработчики событий для input элементов
 document
   .getElementById("registration")
   .addEventListener("change", handleInputChange);
@@ -261,15 +236,14 @@ document.getElementById("NU").addEventListener("change", handleInputChange);
 document
   .getElementById("listWrite")
   .addEventListener("change", handleInputChange);
-
 function updateCountStaffs(event) {
   const selectedValue = event.target.value;
   // Убедимся, что выбранное значение допустимо
   if (["5", "20", "50", "100", "200"].includes(selectedValue)) {
     data.countStaffs = parseInt(selectedValue, 10); // Обновляем значение в data
-    finalyStage.removeAttribute('disabled');
+    finalyStage.removeAttribute("disabled");
   } else {
-    finalyStage.setAttribute("disabled","");
+    finalyStage.setAttribute("disabled", "");
     console.warn("Неверное значение: ", selectedValue);
     data.countStaffs = null;
   }
@@ -283,3 +257,92 @@ const tariffElements = document.getElementsByName("tariff");
 tariffElements.forEach((element) => {
   element.addEventListener("change", updateCountStaffs);
 });
+
+finalyStage.addEventListener("click", async () => {
+  try {
+    let isVal = await secondStageValidation();
+    if (!isVal) return false;
+
+    // Загружаем аватар и документы параллельно
+    const [avatar, files] = await Promise.all([sendAvatar(), sendDocuments()]);
+
+    // После успешной загрузки файлов отправляем запрос на создание платежа
+    const response = await fetch("/api/create-payment-company", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "augwod89h1h9awdh9py0y82hjd",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.status === 201) {
+      const data = await response.json();
+      // Проверяем наличие confirmation_url
+      if (data.confirmation && data.confirmation.confirmation_url) {
+        // Перенаправляем пользователя
+        console.log(data.confirmation.confirmation_url);
+        window.location.href = data.confirmation.confirmation_url;
+      } else {
+        throw new Error("Invalid payment response");
+      }
+    } else {
+      throw new Error(
+        `Failed to create payment, status code: ${response.status}`
+      );
+    }
+  } catch (error) {
+    alert("Произошла ошибка при создании платежа: " + error.message);
+    finalyStage.removeAttribute("disabled");
+  }
+});
+
+const sendAvatar = async () => {
+  try {
+    const response = await fetch(`${window.conf.FILE_SERVER}/upload/company`, {
+      method: "POST",
+      headers: {
+        Authorization: "ILOVEPORN",
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Image upload failed.");
+    }
+    const dataSERV = await response.json();
+    data.companyICON = dataSERV.title;
+    console.log(data.companyICON);
+    return dataSERV;
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    throw error; // Пробрасываем ошибку дальше
+  }
+};
+
+const sendDocuments = async () => {
+  try {
+    const response = await fetch(`${window.conf.FILE_SERVER}/upload/pdfs`, {
+      method: "POST",
+      headers: {
+        Authorization: "ILOVEPORN",
+      },
+      body: formData1,
+    });
+
+    if (!response.ok) {
+      throw new Error("PDF upload failed.");
+    }
+    const dataSERV = await response.json();
+    console.log(dataSERV);
+    // Обновление данных
+    data.NU = dataSERV.files.NU;
+    data.registration = dataSERV.files.registration;
+    data.listWrite = dataSERV.files.listWrite;
+
+    return dataSERV;
+  } catch (error) {
+    console.error("Error uploading PDFs:", error);
+    throw error; // Пробрасываем ошибку дальше
+  }
+};

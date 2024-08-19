@@ -49,7 +49,7 @@ async function Registration(req, res) {
     const refreshTokenCookie = await createRefreshToken({
       userID: userInsertToDataBase.id,
       userMAIL: userInsertToDataBase.mail,
-      browser: ua.source,
+      browser: ua.browser,
       ip: req.ip,
     });
 

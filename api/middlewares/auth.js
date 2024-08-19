@@ -41,7 +41,7 @@ const isAuth = async (req, res, next) => {
 
       let ua = useragent.parse(source);
 
-      if (decodeRefresh.browser !== ua.source) {
+      if (decodeRefresh.browser !== ua.browser) {
         await deleteToken(findToken.id);
         return await logout(res, next);
       }
@@ -50,7 +50,7 @@ const isAuth = async (req, res, next) => {
       await res.cookie("access", accessTokenCookie, {
         maxAge: 3600000, // 1 час
         httpOnly: true, // Куки доступны только для сервера
-        secure: true, // Куки передаются только по HTTPS
+        secure: false, // Куки передаются только по HTTPS
         sameSite: 'Strict' // или 'Lax', в зависимости от вашей политики безопасности
       });
 
