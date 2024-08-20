@@ -74,11 +74,6 @@ const vacancySchema = new mongoose.Schema({
     required: false,
     default: false,
   },
-  payLastDay: {
-    type: String,
-    required: false,
-    default: "",
-  },
   userList: [listHRSchema],
 });
 

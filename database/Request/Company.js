@@ -55,8 +55,27 @@ async function createCompany({
 
 async function findCompanyOfUser(userID) {
   try {
-    let findFirst = await CompanySchema.findOne({ creatorID: userID });
-    if (findFirst) return { success: false, error: "Company already exists" };
+    console.log(userID);
+    let findFirst = await CompanySchema.findOne({
+      userList: { $elemMatch: { userID: userID } }, // Ищем, чтобы userID был в массиве userList
+      isVarefy: true,
+    });
+    if (!findFirst) return { success: false, message: "Компании нет" };
+    return { success: true, data: findFirst };
+  } catch (error) {
+    console.error(error);
+    return { success: false, error: "Error" };
+  }
+}
+
+async function findCompanyOfINN(INN) {
+  try {
+    let findFirst = await CompanySchema.findOne({
+      INN: INN,
+      isVarefy: true,
+    });
+    console.log(findFirst, ' - тут норм');
+    if (!findFirst) return { success: false, message: "Компании нет" };
     return { success: true, data: findFirst };
   } catch (error) {
     console.error(error);
@@ -70,11 +89,15 @@ async function findCompanyOfUserAndINN(userID, INN) {
       $or: [{ INN }, { creatorID: userID }],
     });
     if (findFirst) return { success: false, error: "Company already exists" };
-    if (findFirst) return { success: false, error: "Company already exists" };
     return { success: true, data: findFirst };
   } catch (error) {
     console.error(error);
     return { success: false, error: "Error" };
   }
 }
-module.exports = { createCompany, findCompanyOfUser, findCompanyOfUserAndINN };
+module.exports = {
+  createCompany,
+  findCompanyOfINN,
+  findCompanyOfUser,
+  findCompanyOfUserAndINN,
+};

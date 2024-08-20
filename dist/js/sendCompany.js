@@ -260,13 +260,31 @@ tariffElements.forEach((element) => {
 
 finalyStage.addEventListener("click", async () => {
   try {
-    let isVal = await secondStageValidation();
-    if (!isVal) return false;
+    // Выполняем верификацию компании
+    let verefy = await verefyCompany();
+    if (!verefy.success) return; // Прекращаем выполнение, если верификация не удалась
 
     // Загружаем аватар и документы параллельно
     const [avatar, files] = await Promise.all([sendAvatar(), sendDocuments()]);
 
-    // После успешной загрузки файлов отправляем запрос на создание платежа
+    // Проверяем успешность загрузки файлов
+    if (
+      !avatar.title ||
+      !files.files.NU ||
+      !files.files.registration ||
+      !files.files.listWrite
+    ) {
+      alert("Ошибка при загрузке файлов.");
+      return;
+    }
+
+    // Обновляем данные перед отправкой платежа
+    data.companyICON = avatar.title;
+    data.NU = files.files.NU;
+    data.registration = files.files.registration;
+    data.listWrite = files.files.listWrite;
+
+    // Отправляем запрос на создание платежа
     const response = await fetch("/api/create-payment-company", {
       method: "POST",
       headers: {
@@ -277,12 +295,14 @@ finalyStage.addEventListener("click", async () => {
     });
 
     if (response.status === 201) {
-      const data = await response.json();
+      const responseData = await response.json();
       // Проверяем наличие confirmation_url
-      if (data.confirmation && data.confirmation.confirmation_url) {
+      if (
+        responseData.confirmation &&
+        responseData.confirmation.confirmation_url
+      ) {
         // Перенаправляем пользователя
-        console.log(data.confirmation.confirmation_url);
-        window.location.href = data.confirmation.confirmation_url;
+        window.location.href = responseData.confirmation.confirmation_url;
       } else {
         throw new Error("Invalid payment response");
       }
@@ -297,6 +317,35 @@ finalyStage.addEventListener("click", async () => {
   }
 });
 
+const verefyCompany = async () => {
+  try {
+    const response = await fetch("/api/verefy-company", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "augwod89h1h9awdh9py0y82hjd",
+      },
+      body: JSON.stringify({ INN: data.INN }),
+    });
+
+    if (response.status === 400) {
+      const responseData = await response.json();
+      alert(responseData.message || "Компания существует");
+      return { success: false }; // Возвращаем объект с success: false
+    }
+
+    if (response.status !== 201) {
+      throw new Error(`Unexpected response status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    console.error("Ошибка при проверке компании", error);
+    throw error; // Пробрасываем ошибку дальше
+  }
+};
+
 const sendAvatar = async () => {
   try {
     const response = await fetch(`${window.conf.FILE_SERVER}/upload/company`, {
@@ -310,9 +359,8 @@ const sendAvatar = async () => {
     if (!response.ok) {
       throw new Error("Image upload failed.");
     }
+
     const dataSERV = await response.json();
-    data.companyICON = dataSERV.title;
-    console.log(data.companyICON);
     return dataSERV;
   } catch (error) {
     console.error("Error uploading image:", error);
@@ -333,13 +381,8 @@ const sendDocuments = async () => {
     if (!response.ok) {
       throw new Error("PDF upload failed.");
     }
-    const dataSERV = await response.json();
-    console.log(dataSERV);
-    // Обновление данных
-    data.NU = dataSERV.files.NU;
-    data.registration = dataSERV.files.registration;
-    data.listWrite = dataSERV.files.listWrite;
 
+    const dataSERV = await response.json();
     return dataSERV;
   } catch (error) {
     console.error("Error uploading PDFs:", error);

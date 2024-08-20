@@ -9,6 +9,7 @@ const {
   findFAllFavoriteOfId,
   getMyFavorites,
 } = require("../database/Request/FavoriteVacancy");
+const { findCompanyOfUser } = require("../database/Request/Company");
 router.get("/:id", isAuthNotRequire, async (req, res, next) => {
   try {
     let access = req.cookies.access;
@@ -28,7 +29,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       favorites = (await findUsersByFavorites(findMyProf.favorite)) || [];
       if (decodeAccess.userID === id) {
         if (result.role === "worker") {
-          console.log("Мой профиль")
+          console.log("Мой профиль");
           let myFavoritesVacancy = await getMyFavorites(result.id);
           console.log("Мой профиль");
           console.log(myFavoritesVacancy);
@@ -49,13 +50,16 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
             favorite: favorites,
             education: result.education,
             avatar: result.avatar,
-            myFV:myFavoritesVacancy.data, 
+            myFV: myFavoritesVacancy.data,
             expiriens: result.expiriens,
             premium: result.premium,
             description: result.description,
           });
         }
         let vacancys = await searchVacancyByUserId(result.id);
+        let findCompany = await findCompanyOfUser(decodeAccess.userID);
+        console.log(findCompany);
+        if (!findCompany.success) findCompany = { data: null };
         return res.render("ImHR.ejs", {
           isLoggedIn: decodeAccess,
           id: decodeAccess.userID,
@@ -68,6 +72,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
           age,
           city: result.city,
           premium: result.premium,
+          company: findCompany.data,
           vacancys: vacancys.data,
           favorite: favorites,
           contacts: result.contacts,
@@ -108,6 +113,9 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       if (!findAllFV.success) {
         findAllFV = { data: { vacancyID: [] } }; // Обеспечиваем, что data будет пустым массивом в случае ошибки
       }
+      let findCompany = await findCompanyOfUser(decodeAccess.userID);
+      console.log(findCompany);
+      if (!findCompany.success) findCompany = { data: null };
       res.render("SeSideHr.ejs", {
         isLoggedIn: decodeAccess,
         id: decodeAccess.userID,
@@ -122,6 +130,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
         avatar: result.avatar,
         isFav: favorites ? favorites.some((item) => item.id === id) : null,
         portfolios: result.portfolio,
+        company:findCompany.data, 
         vacancys: vacancys.data,
         im: decodeAccess.userROLE || null,
         contacts: result.contacts,

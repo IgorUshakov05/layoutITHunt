@@ -4829,7 +4829,7 @@ input[type="number"] {
   font-size: 19px;
   font-style: normal;
   font-weight: 700;
-  line-height: 141.4%; /* 26.866px */
+  line-height: 100%; /* 26.866px */
   letter-spacing: -0.095px;
 }
 .personalInfo.chatLeft {

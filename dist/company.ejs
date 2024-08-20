@@ -14,7 +14,7 @@
     <meta name="author" content="WebHunt">
     <link rel="stylesheet" href="/style.css">
     <script src="/js/jquery.js"></script>
-    <title>Компания - МТС</title>
+    <title>Компания - <%-company.title%></title>
 </head>
 <% isActive = false %>
 <body>
@@ -28,11 +28,11 @@
 
             <div class="titleCompanyAndPhoto">
                 <div class="logoCompany">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/800px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png" width="41" height="41" alt="Логотип компании">
+                    <img src="<%-company.avatar%>" width="41" height="41" alt="Логотип компании">
                 </div>
-                <h1>MTC Group</h1>
+                <h1><%-company.title%></h1>
             </div>
-            <h2 class="descriptionCompanyInVacansy companyPadding">МТС — российская компания, предоставляющая телекоммуникационные услуги, цифровые и медийные сервисы в России, Армении и Белоруссии под торговой маркой «МТС»
+            <h2 class="descriptionCompanyInVacansy companyPadding"><%-company.description%>
             </h2>
             <div class="panelForHR flex">
                 <a href="/editComapny" class="showMoreButton editCompany">Редактировать</a>

@@ -34,6 +34,7 @@ const inboxCompany = require("./pageRoutes/inboxCompany");
 const court = require("./pageRoutes/court");
 const inboxFastWork = require("./pageRoutes/inboxFast-work");
 const inboxVacansy = require("./pageRoutes/inboxVacansy");
+const companyRoute = require('./api/company/routes');
 const company = require("./pageRoutes/company");
 const vacancia = require("./pageRoutes/vacansyaItem");
 const userChat = require("./pageRoutes/privateChat");
@@ -90,6 +91,7 @@ app.use(
   payment,
   setSetting,
   skills,
+  companyRoute,
   city
 );
 const server = http.createServer(app);
