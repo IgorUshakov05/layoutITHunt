@@ -4,6 +4,7 @@ const { isAuth } = require("../middlewares/auth");
 const { findCompanyOfUserAndINN } = require("../../database/Request/Company");
 const { decodeAccessToken } = require("../tokens/accessToken");
 const { body, validationResult } = require("express-validator");
+const findCompany = require("./findCompanyForInvite");
 
 router.post(
   "/verefy-company",
@@ -39,5 +40,12 @@ router.post(
       .status(201)
       .json({ success: true, message: "Компания не зарегестриоована" });
   }
+);
+
+router.post(
+  "/invite-company",
+  [body("text").isLength({ min: 3, max: 250 }).withMessage("Min 3, Max 250")],
+  isAuth,
+  findCompany
 );
 module.exports = router;

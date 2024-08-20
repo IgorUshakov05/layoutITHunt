@@ -75,6 +75,18 @@ const vacancySchema = new mongoose.Schema({
     default: false,
   },
   userList: [listHRSchema],
+  paymentId: {
+    type: String,
+    required: true,
+  },
+  paymentMethod: {
+    type: String,
+    required: true,
+  },
+  save: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("Company", vacancySchema);

@@ -10,9 +10,11 @@ async function createCompany({
   avatar,
   creatorID,
   countStaffs,
-  certificate_of_state_registration = null, // Замените на null, если данные отсутствуют
-  tax_registration_certificate = null, // Замените на null, если данные отсутствуют
-  egrul_egrip_record_sheet = null, // Замените на null, если данные отсутствуют
+  paymentId,
+  paymentMethod,
+  certificate_of_state_registration = null,
+  tax_registration_certificate = null,
+  egrul_egrip_record_sheet = null,
 }) {
   try {
     let findFirst = await CompanySchema.findOne({
@@ -29,6 +31,9 @@ async function createCompany({
       description,
       avatar,
       nextPayDay,
+      save: true,
+      paymentId,
+      paymentMethod,
       creatorID,
       userList: [{ userID: creatorID }],
       dataCreated: now,
@@ -44,12 +49,11 @@ async function createCompany({
 
     const user = await UserSchema.findOne({ id: creatorID });
     if (!user) return { success: false, error: "User not found" };
-
-    let saveCompany = await company.save();
+    let saveCompany = await company.save(); // Сохранение объекта
     return { success: true, data: saveCompany };
   } catch (error) {
-    console.error(error);
-    return { success: false, error: "Error" };
+    console.error("Ошибка при создании компании:", error);
+    return { success: false, error: error.message || "Error" };
   }
 }
 
@@ -67,6 +71,28 @@ async function findCompanyOfUser(userID) {
     return { success: false, error: "Error" };
   }
 }
+async function findCompanyOfINNorTitle(text) {
+  try {
+    // Создаем регулярное выражение для поиска без учета регистра
+    const regex = new RegExp(`(^${text}.*|.*${text}$|.*${text}.*)`, "i");
+
+    // Выполняем поиск в базе данных
+    let findFirst = await CompanySchema.find({
+      $or: [{ INN: regex }, { title: regex }],
+    }).select("avatar INN title");
+
+    // Если не нашли совпадений
+    if (findFirst.length === 0) {
+      return { success: false, message: "Компании нет" };
+    }
+
+    // Возвращаем успешный результат с найденными данными
+    return { success: true, data: findFirst };
+  } catch (error) {
+    console.error(error);
+    return { success: false, error: "Error" };
+  }
+}
 
 async function findCompanyOfINN(INN) {
   try {
@@ -74,7 +100,7 @@ async function findCompanyOfINN(INN) {
       INN: INN,
       isVarefy: true,
     });
-    console.log(findFirst, ' - тут норм');
+    console.log(findFirst, " - тут норм");
     if (!findFirst) return { success: false, message: "Компании нет" };
     return { success: true, data: findFirst };
   } catch (error) {
@@ -100,4 +126,5 @@ module.exports = {
   findCompanyOfINN,
   findCompanyOfUser,
   findCompanyOfUserAndINN,
+  findCompanyOfINNorTitle,
 };

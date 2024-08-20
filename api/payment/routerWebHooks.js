@@ -45,9 +45,9 @@ router.post("/webhook/yookassa", async (req, res) => {
           typePremium: description,
           typePay: paymentMethodType,
           amount: amount.value,
+          timePay: new Date().toISOString(),
           paymentId: paymentMethodId,
           paymentMethod: paymentMethodType,
-          timePay: new Date().toISOString(),
           save: isAutoPay,
         };
         const updateResult = await setNewPremium(userId, premiumData);
@@ -68,6 +68,9 @@ router.post("/webhook/yookassa", async (req, res) => {
           avatar: companyICON || null, // Если иконка компании не предоставлена, установим null
           creatorID: userId,
           countStaffs,
+          paymentId: paymentMethodId,
+          paymentMethod: paymentMethodType,
+          save: isAutoPay,
           certificate_of_state_registration: registration || null, // Если регистрационное свидетельство не предоставлено, установим null
           tax_registration_certificate: NU || null, // Если налоговое свидетельство не предоставлено, установим null
           egrul_egrip_record_sheet: listWrite || null, // Если лист записи ЕГРЮЛ/ЕГРИП не предоставлен, установим null

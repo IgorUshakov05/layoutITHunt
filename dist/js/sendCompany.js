@@ -257,12 +257,17 @@ const tariffElements = document.getElementsByName("tariff");
 tariffElements.forEach((element) => {
   element.addEventListener("change", updateCountStaffs);
 });
-
 finalyStage.addEventListener("click", async () => {
+  // Отключаем кнопку, чтобы предотвратить повторные нажатия
+  finalyStage.setAttribute("disabled", "true");
+
   try {
     // Выполняем верификацию компании
     let verefy = await verefyCompany();
-    if (!verefy.success) return; // Прекращаем выполнение, если верификация не удалась
+    if (!verefy.success) {
+      finalyStage.removeAttribute("disabled"); // Включаем кнопку обратно, если верификация не удалась
+      return;
+    }
 
     // Загружаем аватар и документы параллельно
     const [avatar, files] = await Promise.all([sendAvatar(), sendDocuments()]);
@@ -275,6 +280,7 @@ finalyStage.addEventListener("click", async () => {
       !files.files.listWrite
     ) {
       alert("Ошибка при загрузке файлов.");
+      finalyStage.removeAttribute("disabled"); // Включаем кнопку обратно, если загрузка не удалась
       return;
     }
 
@@ -313,7 +319,12 @@ finalyStage.addEventListener("click", async () => {
     }
   } catch (error) {
     alert("Произошла ошибка при создании платежа: " + error.message);
-    finalyStage.removeAttribute("disabled");
+    finalyStage.removeAttribute("disabled"); // Включаем кнопку обратно в случае ошибки
+  } finally {
+    // Чтобы кнопка не оставалась заблокированной навсегда
+    setTimeout(() => {
+      finalyStage.removeAttribute("disabled");
+    }, 5000); // Включаем кнопку через 5 секунд
   }
 });
 
