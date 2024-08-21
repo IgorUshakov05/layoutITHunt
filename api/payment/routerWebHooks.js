@@ -1,14 +1,12 @@
 const { Router } = require("express");
 const router = Router();
 const axios = require("axios");
-const setNewPremium = require("../../database/Request/setPremium");
+const {setNewPremium} = require("../../database/Request/setPremium");
 const {createCompany} = require("../../database/Request/Company");
 
 // Маршрут для обработки уведомлений от YooKassa
 router.post("/webhook/yookassa", async (req, res) => {
-  const notification = req.body;
-  console.log(notification);
-
+  const notification = await req.body;
   if (notification.event === "payment.succeeded") {
     const {
       amount,
@@ -31,7 +29,7 @@ router.post("/webhook/yookassa", async (req, res) => {
         registration,
         listWrite,
       },
-    } = notification.object;
+    } = await notification.object;
 
     if (!paid) {
       res.json({ received: true });
@@ -41,7 +39,7 @@ router.post("/webhook/yookassa", async (req, res) => {
     try {
       if (paymentType === "premium") {
         // Обработка премиум-платежа
-        const premiumData = {
+        const premiumData = await {
           typePremium: description,
           typePay: paymentMethodType,
           amount: amount.value,
@@ -52,16 +50,16 @@ router.post("/webhook/yookassa", async (req, res) => {
         };
         const updateResult = await setNewPremium(userId, premiumData);
         if (updateResult.success) {
-          console.log("Премиум подписка успешно обновлена");
+          await console.log("Премиум подписка успешно обновлена");
         } else {
-          console.error(
+          await console.error(
             "Ошибка при обновлении подписки:",
             updateResult.message
           );
         }
       } else if (paymentType === "company") {
         // Обработка платежа за создание компании
-        const companyData = {
+        const companyData = await {
           title,
           INN,
           description: descriptionCompany || null, // Если описание не предоставлено, установим null
@@ -70,21 +68,19 @@ router.post("/webhook/yookassa", async (req, res) => {
           countStaffs,
           paymentId: paymentMethodId,
           paymentMethod: paymentMethodType,
-          save: isAutoPay,
+          isAutoPay,
           certificate_of_state_registration: registration || null, // Если регистрационное свидетельство не предоставлено, установим null
           tax_registration_certificate: NU || null, // Если налоговое свидетельство не предоставлено, установим null
           egrul_egrip_record_sheet: listWrite || null, // Если лист записи ЕГРЮЛ/ЕГРИП не предоставлен, установим null
         };
-        console.log("Данные компании:", companyData);
         let saveCompany = await createCompany(companyData);
-
-        console.log(
+        await console.log(
           "Платеж обработан успешно, компания создана: ",
           saveCompany
         );
       }
 
-      res.json({ received: true });
+      await res.json({ received: true });
     } catch (error) {
       console.error("Ошибка при обработке платежа:", error);
       res.status(500).json({ error: "Internal Server Error" });

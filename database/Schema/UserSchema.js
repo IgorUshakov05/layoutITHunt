@@ -91,10 +91,6 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  premium: {
-    type: Boolean,
-    default: false,
-  },
   chatList: {
     type: String,
     require: true,

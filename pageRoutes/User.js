@@ -9,6 +9,7 @@ const {
   findFAllFavoriteOfId,
   getMyFavorites,
 } = require("../database/Request/FavoriteVacancy");
+const { findPremium } = require("../database/Request/setPremium");
 const { findCompanyOfUser } = require("../database/Request/Company");
 router.get("/:id", isAuthNotRequire, async (req, res, next) => {
   try {
@@ -23,6 +24,9 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       return res.redirect("/login");
     }
     var favorites = null;
+    let premium = await findPremium(result.id);
+    if (!premium.success) premium = null;
+    premium = premium.premium;
     const age = calculateAge(result.birthDay);
     if (access) {
       let findMyProf = await searchUserId(decodeAccess.userID);
@@ -52,7 +56,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
             avatar: result.avatar,
             myFV: myFavoritesVacancy.data,
             expiriens: result.expiriens,
-            premium: result.premium,
+            premium,
             description: result.description,
           });
         }
@@ -71,7 +75,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
           avatar: result.avatar,
           age,
           city: result.city,
-          premium: result.premium,
+          premium,
           company: findCompany.data,
           vacancys: vacancys.data,
           favorite: favorites,
@@ -97,7 +101,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
         age,
         city: result.city,
         skills: result.skills,
-        premium: result.premium,
+        premium,
         education: result.education,
         isFav: favorites ? favorites.some((item) => item.id === id) : null,
         im: decodeAccess.userROLE || null,
@@ -125,12 +129,12 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
         job: result.job,
         title: `${result.surname} ${result.name}`,
         age,
-        premium: result.premium,
+        premium,
         city: result.city,
         avatar: result.avatar,
         isFav: favorites ? favorites.some((item) => item.id === id) : null,
         portfolios: result.portfolio,
-        company:findCompany.data, 
+        company: findCompany.data,
         vacancys: vacancys.data,
         im: decodeAccess.userROLE || null,
         contacts: result.contacts,

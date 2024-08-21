@@ -83,7 +83,7 @@ const vacancySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  save: {
+  isAutoPay: {
     type: Boolean,
     default: false,
   },

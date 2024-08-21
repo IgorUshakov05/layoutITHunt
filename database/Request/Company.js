@@ -11,6 +11,7 @@ async function createCompany({
   creatorID,
   countStaffs,
   paymentId,
+  isAutoPay,
   paymentMethod,
   certificate_of_state_registration = null,
   tax_registration_certificate = null,
@@ -22,16 +23,23 @@ async function createCompany({
     });
     if (findFirst) return { success: false, error: "Company already exists" };
 
-    const now = Temporal.Now.plainDateTimeISO();
-    const nextPayDay = now.add({ months: 1 });
-    const company = new CompanySchema({
+    const now = await Temporal.Now.plainDateTimeISO();
+    const nextPayDay = await now
+      .add({ months: 1 })
+      .toPlainDate()
+      .toLocaleString("ru-RU", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      });
+    const company = await new CompanySchema({
       id: v4(),
       title,
       INN,
       description,
       avatar,
       nextPayDay,
-      save: true,
+      isAutoPay,
       paymentId,
       paymentMethod,
       creatorID,
@@ -46,11 +54,10 @@ async function createCompany({
         },
       ],
     });
-
     const user = await UserSchema.findOne({ id: creatorID });
-    if (!user) return { success: false, error: "User not found" };
+    if (!user) return await { success: false, error: "User not found" };
     let saveCompany = await company.save(); // Сохранение объекта
-    return { success: true, data: saveCompany };
+    return await { success: true, data: saveCompany };
   } catch (error) {
     console.error("Ошибка при создании компании:", error);
     return { success: false, error: error.message || "Error" };

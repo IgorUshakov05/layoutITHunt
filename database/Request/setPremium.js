@@ -29,9 +29,6 @@ const setNewPremium = async (id, { typePremium, typePay, amount, paymentId, paym
       { $set: { typePremium, typePay, amount, paymentId, paymentMethod, timePay, save, nextTimePay: formattedNextTimePay } },
       { upsert: true, new: true, setDefaultsOnInsert: true }
     );
-
-    let updateUser = await UserScheme.findOneAndUpdate({ id }, { premium: true });
-
     return { success: true, message: "Успешно обновлено или создано", result };
   } catch (e) {
     console.error("Ошибка при обновлении подписки:", e);
@@ -39,4 +36,14 @@ const setNewPremium = async (id, { typePremium, typePay, amount, paymentId, paym
   }
 };
 
-module.exports = setNewPremium;
+let findPremium = async (userID) => {
+  try {
+    const premium = await PremiumScheme.findOne({ userID });
+    return {success: true, premium};
+  } catch (e) {
+    console.error("Ошибка при поиске подписки:", e);
+    return { success: false, message: "Произошла ошибка, попробуйте позже" };
+  }
+}
+
+module.exports = { setNewPremium, findPremium };
