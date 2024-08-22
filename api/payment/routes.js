@@ -6,7 +6,6 @@ const { isAuth } = require("../middlewares/auth");
 const { body, validationResult } = require("express-validator");
 const { v4 } = require("uuid");
 const { findCompanyOfUserAndINN } = require("../../database/Request/Company");
-const createPayment = require("./autoPay");
 const tariffs = {
   short: {
     amount: "299.00",
@@ -166,20 +165,5 @@ router.post(
     }
   }
 );
-
-router.post("/auto-payment", isAuth, async (req, res) => {
-  try {
-    let isPay = await createPayment(req.body.amount, req.body.paymentMethodId);
-    console.log(isPay);
-    if (isPay) {
-      return res.status(200).json({ message: "Payment successful" });
-    } else {
-      return res.status(400).json({ message: "Payment failed" });
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    return res.status(500).json({ error: error.message });
-  }
-});
 
 module.exports = router;
