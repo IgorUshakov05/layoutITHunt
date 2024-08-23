@@ -9,21 +9,21 @@ var agreement = vacancy.price.agreement;
     <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Описание вакансии <%- vacancy.special %> разработчика в компании <%- from.name %>. Зарплата: <%= minPrice ? (minPrice.toLocaleString('ru-RU') + (maxPrice ? ' - ' + maxPrice.toLocaleString('ru-RU') : '')) : 'Договорная' %>.">
-    <meta name="keywords" content="вакансия, <%- vacancy.special %> разработчик, работа, <%- from.name %>, программирование, разработка, зарплата">
-    <meta name="author" content="<%- from.name %>">
-    <meta property="og:title" content="Вакансия <%- vacancy.special %> разработчика в компании <%- from.name %>">
-    <meta property="og:description" content="Подробнее о вакансии <%- vacancy.special %> разработчика в компании <%- from.name %>. Зарплата: <%= minPrice ? (minPrice.toLocaleString('ru-RU') + (maxPrice ? ' - ' + maxPrice.toLocaleString('ru-RU') : '')) : 'Договорная' %>. Узнайте о требованиях и условиях работы.">
+    <meta name="description" content="Описание вакансии <%- vacancy.special %> разработчика в компании <%- from.name|| from.title %>. Зарплата: <%= minPrice ? (minPrice.toLocaleString('ru-RU') + (maxPrice ? ' - ' + maxPrice.toLocaleString('ru-RU') : '')) : 'Договорная' %>.">
+    <meta name="keywords" content="вакансия, <%- vacancy.special %> разработчик, работа, <%- from.name || from.title%>, программирование, разработка, зарплата">
+    <meta name="author" content="<%- from.name|| from.title %>">
+    <meta property="og:title" content="Вакансия <%- vacancy.special %> разработчика в компании <%- from.name ||from.title  %>">
+    <meta property="og:description" content="Подробнее о вакансии <%- vacancy.special %> разработчика в компании <%- from.name || from.title %>. Зарплата: <%= minPrice ? (minPrice.toLocaleString('ru-RU') + (maxPrice ? ' - ' + maxPrice.toLocaleString('ru-RU') : '')) : 'Договорная' %>. Узнайте о требованиях и условиях работы.">
     <meta property="og:image" content="<%-from.avatar%>">
     <meta property="og:url" content="/<%= vacancy.id %>">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="<%- from.name %>">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Вакансия <%- vacancy.special %> разработчика в компании <%- from.name %>">
+    <meta name="twitter:title" content="Вакансия <%- vacancy.special %> разработчика в компании <%- from.name ||from.title  %>">
     <meta name="twitter:description" content="Подробнее о вакансии <%- vacancy.special %> разработчика в компании <%- from.name %>. Зарплата: <%= minPrice ? (minPrice.toLocaleString('ru-RU') + (maxPrice ? ' - ' + maxPrice.toLocaleString('ru-RU') : '')) : 'Договорная' %>. Узнайте о требованиях и условиях работы.">
     <link rel="stylesheet" href="/style.css">
     <script src="/js/jquery.js"></script>
-    <title>Вакансия <%- vacancy.special %> от <%- from.name %> <%-from.surname%></title>
+    <title>Вакансия <%- vacancy.special %> от <%- from.name || from.title %> <%-from.surname%></title>
 </head>
 <body>
     <%- include('./header.ejs', { isLoggedIn, active: 'profile', id,chat:chatList}) %>
@@ -38,17 +38,17 @@ var agreement = vacancy.price.agreement;
                 <div class="logoCompany">
                     <img src="<%- from.avatar %>" width="41" height="41" alt="Логотип компании">
                 </div>
-                <p><%-from.name%> <%-from.surname%></p>
+                <p><%-from.name || from.title%> <%-from.surname%></p>
             </div>
 <p class="descriptionCompanyInVacansy"><%-from.description%></p>
 <div class="showAllVacansy">
-    <a href="/<%-from.id%>">
+    <a href="/<%-from.INN?`company/${from.INN}`:from.id %>">
         <span class="seeAllVacansy">Посмотреть все вакансии</span>
     </a>
 </div>
 </div>
 <div class="toMoreVacansy">
-    <a class="toMoreVacansyA" href="/<%-from.id%>">
+    <a class="toMoreVacansyA" href="/<%-from.INN?`company/${from.INN}`:from.id %>">
         <p>Посмотреть все вакансии</p>
         <div class="toArrow">
             <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">

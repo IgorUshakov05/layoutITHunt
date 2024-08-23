@@ -68,20 +68,15 @@
                     </div>
                 </div>
             </div>
-<% let company = 
-null
-%>
-<!-- // {
-//     url: '/company', pic: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/800px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png', title: "MTC Group"
-// } -->
+
             <div class="meiddleInfo descriptionInfo">
                 <% if(company) { %>
-                <a href="<%= company.url %>">
+                <a href="/company/<%= company.INN %>">
                     <div class="titleCompanyAndPhoto titleCompanyAndPhotoProfile">
                         <div class="logoCompany logoCompanyProfile">
-                            <img src="<%= company.pic %>" width="35" height="35" alt="Логотип компании">
+                            <img src="<%= company.avatar %>" width="35" height="35" alt="Логотип компании">
                         </div>
-                        <h1 class="whitespace" title="Search cleack"><%=company.title %></h1>
+                        <h1 class="whitespace" title="Название компании"><%=company.title %></h1>
                     </div>
                     </a>
                     <% } %>

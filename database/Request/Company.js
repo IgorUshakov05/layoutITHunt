@@ -157,8 +157,21 @@ async function findCompanyOfUserAndINN(userID, INN) {
     return { success: false, error: "Error" };
   }
 }
+
+const searchCompanyForVacancy = async (creatorID) => {
+  try {
+    let result = await CompanySchema.findOne({ creatorID }).select(
+      "INN avatar title description"
+    );
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
 module.exports = {
   createCompany,
+  searchCompanyForVacancy,
   findCompanyOfINN,
   findCompanyOfUser,
   findCompanyOfUserAndINN,

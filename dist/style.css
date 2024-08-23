@@ -4847,7 +4847,8 @@ input[type="number"] {
   font-style: normal;
   font-weight: 300;
   line-height: 136.9%; /* 17.797px */
-  letter-spacing: -0.065px;
+  letter-spacing: -0.065px;    
+  word-break: break-word;
 }
 
 .seeAllVacansy {

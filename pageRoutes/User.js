@@ -113,14 +113,13 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
     } else {
       let vacancys = await searchVacancyByUserId(result.id);
       let findAllFV = await findFAllFavoriteOfId(decodeAccess.userID);
-
-      if (!findAllFV.success) {
+      console.log(findAllFV);
+      if (!findAllFV.data) {
         findAllFV = { data: { vacancyID: [] } }; // Обеспечиваем, что data будет пустым массивом в случае ошибки
       }
-      let findCompany = await findCompanyOfUser(decodeAccess.userID);
-      console.log(findCompany);
+      let findCompany = await findCompanyOfUser(result.id);
       if (!findCompany.success) findCompany = { data: null };
-      res.render("SeSideHr.ejs", {
+      return res.render("SeSideHr.ejs", {
         isLoggedIn: decodeAccess,
         id: decodeAccess.userID,
         name: result.name,
@@ -144,6 +143,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       });
     }
   } catch (e) {
+    console.log(e);
     return false;
   }
 });
