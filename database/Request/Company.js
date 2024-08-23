@@ -64,6 +64,35 @@ async function createCompany({
   }
 }
 
+let removeCompany = async (userID) => {
+  try {
+    const premium = await CompanySchema.findOneAndDelete({ creatorID: userID });
+    return { success: true, premium };
+  } catch (e) {
+    console.error("Ошибка при поиске подписки:", e);
+    return { success: false, message: "Произошла ошибка, попробуйте позже" };
+  }
+};
+
+const updateCompany = async (id, paymentId, nextTimePay) => {
+  console.log(paymentId);
+  try {
+    const result = await CompanySchema.findOneAndUpdate(
+      { creatorID: id },
+      {
+        $set: {
+          paymentId,
+          nextPayDay: nextTimePay,
+        },
+      }
+    );
+    return { success: true, message: "Успешно обновлено", result };
+  } catch (e) {
+    console.error("Ошибка при обновлении подписки:", e);
+    return { success: false, message: "Произошла ошибка, попробуйте позже" };
+  }
+};
+
 async function findCompanyOfUser(userID) {
   try {
     console.log(userID);
@@ -134,4 +163,6 @@ module.exports = {
   findCompanyOfUser,
   findCompanyOfUserAndINN,
   findCompanyOfINNorTitle,
+  updateCompany,
+  removeCompany
 };

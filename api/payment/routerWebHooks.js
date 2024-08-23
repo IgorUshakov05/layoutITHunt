@@ -5,7 +5,11 @@ const {
   updatePremium,
   removePremium,
 } = require("../../database/Request/setPremium");
-const { createCompany } = require("../../database/Request/Company");
+const {
+  createCompany,
+  updateCompany,
+  removeCompany,
+} = require("../../database/Request/Company");
 
 // Маршрут для обработки уведомлений от YooKassa
 router.post("/webhook/yookassa", async (req, res) => {
@@ -24,6 +28,7 @@ router.post("/webhook/yookassa", async (req, res) => {
     },
     metadata: {
       userId,
+      creatorID,
       paymentType,
       title,
       nextTimePay,
@@ -36,7 +41,7 @@ router.post("/webhook/yookassa", async (req, res) => {
       listWrite,
     },
   } = notification.object;
-
+  console.log(paid);
   if (notification.event === "payment.succeeded") {
     if (!paid) {
       // Если платёж не подтверждён, пропускаем создание подписки
@@ -100,6 +105,21 @@ router.post("/webhook/yookassa", async (req, res) => {
             updateResult.message
           );
         }
+      } else if (paymentType === "company-update") {
+        // Обработка обновления премиум-платежа
+        const updateResult = await updateCompany(
+          creatorID,
+          paymentMethodId,
+          nextTimePay
+        );
+        if (updateResult.success) {
+          console.log("Премиум подписка успешно обновлена");
+        } else {
+          console.error(
+            "Ошибка при обновлении подписки:",
+            updateResult.message
+          );
+        }
       }
       return res.json({ received: true });
     } catch (error) {
@@ -111,6 +131,16 @@ router.post("/webhook/yookassa", async (req, res) => {
       try {
         let removePremiumUser = await removePremium(userId);
         console.log("Премиум подписка успешно отменена", removePremiumUser);
+        return res.json({ received: true });
+      } catch (error) {
+        console.error("Ошибка при отмене подписки:", error);
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
+    }
+    if (paymentType === "company-update") {
+      try {
+        let removeCompanyResult = await removeCompany(creatorID);
+        console.log("Удаление компании из-за недостатка средств", removeCompanyResult);
         return res.json({ received: true });
       } catch (error) {
         console.error("Ошибка при отмене подписки:", error);
