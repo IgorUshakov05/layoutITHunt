@@ -8,7 +8,7 @@ const {
 const {
   createCompany,
   updateCompany,
-  removeCompany,
+  freezCompany,
 } = require("../../database/Request/Company");
 
 // Маршрут для обработки уведомлений от YooKassa
@@ -139,8 +139,11 @@ router.post("/webhook/yookassa", async (req, res) => {
     }
     if (paymentType === "company-update") {
       try {
-        let removeCompanyResult = await removeCompany(creatorID);
-        console.log("Удаление компании из-за недостатка средств", removeCompanyResult);
+        let freezCompanyResult = await freezCompany(creatorID);
+        console.log(
+          "Заморозка компании из-за недостатка средств",
+          freezCompanyResult
+        );
         return res.json({ received: true });
       } catch (error) {
         console.error("Ошибка при отмене подписки:", error);

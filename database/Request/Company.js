@@ -64,9 +64,14 @@ async function createCompany({
   }
 }
 
-let removeCompany = async (userID) => {
+let freezCompany = async (userID) => {
   try {
-    const premium = await CompanySchema.findOneAndDelete({ creatorID: userID });
+    const premium = await CompanySchema.findOneAndUpdate(
+      { creatorID: userID },
+      {
+        isFreez: true,
+      }
+    );
     return { success: true, premium };
   } catch (e) {
     console.error("Ошибка при поиске подписки:", e);
@@ -99,6 +104,7 @@ async function findCompanyOfUser(userID) {
     let findFirst = await CompanySchema.findOne({
       userList: { $elemMatch: { userID: userID } }, // Ищем, чтобы userID был в массиве userList
       isVarefy: true,
+      isFreez: false,
     });
     if (!findFirst) return { success: false, message: "Компании нет" };
     return { success: true, data: findFirst };
@@ -135,6 +141,7 @@ async function findCompanyOfINN(INN) {
     let findFirst = await CompanySchema.findOne({
       INN: INN,
       isVarefy: true,
+      isFreez: false,
     });
     console.log(findFirst, " - тут норм");
     if (!findFirst) return { success: false, message: "Компании нет" };
@@ -160,9 +167,11 @@ async function findCompanyOfUserAndINN(userID, INN) {
 
 const searchCompanyForVacancy = async (creatorID) => {
   try {
-    let result = await CompanySchema.findOne({ creatorID }).select(
-      "INN avatar title description"
-    );
+    let result = await CompanySchema.findOne({
+      creatorID,
+      isVarefy: true,
+      isFreez: false,
+    }).select("INN avatar title description");
     return result;
   } catch (e) {
     return false;
@@ -177,5 +186,5 @@ module.exports = {
   findCompanyOfUserAndINN,
   findCompanyOfINNorTitle,
   updateCompany,
-  removeCompany
+  freezCompany,
 };
