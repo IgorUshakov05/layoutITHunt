@@ -12,44 +12,31 @@ const setNewPremium = async (
     let nextTimePay;
     switch (typePremium) {
       case "Шорт":
-        nextTimePay = now.add({ months: 1 });
+        nextTimePay = await now.add({ months: 1 });
         break;
       case "Миддл":
-        nextTimePay = now.add({ months: 3 });
+        nextTimePay = await now.add({ months: 3 });
         break;
       case "Лонг":
-        nextTimePay = now.add({ years: 1 });
+        nextTimePay = await now.add({ years: 1 });
         break;
       default:
         throw new Error("Invalid typePremium value");
     }
-
-    // Форматируем дату в ДД-ММ-ГГГГ
-    const formattedNextTimePay = nextTimePay.toLocaleString("ru-RU", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-
-    const result = await PremiumScheme.findOneAndUpdate(
-      { userID: id },
-      {
-        $set: {
-          typePremium,
-          typePay,
-          amount,
-          paymentId,
-          paymentMethod,
-          timePay,
-          save,
-          nextTimePay: formattedNextTimePay,
-        },
-      },
-      { upsert: true, new: true, setDefaultsOnInsert: true }
-    );
-    return { success: true, message: "Успешно обновлено или создано", result };
+    const result = await new PremiumScheme({
+      userID: id,
+      typePremium,
+      typePay,
+      amount,
+      paymentId,
+      paymentMethod,
+      timePay,
+      saved: save,
+      nextTimePay,
+    }).save();
+    return { success: true, message: "Успешно создано", result };
   } catch (e) {
-    console.error("Ошибка при обновлении подписки:", e);
+    console.error("Ошибка создании подписки:", e);
     return { success: false, message: "Произошла ошибка, попробуйте позже" };
   }
 };

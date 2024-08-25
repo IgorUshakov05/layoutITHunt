@@ -64,10 +64,7 @@ router.post("/webhook/yookassa", async (req, res) => {
         if (updateResult.success) {
           console.log("Премиум подписка успешно создана");
         } else {
-          console.error(
-            "Ошибка при обновлении подписки:",
-            updateResult.message
-          );
+          console.error("Ошибка создании подписки:", updateResult.message);
         }
       } else if (paymentType === "company") {
         // Обработка платежа за создание компании

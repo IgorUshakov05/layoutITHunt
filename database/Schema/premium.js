@@ -34,7 +34,7 @@ const schema = new mongoose.Schema({
     type: String,
     required: true
   },
-  save: {
+  saved: {
     type: Boolean,
     default: false,
   }
