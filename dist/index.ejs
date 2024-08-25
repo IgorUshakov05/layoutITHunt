@@ -1,389 +1,753 @@
 <!DOCTYPE html>
 <html lang="ru" prefix="og: https://ogp.me/ns#">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Найдите работу или предложите её в IT-сфере с помощью нашего сайта. Мы предлагаем широкий выбор вакансий для различных специализаций.">
-    <meta name="keywords" content="IT, работа, вакансии, поиск работы, WebHunt, специалисты, программист, разработчик, тестировщик, веб-дизайнер">
-    <meta name="robots" content="index, follow">
-    <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon">
-    <meta name="author" content="WebHunt">
-    <link rel="stylesheet" href="/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Найдите работу или предложите её в IT-сфере с помощью нашего сайта. Мы предлагаем широкий выбор вакансий для различных специализаций."
+    />
+    <meta
+      name="keywords"
+      content="IT, работа, вакансии, поиск работы, WebHunt, специалисты, программист, разработчик, тестировщик, веб-дизайнер"
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon" />
+    <meta name="author" content="WebHunt" />
+    <link rel="stylesheet" href="/style.css" />
     <script src="/js/jquery.js"></script>
     <title>WebHunt - поиск работы для IT-специалистов</title>
-    <meta property="og:title" content="WebHunt" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://webhunt.ru/" />
-  <meta property="og:image" content="https://webhunt.ru/images/logo.png" />
-  <meta property="og:description" content="WebHunt - надежный партнер для поиска работы в IT-сфере и подбора высококвалифицированных специалистов." />
-  <meta property="og:site_name" content="WebHunt" />
-  <meta property="og:locale" content="ru_RU" />
-  <meta property="og:locale:alternate" content="ru_RU" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Логотип WebHunt" />
-</head>
-<body style="height: 100vh;">
-    <%- include('./header.ejs', { isLoggedIn, active: 'index', id, chat:chatList}) %>
+    <meta
+      property="og:title"
+      content="WebHunt"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://webhunt.ru/" />
+    <meta
+      property="og:image"
+      content="https://2228-85-140-161-118.ngrok-free.app/assets/pictures/picPreview.png"
+    />
+    <meta
+      property="og:description"
+      content="WebHunt - надежный партнер для поиска работы в IT-сфере и подбора высококвалифицированных специалистов."
+    />
+    <meta property="og:site_name" content="WebHunt" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:locale:alternate" content="ru_RU" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Логотип WebHunt" />
+  </head>
+  <body style="height: 100vh">
+    <%- include('./header.ejs', { isLoggedIn, active: 'index', id,
+    chat:chatList}) %>
 
-
-<main>
-    <section class="welcome">
+    <main>
+      <section class="welcome">
         <div class="content">
-            <div class="left">
-                <h1 class="textHello">Добро пожаловать в WebHunt</h1>
-                <p class="description">Мы являемся надежным партнером для тех, кто стремится найти идеальную работу в IT-сфере, а также для компаний, которым необходимы высококвалифицированные профессионалы в этой области.</p>
-                <div class="contentBottom">
-                    <div class="serching">
-                        <input class="search" placeholder="Кто вам нужен?" type="search" name="search" id="searchID">
-                        <div class="exampleInput">
-                            <p>Пример: <b>FrontEnd разработчик</b></p>
-                        </div>
-                    </div>
-                    <div class="person">
-                        <a href="/vacancies" rel="nofollow">Я ищу работу</a>
-                        <a href="/specialists" rel="nofollow">Я работодатель</a>
-                    </div>
+          <div class="left">
+            <h1 class="textHello">Добро пожаловать в WebHunt</h1>
+            <p class="description">
+              Мы являемся надежным партнером для тех, кто стремится найти
+              идеальную работу в IT-сфере, а также для компаний, которым
+              необходимы высококвалифицированные профессионалы в этой области.
+            </p>
+            <div class="contentBottom">
+              <div class="serching">
+                <input
+                  class="search"
+                  placeholder="Кто вам нужен?"
+                  type="search"
+                  name="search"
+                  id="searchID"
+                />
+                <div class="exampleInput">
+                  <p>Пример: <b>FrontEnd разработчик</b></p>
                 </div>
+              </div>
+              <div class="person">
+                <a href="/vacancies" rel="nofollow">Я ищу работу</a>
+                <a href="/specialists" rel="nofollow">Я работодатель</a>
+              </div>
             </div>
-            <div class="right">
-                <div class="logo">
-                    <svg width="309" height="246" viewBox="0 0 309 246" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0 0H3.55173C54.5529 0 95.8975 41.3446 95.8975 92.3458V245.071H92.3458C41.3446 245.071 0 203.727 0 152.726V0Z" fill="url(#paint0_linear_4392_5819)"/>
-                        <path d="M309.005 -5.34058e-05H305.454C254.452 -5.34058e-05 213.108 41.3446 213.108 92.3457V245.071H216.659C267.661 245.071 309.005 203.727 309.005 152.726V-5.34058e-05Z" fill="url(#paint1_linear_4392_5819)"/>
-                        <path d="M106.554 123.944H152.727C180.189 123.944 202.451 146.207 202.451 173.669V245.071H156.279C128.816 245.071 106.554 222.809 106.554 195.347V123.944Z" fill="url(#paint2_linear_4392_5819)"/>
-                        <defs>
-                        <linearGradient id="paint0_linear_4392_5819" x1="48.446" y1="87.1132" x2="51.9004" y2="249.066" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="white"/>
-                        <stop offset="1" stop-color="#4900E3"/>
-                        </linearGradient>
-                        <linearGradient id="paint1_linear_4392_5819" x1="260.559" y1="87.1131" x2="257.105" y2="249.066" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="white"/>
-                        <stop offset="1" stop-color="#4900E3"/>
-                        </linearGradient>
-                        <linearGradient id="paint2_linear_4392_5819" x1="155" y1="167" x2="155.844" y2="247.073" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="white"/>
-                        <stop offset="1" stop-color="#4900E3"/>
-                        </linearGradient>
-                        </defs>
-                        </svg>
-                        
-                </div>
+          </div>
+          <div class="right">
+            <div class="logo">
+              <svg
+                width="309"
+                height="246"
+                viewBox="0 0 309 246"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 0H3.55173C54.5529 0 95.8975 41.3446 95.8975 92.3458V245.071H92.3458C41.3446 245.071 0 203.727 0 152.726V0Z"
+                  fill="url(#paint0_linear_4392_5819)"
+                />
+                <path
+                  d="M309.005 -5.34058e-05H305.454C254.452 -5.34058e-05 213.108 41.3446 213.108 92.3457V245.071H216.659C267.661 245.071 309.005 203.727 309.005 152.726V-5.34058e-05Z"
+                  fill="url(#paint1_linear_4392_5819)"
+                />
+                <path
+                  d="M106.554 123.944H152.727C180.189 123.944 202.451 146.207 202.451 173.669V245.071H156.279C128.816 245.071 106.554 222.809 106.554 195.347V123.944Z"
+                  fill="url(#paint2_linear_4392_5819)"
+                />
+                <defs>
+                  <linearGradient
+                    id="paint0_linear_4392_5819"
+                    x1="48.446"
+                    y1="87.1132"
+                    x2="51.9004"
+                    y2="249.066"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stop-color="white" />
+                    <stop offset="1" stop-color="#4900E3" />
+                  </linearGradient>
+                  <linearGradient
+                    id="paint1_linear_4392_5819"
+                    x1="260.559"
+                    y1="87.1131"
+                    x2="257.105"
+                    y2="249.066"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stop-color="white" />
+                    <stop offset="1" stop-color="#4900E3" />
+                  </linearGradient>
+                  <linearGradient
+                    id="paint2_linear_4392_5819"
+                    x1="155"
+                    y1="167"
+                    x2="155.844"
+                    y2="247.073"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stop-color="white" />
+                    <stop offset="1" stop-color="#4900E3" />
+                  </linearGradient>
+                </defs>
+              </svg>
             </div>
+          </div>
         </div>
-    </section>
-    <div class="nowsecond">
+      </section>
+      <div class="nowsecond">
         <div class="leftsecond">
-            <h2 class="title">Недавние вакансии</h2>
-            <p class="descripe">Это список самых свежих вакансий. Мы регулярно обновляем список доступных позиций, чтобы предложить вам широкий выбор возможностей. С нашей удобной системой поиска вы можете настроить поиск работы в соответствии с вашими интересами, навыками и предпочтениями</p>
-            <div class="buttons">
-                <button>
-                    <a href="#" title="Создать вакансию" rel="nofollow">Создать вакансию</a>
-                </button>
-                <a href="vacancies" title="Смотреть вакансии" rel="nofollow">Смотреть вакансии</a>
-            </div>
+          <h2 class="title">Недавние вакансии</h2>
+          <p class="descripe">
+            Это список самых свежих вакансий. Мы регулярно обновляем список
+            доступных позиций, чтобы предложить вам широкий выбор возможностей.
+            С нашей удобной системой поиска вы можете настроить поиск работы в
+            соответствии с вашими интересами, навыками и предпочтениями
+          </p>
+          <div class="buttons">
+            <button>
+              <a href="#" title="Создать вакансию" rel="nofollow"
+                >Создать вакансию</a
+              >
+            </button>
+            <a href="vacancies" title="Смотреть вакансии" rel="nofollow"
+              >Смотреть вакансии</a
+            >
+          </div>
         </div>
         <div class="vakans">
-            <div class="vakansia">
-                <a href="">
-                    <div class="top">
-                        <h3 class="titleV">FrontEnd Разработчик</h3>
-                        <h3 class="price">200 000<span class="p">₽</span></h3>
-                    </div>
-                </a>
-                <div class="expiriens">
-                    <p class="expirienstext">Опыт работы: 3 года</p>
-                </div>
-                <ul class="stack">
-                    <li>HTML</li>
-                    <li>JQuery</li>
-                    <li>CSS</li>
-                    <li>GIT</li>
-                    <li>Vue.js</li>
-                    <li>NPM</li>
-                </ul>
-            </div>      
-            <div class="vakansia">
-                <a href="">
-                    <div class="top">
-                        <h3 class="titleV">FrontEnd Разработчик</h3>
-                        <h3 class="price">200 000<span class="p">₽</span></h3>
-                    </div>
-                </a>
-                <div class="expiriens">
-                    <p class="expirienstext">Опыт работы: 3 года</p>
-                </div>
-                <ul class="stack">
-                    <li>HTML</li>
-                    <li>JQuery</li>
-                    <li>CSS</li>
-                    <li>GIT</li>
-                    <li>Vue.js</li>
-                    <li>NPM</li>
-                </ul>
-            </div>    <div class="vakansia">
-                <a href="">
-                    <div class="top">
-                        <h3 class="titleV">FrontEnd Разработчик</h3>
-                        <h3 class="price">200 000<span class="p">₽</span></h3>
-                    </div>
-                </a>
-                <div class="expiriens">
-                    <p class="expirienstext">Опыт работы: 3 года</p>
-                </div>
-                <ul class="stack">
-                    <li>HTML</li>
-                    <li>JQuery</li>
-                    <li>CSS</li>
-                    <li>GIT</li>
-                    <li>Vue.js</li>
-                    <li>NPM</li>
-                </ul>
-            </div>    <div class="vakansia">
-                <a href="">
-                    <div class="top">
-                        <h3 class="titleV">FrontEnd Разработчик</h3>
-                        <h3 class="price">200 000<span class="p">₽</span></h3>
-                    </div>
-                </a>
-                <div class="expiriens">
-                    <p class="expirienstext">Опыт работы: 3 года</p>
-                </div>
-                <ul class="stack">
-                    <li>HTML</li>
-                    <li>JQuery</li>
-                    <li>CSS</li>
-                    <li>GIT</li>
-                    <li>Vue.js</li>
-                    <li>NPM</li>
-                </ul>
-            </div>    <div class="vakansia">
-                <a href="">
-                    <div class="top">
-                        <h3 class="titleV">FrontEnd Разработчик</h3>
-                        <h3 class="price">200 000<span class="p">₽</span></h3>
-                    </div>
-                </a>
-                <div class="expiriens">
-                    <p class="expirienstext">Опыт работы: 3 года</p>
-                </div>
-                <ul class="stack">
-                    <li>HTML</li>
-                    <li>JQuery</li>
-                    <li>CSS</li>
-                    <li>GIT</li>
-                    <li>Vue.js</li>
-                    <li>NPM</li>
-                </ul>
-            </div>    <div class="vakansia">
-                <a href="">
-                    <div class="top">
-                        <h3 class="titleV">FrontEnd Разработчик</h3>
-                        <h3 class="price">200 000<span class="p">₽</span></h3>
-                    </div>
-                </a>
-                <div class="expiriens">
-                    <p class="expirienstext">Опыт работы: 3 года</p>
-                </div>
-                <ul class="stack">
-                    <li>HTML</li>
-                    <li>JQuery</li>
-                    <li>CSS</li>
-                    <li>GIT</li>
-                    <li>Vue.js</li>
-                    <li>NPM</li>
-                </ul>
-            </div>      
+          <div class="vakansia">
+            <a href="">
+              <div class="top">
+                <h3 class="titleV">FrontEnd Разработчик</h3>
+                <h3 class="price">200 000<span class="p">₽</span></h3>
+              </div>
+            </a>
+            <div class="expiriens">
+              <p class="expirienstext">Опыт работы: 3 года</p>
+            </div>
+            <ul class="stack">
+              <li>HTML</li>
+              <li>JQuery</li>
+              <li>CSS</li>
+              <li>GIT</li>
+              <li>Vue.js</li>
+              <li>NPM</li>
+            </ul>
+          </div>
+          <div class="vakansia">
+            <a href="">
+              <div class="top">
+                <h3 class="titleV">FrontEnd Разработчик</h3>
+                <h3 class="price">200 000<span class="p">₽</span></h3>
+              </div>
+            </a>
+            <div class="expiriens">
+              <p class="expirienstext">Опыт работы: 3 года</p>
+            </div>
+            <ul class="stack">
+              <li>HTML</li>
+              <li>JQuery</li>
+              <li>CSS</li>
+              <li>GIT</li>
+              <li>Vue.js</li>
+              <li>NPM</li>
+            </ul>
+          </div>
+          <div class="vakansia">
+            <a href="">
+              <div class="top">
+                <h3 class="titleV">FrontEnd Разработчик</h3>
+                <h3 class="price">200 000<span class="p">₽</span></h3>
+              </div>
+            </a>
+            <div class="expiriens">
+              <p class="expirienstext">Опыт работы: 3 года</p>
+            </div>
+            <ul class="stack">
+              <li>HTML</li>
+              <li>JQuery</li>
+              <li>CSS</li>
+              <li>GIT</li>
+              <li>Vue.js</li>
+              <li>NPM</li>
+            </ul>
+          </div>
+          <div class="vakansia">
+            <a href="">
+              <div class="top">
+                <h3 class="titleV">FrontEnd Разработчик</h3>
+                <h3 class="price">200 000<span class="p">₽</span></h3>
+              </div>
+            </a>
+            <div class="expiriens">
+              <p class="expirienstext">Опыт работы: 3 года</p>
+            </div>
+            <ul class="stack">
+              <li>HTML</li>
+              <li>JQuery</li>
+              <li>CSS</li>
+              <li>GIT</li>
+              <li>Vue.js</li>
+              <li>NPM</li>
+            </ul>
+          </div>
+          <div class="vakansia">
+            <a href="">
+              <div class="top">
+                <h3 class="titleV">FrontEnd Разработчик</h3>
+                <h3 class="price">200 000<span class="p">₽</span></h3>
+              </div>
+            </a>
+            <div class="expiriens">
+              <p class="expirienstext">Опыт работы: 3 года</p>
+            </div>
+            <ul class="stack">
+              <li>HTML</li>
+              <li>JQuery</li>
+              <li>CSS</li>
+              <li>GIT</li>
+              <li>Vue.js</li>
+              <li>NPM</li>
+            </ul>
+          </div>
+          <div class="vakansia">
+            <a href="">
+              <div class="top">
+                <h3 class="titleV">FrontEnd Разработчик</h3>
+                <h3 class="price">200 000<span class="p">₽</span></h3>
+              </div>
+            </a>
+            <div class="expiriens">
+              <p class="expirienstext">Опыт работы: 3 года</p>
+            </div>
+            <ul class="stack">
+              <li>HTML</li>
+              <li>JQuery</li>
+              <li>CSS</li>
+              <li>GIT</li>
+              <li>Vue.js</li>
+              <li>NPM</li>
+            </ul>
+          </div>
         </div>
-    </div>
-    <div class="shtat">
+      </div>
+      <div class="shtat">
         <h2>У нас есть все специалисты</h2>
         <ul class="list">
-            <li>
-                <img loading="lazy" src="/assets/pictures/analytics.webp" alt="Аналитик">
-                <h2>Аналитик</h2>
-            </li>
-            <li>
-                <img loading="lazy" src="/assets/pictures/seo.webp" alt="SEO-специалист">
-                <h2>SEO-специалист</h2>
-            </li>
-            <li>
-                <img loading="lazy" src="/assets/pictures/disigner.webp" alt="Графический дизайнер">
-                <h2>Графический дизайнер</h2>
-            </li>
-            <li><img loading="lazy" src="/assets/pictures/sysadm.webp" alt="Системный администратор"><h2 title="Системный администратор">Систем. админ</h2></li>
-            <li><img loading="lazy" src="/assets/pictures/database.webp" alt="Администратор БД"><h2>Администратор БД</h2></li>
-            <li><img loading="lazy" src="/assets/pictures/hr.webp" alt="HR"><h2>HR</h2></li>
-            <li><img loading="lazy" src="/assets/pictures/frontend.webp" alt="FrontEnd"><h2>FrontEnd</h2></li>
-            <li><img loading="lazy" src="/assets/pictures/meneger.webp" alt="Менеджер продаж"><h2>Менеджер продаж</h2></li>
-            <li><img loading="lazy" src="/assets/pictures/tester.webp" alt="Тестировщик"><h2>Тестировщик</h2></li>
-            <li><img loading="lazy" src="/assets/pictures/product.webp" alt="Продукт менеджер"><h2>Продукт менеджер</h2></li>
-            <li><img loading="lazy" src="/assets/pictures/backend.webp" alt="BackEnd"><h2>BackEnd</h2></li>
-            <li><img loading="lazy" src="/assets/pictures/fullstack.webp" alt="FullSatck"><h2>FullStack</h2></li>
-            <li><img loading="lazy" src="/assets/pictures/teamleader.webp" alt="TeamLeader"><h2>TeamLeader</h2></li>
-            <li><img loading="lazy" src="/assets/pictures/Верстальщик.webp" alt="Верстальщик"><h2>Верстальщик</h2></li>
-            <li><img loading="lazy" src="/assets/pictures/soft.webp" alt="Инфобез-специалист"><h2 title="Специалист информационной беопастности">Инфобез-специалист</h2></li>
-            <li><img loading="lazy" src="/assets/pictures/web-disigner.webp" alt="Веб-дизайнер"><h2>Веб-дизайнер</h2></li>
-            <li><img loading="lazy" src="/assets/pictures/marketolog.webp" alt="Маркетолог"><h2>Маркетолог</h2></li>
-            <li><img loading="lazy" src="/assets/pictures/copy.webp" alt="Копирайтер"><h2>Копирайтер</h2></li>
-            <li id="openModal"><img loading="lazy" src="/assets/pictures/plus.webp" alt="Добавить еще"><a>Кого-то забыли?</a></li>
+          <li>
+            <img
+              loading="lazy"
+              src="/assets/pictures/analytics.webp"
+              alt="Аналитик"
+            />
+            <h2>Аналитик</h2>
+          </li>
+          <li>
+            <img
+              loading="lazy"
+              src="/assets/pictures/seo.webp"
+              alt="SEO-специалист"
+            />
+            <h2>SEO-специалист</h2>
+          </li>
+          <li>
+            <img
+              loading="lazy"
+              src="/assets/pictures/disigner.webp"
+              alt="Графический дизайнер"
+            />
+            <h2>Графический дизайнер</h2>
+          </li>
+          <li>
+            <img
+              loading="lazy"
+              src="/assets/pictures/sysadm.webp"
+              alt="Системный администратор"
+            />
+            <h2 title="Системный администратор">Систем. админ</h2>
+          </li>
+          <li>
+            <img
+              loading="lazy"
+              src="/assets/pictures/database.webp"
+              alt="Администратор БД"
+            />
+            <h2>Администратор БД</h2>
+          </li>
+          <li>
+            <img loading="lazy" src="/assets/pictures/hr.webp" alt="HR" />
+            <h2>HR</h2>
+          </li>
+          <li>
+            <img
+              loading="lazy"
+              src="/assets/pictures/frontend.webp"
+              alt="FrontEnd"
+            />
+            <h2>FrontEnd</h2>
+          </li>
+          <li>
+            <img
+              loading="lazy"
+              src="/assets/pictures/meneger.webp"
+              alt="Менеджер продаж"
+            />
+            <h2>Менеджер продаж</h2>
+          </li>
+          <li>
+            <img
+              loading="lazy"
+              src="/assets/pictures/tester.webp"
+              alt="Тестировщик"
+            />
+            <h2>Тестировщик</h2>
+          </li>
+          <li>
+            <img
+              loading="lazy"
+              src="/assets/pictures/product.webp"
+              alt="Продукт менеджер"
+            />
+            <h2>Продукт менеджер</h2>
+          </li>
+          <li>
+            <img
+              loading="lazy"
+              src="/assets/pictures/backend.webp"
+              alt="BackEnd"
+            />
+            <h2>BackEnd</h2>
+          </li>
+          <li>
+            <img
+              loading="lazy"
+              src="/assets/pictures/fullstack.webp"
+              alt="FullSatck"
+            />
+            <h2>FullStack</h2>
+          </li>
+          <li>
+            <img
+              loading="lazy"
+              src="/assets/pictures/teamleader.webp"
+              alt="TeamLeader"
+            />
+            <h2>TeamLeader</h2>
+          </li>
+          <li>
+            <img
+              loading="lazy"
+              src="/assets/pictures/Верстальщик.webp"
+              alt="Верстальщик"
+            />
+            <h2>Верстальщик</h2>
+          </li>
+          <li>
+            <img
+              loading="lazy"
+              src="/assets/pictures/soft.webp"
+              alt="Инфобез-специалист"
+            />
+            <h2 title="Специалист информационной беопастности">
+              Инфобез-специалист
+            </h2>
+          </li>
+          <li>
+            <img
+              loading="lazy"
+              src="/assets/pictures/web-disigner.webp"
+              alt="Веб-дизайнер"
+            />
+            <h2>Веб-дизайнер</h2>
+          </li>
+          <li>
+            <img
+              loading="lazy"
+              src="/assets/pictures/marketolog.webp"
+              alt="Маркетолог"
+            />
+            <h2>Маркетолог</h2>
+          </li>
+          <li>
+            <img
+              loading="lazy"
+              src="/assets/pictures/copy.webp"
+              alt="Копирайтер"
+            />
+            <h2>Копирайтер</h2>
+          </li>
+          <li id="openModal">
+            <img
+              loading="lazy"
+              src="/assets/pictures/plus.webp"
+              alt="Добавить еще"
+            /><a>Кого-то забыли?</a>
+          </li>
         </ul>
-        <div class="modal" style="display:none;">
-
-        <div id="myModal" class="modalWind">
+        <div class="modal" style="display: none">
+          <div id="myModal" class="modalWind">
             <div class="modalText">
-                <h4>Нет нужной специальности?</h4>
-                <div class="textInfoModal" id="parentForAppend">
-                    <div class="textHelp">
-                        <div class="green"></div>
-                        <p>Специальность не должна повторяться с теми что уже находятся на платформе</p>
-                    </div>
-                    <div class="textHelp">
-                        <div class="green"></div>
-                        <p>Специальность должна быть связана с IT-сферой</p>
-                    </div>
-                    
+              <h4>Нет нужной специальности?</h4>
+              <div class="textInfoModal" id="parentForAppend">
+                <div class="textHelp">
+                  <div class="green"></div>
+                  <p>
+                    Специальность не должна повторяться с теми что уже находятся
+                    на платформе
+                  </p>
                 </div>
+                <div class="textHelp">
+                  <div class="green"></div>
+                  <p>Специальность должна быть связана с IT-сферой</p>
+                </div>
+              </div>
             </div>
-                <input type="text" id="specializationInput" placeholder="Название">
+            <input
+              type="text"
+              id="specializationInput"
+              placeholder="Название"
+            />
             <div class="modal-content">
-                <button id="backBtn">Назад</button>
-                <button disabled id="submitBtn">Отправить</button>
+              <button id="backBtn">Назад</button>
+              <button disabled id="submitBtn">Отправить</button>
             </div>
+          </div>
         </div>
-        </div>
-        <p class="bottomList">У нас есть все специалисты необходимы для работы сайтами, начиная от создания и до поддержания его жизнедеятельности.</p>
-    </div>
-    <div class="best">
+        <p class="bottomList">
+          У нас есть все специалисты необходимы для работы сайтами, начиная от
+          создания и до поддержания его жизнедеятельности.
+        </p>
+      </div>
+      <div class="best">
         <h2>Приемущества данного сервиса</h2>
         <div class="all">
-            <div class="element">
+          <div class="element">
             <h3>Узкая направленность</h3>
-                <img loading="lazy" src="/assets/pictures/one.jpg" alt="Узкая направленность">
-                <div class="open-close"></div>
-                <p>Наша платформа предоставляет самые популярные вакансии для веб-разработчиков, обеспечивая высокий шанс найти именно ту работу, которую вы ищете в этой сфере. Мы специализируемся исключительно на веб-разработке, что делает нас лучшим выбором для специалистов этой области.</p>
-            </div>
-            <div class="element">
-                <h3>Удобный графический интерфейс сайта</h3>
-                <img loading="lazy" src="/assets/pictures/toptwo.jpg" alt="Удобный графический интерфейс сайта">
-                <div class="open-close"></div>
-                <p>Наши талантливые дизайнеры инвестировали много времени и энергии в разработку удобного графического интерфейса нашего сайта. Мы предоставляем интуитивно понятные элементы управления, удобную навигацию и современный дизайн, чтобы обеспечить наилучший опыт пользования нашей платформой. Вы сможете легко находить вакансии, создавать профиль и взаимодействовать с работодателями, не испытывая никаких сложностей</p>
-            </div>
-            <div class="element">
-                <h3>Равные условия</h3>
-                <img loading="lazy" src="/assets/pictures/threetop.jpg" alt="Равные условия">
-                <div class="open-close"></div>
-                <p>Мы гарантируем, что все участники нашей платформы имеют равные возможности при поиске работы. Независимо от вашего рейтинга или опыта, каждый имеет равный доступ к вакансиям и возможность выделить свои навыки и потенциал. Мы стремимся к справедливому и прозрачному процессу отбора, где ваше профессиональное качество является ключевым фактором</p>
-            </div>
-            <div class="element">
-                <h3>Постоянная поддержка</h3>
-                <img loading="lazy" src="/assets/pictures/onetwo.jpg" alt="Удобный графический интерфейс сайта">
-                <div class="open-close"></div>
-            <p>Мы понимаем, что в процессе поиска работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы и предоставить необходимую помощь в кратчайшие сроки. Мы ценим ваше время и стремимся обеспечить гладкое и безопасное пользование нашей платформой.</p>
-            </div>
-            <div class="element">
-                <h3>Постоянная работа или разовая</h3>
-                <img loading="lazy" src="/assets/pictures/two.jpg" alt="Узкая направленность">
-                <div class="open-close"></div>
-                <p>Независимо от того, нужен ли вам сотрудник на постоянную основу или для разового проекта, WebHunt предоставляет вам все необходимые инструменты и ресурсы для успешного подбора персонала. Мы предлагаем удобный поиск вакансий, функциональные фильтры и возможность просмотра подробной информации о кандидатах</p>
-                 </div>
-            <div class="element">
-                <h3>У нас все бесплатно</h3>
-                <img loading="lazy" src="/assets/pictures/three.jpg" alt="Удобный графический интерфейс сайта">
-                <div class="open-close"></div>
-            <p>Мы полностью осознаем, что каждая компания и каждый профессионал имеют свои уникальные потребности и бюджетные ограничения. Поэтому в нашем начальном этапе работы мы решили предоставить бесплатный период использования нашей биржи. Это даст возможность всем желающим воспользоваться всеми нашими инструментами и ресурсами для успешного подбора персонала без дополнительных затрат</p>
-            </div>
+            <img
+              loading="lazy"
+              src="/assets/pictures/one.jpg"
+              alt="Узкая направленность"
+            />
+            <div class="open-close"></div>
+            <p>
+              Наша платформа предоставляет самые популярные вакансии для
+              веб-разработчиков, обеспечивая высокий шанс найти именно ту
+              работу, которую вы ищете в этой сфере. Мы специализируемся
+              исключительно на веб-разработке, что делает нас лучшим выбором для
+              специалистов этой области.
+            </p>
+          </div>
+          <div class="element">
+            <h3>Удобный графический интерфейс сайта</h3>
+            <img
+              loading="lazy"
+              src="/assets/pictures/toptwo.jpg"
+              alt="Удобный графический интерфейс сайта"
+            />
+            <div class="open-close"></div>
+            <p>
+              Наши талантливые дизайнеры инвестировали много времени и энергии в
+              разработку удобного графического интерфейса нашего сайта. Мы
+              предоставляем интуитивно понятные элементы управления, удобную
+              навигацию и современный дизайн, чтобы обеспечить наилучший опыт
+              пользования нашей платформой. Вы сможете легко находить вакансии,
+              создавать профиль и взаимодействовать с работодателями, не
+              испытывая никаких сложностей
+            </p>
+          </div>
+          <div class="element">
+            <h3>Равные условия</h3>
+            <img
+              loading="lazy"
+              src="/assets/pictures/threetop.jpg"
+              alt="Равные условия"
+            />
+            <div class="open-close"></div>
+            <p>
+              Мы гарантируем, что все участники нашей платформы имеют равные
+              возможности при поиске работы. Независимо от вашего рейтинга или
+              опыта, каждый имеет равный доступ к вакансиям и возможность
+              выделить свои навыки и потенциал. Мы стремимся к справедливому и
+              прозрачному процессу отбора, где ваше профессиональное качество
+              является ключевым фактором
+            </p>
+          </div>
+          <div class="element">
+            <h3>Постоянная поддержка</h3>
+            <img
+              loading="lazy"
+              src="/assets/pictures/onetwo.jpg"
+              alt="Удобный графический интерфейс сайта"
+            />
+            <div class="open-close"></div>
+            <p>
+              Мы понимаем, что в процессе поиска работы могут возникать вопросы
+              и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим
+              пользователям. Наша команда экспертов всегда готова ответить на
+              ваши вопросы и предоставить необходимую помощь в кратчайшие сроки.
+              Мы ценим ваше время и стремимся обеспечить гладкое и безопасное
+              пользование нашей платформой.
+            </p>
+          </div>
+          <div class="element">
+            <h3>Постоянная работа или разовая</h3>
+            <img
+              loading="lazy"
+              src="/assets/pictures/two.jpg"
+              alt="Узкая направленность"
+            />
+            <div class="open-close"></div>
+            <p>
+              Независимо от того, нужен ли вам сотрудник на постоянную основу
+              или для разового проекта, WebHunt предоставляет вам все
+              необходимые инструменты и ресурсы для успешного подбора персонала.
+              Мы предлагаем удобный поиск вакансий, функциональные фильтры и
+              возможность просмотра подробной информации о кандидатах
+            </p>
+          </div>
+          <div class="element">
+            <h3>У нас все бесплатно</h3>
+            <img
+              loading="lazy"
+              src="/assets/pictures/three.jpg"
+              alt="Удобный графический интерфейс сайта"
+            />
+            <div class="open-close"></div>
+            <p>
+              Мы полностью осознаем, что каждая компания и каждый профессионал
+              имеют свои уникальные потребности и бюджетные ограничения. Поэтому
+              в нашем начальном этапе работы мы решили предоставить бесплатный
+              период использования нашей биржи. Это даст возможность всем
+              желающим воспользоваться всеми нашими инструментами и ресурсами
+              для успешного подбора персонала без дополнительных затрат
+            </p>
+          </div>
         </div>
-    </div>
-    <div class="money">
+      </div>
+      <div class="money">
         <h2>Как начать зарабатывать на профессии мечты с WebHunt</h2>
         <div class="allBeBack">
-        <div class="first">
+          <div class="first">
             <div class="picAndCell">
-                <img loading="lazy" src="/assets/pictures/Создай%20профиль.jpg" alt="Картинка - создай профиль">
-                <h3>Создай профиль</h3>
+              <img
+                loading="lazy"
+                src="/assets/pictures/Создай%20профиль.jpg"
+                alt="Картинка - создай профиль"
+              />
+              <h3>Создай профиль</h3>
             </div>
-            <p>Твой профиль является визитной карточкой, которая представит тебя потенциальным работодателям или клиентам. Убедись, что профиль ясно отражает твои навыки, опыт и образование в области IT</p>
-        </div>
-        <div class="first">
+            <p>
+              Твой профиль является визитной карточкой, которая представит тебя
+              потенциальным работодателям или клиентам. Убедись, что профиль
+              ясно отражает твои навыки, опыт и образование в области IT
+            </p>
+          </div>
+          <div class="first">
             <div class="picAndCell">
-                <img loading="lazy" src="/assets/pictures/Найди%20вакансию.jpg" alt="Картинка - создай профиль">
-                <h3>Найди вакансию</h3>
+              <img
+                loading="lazy"
+                src="/assets/pictures/Найди%20вакансию.jpg"
+                alt="Картинка - создай профиль"
+              />
+              <h3>Найди вакансию</h3>
             </div>
-            <p>После заполнения профиля начни искать вакансии или проекты, которые соответствуют твоим навыкам и интересам. WebHunt предоставляет широкий спектр возможностей в области IT, от фриланс-проектов до полноценной постоянной работы. </p>
-        </div>
-        <div class="first">
+            <p>
+              После заполнения профиля начни искать вакансии или проекты,
+              которые соответствуют твоим навыкам и интересам. WebHunt
+              предоставляет широкий спектр возможностей в области IT, от
+              фриланс-проектов до полноценной постоянной работы. 
+            </p>
+          </div>
+          <div class="first">
             <div class="picAndCell">
-                <img loading="lazy" src="/assets/pictures/Не%20сдавайся.jpg" alt="Картинка - создай профиль">
-                <h3>Не сдавайся</h3>
+              <img
+                loading="lazy"
+                src="/assets/pictures/Не%20сдавайся.jpg"
+                alt="Картинка - создай профиль"
+              />
+              <h3>Не сдавайся</h3>
             </div>
-            <p>Самые успешные люди сталкиваются с неудачами на своем пути, но они не прекращают стремиться к своим целям. Будьте настойчивыми, учись на своих ошибках и продолжай двигаться вперед. В конечном итоге, твоя преданность и упорство приведут к желаемым результатам.</p>
-        </div>
+            <p>
+              Самые успешные люди сталкиваются с неудачами на своем пути, но они
+              не прекращают стремиться к своим целям. Будьте настойчивыми, учись
+              на своих ошибках и продолжай двигаться вперед. В конечном итоге,
+              твоя преданность и упорство приведут к желаемым результатам.
+            </p>
+          </div>
         </div>
         <% if(!isLoggedIn) {%>
         <a class="profile" href="/login">
-            <button class="join lazzy">
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9 1V17" stroke="#4900E3" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M17 9L1 9" stroke="#4900E3" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                Присоединиться
-            </button>
+          <button class="join lazzy">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 1V17"
+                stroke="#4900E3"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+              <path
+                d="M17 9L1 9"
+                stroke="#4900E3"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            Присоединиться
+          </button>
         </a>
         <%}else {%>
-            <p class="thanks">У вас все получится!</p>
-<%}%>
-    </div>
-    <div id="questions" class="quetion">
-            <h2>Часто задаваемые вопросы</h2>
-            <div class="block">
-            <div class="picure">
-                <div class="centerPic">
-                    <img loading="lazy" src="/assets/pictures/знак%20вопроса.png" alt="Вот вопросы:" loading="lazy">
-                </div>
+        <p class="thanks">У вас все получится!</p>
+        <%}%>
+      </div>
+      <div id="questions" class="quetion">
+        <h2>Часто задаваемые вопросы</h2>
+        <div class="block">
+          <div class="picure">
+            <div class="centerPic">
+              <img
+                loading="lazy"
+                src="/assets/pictures/знак%20вопроса.png"
+                alt="Вот вопросы:"
+                loading="lazy"
+              />
             </div>
-            <div class="vopross">
-                <div class="response">
-                    <div class="text">
-                        <svg class="wow" width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15.4174 0L0.417419 15L0.417419 -6.55671e-07L15.4174 0Z" fill="#D9D9D9"/>
-                        </svg>
-                        <p>Что будет если удалить свой профиль?</p>
-                    </div>
-                <div class="request">
-                    <p>Удаление аккаунта приведет к безвозвратной утрате всех ваших данных!</p>
-                </div>
-                     </div>
-                <div class="response">
-                    <div class="text">
-                        <svg class="wow" width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15.4174 0L0.417419 15L0.417419 -6.55671e-07L15.4174 0Z" fill="#D9D9D9"/>
-                        </svg>
-                        <p>Как сменить профиль с Работодатель на Исполнитель или наоборот?</p>
-                    </div>
-                    <div class="request">
-                        <p>Наши услуги включают размещение вакансий, поиск и подбор IT-специалистов, проведение технических собеседований и оценку навыков, чтобы убедиться, что каждый кандидат соответствует требованиям и ожиданиям наших клиентов. Мы тщательно анализируем рынок труда и работаем на</p>
-                    </div>
-                </div>
-                <div class="response">
-                    <div class="text">
-                        <svg class="wow" width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15.4174 0L0.417419 15L0.417419 -6.55671e-07L15.4174 0Z" fill="#D9D9D9"/>
-                        </svg>
-                        <p>Как сменить профиль с Работодатель на Исполнитель или наоборот?</p>
-                    </div>
-                    <div class="request">
-                        <p>Наши услуги включают размещение вакансий, поиск и подбор IT-специалистов, проведение технических собеседований и оценку навыков, чтобы убедиться, что каждый кандидат соответствует требованиям и ожиданиям наших клиентов. Мы тщательно анализируем рынок труда и работаем на</p>
-                    </div>
-                </div>
+          </div>
+          <div class="vopross">
+            <div class="response">
+              <div class="text">
+                <svg
+                  class="wow"
+                  width="16"
+                  height="15"
+                  viewBox="0 0 16 15"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15.4174 0L0.417419 15L0.417419 -6.55671e-07L15.4174 0Z"
+                    fill="#D9D9D9"
+                  />
+                </svg>
+                <p>Что будет если удалить свой профиль?</p>
+              </div>
+              <div class="request">
+                <p>
+                  Удаление аккаунта приведет к безвозвратной утрате всех ваших
+                  данных!
+                </p>
+              </div>
             </div>
+            <div class="response">
+              <div class="text">
+                <svg
+                  class="wow"
+                  width="16"
+                  height="15"
+                  viewBox="0 0 16 15"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15.4174 0L0.417419 15L0.417419 -6.55671e-07L15.4174 0Z"
+                    fill="#D9D9D9"
+                  />
+                </svg>
+                <p>
+                  Как сменить профиль с Работодатель на Исполнитель или
+                  наоборот?
+                </p>
+              </div>
+              <div class="request">
+                <p>
+                  Наши услуги включают размещение вакансий, поиск и подбор
+                  IT-специалистов, проведение технических собеседований и оценку
+                  навыков, чтобы убедиться, что каждый кандидат соответствует
+                  требованиям и ожиданиям наших клиентов. Мы тщательно
+                  анализируем рынок труда и работаем на
+                </p>
+              </div>
+            </div>
+            <div class="response">
+              <div class="text">
+                <svg
+                  class="wow"
+                  width="16"
+                  height="15"
+                  viewBox="0 0 16 15"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15.4174 0L0.417419 15L0.417419 -6.55671e-07L15.4174 0Z"
+                    fill="#D9D9D9"
+                  />
+                </svg>
+                <p>
+                  Как сменить профиль с Работодатель на Исполнитель или
+                  наоборот?
+                </p>
+              </div>
+              <div class="request">
+                <p>
+                  Наши услуги включают размещение вакансий, поиск и подбор
+                  IT-специалистов, проведение технических собеседований и оценку
+                  навыков, чтобы убедиться, что каждый кандидат соответствует
+                  требованиям и ожиданиям наших клиентов. Мы тщательно
+                  анализируем рынок труда и работаем на
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </main>
 
-        </div>
-</main>
-
-<%- include('./footer.ejs') %>
-<script src="/js/header.js"></script>
-<script src="/js/addNew.js"></script>
-</body>
+    <%- include('./footer.ejs') %>
+    <script src="/js/header.js"></script>
+    <script src="/js/addNew.js"></script>
+  </body>
 </html>

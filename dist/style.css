@@ -1446,7 +1446,7 @@ p.error {
   color: red;
 }
 .clickShow {
-  width: 30%;
+  max-width: 30%;
   overflow: hidden;
 }
 .toGoogle {

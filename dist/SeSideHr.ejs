@@ -9,7 +9,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon">
     <meta name="author" content="WebHunt">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/style.css">
     <script src="/js/jquery.js"></script>
     <title><%=title%></title>
@@ -188,8 +187,9 @@
 </svg>
 </div>
 <div class="buttonsElements buttonsElementsProfile buttonsElementsProfileDesc">
-                            <!-- addingFavorite - класс добавленого в избранное -->
-                            <button class="Infavorites InfavoritesVacancy <%-myFavorites.some(elem => elem.id ===  element.id)?'addingFavorite':''%>" data-id="<%-element.id%>">В избранное</button>
+                            <%if(myFavorites) {%>
+                                <button class="Infavorites InfavoritesVacancy <%-myFavorites.some(elem => elem.id ===  element.id)?'addingFavorite':''%>" data-id="<%-element.id%>">В избранное</button>
+                                <%}%>
                             <button class="Respond"><a href="/vacancia/<%-element.id%>">Откликнуться</a></button>                        
                         </div>
                         </div>
@@ -259,8 +259,10 @@
                           
                         </div>
                         <div class="buttonsElements buttonsElementsProfile">
-                            <!-- addingFavorite - класс добавленого в избранное -->
-                            <button class="Infavorites InfavoritesVacancy  <%-myFavorites.some(elem => elem.id ===  element.id)?'addingFavorite':''%>" data-id="<%-element.id%>" style="padding: 10px 17px;"  data-id="<%-element.id%>">В избранное</button>
+                            <!-- addingFavorite - класс добавленого в избранное -->\
+                               <%if(myFavorites) {%>
+                                <button class="Infavorites InfavoritesVacancy  <%-myFavorites.some(elem => elem.id ===  element.id)?'addingFavorite':''%>" data-id="<%-element.id%>" style="padding: 10px 17px;"  data-id="<%-element.id%>">В избранное</button>
+                                <%}%>
                             <button class="Respond" style="padding: 10px 17px;"><a href="/vacancia/<%-element.id%>">Откликнуться</a></button>                        
                         </div>
                                 </div>

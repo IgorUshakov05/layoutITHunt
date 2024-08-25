@@ -23,15 +23,8 @@ async function createCompany({
     });
     if (findFirst) return { success: false, error: "Company already exists" };
 
-    const now = await Temporal.Now.plainDateTimeISO();
-    const nextPayDay = await now
-      .add({ months: 1 })
-      .toPlainDate()
-      .toLocaleString("ru-RU", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-      });
+    const now = await Temporal.Now.plainDateISO();
+    const nextPayDay = await now.add({ months: 1 });
     const company = await new CompanySchema({
       id: v4(),
       title,
