@@ -17,8 +17,7 @@ async function createVacancy({
 
   // Использование PlainDateTime для работы с датой и временем
   const now = Temporal.Now.plainDateTimeISO();
-  const addDate = now.add({ days: 30 });
-
+  const add30 = now.add({days: 30});
   const newVacancy = new Vacancy({
     id: v4(),
     userID,
@@ -29,7 +28,7 @@ async function createVacancy({
     price,
     description,
     responses,
-    dateAndTimeCreated: addDate.toString(), // Сохраняем дату как строку
+    dateRemove: add30.toString(), // Сохраняем дату как строку
   });
 
   try {

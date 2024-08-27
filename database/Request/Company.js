@@ -57,6 +57,16 @@ async function createCompany({
   }
 }
 
+let findCourtOfUser = async (userID) => {
+  try {
+    const court = await CompanySchema.findOne({ creatorID: userID, isVarefy:false }).select("avatar title description");
+    return { success: true, court };
+  } catch (error) {
+    console.error("Ошибка при поиске подписки:", error);
+    return { success: false, message: "Произошла ошибка, попробуйте позже" };
+  }
+};
+
 let freezCompany = async (userID) => {
   try {
     const premium = await CompanySchema.findOneAndUpdate(
@@ -176,6 +186,7 @@ module.exports = {
   searchCompanyForVacancy,
   findCompanyOfINN,
   findCompanyOfUser,
+  findCourtOfUser,
   findCompanyOfUserAndINN,
   findCompanyOfINNorTitle,
   updateCompany,

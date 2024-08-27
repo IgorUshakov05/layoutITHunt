@@ -6,6 +6,13 @@ const vacancyIDSchema = new mongoose.Schema({
     required: true 
   },
 });
+const fastWorkIDSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    unique: false,
+    required: true,
+  },
+});
 const schema = new mongoose.Schema({
   userID: {
     type: String,
@@ -13,5 +20,6 @@ const schema = new mongoose.Schema({
     unique: true,
   },
   vacancyID: [vacancyIDSchema],
+  fastWorkID: [fastWorkIDSchema],
 });
 module.exports = mongoose.model("FavoriteVacancy", schema);

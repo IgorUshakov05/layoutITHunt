@@ -38,7 +38,7 @@ var agreement = vacancy.price.agreement;
                 <div class="logoCompany">
                     <img src="<%- from.avatar %>" width="41" height="41" alt="Логотип компании">
                 </div>
-                <p><%-from.name || from.title%> <%-from.surname%></p>
+                <h3><%-from.name || from.title%> <%-from.surname%></h3>
             </div>
 <p class="descriptionCompanyInVacansy"><%-from.description%></p>
 <div class="showAllVacansy">
@@ -124,7 +124,7 @@ var agreement = vacancy.price.agreement;
                     <%});%>
                 </div>
             <div class="buttonsVacant">
-                <a href="/vacancies">Назад</a>
+                <a href="/vacancies">Вакансии</a>
                 <%if(isLoggedIn) {%>
                     <button id="addToFavorites" class="<%-isFav?'Infavorites addingFavorite': 'Infavorites'%>">В избранное</button>
                 <%} else {%>

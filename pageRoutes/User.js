@@ -11,6 +11,7 @@ const {
 } = require("../database/Request/FavoriteVacancy");
 const { findPremium } = require("../database/Request/setPremium");
 const { findCompanyOfUser } = require("../database/Request/Company");
+const { searchFastWorkByUserId } = require("../database/Request/FastWork");
 router.get("/:id", isAuthNotRequire, async (req, res, next) => {
   try {
     let access = req.cookies.access;
@@ -34,9 +35,9 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       if (decodeAccess.userID === id) {
         if (result.role === "worker") {
           console.log("Мой профиль");
-          let myFavoritesVacancy = await getMyFavorites(result.id);
+          let myFavoritesPubloc = await getMyFavorites(result.id);
           console.log("Мой профиль");
-          console.log(myFavoritesVacancy);
+          console.log(myFavoritesPubloc.data[1]);
           return res.render("ImProfessional.ejs", {
             isLoggedIn: decodeAccess,
             id: decodeAccess.userID,
@@ -54,15 +55,16 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
             favorite: favorites,
             education: result.education,
             avatar: result.avatar,
-            myFV: myFavoritesVacancy.data,
+            myFV: myFavoritesPubloc.data,
             expiriens: result.expiriens,
             premium,
             description: result.description,
           });
         }
         let vacancys = await searchVacancyByUserId(result.id);
+        let fastWork = await searchFastWorkByUserId(result.id);
+        console.log(fastWork);
         let findCompany = await findCompanyOfUser(decodeAccess.userID);
-        console.log(findCompany);
         if (!findCompany.success) findCompany = { data: null };
         return res.render("ImHR.ejs", {
           isLoggedIn: decodeAccess,
@@ -78,6 +80,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
           premium,
           company: findCompany.data,
           vacancys: vacancys.data,
+          fastWork: fastWork.data,
           favorite: favorites,
           contacts: result.contacts,
           portfolios: result.portfolio,
@@ -112,6 +115,8 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       });
     } else {
       let vacancys = await searchVacancyByUserId(result.id);
+      let fastWork = await searchFastWorkByUserId(result.id);
+      console.log(fastWork);
       let findAllFV = await findFAllFavoriteOfId(decodeAccess.userID);
       console.log(findAllFV);
       if (!findAllFV.data) {
@@ -135,6 +140,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
         portfolios: result.portfolio,
         company: findCompany.data,
         vacancys: vacancys.data,
+        fastWork: fastWork.data,
         im: decodeAccess.userROLE || null,
         contacts: result.contacts,
         status: result.status,

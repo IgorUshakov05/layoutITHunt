@@ -7,13 +7,6 @@ const skillsSchema = new mongoose.Schema({
   },
 });
 
-const typeWorkSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-});
-
 const priceSchema = new mongoose.Schema({
   minPrice: {
     type: Number,
@@ -42,10 +35,10 @@ const responseSchema = new mongoose.Schema({
     type: Boolean,
     required: false,
     default: false,
-  }
+  },
 });
 
-const vacancySchema = new mongoose.Schema({
+const fastWorkSchema = new mongoose.Schema({
   id: {
     type: String,
     required: true,
@@ -59,9 +52,8 @@ const vacancySchema = new mongoose.Schema({
     required: false,
   },
   skills: [skillsSchema],
-  typeWork: [typeWorkSchema],
-  experience: {
-    type: String,
+  level: {
+    type: Number,
     required: true,
   },
   price: priceSchema,
@@ -76,4 +68,4 @@ const vacancySchema = new mongoose.Schema({
   responses: [responseSchema],
 });
 
-module.exports = mongoose.model("Vacancy", vacancySchema);
+module.exports = mongoose.model("FastWork", fastWorkSchema);

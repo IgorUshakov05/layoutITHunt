@@ -291,12 +291,14 @@ const makeOneVisibleLastStage = () => {
 $("#nextStageTwo").on("click", () => {
   oneStageHideAndShoTwoStage();
   $(".oneStage").height("0");
-  $("#progress").attr("value", "30");
+  $("#progress").attr("value", "60");
   $(".twoStage").height("fit-content");
 });
 
 //Первый экран - на первый экран
 $("#toOneStage").on("click", () => {
+  $(".oneStage").height("fit-content");
+  $("#progress").attr("value", "30");
   document.getElementById("oneStage").style.display = "block";
   document.getElementById("twoStage").style.display = "none";
 });
@@ -389,6 +391,7 @@ document
       console.log(data);
       console.log("Отрисовка");
       $(".threeStage").height("0");
+  progress.value = 100;
       $("#progress").attr("value", "100");
       $(".lineCreateLevel").addClass("filalyProgress");
       $(".finalyStage").height("fit-content");

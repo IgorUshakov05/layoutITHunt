@@ -123,7 +123,7 @@ router.post(
       },
       confirmation: {
         type: "redirect",
-        return_url: `${process.env.BASE_URL}/${userID}`,
+        return_url: `${process.env.BASE_URL}/court`,
       },
       capture: true,
       description: `Оплата ${countStaffs} количества сотрудников. СкидкаА: ${

@@ -42,6 +42,7 @@ const deleteAccount = require("./pageRoutes/deleteAccount");
 const city = require('./api/city/routes')
 const payment = require('./api/payment/routes')
 const createVacancyPOST = require('./api/vakancy/routes')
+const createFastWorkPOST = require("./api/fastWork/routes");
 const paymentHook = require('./api/payment/routerWebHooks')
 const deleteAccountComplite = require("./pageRoutes/deleteAccountComplite");
 const specialists = require("./pageRoutes/specialist");
@@ -89,6 +90,7 @@ app.use(
   education,
   favorite,
   payment,
+  createFastWorkPOST,
   setSetting,
   skills,
   companyRoute,

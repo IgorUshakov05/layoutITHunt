@@ -1,8 +1,15 @@
-const {Router} = require('express')
-const router = Router()
+const { Router } = require("express");
+const router = Router();
+const { decodeAccessToken } = require("../api/tokens/accessToken");
 
-router.get('/create-fast-work', (req,res) => {
-    res.render('createFastWork', {isLoggedIn: false, username: ''})
-})
+router.get("/create-fast-work", async (req, res) => {
+  let access = await req.cookies.access;
+  let user = decodeAccessToken(access);
+  res.render("createFastWork", {
+    isLoggedIn: false,
+    id: user.userID,
+    username: "",
+  });
+});
 
-module.exports = router
+module.exports = router;

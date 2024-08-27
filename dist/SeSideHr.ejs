@@ -135,15 +135,6 @@
             <%}%>
             </div>   
         </div>
-        <% let fastWork = [
-            // {title: "Администратор баз данных",time:'12 дней назад',price: 234112,clicks: 14, proglosh:1, stack: ["HTML", "CSS", "JS", "Vue", "Angular"], place: "Арзамас", description:"loreawdia iwda iwdiaiwhdglaiwhdlg iahjw djlahwdg u jahwiuhajlw f;il haw;odyg hauwdkgkauwdgagwdoialhwbdia hwduoahwgd iahw ydi hawg 7d8o jagkwvduyagcwvdu gwadj afwgdijlkfh 9yoihfjk lyhk lg9oawyd a8wyd  a'wd hjaw0' 'p aowdljawdui",hard: 2},
-            // {title: "FrontEnd",time:'12 дней назад',price: 5634,clicks: 55, proglosh: 7, stack: ["CSS", "JS", "Vue", "Angular"], place: "Удаленно", description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus magnam dolore porro est quos voluptatibus voluptatum placeat alias sunt dignissimos commodi voluptas quo et consectetur eligendi eos repudiandae architecto, iusto ducimus vel? Hic animi saepe veniam voluptatibus? Ducimus, aliquam. Harum cum suscipit quidem facilis soluta quod ipsa ducimus voluptatum, dignissimos vero natus quas labore voluptates molestiae, ullam dolor illum sint blanditiis libero tenetur voluptas officiis et perferendis. Cupiditate accusamus possimus ipsam perferendis deleniti, nostrum quos debitis deserunt, aliquid eligendi obcaecati eveniet iste, iusto corporis officia recusandae velit a facilis. Suscipit neque quisquam hic placeat eos doloribus quasi fugit, laborum voluptas nostrum necessitatibus odit magni doloremque praesentium, autem incidunt aspernatur tempora iure optio modi quia libero? Illo, non! Eos exercitationem maxime facilis similique debitis quidem quae quos quia, odit ullam iste rem blanditiis veniam sint dolorem fugit provident mollitia maiores voluptatibus ipsam ad tempora delectus autem sequi! Repellat quas eius alias iure quisquam veritatis? Accusantium iure assumenda fuga possimus dolorem laborum veniam labore sapiente exercitationem autem expedita natus, deserunt accusamus a eveniet molestias at? Nihil, asperiores reprehenderit ad repellendus harum non adipisci quidem sint voluptate sunt fugit vero? Porro culpa, repellendus tempora non laboriosam quae ad, tenetur adipisci nemo assumenda reiciendis provident! Dolorem provident tempora repellat ab perferendis, nobis vel? Qui neque maiores eum perspiciatis id animi earum, quis sint consequuntur quidem mollitia velit nam praesentium ipsam maxime natus? Dolore perferendis eaque nesciunt quaerat vero libero numquam tenetur debitis. Laudantium repellendus modi corrupti cumque quibusdam tempora ut ab tempore optio distinctio labore est ipsa culpa porro error dolor, repudiandae quo totam eos rem debitis quae. Quam ipsum, neque sapiente provident hic delectus doloribus necessitatibus, earum velit, esse eum debitis modi possimus aperiam est tenetur eaque harum porro eveniet. Velit alias facilis quis ut ipsa quas eligendi blanditiis, exercitationem ducimus voluptatem repellat?",hard: 5},
-            // {title: "Веб-дизайнер",time:'5 дней назад',price: 1234,clicks: 123, proglosh: 4, stack: ["Figma", "CSS", "JS", "Vue", "Angular"], place: "Абакан Чехова 25 1", description:"loreawdia iwda iwdiaiwhdglaiwhdlg iahjw djlahwdg u jahwiuhajlw f;il haw;odyg hauwdkgkauwdgagwdoialhwbdia hwduoahwgd iahw ydi hawg 7d8o jagkwvduyagcwvdu gwadj afwgdijlkfh 9yoihfjk lyhk lg9oawyd a8wyd  a'wd hjaw0' 'p aowdljawdui", hard: 4}
-       
-        ] %>
-
-        
-        
         
         <div class="MoreInfo bottoMargin">
             <% if(vacancys.length) { %>
@@ -229,7 +220,7 @@
                         
                         <time>
   <%- (() => {
-    const d = new Date(element.dateAndTimeCreated) - new Date();
+    const d = new Date(element.dateRemove) - new Date();
     const days = Math.floor(d / (1000 * 60 * 60 * 24));
     const hours = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
@@ -259,9 +250,9 @@
                           
                         </div>
                         <div class="buttonsElements buttonsElementsProfile">
-                            <!-- addingFavorite - класс добавленого в избранное -->\
+                            <!-- addingFavorite - класс добавленого в избранное -->
                                <%if(myFavorites) {%>
-                                <button class="Infavorites InfavoritesVacancy  <%-myFavorites.some(elem => elem.id ===  element.id)?'addingFavorite':''%>" data-id="<%-element.id%>" style="padding: 10px 17px;"  data-id="<%-element.id%>">В избранное</button>
+                                <button class="Infavorites InfavoritesVacancy  <%-myFavorites.some(elem => elem.id ===  element.id)?'addingFavorite':''%>" data-id="<%-element.id%>" data-id="<%-element.id%>">В избранное</button>
                                 <%}%>
                             <button class="Respond" style="padding: 10px 17px;"><a href="/vacancia/<%-element.id%>">Откликнуться</a></button>                        
                         </div>
@@ -279,29 +270,53 @@
                 <div class="fastBox">
                     <% fastWork.forEach(element => { %>
                     <div class="myVac">
-                        <div class="topFlex">
-                        <div class="clickShow"><p class="titleVacansyProf"><%=element.title %><span class="hardOrNo" style="font-weight: 300;font-size: 15px;color: <%=element.hard <= 2 ? '#A4A4A4' : (element.hard <= 4 ? '#000000' : '#4900E3') %>;"><%=element.hard %></span></p><div class="priceInMyVac"><p style="font-family: Ubuntu;"><%= (element.price).toLocaleString("no-NO") %></p><span class="p">Ꝑ</span></div></div>
+                    <div class="topFlex">
+                        <div class="clickShow"><p class="titleVacansyProf"><%-element.special %><span class="hardOrNo" style="font-weight: 300;font-size: 15px;color: <%=element.level <= 2 ? '#A4A4A4' : (element.level <= 4 ? '#000000' : '#4900E3') %>"><%= element.level %></span></p>
+                          <div class="priceInMyVac">
+                    <%if(element.price.minPrice) {%>
+                    <p style="font-family: Ubuntu;"><%if(!element.price.maxPrice) {%>
+                        от
+                        <%}%>
+                        <%= (element.price.minPrice).toLocaleString("no-NO") %></p>
+                    <span class="p">Ꝑ </span>
+                        <%}%> 
+                        <%if(element.price.minPrice && element.price.maxPrice ) {%>
+                            -
+                        <%}%>
+                          <%if(element.price.maxPrice) {%>
+                   <p style="font-family: Ubuntu;"><%if(!element.price.minPrice) {%>
+                        до
+                        <%}%> <%= (element.price.maxPrice).toLocaleString("no-NO") %></p>
+                    <span class="p">Ꝑ </span>
+                        <%}%> 
+                        <%if(element.price.agreement) {%>
+                            <span>Договорная</span>
+                            <%}%>
+                </div>
+                                    </div>
                         <div class="inviteAndClick mobNone">
-                            <a href=""><span class="countClick"><%=element.clicks %> откликов</span></a>
+                              <a href=""><span class="countClick"><%= element.responses.length %> откликов</span></a>
+                        </div>
+                           <div class="buttonsElements buttonsElementsProfile mobNone">
+                               <%if(myFavorites) {%>
+                                <button class="Infavorites InfavoritesVacancy  <%-myFavorites.some(elem => elem.id ===  element.id)?'addingFavorite':''%>" data-id="<%-element.id%>"  data-id="<%-element.id%>">В избранное</button>
+                                <%}%>
+                            <button class="Respond" style="padding: 10px 17px;"><a href="/fast-work/<%-element.id%>">Откликнуться</a></button>                        
                         </div>
                         <div class="arrow">
                             <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M13 8L7 2L1 8" stroke="#5412E0" stroke-width="2"/>
 </svg>
 </div>
-<div class="buttonsElements buttonsElementsProfile buttonsElementsProfileDesc">
-                            <!-- addingFavorite - класс добавленого в избранное -->
-                            <button class="Infavorites"  data-id="<%-element.id%>">В избранное</button>
-                            <button class="Respond"><a href="/vacancia">Откликнуться</a></button>                        
-                        </div>
                         </div>
                         <div class="descriptionVacansyProfile">
-                        <p><%=element.description %></p>
+                                               <pre class="descriptionVacansyProfilePRE"><%- element.description.replace('<script>', ' ') %></pre>
+
                         <div class="stackForJob">
                 <ul class="listStacks">
-                    <% (element.stack).forEach(element => { %>
+                    <% (element.skills).forEach(element => { %>
                     <li class="abilityItem abilityItemProf">
-                        <h5 class="ability"><%= element %></h5>
+                        <h5 class="ability"><%= element.title %></h5>
                     </li>
                     <% }) %>
                 </ul>
@@ -312,7 +327,28 @@
                         <circle cx="7.5" cy="7.5" r="7.25" stroke="black" stroke-width="0.5"/>
                         <path d="M7.5 1.40747V7.50006H11.8333" stroke="black" stroke-width="0.5"/>
                         </svg>
-                        <time>12 дней</time></div>
+                                  <time>
+  <%- (() => {
+    const d = new Date(element.dateRemove) - new Date();
+    const days = Math.floor(d / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
+     let result = '';
+
+    if (days > 0) {
+      return result += `${days} дней `;
+    }
+    if (hours > 0) {
+      return result += `${hours} часов `;
+    }
+    if (minutes > 0) {
+      return result += `${minutes} минут`;
+    }
+
+    return result.trim() || '0 минут';
+    
+  })() %>
+</time></div>
                             </div>
                          
                         </div>
@@ -322,8 +358,10 @@
                         </div>
                                                 <div class="buttonsElements buttonsElementsProfile">
                             <!-- addingFavorite - класс добавленого в избранное -->
-                            <button class="Infavorites" style="padding: 10px 17px;"  data-id="<%-element.id%>">В избранное</button>
-                            <button class="Respond" style="padding: 10px 17px;"><a href="/vacancia">Откликнуться</a></button>                        
+                            <%if(myFavorites) {%>
+                                <button class="Infavorites InfavoritesVacancy  <%-myFavorites.some(elem => elem.id ===  element.id)?'addingFavorite':''%>" data-id="<%-element.id%>" data-id="<%-element.id%>">В избранное</button>
+                                <%}%>
+                            <button class="Respond" style="padding: 10px 17px;"><a href="/fast-work/<%-element.id%>">Откликнуться</a></button>                        
                         </div>
                                 </div>
                     </div>

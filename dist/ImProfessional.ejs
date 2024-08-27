@@ -726,11 +726,11 @@ function escapeHtml(unsafe) {
                         </div>
                         <div class="exucation" style="margin-bottom: 20px; z-index: 1; position: relative;">
                         <p class="myVacancyText">Избранные публикации</p>
-                        <%if(myFV.length) {%>
+                        <%if(myFV[0].length) {%>
                         <div class="eduSchool onClick">
                             <div class="countAndOther">
                                 <p class="educationalInstitution">Вакансии</p>
-                                <p class="onclickCount"><%-myFV.length%> <%-myFV.length<4?'отклика':'откликов'%></p>
+                                <p class="onclickCount"><%-myFV[0].length%> <%-myFV[0].length<4?'отклика':'откликов'%></p>
                             </div>
                             <div class="expand rot"><svg class="rotatePls" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M0.920898 1L6.93536 7L12.9498 1" stroke="#5412E0" stroke-width="2"/>
@@ -739,7 +739,7 @@ function escapeHtml(unsafe) {
 <ul class="myListOnClick">
                                
 
-<%myFV.forEach(item => { %>
+<%myFV[0].forEach(item => { %>
     <li>
                                     <a href="/vacancia/<%-item.id%>" class="vacansyaLink">
                                         <div class="countAndOther VacansyItemFav">
@@ -782,10 +782,11 @@ function escapeHtml(unsafe) {
                             </ul>
                             </div>
                             <%}%>
+                            <%if(myFV[1]) {%>
                             <div class="eduSchool onClick" style="z-index:3;">
-                            <div class="countAndOther">
-                                <p class="educationalInstitution">Фаст-Ворк</p>
-                                <p class="onclickCount">200 откликов</p>
+                       <div class="countAndOther">
+                                <p class="educationalInstitution">Фаст-Ворки</p>
+                                <p class="onclickCount"><%-myFV[1].length%> <%-myFV[1].length<4?'отклика':'откликов'%></p>
                             </div>
                             <div class="expand rot"><svg class="rotatePls" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M0.920898 1L6.93536 7L12.9498 1" stroke="#5412E0" stroke-width="2"/>
@@ -794,91 +795,49 @@ function escapeHtml(unsafe) {
 <ul class="myListOnClick">
                                
 
-
+<%myFV[1].forEach(item => { %>
     <li>
-                                    <a href="vacaawd" class="vacansyaLink">
+                                    <a href="/fast-work/<%-item.id%>" class="vacansyaLink">
                                         <div class="countAndOther VacansyItemFav">
-                                            <p class="educationalInstitution">Front End разработчик</p>
+                                            <p class="educationalInstitution"><%-item.special%></p>
                                             <p class="onclickCount mt-5">MTC</p>
                                         </div>
-                                        <h2><span class="educationalInstitution onclickCount"><%= (100000).toLocaleString("no-NO") %></span><span class="p f-size">Ꝑ</span></h2>
+                                        <h2 style="font-family: Ubuntu;">
+    <% if (item.price.minPrice) { %>
+        <% if (!item.price.maxPrice) { %>
+            <span class="agreement">от</span> 
+        <% } %>
+        <span class="educationalInstitution onclickCount">
+            <%= (item.price.minPrice).toLocaleString("no-NO") %>
+        </span>
+        <span class="p f-size">Ꝑ</span>
+    <% } %>
+    
+    <% if (item.price.minPrice && item.price.maxPrice) { %>
+        -
+    <% } %>
 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="vacaawd" class="vacansyaLink">
-                                        <div class="countAndOther VacansyItemFav">
-                                            <p class="educationalInstitution">Front End разработчик</p>
-                                            <p class="onclickCount mt-5">MTC</p>
-                                        </div>
-                                        <h2><span class="educationalInstitution onclickCount"><%= (100000).toLocaleString("no-NO") %></span><span class="p f-size">Ꝑ</span></h2>
+    <% if (item.price.maxPrice) { %>
+        <% if (!item.price.minPrice) { %>
+            <span class="agreement">до</span> 
+        <% } %>
+        <span class="educationalInstitution onclickCount">
+            <%= (item.price.maxPrice).toLocaleString("no-NO") %>
+        </span>
+        <span class="p f-size">Ꝑ</span>
+    <% } %>
 
-                                    </a>
-                                </li>  
-                                <li>
-                                    <a href="vacaawd" class="vacansyaLink">
-                                        <div class="countAndOther VacansyItemFav">
-                                            <p class="educationalInstitution">Front End разработчик</p>
-                                            <p class="onclickCount mt-5">MTC</p>
-                                        </div>
-                                        <h2><span class="educationalInstitution onclickCount"><%= (100000).toLocaleString("no-NO") %></span><span class="p f-size">Ꝑ</span></h2>
-
-                                    </a>
-                                </li>  
-                                <li>
-                                    <a href="vacaawd" class="vacansyaLink">
-                                        <div class="countAndOther VacansyItemFav">
-                                            <p class="educationalInstitution">Front End разработчик</p>
-                                            <p class="onclickCount mt-5">MTC</p>
-                                        </div>
-                                        <h2><span class="educationalInstitution onclickCount"><%= (100000).toLocaleString("no-NO") %></span><span class="p f-size">Ꝑ</span></h2>
-
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="vacaawd" class="vacansyaLink">
-                                        <div class="countAndOther VacansyItemFav">
-                                            <p class="educationalInstitution">Front End разработчик</p>
-                                            <p class="onclickCount mt-5">MTC</p>
-                                        </div>
-                                        <h2><span class="educationalInstitution onclickCount"><%= (100000).toLocaleString("no-NO") %></span><span class="p f-size">Ꝑ</span></h2>
-
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="vacaawd" class="vacansyaLink">
-                                        <div class="countAndOther VacansyItemFav">
-                                            <p class="educationalInstitution">Front End разработчик</p>
-                                            <p class="onclickCount mt-5">MTC</p>
-                                        </div>
-                                        <h2><span class="educationalInstitution onclickCount"><%= (100000).toLocaleString("no-NO") %></span><span class="p f-size">Ꝑ</span></h2>
+    <% if (item.price.agreement &&(!item.price.maxPrice && !item.price.minPrice) ) { %>
+        <span class="agreement">Договорная</span>
+    <% } %>
+</h2>
 
                                     </a>
                                 </li>  
-                                <li>
-                                    <a href="vacaawd" class="vacansyaLink">
-                                        <div class="countAndOther VacansyItemFav">
-                                            <p class="educationalInstitution">Front End разработчик</p>
-                                            <p class="onclickCount mt-5">MTC</p>
-                                        </div>
-                                        <h2><span class="educationalInstitution onclickCount"><%= (100000).toLocaleString("no-NO") %></span><span class="p f-size">Ꝑ</span></h2>
-
-                                    </a>
-                                </li>  
-                                <li>
-                                    <a href="vacaawd" class="vacansyaLink">
-                                        <div class="countAndOther VacansyItemFav">
-                                            <p class="educationalInstitution">Front End разработчик</p>
-                                            <p class="onclickCount mt-5">MTC</p>
-                                        </div>
-                                        <h2><span class="educationalInstitution onclickCount"><%= (100000).toLocaleString("no-NO") %></span><span class="p f-size">Ꝑ</span></h2>
-
-                                    </a>
-                                </li>
-
+<%});%>
                             </ul>
                             </div>
+                            <%}%>
                         </div>
                     </div>
 

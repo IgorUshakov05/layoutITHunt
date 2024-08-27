@@ -3229,6 +3229,7 @@ input[type="checkbox"] {
 
 .elemExpiriens > input {
   width: 0;
+  display: none;
 }
 
 .elemExpiriens > input:checked + label {
@@ -9557,7 +9558,9 @@ label.elemExpiriensLabel {
 .iconVariant {
   display: flex;
 }
-
+.fastWorkSelect > div > label{
+  font-family: Ubuntu;
+}
 #createEvent,
 #updateEvent {
   font-weight: 500;

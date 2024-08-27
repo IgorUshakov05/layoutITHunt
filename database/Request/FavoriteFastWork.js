@@ -1,10 +1,9 @@
-const FavoriteVacancySchema = require("../Schema/FavoriteVacancyOfUserSchema");
-const VacancySchema = require("../Schema/Vakancy");
-const FastWorkSchema = require("../Schema/FastWork")
+const FavoriteSchema = require("../Schema/FavoriteVacancyOfUserSchema");
+const FastWorkSchema = require("../Schema/FastWork");
 
-async function isFavoriteVacancy(userID, vacancyID) {
+async function isFavoriteFastWork(userID, vacancyID) {
   try {
-    let electedVacancyAdd = await FavoriteVacancySchema.findOne({
+    let electedVacancyAdd = await FavoriteSchema.findOne({
       userID,
       "vacancyID.id": vacancyID,
     });
@@ -16,28 +15,29 @@ async function isFavoriteVacancy(userID, vacancyID) {
   }
 }
 
-async function electedVacancy(userID, vacancyID) {
+async function electedFastWork(userID, fastWorkID) {
   try {
-    let electedVacancyAdd = await FavoriteVacancySchema.findOneAndUpdate(
+    let electedVacancyAdd = await FavoriteSchema.findOneAndUpdate(
       { userID },
       { $setOnInsert: { userID, fastWorkID: [], vacancyID: [] } },
       { new: true, upsert: true }
     );
-
-    let findFavorite = electedVacancyAdd.vacancyID.find(
-      (item) => item.id === vacancyID
+    // Проверить, существует ли уже fastWorkID
+    let findFavorite = electedVacancyAdd.fastWorkID.find(
+      (item) => item.id === fastWorkID
     );
 
+    // Если не существует, добавить в список, иначе удалить
     if (!findFavorite) {
-      await FavoriteVacancySchema.updateOne(
+      await FavoriteSchema.updateOne(
         { userID },
-        { $push: { vacancyID: { id: vacancyID } } }
+        { $push: { fastWorkID: { id: fastWorkID } } }
       );
       return { success: true, isNew: true };
     } else {
-      await FavoriteVacancySchema.updateOne(
+      await FavoriteSchema.updateOne(
         { userID },
-        { $pull: { vacancyID: { id: vacancyID } } }
+        { $pull: { fastWorkID: { id: fastWorkID } } }
       );
       return { success: true, isNew: false };
     }
@@ -52,7 +52,7 @@ async function findFAllFavoriteOfId(userID) {
     console.log(userID);
     if (!userID)
       return { success: false, error: "User ID is required", data: [] };
-    let electedVacancyAdd = await FavoriteVacancySchema.findOne({ userID });
+    let electedVacancyAdd = await FavoriteSchema.findOne({ userID });
     return { success: true, data: electedVacancyAdd };
   } catch (err) {
     console.log(err);
@@ -62,7 +62,7 @@ async function findFAllFavoriteOfId(userID) {
 
 async function getMyFavorites(userID) {
   try {
-    let electedVacancyAdd = await FavoriteVacancySchema.findOne({ userID });
+    let electedVacancyAdd = await FastWorkSchema.findOne({ userID });
     console.log(electedVacancyAdd);
     if (!electedVacancyAdd)
       return { success: false, error: "User ID is required", data: [] };
@@ -71,20 +71,15 @@ async function getMyFavorites(userID) {
       { id: { $in: vacancies } },
       { special: 1, id: 1, price: 1, _id: 0 }
     );
-    let fastWork = electedVacancyAdd.fastWorkID.map((item) => item.id);
-    let fastWorkData = await FastWorkSchema.find(
-      { id: { $in: fastWork } },
-      { special: 1, id: 1, price: 1, _id: 0 }
-    );
-    return { success: true, data: [vacanciesData, fastWorkData] };
+    return { success: true, data: vacanciesData };
   } catch (e) {
     return { success: false, error: err.message, data: [] };
   }
 }
 
 module.exports = {
-  isFavoriteVacancy,
-  electedVacancy,
+  isFavoriteFastWork,
+  electedFastWork,
   findFAllFavoriteOfId,
   getMyFavorites,
 };
