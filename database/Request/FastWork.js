@@ -48,6 +48,7 @@ async function createFastWork({
 async function searchFastWorkById(id) {
   try {
     const fastWork = await FastWork.findOne({ id });
+    console.log(fastWork);
     if (!fastWork) {
       return { success: false, message: "ФастВорк с таким id не найдено" };
     }

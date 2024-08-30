@@ -113,16 +113,17 @@ router.post("/favorite-fastWork", async (req, res) => {
     if (!access) return res.redirect("/login");
     const decodeAccess = await decodeAccessToken(access);
     if (!decodeAccess) return res.redirect("/login");
-    let fastWorkID = req.body.fastWorkId;
+    let fastWorkID = req.body.id;
+    console.log(fastWorkID);
     if (!fastWorkID)
       return res
         .status(400)
-        .json({ message: "Вакансия не найдена", result: false });
+        .json({ message: "Фаст Ворк не найден", result: false });
     let findFastWorkInDatabase = await searchFastWorkById(fastWorkID);
     if (!findFastWorkInDatabase.success)
       return res
         .status(400)
-        .json({ message: "Вакансия не найдена", result: false });
+        .json({ message: "Фаст Ворк не найден", result: false });
     let addFastWorkOrDelete = await electedFastWork(
       decodeAccess.userID,
       fastWorkID

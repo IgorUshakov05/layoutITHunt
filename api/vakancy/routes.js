@@ -129,7 +129,7 @@ router.post("/favorite-vacancy", async (req, res) => {
     if (!access) return res.redirect("/login");
     const decodeAccess = await decodeAccessToken(access);
     if (!decodeAccess) return res.redirect("/login");
-    let vacancyID = req.body.vacancyId;
+    let vacancyID = req.body.id;
     if (!vacancyID)
       return res.status(400).json({ message: "Вакансия не найдена",result: false });
     let findVacancyInDatabase = await searchVacancyById(vacancyID);

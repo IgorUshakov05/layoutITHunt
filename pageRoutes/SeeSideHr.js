@@ -1,4 +1,4 @@
-const {Router} = require('express')
+sconst {Router} = require('express')
 const router = Router()
 const {decodeAccessToken} = require('../api/tokens/accessToken')
 const {isAuthNotRequire} = require('../api/middlewares/authNotRequire')

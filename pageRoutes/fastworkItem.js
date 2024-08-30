@@ -16,9 +16,9 @@ router.get("/fast-work/:id", isAuthNotRequire, async (req, res) => {
   let findFromUser = await searchUserId(findFastWork.data.userID);
   let company = await searchCompanyForVacancy(findFromUser.id);
   console.log(findFromUser || company);
-  let isFavoriteVacancyVar = false;
+  let isFavoriteFastWorkVar = false;
   if (findFromUser && user) {
-    isFavoriteVacancyVar = await isFavoriteFastWork(user.userID, req.params.id);
+    isFavoriteFastWorkVar = await isFavoriteFastWork(user.userID, req.params.id);
   }
   console.log(user);
   res.render("fast-workItem", {
@@ -27,7 +27,7 @@ router.get("/fast-work/:id", isAuthNotRequire, async (req, res) => {
     chatList: user.chatList || null,
     fastWork: findFastWork.data,
     from: company || findFromUser,
-    isFav: isFavoriteVacancyVar,
+    isFav: isFavoriteFastWorkVar,
   });
 });
 

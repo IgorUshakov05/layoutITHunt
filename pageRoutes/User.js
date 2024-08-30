@@ -124,6 +124,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       }
       let findCompany = await findCompanyOfUser(result.id);
       if (!findCompany.success) findCompany = { data: null };
+      console.log(findAllFV);
       return res.render("SeSideHr.ejs", {
         isLoggedIn: decodeAccess,
         id: decodeAccess.userID,
@@ -144,7 +145,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
         im: decodeAccess.userROLE || null,
         contacts: result.contacts,
         status: result.status,
-        myFavorites: findAllFV.data.vacancyID,
+        myFavorites: findAllFV.data,
         description: result.description,
       });
     }

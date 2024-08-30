@@ -28,7 +28,7 @@ addToFavorites.addEventListener("click", async () => {
         Authorization: "augwod89h1h9awdh9py0y82hjd",
       },
       body: JSON.stringify({
-        fastWorkId: value,
+        id: value,
       }),
     });
 

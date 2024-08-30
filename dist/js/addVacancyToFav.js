@@ -1,42 +1,55 @@
-$(document).on("click", ".InfavoritesVacancy", async function () {
-  // Получаем значение data-id текущего элемента
-  let clickedValue = $(this).attr("data-id");
+// Универсальная функция для обработки кликов
+$(document).on(
+  "click",
+  ".InfavoritesFastWork, .InfavoritesVacancy",
+  async function () {
+    // Определяем класс элемента и соответствующий URL
+    const isFastWork = $(this).hasClass("InfavoritesFastWork");
+    const url = isFastWork ? "/api/favorite-fastWork" : "/api/favorite-vacancy";
 
-  // Отключаем кнопки (если необходимо)
-  setButtonState(false);
+    // Получаем значение data-id текущего элемента
+    const clickedValue = $(this).attr("data-id");
 
-  try {
-    // Выполняем запрос к серверу
-    let response = await fetch("/api/favorite-vacancy", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "augwod89h1h9awdh9py0y82hjd",
-      },
-      body: JSON.stringify({
-        vacancyId: clickedValue,
-      }),
-    });
+    // Отключаем кнопки
+    setButtonState(false);
 
-    let data = await response.json();
+    try {
+      // Выполняем запрос к серверу
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "augwod89h1h9awdh9py0y82hjd",
+        },
+        body: JSON.stringify({
+          id: clickedValue,
+        }),
+      });
 
-    // Находим все элементы с классом .InfavoritesVacancy
-    $(".InfavoritesVacancy").each(function () {
-      let dataId = $(this).attr("data-id");
-      if (dataId === clickedValue) {
-        if (data.result) {
-          makeInFuture(this);
-        } else {
-          removeFuture(this);
+      const data = await response.json();
+
+      // Находим все элементы с соответствующим классом
+      const targetClass = isFastWork
+        ? ".InfavoritesFastWork"
+        : ".InfavoritesVacancy";
+
+      $(targetClass).each(function () {
+        const dataId = $(this).attr("data-id");
+        if (dataId === clickedValue) {
+          if (data.result) {
+            makeInFuture(this);
+          } else {
+            removeFuture(this);
+          }
         }
-      }
-    });
-  } catch (error) {
-    console.error("Ошибка:", error);
-  } finally {
-    setTimeout(() => setButtonState(true), 1000);
+      });
+    } catch (error) {
+      console.error("Ошибка:", error);
+    } finally {
+      setTimeout(() => setButtonState(true), 1000);
+    }
   }
-});
+);
 
 // Функция для добавления класса
 function makeInFuture(element) {
@@ -50,5 +63,5 @@ function removeFuture(element) {
 
 // Функция для управления состоянием кнопок
 const setButtonState = (enabled) => {
-  $(".InfavoritesVacancy").prop("disabled", !enabled);
+  $(".InfavoritesFastWork, .InfavoritesVacancy").prop("disabled", !enabled);
 };

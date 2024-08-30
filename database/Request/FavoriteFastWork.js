@@ -5,7 +5,7 @@ async function isFavoriteFastWork(userID, vacancyID) {
   try {
     let electedVacancyAdd = await FavoriteSchema.findOne({
       userID,
-      "vacancyID.id": vacancyID,
+      "fastWorkID.id": vacancyID,
     });
     console.log(!!electedVacancyAdd);
     return !!electedVacancyAdd;
