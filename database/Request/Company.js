@@ -195,11 +195,24 @@ const getNotVerefy = async () => {
   }
 };
 
+const setStatusOfCompany = async (companyID, status = false) => {
+  try {
+    let result = await CompanySchema.updateOne(
+      { id: companyID },
+      { isVarefy: status }
+    );
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
 module.exports = {
   createCompany,
   searchCompanyForVacancy,
   findCompanyOfINN,
   findCompanyOfUser,
+  setStatusOfCompany,
   findCourtOfUser,
   findCompanyOfUserAndINN,
   getNotVerefy,
