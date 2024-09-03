@@ -1,7 +1,10 @@
 const { Router } = require("express");
 const router = Router();
 const { isAuth } = require("../middlewares/auth");
-const { findCompanyOfUserAndINN } = require("../../database/Request/Company");
+const {
+  findCompanyOfUserAndINN,
+  getNotVerefy,
+} = require("../../database/Request/Company");
 const { decodeAccessToken } = require("../tokens/accessToken");
 const { body, validationResult } = require("express-validator");
 const findCompany = require("./findCompanyForInvite");
@@ -48,4 +51,6 @@ router.post(
   isAuth,
   findCompany
 );
+
+
 module.exports = router;

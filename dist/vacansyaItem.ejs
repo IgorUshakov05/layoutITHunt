@@ -14,7 +14,7 @@ var agreement = vacancy.price.agreement;
     <meta name="author" content="<%- from.name|| from.title %>">
     <meta property="og:title" content="Вакансия <%- vacancy.special %> разработчика в компании <%- from.name ||from.title  %>">
     <meta property="og:description" content="Подробнее о вакансии <%- vacancy.special %> разработчика в компании <%- from.name || from.title %>. Зарплата: <%= minPrice ? (minPrice.toLocaleString('ru-RU') + (maxPrice ? ' - ' + maxPrice.toLocaleString('ru-RU') : '')) : 'Договорная' %>. Узнайте о требованиях и условиях работы.">
-    <meta property="og:image" content="<%-from.avatar%>">
+    <meta property="og:image" content="https://q72v1zh5-3001.euw.devtunnels.ms/preview/user?name=John&lastname=Doe&role=admin&avatar=https://masterpiecer-images.s3.yandex.net/2e2665fe6d1111ee89c3f6f8c1ba65ae:upscaled&location=New%20York&premium= &special=<%-from.special%>">
     <meta property="og:url" content="/<%= vacancy.id %>">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="<%- from.name %>">

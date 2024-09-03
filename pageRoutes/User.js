@@ -37,7 +37,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
           console.log("Мой профиль");
           let myFavoritesPubloc = await getMyFavorites(result.id);
           console.log("Мой профиль");
-          console.log(myFavoritesPubloc.data[1]);
+          console.log(myFavoritesPubloc);
           return res.render("ImProfessional.ejs", {
             isLoggedIn: decodeAccess,
             id: decodeAccess.userID,
@@ -119,8 +119,8 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       console.log(fastWork);
       let findAllFV = await findFAllFavoriteOfId(decodeAccess.userID);
       console.log(findAllFV);
-      if (!findAllFV.data) {
-        findAllFV = { data: { vacancyID: [] } }; // Обеспечиваем, что data будет пустым массивом в случае ошибки
+      if (!findAllFV) {
+        findAllFV = { data: { vacancyID: [], fastWorkID: [] } }; // Обеспечиваем, что data будет пустым массивом в случае ошибки
       }
       let findCompany = await findCompanyOfUser(result.id);
       if (!findCompany.success) findCompany = { data: null };
