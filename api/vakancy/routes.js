@@ -2,12 +2,13 @@ const { Router } = require("express");
 const { check, validationResult } = require("express-validator");
 const router = Router();
 const { decodeAccessToken } = require("../tokens/accessToken");
-const { createVacancy } = require("../../database/Request/Vacancy");
 const {
-  electedVacancy,
-} = require("../../database/Request/FavoriteVacancy");
+  createVacancy,
+  removeVacancy,
+} = require("../../database/Request/Vacancy");
+const { electedVacancy } = require("../../database/Request/FavoriteVacancy");
 const { searchUserId } = require("../../database/Request/User");
-const { searchVacancyById } = require('../../database/Request/Vacancy')
+const { searchVacancyById } = require("../../database/Request/Vacancy");
 const specialList = [
   "Аналитик",
   "SEO-специалист",
@@ -122,7 +123,34 @@ router.post(
     }
   }
 );
+router.post(
+  "/removeVacancy",
+  [check("id").isString(), check("text").isInt({ min: 1, max: 3 })],
+  async (req, res) => {
+    try {
+      const errors = validationResult(req);
 
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ success: false, error: errors.array() });
+      }
+      let id = req.body.id;
+      let text = req.body.text;
+      console.log(id, text);
+      let access = req.cookies.access;
+      if (!access) return res.redirect("/login");
+      const removeVacansyResult = await removeVacancy(id,text);
+      if (!removeVacansyResult.success) {
+        return res.status(400).json({ success: false, error: "Vacancy not found" });
+      }
+      return res
+        .status(200)
+        .json({ success: true, message: "Vacancy deleted successfully" });
+    } catch (e) {
+      console.log(e);
+      res.status(500).json({ message: e.message });
+    }
+  }
+);
 router.post("/favorite-vacancy", async (req, res) => {
   try {
     let access = await req.cookies.access;
@@ -131,10 +159,15 @@ router.post("/favorite-vacancy", async (req, res) => {
     if (!decodeAccess) return res.redirect("/login");
     let vacancyID = req.body.id;
     if (!vacancyID)
-      return res.status(400).json({ message: "Вакансия не найдена",result: false });
+      return res
+        .status(400)
+        .json({ message: "Вакансия не найдена", result: false });
     let findVacancyInDatabase = await searchVacancyById(vacancyID);
     console.log(findVacancyInDatabase);
-    if(!findVacancyInDatabase.success) return res.status(400).json({ message: "Вакансия не найдена", result: false });
+    if (!findVacancyInDatabase.success)
+      return res
+        .status(400)
+        .json({ message: "Вакансия не найдена", result: false });
     let addVacancyOrDelete = await electedVacancy(
       decodeAccess.userID,
       vacancyID

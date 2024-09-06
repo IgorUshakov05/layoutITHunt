@@ -1,6 +1,7 @@
 const Vacancy = require("../Schema/Vakancy");
 const { v4 } = require("uuid");
 const { Temporal } = require("@js-temporal/polyfill");
+const ReasonRMVacancy = require("../Schema/ReasonRemoveVacansy");
 
 async function createVacancy({
   userID,
@@ -17,7 +18,7 @@ async function createVacancy({
 
   // Использование PlainDateTime для работы с датой и временем
   const now = Temporal.Now.plainDateTimeISO();
-  const add30 = now.add({days: 30});
+  const add30 = now.add({ days: 30 });
   const newVacancy = new Vacancy({
     id: v4(),
     userID,
@@ -39,7 +40,20 @@ async function createVacancy({
     return { success: false, error: err.message };
   }
 }
-
+const removeVacancy = async (id, userReason) => {
+  try {
+    let result = await Vacancy.deleteOne({ id });
+    console.log(result);
+    if (!result.deletedCount) {
+      return { success: false, message: "Vacancy not found" };
+    }
+    let reason = await ReasonRMVacancy({ id: v4(), text: userReason });
+    await reason.save();
+    return { success: true, message: "Company removed" };
+  } catch (e) {
+    return { success: false, message: "Error" };
+  }
+};
 async function searchVacancyById(id) {
   try {
     const vacancy = await Vacancy.findOne({ id });
@@ -68,4 +82,9 @@ async function searchVacancyByUserId(id) {
   }
 }
 
-module.exports = { createVacancy, searchVacancyById, searchVacancyByUserId };
+module.exports = {
+  createVacancy,
+  searchVacancyById,
+  searchVacancyByUserId,
+  removeVacancy,
+};

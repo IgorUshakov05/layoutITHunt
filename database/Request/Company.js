@@ -195,6 +195,7 @@ const getNotVerefy = async () => {
     return false;
   }
 };
+
 const tariffsCompany = {
   5: { amount: 349, discount: "" },
   20: { amount: 1260, discount: "10%" },
