@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const refund = require("../payment/refundMoney");
 const {
   getNotVerefy,
   setStatusOfCompany,
@@ -13,7 +14,6 @@ router.post("/get_all_not_verefy_company", async (req, res) => {
     res.status(500).json({ success: false, message: "Error retrieving data" });
   }
 });
-
 router.post("/setVerefy", async (req, res) => {
   try {
     const { id, status } = req.body;
@@ -24,9 +24,7 @@ router.post("/setVerefy", async (req, res) => {
       return res.json({ success: false, message: "Статус не передан" });
     console.log(status, id);
     const setStatus = await setStatusOfCompany(id, status);
-    if (!setStatus)
-      return res.json({ success: false, message: "Комапния не найдена" });
-    return res.json({ success: true, result: setStatus });
+    return res.json(setStatus);
   } catch (error) {
     console.error("Error getting not verified companies:", error);
     res.status(500).json({ success: false, message: "Error retrieving data" });

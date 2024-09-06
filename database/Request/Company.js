@@ -2,6 +2,7 @@ const CompanySchema = require("../Schema/Company");
 const UserSchema = require("../Schema/UserSchema");
 const { v4 } = require("uuid");
 const { Temporal } = require("@js-temporal/polyfill");
+const createRefund = require("../../admin/payment/refundMoney");
 
 async function createCompany({
   title,
@@ -194,16 +195,36 @@ const getNotVerefy = async () => {
     return false;
   }
 };
-
+const tariffsCompany = {
+  5: { amount: 349, discount: "" },
+  20: { amount: 1260, discount: "10%" },
+  50: { amount: 2800, discount: "20%" },
+  100: { amount: 4900, discount: "30%" },
+  200: { amount: 9900, discount: "40%" },
+};
 const setStatusOfCompany = async (companyID, status = false) => {
   try {
+    if (status === false) {
+      let getCompany = await CompanySchema.findOne({ id: companyID });
+      if (!getCompany) return { success: false, message: "Company not found" };
+      let amount = await tariffsCompany[getCompany.countStaffs].amount;
+      let payID = getCompany.paymentId;
+      let refund = await createRefund(amount, payID);
+      console.log(refund);
+      if (refund === "succeeded") {
+        await getCompany.deleteOne({ id: companyID });
+        return { success: true, message: "Success" };
+      }
+      return { success: false, message: "Refund Error" };
+    }
     let result = await CompanySchema.updateOne(
       { id: companyID },
       { isVarefy: status }
     );
-    return result;
+    return { success: true, message: "Company active" };
   } catch (e) {
-    return false;
+    console.log(e);
+    return { success: false, message: "Error" };
   }
 };
 

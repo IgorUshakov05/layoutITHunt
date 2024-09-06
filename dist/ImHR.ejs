@@ -70,7 +70,10 @@
                     <div class="logoCompany logoCompanyProfile">
                         <img src="<%= company.avatar %>" width="35" height="35" alt="Логотип компании">
                     </div>
-                    <h1 class="whitespace" title="Search cleack"><%=company.title %></h1>
+                    <h1 class="whitespace" title="Search cleack" style="
+     overflow: hidden; 
+     text-overflow: ellipsis; 
+     white-space: nowrap; "><%=company.title %></h1>
                 </div>
                 </a>
                 <% }else { %>
