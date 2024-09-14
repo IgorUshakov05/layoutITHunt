@@ -42,9 +42,34 @@
                 <button id="removeChatUser">Удалить</button>
             </div>
         </div>
-        <div class="removePublication">
+        <div class="removePublication addExpiriens" id="removePublication">
              <h1 class="titleRemove">Вы действительно хотите снять вакансию?</h1>
             <p class="descriptionRemove">Объявление будет удалено безвозвратно</p>
+
+            <div class="wayWork reportItem">
+    <h4>Пожалуйста укажите причину снятия</h4>
+        <div class="wayWorkItem">
+
+                <input type="radio" id="Yees" name="interest" value="Я нашел специалиста" />
+                <label class="titleWork" for="distant">Я нашел специалиста</label>
+            </div>
+
+                <div class="wayWorkItem">
+                    <input type="radio" id="notClick" name="interest" value="Нет откликов" />
+                    <label class="titleWork" for="fullday">Нет откликов</label>
+                </div>
+                
+                <div class="wayWorkItem">
+                    <input type="radio" id="notActualy" name="interest" value="Позициия уже не актуальна" />
+                <label class="titleWork" for="partTime">Позициия уже не актуальна</label>
+            </div>
+    </div>
+
+            <div class="canelsButton removePublicButton">
+                        <button id="closeEduModal" class="canel removePublicToServer ">Отмена</button>
+                        <button class="sendJobTitle" id="removePublic">Снять</button>
+                    </div>
+
 
         </div>
     </div>

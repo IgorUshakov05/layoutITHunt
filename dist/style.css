@@ -127,12 +127,13 @@ img {
 html,
 body {
   width: 100%;
-  background-color: #F9F9FF;
+  background-color: #f9f9ff;
 }
 @media (max-width: 1100px) {
-    body, html {
-        background-color: white;
-    }
+  body,
+  html {
+    background-color: white;
+  }
 }
 :root {
   --indexColor: #4900e3;
@@ -3434,6 +3435,22 @@ input[type="number"] {
   letter-spacing: 0.05px;
   margin-left: 5px;
 }
+.reportItem {
+  border-radius: 4px;
+  margin-top: 14px;
+  background: #f7f6ff;
+  padding:12px; 
+}
+.reportItem > div >input  {
+  min-width: 21px;
+  background: white;
+} 
+.removePublication {
+  display: none;
+  width: 470px !important;
+
+  height: fit-content;
+}
 
 .adressJobText:hover {
   color: var(--indexColor);
@@ -4338,7 +4355,7 @@ input[type="number"] {
 }
 
 #innCompany {
-  font-family: 'Ubuntu';
+  font-family: "Ubuntu";
 }
 
 .myMessage {
@@ -4834,7 +4851,7 @@ input[type="number"] {
   letter-spacing: -0.095px;
 }
 .personalInfo.chatLeft {
-    background: none;
+  background: none;
 }
 .itemChat {
   background: white;
@@ -4848,7 +4865,7 @@ input[type="number"] {
   font-style: normal;
   font-weight: 300;
   line-height: 136.9%; /* 17.797px */
-  letter-spacing: -0.065px;    
+  letter-spacing: -0.065px;
   word-break: break-word;
 }
 
@@ -5481,10 +5498,10 @@ input[type="number"] {
 }
 .places {
   display: flex;
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
-.placeJob >div>  span {
+.placeJob > div > span {
   font-family: Raleway;
   font-size: 14px;
   font-style: normal;
@@ -9558,7 +9575,7 @@ label.elemExpiriensLabel {
 .iconVariant {
   display: flex;
 }
-.fastWorkSelect > div > label{
+.fastWorkSelect > div > label {
   font-family: Ubuntu;
 }
 #createEvent,
@@ -9693,14 +9710,16 @@ button.submitButton:focus {
 
 .descriptionVacansyProfilePRE {
   white-space: pre-wrap;
-      word-break: break-all;
-    overflow-wrap: break-word;
+  word-break: break-all;
+  overflow-wrap: break-word;
 }
-.descriptionVacansyProfilePRE > *, .descriptionVacansyProfilePRE >*>*, .descriptionVacansyProfilePRE > * > * > *   {
+.descriptionVacansyProfilePRE > *,
+.descriptionVacansyProfilePRE > * > *,
+.descriptionVacansyProfilePRE > * > * > * {
   font-size: 13px;
   line-height: 20px;
-  background:none !important;
-  color:black !important; 
+  background: none !important;
+  color: black !important;
 }
 
 .descriptionVacansyProfilePRE > h1,
@@ -9726,40 +9745,55 @@ button.submitButton:focus {
 .descriptionVacansyProfilePRE > * > * > a {
   color: blue;
 }
-li[data-list='ordered'] {
+li[data-list="ordered"] {
   list-style-type: decimal;
   margin-left: 20px;
 }
-li[data-list='bullet'] {
-    list-style-type: disc;
+li[data-list="bullet"] {
+  list-style-type: disc;
   margin-left: 20px;
 }
 
 .wayWork.vac > div {
-    width: 25%;
+  width: 25%;
 }
 
 @media (max-width: 450px) {
-    .wayWork.vac > div {
+  .wayWork.vac > div {
     width: fit-content;
-}
-.wayWork.vac {
+  }
+  .wayWork.vac {
     justify-content: space-between;
-}
+  }
 }
 
 .agreement {
   font-size: 15px;
 }
 
-.createTwo, .createThree {
+.createTwo,
+.createThree {
   display: none;
 }
 
 .documents.active > .uploadFile {
   border: 1px solid green;
-} 
+}
 
 .documents.error > .uploadFile {
   border: 1px solid red;
+}
+
+
+.removePublicButton {
+  width: 100%;
+  justify-content: space-between;
+}
+.removePublicButton > button {
+  width: 50%;
+} 
+
+#removePublic {
+  background: #F8221D;
+  color:white; 
 }

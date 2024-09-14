@@ -1,17 +1,56 @@
+let idVacancy = null;
+let text = null;
 document.addEventListener("DOMContentLoaded", () => {
   document
     .querySelector(".removeVacancy")
     .addEventListener("click", function (e) {
-      console.log(this.getAttribute("data-id"));
+      idVacancy = this.dataset.id;
+      document.querySelector(".blackBack").style.display = "block";
+      document.getElementById("removePublication").style.display = "block";
     });
 });
-
-function removePublic(id) {
-  fetch("/api/removeVacancy", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ id: id }),
-  });
+document.getElementById("Yees").addEventListener("click", function (e) {
+  text = 1;
+});
+document.getElementById("notClick").addEventListener("click", function (e) {
+  text = 2;
+});
+document.getElementById("notActualy").addEventListener("click", function (e) {
+  text = 3;
+});
+async function removePublic(id) {
+  try {
+    let result = await fetch("http://localhost:3000/api/removeVacancy", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "augwod89h1h9awdh9py0y82hjd",
+      },
+      body: JSON.stringify({ id, text }),
+    }).then((obj) => obj.json());
+    return result;
+  } catch (error) {
+    console.error("Error:", error);
+    return false;
+  }
 }
+
+document
+  .querySelector(".removePublicToServer")
+  .addEventListener("click", function (e) {
+    idVacancy = null;
+    document.querySelector(".blackBack").style.display = "none";
+    document.getElementById("removePublication").style.display = "none";
+  });
+
+document
+  .getElementById("removePublic")
+  .addEventListener("click", async function (e) {
+    let removeVacancy = await removePublic(idVacancy);
+    console.log(removeVacancy);
+    if (removeVacancy.success) {
+      window.location.reload();
+    } else {
+      alert("Ошибка удаления вакансии");
+    }
+  });
