@@ -1,13 +1,14 @@
 let idVacancy = null;
 let text = null;
 document.addEventListener("DOMContentLoaded", () => {
-  document
-    .querySelector(".removeVacancy")
-    .addEventListener("click", function (e) {
+  let removesButton = document.querySelectorAll(".removeVacancy");
+  for (const button of removesButton) {
+    button.addEventListener("click", function (e) {
       idVacancy = this.dataset.id;
       document.querySelector(".blackBack").style.display = "block";
       document.getElementById("removePublication").style.display = "block";
     });
+  }
 });
 document.getElementById("Yees").addEventListener("click", function (e) {
   text = 1;
@@ -20,7 +21,7 @@ document.getElementById("notActualy").addEventListener("click", function (e) {
 });
 async function removePublic(id) {
   try {
-    let result = await fetch("http://localhost:3000/api/removeVacancy", {
+    let result = await fetch("/api/removeVacancy", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

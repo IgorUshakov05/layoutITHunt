@@ -2,7 +2,7 @@ const Vacancy = require("../Schema/Vakancy");
 const { v4 } = require("uuid");
 const { Temporal } = require("@js-temporal/polyfill");
 const ReasonRMVacancy = require("../Schema/ReasonRemoveVacansy");
-
+const { addCause } = require("./CauseRemoveVacansy");
 async function createVacancy({
   userID,
   special,
@@ -42,15 +42,14 @@ async function createVacancy({
 }
 const removeVacancy = async (id, userReason) => {
   try {
-    let result = await Vacancy.deleteOne({ id });
-    console.log(result);
-    if (!result.deletedCount) {
+    let result = await Vacancy.findOneAndDelete({ id });
+    if (!result) {
       return { success: false, message: "Vacancy not found" };
     }
-    let reason = await ReasonRMVacancy({ id: v4(), text: userReason });
-    await reason.save();
-    return { success: true, message: "Company removed" };
+    let addToCause = await addCause(result.special, userReason);
+    return { success: true, message: "Vacansy removed" };
   } catch (e) {
+    console.log(e);
     return { success: false, message: "Error" };
   }
 };

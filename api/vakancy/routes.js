@@ -140,7 +140,9 @@ router.post(
       if (!access) return res.redirect("/login");
       const removeVacansyResult = await removeVacancy(id,text);
       if (!removeVacansyResult.success) {
-        return res.status(400).json({ success: false, error: "Vacancy not found" });
+        return res
+          .status(400)
+          .json({ success: false, error: removeVacansyResult.message});
       }
       return res
         .status(200)

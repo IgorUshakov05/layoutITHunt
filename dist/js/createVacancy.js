@@ -60,15 +60,15 @@ inputSkills.addEventListener("keydown", function (event) {
   if (event.key === "Enter") {
     console.log("Вы нажали Enter");
     event.preventDefault();
-     if (!allData.skills.includes(this.value)) {
-       allData.skills.push(this.value);
-       appendElementUI(this.value);
-     }
-     this.value = "";
-     document.querySelector(".ParentlistExpressive").style.display = "none";
-     list.innerHTML = "";
-     clearTimeout(timeoutId);
-     return;
+    if (!allData.skills.includes(this.value)) {
+      allData.skills.push(this.value);
+      appendElementUI(this.value);
+    }
+    this.value = "";
+    document.querySelector(".ParentlistExpressive").style.display = "none";
+    list.innerHTML = "";
+    clearTimeout(timeoutId);
+    return;
   }
 });
 inputSkills.addEventListener("input", async function (e) {
@@ -103,7 +103,7 @@ inputSkills.addEventListener("input", async function (e) {
       }
 
       // Обновляем UI, используя полученные данные
-      
+
       document.querySelector(".ParentlistExpressive").style.display = "block";
       list.innerHTML = "";
 
@@ -317,7 +317,29 @@ $("#toThreeStage").on("click", () => {
 });
 
 //Финал!
-
+var formats = [
+  "background",
+  "bold",
+  "color",
+  "font",
+  "code",
+  "italic",
+  "link",
+  "size",
+  "strike",
+  "script",
+  "underline",
+  "blockquote",
+  "header",
+  "indent",
+  "list",
+  "align",
+  "direction",
+  "code-block",
+  "formula",
+  // 'image'
+  // 'video'
+];
 var quill = new Quill("#editor-container", {
   theme: "snow",
   placeholder: "Придумайте описание вакансии",
@@ -328,6 +350,7 @@ var quill = new Quill("#editor-container", {
       ["clean"],
     ],
   },
+  formats: formats
 });
 let charCount = document.getElementById("charCount");
 var charCountElem = document.getElementById("charCount");
@@ -354,6 +377,16 @@ quill.on("text-change", (delta, oldDelta, source) => {
     console.log("An API call triggered this change.");
   } else if (source === "user") {
     console.log("A user action triggered this change.");
+  }
+
+  // Блокировка вставки картинок
+  if (source === "user") {
+    const ops = delta.ops;
+    for (const op of ops) {
+      if (op.insert && typeof op.insert === "object" && op.insert.image) {
+        quill.deleteText(op.insert.image.length, 0);
+      }
+    }
   }
   allData.description = quill.root.innerHTML;
 });
@@ -391,7 +424,7 @@ document
       console.log(data);
       console.log("Отрисовка");
       $(".threeStage").height("0");
-  progress.value = 100;
+      progress.value = 100;
       $("#progress").attr("value", "100");
       $(".lineCreateLevel").addClass("filalyProgress");
       $(".finalyStage").height("fit-content");
