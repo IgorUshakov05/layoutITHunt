@@ -3439,12 +3439,12 @@ input[type="number"] {
   border-radius: 4px;
   margin-top: 14px;
   background: #f7f6ff;
-  padding:12px; 
+  padding: 12px;
 }
-.reportItem > div >input  {
+.reportItem > div > input {
   min-width: 21px;
   background: white;
-} 
+}
 .removePublication {
   display: none;
   width: 470px !important;
@@ -8435,9 +8435,6 @@ textarea.specialisationSelectInput {
   justify-content: space-between;
   align-items: center;
 }
-.teamSoom {
-  margin-left: 10px;
-}
 .commingSoon {
   width: 100%;
   border-radius: 4px;
@@ -8656,6 +8653,7 @@ textarea.specialisationSelectInput {
 }
 .rowList {
   margin-top: 15px;
+  gap: 5px;
 }
 .verticalLine {
   margin: 0 6px;
@@ -9784,16 +9782,28 @@ li[data-list="bullet"] {
   border: 1px solid red;
 }
 
-
 .removePublicButton {
   width: 100%;
   justify-content: space-between;
 }
 .removePublicButton > button {
   width: 50%;
-} 
+}
 
 #removePublic {
-  background: #F8221D;
-  color:white; 
+  background: #f8221d;
+  color: white;
+}
+
+.itemCountSpec.active {
+  background-color: #4900e3;
+}
+
+.itemCountSpec.active > .priceAndHall > * > *,
+.itemCountSpec.active > .TitleAndPrice > .countPersonal > * {
+  color: white !important;
+}
+  
+.itemCountSpec {
+  cursor: pointer;
 }

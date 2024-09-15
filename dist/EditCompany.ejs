@@ -1,203 +1,332 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Найдите работу или предложите её в IT-сфере с помощью нашего сайта. Мы предлагаем широкий выбор вакансий для различных специализаций.">
-    <meta name="keywords" content="IT, работа, вакансии, поиск работы, WebHunt, специалисты, программист, разработчик, тестировщик, веб-дизайнер">
-    <meta name="robots" content="index, follow">
-    <meta property="og:title" content="WebHunt - MTS Group">
-    <meta property="og:description" content="МТС — российская компания, предоставляющая телекоммуникационные услуги, цифровые и медийные сервисы в России, Армении и Белоруссии под торговой маркой «МТС»">
-    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/800px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png">
-    <link rel="stylesheet" href="/style.css">
-    <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon">
-    <meta name="author" content="WebHunt">
-    <link rel="stylesheet" href="/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Найдите работу или предложите её в IT-сфере с помощью нашего сайта. Мы предлагаем широкий выбор вакансий для различных специализаций."
+    />
+    <meta
+      name="keywords"
+      content="IT, работа, вакансии, поиск работы, WebHunt, специалисты, программист, разработчик, тестировщик, веб-дизайнер"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="WebHunt - MTS Group" />
+    <meta
+      property="og:description"
+      content="МТС — российская компания, предоставляющая телекоммуникационные услуги, цифровые и медийные сервисы в России, Армении и Белоруссии под торговой маркой «МТС»"
+    />
+    <meta
+      property="og:image"
+      content="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/800px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon" />
+    <meta name="author" content="WebHunt" />
+    <link rel="stylesheet" href="/style.css" />
     <style>
-         .discount {
-            right: 0 !important;
-            top: 0 !important;
-        }
+      .discount {
+        right: 0 !important;
+        top: 0 !important;
+      }
     </style>
+    <script>
+      window.conf = {
+        FILE_SERVER: "<%-FILE_SERVER%>",
+      };
+    </script>
     <script src="/js/jquery.js"></script>
     <title>Компания - МТС</title>
-</head>
-<body>
-        <%- include('./header.ejs', { isLoggedIn, active: 'vacancies',chat:chatList}) %>
+  </head>
+  <body>
+    <%- include('./header.ejs', { isLoggedIn, active:
+    'vacancies',chat:chatList}) %>
 
-<main class="main">
-    <div class="twoBlocks">
-        
-       <div class="personalInfo filterAlways noShadow">
-        <div class="boxShadow">
+    <main class="main">
+      <div class="twoBlocks">
+        <div class="personalInfo filterAlways noShadow">
+          <div class="boxShadow">
             <h1 class="username setPhoto">Установите логотип компании</h1>
             <div class="setLogo mt-10">
-                <div class="leftFishPhoto">
-                    <p>Для просмотра загрузите файл</p>
+              <div
+                class="leftFishPhoto"
+                style="
+                  background-image: url('<%- company.avatar%>');
+                  background-size: cover;
+                  background-repeat: no-repeat; /*  Предотвращает повторение изображения */
+                  background-position: center;
+                "
+              ></div>
+              <div class="leftInputImg ohidden">
+                <p>Соотношение сторон 1:1</p>
+                <p>Допускаемые форматы изображения могут включать JPEG, PNG</p>
+                <div class="addCompany">
+                  <input
+                    type="file"
+                    id="imageUpload"
+                    name="imageUpload"
+                    accept="image/jpeg, image/png"
+                  />
+                  <svg
+                    width="20"
+                    height="16"
+                    viewBox="0 0 20 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M15.6409 14.7641L19.0568 6.4684C19.2683 5.95477 18.8906 5.39087 18.3351 5.39087H4.94839C4.63215 5.39087 4.34718 5.58171 4.22677 5.87413L0.810877 14.1699C0.59938 14.6835 0.977016 15.2474 1.53249 15.2474H14.9193C15.2355 15.2474 15.5205 15.0566 15.6409 14.7641Z"
+                      stroke="white"
+                      stroke-width="0.613169"
+                    />
+                    <path
+                      d="M0.947266 10.6091V1.53296C0.947266 1.10196 1.29666 0.752563 1.72766 0.752563H5.10332C5.39891 0.752563 5.66914 0.91957 5.80133 1.18396L6.52953 2.64035C6.66172 2.90474 6.93194 3.07175 7.22754 3.07175H14.6618C15.0928 3.07175 15.4422 3.42114 15.4422 3.85214V4.23134"
+                      stroke="white"
+                      stroke-width="0.613169"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                  <span id="titleFile">Загрузить изображение</span>
                 </div>
-                <div class="leftInputImg ohidden">
-                    <p>Соотношение сторон 1:1</p>
-                    <p>Допускаемые форматы изображения могут включать JPEG, PNG</p>
-                    <div class="addCompany">
-                        <input type="file" id="imageUpload" name="imageUpload" accept="image/jpeg, image/png">
-                        <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15.6409 14.7641L19.0568 6.4684C19.2683 5.95477 18.8906 5.39087 18.3351 5.39087H4.94839C4.63215 5.39087 4.34718 5.58171 4.22677 5.87413L0.810877 14.1699C0.59938 14.6835 0.977016 15.2474 1.53249 15.2474H14.9193C15.2355 15.2474 15.5205 15.0566 15.6409 14.7641Z" stroke="white" stroke-width="0.613169"/>
-                            <path d="M0.947266 10.6091V1.53296C0.947266 1.10196 1.29666 0.752563 1.72766 0.752563H5.10332C5.39891 0.752563 5.66914 0.91957 5.80133 1.18396L6.52953 2.64035C6.66172 2.90474 6.93194 3.07175 7.22754 3.07175H14.6618C15.0928 3.07175 15.4422 3.42114 15.4422 3.85214V4.23134" stroke="white" stroke-width="0.613169" stroke-linecap="round"/>
-                            </svg>
-                            <span id="titleFile">Загрузить изображение</span>
-                    </div>
-                </div>
+              </div>
             </div>
 
-        <div class="inputs mt-30px">
-            <h1 class="username setPhoto">Установите логотип компании</h1>
+            <div class="inputs mt-30px">
+              <h1 class="username setPhoto">Название компании</h1>
 
-            <input required minlength="2" class="mt-5px" maxlength="50" type="text" placeholder="Название компании" name="email" id="titleCompany">
-            <h1 class="username setPhoto mt-30px">Описание</h1>
-            <textarea class="specialisationSelectInput mt-10" placeholder="Кратко, но информативно опишите компанию" type="text" name="descriptionCompany" id="descriptionCompany"></textarea>
-            <h1 class="username setPhoto leftText">Осталось символов: 250</h1>
-            <div class="panelForHR flex mt-30px">
+              <input
+                required
+                minlength="2"
+                class="mt-5px"
+                maxlength="250"
+                min="3"
+                type="text"
+                value="<%-company.title%>"
+                placeholder="Название компании"
+                name="email"
+                id="titleCompany"
+              />
+              <h1 class="username setPhoto mt-30px">Описание</h1>
+              <textarea
+                class="specialisationSelectInput mt-5px"
+                placeholder="Кратко, но информативно опишите компанию"
+                type="text"
+                maxlength="250"
+                name="descriptionCompany"
+                id="descriptionCompany"
+              ></textarea>
+              <h1 class="username setPhoto leftText" id="teap">
+                Осталось символов: 250
+              </h1>
+              <div class="panelForHR flex mt-30px">
                 <button class="showMoreButton editCompany">Отменить</button>
                 <button class="showMoreButton flex">Сохранить</button>
+              </div>
             </div>
+          </div>
         </div>
-
-</div>
-
-       </div>
-       <div class="MoreInfo">
-        <div class="listVacas">
+        <div class="MoreInfo">
+          <div class="listVacas">
             <article class="vakansiaItem">
-                <h1 class="changeCountTeam">Изменить количество участников в компании</h1>
-                <p class="changeCountTeamDescription">Если после регистрации возникает необходимость увеличить количество сотрудников, вы можете приобрести тариф на большее количество человек. </p>
-                <div class="flex price">
-                    <div class="pic diplayPic">
-                        <img src="/assets/pictures/time.png" alt="Картинка истечения срока подписки">
-                    </div>
-                    <div class="textBlock">
-                        <p class="changeCountTeamDescription mt0">Однако при этом, если подписка покупается заново, срок действия предыдущей подписки обнуляется, и новая подписка начинает действовать с момента покупки.</p>
-                    </div>
+              <h1 class="changeCountTeam">
+                Изменить количество участников в компании
+              </h1>
+              <p class="changeCountTeamDescription">
+                Если после регистрации возникает необходимость увеличить
+                количество сотрудников, вы можете приобрести тариф на большее
+                количество человек.
+              </p>
+              <div class="flex price">
+                <div class="pic diplayPic">
+                  <img
+                    src="/assets/pictures/time.png"
+                    alt="Картинка истечения срока подписки"
+                  />
                 </div>
-                <div class="teamSoom rowList">
-                    <div class="itemCountSpec">
-                        <div class="priceAndHall">
-                            <div class="priceAndMonth mobBottom">
-                                <p class="priceMonth">349</p><p class="Ꝑ">Ꝑ</p><p></p><p class="verticalLine">|</p><p class="month">Месяц</p>
-                                
-                            </div>
-                   
-                        </div>
-                        <div class="TitleAndPrice">
-                            <div class="countPersonal">
-                                <p class="textCountPersonal">Количество сотрудников</p>
-                                <p class="countItem">5</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="itemCountSpec mrl-5">
-                        <div class="Hall">
-                            <div class="discount" style="top:0;background-color: #4900E3;"><span style="font-family: Ubuntu; color: white;">10%</span></div>
-
-                        </div>
-                        <div class="priceAndHall">
-                            <div class="priceAndMonth mobBottom">
-                                <p class="priceMonth">1 260</p><p class="Ꝑ">Ꝑ</p><p></p><p class="verticalLine">|</p><p class="month">Месяц</p>
-                                
-                            </div>
-                   
-                        </div>
-                        <div class="TitleAndPrice">
-                            <div class="countPersonal">
-                                <p class="textCountPersonal">Количество сотрудников</p>
-                                <p class="countItem">20</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="itemCountSpec mrl-5">
-                        <div class="Hall">
-                            <div class="discount" style="top:0;background-color: #4900E3;"><span style="font-family: Ubuntu; color: white;">20%</span></div>
-
-                        </div>
-                        <div class="priceAndHall">
-                            <div class="priceAndMonth mobBottom">
-                                <p class="priceMonth">2 800</p><p class="Ꝑ">Ꝑ</p><p></p><p class="verticalLine">|</p><p class="month">Месяц</p>
-                                
-                            </div>
-                   
-                        </div>
-                        <div class="TitleAndPrice">
-                            <div class="countPersonal">
-                                <p class="textCountPersonal">Количество сотрудников</p>
-                                <p class="countItem">50</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="itemCountSpec mrl-5">
-                        <div class="Hall">
-                            <div class="discount" style="top:0;background-color: #4900E3;"><span style="font-family: Ubuntu; color: white;">30%</span></div>
-
-                        </div>
-                        <div class="priceAndHall">
-                            <div class="priceAndMonth mobBottom">
-                                <p class="priceMonth">4 900</p><p class="Ꝑ">Ꝑ</p><p></p><p class="verticalLine">|</p><p class="month">Месяц</p>
-                                
-                            </div>
-                   
-                        </div>
-                        <div class="TitleAndPrice">
-                            <div class="countPersonal">
-                                <p class="textCountPersonal">Количество сотрудников</p>
-                                <p class="countItem">100</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="itemCountSpec lastItem">
-                        <div class="Hall">
-                            <div class="discount"><span style="font-family: Ubuntu;">40%</span></div>
-                        </div>
-                        <div class="priceAndHall">
-                            <div class="priceAndMonth mobBottom">
-                                <p class="priceMonth colorWhite">9 900</p><p class="colorWhite Ꝑ">Ꝑ</p><p></p><p class="verticalLine colorWhite">|</p><p class="month colorWhite">Месяц</p>
-                                
-                            </div>
-                   
-                        </div>
-                        <div class="TitleAndPrice">
-                            <div class="countPersonal">
-                                <p class="textCountPersonal colorWhite">Количество сотрудников</p>
-                                <p class="countItem colorWhite">200</p>
-                            </div>
-                        </div>
-                    </div>
-                    
+                <div class="textBlock">
+                  <p class="changeCountTeamDescription mt0">
+                    Однако при этом, если подписка покупается заново, срок
+                    действия предыдущей подписки обнуляется, и новая подписка
+                    начинает действовать с момента покупки.
+                  </p>
                 </div>
+              </div>
+              <div class="teamSoom rowList">
+                <div
+                  data-count="5"
+                  class="itemCountSpec <%-company.countStaffs === 5?'active':'' %>"
+                >
+                  <div class="priceAndHall">
+                    <div class="priceAndMonth mobBottom">
+                      <p class="priceMonth">349</p>
+                      <p class="Ꝑ">Ꝑ</p>
+                      <p></p>
+                      <p class="verticalLine">|</p>
+                      <p class="month">Месяц</p>
+                    </div>
+                  </div>
+                  <div class="TitleAndPrice">
+                    <div class="countPersonal">
+                      <p class="textCountPersonal">Количество сотрудников</p>
+                      <p class="countItem">5</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  data-count="20"
+                  class="itemCountSpec <%-company.countStaffs === 20?'active':'' %>"
+                >
+                  <div class="Hall">
+                    <div
+                      class="discount"
+                      style="top: 0; background-color: #4900e3"
+                    >
+                      <span style="font-family: Ubuntu; color: white">10%</span>
+                    </div>
+                  </div>
+                  <div class="priceAndHall">
+                    <div class="priceAndMonth mobBottom">
+                      <p class="priceMonth">1 260</p>
+                      <p class="Ꝑ">Ꝑ</p>
+                      <p></p>
+                      <p class="verticalLine">|</p>
+                      <p class="month">Месяц</p>
+                    </div>
+                  </div>
+                  <div class="TitleAndPrice">
+                    <div class="countPersonal">
+                      <p class="textCountPersonal">Количество сотрудников</p>
+                      <p class="countItem">20</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  data-count="50"
+                  class="itemCountSpec <%-company.countStaffs === 50?'active':'' %>"
+                >
+                  <div class="Hall">
+                    <div
+                      class="discount"
+                      style="top: 0; background-color: #4900e3"
+                    >
+                      <span style="font-family: Ubuntu; color: white">20%</span>
+                    </div>
+                  </div>
+                  <div class="priceAndHall">
+                    <div class="priceAndMonth mobBottom">
+                      <p class="priceMonth">2 800</p>
+                      <p class="Ꝑ">Ꝑ</p>
+                      <p></p>
+                      <p class="verticalLine">|</p>
+                      <p class="month">Месяц</p>
+                    </div>
+                  </div>
+                  <div class="TitleAndPrice">
+                    <div class="countPersonal">
+                      <p class="textCountPersonal">Количество сотрудников</p>
+                      <p class="countItem">50</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  data-count="100"
+                  class="itemCountSpec <%-company.countStaffs === 100?'active':'' %>"
+                >
+                  <div class="Hall">
+                    <div
+                      class="discount"
+                      style="top: 0; background-color: #4900e3"
+                    >
+                      <span style="font-family: Ubuntu; color: white">30%</span>
+                    </div>
+                  </div>
+                  <div class="priceAndHall">
+                    <div class="priceAndMonth mobBottom">
+                      <p class="priceMonth">4 900</p>
+                      <p class="Ꝑ">Ꝑ</p>
+                      <p></p>
+                      <p class="verticalLine">|</p>
+                      <p class="month">Месяц</p>
+                    </div>
+                  </div>
+                  <div class="TitleAndPrice">
+                    <div class="countPersonal">
+                      <p class="textCountPersonal">Количество сотрудников</p>
+                      <p class="countItem">100</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  data-count="200"
+                  class="itemCountSpec <%-company.countStaffs === 200?'active':'' %>"
+                >
+                  <div class="Hall">
+                    <div
+                      class="discount"
+                      style="top: 0; background-color: black"
+                    >
+                      <span style="font-family: Ubuntu; color: white">40%</span>
+                    </div>
+                  </div>
+                  <div class="priceAndHall">
+                    <div class="priceAndMonth mobBottom">
+                      <p class="priceMonth">9 900</p>
+                      <p class="Ꝑ">Ꝑ</p>
+                      <p></p>
+                      <p class="verticalLine">|</p>
+                      <p class="month">Месяц</p>
+                    </div>
+                  </div>
+                  <div class="TitleAndPrice">
+                    <div class="countPersonal">
+                      <p class="textCountPersonal">Количество сотрудников</p>
+                      <p class="countItem">200</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </article>
             <article class="vakansiaItem">
-                <h1 class="changeCountTeam">Хотите удалить компанию?</h1>
-                <p class="changeCountTeamDescription">Удаление компании приведет к необратимой потере ее, можно будет восстановить только путем повторной регистрации. Помимо этого, исчезнет чат с сотрудниками компании, а размещенные вакансии будут приписаны к сотрудникам, опубликовавшим их, вместо названия самой компании.</p>
-                    <div class="linkRemoveCompany">
+              <h1 class="changeCountTeam">Хотите удалить компанию?</h1>
+              <p class="changeCountTeamDescription">
+                Удаление компании приведет к необратимой потере ее, можно будет
+                восстановить только путем повторной регистрации. Помимо этого,
+                исчезнет чат с сотрудниками компании, а размещенные вакансии
+                будут приписаны к сотрудникам, опубликовавшим их, вместо
+                названия самой компании.
+              </p>
+              <div class="linkRemoveCompany">
                 <a href="/remove-company">
-<div class="flex alignItemsCenter">
-                        <div class="pic">
-                            <svg width="17" height="19" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4 0.5H13M5.2 6.08621V15.3966M12.4 6.08621V15.3966M8.8 6.08621V15.3966M16 16.5V4.98276C16 3.87819 15.1046 2.98276 14 2.98276H3C1.89543 2.98276 1 3.87819 1 4.98276V16.5C1 17.6046 1.89543 18.5 3 18.5H14C15.1046 18.5 16 17.6046 16 16.5Z" stroke="#E53935" stroke-width="0.5" stroke-linecap="round"/>
-                                </svg>
-                                 </div>
-                        <p class="removeTextButton">
-                            Перейти к удалению
-                        </p>
+                  <div class="flex alignItemsCenter">
+                    <div class="pic">
+                      <svg
+                        width="17"
+                        height="19"
+                        viewBox="0 0 17 19"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M4 0.5H13M5.2 6.08621V15.3966M12.4 6.08621V15.3966M8.8 6.08621V15.3966M16 16.5V4.98276C16 3.87819 15.1046 2.98276 14 2.98276H3C1.89543 2.98276 1 3.87819 1 4.98276V16.5C1 17.6046 1.89543 18.5 3 18.5H14C15.1046 18.5 16 17.6046 16 16.5Z"
+                          stroke="#E53935"
+                          stroke-width="0.5"
+                          stroke-linecap="round"
+                        />
+                      </svg>
                     </div>
-                    </a>
-
-                    </div>
+                    <p class="removeTextButton">Перейти к удалению</p>
+                  </div>
+                </a>
+              </div>
             </article>
+          </div>
         </div>
-    </div>
-</div>
-</main>
+      </div>
+    </main>
 
-
-<%- include('./footer.ejs') %>
-<script src="/js/header.js"></script>
-</body>
+    <%- include('./footer.ejs') %>
+    <script src="/js/header.js"></script>
+    <script src="/js/editCompany.js"></script>
+  </body>
 </html>

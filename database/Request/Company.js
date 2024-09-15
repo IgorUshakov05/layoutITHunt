@@ -71,6 +71,33 @@ let findCourtOfUser = async (userID) => {
   }
 };
 
+
+let getCompanyByCreator = async (userID) => {
+  try {
+    const company = await CompanySchema.findOne({
+      creatorID: userID,
+      isVarefy: true,
+    });
+    return { success: true, company };
+  } catch (error) {
+    console.error("Ошибка при поиске подписки:", error);
+    return { success: false, message: "Произошла ошибка, попробуйте позже" };
+  }
+};
+
+let findCompanyByCreator = async (userID) => {
+  try {
+    const company = await CompanySchema.findOne({
+      creatorID: userID,
+      isVarefy: true,
+    }).select("avatar title description countStaffs");
+    return { success: true, company };
+  } catch (error) {
+    console.error("Ошибка при поиске подписки:", error);
+    return { success: false, message: "Произошла ошибка, попробуйте позже" };
+  }
+};
+
 let freezCompany = async (userID) => {
   try {
     const premium = await CompanySchema.findOneAndUpdate(
@@ -234,8 +261,10 @@ module.exports = {
   searchCompanyForVacancy,
   findCompanyOfINN,
   findCompanyOfUser,
+  findCompanyByCreator,
   setStatusOfCompany,
   findCourtOfUser,
+  getCompanyByCreator,
   findCompanyOfUserAndINN,
   getNotVerefy,
   findCompanyOfINNorTitle,
