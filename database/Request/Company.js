@@ -71,7 +71,6 @@ let findCourtOfUser = async (userID) => {
   }
 };
 
-
 let getCompanyByCreator = async (userID) => {
   try {
     const company = await CompanySchema.findOne({
@@ -109,6 +108,39 @@ let freezCompany = async (userID) => {
     return { success: true, premium };
   } catch (e) {
     console.error("Ошибка при поиске подписки:", e);
+    return { success: false, message: "Произошла ошибка, попробуйте позже" };
+  }
+};
+let updateInfoCompany = async (userID, { title, avatar, description }) => {
+  try {
+    const updateData = {};
+
+    // Проверяем каждое поле и добавляем его в объект обновления, если оно не null
+    if (title !== null) {
+      updateData.title = title.trim();
+    }
+    if (avatar !== null) {
+      updateData.avatar = avatar.trim();
+    }
+    if (description !== null) {
+      updateData.description = description.trim();
+    }
+
+    // Если объект обновления пустой (никаких полей не было обновлено), ничего не делаем
+    if (Object.keys(updateData).length === 0) {
+      return { success: false, message: "Нет данных для обновления" };
+    }
+
+    const result = await CompanySchema.findOneAndUpdate(
+      { creatorID: userID },
+      {
+        $set: updateData,
+      }
+    );
+    console.log(result);
+    return { success: true, message: "Успешно обновлено", result };
+  } catch (e) {
+    console.error("Ошибка при обновлении подписки:", e);
     return { success: false, message: "Произошла ошибка, попробуйте позже" };
   }
 };
@@ -269,5 +301,6 @@ module.exports = {
   getNotVerefy,
   findCompanyOfINNorTitle,
   updateCompany,
+  updateInfoCompany,
   freezCompany,
 };

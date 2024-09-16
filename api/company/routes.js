@@ -4,6 +4,7 @@ const { isAuth } = require("../middlewares/auth");
 const {
   findCompanyOfUserAndINN,
   getCompanyByCreator,
+  updateInfoCompany,
 } = require("../../database/Request/Company");
 const { decodeAccessToken } = require("../tokens/accessToken");
 const { body, validationResult } = require("express-validator");
@@ -57,9 +58,15 @@ router.post(
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res.status(422).json({ errors: errors.array() });
+        return res.status(422).json({ success: false, errors: errors.array() });
       }
-      let { title, description, count } = req.body;
+      let { title, description, count, avatar } = req.body;
+      if (!title && !description && !avatar && !count) {
+        return res
+          .status(202)
+          .json({ success: true, message: "Значение пустые" });
+      }
+      console.log(req.body);
       let access = await req.cookies.access;
       if (!access) return res.redirect("/login");
       const decodeAccess = await decodeAccessToken(access);
@@ -68,8 +75,24 @@ router.post(
       if (!notVerifiedCompanies.success)
         return res.status(501).json({ success: false });
       if (!notVerifiedCompanies.company) return res.redirect("/");
-      if (notVerifiedCompanies.company.countStaffs === count) {
-        return res.status(200).json({ success: true });
+      if (!!avatar) {
+        let removeLast = await removeLastAvatar(
+          notVerifiedCompanies.company.avatar.split("/")[4]
+        );
+        console.log(removeLast);
+      }
+      if (
+        notVerifiedCompanies.company.countStaffs === count ||
+        count === null
+      ) {
+        let updateInfo = await updateInfoCompany(decodeAccess.userID, {
+          avatar,
+          title,
+          description,
+        });
+        return res
+          .status(200)
+          .json({ success: true, INN: notVerifiedCompanies.company.INN });
       }
       return res.status(200).json({ success: true, message: "Нужно платить" });
     } catch (error) {
@@ -80,6 +103,19 @@ router.post(
     }
   }
 );
+
+async function removeLastAvatar(title) {
+  let deleteLastPhoto = await fetch(
+    process.env.FILE_SERVER_PATH + "/avatarCompany/remove",
+    {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ file: title }),
+    }
+  );
+  let response = await deleteLastPhoto.json();
+  return response;
+}
 
 router.post(
   "/invite-company",

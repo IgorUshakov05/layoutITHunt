@@ -1,6 +1,7 @@
-let getAlltarrif = document.querySelectorAll(".itemCountSpec");
-let titleInput = document.getElementById("titleCompany");
-let descriptionInput = document.getElementById("descriptionCompany");
+const getAlltarrif = document.querySelectorAll(".itemCountSpec");
+const titleInput = document.getElementById("titleCompany");
+const descriptionInput = document.getElementById("descriptionCompany");
+const buttonSave = document.getElementById("sendChange");
 let dataCompany = {
   title: null,
   description: null,
@@ -48,18 +49,23 @@ const sendAvatar = async () => {
 };
 
 async function sendUpdateData() {
+  if (
+    formData.has("company") === false &&
+    dataCompany.title === null &&
+    dataCompany.description === null
+  ) {
+    return [null, false];
+  }
   let sendAvatarOfCompany;
-
   // Пытаемся отправить аватар, если он есть
   if (formData.has("company")) {
     sendAvatarOfCompany = await sendAvatar();
   }
 
-  // Если аватар успешно отправлен, обновляем данные о компании
-  if (sendAvatarOfCompany !== false) {
-    dataCompany.avatar = sendAvatarOfCompany.title; // если изображение отправлено, сохраняя путь к аватару
+  if (sendAvatarOfCompany === false || !formData.has("company")) {
+    dataCompany.avatar = null;
   } else {
-    dataCompany.avatar = null; // задаем аватар как null, если не отправили
+    dataCompany.avatar = sendAvatarOfCompany.title;
   }
 
   // Отправляем данные компании
@@ -73,7 +79,7 @@ async function sendUpdateData() {
   });
 
   let toJson = await sendData.json();
-  console.log(toJson);
+  return [toJson.INN, toJson.success];
 }
 
 let formData = new FormData();
@@ -89,7 +95,12 @@ for (const item of getAlltarrif) {
 
 const imageUpload = document.getElementById("imageUpload");
 const backgroundImage = document.querySelector(".leftFishPhoto");
-
+buttonSave.addEventListener("click", async function (e) {
+  let [inn, status] = await sendUpdateData();
+  console.log(inn, status);
+  if (!status) return false;
+  window.location.href = `/company/${inn}`;
+});
 imageUpload.addEventListener("change", function (event) {
   const file = event.target.files[0];
   // Проверяем, является ли файл изображением
