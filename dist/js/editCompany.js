@@ -52,6 +52,7 @@ async function sendUpdateData() {
   if (
     formData.has("company") === false &&
     dataCompany.title === null &&
+    dataCompany.count === null &&
     dataCompany.description === null
   ) {
     return [null, false];
@@ -77,9 +78,9 @@ async function sendUpdateData() {
     },
     body: JSON.stringify(dataCompany),
   });
-
   let toJson = await sendData.json();
-  return [toJson.INN, toJson.success];
+  await console.log(toJson);
+  return [toJson.INN, toJson.success, toJson.message];
 }
 
 let formData = new FormData();
@@ -96,9 +97,9 @@ for (const item of getAlltarrif) {
 const imageUpload = document.getElementById("imageUpload");
 const backgroundImage = document.querySelector(".leftFishPhoto");
 buttonSave.addEventListener("click", async function (e) {
-  let [inn, status] = await sendUpdateData();
+  let [inn, status, message] = await sendUpdateData();
   console.log(inn, status);
-  if (!status) return false;
+  if (!inn || !status) return false;
   window.location.href = `/company/${inn}`;
 });
 imageUpload.addEventListener("change", function (event) {

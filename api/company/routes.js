@@ -73,7 +73,7 @@ router.post(
       if (!decodeAccess) return res.redirect("/login");
       let notVerifiedCompanies = await getCompanyByCreator(decodeAccess.userID);
       if (!notVerifiedCompanies.success)
-        return res.status(501).json({ success: false });
+        return res.status(501).json({ success: false, message: "Not pay" });
       if (!notVerifiedCompanies.company) return res.redirect("/");
       if (!!avatar) {
         let removeLast = await removeLastAvatar(
@@ -81,18 +81,20 @@ router.post(
         );
         console.log(removeLast);
       }
+      let updateInfo = await updateInfoCompany(decodeAccess.userID, {
+        avatar,
+        title,
+        description,
+      });
       if (
         notVerifiedCompanies.company.countStaffs === count ||
         count === null
       ) {
-        let updateInfo = await updateInfoCompany(decodeAccess.userID, {
-          avatar,
-          title,
-          description,
+        return res.status(200).json({
+          success: true,
+          INN: notVerifiedCompanies.company.INN,
+          message: "Not pay",
         });
-        return res
-          .status(200)
-          .json({ success: true, INN: notVerifiedCompanies.company.INN });
       }
       return res.status(200).json({ success: true, message: "Нужно платить" });
     } catch (error) {
