@@ -287,7 +287,13 @@ const setStatusOfCompany = async (companyID, status = false) => {
   }
 };
 
-const updateCountStaffOfCompany = async (creatorID, newCount) => {
+const updateCountStaffOfCompany = async (
+  creatorID,
+  newCount,
+  isSave,
+  paymentId,
+  paymentMethod
+) => {
   try {
     const now = Temporal.Now.plainDateISO();
     let result = await CompanySchema.updateOne(
@@ -295,6 +301,9 @@ const updateCountStaffOfCompany = async (creatorID, newCount) => {
       {
         $set: {
           countStaffs: newCount,
+          isAutoPay: isSave,
+          paymentId,
+          paymentMethod,
           nextPayDay: now.add({ months: 1 }).toString(),
         },
       }

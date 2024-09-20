@@ -17,9 +17,6 @@ const {
 router.post("/webhook/yookassa", async (req, res) => {
   try {
     const notification = req.body;
-    console.log(notification.event);
-    console.log(notification.object);
-
     const {
       amount,
       paid,
@@ -123,9 +120,13 @@ router.post("/webhook/yookassa", async (req, res) => {
           }
         } else if (paymentType === "UpdateCompanyInfo") {
           let staffs = Number(newCountStaff);
+          console.log(isAutoPay, paymentMethodId, " - нужно добавить");
           let updateCompanyInfo = await updateCountStaffOfCompany(
             userId,
-            staffs
+            staffs,
+            isAutoPay,
+            paymentMethodId,
+            paymentMethodType
           );
           if (!updateCompanyInfo.success) {
             console.error(
