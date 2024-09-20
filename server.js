@@ -9,6 +9,7 @@ const session = require("express-session");
 const api = require("./api/authtorizationRoutes/authRoute");
 const apiSkill = require("./api/Skills Offered/skillsOffered");
 const index = require("./pageRoutes/indexPage");
+const editVacancy = require("./pageRoutes/editVacansy");
 const login = require("./pageRoutes/login");
 const registration = require("./pageRoutes/registration");
 const expiriens = require("./api/expiriens/routes");
@@ -127,6 +128,7 @@ app.use(
   EditCompany,
   deleteAccountComplite,
   chatRouter,
+  editVacancy,
   court,
   chatCompany,
   inboxOther,

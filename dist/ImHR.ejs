@@ -342,7 +342,7 @@
                 <a href=""><span class="countClick leftmaring"><%= element.proglosh %> приглашений</span></a>
             </div>
             <div class="editAndRemove mobNone">
-                <a class="editVacancy">Изменить</a>
+                <a class="editVacancy" href="/edit-vacancy?id=<%-element.id%>">Изменить</a>
                 <button class="editVacancy removeVacancy" data-id="<%-element.id%>">Снять</button>
             </div>
             <div class="arrow">
@@ -471,7 +471,7 @@
                 <a href=""><span class="countClick leftmaring"><%= element.responses %> приглашений</span></a>
                         </div>
                             <div class="editAndRemove mobNone">
-                            <a class="editVacancy">Изменить</a>
+                            <a class="editVacancy" href="/edit-vacancy?id=<%-element.id%>">Изменить</a>
                             <button class="editVacancy removeVacancy">Снять</button>
                         </div>
                         <div class="arrow">
@@ -527,7 +527,7 @@
                                     <a href=""><span class="countClick"><%=element.clicks %> откликов</span></a>
                         </div>
                             <div class="editAndRemove">
-                            <a class="editVacancy">Изменить</a>
+                            <a class="editVacancy" href="/edit-vacancy?id=<%-element.id%>">Изменить</a>
                             <button class="editVacancy removeVacancy">Снять</button>
                         </div>
                                 </div>
