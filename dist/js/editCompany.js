@@ -49,6 +49,7 @@ const sendAvatar = async () => {
 };
 
 async function sendUpdateData() {
+  buttonSave.setAttribute("disabled", "disabled");
   if (
     formData.has("company") === false &&
     dataCompany.title === null &&
@@ -79,8 +80,11 @@ async function sendUpdateData() {
     body: JSON.stringify(dataCompany),
   });
   let toJson = await sendData.json();
-  await console.log(toJson);
-  return [toJson.INN, toJson.success, toJson.message];
+  return {
+    success: toJson.success,
+    type: toJson.type,
+    redirect: toJson.redirect,
+  };
 }
 
 let formData = new FormData();
@@ -97,10 +101,13 @@ for (const item of getAlltarrif) {
 const imageUpload = document.getElementById("imageUpload");
 const backgroundImage = document.querySelector(".leftFishPhoto");
 buttonSave.addEventListener("click", async function (e) {
-  let [inn, status, message] = await sendUpdateData();
-  console.log(inn, status);
-  if (!inn || !status) return false;
-  window.location.href = `/company/${inn}`;
+  let { success, type, redirect } = await sendUpdateData();
+  console.log({ success, type, redirect });
+  if (!success) {
+    buttonSave.removeAttribute("disabled", "disabled");
+    return false;
+  }
+  return (window.location.href = redirect);
 });
 imageUpload.addEventListener("change", function (event) {
   const file = event.target.files[0];

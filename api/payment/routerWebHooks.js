@@ -5,9 +5,11 @@ const {
   updatePremium,
   removePremium,
 } = require("../../database/Request/setPremium");
+
 const {
   createCompany,
   updateCompany,
+  updateCountStaffOfCompany,
   freezCompany,
 } = require("../../database/Request/Company");
 
@@ -33,6 +35,7 @@ router.post("/webhook/yookassa", async (req, res) => {
         paymentType,
         title,
         nextTimePay,
+        newCountStaff,
         INN,
         descriptionCompany,
         companyICON,
@@ -117,6 +120,19 @@ router.post("/webhook/yookassa", async (req, res) => {
               "Ошибка при обновлении подписки:",
               updateResult.message
             );
+          }
+        } else if (paymentType === "UpdateCompanyInfo") {
+          let staffs = Number(newCountStaff);
+          let updateCompanyInfo = await updateCountStaffOfCompany(
+            userId,
+            staffs
+          );
+          if (!updateCompanyInfo.success) {
+            console.error(
+              "Ошибка при изменении количества сотрудников компании:",
+              updateCompanyInfo.message
+            );
+            return res.status(500).json({ error: "Internal Server Error" });
           }
         }
         return res.json({ received: true });

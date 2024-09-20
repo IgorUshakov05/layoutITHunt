@@ -209,7 +209,6 @@ async function findCompanyOfINN(INN) {
       isVarefy: true,
       isFreez: false,
     });
-    console.log(findFirst, " - тут норм");
     if (!findFirst) return { success: false, message: "Компании нет" };
     return { success: true, data: findFirst };
   } catch (error) {
@@ -288,6 +287,28 @@ const setStatusOfCompany = async (companyID, status = false) => {
   }
 };
 
+const updateCountStaffOfCompany = async (creatorID, newCount) => {
+  try {
+    const now = Temporal.Now.plainDateISO();
+    let result = await CompanySchema.updateOne(
+      { creatorID },
+      {
+        $set: {
+          countStaffs: newCount,
+          nextPayDay: now.add({ months: 1 }).toString(),
+        },
+      }
+    );
+    if (!result) {
+      return { success: false, message: "Company not found" };
+    }
+    return { success: true, message: "Count staffs updated" };
+  } catch (e) {
+    console.error(e);
+    return { success: false, message: "Error" };
+  }
+};
+
 module.exports = {
   createCompany,
   searchCompanyForVacancy,
@@ -295,6 +316,7 @@ module.exports = {
   findCompanyOfUser,
   findCompanyByCreator,
   setStatusOfCompany,
+  updateCountStaffOfCompany,
   findCourtOfUser,
   getCompanyByCreator,
   findCompanyOfUserAndINN,

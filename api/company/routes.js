@@ -1,6 +1,16 @@
 const { Router } = require("express");
 const router = Router();
+const axios = require("axios");
 const { isAuth } = require("../middlewares/auth");
+const { v4 } = require("uuid");
+const tariffsCompany = {
+  5: { amount: 349, discount: "" },
+  20: { amount: 1260, discount: "10%" },
+  50: { amount: 2800, discount: "20%" },
+  100: { amount: 4900, discount: "30%" },
+  200: { amount: 9900, discount: "40%" },
+};
+
 const {
   findCompanyOfUserAndINN,
   getCompanyByCreator,
@@ -53,55 +63,135 @@ router.post(
   body("description")
     .optional({ checkFalsy: true })
     .isLength({ min: 5, max: 250 }),
-  body("count").optional({ checkFalsy: true }).isIn([5, 20, 50, 100, 200]),
+  body("count")
+    .optional({ checkFalsy: true })
+    .isIn([null, 5, 20, 50, 100, 200]),
   async (req, res) => {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res.status(422).json({ success: false, errors: errors.array() });
+        return res
+          .status(422)
+          .json({ success: false, type: "Error", errors: errors.array() });
       }
+
       let { title, description, count, avatar } = req.body;
-      if (!title && !description && !avatar && !count) {
+
+      // Проверяем, что хотя бы одно поле изменилось
+      if (!title && !description && !avatar && count === null) {
         return res
           .status(202)
-          .json({ success: true, message: "Значение пустые" });
+          .json({ success: true, type: "Error", message: "Значение пустые" });
       }
-      console.log(req.body);
+
       let access = await req.cookies.access;
       if (!access) return res.redirect("/login");
       const decodeAccess = await decodeAccessToken(access);
       if (!decodeAccess) return res.redirect("/login");
+
+      // Обработка ошибки getCompanyByCreator
       let notVerifiedCompanies = await getCompanyByCreator(decodeAccess.userID);
+      if (!notVerifiedCompanies) {
+        return res.status(404).json({
+          success: false,
+          type: "Error",
+          message: "Company not found",
+        });
+      }
+
       if (!notVerifiedCompanies.success)
-        return res.status(501).json({ success: false, message: "Not pay" });
+        return res
+          .status(501)
+          .json({ success: false, type: "Error", message: "Not pay" });
       if (!notVerifiedCompanies.company) return res.redirect("/");
+
+      // Удаление старого аватара
       if (!!avatar) {
         let removeLast = await removeLastAvatar(
           notVerifiedCompanies.company.avatar.split("/")[4]
         );
         console.log(removeLast);
       }
+
+      // Обновление информации о компании
       let updateInfo = await updateInfoCompany(decodeAccess.userID, {
         avatar,
         title,
         description,
       });
+
+      // Проверка на необходимость оплаты
       if (
-        notVerifiedCompanies.company.countStaffs === count ||
-        count === null
+        count !== null &&
+        count !== notVerifiedCompanies.company.countStaffs
       ) {
+        try {
+          const paymentData = {
+            amount: {
+              value: tariffsCompany[count].amount,
+              currency: "RUB",
+            },
+            confirmation: {
+              type: "redirect",
+              return_url: `${process.env.BASE_URL}/company/${notVerifiedCompanies.company.INN}`,
+            },
+            capture: true,
+            description: `Обновления количества сотрудников - ${count}.`,
+            metadata: {
+              userId: decodeAccess.userID,
+              paymentType: "UpdateCompanyInfo",
+              newCountStaff: count,
+            },
+          };
+          const response = await axios.post(
+            "https://api.yookassa.ru/v3/payments",
+            paymentData,
+            {
+              auth: {
+                username: process.env.SHOPID,
+                password: process.env.SECRETKEY,
+              },
+              headers: {
+                "Idempotence-Key": v4(),
+              },
+            }
+          );
+
+          if (response.status === 200) {
+            const paymentId = response.data.id; // Пример: Извлечение ID платежа
+            const confirmationUrl = response.data.confirmation.confirmation_url; // Пример: Извлечение URL подтверждения
+            return res.status(200).json({
+              success: true,
+              redirect: confirmationUrl,
+            });
+          } else {
+            console.error("Error creating payment: ", response.data);
+            res
+              .status(500)
+              .json({ success: false, type: "Error", error: response.data });
+          }
+        } catch (error) {
+          console.error("Error creating payment: ", error.response.data);
+          res
+            .status(500)
+            .json({
+              success: false,
+              type: "Error",
+              error: error.response.data,
+            });
+        }
+      } else {
         return res.status(200).json({
           success: true,
-          INN: notVerifiedCompanies.company.INN,
-          message: "Not pay",
+          redirect: `/company/${notVerifiedCompanies.company.INN}`,
         });
       }
-      return res.status(200).json({ success: true, message: "Нужно платить" });
     } catch (error) {
-      console.error("Error getting not verified companies:", error);
-      res
-        .status(500)
-        .json({ success: false, message: "Error retrieving data" });
+      console.error("Error getting not verified companies: ", error);
+      res.status(500).json({
+        success: false,
+        type: "Error",
+      });
     }
   }
 );
