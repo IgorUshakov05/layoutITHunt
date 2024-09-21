@@ -1,18 +1,26 @@
 const mongoose = require("mongoose");
 
-const skillsSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
+const skillsSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
   },
-});
+  { _id: false }
+);
 
-const typeWorkSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
+const typeWorkSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
   },
-});
+  {
+    _id: false,
+  }
+);
 
 const priceSchema = new mongoose.Schema({
   minPrice: {
@@ -42,7 +50,7 @@ const responseSchema = new mongoose.Schema({
     type: Boolean,
     required: false,
     default: false,
-  }
+  },
 });
 
 const vacancySchema = new mongoose.Schema({

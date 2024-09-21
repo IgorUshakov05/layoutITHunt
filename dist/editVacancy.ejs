@@ -9,6 +9,22 @@
       name="viewport"
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
+    <script>
+      window.conf = {
+        special: "<%- data.special || '' %>",
+        experience: "<%- data.experience || '' %>",
+        price: {
+          min: "<%- data.price.minPrice || 0 %>",
+          max: "<%- data.price.maxPrice || 0 %>",
+          agreement: "<%- data.price.agreement===true?'true':'' %>",
+        },
+        skills: JSON.parse(`<%- JSON.stringify(data.skills) %>`),
+        description: `<%-data.description%>`,
+        wayOfWorking: JSON.parse(`<%- JSON.stringify(data.typeWork) %>`),
+        expirienceLife: "<%-data.experience%>",
+      };
+    </script>
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon" />
     <link rel="stylesheet" href="/style.css" />
@@ -18,7 +34,7 @@
       href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css"
       rel="stylesheet"
     />
-    <title>WebHunt - создание вакансии</title>
+    <title>Редактирование вакансии</title>
   </head>
   <body>
     <main>
@@ -179,7 +195,6 @@
                 >Отмена</a
               >
               <button
-                disabled
                 id="nextStageTwo"
                 class="showMoreButton nextStageBattonVacancy"
                 title="Далее"
@@ -350,7 +365,6 @@
               <button
                 id="nextStageThree"
                 class="showMoreButton nextStageBattonVacancy"
-                disabled
               >
                 Продолжить
               </button>
@@ -838,6 +852,6 @@
         </div>
       </div>
     </main>
-    <script src="/js/createVacancy.js"></script>
+    <script src="/js/editVacansy.js"></script>
   </body>
 </html>
