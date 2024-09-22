@@ -19,7 +19,7 @@ const specialList = [
   "Менеджер продаж",
   "Тестировщик",
   "Продукт менеджер",
-  "BackEnd",
+  "Backend",
   "FullStack",
   "TeamLeader",
   "Верстальщик",

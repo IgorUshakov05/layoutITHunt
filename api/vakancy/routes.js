@@ -4,6 +4,7 @@ const router = Router();
 const { decodeAccessToken } = require("../tokens/accessToken");
 const {
   createVacancy,
+  updateVacansy,
   removeVacancy,
 } = require("../../database/Request/Vacancy");
 const { electedVacancy } = require("../../database/Request/FavoriteVacancy");
@@ -20,7 +21,7 @@ const specialList = [
   "Менеджер продаж",
   "Тестировщик",
   "Продукт менеджер",
-  "BackEnd",
+  "Backend",
   "FullStack",
   "TeamLeader",
   "Верстальщик",
@@ -80,6 +81,7 @@ router.post(
       .isLength({ min: 10 })
       .withMessage("Описание должно быть не менее 10 символов"),
   ],
+
   async (req, res) => {
     try {
       let access = await req.cookies.access;
@@ -138,11 +140,11 @@ router.post(
       console.log(id, text);
       let access = req.cookies.access;
       if (!access) return res.redirect("/login");
-      const removeVacansyResult = await removeVacancy(id,text);
+      const removeVacansyResult = await removeVacancy(id, text);
       if (!removeVacansyResult.success) {
         return res
           .status(400)
-          .json({ success: false, error: removeVacansyResult.message});
+          .json({ success: false, error: removeVacansyResult.message });
       }
       return res
         .status(200)
@@ -181,5 +183,80 @@ router.post("/favorite-vacancy", async (req, res) => {
     res.status(500).json({ message: err.message, result: false });
   }
 });
+
+router.post(
+  "/edit-vacancy",
+  [
+    check("id").notEmpty(),
+    check("special").isIn(specialList).withMessage("Неверная специальность"),
+    check("skills")
+      .isArray({ min: 1 })
+      .withMessage("Должен быть хотя бы один навык"),
+    check("wayOfWorking")
+      .isArray()
+      .custom((value) =>
+        value.every((item) => wayOfWorkingOptions.includes(item))
+      )
+      .withMessage("Неверный способ работы"),
+    check("expirienceLife")
+      .isIn(expirienceLifeOptions)
+      .withMessage("Неверный опыт работы"),
+    check("salary.min").optional(),
+    check("salary.max").optional(),
+    check("salary").custom((salary) => {
+      const { min, max, agreement } = salary;
+      const minValue = min === "" ? 0 : min;
+      const maxValue = max === "" ? 0 : max;
+      if (minValue > 0 || maxValue > 0 || agreement) {
+        return true;
+      }
+      throw new Error(
+        'Необходимо указать либо "min", либо "max", либо "agreement".'
+      );
+    }),
+    check("description")
+      .isLength({ min: 10 })
+      .withMessage("Описание должно быть не менее 10 символов"),
+  ],
+  async (req, res) => {
+    try {
+      let access = await req.cookies.access;
+      if (!access) return res.redirect("/login");
+      const vacancyID = req.body.id;
+      console.log(vacancyID, " - id вакансии");
+      const decodeAccess = await decodeAccessToken(access);
+      if (!decodeAccess || !vacancyID) return res.redirect("/login");
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        console.log(errors.array());
+        return res.status(400).json({ errors: errors.array() });
+      }
+      let findUser = await searchUserId(decodeAccess.userID);
+      if (!findUser) return res.redirect("/login");
+      const result = await updateVacansy(vacancyID, {
+        userID: decodeAccess.userID,
+        special: req.body.special,
+        skills: req.body.skills, // ['React']
+        typeWork: req.body.wayOfWorking, // ['Гибкий график']
+        experience: req.body.expirienceLife, // 'OneTwo'
+        price: {
+          minPrice: req.body.salary.min,
+          maxPrice: req.body.salary.max,
+          agreement: req.body.salary.agreement,
+        },
+        description: req.body.description, // '<h1>Awdaawdawdawd</h1>'
+      });
+      if (!result.success)
+        return res
+          .status(501)
+          .json({ success: false, message: result.message });
+      return res.status(201).json({
+        message: "Vacancy created successfully",
+      });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  }
+);
 
 module.exports = router;

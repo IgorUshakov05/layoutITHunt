@@ -23,7 +23,7 @@ const specializations = {
   "Менеджер продаж": "/assets/pictures/meneger.webp",
   Тестировщик: "/assets/pictures/tester.webp",
   "Продукт менеджер": "/assets/pictures/product.webp",
-  BackEnd: "/assets/pictures/backend.webp",
+  Backend: "/assets/pictures/backend.webp",
   FullStack: "/assets/pictures/fullstack.webp",
   TeamLeader: "/assets/pictures/teamleader.webp",
   Верстальщик: "/assets/pictures/Верстальщик.webp",
@@ -38,9 +38,14 @@ const parentListSpecial = document.querySelector(".ParentlistSpecial");
 let skillList = [];
 let allData = {
   special: window.conf.special,
-  skills: window.conf.skills,
-  wayOfWorking: window.conf.wayOfWorking,
+  skills: window.conf.skills.map((el) => {
+    return el.title;
+  }),
+  wayOfWorking: window.conf.wayOfWorking.map((el) => {
+    return el.title;
+  }),
   expirienceLife: window.conf.expirienceLife,
+  id: new URL(window.location).searchParams.get("id"),
   salary: {
     min: window.conf.price.min,
     max: window.conf.price.max,
@@ -49,13 +54,13 @@ let allData = {
   description: window.conf.description,
 };
 for (const wayItem of allData.wayOfWorking) {
-  document.querySelector(`input[value="${wayItem.title}"]`).checked = true;
+  document.querySelector(`input[value="${wayItem}"]`).checked = true;
 }
 document.querySelector(
   `input[value="${allData.expirienceLife}"]`
 ).checked = true;
 for (const skill of allData.skills) {
-  appendElementUI(skill.title);
+  appendElementUI(skill);
 }
 
 let specialList = [
@@ -69,7 +74,7 @@ let specialList = [
   "Менеджер продаж",
   "Тестировщик",
   "Продукт менеджер",
-  "BackEnd",
+  "Backend",
   "FullStack",
   "TeamLeader",
   "Верстальщик",
@@ -225,7 +230,7 @@ input.addEventListener("input", function () {
 });
 
 function removeFromSkillAllData(title) {
-  allData.skills = allData.skills.filter((skill) => skill.title !== title);
+  allData.skills = allData.skills.filter((skill) => skill !== title);
   console.log(allData.skills);
 }
 function select(pic, title) {
@@ -442,7 +447,7 @@ document
       }
 
       console.log("Fetch Create Vacancy");
-      const response = await fetch("/api/create-vacancy", {
+      const response = await fetch("/api/edit-vacancy", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -457,8 +462,6 @@ document
       }
 
       const data = await response.json();
-      console.log(data);
-      console.log("Отрисовка");
       $(".threeStage").height("0");
       progress.value = 100;
       $("#progress").attr("value", "100");

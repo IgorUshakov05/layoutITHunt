@@ -80,9 +80,47 @@ async function searchVacancyByUserId(id) {
     return { success: false, error: err.message };
   }
 }
-
+async function updateVacansy(
+  id,
+  {
+    userID,
+    special,
+    skills,
+    typeWork,
+    experience,
+    price,
+    description,
+    responses,
+  }
+) {
+  try {
+    const formattedSkills = skills.map((skill) => ({ title: skill }));
+    const formattedTypeWork = typeWork.map((workType) => ({ title: workType }));
+    const result = await Vacancy.findOneAndUpdate(
+      { id, userID },
+      {
+        $set: {
+          special,
+          skills: formattedSkills,
+          typeWork: formattedTypeWork,
+          experience,
+          price,
+          description,
+          responses,
+        },
+      }
+    );
+    console.log(result);
+    if (!result) return { success: false, message: "Vacancy not found" };
+    return { success: true, data: result };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: err.message };
+  }
+}
 module.exports = {
   createVacancy,
+  updateVacansy,
   searchVacancyById,
   searchVacancyByUserId,
   removeVacancy,
