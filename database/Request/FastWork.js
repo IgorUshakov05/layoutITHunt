@@ -73,5 +73,47 @@ async function searchFastWorkByUserId(id) {
     return { success: false, error: err.message };
   }
 }
-
-module.exports = { createFastWork, searchFastWorkById, searchFastWorkByUserId };
+async function searchFastWorkById(id, userID) {
+  try {
+    const vacancy = await FastWork.findOne({ id, userID });
+    if (!vacancy) {
+      return { success: false, message: "Вакансии с таким id не найдено" };
+    }
+    return { success: true, data: vacancy };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: err.message };
+  }
+}
+async function updateFastWork(
+  id,
+  { userID, special, skills, experience, price, description, responses }
+) {
+  const formattedSkills = skills.map((skill) => ({ title: skill }));
+  try {
+    const result = await FastWork.findOneAndUpdate(
+      { id, userID },
+      {
+        $set: {
+          userID,
+          special,
+          skills: formattedSkills,
+          level: experience,
+          price,
+          description,
+        },
+      }
+    );
+    if (!result) return { success: false, message: "fast work not found" };
+    return { success: true, data: result };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: err.message };
+  }
+}
+module.exports = {
+  createFastWork,
+  updateFastWork,
+  searchFastWorkById,
+  searchFastWorkByUserId,
+};

@@ -53,9 +53,9 @@ const removeVacancy = async (id, userReason) => {
     return { success: false, message: "Error" };
   }
 };
-async function searchVacancyById(id) {
+async function searchVacancyById(id,userID) {
   try {
-    const vacancy = await Vacancy.findOne({ id });
+    const vacancy = await Vacancy.findOne({ id,userID });
     if (!vacancy) {
       return { success: false, message: "Вакансии с таким id не найдено" };
     }
@@ -106,7 +106,6 @@ async function updateVacansy(
           experience,
           price,
           description,
-          responses,
         },
       }
     );

@@ -5,6 +5,20 @@
     <meta name="robots" content="index" />
     <meta name="googlebot" content="index" />
     <meta name="author" content="WebHunt" />
+    <script>
+      window.conf = {
+        special: "<%- data.special || '' %>",
+        experience: "<%- data.experience || '' %>",
+        level:"<%- data.level || '' %>", 
+        price: {
+          min: "<%- data.price.minPrice || 0 %>",
+          max: "<%- data.price.maxPrice || 0 %>",
+          agreement: "<%- data.price.agreement===true?'true':'' %>",
+        },
+        skills: JSON.parse(`<%- JSON.stringify(data.skills) %>`),
+        description: `<%-data.description%>`,
+      };
+    </script>
     <meta
       name="viewport"
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
@@ -18,7 +32,7 @@
       href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css"
       rel="stylesheet"
     />
-    <title>WebHunt - создание фаст-ворка</title>
+    <title>WebHunt - изменение фаст-ворка</title>
   </head>
   <body>
     <main>
@@ -62,6 +76,7 @@
                   class="specialisationSelectInput"
                   placeholder="FullStack"
                   type="text"
+                  value="<%-data.special%>"
                   name="specialisationSelect"
                   id="specialisationSelect"
                 />
@@ -178,7 +193,6 @@
                 >Отмена</a
               >
               <button
-                disabled
                 id="nextStageTwo"
                 class="showMoreButton nextStageBattonVacancy"
                 title="Далее"
@@ -291,7 +305,6 @@
               <button
                 id="nextStageThree"
                 class="showMoreButton nextStageBattonVacancy"
-                disabled
               >
                 Продолжить
               </button>
@@ -320,14 +333,13 @@
               <button
                 id="nextStageFinalyAndEnd"
                 class="showMoreButton nextStageBattonVacancy finaly"
-                disabled
               >
                 Сохранить изменения
               </button>
             </div>
           </div>
           <div id="finalyStage" class="finalyStage">
-            <h1 class="firstStage">Фаст-Ворк готов!</h1>
+            <h1 class="firstStage">Фаст-ворк изменен!</h1>
             <p class="firstStageDescription">
               Для большей эффективности поделитесь ссылкой на фаст-ворк в своих
               соц сетях
@@ -779,6 +791,6 @@
         </div>
       </div>
     </main>
-    <script src="/js/createFastWork.js"></script>
+    <script src="/js/editFastWork.js"></script>
   </body>
 </html>
