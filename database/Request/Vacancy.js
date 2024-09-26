@@ -17,8 +17,8 @@ async function createVacancy({
   const formattedTypeWork = typeWork.map((workType) => ({ title: workType }));
 
   // Использование PlainDateTime для работы с датой и временем
-  const now = Temporal.Now.plainDateTimeISO();
-  const add30 = now.add({ days: 30 });
+  const now = Temporal.Now.plainDateISO();
+  const add30 = now.add({ months: 1 });
   const newVacancy = new Vacancy({
     id: v4(),
     userID,
@@ -53,9 +53,9 @@ const removeVacancy = async (id, userReason) => {
     return { success: false, message: "Error" };
   }
 };
-async function searchVacancyById(id,userID) {
+async function searchVacancyById(id, userID) {
   try {
-    const vacancy = await Vacancy.findOne({ id,userID });
+    const vacancy = await Vacancy.findOne({ id, userID });
     if (!vacancy) {
       return { success: false, message: "Вакансии с таким id не найдено" };
     }

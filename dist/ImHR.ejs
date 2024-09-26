@@ -425,9 +425,10 @@
                         </a>
                 </div>
             <% } %>
-        <%if(!vacancys.length && favorite.length) {%>
+        <%if(!vacancys.length && fastWork.length) {%>
 
-                <a href="/create-vacancy"><div class="addNewVacansy" style="margin-bottom: 20px; margin-top: 0;" >
+                <a href="/create-vacancy">
+                    <div class="addNewVacansy" style="margin-bottom: 20px; margin-top: 0;" >
                         <div class="svgPlus"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M9.12305 0.75V9V17.25" stroke="white" stroke-linecap="round"/>
 <path d="M17.25 9.12314H9H0.75" stroke="white" stroke-linecap="round"/>
@@ -436,6 +437,17 @@
                         </div>
                         </a>
                         <%}%>
+
+                        <%if(!fastWork.length && vacancys.length) {%>
+                            <a href="/create-fast-work">< class="addNewVacansy"   style="<%= vacancys.length ? 'margin-top: 20px;' : 'margin-top: 0px;'%>  margin-bottom: 20px;">
+                        <div class="svgPlus"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M9.12305 0.75V9V17.25" stroke="white" stroke-linecap="round"/>
+<path d="M17.25 9.12314H9H0.75" stroke="white" stroke-linecap="round"/>
+</svg>
+</div><span>Добавить фаст-форк</span>
+                        </div>
+                        </a>
+                            <%}%>
             <% if(fastWork.length) { %>
             <div class="myVacancy mt-20" style="margin-bottom: 20px;">
                 <h1 class="inLine"><span class="myVacancyText">Мои Фаст-Ворки</span><span class="vacancyIter">  (<%=fastWork.length%>)</span><div class="closeFast"><svg width="22" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12L11 3L20 12" stroke="black" stroke-width="3"/></svg></div></h1>

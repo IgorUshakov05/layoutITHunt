@@ -21,8 +21,8 @@ async function createFastWork({
     description,
     responses
   );
-  const now = Temporal.Now.plainDateTimeISO();
-  const add30 = now.add({ days: 30 });
+  const now = Temporal.Now.plainDateISO();
+  const add30 = now.add({ months: 1 });
 
   const newVacancy = new FastWork({
     id: v4(),

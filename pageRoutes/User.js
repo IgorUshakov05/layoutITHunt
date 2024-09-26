@@ -26,9 +26,10 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
     }
     var favorites = null;
     let premium = await findPremium(result.id);
-    if (!premium.success) premium = null;
-    premium = premium.premium;
+    if (!premium.success) premium = false;
+    premium = true;
     const age = calculateAge(result.birthDay);
+    console.log(premium, " - премиум");
     if (access) {
       let findMyProf = await searchUserId(decodeAccess.userID);
       favorites = (await findUsersByFavorites(findMyProf.favorite)) || [];
@@ -93,7 +94,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
     if (result.role === "worker") {
       return res.render("seeSideProf.ejs", {
         isLoggedIn: decodeAccess,
-        id: decodeAccess.userID,
+        id: result.id,
         name: result.name,
         surname: result.surname,
         contacts: result.contacts,
@@ -103,6 +104,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
         title: `${result.surname} ${result.name}`,
         age,
         city: result.city,
+        FILE_SERVER: process.env.FILE_SERVER_PATH,
         skills: result.skills,
         premium,
         education: result.education,
@@ -127,9 +129,10 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       console.log(findAllFV);
       return res.render("SeSideHr.ejs", {
         isLoggedIn: decodeAccess,
-        id: decodeAccess.userID,
+        id: result.id,
         name: result.name,
         chatList: decodeAccess.chatList || null,
+        FILE_SERVER: process.env.FILE_SERVER_PATH,
         surname: result.surname,
         job: result.job,
         title: `${result.surname} ${result.name}`,

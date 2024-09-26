@@ -2,8 +2,56 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="robots" content="noindex">
-    <meta name="googlebot" content="noindex">
+    <meta name="robots" content="index">
+    <meta name="googlebot" content="index">
+    <meta
+      name="description"
+      content="Работадатель которому нужны умелые сотрудники!"
+    />
+    <%if(!!company) {%>
+        <meta property="og:title" content="<%-name%> <%-surname%> - работадатель из компании <%-company.title%>" />
+        <%} else {%>
+            <meta property="og:title" content="<%-name%> <%-surname%>" />
+            <%}%>
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://webhunt.ru/<%-id%>" />
+    <meta
+      property="og:image"
+      content="<%-FILE_SERVER%>/preview/user?name=<%-name%>&lastname=<%-surname%>&role=admin&avatar=<%=  avatar %>&location=<%-city%>&special=&premium=<%-premium%>"
+    />
+    <meta
+      property="og:description"
+      content="Работадатель которому нужны умелые сотрудники!"
+    />
+    <meta property="og:site_name" content="WebHunt" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:locale:alternate" content="ru_RU" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Логотип WebHunt" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@WebHunt" />
+    <%if(!!company) {%>
+        <meta name="twitter:title" content="<%-name%> <%-surname%> - работадатель из компании <%-company.title%>" />
+        <%} else {%>
+            <meta name="twitter:title" content="<%-name%> <%-surname%>" />
+            <%}%>
+    <meta
+      name="twitter:description"
+      content="Работадатель которому нужны умелые сотрудники!"
+    />
+    <meta
+      name="twitter:image"
+      content="<%-FILE_SERVER%>/preview/user?name=<%-name%>&lastname=<%-surname%>&role=admin&avatar=<%=  avatar %>&location=<%-city%>&special=&premium=<%-premium%>"   
+    />
+    <meta name="twitter:image:alt" content="Иконка работадателя" />
+
+    <meta
+      name="keywords"
+      content="IT, работа, вакансии, поиск работы, WebHunt, специалисты, HR <%name%>, <%-surname%>, <%-city%>"
+    />
+    <meta name="robots" content="index, follow" />
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
