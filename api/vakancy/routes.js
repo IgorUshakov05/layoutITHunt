@@ -136,7 +136,7 @@ router.post(
       .withMessage("Неизвестный тип публикации"),
   ],
   async (req, res) => {
-    console.log(req.body)
+    console.log(req.body);
     try {
       const errors = validationResult(req);
 
@@ -149,16 +149,19 @@ router.post(
       let access = req.cookies.access;
       if (!access) return res.redirect("/login");
       let removePublication;
-      switch (req.body.type) {
+      let type = req.body.type;
+      switch (type) {
         case "vacancy":
           removePublication = await removeVacancy(id, text);
           break;
         case "fastwork":
           removePublication = await removeFastWork(id, text);
+          break;
         default:
           removePublication = { success: false, error: "Не верный тип" };
           break;
       }
+      console.log(removePublication, " - удаление публикации");
       if (!removePublication.success) {
         return res
           .status(400)
