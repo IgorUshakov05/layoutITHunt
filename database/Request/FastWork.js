@@ -1,6 +1,7 @@
 const FastWork = require("../Schema/FastWork");
 const { v4 } = require("uuid");
 const { Temporal } = require("@js-temporal/polyfill");
+const {addCauseFastWork} = require("../Request/CauseRemovePublication");
 
 async function createFastWork({
   userID,
@@ -111,9 +112,25 @@ async function updateFastWork(
     return { success: false, error: err.message };
   }
 }
+
+const removeFastWork = async (id, userReason) => {
+  try {
+    let result = await FastWork.findOneAndDelete({ id });
+    if (!result) {
+      return { success: false, message: "Vacancy not found" };
+    }
+    let addToCause = await addCauseFastWork(result.special, userReason);
+    return { success: true, message: "Vacansy removed" };
+  } catch (e) {
+    console.log(e);
+    return { success: false, message: "Error" };
+  }
+};
+
 module.exports = {
   createFastWork,
   updateFastWork,
+  removeFastWork,
   searchFastWorkById,
   searchFastWorkByUserId,
 };

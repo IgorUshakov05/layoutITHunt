@@ -7,6 +7,7 @@ const {
   updateVacansy,
   removeVacancy,
 } = require("../../database/Request/Vacancy");
+const { removeFastWork } = require("../../database/Request/FastWork");
 const { electedVacancy } = require("../../database/Request/FavoriteVacancy");
 const { searchUserId } = require("../../database/Request/User");
 const { searchVacancyById } = require("../../database/Request/Vacancy");
@@ -126,9 +127,16 @@ router.post(
   }
 );
 router.post(
-  "/removeVacancy",
-  [check("id").isString(), check("text").isInt({ min: 1, max: 3 })],
+  "/removePublication",
+  [
+    check("id").isString(),
+    check("text").isInt({ min: 1, max: 3 }),
+    check("type")
+      .isIn(["vacancy", "fastwork"])
+      .withMessage("Неизвестный тип публикации"),
+  ],
   async (req, res) => {
+    console.log(req.body)
     try {
       const errors = validationResult(req);
 
@@ -140,11 +148,21 @@ router.post(
       console.log(id, text);
       let access = req.cookies.access;
       if (!access) return res.redirect("/login");
-      const removeVacansyResult = await removeVacancy(id, text);
-      if (!removeVacansyResult.success) {
+      let removePublication;
+      switch (req.body.type) {
+        case "vacancy":
+          removePublication = await removeVacancy(id, text);
+          break;
+        case "fastwork":
+          removePublication = await removeFastWork(id, text);
+        default:
+          removePublication = { success: false, error: "Не верный тип" };
+          break;
+      }
+      if (!removePublication.success) {
         return res
           .status(400)
-          .json({ success: false, error: removeVacansyResult.message });
+          .json({ success: false, error: removePublication.message });
       }
       return res
         .status(200)
