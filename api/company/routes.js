@@ -12,6 +12,7 @@ const tariffsCompany = {
 };
 
 const {
+  createNewRequest,
   findCompanyOfUserAndINN,
   getCompanyByCreator,
   updateInfoCompany,
@@ -172,13 +173,11 @@ router.post(
           }
         } catch (error) {
           console.error("Error creating payment: ", error.response.data);
-          res
-            .status(500)
-            .json({
-              success: false,
-              type: "Error",
-              error: error.response.data,
-            });
+          res.status(500).json({
+            success: false,
+            type: "Error",
+            error: error.response.data,
+          });
         }
       } else {
         return res.status(200).json({
@@ -195,6 +194,24 @@ router.post(
     }
   }
 );
+
+router.post("/invite-company-request", async (req, res) => {
+  try {
+    let access = await req.cookies.access;
+    let companyId = req.body.companyId;
+    console.log(companyId);
+    if (!companyId)
+      return res.status(403).json({ success: false, message: "Введите id" });
+    if (!access) return res.redirect("/login");
+    const decodeAccess = await decodeAccessToken(access);
+    if (!decodeAccess) return res.redirect("/login");
+    let setInvite = await createNewRequest(decodeAccess.userID, companyId);
+    return res.status(201).json(setInvite);
+  } catch (e) {
+    console.log(e);
+    return res.status(500).json({ status: "Error", message: "Сервер упал" });
+  }
+});
 
 async function removeLastAvatar(title) {
   let deleteLastPhoto = await fetch(

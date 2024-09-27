@@ -1,8 +1,8 @@
-const {Router} = require('express')
-const router = Router()
+const { Router } = require("express");
+const router = Router();
+const {isAuth} = require('../api/middlewares/auth');
+router.get("/find-company", isAuth, (req, res) => {
+  res.render("findCompany", { isLoggedIn: false, username: "" });
+});
 
-router.get('/find-company', (req,res) => {
-    res.render('findCompany', {isLoggedIn: false, username: ''})
-})
-
-module.exports = router
+module.exports = router;

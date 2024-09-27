@@ -26,8 +26,6 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
     }
     var favorites = null;
     let premium = await findPremium(result.id);
-    if (!premium.success) premium = false;
-    premium = true;
     const age = calculateAge(result.birthDay);
     console.log(premium, " - премиум");
     if (access) {
@@ -58,7 +56,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
             avatar: result.avatar,
             myFV: myFavoritesPubloc.data,
             expiriens: result.expiriens,
-            premium,
+            premium: premium.pemium,
             description: result.description,
           });
         }
@@ -78,7 +76,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
           avatar: result.avatar,
           age,
           city: result.city,
-          premium,
+          premium: premium.premium,
           company: findCompany.data,
           vacancys: vacancys.data,
           fastWork: fastWork.data,

@@ -130,7 +130,6 @@ let updateInfoCompany = async (userID, { title, avatar, description }) => {
     if (Object.keys(updateData).length === 0) {
       return { success: false, message: "Нет данных для обновления" };
     }
-
     const result = await CompanySchema.findOneAndUpdate(
       { creatorID: userID },
       {
@@ -318,6 +317,42 @@ const updateCountStaffOfCompany = async (
   }
 };
 
+const createNewRequest = async (userRequest, INN) => {
+  try {
+    let findCompany = await CompanySchema.findOne({ INN });
+    if (!findCompany) return { success: false, message: "Компания не найдена" };
+
+    let findUser = await UserSchema.findOne({ id: userRequest });
+    if (!findUser) return { success: false, message: "Пользователь не найден" };
+    if (findUser.role !== "creatorWork")
+      return { success: false, message: "Нет доступа" };
+    let findCompaniesOfUser = await CompanySchema.findOne({
+      userList: {
+        $elemMatch: { userID: userRequest },
+      },
+    });
+    if (findCompaniesOfUser)
+      return { success: false, message: "Уже в компании" };
+    // Написать нужно что пользователь не отправил заявку повторно
+    let appendRequest = await CompanySchema.updateOne(
+      { INN },
+      {
+        $push: {
+          RequestList: {
+            id: v4(),
+            userID: userRequest,
+          },
+        },
+      }
+    );
+
+    return { success: true, appendRequest };
+  } catch (e) {
+    console.log(e);
+    return { success: false };
+  }
+};
+
 module.exports = {
   createCompany,
   searchCompanyForVacancy,
@@ -326,6 +361,7 @@ module.exports = {
   findCompanyByCreator,
   setStatusOfCompany,
   updateCountStaffOfCompany,
+  createNewRequest,
   findCourtOfUser,
   getCompanyByCreator,
   findCompanyOfUserAndINN,

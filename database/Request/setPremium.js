@@ -63,10 +63,13 @@ const updatePremium = async (id, paymentId, nextTimePay) => {
 let findPremium = async (userID) => {
   try {
     const premium = await PremiumScheme.findOne({ userID });
-    return { success: true, premium };
+    if (!premium) {
+      return { success: true, pemium: false };
+    }
+    return { success: true, premium: true };
   } catch (e) {
     console.error("Ошибка при поиске подписки:", e);
-    return { success: false, message: "Произошла ошибка, попробуйте позже" };
+    return { success: true, pemium: false };
   }
 };
 

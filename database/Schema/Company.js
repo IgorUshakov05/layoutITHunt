@@ -21,7 +21,13 @@ const documentSchema = new mongoose.Schema({
     required: true,
   },
 });
-
+const RequestItem = new mongoose.Schema(
+  {
+    id: { type: String, required: true, unique: true },
+    userID: { type: String, required: true, unique: true },
+  },
+  { _id: false }
+);
 const vacancySchema = new mongoose.Schema({
   id: {
     type: String,
@@ -75,6 +81,7 @@ const vacancySchema = new mongoose.Schema({
     default: false,
   },
   userList: [listHRSchema],
+  RequestList: [RequestItem],
   paymentId: {
     type: String,
     required: true,
