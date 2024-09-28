@@ -3,6 +3,7 @@ const UserSchema = require("../Schema/UserSchema");
 const { v4 } = require("uuid");
 const { Temporal } = require("@js-temporal/polyfill");
 const createRefund = require("../../admin/payment/refundMoney");
+const Company = require("../Schema/Company");
 
 async function createCompany({
   title,
@@ -317,6 +318,19 @@ const updateCountStaffOfCompany = async (
   }
 };
 
+const searchRequest = async (userID) => {
+  try {
+    let findRequest = await Company.findOne({
+      RequestList: { $elemMatch: { userID } },
+    });
+    console.log(findRequest);
+    return { success: true, isHave: !!findRequest };
+  } catch (e) {
+    console.log(e);
+    return { success: false, message: "Возникла ошибка" };
+  }
+};
+
 const createNewRequest = async (userRequest, INN) => {
   try {
     let findCompany = await CompanySchema.findOne({ INN });
@@ -334,6 +348,14 @@ const createNewRequest = async (userRequest, INN) => {
     if (findCompaniesOfUser)
       return { success: false, message: "Уже в компании" };
     // Написать нужно что пользователь не отправил заявку повторно
+    let { success, isHave } = await searchRequest(userRequest);
+    if (!success)
+      return { success: false, message: "Возникла ошибка при запросе" };
+    if (isHave)
+      return {
+        success: false,
+        message: "Вы уже отправляли заявки на вступление",
+      };
     let appendRequest = await CompanySchema.updateOne(
       { INN },
       {

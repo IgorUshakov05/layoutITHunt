@@ -122,10 +122,12 @@ $("#bigBox").on("click", ".selectNo", () => {
   $(".selecteCompany").remove();
 });
 
-$("#toTwoStage").on("click", () => {
+$("#toTwoStage").on("click", async () => {
   if (data.inn == 0) {
     return false;
   } else {
+    let { success, message } = await request();
+    if (!success) return alert(message);
     $(".here").attr("href", data.img);
     $(".windowFinally").css("display", "flex");
     $(".data").css("height", "0").css("overflow", "hidden");
@@ -135,3 +137,17 @@ $("#toTwoStage").on("click", () => {
     $(".addOrg").css("color", "white");
   }
 });
+
+let request = async () => {
+  let fetching = await fetch("/api/invite-company-request", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "augwod89h1h9awdh9py0y82hjd",
+    },
+    body: JSON.stringify({ companyId: data.inn }), // Передаем JSON в теле запроса
+  });
+  let response = await fetching.json();
+  console.log(response);
+  return response;
+};
