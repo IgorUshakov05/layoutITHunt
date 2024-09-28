@@ -1,151 +1,146 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Найдите работу или предложите её в IT-сфере с помощью нашего сайта. Мы предлагаем широкий выбор вакансий для различных специализаций.">
-    <meta name="keywords" content="IT, работа, вакансии, поиск работы, WebHunt, специалисты, программист, разработчик, тестировщик, веб-дизайнер">
-    <meta name="robots" content="index, follow">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Найдите работу или предложите её в IT-сфере с помощью нашего сайта. Мы предлагаем широкий выбор вакансий для различных специализаций."
+    />
+    <meta
+      name="keywords"
+      content="IT, работа, вакансии, поиск работы, WebHunt, специалисты, программист, разработчик, тестировщик, веб-дизайнер"
+    />
+    <meta name="robots" content="index, follow" />
 
-    <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon">
-    <meta name="author" content="WebHunt">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon" />
+    <meta name="author" content="WebHunt" />
+    <link rel="stylesheet" href="/style.css" />
     <script src="/js/jquery.js"></script>
     <title>Входящие уведомления - Компания</title>
-</head>
-<body>
+  </head>
+  <body>
     <%- include('./header.ejs', { isLoggedIn, active: 'inbox',chat:chatList}) %>
-    <main  class="main">
-        <div class="twoBlocks mt20">
-            <%- include('./inboxLinks', {active: "3", isMain: false }) %>
-            <div class="MoreInfo mt35">
-                <div class="topInputAndLastAndFirst">
-                    <div class="inputSearchUser">
-                        <input type="text" name="userName" placeholder="Фамилия Имя" class="userNameSearchInput" id="userName">
+    <main class="main">
+      <div class="twoBlocks mt20">
+        <%- include('./inboxLinks', {active: "3", isMain: false }) %>
+        <div class="MoreInfo mt35">
+          <div class="topInputAndLastAndFirst">
+            <div class="inputSearchUser">
+              <input
+                type="text"
+                name="userName"
+                placeholder="Фамилия Имя"
+                class="userNameSearchInput"
+                id="userName"
+              />
+            </div>
+            <div class="selectLastOrFirst">
+              <div class="lastSelect divLF selectedRadio">
+                <input
+                  value="last"
+                  type="radio"
+                  class="inpCheck"
+                  name="lastOrFirst"
+                  id="FirstID"
+                  checked
+                />
+                <label for="FirstID">Последние</label>
+              </div>
+              <div class="firstSelect divLF">
+                <input
+                  value="first"
+                  type="radio"
+                  class="inpCheck"
+                  name="lastOrFirst"
+                  id="lastID"
+                />
+                <label for="lastID">Давние</label>
+              </div>
+            </div>
+          </div>
+          <div class="toDay">
+            <p class="countList">Количество заявок (12)</p>
+          </div>
+          <div class="listInviteInCompany">
+            <%hrList.forEach((hr) =>{%>
+            <article class="itemInviteComp">
+              <div class="timeLastSeen InCompanyRed">Отклонен</div>
+              <div class="timeLastSeen timeSeen"><%-hr.date%></div>
+              <div class="timeLastSeen InCompanyGren">Принят</div>
+              <a href="/<%-hr.id%>">
+                <div class="topInfoInvite">
+                  <div class="leftinf">
+                    <img
+                      src="<%-hr.avatar%>"
+                      width="53"
+                      height="53"
+                      alt="Фото пользователя"
+                    />
+                  </div>
+                  <div class="rightInfUs">
+                    <div class="toprightInfUs">
+                      <h1 class="userNameCompany"><%-hr.surname%> <%-hr.name%></h1>
                     </div>
-                    <div class="selectLastOrFirst">
-                        <div class="lastSelect divLF selectedRadio">
-                            <input value="last" type="radio" class="inpCheck" name="lastOrFirst" id="FirstID" checked >
-                            <label for="FirstID">Последние</label>
-                        </div>
-                        <div class="firstSelect divLF">
-                            <input value="first" type="radio" class="inpCheck" name="lastOrFirst" id="lastID">
-                            <label for="lastID">Давние</label>
-                        </div>
+                    <div class="locaton">
+                      <svg
+                        width="11"
+                        height="15"
+                        viewBox="0 0 11 15"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M5.5 0C8.53757 0 11 2.26228 11 5.05312C11 9.61016 5.5 14.4375 5.5 14.4375C5.5 14.4375 0 9.65067 0 5.05312C0 2.26228 2.46243 0 5.5 0Z"
+                          fill="#5412E0"
+                        />
+                        <path
+                          d="M5.5 8.25002C7.01878 8.25002 8.25 7.0188 8.25 5.50002C8.25 3.98123 7.01878 2.75002 5.5 2.75002C3.98122 2.75002 2.75 3.98123 2.75 5.50002C2.75 7.0188 3.98122 8.25002 5.5 8.25002Z"
+                          fill="white"
+                        />
+                      </svg>
+                      <p class="locationText"><%-hr.city.split(',').reverse()[0]||'Не известно'%></p>
                     </div>
+                  </div>
                 </div>
-                <div class="toDay">
-                    <p class="countList">Количество заявок (12)</p>
-                </div>
-                <div class="listInviteInCompany">
-                    <article class="itemInviteComp">
-                        <div class="timeLastSeen InCompanyRed">Отклонен</div>
-                        <div class="timeLastSeen timeSeen">3 минуты</div>
-                        <div class="timeLastSeen InCompanyGren">Принят</div>
-                        <a href="/sesideHr">
-                            <div class="topInfoInvite">
-                                <div class="leftinf">
-                                    <img src="/assets/pictures/person.jpg" width="53" height="53" alt="Фото пользователя">
-                                </div>
-                                <div class="rightInfUs">
-                                    <div class="toprightInfUs">
-                                        <h1 class="userNameCompany">Губарев Кирилл</h1>
-                                </div>
-                            <div class="locaton">
-                                <svg width="11" height="15" viewBox="0 0 11 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 0C8.53757 0 11 2.26228 11 5.05312C11 9.61016 5.5 14.4375 5.5 14.4375C5.5 14.4375 0 9.65067 0 5.05312C0 2.26228 2.46243 0 5.5 0Z" fill="#5412E0"/>
-                                    <path d="M5.5 8.25002C7.01878 8.25002 8.25 7.0188 8.25 5.50002C8.25 3.98123 7.01878 2.75002 5.5 2.75002C3.98122 2.75002 2.75 3.98123 2.75 5.50002C2.75 7.0188 3.98122 8.25002 5.5 8.25002Z" fill="white"/>
-                                    </svg>
-                                <p class="locationText">Ростов на Дону</p>                                    
-                            </div>    
-                            </div>
-                            </div>
-                        </a>
-                        <div class="noInORInv">
-                            <button class="noInORInvbutton reject">Отклонить</button>
-                            <button class="noInORInvbutton responseD">Пригласить</button>
-                            <button class="noInORInvbutton canelRespons">Отмена</button>
-                        </div>
-                    </article>
-                    <article class="itemInviteComp">
-                        <div class="timeLastSeen InCompanyRed">Отклонен</div>
-                        <div class="timeLastSeen timeSeen">3 минуты</div>
-                        <div class="timeLastSeen InCompanyGren">Принят</div>
-                        <a href="/sesideHr">
-                            <div class="topInfoInvite">
-                                <div class="leftinf">
-                                    <img src="/assets/pictures/person.jpg" width="53" height="53" alt="Фото пользователя">
-                                </div>
-                                <div class="rightInfUs">
-                                    <div class="toprightInfUs">
-                                        <h1 class="userNameCompany">Шишкин Никита</h1>
-                                </div>
-                            <div class="locaton">
-                                <svg width="11" height="15" viewBox="0 0 11 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 0C8.53757 0 11 2.26228 11 5.05312C11 9.61016 5.5 14.4375 5.5 14.4375C5.5 14.4375 0 9.65067 0 5.05312C0 2.26228 2.46243 0 5.5 0Z" fill="#5412E0"/>
-                                    <path d="M5.5 8.25002C7.01878 8.25002 8.25 7.0188 8.25 5.50002C8.25 3.98123 7.01878 2.75002 5.5 2.75002C3.98122 2.75002 2.75 3.98123 2.75 5.50002C2.75 7.0188 3.98122 8.25002 5.5 8.25002Z" fill="white"/>
-                                    </svg>
-                                <p class="locationText">Ростов на Дону</p>                                    
-                            </div>    
-                            </div>
-                            </div>
-                        </a>
-                        <div class="noInORInv">
-                            <button class="noInORInvbutton reject">Отклонить</button>
-                            <button class="noInORInvbutton responseD">Пригласить</button>
-                            <button class="noInORInvbutton canelRespons">Отмена</button>
-                        </div>
-                    </article>
-                    <article class="itemInviteComp">
-                        <div class="timeLastSeen InCompanyRed">Отклонен</div>
-                        <div class="timeLastSeen timeSeen">3 минуты</div>
-                        <div class="timeLastSeen  InCompanyGren">Принят</div>
-                        <a href="/sesideHr">
-                            <div class="topInfoInvite">
-                                <div class="leftinf">
-                                    <img src="/assets/pictures/person.jpg" width="53" height="53" alt="Фото пользователя">
-                                </div>
-                                <div class="rightInfUs">
-                                    <div class="toprightInfUs">
-                                        <h1 class="userNameCompany">Ушаков Игорь</h1>
-                                </div>
-                            <div class="locaton">
-                                <svg width="11" height="15" viewBox="0 0 11 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 0C8.53757 0 11 2.26228 11 5.05312C11 9.61016 5.5 14.4375 5.5 14.4375C5.5 14.4375 0 9.65067 0 5.05312C0 2.26228 2.46243 0 5.5 0Z" fill="#5412E0"/>
-                                    <path d="M5.5 8.25002C7.01878 8.25002 8.25 7.0188 8.25 5.50002C8.25 3.98123 7.01878 2.75002 5.5 2.75002C3.98122 2.75002 2.75 3.98123 2.75 5.50002C2.75 7.0188 3.98122 8.25002 5.5 8.25002Z" fill="white"/>
-                                    </svg>
-                                <p class="locationText">Ростов на Дону</p>                                    
-                            </div>    
-                            </div>
-                            </div>
-                        </a>
-                        <div class="noInORInv">
-                            <button class="noInORInvbutton reject">Отклонить</button>
-                            <button class="noInORInvbutton responseD">Пригласить</button>
-                            <button class="noInORInvbutton canelRespons">Отмена</button>
-                        </div>
-                    </article>
-                </div>
-         </div>
-     </div>
+              </a>
+              <div class="noInORInv">
+                <button class="noInORInvbutton reject">Отклонить</button>
+                <button class="noInORInvbutton responseD">Пригласить</button>
+                <button class="noInORInvbutton canelRespons">Отмена</button>
+              </div>
+            </article>
+            <% })%>
+          </div>
+        </div>
+      </div>
     </main>
-<%- include('./footer.ejs') %>
-<script src="/js/header.js"></script>
-<script src="/js/inviteCompany.js"></script>
-<script>
-    document.querySelectorAll('.inpCheck').forEach(function(item) {
-item.addEventListener('change', function() {
-  document.querySelector('.lastSelect').classList.remove('selectedRadio');
-  document.querySelector('.firstSelect').classList.remove('selectedRadio');
-  let thisValue = this.value;
-  if (thisValue === 'last') {
-    document.querySelector('.lastSelect').classList.add('selectedRadio');
-  } else {
-    document.querySelector('.firstSelect').classList.add('selectedRadio');
-  }
-});
-});
-
-</script>
-</body>
+    <%- include('./footer.ejs') %>
+    <script src="/js/header.js"></script>
+    <script src="/js/inviteCompany.js"></script>
+    <script>
+      document.querySelectorAll(".inpCheck").forEach(function (item) {
+        item.addEventListener("change", function () {
+          document
+            .querySelector(".lastSelect")
+            .classList.remove("selectedRadio");
+          document
+            .querySelector(".firstSelect")
+            .classList.remove("selectedRadio");
+          let thisValue = this.value;
+          if (thisValue === "last") {
+            document
+              .querySelector(".lastSelect")
+              .classList.add("selectedRadio");
+          } else {
+            document
+              .querySelector(".firstSelect")
+              .classList.add("selectedRadio");
+          }
+        });
+      });
+    </script>
+  </body>
 </html>

@@ -356,6 +356,8 @@ const createNewRequest = async (userRequest, INN) => {
         success: false,
         message: "Вы уже отправляли заявки на вступление",
       };
+    const now = Temporal.Now.plainDateTimeISO();
+    const date = new Date(now.toString());
     let appendRequest = await CompanySchema.updateOne(
       { INN },
       {
@@ -363,6 +365,7 @@ const createNewRequest = async (userRequest, INN) => {
           RequestList: {
             id: v4(),
             userID: userRequest,
+            date,
           },
         },
       }
@@ -374,14 +377,112 @@ const createNewRequest = async (userRequest, INN) => {
     return { success: false };
   }
 };
+const responseToInvite = async (creatorID, newHRid, status) => {
+  try {
+    let findRequest = await CompanySchema.findOne({
+      creatorID,
+      RequestList: { $elemMatch: { userID: newHRid } },
+    });
+
+    if (!findRequest || findRequest.RequestList.length === 0) {
+      return { success: false, message: "Вам этот HR не отправлял заявку" };
+    }
+
+    if (status) {
+      const accept = await CompanySchema.findOneAndUpdate(
+        { creatorID },
+        {
+          $push: { userList: { userID: newHRid } },
+          $pull: { RequestList: { userID: newHRid } },
+        }
+      );
+      return { success: true, status: true, message: "Пользователь добавлен" };
+    } else {
+      const cancel = await CompanySchema.findOneAndUpdate(
+        { creatorID },
+        {
+          $pull: { RequestList: { userID: newHRid } },
+        }
+      );
+      return { success: true, status: false, message: "Пользователь отклонен" };
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const getRequest = async (creatorID) => {
+  try {
+    const invites = await Company.findOne({
+      creatorID,
+    }).select("RequestList.userID RequestList.date");
+
+    if (!invites || !invites.RequestList) {
+      return { success: true, results: [] };
+    }
+
+    const userIDs = invites.RequestList.map((item) => item.userID);
+    const users = await UserSchema.find({ id: { $in: userIDs } }).select(
+      "id surname name avatar city"
+    );
+
+    const usersWithDates = invites.RequestList.map((request) => {
+      let user = users.find((u) => u.id === request.userID);
+      if (user) {
+        // Получаем разницу во времени
+        const dateObj = new Date(request.date);
+        const now = new Date();
+        const diffTime = Math.abs(now - dateObj);
+
+        // Вычисляем дни, часы, минуты, секунды
+        const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+
+        // Формируем строку с разницей во времени
+        let timeString = "";
+        if (days > 0) {
+          timeString = ` ${days} ${days > 1 ? "дня" : "день"} назад`;
+        } else if (hours > 0) {
+          timeString = `${hours} ${hours > 1 ? "часа" : "час"} назад`;
+        } else if (minutes > 0) {
+          timeString = `${minutes} ${minutes > 1 ? "минуты" : "минута"} назад`;
+        } else {
+          timeString = `${seconds} ${
+            seconds > 1 ? "секунды" : "секунда"
+          } назад`;
+        }
+
+        // Возвращаем объект с обновленным временем
+        return { ...user._doc, date: timeString };
+      } else {
+        return null;
+      }
+    });
+
+    const filteredUsersWithDates = usersWithDates.filter(
+      (user) => user !== null
+    );
+
+    return { success: true, results: filteredUsersWithDates };
+  } catch (e) {
+    console.error(e);
+    return { success: false, results: null };
+  }
+};
 
 module.exports = {
+  getRequest,
   createCompany,
   searchCompanyForVacancy,
   findCompanyOfINN,
   findCompanyOfUser,
   findCompanyByCreator,
   setStatusOfCompany,
+  responseToInvite,
   updateCountStaffOfCompany,
   createNewRequest,
   findCourtOfUser,

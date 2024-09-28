@@ -109,7 +109,7 @@ const schema = new mongoose.Schema({
   skills: [skillsScheme],
   avatar: {
     type: String,
-    default: "./assets/pictures/defaultAvatar.png",
+    default: "/assets/pictures/defaultAvatar.png",
   },
   favorite:[favoriteScheme],
   expiriens:[expiriensSchema],
