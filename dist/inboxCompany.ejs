@@ -60,7 +60,7 @@
             </div>
           </div>
           <div class="toDay">
-            <p class="countList">Количество заявок (12)</p>
+            <p class="countList">Количество заявок (<%-hrList.length%>)</p>
           </div>
           <div class="listInviteInCompany">
             <%hrList.forEach((hr) =>{%>
@@ -80,7 +80,9 @@
                   </div>
                   <div class="rightInfUs">
                     <div class="toprightInfUs">
-                      <h1 class="userNameCompany"><%-hr.surname%> <%-hr.name%></h1>
+                      <h1 class="userNameCompany">
+                        <%-hr.surname%> <%-hr.name%>
+                      </h1>
                     </div>
                     <div class="locaton">
                       <svg
@@ -101,14 +103,20 @@
                           fill="white"
                         />
                       </svg>
-                      <p class="locationText"><%-hr.city.split(',').reverse()[0]||'Не известно'%></p>
+                      <p class="locationText">
+                        <%-hr.city.split(',').reverse()[0]||'Не известно'%>
+                      </p>
                     </div>
                   </div>
                 </div>
               </a>
               <div class="noInORInv">
-                <button class="noInORInvbutton reject">Отклонить</button>
-                <button class="noInORInvbutton responseD">Пригласить</button>
+                <button class="noInORInvbutton reject" data-id="<%-hr.id%>">
+                  Отклонить
+                </button>
+                <button class="noInORInvbutton responseD" data-id="<%-hr.id%>">
+                  Пригласить
+                </button>
                 <button class="noInORInvbutton canelRespons">Отмена</button>
               </div>
             </article>

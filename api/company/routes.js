@@ -16,6 +16,7 @@ const {
   findCompanyOfUserAndINN,
   getCompanyByCreator,
   updateInfoCompany,
+  updateRequestStatus,
 } = require("../../database/Request/Company");
 const { decodeAccessToken } = require("../tokens/accessToken");
 const { body, validationResult } = require("express-validator");
@@ -227,11 +228,45 @@ async function removeLastAvatar(title) {
 }
 
 router.post(
+  "/sendAnswerToRequest",
+  body("requestId").isUUID(),
+  async (req, res) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        console.log(errors.array());
+        return res
+          .status(422)
+          .json({ success: false, type: "Error", errors: errors.array() });
+      }
+      let access = await req.cookies.access;
+      if (!access) return res.redirect("/login");
+      let requestId = req.body.requestId;
+      let answer = req.body.answer;
+      if (!requestId || !answer)
+        return res
+          .status(403)
+          .json({ success: false, message: "Введите id и ответ" });
+      const decodeAccess = await decodeAccessToken(access);
+      if (!decodeAccess) return res.redirect("/login");
+      let updateRequest = await updateRequestStatus(
+        decodeAccess.userID,
+        requestId,
+        answer
+      );
+      return res.status(201).json(req.body);
+    } catch (e) {
+      console.log(e);
+      return res.status(500).json({ status: "Error", message: "Сервер упал" });
+    }
+  }
+);
+
+router.post(
   "/invite-company",
   [body("text").isLength({ min: 3, max: 250 }).withMessage("Min 3, Max 250")],
   isAuth,
   findCompany
 );
-
 
 module.exports = router;
