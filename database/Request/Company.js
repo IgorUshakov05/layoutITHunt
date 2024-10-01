@@ -377,11 +377,11 @@ const createNewRequest = async (userRequest, INN) => {
     return { success: false };
   }
 };
-const responseToInvite = async (creatorID, newHRid, status) => {
+const responseToInvite = async (creatorID, userID, status) => {
   try {
     let findRequest = await CompanySchema.findOne({
       creatorID,
-      RequestList: { $elemMatch: { userID: newHRid } },
+      RequestList: { $elemMatch: { userID } },
     });
 
     if (!findRequest || findRequest.RequestList.length === 0) {
@@ -392,8 +392,8 @@ const responseToInvite = async (creatorID, newHRid, status) => {
       const accept = await CompanySchema.findOneAndUpdate(
         { creatorID },
         {
-          $push: { userList: { userID: newHRid } },
-          $pull: { RequestList: { userID: newHRid } },
+          $push: { userList: { userID } },
+          $pull: { RequestList: { userID } },
         }
       );
       return { success: true, status: true, message: "Пользователь добавлен" };
@@ -401,13 +401,14 @@ const responseToInvite = async (creatorID, newHRid, status) => {
       const cancel = await CompanySchema.findOneAndUpdate(
         { creatorID },
         {
-          $pull: { RequestList: { userID: newHRid } },
+          $pull: { RequestList: { userID } },
         }
       );
       return { success: true, status: false, message: "Пользователь отклонен" };
     }
   } catch (e) {
     console.log(e);
+    return { success: false, message: "Какая-то ошибка" };
   }
 };
 

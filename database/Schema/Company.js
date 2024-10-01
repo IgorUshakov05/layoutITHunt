@@ -1,11 +1,14 @@
 const mongoose = require("mongoose");
 
-const listHRSchema = new mongoose.Schema({
-  userID: {
-    type: String,
-    required: true,
+const listHRSchema = new mongoose.Schema(
+  {
+    userID: {
+      type: String,
+      required: true,
+    },
   },
-});
+  { _id: false }
+);
 
 const documentSchema = new mongoose.Schema({
   certificate_of_state_registration: {

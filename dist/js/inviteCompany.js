@@ -24,7 +24,9 @@ userNameInput.addEventListener("input", function () {
 });
 
 document.querySelectorAll(".reject").forEach(function (element) {
-  element.addEventListener("click", function () {
+  element.addEventListener("click", async function () {
+    let response = await sendRequest(false, this.getAttribute("data-id"));
+    console.log(response);
     element.style.display = "none";
     element.parentNode.querySelector(".responseD").style.display = "none";
     element.parentNode.parentNode.querySelector(".timeSeen").style.display =
@@ -43,7 +45,9 @@ document.querySelectorAll(".reject").forEach(function (element) {
 });
 
 document.querySelectorAll(".responseD").forEach(function (element) {
-  element.addEventListener("click", function () {
+  element.addEventListener("click", async function () {
+    let response = await sendRequest(true, this.getAttribute("data-id"));
+    console.log(response);
     element.style.display = "none";
     element.parentNode.querySelector(".reject").style.display = "none";
     element.parentNode.parentNode.querySelector(".timeSeen").style.display =
@@ -63,8 +67,19 @@ document.querySelectorAll(".responseD").forEach(function (element) {
   });
 });
 
-let sendRequest = async (status,idRequest) => {
-    const request = await fetch('/')
+let sendRequest = async (answer, requestId) => {
+  let response = await fetch("/api/sendAnswerToRequest", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "augwod89h1h9awdh9py0y82hjd",
+    },
+    body: JSON.stringify({
+      requestId,
+      answer,
+    }),
+  });
+  return await response.json();
 };
 
 document.querySelectorAll(".canelRespons").forEach(function (element) {

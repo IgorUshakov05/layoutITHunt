@@ -16,7 +16,7 @@ const {
   findCompanyOfUserAndINN,
   getCompanyByCreator,
   updateInfoCompany,
-  updateRequestStatus,
+  responseToInvite,
 } = require("../../database/Request/Company");
 const { decodeAccessToken } = require("../tokens/accessToken");
 const { body, validationResult } = require("express-validator");
@@ -229,7 +229,10 @@ async function removeLastAvatar(title) {
 
 router.post(
   "/sendAnswerToRequest",
-  body("requestId").isUUID(),
+  [
+    body("requestId").isUUID().withMessage("Не id"),
+    body("answer").isBoolean().withMessage("Введите логическое значение"),
+  ],
   async (req, res) => {
     try {
       const errors = validationResult(req);
@@ -243,18 +246,19 @@ router.post(
       if (!access) return res.redirect("/login");
       let requestId = req.body.requestId;
       let answer = req.body.answer;
-      if (!requestId || !answer)
+      if (!requestId || answer === undefined)
         return res
           .status(403)
           .json({ success: false, message: "Введите id и ответ" });
       const decodeAccess = await decodeAccessToken(access);
       if (!decodeAccess) return res.redirect("/login");
-      let updateRequest = await updateRequestStatus(
+      let updateRequest = await responseToInvite(
         decodeAccess.userID,
         requestId,
         answer
       );
-      return res.status(201).json(req.body);
+      console.log(updateRequest);
+      return res.status(201).json(updateRequest);
     } catch (e) {
       console.log(e);
       return res.status(500).json({ status: "Error", message: "Сервер упал" });

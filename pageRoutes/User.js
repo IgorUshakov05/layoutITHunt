@@ -27,16 +27,13 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
     var favorites = null;
     let premium = await findPremium(result.id);
     const age = calculateAge(result.birthDay);
-    console.log(premium, " - премиум");
     if (access) {
       let findMyProf = await searchUserId(decodeAccess.userID);
       favorites = (await findUsersByFavorites(findMyProf.favorite)) || [];
       if (decodeAccess.userID === id) {
         if (result.role === "worker") {
-          console.log("Мой профиль");
           let myFavoritesPubloc = await getMyFavorites(result.id);
-          console.log("Мой профиль");
-          console.log(myFavoritesPubloc);
+          console.log(myFavoritesPubloc, ' - это')
           return res.render("ImProfessional.ejs", {
             isLoggedIn: decodeAccess,
             id: decodeAccess.userID,

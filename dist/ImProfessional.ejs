@@ -725,6 +725,7 @@ function escapeHtml(unsafe) {
                             </div>
                         </div>
                         <div class="exucation" style="margin-bottom: 20px; z-index: 1; position: relative;">
+                            <%if(myFV!==null) {%>
                         <p class="myVacancyText">Избранные публикации</p>
                         <%if(myFV[0].length) {%>
                         <div class="eduSchool onClick">
@@ -838,6 +839,8 @@ function escapeHtml(unsafe) {
                             </ul>
                             </div>
                             <%}%>
+                            <%}%>
+
                         </div>
                     </div>
 

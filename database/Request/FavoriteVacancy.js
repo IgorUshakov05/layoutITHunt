@@ -1,6 +1,6 @@
 const FavoriteVacancySchema = require("../Schema/FavoriteVacancyOfUserSchema");
 const VacancySchema = require("../Schema/Vakancy");
-const FastWorkSchema = require("../Schema/FastWork")
+const FastWorkSchema = require("../Schema/FastWork");
 
 async function isFavoriteVacancy(userID, vacancyID) {
   try {
@@ -53,7 +53,7 @@ async function findFAllFavoriteOfId(userID) {
     if (!userID)
       return { success: false, error: "User ID is required", data: [] };
     let electedVacancyAdd = await FavoriteVacancySchema.findOne({ userID });
-    console.log(electedVacancyAdd , ' вот')
+    console.log(electedVacancyAdd, " вот");
     return { success: true, data: electedVacancyAdd };
   } catch (err) {
     console.log(err);
@@ -66,7 +66,7 @@ async function getMyFavorites(userID) {
     let electedVacancyAdd = await FavoriteVacancySchema.findOne({ userID });
     console.log(electedVacancyAdd);
     if (!electedVacancyAdd)
-      return { success: false, error: "User ID is required", data: [] };
+      return { success: false, error: "User ID is required", data: null };
     let vacancies = electedVacancyAdd.vacancyID.map((item) => item.id);
     let vacanciesData = await VacancySchema.find(
       { id: { $in: vacancies } },
