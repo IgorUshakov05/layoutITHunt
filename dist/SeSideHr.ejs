@@ -226,7 +226,7 @@
 </svg>
 </div>
 <div class="buttonsElements buttonsElementsProfile buttonsElementsProfileDesc">
-                            <%if(myFavorites.data) {%>
+                            <%if(myFavorites?.data) {%>
 
                                 <button class="Infavorites InfavoritesVacancy <%-myFavorites?.data?.vacancyID.some(elem => elem.id ===  element.id)?'addingFavorite':''%>" data-id="<%-element.id%>">В избранное</button>
 <%}%>
@@ -299,7 +299,7 @@
                           
                         </div>
                         <div class="buttonsElements buttonsElementsProfile">
-                            <%if(myFavorites.data) {%>
+                            <%if(myFavorites?.data) {%>
                                 <button class="Infavorites InfavoritesVacancy  <%-myFavorites?.data?.vacancyID.some(elem => elem.id ===  element.id)?'addingFavorite':''%>" data-id="<%-element.id%>" data-id="<%-element.id%>">В избранное</button>
                                 <%}%>
                             <button class="Respond"><a href="/vacancia/<%-element.id%>">Откликнуться</a></button>                        

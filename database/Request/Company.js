@@ -233,7 +233,7 @@ async function findCompanyOfUserAndINN(userID, INN) {
 const searchCompanyForVacancy = async (creatorID) => {
   try {
     let result = await CompanySchema.findOne({
-      creatorID,
+      userList: { $elemMatch: { userID: creatorID } },
       isVarefy: true,
       isFreez: false,
     }).select("INN avatar title description");
