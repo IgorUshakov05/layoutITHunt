@@ -10,9 +10,9 @@ const { body } = require("express-validator");
 router.post(
   "/registration",
   body("mail").isEmail(),
-  body("password").isLength({ min: 6 }),
-  body("surname").isLength({ min: 2 }),
-  body("name").isLength({ min: 2 }),
+  body("password").isLength({ min: 6, max: 200 }),
+  body("surname").isLength({ min: 2, max: 200 }),
+  body("name").isLength({ min: 2, max: 200 }),
   body("role").isIn(["worker", "creatorWork"]),
   body("birthDay")
     .isDate({ format: "DD-MM-YYYY" })
@@ -29,7 +29,7 @@ router.post(
   body("birthDay")
     .isDate({ format: "DD-MM-YYYY" })
     .withMessage("Введенное значение не является датой."),
-    registration_with_google
+  registration_with_google
 );
 
 router.post(
@@ -51,7 +51,5 @@ router.post(
   body("codeUser").isLength({ min: 6, max: 6 }),
   acceptCodeFromPost
 );
-
-
 
 module.exports = router;

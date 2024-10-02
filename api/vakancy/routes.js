@@ -280,4 +280,31 @@ router.post(
   }
 );
 
+router.post(
+  "/respond-vacancy",
+  [
+    check("id").notEmpty().isUUID(),
+    check("message")
+      .notEmpty()
+      .isLength({ min: 1, max: 1500 })
+      .withMessage("Сообщение не больше 1500 символов"),
+  ],
+  async (req, res) => {
+    let access = await req.cookies.access;
+    if (!access) return res.redirect("/login");
+    const decodeAccess = await decodeAccessToken(access);
+    if (!decodeAccess) return res.redirect("/login");
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      console.log(errors.array());
+      return res.status(400).json({ errors: errors.array() });
+    }
+    let findUser = await searchUserId(decodeAccess.userID);
+    if (!findUser) return res.redirect("/login");
+    const vacancyID = req.body.id;
+    console.log(vacancyID, " - id вакансии");
+    return res.status(200).json({ message: "Отклик успешно отправлен!" });
+  }
+);
+
 module.exports = router;

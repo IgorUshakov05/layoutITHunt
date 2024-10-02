@@ -117,10 +117,28 @@ async function updateVacansy(
     return { success: false, error: err.message };
   }
 }
+
+let sendRequest = async (id, specialID, message) => {
+  try {
+    let nowDateTime = await Temporal.Now.plainDateTimeISO();
+    let findVacancy = await Vacancy.findOneAndUpdate(
+      { id },
+      { $push: { userID: specialID, message, datetime: nowDateTime } }
+    );
+    if (!findVacancy)
+      return { success: false, message: "Вакансия не найдена!" };
+    return { success: true, message: "Успех!" };
+  } catch (e) {
+    console.log(e);
+    return { success: false, message: "Непредвиденная ошибка" };
+  }
+};
+
 module.exports = {
   createVacancy,
   updateVacansy,
   searchVacancyById,
   searchVacancyByUserId,
   removeVacancy,
+  sendRequest,
 };
