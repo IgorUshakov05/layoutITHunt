@@ -138,7 +138,7 @@ let sendRequest = async (id, specialID, message) => {
     }
     if (findVacancy.responses.userID === specialID)
       return { success: false, message: "Заявка уже отправлена" };
-    return { success: true, message: "Успех!" };
+    return { success: true, message: "Отклик отправлен!" };
   } catch (e) {
     console.log(e);
     return { success: false, message: "Непредвиденная ошибка" };

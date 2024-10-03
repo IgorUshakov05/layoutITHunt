@@ -183,11 +183,9 @@ router.post("/favorite-vacancy", async (req, res) => {
     if (!access) return res.redirect("/login");
     const decodeAccess = await decodeAccessToken(access);
     if (!decodeAccess) return res.redirect("/login");
-    let vacancyID = req.body.id;
+    let vacancyID = req.body.vacancyId;
     if (!vacancyID)
-      return res
-        .status(400)
-        .json({ message: "Вакансия не найдена", result: false });
+      return res.status(400).json({ message: "Id не указан", result: false });
     let findVacancyInDatabase = await searchVacancyById(vacancyID);
     console.log(findVacancyInDatabase);
     if (!findVacancyInDatabase.success)
@@ -291,25 +289,31 @@ router.post(
       .withMessage("Сообщение не больше 1500 символов"),
   ],
   async (req, res) => {
-    let access = await req.cookies.access;
-    if (!access) return res.redirect("/login");
-    const decodeAccess = await decodeAccessToken(access);
-    if (!decodeAccess) return res.redirect("/login");
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      console.log(errors.array());
-      return res.status(400).json({ errors: errors.array() });
+    try {
+      let access = await req.cookies.access;
+      if (!access) return res.redirect("/login");
+      const decodeAccess = await decodeAccessToken(access);
+      if (!decodeAccess) return res.redirect("/login");
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        console.log(errors.array());
+        return res.status(400).json({ errors: errors.array() });
+      }
+      let findUser = await searchUserId(decodeAccess.userID);
+      if (!findUser || findUser.role !== "worker")
+        return res.redirect("/login");
+      const vacancyID = req.body.id;
+      let send = await sendRequest(
+        vacancyID,
+        decodeAccess.userID,
+        req.body.message
+      );
+      console.log(send);
+      return res.status(200).json(send);
+    } catch (e) {
+      console.log(e);
+      return res.status(500).json({ message: "Программист накосячил(" });
     }
-    let findUser = await searchUserId(decodeAccess.userID);
-    if (!findUser || findUser.role !== "worker") return res.redirect("/login");
-    const vacancyID = req.body.id;
-    let send = await sendRequest(
-      vacancyID,
-      decodeAccess.userID,
-      req.body.message
-    );
-    console.log(send);
-    return res.status(200).json({ message: "Отклик успешно отправлен!" });
   }
 );
 

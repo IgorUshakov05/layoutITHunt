@@ -1,5 +1,6 @@
 let message = document.getElementById("message");
 let button = document.getElementById("send");
+let handelText = document.getElementById("handelText");
 button.setAttribute("disabled", "disabled");
 const data = {
   id: window.location.href.split("/").reverse()[0],
@@ -15,14 +16,10 @@ let sendRespond = async () => {
     body: JSON.stringify(data),
   })
     .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    })
     .catch((error) => {
       console.error("Error:", error);
     });
 };
-
 message.addEventListener("input", function (e) {
   let value = e.target.value;
   if (value === "") {
@@ -38,4 +35,27 @@ message.addEventListener("input", function (e) {
   data.message = value;
 });
 
-button.addEventListener("click", sendRespond);
+button.addEventListener("click", async () => {
+  try {
+    let sendRequest = await sendRespond();
+    console.log(sendRequest);
+    if (!sendRequest.success) {
+      return await handler(sendRequest.message, "error");
+    }
+    return await handler(sendRequest.message, "success");
+  } catch (e) {
+    console.log(e);
+    handler("Ошибка при отправке :(", "error");
+    return false;
+  }
+});
+
+let handler = (text, type) => {
+  handelText.style.display = "block";
+  handelText.style.color = type === "error" ? "red" : "green";
+  handelText.textContent = text;
+  if (type === "success" || text === "Заявка уже существует!") {
+    message.setAttribute("disabled", "disabled");
+    button.setAttribute("disabled", "disabled");
+  }
+};
