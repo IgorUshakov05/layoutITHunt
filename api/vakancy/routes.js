@@ -5,6 +5,7 @@ const { decodeAccessToken } = require("../tokens/accessToken");
 const {
   createVacancy,
   updateVacansy,
+  sendRequest,
   removeVacancy,
 } = require("../../database/Request/Vacancy");
 const { removeFastWork } = require("../../database/Request/FastWork");
@@ -300,9 +301,14 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     let findUser = await searchUserId(decodeAccess.userID);
-    if (!findUser) return res.redirect("/login");
+    if (!findUser || findUser.role !== "worker") return res.redirect("/login");
     const vacancyID = req.body.id;
-    console.log(vacancyID, " - id вакансии");
+    let send = await sendRequest(
+      vacancyID,
+      decodeAccess.userID,
+      req.body.message
+    );
+    console.log(send);
     return res.status(200).json({ message: "Отклик успешно отправлен!" });
   }
 );

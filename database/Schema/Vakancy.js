@@ -52,9 +52,9 @@ const responseSchema = new mongoose.Schema({
     default: false,
   },
   datetime: {
-    type: String, 
-    require:true, 
-  }
+    type: Date,
+    require: true,
+  },
 });
 
 const vacancySchema = new mongoose.Schema({

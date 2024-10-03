@@ -120,13 +120,24 @@ async function updateVacansy(
 
 let sendRequest = async (id, specialID, message) => {
   try {
-    let nowDateTime = await Temporal.Now.plainDateTimeISO();
+    const now = Temporal.Now.plainDateTimeISO();
+    const date = new Date(now.toString());
+    let isNotRep = await Vacancy.findOne({
+      id,
+      responses: { $elemMatch: { userID: specialID } },
+    });
+    if (isNotRep) return { success: false, message: "Заявка уже существует!" };
     let findVacancy = await Vacancy.findOneAndUpdate(
       { id },
-      { $push: { userID: specialID, message, datetime: nowDateTime } }
+      {
+        $push: { responses: { userID: specialID, message, datetime: date } },
+      }
     );
-    if (!findVacancy)
+    if (!findVacancy) {
       return { success: false, message: "Вакансия не найдена!" };
+    }
+    if (findVacancy.responses.userID === specialID)
+      return { success: false, message: "Заявка уже отправлена" };
     return { success: true, message: "Успех!" };
   } catch (e) {
     console.log(e);
