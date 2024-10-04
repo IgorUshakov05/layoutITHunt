@@ -22,10 +22,8 @@
     <%- include('./header.ejs', { isLoggedIn, active: 'inbox',chat:chatList}) %>
     <main  class="main">
         <div class="twoBlocks mt20">
-            <%- include('./inboxLinks', {active: "", isMain: true}) %>
+            <%- include('./inboxLinks', {active: "", role,isMain: true}) %>
             <div class="MoreInfo">
-                
-             
          </div>
      </div>
     </main>

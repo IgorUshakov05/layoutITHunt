@@ -6686,14 +6686,17 @@ li:hover > .noneHover {
   align-items: center;
   justify-content: flex-start;
 }
-
+.itemInbox > svg {
+  width: 51px;
+  height: 55px;
+}
 .itemInbox:nth-child(1) {
   border-radius: 4px 4px 0 0;
 }
-
+/* 
 .itemInbox:nth-child(3) {
   border-radius: 0 0 4px 4px;
-}
+} */
 .countContainer {
   display: flex;
   align-items: center;

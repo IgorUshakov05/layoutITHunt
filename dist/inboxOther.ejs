@@ -17,12 +17,9 @@
     <%- include('./header.ejs', { isLoggedIn, active: 'inbox',chat:chatList}) %>
     <main  class="main">
         <div class="twoBlocks mt20">
-            <%- include('./inboxLinks', {active: "4", isMain: false }) %>
-            <% let role = 'HR' %>
+            <%- include('./inboxLinks', {active: "4", role,isMain: false }) %>
             <div class="MoreInfo">
-                
              <div class="listInbox">
-                <% if (role==='HR') { %>
                     <div class="toDay">
                         <span class="textDay">Сегодня (1)</span>
                         <div class="mt-10"></div>
@@ -233,7 +230,6 @@
                     </div>
 
                     </div>    
-                <%}%>
              </div>
          </div>
      </div>

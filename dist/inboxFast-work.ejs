@@ -24,7 +24,7 @@
     <%- include('./header.ejs', { isLoggedIn, active: 'inbox',chat:chatList}) %>
     <main  class="main">
         <div class="twoBlocks mt20">
-            <%- include('./inboxLinks', {active: "2", isMain: false }) %>
+            <%- include('./inboxLinks', {active: "2", role,isMain: false }) %>
             <div class="MoreInfo mt35">
                 <div class="topInputAndLastAndFirst">
                     <div class="inputSearchUser flexed">

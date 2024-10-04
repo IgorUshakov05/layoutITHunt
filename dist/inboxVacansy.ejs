@@ -23,7 +23,7 @@
     <%- include('./header.ejs', { isLoggedIn, active: 'inbox',chat:chatList}) %>
     <main  class="main">
         <div class="twoBlocks mt20">
-            <%- include('./inboxLinks', {active: "1", isMain: false }) %>
+            <%- include('./inboxLinks', {active: "1",role, isMain: false }) %>
             <div class="MoreInfo mt35">
                 <div class="topInputAndLastAndFirst">
                     <div class="inputSearchUser flexed">
