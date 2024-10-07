@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://webhunt.ru/<%-id%>" />
     <meta
       property="og:image"
-      content="<%-FILE_SERVER%>/preview/user?name=<%-name%>&lastname=<%-surname%>&role=admin&avatar=<%=  avatar %>&location=<%-city%>&special=&premium=<%-premium%>"
+      content="<%-FILE_SERVER%>/preview/user?name=<%-name%>&lastname=<%-surname%>&role=admin&avatar=<%=  avatar?avatar:premium?'/assets/pictures/ПремиумРаботодатель.jpg':'/assets/pictures/ДефолтРаботодатель.jpg' %>&location=<%-city%>&special=&premium=<%-premium%>"
     />
     <meta
       property="og:description"
@@ -43,7 +43,7 @@
     />
     <meta
       name="twitter:image"
-      content="<%-FILE_SERVER%>/preview/user?name=<%-name%>&lastname=<%-surname%>&role=admin&avatar=<%=  avatar %>&location=<%-city%>&special=&premium=<%-premium%>"   
+      content="<%-FILE_SERVER%>/preview/user?name=<%-name%>&lastname=<%-surname%>&role=admin&avatar=<%=  avatar?avatar:premium?'/assets/pictures/ПремиумРаботодатель.jpg':'/assets/pictures/ДефолтРаботодатель.jpg' %>&location=<%-city%>&special=&premium=<%-premium%>"   
     />
     <meta name="twitter:image:alt" content="Иконка работадателя" />
 
@@ -72,7 +72,7 @@
             <div class="allInfoProfile"  style="margin-top: 0;">
             <div class="topInfo">
                 <div class="photoBlock">
-                    <img width="110" src="<%=  avatar %>" alt="Фото профиля">
+                    <img width="110" src="<%=  avatar?avatar:premium?'/assets/pictures/ПремиумРаботодатель.jpg':'/assets/pictures/ДефолтРаботодатель.jpg' %>" alt="Фото профиля">
                 </div>
                 <div class="textInfoAbout">
                     <div class="topInfoChild">

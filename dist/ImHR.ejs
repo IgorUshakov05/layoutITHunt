@@ -85,7 +85,7 @@
             <div class="allInfoProfile" >
             <div class="topInfo">
                 <div class="photoBlock">
-                    <img width="110" src="<%=  avatar %>" alt="Фото профиля">
+                    <img width="110" src="<%=  avatar?avatar:premium?'/assets/pictures/ПремиумРаботодатель.jpg':'/assets/pictures/ДефолтРаботодатель.jpg' %>" alt="Фото профиля">
                 </div>
                 <div class="textInfoAbout">
                     <div class="topInfoChild">

@@ -214,7 +214,7 @@
                             placeholder="Аватар"
                              onchange="previewImage(this)">
                         </div>
-                        <img id="preview" style="border-radius: 100%;" class="photoUsera" width="120" height="120" src="<%=avatar%>" >
+                                                <img id="preview" style="border-radius: 100%;" class="photoUsera" width="120" height="120" src="<%=avatar?avatar:'/assets/pictures/ДефолтСпециалист.jpg' %>" >
                     </div>
                     <div class="textInfoAbout">
                         <div style="margin-top: 10px" class="topInfoChild">
