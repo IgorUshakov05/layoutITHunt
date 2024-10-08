@@ -25,21 +25,30 @@ const priceSchema = new mongoose.Schema({
   },
 });
 
-const responseSchema = new mongoose.Schema({
-  userID: {
-    type: String,
-    required: false,
+const responseSchema = new mongoose.Schema(
+  {
+    userID: {
+      type: String,
+      required: false,
+    },
+    message: {
+      type: String,
+      required: false,
+    },
+    request: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    datetime: {
+      type: Date,
+      require: true,
+    },
   },
-  message: {
-    type: String,
-    required: false,
-  },
-  request: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
-});
+  {
+    _id: false,
+  }
+);
 
 const fastWorkSchema = new mongoose.Schema({
   id: {

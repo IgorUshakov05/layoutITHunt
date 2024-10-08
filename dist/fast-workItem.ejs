@@ -101,13 +101,13 @@
         <div class="oneCard twoCard">
         <span class="sendBid">Отправьте заявку</span>
 
-            <form action="/sendBid" method="post">
             <span class="sendBid sendBidTwo">Отправьте сообщение работодателю описав свои навыки и опыт работы</span>
-            <textarea maxlength="1200" class="textareaTwoCard" placeholder="Введите текст" name="message" id="message" cols="30" rows="10"></textarea>
+            <span class="sendBidTwo" id="handelText" style="display: none; margin: 10px 0 0 0;"></span>
+        
+           <textarea maxlength="1500" class="textareaTwoCard" placeholder="Введите текст" name="message" id="message" cols="30" rows="10"></textarea>
             <div class="sendBidButtonDiv">
-                <button class="sendBidButton" type="submit">Откликнуться</button>
+                <button class="sendBidButton" type="submit" id="send">Откликнуться</button>
             </div>
-        </form>
         </div>
     </div>
 </main>
@@ -115,5 +115,6 @@
 <%- include('./footer.ejs') %>
 <script src="/js/header.js"></script>
 <script src="/js/methodsFW.js"></script>
+<script src="/js/sendRespondFastWork.js"></script>
 </body>
 </html>

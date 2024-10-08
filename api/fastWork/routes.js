@@ -8,6 +8,7 @@ const {
   searchFastWorkById,
   createFastWork,
   updateFastWork,
+  sendRequest
 } = require("../../database/Request/FastWork");
 const specialList = [
   "Аналитик",
@@ -206,6 +207,45 @@ router.post(
       }
     } catch (err) {
       res.status(500).json({ message: err.message });
+    }
+  }
+);
+
+
+router.post(
+  "/respond-fast-work",
+  [
+    check("id").notEmpty().isUUID(),
+    check("message")
+      .notEmpty()
+      .isLength({ min: 1, max: 1500 })
+      .withMessage("Сообщение не больше 1500 символов"),
+  ],
+  async (req, res) => {
+    try {
+      let access = await req.cookies.access;
+      if (!access) return res.redirect("/login");
+      const decodeAccess = await decodeAccessToken(access);
+      if (!decodeAccess) return res.redirect("/login");
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        console.log(errors.array());
+        return res.status(400).json({ errors: errors.array() });
+      }
+      let findUser = await searchUserId(decodeAccess.userID);
+      if (!findUser || findUser.role !== "worker")
+        return res.redirect("/login");
+      const vacancyID = req.body.id;
+      let send = await sendRequest(
+        vacancyID,
+        decodeAccess.userID,
+        req.body.message
+      );
+      console.log(send);
+      return res.status(200).json(send);
+    } catch (e) {
+      console.log(e);
+      return res.status(500).json({ message: "Программист накосячил(" });
     }
   }
 );

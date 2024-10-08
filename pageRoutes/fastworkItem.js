@@ -9,16 +9,18 @@ const { searchUserId } = require("../database/Request/User");
 
 router.get("/fast-work/:id", isAuthNotRequire, async (req, res) => {
   let access = req.cookies.access;
+  console.log("Вывод");
   let user = await decodeAccessToken(access);
   let findFastWork = await searchFastWorkById(req.params.id);
-  console.log(findFastWork);
   if (!findFastWork.success || !req.params.id) return res.redirect("/404");
   let findFromUser = await searchUserId(findFastWork.data.userID);
   let company = await searchCompanyForVacancy(findFromUser.id);
-  console.log(findFromUser || company);
   let isFavoriteFastWorkVar = false;
   if (findFromUser && user) {
-    isFavoriteFastWorkVar = await isFavoriteFastWork(user.userID, req.params.id);
+    isFavoriteFastWorkVar = await isFavoriteFastWork(
+      user.userID,
+      req.params.id
+    );
   }
   console.log(user);
   res.render("fast-workItem", {

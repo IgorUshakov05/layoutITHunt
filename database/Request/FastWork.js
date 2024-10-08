@@ -48,6 +48,7 @@ async function createFastWork({
 
 async function searchFastWorkById(id) {
   try {
+    console.log(id, ' - айди')
     const fastWork = await FastWork.findOne({ id });
     console.log(fastWork);
     if (!fastWork) {
@@ -74,18 +75,7 @@ async function searchFastWorkByUserId(id) {
     return { success: false, error: err.message };
   }
 }
-async function searchFastWorkById(id, userID) {
-  try {
-    const vacancy = await FastWork.findOne({ id, userID });
-    if (!vacancy) {
-      return { success: false, message: "Вакансии с таким id не найдено" };
-    }
-    return { success: true, data: vacancy };
-  } catch (err) {
-    console.log(err);
-    return { success: false, error: err.message };
-  }
-}
+
 async function updateFastWork(
   id,
   { userID, special, skills, experience, price, description, responses }
@@ -127,9 +117,39 @@ const removeFastWork = async (id, userReason) => {
   }
 };
 
+
+let sendRequest = async (id, specialID, message) => {
+  try {
+    const now = Temporal.Now.plainDateTimeISO();
+    const date = new Date(now.toString());
+    let isNotRep = await FastWork.findOne({
+      id,
+      responses: { $elemMatch: { userID: specialID } },
+    });
+    if (isNotRep) return { success: false, message: "Заявка уже существует!" };
+    let findVacancy = await FastWork.findOneAndUpdate(
+      { id },
+      {
+        $push: { responses: { userID: specialID, message, datetime: date } },
+      }
+    );
+    if (!findVacancy) {
+      return { success: false, message: "Фаст-Ворк не найден!" };
+    }
+    if (findVacancy.responses.userID === specialID)
+      return { success: false, message: "Заявка уже отправлена" };
+    return { success: true, message: "Отклик отправлен!" };
+  } catch (e) {
+    console.log(e);
+    return { success: false, message: "Непредвиденная ошибка" };
+  }
+};
+
+
 module.exports = {
   createFastWork,
   updateFastWork,
+  sendRequest,
   removeFastWork,
   searchFastWorkById,
   searchFastWorkByUserId,
