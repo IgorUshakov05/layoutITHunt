@@ -35,21 +35,25 @@
             <h2 class="descriptionCompanyInVacansy companyPadding"><%-company.description%>
             </h2>
             <div class="panelForHR flex">
-                <a href="/editComapny" class="showMoreButton editCompany">Редактировать</a>
-                <% if(!isActive)  {%>
-                <span class="showMoreButton flex noneActiveCompany">
-                    <img src="/assets/pictures/chatCompanyIcon.svg" alt="Пульс">
-                    <span  style="white-space: nowrap;">Чат компании</span>
-</span>
-<% }else {%>
-    <a href="/chat-company" class="showMoreButton flex">
-        <img src="/assets/pictures/chatCompanyIcon.svg" alt="Пульс">
-        <span style="white-space: nowrap;">Чат компании</span></a>
-    <% } %>
-            </div>
-</div>
+                <%if(isEmployee) {%>
+                <%if(isCreator) {%>
+                        <a href="/editComapny" class="showMoreButton editCompany">Редактировать</a>
+                        <%}%>
+                        <% if(!isEmployee)  {%>
+                            <span style="<%-isCreator?'width: 50%;':'width:100%; '%>" class="showMoreButton flex noneActiveCompany">
+                                <img src="/assets/pictures/chatCompanyIcon.svg" alt="Пульс">
+                                <span  style="white-space: nowrap;">Чат компании</span>
+                            </span>
+                            <% }else {%>
+                                <a href="/chat-company" style="<%-isCreator?'width: 50%;':'width:100%; '%>" class="showMoreButton flex">
+                                    <img src="/assets/pictures/chatCompanyIcon.svg" alt="Пульс">
+                                    <span style="white-space: nowrap;">Чат компании</span></a>
+                                    <% } %>
+                                    <%}%>
+                                </div>
+                            </div>
 
-<% if(!isActive) { %>
+<% if(company.isFreez) { %>
 <div class="warning">
     <div class="flex centerItems">
         <div class="warningPic">
@@ -333,7 +337,7 @@
 
        </div>
        <div class="MoreInfo">
-        <% var items = 0 %>
+        <% var items = 1 %>
         <% if(items) { %>
         <div class="listVacas">
             <article class="vakansiaItem">
@@ -402,7 +406,7 @@
                     </ul>
                 </div>
                 <div class="bottomInfo">
-                    <a href ="#">
+                    <a href ="">
                         <div class="companyInfo">
                             <div class="img">
                                 <img width="40" height="40" alt="Логотип компании" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/200px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png">

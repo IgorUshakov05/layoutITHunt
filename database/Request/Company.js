@@ -202,12 +202,12 @@ async function findCompanyOfINNorTitle(text) {
   }
 }
 
-async function findCompanyOfINN(INN) {
+async function findCompanyOfINN(INN, hrID) {
   try {
     let findFirst = await CompanySchema.findOne({
       INN: INN,
       isVarefy: true,
-      isFreez: false,
+      userList: { $elemMatch: { userID: hrID } },
     });
     if (!findFirst) return { success: false, message: "Компании нет" };
     return { success: true, data: findFirst };
@@ -235,8 +235,7 @@ const searchCompanyForVacancy = async (creatorID) => {
     let result = await CompanySchema.findOne({
       userList: { $elemMatch: { userID: creatorID } },
       isVarefy: true,
-      isFreez: false,
-    }).select("INN avatar title description");
+    }).select("INN avatar title description isFreez isActive");
     return result;
   } catch (e) {
     return false;

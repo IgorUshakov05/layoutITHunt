@@ -56,8 +56,7 @@ const responseSchema = new mongoose.Schema(
       type: Date,
       require: true,
     },
-  },
-  { _id: false }
+  },{ _id: false }
 );
 
 const vacancySchema = new mongoose.Schema({

@@ -1755,7 +1755,7 @@ p.error {
   letter-spacing: 0.093px;
 }
 .descriptionInfo {
-  margin-top: 10px;
+  margin-top: 14px;
 }
 .city {
   width: fit-content;
@@ -1784,7 +1784,7 @@ p.error {
 }
 
 .descript {
-  margin-top: 6px;
+  margin-top: 2px;
   font-family: Raleway;
   font-size: 12px;
   font-style: normal;

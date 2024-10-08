@@ -340,7 +340,7 @@
             </div>
             <div class="inviteAndClick mobNone">
                 <a href=""><span class="countClick"><%= element.responses.length %> откликов</span></a>
-                <a href=""><span class="countClick leftmaring"><%= element.proglosh %> приглашений</span></a>
+                <a href=""><span class="countClick leftmaring"><%= element.responses.length %> приглашений</span></a>
             </div>
             <div class="editAndRemove mobNone">
                 <a class="editVacancy" href="/edit-vacancy?id=<%-element.id%>">Изменить</a>
@@ -462,9 +462,9 @@
                 </div>
                                     </div>
                         <div class="inviteAndClick mobNone">
-                              <a href=""><span class="countClick"><%= element.responses.length %> откликов</span></a>
-                <a href=""><span class="countClick leftmaring"><%= element.responses %> приглашений</span></a>
-                        </div>
+                <a href=""><span class="countClick"><%= element.responses.length %> откликов</span></a>
+                <a href=""><span class="countClick leftmaring"><%= element.responses.length %> приглашений</span></a>
+            </div>
                             <div class="editAndRemove mobNone">
                             <a class="editVacancy" href="/edit-fastwork?id=<%-element.id%>">Изменить</a>
                             <button class="editVacancy removeVacancy removeFButton"  data-id="<%-element.id%>">Снять</button>
