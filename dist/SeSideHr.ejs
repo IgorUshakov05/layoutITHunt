@@ -226,10 +226,8 @@
 </svg>
 </div>
 <div class="buttonsElements buttonsElementsProfile buttonsElementsProfileDesc">
-                            <%if(myFavorites?.data) {%>
 
-                                <button class="Infavorites InfavoritesVacancy <%-myFavorites?.data?.vacancyID.some(elem => elem.id ===  element.id)?'addingFavorite':''%>" data-id="<%-element.id%>">В избранное</button>
-<%}%>
+                                <button class="Infavorites InfavoritesVacancy <%-myFavorites?.vacancyID.some(elem => elem.id ===  element.id)?'addingFavorite':''%>" data-id="<%-element.id%>">В избранное</button>
                                 <button class="Respond"><a href="/vacancia/<%-element.id%>">Откликнуться</a></button>                        
                         </div>
                         </div>
@@ -299,9 +297,7 @@
                           
                         </div>
                         <div class="buttonsElements buttonsElementsProfile">
-                            <%if(myFavorites?.data) {%>
-                                <button class="Infavorites InfavoritesVacancy  <%-myFavorites?.data?.vacancyID.some(elem => elem.id ===  element.id)?'addingFavorite':''%>" data-id="<%-element.id%>" data-id="<%-element.id%>">В избранное</button>
-                                <%}%>
+                                <button class="Infavorites InfavoritesVacancy  <%-myFavorites?.vacancyID.some(elem => elem.id ===  element.id)?'addingFavorite':''%>" data-id="<%-element.id%>" data-id="<%-element.id%>">В избранное</button>
                             <button class="Respond"><a href="/vacancia/<%-element.id%>">Откликнуться</a></button>                        
                         </div>
                                 </div>
@@ -343,11 +339,11 @@
                 </div>
                                     </div>
                         <div class="inviteAndClick mobNone">
-                              <a href=""><span class="countClick"><%= element.responses.length %> откликов</span></a>
+                              <a href=""><span class="countClick"><%- element.responses.length %> откликов</span></a>
                         </div>
                            <div class="buttonsElements buttonsElementsProfile mobNone">
-                            <%if(myFavorites.data) {%>
-                                <button class="Infavorites InfavoritesFastWork  <%-myFavorites?.data?.fastWorkID.some(elem => elem.id ===  element.id)?'addingFavorite':''%>" data-id="<%-element.id%>"  data-id="<%-element.id%>">В избранное</button>
+                            <%if(myFavorites) {%>
+                                <button class="Infavorites InfavoritesFastWork  <%-myFavorites.fastWorkID.some(elem => elem.id ===  element.id)?'addingFavorite':''%>" data-id="<%-element.id%>"  data-id="<%-element.id%>">В избранное</button>
                             <%}%>
                                 <button class="Respond"><a href="/fast-work/<%-element.id%>">Откликнуться</a></button>                        
                         </div>
@@ -402,13 +398,11 @@
                         </div>
                         <div class="bottomMobile">
                                 <div class="inviteAndClick">
-                                    <a href=""><span class="countClick"><%=element.responses.length %> откликов</span></a>
+                                    <a href=""><span class="countClick"><%-element.responses.length %> откликов</span></a>
                         </div>
                                                 <div class="buttonsElements buttonsElementsProfile">
-                            <%if(myFavorites.data) {%>
                                                     
-                                <button class="Infavorites InfavoritesFastWork  <%-myFavorites?.data?.fastWorkID.some(elem => elem.id ===  element.id)?'addingFavorite':''%>" data-id="<%-element.id%>" data-id="<%-element.id%>">В избранное</button>
-                            <%}%>
+                                <button class="Infavorites InfavoritesFastWork  <%-myFavorites?.fastWorkID.some(elem => elem.id ===  element.id)?'addingFavorite':''%>" data-id="<%-element.id%>" data-id="<%-element.id%>">В избранное</button>
                                 <button class="Respond"><a href="/fast-work/<%-element.id%>">Откликнуться</a></button>                        
                         </div>
                                 </div>

@@ -124,7 +124,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       console.log(findAllFV);
       return res.render("SeSideHr.ejs", {
         isLoggedIn: decodeAccess,
-        id: result.id,
+        id: decodeAccess.userID,
         name: result.name,
         chatList: decodeAccess.chatList || null,
         FILE_SERVER: process.env.FILE_SERVER_PATH,

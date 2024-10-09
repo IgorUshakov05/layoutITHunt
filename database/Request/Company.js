@@ -1,4 +1,6 @@
 const CompanySchema = require("../Schema/Company");
+const VacancySchema = require("../Schema/Vakancy");
+const FastWorkSchema = require("../Schema/FastWork");
 const UserSchema = require("../Schema/UserSchema");
 const { v4 } = require("uuid");
 const { Temporal } = require("@js-temporal/polyfill");
@@ -207,10 +209,30 @@ async function findCompanyOfINN(INN, hrID) {
     let findFirst = await CompanySchema.findOne({
       INN: INN,
       isVarefy: true,
-      userList: { $elemMatch: { userID: hrID } },
     });
-    if (!findFirst) return { success: false, message: "Компании нет" };
+    // Проверя,явлется ли пользователь hr,если да то отрисовывать даже если под фризом
+    if (findFirst.userList.some((hr) => hr.userID === hrID))
+      return { success: true, data: findFirst };
+    if (!findFirst || findFirst.isFreez)
+      return { success: false, message: "Компании нет" };
     return { success: true, data: findFirst };
+  } catch (error) {
+    console.error(error);
+    return { success: false, error: "Error" };
+  }
+}
+
+async function getVacansyByCompanyINN(INN) {
+  try {
+    let findFirst = await CompanySchema.findOne({
+      INN: INN,
+      isVarefy: true,
+    });
+    let getUserID = findFirst.userList.map((user) => user.userID);
+    console.log(getUserID);
+    let vacansys = await VacancySchema.find({ userID: getUserID });
+    // let fastworks = await FastWorkSchema.find({ userID: getUserID });
+    return { success: true, data: [vacansys] };
   } catch (error) {
     console.error(error);
     return { success: false, error: "Error" };
@@ -492,5 +514,6 @@ module.exports = {
   findCompanyOfINNorTitle,
   updateCompany,
   updateInfoCompany,
+  getVacansyByCompanyINN,
   freezCompany,
 };

@@ -22,7 +22,7 @@ $(document).on(
           Authorization: "augwod89h1h9awdh9py0y82hjd",
         },
         body: JSON.stringify({
-          id: clickedValue,
+          vacancyId: clickedValue,
         }),
       });
 

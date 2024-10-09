@@ -47,7 +47,7 @@ async function electedVacancy(userID, vacancyID) {
   }
 }
 
-async function findFAllFavoriteOfId(userID) {
+async function findFAllFavoriteOfId(userID ) {
   try {
     console.log(userID);
     if (!userID)

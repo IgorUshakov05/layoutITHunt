@@ -9723,9 +9723,26 @@ button.submitButton:focus {
   color: black !important;
 }
 
+
+.descriptionVacansyText > *,
+.descriptionVacansyText > * > *,
+.descriptionVacansyText > * > * > * {
+  font-size: 13px;
+  line-height: 20px;
+  background: none !important;
+  color: black !important;
+}
+/* descriptionVacansyText */
+
 .descriptionVacansyProfilePRE > h1,
 .descriptionVacansyProfilePRE > * > h1,
 .descriptionVacansyProfilePRE > * > * > h1 {
+  font-size: 20px;
+}
+
+.descriptionVacansyText > h1,
+.descriptionVacansyText > * > h1,
+.descriptionVacansyText > * > * > h1 {
   font-size: 20px;
 }
 
@@ -9735,10 +9752,25 @@ button.submitButton:focus {
   font-size: 18px;
 }
 
+
+.descriptionVacansyText > h2,
+.descriptionVacansyText > * > h2,
+.descriptionVacansyText > * > * > h2 {
+  font-size: 18px;
+}
+
 .descriptionVacansyProfilePRE > h3,
 .descriptionVacansyProfilePRE > * > h3,
 .descriptionVacansyProfilePRE > * > * > h3 {
   font-size: 16px;
+}
+
+
+
+.descriptionVacansyText > a,
+.descriptionVacansyText > * > a,
+.descriptionVacansyText > * > * > a {
+  color: blue;
 }
 
 .descriptionVacansyProfilePRE > a,
@@ -9746,6 +9778,7 @@ button.submitButton:focus {
 .descriptionVacansyProfilePRE > * > * > a {
   color: blue;
 }
+
 li[data-list="ordered"] {
   list-style-type: decimal;
   margin-left: 20px;

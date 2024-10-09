@@ -59,6 +59,7 @@ const responseSchema = new mongoose.Schema(
   },{ _id: false }
 );
 
+
 const vacancySchema = new mongoose.Schema({
   id: {
     type: String,
