@@ -1,8 +1,10 @@
 const Vacancy = require("../Schema/Vakancy");
+const UserScheme = require("../Schema/UserSchema");
 const { v4 } = require("uuid");
 const { Temporal } = require("@js-temporal/polyfill");
 const ReasonRMVacancy = require("../Schema/ReasonRemoveVacansy");
 const { addCauseVacancy } = require("./CauseRemovePublication");
+const VacansyRemoved = require("../Schema/VacansyRemoved");
 async function createVacancy({
   userID,
   special,
@@ -145,11 +147,32 @@ let sendRequest = async (id, specialID, message) => {
   }
 };
 
+let getAllRespond = async (hrDI) => {
+  try {
+    let getAllRespond = await Vacancy.find({ userID: hrDI }).select(
+      "special skills responses id"
+    );
+    if (!getAllRespond) return { success: true, message: "Вакансий нет" };
+    let userIDs = getAllRespond.map((item) => {
+      return item.responses.map((response) => response.userID);
+    });
+    console.log(userIDs);
+    console.log(getAllRespond);
+    let getUsers = await UserScheme.find({ id: getAllRespond });
+    console.log(getUsers);
+    return { success: true, vacancy: getAllRespond };
+  } catch (e) {
+    console.log(e);
+    return { success: false, message: "Сервер упал!" };
+  }
+};
+
 module.exports = {
   createVacancy,
   updateVacansy,
   searchVacancyById,
   searchVacancyByUserId,
   removeVacancy,
+  getAllRespond,
   sendRequest,
 };

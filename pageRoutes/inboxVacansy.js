@@ -1,13 +1,13 @@
 const { Router } = require("express");
 const router = Router();
 const { decodeAccessToken } = require("../api/tokens/accessToken");
-
-router.get("/inbox/vacancies", (req, res) => {
+const { getAllRespond } = require("../database/Request/Vacancy");
+router.get("/inbox/vacancies", async (req, res) => {
   let access = req.cookies.access;
-  let user = decodeAccessToken(access);
+  let user = await decodeAccessToken(access);
   if (!access || !user) return res.redirect("/login");
-  
-  res.render("inboxVacansy", {
+  let getInbox = await getAllRespond(user.userID);
+  return await res.render("inboxVacansy", {
     isLoggedIn: !!user,
     id: user.userID,
     role: user.userROLE,
