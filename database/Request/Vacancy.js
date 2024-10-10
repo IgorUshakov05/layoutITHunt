@@ -5,6 +5,7 @@ const { Temporal } = require("@js-temporal/polyfill");
 const ReasonRMVacancy = require("../Schema/ReasonRemoveVacansy");
 const { addCauseVacancy } = require("./CauseRemovePublication");
 const VacansyRemoved = require("../Schema/VacansyRemoved");
+const Vakancy = require("../Schema/Vakancy");
 async function createVacancy({
   userID,
   special,
@@ -147,19 +148,25 @@ let sendRequest = async (id, specialID, message) => {
   }
 };
 
-let getAllRespond = async (hrDI) => {
+let getAllRespond = async (hrID) => {
   try {
-    let getAllRespond = await Vacancy.find({ userID: hrDI }).select(
+    let getAllRespond = await Vacancy.find({ userID: hrID }).select(
       "special skills responses id"
     );
     if (!getAllRespond) return { success: true, message: "Вакансий нет" };
-    let userIDs = getAllRespond.map((item) => {
-      return item.responses.map((response) => response.userID);
+    let userIDs = [];
+    getAllRespond.forEach((vacancy) => {
+      vacancy.responses.forEach((response) => {
+        userIDs.push(response.userID);
+      });
     });
-    console.log(userIDs);
-    console.log(getAllRespond);
-    let getUsers = await UserScheme.find({ id: getAllRespond });
-    console.log(getUsers);
+    let getUsers = await UserScheme.find({ id: { $in: userIDs } }).select(
+      "id name surname skills avatar"
+    );
+    const userMap = new Map(getUsers.map((user) => [user.id, user]));
+
+    console.log(userMap.get("93a44f72-6ea8-418a-b17d-274ab274e9a1"));
+
     return { success: true, vacancy: getAllRespond };
   } catch (e) {
     console.log(e);
