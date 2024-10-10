@@ -13,13 +13,7 @@
     <title>Входящие уведомления - Вакансии</title>
 </head>
 <body>
-    <% let userSkills = ["Vue", "React", "Git", "Linux", "Docker", "AWS","AWD","MongoDB", "React Native", "Redux", "Express", "Webpack", "Nginx", "Angular", "SQL"] %>
-<% let vacansySkills = ["Vue", "React", "HTML", "CSS", "JS", "AWD", "Python", "Node.js", "Git"] %>
-<% let grup = [
-  ...userSkills.filter(skill => vacansySkills.includes(skill)),
-  ...vacansySkills.filter(skill => !userSkills.includes(skill)).filter(skill => !userSkills.includes(skill)),
-  ...userSkills.filter(skill => !vacansySkills.includes(skill))
-] %>
+
     <%- include('./header.ejs', { isLoggedIn, active: 'inbox',chat:chatList}) %>
     <main  class="main">
         <div class="twoBlocks mt20">
@@ -38,9 +32,10 @@
                             </div>
                             <ul class="listVacansySelect">
                                 <li class="itemVacForSelect selectedVac">Все фаст-ворки</li>
-                                <li class="itemVacForSelect selectedVac">FrontEnd</li>
-                                <li class="itemVacForSelect selectedVac">Backend</li>
-                                <li class="itemVacForSelect selectedVac">FullStack</li>
+                                <%vacancies.forEach(element => {%>
+                                    <li class="itemVacForSelect selectedVac"><%-element.special%></li>
+                                
+                                <%});%>
                             </ul>
                         </div>
                         <div class="myVacListForSelect filterToExp">
@@ -66,24 +61,35 @@
                     </div>
                 </div>
                 <div class="toDay">
-                    <p class="countList">Количество заявок (12)</p>
+                    <p class="countList">Количество заявок ( <%-vacancies.reduce((acc, item) => acc + item.responses.length, 0);%> )</p>
                 </div>
                 <div class="listZayavoc">
-                    <article class="itemZayancaVac premiumUser">
+
+                    <%vacancies.forEach(vacansy => {%>
+                        <%vacansy.responses.forEach(respond => {%>
+                            <%if(users.find((user)=>user.id === respond.userID )) {%>
+                                <article class="itemZayancaVac <%-users.find((user)=>user.id === respond.userID ).premium?'premiumUser':''%>">
+                                <% let userSkills =users.find((user)=>user.id === respond.userID ).skills.map((item) =>item.title)   %>
+<% let vacansySkills = vacansy.skills.map((item) =>item.title )%>
+<% let grup = [
+  ...userSkills.filter(skill => vacansySkills.includes(skill)),
+  ...vacansySkills.filter(skill => !userSkills.includes(skill)).filter(skill => !userSkills.includes(skill)),
+  ...userSkills.filter(skill => !vacansySkills.includes(skill))
+] %>
                         <div class="titleVacansyZayavca">
-                            <p class="titleVacancyZa">Инфо-безопастность</p>
+                            <p class="titleVacancyZa"><%-vacansy.special%></p>
                             <div class="timeLastSeen noAbs">3 минуты назад</div>
                         </div>
                         <div class="otherInfo">
-                            <a href="/awdawfuawd">
+                            <a href="/<%-respond.userID%>">
                                 <div class="topElems">
                                     <div class="photoUserZayavca">
-                                        <img width="104" height="104" src="/assets/pictures/person.jpg" alt="Фото пользователя">
+                                        <img width="104" height="104" src="<%-users.find((user)=>user.id === respond.userID ).avatar||'/assets/pictures/ДефолтСпециалист.jpg'%>" alt="Фото пользователя">
                                     </div>
                                     <div class="nameDolzCity">
                                         <div class="topBlockInfo">
-                                            <h1 class="surename">Ушаков Ярослав</h1>
-                                            <h2 class="Dolznost">Веб-дизайнер</h2>
+                                            <h1 class="surename"><%-users.find((user)=>user.id === respond.userID ).surname%> <%-users.find((user)=>user.id === respond.userID ).name%></h1>
+                                            <h2 class="Dolznost"><%-users.find((user)=>user.id === respond.userID ).job%></h2>
                                         </div>
                                         <div class="locaton">
                                             <svg width="11" height="15" viewBox="0 0 11 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -97,7 +103,7 @@
                             </a>
                             <div class="middleInfoVacansya noMob">
                                 <div class="descriptionVacansy">
-                                <p class="descriptionVacansyText">Мы понимаем, что в процессе поиска работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы и предоставить необходимую помощь в кратчайшие сроки. Мы ценим ваше время и стремимся обеспечить гладкое и безопасное пользование нашей платформой. Мы понимаем, что в процессе поиска работы могут возникать вопросы и затруднения. Поэтому мы предлагаем непрерывную поддержку нашим пользователям. Наша команда экспертов всегда готова ответить на ваши вопросы </p>
+                                <p class="descriptionVacansyText"><%-respond.message%></p>
                                 </div>
                                 <div class="showFull"><span class="showFullText">Показать полностью</span></div>
                             </div>
@@ -121,7 +127,7 @@
                                 </div>
                                 <ul class="listStacks m-8">
                                     <% grup.forEach(item => { %>
-                                        <li class="abilityItem <%= vacansySkills.includes(item) === userSkills.includes(item) ? 'targetSkill' : (userSkills.includes(item) ? '' : 'noneSkill') %>">
+                                        <li class="abilityItem <%= vacansySkills.includes(item) === userSkills.includes(item.toLowerCase()) ? 'targetSkill' : (userSkills.includes(item.toLowerCase()) ? '' : 'noneSkill') %>">
                                             <h5 class="ability"><%= item %></h5>
                                         </li>
                                     <% })%>
@@ -156,6 +162,12 @@
                             </div>
                         </div>
                     </article>
+                                <%}%>
+                         
+                    <%})%>
+                        <%});%>
+
+                   
                 </div>
          </div>
      </div>

@@ -26,6 +26,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
     }
     var favorites = null;
     let premium = await findPremium(result.id);
+
     const age = calculateAge(result.birthDay);
     if (access) {
       let findMyProf = await searchUserId(decodeAccess.userID);
@@ -33,7 +34,6 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       if (decodeAccess.userID === id) {
         if (result.role === "worker") {
           let myFavoritesPubloc = await getMyFavorites(result.id);
-          console.log(myFavoritesPubloc, ' - это')
           return res.render("ImProfessional.ejs", {
             isLoggedIn: decodeAccess,
             id: decodeAccess.userID,
@@ -59,7 +59,6 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
         }
         let vacancys = await searchVacancyByUserId(result.id);
         let fastWork = await searchFastWorkByUserId(result.id);
-        console.log(fastWork);
         let findCompany = await findCompanyOfUser(decodeAccess.userID);
         if (!findCompany.success) findCompany = { data: null };
         return res.render("ImHR.ejs", {
@@ -87,9 +86,11 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
     }
 
     if (result.role === "worker") {
+      console.log(premium, " -премиум");
+
       return res.render("seeSideProf.ejs", {
         isLoggedIn: decodeAccess,
-        id: result.id,
+        id: decodeAccess.userID,
         name: result.name,
         surname: result.surname,
         contacts: result.contacts,
@@ -101,7 +102,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
         city: result.city,
         FILE_SERVER: process.env.FILE_SERVER_PATH,
         skills: result.skills,
-        premium,
+        premium: premium.premium,
         education: result.education,
         isFav: favorites ? favorites.some((item) => item.id === id) : null,
         im: decodeAccess.userROLE || null,
@@ -113,15 +114,12 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
     } else {
       let vacancys = await searchVacancyByUserId(result.id);
       let fastWork = await searchFastWorkByUserId(result.id);
-      console.log(fastWork);
       let findAllFV = await findFAllFavoriteOfId(decodeAccess.userID);
-      console.log(findAllFV);
       if (!findAllFV) {
         findAllFV = { data: { vacancyID: [], fastWorkID: [] } }; // Обеспечиваем, что data будет пустым массивом в случае ошибки
       }
       let findCompany = await findCompanyOfUser(result.id);
       if (!findCompany.success) findCompany = { data: null };
-      console.log(findAllFV);
       return res.render("SeSideHr.ejs", {
         isLoggedIn: decodeAccess,
         id: decodeAccess.userID,
@@ -132,7 +130,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
         job: result.job,
         title: `${result.surname} ${result.name}`,
         age,
-        premium,
+        premium: premium.premium,
         city: result.city,
         avatar: result.avatar,
         isFav: favorites ? favorites.some((item) => item.id === id) : null,

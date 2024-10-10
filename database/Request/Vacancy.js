@@ -3,6 +3,7 @@ const UserScheme = require("../Schema/UserSchema");
 const { v4 } = require("uuid");
 const { Temporal } = require("@js-temporal/polyfill");
 const ReasonRMVacancy = require("../Schema/ReasonRemoveVacansy");
+const Premium = require("../Schema/Premium");
 const { addCauseVacancy } = require("./CauseRemovePublication");
 const VacansyRemoved = require("../Schema/VacansyRemoved");
 const Vakancy = require("../Schema/Vakancy");
@@ -150,24 +151,28 @@ let sendRequest = async (id, specialID, message) => {
 
 let getAllRespond = async (hrID) => {
   try {
-    let getAllRespond = await Vacancy.find({ userID: hrID }).select(
+    // Fetch vacancies for the given hrID
+    let vacancies = await Vacancy.find({ userID: hrID }).select(
       "special skills responses id"
     );
-    if (!getAllRespond) return { success: true, message: "Вакансий нет" };
-    let userIDs = [];
-    getAllRespond.forEach((vacancy) => {
-      vacancy.responses.forEach((response) => {
-        userIDs.push(response.userID);
-      });
-    });
-    let getUsers = await UserScheme.find({ id: { $in: userIDs } }).select(
-      "id name surname skills avatar"
+
+    if (!vacancies.length) return { success: true, message: "Вакансий нет" };
+
+    let userIDs = vacancies.flatMap((vacancy) =>
+      vacancy.responses.map((response) => response.userID)
     );
-    const userMap = new Map(getUsers.map((user) => [user.id, user]));
 
-    console.log(userMap.get("93a44f72-6ea8-418a-b17d-274ab274e9a1"));
-
-    return { success: true, vacancy: getAllRespond };
+    let users = await UserScheme.find({ id: { $in: userIDs } }).select(
+      "id name surname skills avatar job city"
+    );
+    let premium = await Premium.find({ userID: { $in: userIDs } }).select(
+      "userID"
+    );
+    premium.map((premium) => premium.userID);
+    users.map((user) => {
+      return (user.premium = premium.includes(premium.userID));
+    });
+    return { success: true, vacancies, users };
   } catch (e) {
     console.log(e);
     return { success: false, message: "Сервер упал!" };

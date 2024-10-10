@@ -32,12 +32,14 @@ const schema = new mongoose.Schema({
   },
   nextTimePay: {
     type: String,
-    required: true
+    required: true,
   },
   saved: {
     type: Boolean,
     default: false,
-  }
+  },
 });
 
-module.exports = mongoose.model("subscription", schema);
+const Premium = mongoose.models.Premium || mongoose.model("Premium", schema);
+
+module.exports = Premium;

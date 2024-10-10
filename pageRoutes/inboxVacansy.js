@@ -6,10 +6,13 @@ router.get("/inbox/vacancies", async (req, res) => {
   let access = req.cookies.access;
   let user = await decodeAccessToken(access);
   if (!access || !user) return res.redirect("/login");
-  let getInbox = await getAllRespond(user.userID);
+  let { vacancies, users, success } = await getAllRespond(user.userID);
+  if (!success) return res.redirect("/");
   return await res.render("inboxVacansy", {
     isLoggedIn: !!user,
     id: user.userID,
+    vacancies,
+    users,
     role: user.userROLE,
     chatList: user.chatList || null,
   });
