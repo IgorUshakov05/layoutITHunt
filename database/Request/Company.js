@@ -462,9 +462,7 @@ const getRequest = async (creatorID) => {
           (diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
         );
         const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
 
-        // Формируем строку с разницей во времени
         let timeString = "";
         if (days > 0) {
           timeString = ` ${days} ${days > 1 ? "дня" : "день"} назад`;
@@ -476,6 +474,8 @@ const getRequest = async (creatorID) => {
           timeString = `${seconds} ${
             seconds > 1 ? "секунды" : "секунда"
           } назад`;
+          const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+          console.log(timeString);
         }
 
         // Возвращаем объект с обновленным временем

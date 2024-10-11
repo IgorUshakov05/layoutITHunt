@@ -5,7 +5,6 @@ let { searchUserId } = require("../../database/Request/User");
 const useragent = require("express-useragent");
 
 const isAuth = async (req, res, next) => {
-  console.log('IsAuth')
   try {
     let refresh = req.cookies.refresh;
     let access = req.cookies.access;
@@ -22,9 +21,7 @@ const isAuth = async (req, res, next) => {
       let decodeRefresh = decodeRefreshToken(findToken);
 
       if (!decodeRefresh) {
-        console.log(`isAuth: decodeRefresh is null, deleting token`);
         await deleteToken(findToken.id);
-        console.log(`isAuth: Token deleted. Calling logout`);
         return await logout(res, next);
       }
 
@@ -46,7 +43,6 @@ const isAuth = async (req, res, next) => {
         return await logout(res, next);
       }
 
-      console.log(`isAuth: Setting new access cookie`);
       await res.cookie("access", accessTokenCookie, {
         maxAge: 3600000, // 1 час
         httpOnly: true, // Куки доступны только для сервера

@@ -26,13 +26,13 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
     }
     var favorites = null;
     let premium = await findPremium(result.id);
-
     const age = calculateAge(result.birthDay);
     if (access) {
       let findMyProf = await searchUserId(decodeAccess.userID);
       favorites = (await findUsersByFavorites(findMyProf.favorite)) || [];
       if (decodeAccess.userID === id) {
         if (result.role === "worker") {
+          console.log("Premium", premium);
           let myFavoritesPubloc = await getMyFavorites(result.id);
           return res.render("ImProfessional.ejs", {
             isLoggedIn: decodeAccess,
@@ -53,7 +53,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
             avatar: result.avatar,
             myFV: myFavoritesPubloc.data,
             expiriens: result.expiriens,
-            premium: premium.pemium,
+            premium: premium.premium,
             description: result.description,
           });
         }
@@ -86,8 +86,6 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
     }
 
     if (result.role === "worker") {
-      console.log(premium, " -премиум");
-
       return res.render("seeSideProf.ejs", {
         isLoggedIn: decodeAccess,
         id: decodeAccess.userID,

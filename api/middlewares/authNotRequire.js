@@ -5,17 +5,13 @@ const { searchUserId } = require("../../database/Request/User");
 const useragent = require("express-useragent");
 
 const isAuthNotRequire = async (req, res, next) => {
-  console.log(req.path);
   let refresh = req.cookies.refresh;
   let access = req.cookies.access;
-  console.log(access, refresh);
   if (!access && !refresh) {
     return next();
   }
 
   let decodeAccess = await decodeAccessToken(access);
-  console.log(decodeAccess);
-  console.log(access);
   if (!decodeAccess) {
     let findToken = await searchToken(refresh);
     let decodeRefresh = decodeRefreshToken(findToken);

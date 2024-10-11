@@ -168,11 +168,12 @@ let getAllRespond = async (hrID) => {
     let premium = await Premium.find({ userID: { $in: userIDs } }).select(
       "userID"
     );
-    premium.map((premium) => premium.userID);
-    users.map((user) => {
-      return (user.premium = premium.includes(premium.userID));
+    premium = premium.map((premium) => premium.userID);
+    let withPremium = await users.map((user) => {
+      return { ...user._doc, premium: premium.includes(user.id) };
     });
-    return { success: true, vacancies, users };
+    console.log(withPremium, premium);
+    return { success: true, vacancies, users: withPremium };
   } catch (e) {
     console.log(e);
     return { success: false, message: "Сервер упал!" };
