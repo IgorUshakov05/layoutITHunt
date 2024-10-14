@@ -107,7 +107,7 @@
             <%respond.responses.map((respondItem) =>{%>
 
             <article class="itemZayancaVac <%-respondItem.premium?'premiumUser':'' %>">
-              <% let userSkills =respondItem.skills.map(skill =>skill.title ) %> <% let vacansySkills = respond.skills.map(skill =>skill.title)%> 
+              <% let userSkills =respondItem.skills.map(skill =>skill.title.toLowerCase() ) %> <% let vacansySkills = respond.skills.map(skill =>skill.title.toLowerCase())%> 
               <% let grup = Array.from(new Set([
               ...userSkills .map(skill => skill.toLowerCase()) .filter(skill =>
               vacansySkills.includes(skill)), ...vacansySkills.filter(skill =>
@@ -156,7 +156,7 @@
                             fill="white"
                           />
                         </svg>
-                        <p class="locationText"><%-respondItem.city%></p>
+                        <p class="locationText"><%-respondItem.city.split(',').reverse()[0] %></p>
                       </div>
                         <%}%>
 
@@ -165,7 +165,7 @@
                 </a>
                 <div class="middleInfoVacansya noMob">
                   <div class="descriptionVacansy">
-                    <p class="descriptionVacansyText">awdawd</p>
+                    <p class="descriptionVacansyText"><%-respondItem.message%></p>
                   </div>
                   <div class="showFull">
                     <span class="showFullText">Показать полностью</span>
@@ -223,8 +223,7 @@
                 </div>
                 <div class="sendMessageOrNo">
                   <button type="button" class="defaultButton ml10 rejectQuery">
-                    Отклонить</button
-                  ><button
+                    Отклонить</button><button
                     type="button"
                     class="defaultButton responseQuery sendResponse"
                   >

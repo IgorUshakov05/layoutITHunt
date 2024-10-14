@@ -201,13 +201,12 @@ let getAllRespond = async (hrID) => {
               seconds > 1 ? "секунды" : "секунда"
             } назад`;
           }
-          console.log(user);
           return {
             userID: response.userID,
-            message: response.message + " - от клиента",
+            message: response.message,
             name: user.name || "",
             surname: user.surname || "",
-            job: user.job || "",
+            job: user.job|| "",
             city: user.city || "",
             timeDifference,
             premium: premium.includes(response.userID),
