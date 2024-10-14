@@ -153,9 +153,8 @@ let getAllRespond = async (hrID) => {
   try {
     // Fetch vacancies for the given hrID
     let vacancies = await Vacancy.find({ userID: hrID }).select(
-      "special skills responses id"
+      "special skills responses id description"
     );
-
     if (!vacancies.length) return { success: true, message: "Вакансий нет" };
 
     let userIDs = vacancies.flatMap((vacancy) =>
@@ -169,11 +168,57 @@ let getAllRespond = async (hrID) => {
       "userID"
     );
     premium = premium.map((premium) => premium.userID);
-    let withPremium = await users.map((user) => {
-      return { ...user._doc, premium: premium.includes(user.id) };
+
+    let formattedVacancies = vacancies.map((vacancy) => {
+      return {
+        special: vacancy.special,
+        description: vacancy.description,
+        responses: vacancy.responses.map((response) => {
+          const user = users.find((u) => u.id === response.userID) || {};
+
+          const now = new Date();
+          const diffTime = Math.abs(now - new Date(response.datetime));
+          const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+          const minutes = Math.floor(
+            (diffTime % (1000 * 60 * 60)) / (1000 * 60)
+          );
+          const hours = Math.floor(
+            (diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+          let timeDifference = "";
+          if (days > 0) {
+            timeDifference = `${days} ${days > 1 ? "дня" : "день"} назад`;
+          } else if (hours > 0) {
+            timeDifference = `${hours} ${hours > 1 ? "часа" : "час"} назад`;
+          } else if (minutes > 0) {
+            timeDifference = `${minutes} ${
+              minutes > 1 ? "минуты" : "минута"
+            } назад`;
+          } else {
+            timeDifference = `${seconds} ${
+              seconds > 1 ? "секунды" : "секунда"
+            } назад`;
+          }
+          console.log(user);
+          return {
+            userID: response.userID,
+            message: response.message + " - от клиента",
+            name: user.name || "",
+            surname: user.surname || "",
+            job: user.job || "",
+            city: user.city || "",
+            timeDifference,
+            premium: premium.includes(response.userID),
+            avatar: user.avatar || "",
+            skills: user.skills || [],
+          };
+        }),
+        skills: vacancy.skills,
+      };
     });
-    console.log(withPremium, premium);
-    return { success: true, vacancies, users: withPremium };
+    return { success: true, vacancies: formattedVacancies };
   } catch (e) {
     console.log(e);
     return { success: false, message: "Сервер упал!" };
