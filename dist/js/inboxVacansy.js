@@ -10,15 +10,22 @@ $(".filterToExp").on("click", function () {
 let fetchMethod = async (userID, vacancyID, isAccept) => {
   let req = await fetch("/api/solution", {
     method: "POST",
-    body: JSON.stringify({ userID, vacancyID, solution: isAccept }),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "augwod89h1h9awdh9py0y82hjd",
+    },
+    body: JSON.stringify({
+      vacancyID,
+      userID: "93a44f72-6ea8-418a-b17d-274ab274e9a1",
+      solution: isAccept,
+    }),
   });
   let response = await req.json();
-  console.log(fetchMethod);
+  console.log(response);
   return response;
 };
 async function accept(userID, vacancyID) {
-    let req = await fetchMethod(userID, vacancyID, true)
-    
+  let req = await fetchMethod(userID, vacancyID, true);
 }
 
 function cancel(userID, vacancyID) {}

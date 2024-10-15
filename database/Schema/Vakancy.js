@@ -50,15 +50,20 @@ const responseSchema = new mongoose.Schema(
     request: {
       type: Boolean,
       required: false,
+      default: null,
+    },
+    isRead: {
+      type: Boolean,
+      required: true,
       default: false,
     },
     datetime: {
       type: Date,
       require: true,
     },
-  },{ _id: false }
+  },
+  { _id: false }
 );
-
 
 const vacancySchema = new mongoose.Schema({
   id: {

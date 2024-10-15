@@ -6,6 +6,7 @@ const {
   createVacancy,
   updateVacansy,
   sendRequest,
+  AnswerOfSolution,
   removeVacancy,
 } = require("../../database/Request/Vacancy");
 const { removeFastWork } = require("../../database/Request/FastWork");
@@ -316,5 +317,27 @@ router.post(
     }
   }
 );
+
+router.post("/solution", async (req, res) => {
+  try {
+    let access = await req.cookies.access;
+    if (!access) return res.redirect("/login");
+    const decodeAccess = await decodeAccessToken(access);
+    if (!decodeAccess ||decodeAccess.userROLE !== 'creatorWork' ) return res.redirect("/login");
+    let { vacancyID, solution, userID } = await req.body;
+    console.log(solution);
+    let toDataBase = await AnswerOfSolution(
+      userID,
+      vacancyID,
+      solution,
+      decodeAccess.userID
+    );
+    return res.status(200).json(toDataBase);
+  } catch (e) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Ошибка сервера,извените:( " });
+  }
+});
 
 module.exports = router;

@@ -173,47 +173,49 @@ let getAllRespond = async (hrID) => {
       return {
         special: vacancy.special,
         description: vacancy.description,
-        responses: vacancy.responses.map((response) => {
-          const user = users.find((u) => u.id === response.userID) || {};
+        responses: vacancy.responses
+          .filter((response) => response.isRead === false)
+          .map((response) => {
+            const user = users.find((u) => u.id === response.userID) || {};
 
-          const now = new Date();
-          const diffTime = Math.abs(now - new Date(response.datetime));
-          const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
-          const minutes = Math.floor(
-            (diffTime % (1000 * 60 * 60)) / (1000 * 60)
-          );
-          const hours = Math.floor(
-            (diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-          );
-          const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            const now = new Date();
+            const diffTime = Math.abs(now - new Date(response.datetime));
+            const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+            const minutes = Math.floor(
+              (diffTime % (1000 * 60 * 60)) / (1000 * 60)
+            );
+            const hours = Math.floor(
+              (diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+            );
+            const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-          let timeDifference = "";
-          if (days > 0) {
-            timeDifference = `${days} ${days > 1 ? "дня" : "день"} назад`;
-          } else if (hours > 0) {
-            timeDifference = `${hours} ${hours > 1 ? "часа" : "час"} назад`;
-          } else if (minutes > 0) {
-            timeDifference = `${minutes} ${
-              minutes > 1 ? "минуты" : "минута"
-            } назад`;
-          } else {
-            timeDifference = `${seconds} ${
-              seconds > 1 ? "секунды" : "секунда"
-            } назад`;
-          }
-          return {
-            userID: response.userID,
-            message: response.message,
-            name: user.name || "",
-            surname: user.surname || "",
-            job: user.job|| "",
-            city: user.city || "",
-            timeDifference,
-            premium: premium.includes(response.userID),
-            avatar: user.avatar || "",
-            skills: user.skills || [],
-          };
-        }),
+            let timeDifference = "";
+            if (days > 0) {
+              timeDifference = `${days} ${days > 1 ? "дня" : "день"} назад`;
+            } else if (hours > 0) {
+              timeDifference = `${hours} ${hours > 1 ? "часа" : "час"} назад`;
+            } else if (minutes > 0) {
+              timeDifference = `${minutes} ${
+                minutes > 1 ? "минуты" : "минута"
+              } назад`;
+            } else {
+              timeDifference = `${seconds} ${
+                seconds > 1 ? "секунды" : "секунда"
+              } назад`;
+            }
+            return {
+              userID: response.userID,
+              message: response.message,
+              name: user.name || "",
+              surname: user.surname || "",
+              job: user.job || "",
+              city: user.city || "",
+              timeDifference,
+              premium: premium.includes(response.userID),
+              avatar: user.avatar || "",
+              skills: user.skills || [],
+            };
+          }),
         skills: vacancy.skills,
       };
     });
@@ -224,9 +226,40 @@ let getAllRespond = async (hrID) => {
   }
 };
 
+let AnswerOfSolution = async (workerID, vacancyID, solution, userID) => {
+  try {
+    let getRequest = await Vacancy.findOne({
+      id: vacancyID,
+      userID,
+      responses: { $elemMatch: { userID: workerID } },
+    });
+    if (!getRequest) return { success: false, message: "Отклик не найден" };
+    let response = getRequest.responses.find((u) => u.userID === workerID);
+    if (!response) return { success: false, message: "Отклик не найден" };
+    let answer = await Vacancy.findOneAndUpdate(
+      {
+        id: vacancyID,
+        userID,
+        responses: { $elemMatch: { userID: workerID } },
+      },
+      {
+        $set: {
+          "responses.$.isRead": solution === null ? false : true,
+          "responses.$.request": solution,
+        },
+      }
+    );
+    if (!answer) return { success: false, message: "Что-то пошло не так!" };
+    return { success: true, message: "Успех!" };
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 module.exports = {
   createVacancy,
   updateVacansy,
+  AnswerOfSolution,
   searchVacancyById,
   searchVacancyByUserId,
   removeVacancy,
