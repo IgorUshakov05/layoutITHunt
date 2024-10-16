@@ -24,11 +24,17 @@ let fetchMethod = async (userID, vacancyID, isAccept) => {
   console.log(response);
   return response;
 };
+
 async function accept(userID, vacancyID) {
   let req = await fetchMethod(userID, vacancyID, true);
 }
 
-function cancel(userID, vacancyID) {}
+async function reject(userID, vacancyID) {
+  let req = await fetchMethod(userID, vacancyID, false);
+}
+async function cancel(userID, vacancyID) {
+  let req = await fetchMethod(userID, vacancyID, null);
+}
 
 function makeInFuture(elem) {
   var elemParent = elem.parentElement.parentElement.parentElement;
@@ -48,11 +54,26 @@ function removeFuture(elem) {
 
 document.querySelectorAll(".inFav").forEach(function (item) {
   item.addEventListener("click", function () {
-    if (item.classList.contains("addingFavorite")) {
-      removeFuture(item);
-    } else {
-      makeInFuture(item);
-    }
+    let id = this.getAttribute("data-id");
+    fetch("/api/favorite", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "augwod89h1h9awdh9py0y82hjd",
+      },
+      body: JSON.stringify({ id }),
+    })
+      .then((obj) => obj.json())
+      .then((obj) => {
+        if (obj.result) {
+          makeInFuture(item);
+        } else {
+          removeFuture(item);
+        }
+      });
+    // if (item.classList.contains("addingFavorite")) {
+    // } else {
+    // }
   });
 });
 

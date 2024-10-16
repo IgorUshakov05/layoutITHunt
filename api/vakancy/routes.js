@@ -324,7 +324,7 @@ router.post("/solution", async (req, res) => {
     if (!access) return res.redirect("/login");
     const decodeAccess = await decodeAccessToken(access);
     if (!decodeAccess ||decodeAccess.userROLE !== 'creatorWork' ) return res.redirect("/login");
-    let { vacancyID, solution, userID } = await req.body;
+    let { vacancyID, solution, userID, message } = await req.body;
     console.log(solution);
     let toDataBase = await AnswerOfSolution(
       userID,
