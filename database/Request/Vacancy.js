@@ -160,7 +160,13 @@ let getAllRespond = async (hrID) => {
     let userIDs = vacancies.flatMap((vacancy) =>
       vacancy.responses.map((response) => response.userID)
     );
-
+    let getFavoriteUser = await UserScheme.findOne({ id: hrID }).select(
+      "favorite"
+    );
+    let favoriteUsers = getFavoriteUser.favorite
+      ? getFavoriteUser.favorite.map((favoriteUser) => favoriteUser.person)
+      : [];
+    console.log(getFavoriteUser);
     let users = await UserScheme.find({ id: { $in: userIDs } }).select(
       "id name surname skills avatar job city"
     );
@@ -210,6 +216,7 @@ let getAllRespond = async (hrID) => {
               surname: user.surname || "",
               job: user.job || "",
               city: user.city || "",
+              isFavorite: favoriteUsers.includes(response.userID),
               timeDifference,
               premium: premium.includes(response.userID),
               avatar: user.avatar || "",
@@ -233,6 +240,7 @@ let AnswerOfSolution = async (workerID, vacancyID, solution, userID) => {
       userID,
       responses: { $elemMatch: { userID: workerID } },
     });
+
     if (!getRequest) return { success: false, message: "Отклик не найден" };
     let response = getRequest.responses.find((u) => u.userID === workerID);
     if (!response) return { success: false, message: "Отклик не найден" };
