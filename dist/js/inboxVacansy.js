@@ -7,7 +7,7 @@ $(".filterToExp").on("click", function () {
   $(this).toggleClass("activeFilter");
   $(".makeWhite").toggleClass("makeBlack");
 });
-let fetchMethod = async (userID, vacancyID, isAccept) => {
+let fetchMethod = async (userID, vacancyID, isAccept, message) => {
   let req = await fetch("/api/solution", {
     method: "POST",
     headers: {
@@ -16,8 +16,9 @@ let fetchMethod = async (userID, vacancyID, isAccept) => {
     },
     body: JSON.stringify({
       vacancyID,
-      userID: "93a44f72-6ea8-418a-b17d-274ab274e9a1",
+      userID,
       solution: isAccept,
+      message
     }),
   });
   let response = await req.json();
@@ -49,6 +50,29 @@ function removeFuture(elem) {
   var buttons = elemParent.querySelectorAll(".inFav");
   buttons.forEach(function (item) {
     item.classList.remove("addingFavorite");
+  });
+}
+function sendRespond(sendLike) {}
+// Принятие
+let like = document.querySelectorAll(".sendLike");
+for (const textAreasItem of like) {
+  textAreasItem.addEventListener("click", function () {
+    accept(this.getAttribute("data-id"), this.getAttribute("data-v-id"));
+  });
+}
+// Отклонение
+let dislike = document.querySelectorAll(".sendDislike");
+for (const textAreasItem of dislike) {
+  textAreasItem.addEventListener("click", function () {
+    reject(this.getAttribute("data-id"), this.getAttribute("data-v-id"), false);
+  });
+}
+
+// Отмена
+let cansel = document.querySelectorAll(".bnone");
+for (const textAreasItem of cansel) {
+  textAreasItem.addEventListener("click", function () {
+    cancel(this.getAttribute("data-id"), this.getAttribute("data-v-id"), null);
   });
 }
 

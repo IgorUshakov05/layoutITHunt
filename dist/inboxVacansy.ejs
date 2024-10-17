@@ -44,7 +44,6 @@
                   </svg>
                 </div>
                 <ul class="listVacansySelect">
-                  <li class="itemVacForSelect selectedVac">Все фаст-ворки</li>
                   <%vacancies.forEach(element => {%>
                   <li class="itemVacForSelect selectedVac">
                     <%-element.special%>
@@ -237,9 +236,9 @@
                   </button>
                 </div>
                 <div class="sendMessageOrNo">
-                  <button type="button" class="defaultButton ml10 bnone">Назад</button><button
+                  <button type="button" class="defaultButton ml10 bnone" data-id='<%-respondItem.userID%>' data-v-id="<%-respond.id%>">Назад</button><button
                     type="button"
-                    class="defaultButton responseQuery sendReject">
+                    class="defaultButton responseQuery sendReject sendLike"  data-id='<%-respondItem.userID%>' data-v-id="<%-respond.id%>">
                     Отправить
                   </button>
                 </div>
@@ -249,10 +248,10 @@
                   <button type="button" class="Infavorites defaultButton inFav" data-id='<%-respondItem.userID%>'>В избранное</button>
                 </div>
                 <div class="sendMessageOrNo">
-                  <button type="button" class="defaultButton ml10 bnone">Назад</button><button
+                  <button type="button" class="defaultButton ml10 bnone" data-id='<%-respondItem.userID%>' data-v-id="<%-respond.id%>">Назад</button><button
                     type="button"
-                    class="defaultButton responseQuery sendReject sendRejectNigat"
-                  >
+                    class="defaultButton responseQuery sendReject sendRejectNigat sendDislike"
+                   data-id='<%-respondItem.userID%>' data-v-id="<%-respond.id%>">
                     Отказать
                   </button>
                 </div>

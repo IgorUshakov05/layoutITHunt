@@ -177,6 +177,7 @@ let getAllRespond = async (hrID) => {
 
     let formattedVacancies = vacancies.map((vacancy) => {
       return {
+        id:vacancy.id, 
         special: vacancy.special,
         description: vacancy.description,
         responses: vacancy.responses
@@ -233,7 +234,7 @@ let getAllRespond = async (hrID) => {
   }
 };
 
-let AnswerOfSolution = async (workerID, vacancyID, solution, userID) => {
+let AnswerOfSolution = async (workerID, vacancyID, solution, userID, message) => {
   try {
     let getRequest = await Vacancy.findOne({
       id: vacancyID,
@@ -244,6 +245,7 @@ let AnswerOfSolution = async (workerID, vacancyID, solution, userID) => {
     if (!getRequest) return { success: false, message: "Отклик не найден" };
     let response = getRequest.responses.find((u) => u.userID === workerID);
     if (!response) return { success: false, message: "Отклик не найден" };
+    console.log(solution)
     let answer = await Vacancy.findOneAndUpdate(
       {
         id: vacancyID,
@@ -253,12 +255,13 @@ let AnswerOfSolution = async (workerID, vacancyID, solution, userID) => {
       {
         $set: {
           "responses.$.isRead": solution === null ? false : true,
+          "responses.$.hrMessage": solution === null ? null : message,
           "responses.$.request": solution,
         },
       }
     );
     if (!answer) return { success: false, message: "Что-то пошло не так!" };
-    return { success: true, message: "Успех!" };
+    return { success: true, message: answer };
   } catch (e) {
     console.log(e);
   }

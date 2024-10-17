@@ -6339,7 +6339,10 @@ li:hover > .noneHover {
   display: flex;
   align-items: stretch;
 }
-
+.sendRejectNigat:hover {
+    color: red;
+    border: 0.5px solid red;
+}
 .rightTopInfoSpec {
   margin-left: 15px;
   width: 100%;

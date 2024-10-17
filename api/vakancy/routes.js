@@ -330,7 +330,8 @@ router.post("/solution", async (req, res) => {
       userID,
       vacancyID,
       solution,
-      decodeAccess.userID
+      decodeAccess.userID, 
+      message
     );
     return res.status(200).json(toDataBase);
   } catch (e) {

@@ -57,6 +57,11 @@ const responseSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
+    hrMessage: {
+      type: String,
+      default: null,
+      required: false,
+    },
     datetime: {
       type: Date,
       require: true,
