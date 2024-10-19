@@ -245,7 +245,7 @@ let AnswerOfSolution = async (workerID, vacancyID, solution, userID, message) =>
     if (!getRequest) return { success: false, message: "Отклик не найден" };
     let response = getRequest.responses.find((u) => u.userID === workerID);
     if (!response) return { success: false, message: "Отклик не найден" };
-    console.log(solution)
+    console.log(message)
     let answer = await Vacancy.findOneAndUpdate(
       {
         id: vacancyID,

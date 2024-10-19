@@ -18,7 +18,7 @@ let fetchMethod = async (userID, vacancyID, isAccept, message) => {
       vacancyID,
       userID,
       solution: isAccept,
-      message
+      message,
     }),
   });
   let response = await req.json();
@@ -26,12 +26,12 @@ let fetchMethod = async (userID, vacancyID, isAccept, message) => {
   return response;
 };
 
-async function accept(userID, vacancyID) {
-  let req = await fetchMethod(userID, vacancyID, true);
+async function accept(userID, vacancyID, message) {
+  let req = await fetchMethod(userID, vacancyID, true, message);
 }
 
-async function reject(userID, vacancyID) {
-  let req = await fetchMethod(userID, vacancyID, false);
+async function reject(userID, vacancyID, message) {
+  let req = await fetchMethod(userID, vacancyID, false, message);
 }
 async function cancel(userID, vacancyID) {
   let req = await fetchMethod(userID, vacancyID, null);
@@ -52,19 +52,25 @@ function removeFuture(elem) {
     item.classList.remove("addingFavorite");
   });
 }
-function sendRespond(sendLike) {}
+
 // Принятие
 let like = document.querySelectorAll(".sendLike");
 for (const textAreasItem of like) {
   textAreasItem.addEventListener("click", function () {
-    accept(this.getAttribute("data-id"), this.getAttribute("data-v-id"));
+    let value = this.closest(".itemZayancaVac")
+      .querySelector(".textRequest")
+      .querySelector(".textareaTwoCard").value.trim();
+    accept(this.getAttribute("data-id"), this.getAttribute("data-v-id"), value);
   });
 }
 // Отклонение
 let dislike = document.querySelectorAll(".sendDislike");
 for (const textAreasItem of dislike) {
   textAreasItem.addEventListener("click", function () {
-    reject(this.getAttribute("data-id"), this.getAttribute("data-v-id"), false);
+    let value = this.closest(".itemZayancaVac")
+      .querySelector(".textRequest")
+      .querySelector(".textareaTwoCard").value.trim();
+    reject(this.getAttribute("data-id"), this.getAttribute("data-v-id"), value);
   });
 }
 

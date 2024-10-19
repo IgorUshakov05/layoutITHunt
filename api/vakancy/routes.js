@@ -318,27 +318,48 @@ router.post(
   }
 );
 
-router.post("/solution", async (req, res) => {
-  try {
-    let access = await req.cookies.access;
-    if (!access) return res.redirect("/login");
-    const decodeAccess = await decodeAccessToken(access);
-    if (!decodeAccess ||decodeAccess.userROLE !== 'creatorWork' ) return res.redirect("/login");
-    let { vacancyID, solution, userID, message } = await req.body;
-    console.log(solution);
-    let toDataBase = await AnswerOfSolution(
-      userID,
-      vacancyID,
-      solution,
-      decodeAccess.userID, 
-      message
-    );
-    return res.status(200).json(toDataBase);
-  } catch (e) {
-    return res
-      .status(500)
-      .json({ success: false, message: "Ошибка сервера,извените:( " });
+router.post(
+  "/solution",
+  [
+    check("vacancyID").notEmpty().isUUID().withMessage("Че делаешь!"),
+    check("userID").notEmpty().isUUID().withMessage("Че делаешь!"),
+    check("solution")
+      .optional()
+      .isIn([true, false, null])
+      .withMessage("Состояние отклика не верное"),
+    check("message")
+      .notEmpty()
+      .isLength({ min: 10, max: 1500 })
+      .withMessage("Сообщение не больше 1500 символов и не меньше 10 символов"),
+  ],
+  async (req, res) => {
+    try {
+      let access = await req.cookies.access;
+      if (!access) return res.redirect("/login");
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+      const decodeAccess = await decodeAccessToken(access);
+      if (!decodeAccess || decodeAccess.userROLE !== "creatorWork")
+        return res.redirect("/login");
+      let { vacancyID, solution, userID, message } = await req.body;
+      console.log(message);
+      console.log(solution);
+      let toDataBase = await AnswerOfSolution(
+        userID,
+        vacancyID,
+        solution,
+        decodeAccess.userID,
+        message
+      );
+      return res.status(200).json(toDataBase);
+    } catch (e) {
+      return res
+        .status(500)
+        .json({ success: false, message: "Ошибка сервера,извените:( " });
+    }
   }
-});
+);
 
 module.exports = router;
