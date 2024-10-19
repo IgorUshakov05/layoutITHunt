@@ -57,20 +57,35 @@ function removeFuture(elem) {
 let like = document.querySelectorAll(".sendLike");
 for (const textAreasItem of like) {
   textAreasItem.addEventListener("click", function () {
+    this.style.display = "none";
+
     let value = this.closest(".itemZayancaVac")
       .querySelector(".textRequest")
-      .querySelector(".textareaTwoCard").value.trim();
-    accept(this.getAttribute("data-id"), this.getAttribute("data-v-id"), value);
+      .querySelector(".textareaTwoCard");
+    value.setAttribute("disabled", "disabled");
+    value.style.cursor = "not-allowed";
+    accept(
+      this.getAttribute("data-id"),
+      this.getAttribute("data-v-id"),
+      value.value.trim()
+    );
   });
 }
 // Отклонение
 let dislike = document.querySelectorAll(".sendDislike");
 for (const textAreasItem of dislike) {
   textAreasItem.addEventListener("click", function () {
+    this.style.display = "none";
     let value = this.closest(".itemZayancaVac")
       .querySelector(".textRequest")
-      .querySelector(".textareaTwoCard").value.trim();
-    reject(this.getAttribute("data-id"), this.getAttribute("data-v-id"), value);
+      .querySelector(".textareaTwoCard");
+    value.setAttribute("disabled", "disabled");
+    value.style.cursor = "not-allowed";
+    reject(
+      this.getAttribute("data-id"),
+      this.getAttribute("data-v-id"),
+      value.value.trim()
+    );
   });
 }
 
@@ -134,12 +149,34 @@ $(".sendResponse").on("click", function () {
 });
 
 $(".bnone").on("click", function () {
+  let dataId = $(this).attr("data-id");
+  $(this)
+    .parent()
+    .parent()
+    .parent()
+    .find('button[data-id="' + dataId + '"].sendLike')
+    .css("display", "inline");
+  $(this)
+    .parent()
+    .parent()
+    .parent()
+    .find('button[data-id="' + dataId + '"].sendDislike')
+    .css("display", "inline");
   $(this)
     .parent()
     .parent()
     .parent()
     .find(".textRequest")
     .css("display", "none");
+  $(this)
+    .parent()
+    .parent()
+    .parent()
+    .find(".textRequest")
+    .find("textarea")
+    .removeAttr("disabled")
+    .css("cursor", "text")
+    .val("");
   $(this)
     .parent()
     .parent()

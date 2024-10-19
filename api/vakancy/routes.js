@@ -328,6 +328,8 @@ router.post(
       .isIn([true, false, null])
       .withMessage("Состояние отклика не верное"),
     check("message")
+      .if(check("solution").equals(null))
+      .optional()
       .notEmpty()
       .isLength({ min: 10, max: 1500 })
       .withMessage("Сообщение не больше 1500 символов и не меньше 10 символов"),

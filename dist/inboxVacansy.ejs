@@ -231,7 +231,7 @@
               </div>
               <div class="sendMEssageButtonOrNoInvite responseUser">
                 <div class="inFavoriteButton">
-                  <button type="button" class="Infavorites defaultButton inFav" data-id='<%-respondItem.userID%>'>
+                  <button type="button" class="Infavorites defaultButton inFav <%-respondItem.isFavorite?'addingFavorite':''%>" data-id='<%-respondItem.userID%>'>
                     В избранное
                   </button>
                 </div>
@@ -245,7 +245,7 @@
               </div>
               <div class="sendMEssageButtonOrNoInvite rejectUser">
                 <div class="inFavoriteButton">
-                  <button type="button" class="Infavorites defaultButton inFav" data-id='<%-respondItem.userID%>'>В избранное</button>
+                  <button type="button" class="Infavorites defaultButton inFav <%-respondItem.isFavorite?'addingFavorite':''%>" data-id='<%-respondItem.userID%>'>В избранное</button>
                 </div>
                 <div class="sendMessageOrNo">
                   <button type="button" class="defaultButton ml10 bnone" data-id='<%-respondItem.userID%>' data-v-id="<%-respond.id%>">Назад</button><button
