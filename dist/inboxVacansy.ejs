@@ -26,9 +26,9 @@
         <div class="MoreInfo mt35">
           <div class="topInputAndLastAndFirst">
             <div class="inputSearchUser flexed">
-              <div class="myVacListForSelect">
+              <div class="myVacListForSelect sortVac">
                 <div class="defaultAll">
-                  <span class="selectedVac"> Все вакансии </span>
+                  <span class="selectedVac mainText"> Все вакансии </span>
                   <svg
                     width="14"
                     height="9"
@@ -44,15 +44,16 @@
                   </svg>
                 </div>
                 <ul class="listVacansySelect">
+                  <li class="itemVacForSelect selectedVac items"> Все вакансии </li>
                   <%vacancies.forEach(element => {%>
-                  <li class="itemVacForSelect selectedVac">
+                  <li class="itemVacForSelect selectedVac items">
                     <%-element.special%>
                   </li>
 
                   <%});%>
                 </ul>
               </div>
-              <div class="myVacListForSelect filterToExp">
+              <div class="myVacListForSelect filterToExp sort">
                 <div class="defaultAll">
                   <span class="selectedVac"> Совпадения навыков </span>
                   <svg
@@ -205,6 +206,7 @@
                 </div>
               </div>
               <div class="textRequest">
+                <span style="font-size: 13px; color: red; display: none;" class="message"></span>
                 <textarea
                   name="textRequest"
                   placeholder="Сообщение..."

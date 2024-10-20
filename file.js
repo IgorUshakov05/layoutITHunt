@@ -4,7 +4,7 @@
   id: '93a44f72-6ea8-418a-b17d-274ab274e9a1',
   surname: 'Ушаков',
   name: 'Игорь',
-  job: 'FrontEnd',
+  job: 'Frontend',
   city: '',
   avatar: 'http://localhost:3001/avatar/83066d05-f39f-43cd-bf62-31d4eaab3c18.png',
   skills: [
@@ -49,7 +49,7 @@
   id: '93a44f72-6ea8-418a-b17d-274ab274e9a1',
   surname: 'Ушаков',
   name: 'Игорь',
-  job: 'FrontEnd',
+  job: 'Frontend',
   city: '',
   avatar: 'http://localhost:3001/avatar/83066d05-f39f-43cd-bf62-31d4eaab3c18.png',
   skills: [
@@ -95,7 +95,7 @@
   id: '93a44f72-6ea8-418a-b17d-274ab274e9a1',
   surname: 'Ушаков',
   name: 'Игорь',
-  job: 'FrontEnd',
+  job: 'Frontend',
   city: '',
   avatar: 'http://localhost:3001/avatar/83066d05-f39f-43cd-bf62-31d4eaab3c18.png',
   skills: [
@@ -117,7 +117,7 @@
   ]
 }
 {
-  special: 'FrontEnd',
+  special: 'Frontend',
   description: '<p>awhdoiaw dahuw djawd jawd</p><p>awdga dawdgyawjdo awgd ajwd</p><p>a wd awidawgda wu 9dgawybawdawdawdd awd </p><p>a</p>',
   responses: [
     {
@@ -126,7 +126,7 @@
         ' awdgvbaj wdawfodcf gabwjndj mawdfta vwdhu awdawwd - от клиента',
       name: 'Игорь',
       surname: 'Ушаков',
-      job: 'FrontEnd',
+      job: 'Frontend',
       city: '',
       timeDifference: '6 дня назад',
       premium: true,

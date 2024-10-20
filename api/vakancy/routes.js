@@ -20,7 +20,7 @@ const specialList = [
   "Системный администратор",
   "Администратор БД",
   "HR",
-  "FrontEnd",
+  "Frontend",
   "Менеджер продаж",
   "Тестировщик",
   "Продукт менеджер",
@@ -250,7 +250,7 @@ router.post(
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         console.log(errors.array());
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).json({ success: false, errors: errors.array() });
       }
       let findUser = await searchUserId(decodeAccess.userID);
       if (!findUser) return res.redirect("/login");
@@ -298,7 +298,7 @@ router.post(
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         console.log(errors.array());
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).json({ success: false, errors: errors.array() });
       }
       let findUser = await searchUserId(decodeAccess.userID);
       if (!findUser || findUser.role !== "worker")
@@ -328,11 +328,11 @@ router.post(
       .isIn([true, false, null])
       .withMessage("Состояние отклика не верное"),
     check("message")
-      .if(check("solution").equals(null))
-      .optional()
+      .if(check("solution").isIn([true, false]))
       .notEmpty()
       .isLength({ min: 10, max: 1500 })
-      .withMessage("Сообщение не больше 1500 символов и не меньше 10 символов"),
+      .withMessage("Сообщение не меньше 10 символов и не больше 1500 символов")
+      .optional({ nullable: true }),
   ],
   async (req, res) => {
     try {
@@ -340,7 +340,7 @@ router.post(
       if (!access) return res.redirect("/login");
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).json({ success: false, errors: errors.array() });
       }
       const decodeAccess = await decodeAccessToken(access);
       if (!decodeAccess || decodeAccess.userROLE !== "creatorWork")
