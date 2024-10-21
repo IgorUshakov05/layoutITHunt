@@ -44,13 +44,15 @@
                   </svg>
                 </div>
                 <ul class="listVacansySelect">
-                  <li class="itemVacForSelect selectedVac items"> Все вакансии </li>
-                  <%vacancies.forEach(element => {%>
-                  <li class="itemVacForSelect selectedVac items">
-                    <%-element.special%>
-                  </li>
-
-                  <%});%>
+                  <li class="itemVacForSelect selectedVac items">Все вакансии</li>
+                  <%if(!!vacancies) {%>
+                    <%vacancies.forEach(element => {%>
+                      <li class="itemVacForSelect selectedVac items">
+                        <%-element.special%>
+                      </li>
+                      
+                      <%});%>
+                      <%}%>
                 </ul>
               </div>
               <div class="myVacListForSelect filterToExp sort">
@@ -98,12 +100,12 @@
           </div>
           <div class="toDay">
             <p class="countList">
-              Количество заявок ( <%-vacancies.reduce((acc, item) => acc +
-              item.responses.length, 0);%> )
+              Количество заявок ( <%-!!vacancies?vacancies.reduce((acc, item) => acc +
+              item.responses.length, 0):0%> )
             </p>
           </div>
           <div class="listZayavoc">
-            <%if(vacancies.length) {%> <%vacancies.map((respond) =>{%>
+            <%if(!!vacancies) {%> <%vacancies.map((respond) =>{%>
             <%respond.responses.map((respondItem) =>{%>
 
             <article class="itemZayancaVac <%-respondItem.premium?'premiumUser':'' %>">
@@ -118,7 +120,7 @@
               <div class="titleVacansyZayavca">
                 <p class="titleVacancyZa"><%-respond.special%></p>
 
-                <div class="timeLastSeen noAbs"><%-respondItem.timeDifference%></div>
+                <div class="timeLastSeen noAbs" data-time="<%-respondItem.datetime%>"><%-respondItem.timeDifference%></div>
               </div>
               <div class="otherInfo">
                 <a href="/<%-respondItem.userID%>">

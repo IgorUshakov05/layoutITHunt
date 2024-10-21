@@ -152,9 +152,11 @@ let sendRequest = async (id, specialID, message) => {
 let getAllRespond = async (hrID) => {
   try {
     // Fetch vacancies for the given hrID
-    let vacancies = await Vacancy.find({ userID: hrID }).select(
-      "special skills responses id description"
-    );
+    let vacancies = await Vacancy.find({
+      userID: hrID,
+    }).select("special skills responses id description");
+
+    console.log(vacancies);
     if (!vacancies.length) return { success: true, message: "Вакансий нет" };
 
     let userIDs = vacancies.flatMap((vacancy) =>
@@ -177,7 +179,7 @@ let getAllRespond = async (hrID) => {
 
     let formattedVacancies = vacancies.map((vacancy) => {
       return {
-        id:vacancy.id, 
+        id: vacancy.id,
         special: vacancy.special,
         description: vacancy.description,
         responses: vacancy.responses
@@ -216,6 +218,7 @@ let getAllRespond = async (hrID) => {
               name: user.name || "",
               surname: user.surname || "",
               job: user.job || "",
+              datetime: response.datetime,
               city: user.city || "",
               isFavorite: favoriteUsers.includes(response.userID),
               timeDifference,
@@ -234,7 +237,13 @@ let getAllRespond = async (hrID) => {
   }
 };
 
-let AnswerOfSolution = async (workerID, vacancyID, solution, userID, message) => {
+let AnswerOfSolution = async (
+  workerID,
+  vacancyID,
+  solution,
+  userID,
+  message
+) => {
   try {
     let getRequest = await Vacancy.findOne({
       id: vacancyID,
@@ -245,7 +254,7 @@ let AnswerOfSolution = async (workerID, vacancyID, solution, userID, message) =>
     if (!getRequest) return { success: false, message: "Отклик не найден" };
     let response = getRequest.responses.find((u) => u.userID === workerID);
     if (!response) return { success: false, message: "Отклик не найден" };
-    console.log(message)
+    console.log(message);
     let answer = await Vacancy.findOneAndUpdate(
       {
         id: vacancyID,

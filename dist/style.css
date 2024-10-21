@@ -7890,7 +7890,7 @@ textarea.specialisationSelectInput {
 .itemVacForSelect:hover {
   background: #e2d4ff;
 }
-.selectedVac {
+.selectedVac  >a {
   font-family: Raleway;
   font-size: 14px;
   font-style: normal;
@@ -7899,6 +7899,14 @@ textarea.specialisationSelectInput {
   letter-spacing: 0.065px;
 }
 
+.selectedVac   {
+  font-family: Raleway;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 141.4%; /* 18.382px */
+  letter-spacing: 0.065px;
+}
 .w-fitContentMy {
   width: fit-content;
 }

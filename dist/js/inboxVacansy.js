@@ -256,3 +256,37 @@ $(".bnone").on("click", function () {
   $(this).parent().parent().parent().find(".defaulUser").toggle();
   $(this).parent().parent().parent().find(".rejectUser").css("display", "none");
 });
+let inputTime = document.querySelectorAll(".inpCheck");
+console.log(inputTime);
+inputTime.forEach((item) => {
+  item.addEventListener("click", function (e) {
+    let value = e.target.value;
+
+    // Получаем все элементы с классом itemZayancaVac
+    let items = document.querySelectorAll(".itemZayancaVac");
+
+    // Сортируем элементы в зависимости от значения value
+    if (value === "first") {
+      items = Array.from(items).sort((a, b) => {
+        let timeA = new Date(a.querySelector(".timeLastSeen").dataset.time);
+        let timeB = new Date(b.querySelector(".timeLastSeen").dataset.time);
+        return timeA - timeB; // Сортировка по возрастанию времени
+      });
+    } else {
+      items = Array.from(items).sort((a, b) => {
+        let timeA = new Date(a.querySelector(".timeLastSeen").dataset.time);
+        let timeB = new Date(b.querySelector(".timeLastSeen").dataset.time);
+        return timeB - timeA; // Сортировка по убыванию времени
+      });
+    }
+
+    // Очищаем контейнер, где должны быть записи
+    let container = document.querySelector(".listZayavoc"); // Замените на ваш селектор
+    container.innerHTML = "";
+
+    // Вставляем отсортированные записи в контейнер
+    items.forEach((item) => {
+      container.appendChild(item);
+    });
+  });
+});
