@@ -24,6 +24,253 @@
       <div class="twoBlocks mt20">
         <%- include('./inboxLinks', {active: "1",role, isMain: false }) %>
         <div class="MoreInfo mt35">
+          <%if(role==='worker') {%>
+             <div class="topInputAndLastAndFirst">
+            <div class="inputSearchUser flexed">
+              <div class="myVacListForSelect sortVac">
+                <div class="defaultAll">
+                  <span class="selectedVac mainText"> Все вакансии </span>
+                  <svg
+                    width="14"
+                    height="9"
+                    viewBox="0 0 14 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1 1L7.01447 7L13.0289 1"
+                      stroke="#5412E0"
+                      stroke-width="2"
+                    />
+                  </svg>
+                </div>
+                <ul class="listVacansySelect">
+                  <li class="itemVacForSelect selectedVac items">Все вакансии</li>
+                  <%if(!!vacancies) {%>
+                    <%vacancies.forEach(element => {%>
+                      <li class="itemVacForSelect selectedVac items">
+                        <%-element.special%>
+                      </li>
+                      
+                      <%});%>
+                      <%}%>
+                </ul>
+              </div>
+            
+            </div>
+            <div class="selectLastOrFirst" style="display: flex; margin-left: 20px;"> 
+              <div class="lastSelect divLF selectedRadio">
+                <input
+                  value="last"
+                  type="radio"
+                  class="inpCheck"
+                  name="lastOrFirst"
+                  id="FirstID"
+                  checked
+                />
+                <label for="FirstID">Последние</label>
+              </div>
+              <div class="firstSelect divLF">
+                <input
+                  value="first"
+                  type="radio"
+                  class="inpCheck"
+                  name="lastOrFirst"
+                  id="lastID"
+                />
+                <label for="lastID">Давние</label>
+              </div>
+            </div>
+            <div class="selectLastOrFirst" style="display: flex; margin-left: 20px;">
+              <div class="lastSelect divLF selectedRadio">
+                <input
+                  value="last"
+                  type="radio"
+                  class="inpCheck"
+                  name="lastOrFirst"
+                  id="FirstID"
+                  checked
+                />
+                <label for="FirstID">Последние</label>
+              </div>
+              <div class="firstSelect divLF">
+                <input
+                  value="first"
+                  type="radio"
+                  class="inpCheck"
+                  name="lastOrFirst"
+                  id="lastID"
+                />
+                <label for="lastID">Давние</label>
+              </div>
+            </div>
+          </div>
+          <div class="toDay">
+            <p class="countList">
+              Количество заявок ( <%-!!vacancies?vacancies.reduce((acc, item) => acc +
+              item.responses.length, 0):0%> )
+            </p>
+          </div>
+          <div class="listZayavoc">
+            <%if(!!vacancies) {%> <%vacancies.map((respond) =>{%>
+            <%respond.responses.map((respondItem) =>{%>
+
+            <article class="itemZayancaVac <%-respondItem.premium?'premiumUser':'' %>">
+              <% let userSkills =respondItem.skills.map(skill =>skill.title.toLowerCase() ) %> <% let vacansySkills = respond.skills.map(skill =>skill.title.toLowerCase())%> 
+              <% let grup = Array.from(new Set([
+              ...userSkills .map(skill => skill.toLowerCase()) .filter(skill =>
+              vacansySkills.includes(skill)), ...vacansySkills.filter(skill =>
+              !userSkills.map(s => s.toLowerCase()).includes(skill)),
+              ...userSkills .map(skill => skill.toLowerCase()) .filter(skill =>
+              !vacansySkills.includes(skill)) ])) %>
+
+              <div class="titleVacansyZayavca">
+                <p class="titleVacancyZa"><%-respond.special%></p>
+
+                <div class="timeLastSeen noAbs" data-time="<%-respondItem.datetime%>"><%-respondItem.timeDifference%></div>
+              </div>
+              <div class="otherInfo">
+                <a href="/<%-respondItem.userID%>">
+                  <div class="topElems">
+                    <div class="photoUserZayavca">
+                      <img
+                        width="104"
+                        height="104"
+                        src="<%=  respondItem.avatar?respondItem.avatar:respondItem.premium?'/assets/pictures/ПремиумСпециалист.jpg':'/assets/pictures/ДефолтСпециалист.jpg' %>"
+                        alt="Фото пользователя"
+                      />
+                    </div>
+                    <div class="nameDolzCity">
+                      <div class="topBlockInfo">
+                        <h1 class="surename"><%-respondItem.name%> <%-respondItem.surname%></h1>
+                        <h2 class="Dolznost"><%-respondItem.job%></h2>
+                      </div>
+                      <%if(respondItem.city) {%>
+                      <div class="locaton">
+                        <svg
+                          width="11"
+                          height="15"
+                          viewBox="0 0 11 15"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M5.5 0C8.53757 0 11 2.26228 11 5.05312C11 9.61016 5.5 14.4375 5.5 14.4375C5.5 14.4375 0 9.65067 0 5.05312C0 2.26228 2.46243 0 5.5 0Z"
+                            fill="#5412E0"
+                          />
+                          <path
+                            d="M5.5 8.25002C7.01878 8.25002 8.25 7.0188 8.25 5.50002C8.25 3.98123 7.01878 2.75002 5.5 2.75002C3.98122 2.75002 2.75 3.98123 2.75 5.50002C2.75 7.0188 3.98122 8.25002 5.5 8.25002Z"
+                            fill="white"
+                          />
+                        </svg>
+                        <p class="locationText"><%-respondItem.city.split(',').reverse()[0] %></p>
+                      </div>
+                        <%}%>
+
+                    </div>
+                  </div>
+                </a>
+                <div class="middleInfoVacansya noMob">
+                  <div class="descriptionVacansy">
+                    <p class="descriptionVacansyText"><%-respondItem.message%></p>
+                  </div>
+                  <div class="showFull">
+                    <span class="showFullText">Показать полностью</span>
+                  </div>
+                </div>
+                <div class="bttomSkillCount">
+                  <div class="countSkill">
+                    <span
+                      >Совпадений
+                      <span class="colorHunt"
+                        ><%- userSkills.filter(skill =>
+                        vacansySkills.includes(skill.toLowerCase())).length%>/<%-vacansySkills.length
+                        %></span></span>
+                    <div class="legenda">
+                      <div class="dotAndText">
+                        <div class="dot one"></div>
+                        <p class="textLegent">Совпадения</p>
+                      </div>
+                      <div class="dotAndText">
+                        <div class="dot two"></div>
+                        <p class="textLegent">Отсутствие</p>
+                      </div>
+                      <div class="dotAndText">
+                        <div class="dot three"></div>
+                        <p class="textLegent mr0">Прочие</p>
+                      </div>
+                    </div>
+                  </div>
+                  <ul class="listStacks m-8">
+                    <% grup.forEach(item => { %>
+                    <li
+                      class="abilityItem <%= (vacansySkills.includes(item.toLowerCase()) && userSkills.map(skill => skill.toLowerCase()).includes(item.toLowerCase())) ? 'targetSkill' : (!userSkills.map(skill => skill.toLowerCase()).includes(item.toLowerCase()) ? 'noneSkill' : '') %>"
+                    >
+                      <h5 class="ability"><%-item%></h5>
+                    </li>
+                    <% }) %>
+                  </ul>
+                </div>
+              </div>
+              <div class="textRequest">
+                <span style="font-size: 13px; color: red; display: none;" class="message"></span>
+                <textarea
+                  name="textRequest"
+                  placeholder="Сообщение..."
+                  cols="30"
+                  rows="10"
+                  class="textareaTwoCard textRequestForUserSpec"
+                ></textarea>
+              </div>
+              <div class="sendMEssageButtonOrNoInvite defaulUser">
+                <div class="inFavoriteButton">
+                  <button type="button" class="Infavorites defaultButton inFav <%-respondItem.isFavorite?'addingFavorite':''%>" data-id='<%-respondItem.userID%>'>
+                    В избранное
+                  </button>
+                </div>
+                <div class="sendMessageOrNo">
+                  <button type="button" class="defaultButton ml10 rejectQuery">
+                    Отклонить</button><button
+                    type="button"
+                    class="defaultButton responseQuery sendResponse"
+                  >
+                    Пригласить
+                  </button>
+                </div>
+              </div>
+              <div class="sendMEssageButtonOrNoInvite responseUser">
+                <div class="inFavoriteButton">
+                  <button type="button" class="Infavorites defaultButton inFav <%-respondItem.isFavorite?'addingFavorite':''%>" data-id='<%-respondItem.userID%>'>
+                    В избранное
+                  </button>
+                </div>
+                <div class="sendMessageOrNo">
+                  <button type="button" class="defaultButton ml10 bnone" data-id='<%-respondItem.userID%>' data-v-id="<%-respond.id%>">Назад</button><button
+                    type="button"
+                    class="defaultButton responseQuery sendReject sendLike"  data-id='<%-respondItem.userID%>' data-v-id="<%-respond.id%>">
+                    Отправить
+                  </button>
+                </div>
+              </div>
+              <div class="sendMEssageButtonOrNoInvite rejectUser">
+                <div class="inFavoriteButton">
+                  <button type="button" class="Infavorites defaultButton inFav <%-respondItem.isFavorite?'addingFavorite':''%>" data-id='<%-respondItem.userID%>'>В избранное</button>
+                </div>
+                <div class="sendMessageOrNo">
+                  <button type="button" class="defaultButton ml10 bnone" data-id='<%-respondItem.userID%>' data-v-id="<%-respond.id%>">Назад</button><button
+                    type="button"
+                    class="defaultButton responseQuery sendReject sendRejectNigat sendDislike"
+                   data-id='<%-respondItem.userID%>' data-v-id="<%-respond.id%>">
+                    Отказать
+                  </button>
+                </div>
+              </div>
+            </article>
+            <%})%> <%})%> <%}%>
+          </div>
+            <%} else {%>
           <div class="topInputAndLastAndFirst">
             <div class="inputSearchUser flexed">
               <div class="myVacListForSelect sortVac">
@@ -263,6 +510,7 @@
             </article>
             <%})%> <%})%> <%}%>
           </div>
+          <%}%>
         </div>
       </div>
     </main>
