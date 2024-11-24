@@ -1,4 +1,5 @@
 const UserSchema = require("../../database/Schema/UserSchema");
+const PremiumSchema = require("../../database/Schema/premium");
 
 const searchUserId = async (id) => {
   try {
@@ -42,35 +43,33 @@ let getSpecialList = async (data) => {
       } else if (typeof value === "string") {
         data[key] = new RegExp(`.*${value}.*`, "i");
       } else if (typeof value === "object") {
-        data[key] = {
-          $elemMatch: {
-            title: { $in: value.map((v) => new RegExp(`.*${v}.*`, "i")) },
-          },
-        };
+        // data[key] = {
+        //   $elemMatch: {
+        //     title: { $in: value.map((v) => new RegExp(`.*${v}.*`, "i")) },
+        //   },
+        // };
       }
     }
-    const users = await UserSchema.find({ role: "worker", ...data }).select(
-      "avatar job id name surname role skills description city expiriens"
-    );
+    let users;
+    if (!data.length) {
+      users = await UserSchema.aggregate([
+        // Применяем фильтр по роли и любым другим полям из data
+        { $match: { role: "worker", ...data } },
+      ]);
+    } else {
+      users = await UserSchema.find({ role: "worker" });
+    }
+    let findAllPremium = users.map((user) => user.id);
+    let premium = await PremiumSchema.find({ userID: { $in: findAllPremium } });
+
+    users.forEach((user) => {
+      user.isPremium = premium.some((prem) => prem.userID === user.id);
+    });
+
     console.log(
-      users[0].expiriens.reduce((acc, item) => {
-        let month = 0;
-        let year = 0;
-
-        if (item.typeData === "m") {
-          month = +Number(item.date);
-          // Если месяцев больше 12, переводим в годы
-          year = Math.floor(month / 12); // Конвертируем месяцы в годы
-          month = month % 12; // Остаток месяцев
-        } else if (item.typeData === "y") {
-          year = +Number(item.date);
-        }
-
-        // Суммируем года и добавляем в аккумулятор
-        return acc + year + month / 12; // Месяцы прибавляются как доля года
-      }, 0)
+      users[1].expiriens
     );
-    console.log(users[0].expiriens);
+
     return { success: true, users };
   } catch (e) {
     console.log(e.message);

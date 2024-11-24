@@ -8,18 +8,15 @@ router.get("/specialists", isAuthNotRequire, async (req, res) => {
   let access = req.cookies.access;
   let user = await decodeAccessToken(access);
   let userData = {
-    name: "иго",
-    surname: "уша",
-    job: "frontEnd",
-    city: "АРЗАМАС",
-    skills: ["Node.js", "121212 б"],
-    // expiriens: []
+    // job: "FrontEnd",
   };
 
   let users = await getSpecialList(userData);
+  if(!users.success) return res.render("error")
   res.render("specialist", {
     isLoggedIn: !!user,
     id: user.userID,
+    users: users.users,
     chatList: user.chatList || null,
   });
 });
