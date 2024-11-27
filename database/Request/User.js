@@ -1,5 +1,5 @@
 const UserSchema = require("../../database/Schema/UserSchema");
-const PremiumSchema = require("../../database/Schema/premium");
+const PremiumSchema = require("../../database/Schema/Premium");
 
 const searchUserId = async (id) => {
   try {
@@ -35,7 +35,7 @@ const findUsersByFavorites = async (favorites) => {
   }
 };
 
-let getSpecialList = async (data) => {
+let getSpecialList = async (data, myID) => {
   try {
     for (const [key, value] of Object.entries(data)) {
       if (!value === null) {
@@ -61,14 +61,20 @@ let getSpecialList = async (data) => {
     }
     let findAllPremium = users.map((user) => user.id);
     let premium = await PremiumSchema.find({ userID: { $in: findAllPremium } });
-
     users.forEach((user) => {
       user.isPremium = premium.some((prem) => prem.userID === user.id);
     });
-
-    console.log(
-      users[1].expiriens
-    );
+    if (myID) {
+      let me = await UserSchema.findOne({ id: myID }).select("favorite");
+      if (!me) {
+      } else {
+        users.forEach((user) => {
+          user.isFavorite = me.favorite.some(
+            (userFav) => userFav.person === user.id
+          );
+        });
+      }
+    }
 
     return { success: true, users };
   } catch (e) {

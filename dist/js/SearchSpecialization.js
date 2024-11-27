@@ -73,3 +73,37 @@ $('.allSpecial').on('click', '.removeSpecial', function() {
     $(this).parent().remove();
     console.log(allData.specials)
 });
+
+function makeInFuture(element) {
+  $(element).addClass("addingFavorite");
+}
+
+// Функция для удаления класса
+function removeFuture(element) {
+  $(element).removeClass("addingFavorite");
+}
+
+document.querySelectorAll(".inFav").forEach(function (item) {
+  item.addEventListener("click", function () {
+    let id = this.getAttribute("data-id");
+    fetch("/api/favorite", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "augwod89h1h9awdh9py0y82hjd",
+      },
+      body: JSON.stringify({ id }),
+    })
+      .then((obj) => obj.json())
+      .then((obj) => {
+        if (obj.result) {
+          makeInFuture(item);
+        } else {
+          removeFuture(item);
+        }
+      });
+    // if (item.classList.contains("addingFavorite")) {
+    // } else {
+    // }
+  });
+});

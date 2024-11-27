@@ -10,8 +10,7 @@ router.get("/specialists", isAuthNotRequire, async (req, res) => {
   let userData = {
     // job: "FrontEnd",
   };
-
-  let users = await getSpecialList(userData);
+  let users = await getSpecialList(userData, user?.userID);
   if(!users.success) return res.render("error")
   res.render("specialist", {
     isLoggedIn: !!user,

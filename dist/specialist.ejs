@@ -369,7 +369,8 @@
                   <div class="rightright">
                     <button
                       id="addToFavorites"
-                      class="inFavoritePerson textMy beActive"
+                      class="inFavoritePerson textMy beActive inFav <%-user.isFavorite?'addingFavorite':''%>"
+                      data-id='<%-user.id%>'
                     >
                       В избранное
                     </button>
@@ -471,10 +472,8 @@ if (months > 0) experienceText += `${years > 0 ? ' и ' : ''}${months} ${monthsW
             </div>
             <%}%>
             <div class="rightright mobrightright">
-              <button
-                id="addToFavorites"
-                class="inFavoritePerson textMy beActive"
-              >
+                                <button type="button" class="Infavorites defaultButton inFav <%-user.isFavorite?'addingFavorite':''%>" data-id='<%-user.userID%>'>
+
                 В избранное
               </button>
               <a href="/" class="inFavoritePerson textMy typing">Написать</a>
