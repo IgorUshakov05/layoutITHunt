@@ -1,37 +1,38 @@
 const Chat = require("../../database/Schema/PrivateChat");
-const { v4 } = require('uuid'); // Import UUID library
+const { v4 } = require("uuid"); // Import UUID library
+const UserSchema = require("../Schema/UserSchema");
 
 const findOrCreateChatByTwoUsers = async (userId1, userId2) => {
   try {
-    // 1. Try to find an existing chat
+    console.log(userId1 + " " + userId2);
+    const findUsers = await UserSchema.find({
+      id: { $in: [userId1, userId2] },
+    });
+    console.log(findUsers);
+    if (findUsers.length < 2)
+      return { success: false, message: "Пользователь не найден" };
     const existingChat = await Chat.findOne({
       users: {
         $all: [
           { $elemMatch: { userID: userId1 } },
-          { $elemMatch: { userID: userId2 } }
-        ]
-      }
+          { $elemMatch: { userID: userId2 } },
+        ],
+      },
     });
-
     if (existingChat) {
-      // 2. Chat exists, return its ID
-      return existingChat.id;
+      return { success: true, id: existingChat.id };
     } else {
-      // 3. Chat doesn't exist, create a new one
       const newChatId = v4();
       const newChat = new Chat({
         id: newChatId,
-        users: [
-          { userID: userId1 },
-          { userID: userId2 }
-        ]
+        users: [{ userID: userId1 }, { userID: userId2 }],
       });
       await newChat.save();
-      return newChatId;
+      return { success: true, id: newChatId };
     }
   } catch (e) {
     console.error("Ошибка при поиске или создании чата:", e);
-    return false;
+    return { success: false, message: "Erorr" };
   }
 };
 

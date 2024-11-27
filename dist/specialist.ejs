@@ -374,7 +374,7 @@
                     >
                       В избранное
                     </button>
-                    <a href="/" class="inFavoritePerson textMy typing"
+                    <a href="/send-message?id=<%-user.id%>" class="inFavoritePerson textMy typing"
                       >Написать</a
                     >
                   </div>
@@ -476,7 +476,7 @@ if (months > 0) experienceText += `${years > 0 ? ' и ' : ''}${months} ${monthsW
 
                 В избранное
               </button>
-              <a href="/" class="inFavoritePerson textMy typing">Написать</a>
+              <a href="/send-message?id=<%-user.id%>" class="inFavoritePerson textMy typing">Написать</a>
             </div>
           </article>
           <%});%>
