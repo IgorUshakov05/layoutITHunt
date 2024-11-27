@@ -38,27 +38,29 @@ const findUsersByFavorites = async (favorites) => {
 let getSpecialList = async (data, myID) => {
   try {
     for (const [key, value] of Object.entries(data)) {
-      if (!value === null) {
+      if (value === null || value === undefined) {
         delete data[key];
       } else if (typeof value === "string") {
-        data[key] = new RegExp(`.*${value}.*`, "i");
-      } else if (typeof value === "object") {
-        // data[key] = {
-        //   $elemMatch: {
-        //     title: { $in: value.map((v) => new RegExp(`.*${v}.*`, "i")) },
-        //   },
-        // };
+        data[key] = new RegExp(value, "i");
+      } else if (Array.isArray(value)) {
+        if (key === "job") {
+          // Создаем массив регулярных выражений для поиска каждого значения
+          data[key] = { $in: value.map((v) => new RegExp(`^${v}$`, "i")) };
+        } else if (key === "skills") {
+          data[key] = {
+            $all: value
+              .filter((v) => v?.trim?.() !== "")
+              .map((v) => ({
+                $elemMatch: { title: new RegExp(`^${v}$`, "i") },
+              })),
+          };
+        }
       }
     }
-    let users;
-    if (!data.length) {
-      users = await UserSchema.aggregate([
-        // Применяем фильтр по роли и любым другим полям из data
-        { $match: { role: "worker", ...data } },
-      ]);
-    } else {
-      users = await UserSchema.find({ role: "worker" });
-    }
+
+    const query = { role: "worker", ...data };
+    console.log(query);
+    let users = await UserSchema.find(query);
     let findAllPremium = users.map((user) => user.id);
     let premium = await PremiumSchema.find({ userID: { $in: findAllPremium } });
     users.forEach((user) => {
