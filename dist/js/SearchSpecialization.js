@@ -9,7 +9,7 @@ const allData = {
   job: [],
   skills: [],
   city: "",
-  expiriens: "",
+  expiriens: [],
 };
 
 let removeSkill = (title) => {
@@ -43,7 +43,17 @@ inputSkills.addEventListener("keypress", function (e) {
     setLisnk("skills", JSON.stringify(allData.skills));
   }
 });
-
+function selectExpiriens(value) {
+  value = value.split("-");
+  if (Number.isNaN(Number(value[0]))) {
+    allData.expiriens = [];
+    url.searchParams.delete("expiriens");
+    return;
+  }
+  allData.expiriens = [value[0], value[1] ? value[1] : null];
+  setLisnk("expiriens", JSON.stringify(allData.expiriens));
+  return;
+}
 const firstAndLastName = document.getElementById("firstAndLastName");
 $("#firstAndLastName").on("input", () => {
   try {

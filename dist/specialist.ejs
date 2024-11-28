@@ -208,30 +208,13 @@
             <div class="specialisationSelect">
               <h1>Город</h1>
               <div class="searchSpecialist">
-                <!-- <div class="selectedSpecial">
-                        <p id="title">Россия, Москва</p>
-                        <div id="removeSpecial" class="removeSpecial"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1L16 16" stroke="white" stroke-linecap="round"/>
-                            <path d="M16 1L8.5 8.5L1 16" stroke="white" stroke-linecap="round"/>
-                            </svg>
-                            </div>
-                    </div> -->
                 <input
                   type="text"
                   placeholder="Абакан"
                   class="descrtopSearchDesctop"
                   id="searchCity"
                 />
-                <!-- <ul class="optionsSelectSpec" id="ListSearchCity">
-                        <li class="optionsSelectSpecItem">
-                            <p class="titleSearch">Абакан</p>
-                            <p class="selectSearch">Выбрать</p>
-                        </li>
-                        <li class="optionsSelectSpecItem">
-                            <p class="titleSearch">Усть-Абакан</p>
-                            <p class="selectSearch">Выбрать</p>
-                        </li>
-                    </ul> -->
+              
               </div>
             </div>
             <div class="specialisationSelect">
@@ -243,12 +226,15 @@
                     id="OneTwo"
                     name="radioExpiriens"
                     value="OneTwo"
+                    onclick="selectExpiriens('0-2')"
+
                   />
                   <label class="elemExpiriensLabel nun" for="OneTwo">0-2</label>
                 </div>
 
                 <div class="elemExpiriens w24">
                   <input
+                    onclick="selectExpiriens('3-5')"
                     type="radio"
                     id="ThreeFour"
                     name="radioExpiriens"
@@ -265,6 +251,7 @@
                     id="SixEight"
                     name="radioExpiriens"
                     value="SixEight"
+                    onclick="selectExpiriens('6-8')"
                   />
                   <label class="elemExpiriensLabel nun" for="SixEight"
                     >6-8</label
@@ -275,6 +262,7 @@
                   <input
                     type="radio"
                     id="EightPlus"
+                    onclick="selectExpiriens('8')"
                     name="radioExpiriens"
                     value="EightPlus"
                   />
