@@ -11,7 +11,7 @@ router.get("/specialists", isAuthNotRequire, async (req, res) => {
     job: req.query?.job ? JSON.parse(req?.query?.job) : null,
     name: req.query.name || null,
     surname: req.query.surname || null,
-    // skills: ["node.js", "FIGMA"],
+    skills: req.query?.skills ? JSON.parse(req?.query?.skills) : null,
     city: req.query.city || null,
   };
   console.log(userData);
