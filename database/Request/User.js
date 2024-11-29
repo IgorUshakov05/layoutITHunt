@@ -37,6 +37,12 @@ const findUsersByFavorites = async (favorites) => {
 
 let getSpecialList = async (data, myID) => {
   try {
+    function calculateExperience(expiriens) {
+      return expiriens.reduce((sum, item) => {
+        const experience = Number(item.date);
+        return sum + (item.typeData === "m" ? experience / 12 : experience);
+      }, 0);
+    }
     for (const [key, value] of Object.entries(data)) {
       if (value === null || value === undefined) {
         delete data[key];
@@ -54,33 +60,48 @@ let getSpecialList = async (data, myID) => {
                 $elemMatch: { title: new RegExp(`^${v}$`, "i") },
               })),
           };
+        } else if (key === "expiriens") {
+          delete data[key];
         }
       }
     }
-
     const query = { role: "worker", ...data };
     console.log(query);
     let users = await UserSchema.find(query);
     let findAllPremium = users.map((user) => user.id);
     let premium = await PremiumSchema.find({ userID: { $in: findAllPremium } });
-    users.forEach((user) => {
-      user.isPremium = premium.some((prem) => prem.userID === user.id);
-    });
-    if (myID) {
-      let me = await UserSchema.findOne({ id: myID }).select("favorite");
-      if (!me) {
-      } else {
-        users.forEach((user) => {
-          user.isFavorite = me.favorite.some(
-            (userFav) => userFav.person === user.id
-          );
-        });
+    if (users.length) {
+      users.forEach((user) => {
+        user.isPremium = premium.some((prem) => prem.userID === user.id);
+      });
+      if (myID) {
+        let me = await UserSchema.findOne({ id: myID }).select("favorite");
+        if (!me) {
+        } else {
+          users.forEach((user) => {
+            user.isFavorite = me.favorite.some(
+              (userFav) => userFav.person === user.id
+            );
+          });
+        }
       }
+      console.log(data?.expiriens);
+      users = users.filter((user) => {
+        let calcExpiriens = calculateExperience(user.expiriens);
+        if (
+          user.expiriens.length > 0 &&
+          (data.expiriens[0] <= calcExpiriens && !data.expiriens[1]
+            ? true
+            : data.expiriens[1] > calcExpiriens)
+        ) {
+          console.info(user.expiriens.length);
+          return user;
+        }
+      });
     }
-
     return { success: true, users };
   } catch (e) {
-    console.log(e.message);
+    console.log(e);
     return { success: false, message: "Ошибка при получении пользователей" };
   }
 };
