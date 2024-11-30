@@ -27,7 +27,6 @@ router.get("/specialists", isAuthNotRequire, async (req, res) => {
     };
     console.log(userData, " - данные для функции");
     let users = await getSpecialList(userData, user?.userID);
-    console.log(users.message);
     if (!users.success) return res.render("404");
     res.render("specialist", {
       isLoggedIn: !!user,

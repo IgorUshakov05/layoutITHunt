@@ -27,6 +27,7 @@ const chat = require("./pageRoutes/chat");
 const inbox = require("./pageRoutes/inbox");
 const skills = require("./api/skills/routes");
 const favorite = require("./api/favorite/routes");
+const user = require("./api/user/router");
 const inboxOther = require("./pageRoutes/inboxOther");
 const findCompany = require("./pageRoutes/findCompany");
 const WebSocket = require("ws");
@@ -96,6 +97,7 @@ app.use(
   education,
   favorite,
   payment,
+  user,
   createFastWorkPOST,
   setSetting,
   skills,

@@ -37,6 +37,7 @@ const findUsersByFavorites = async (favorites) => {
 
 let getSpecialList = async (data, myID) => {
   try {
+    let exp = JSON.parse(JSON.stringify(data));
     function calculateExperience(expiriens) {
       return expiriens.reduce((sum, item) => {
         const experience = Number(item.date);
@@ -67,13 +68,19 @@ let getSpecialList = async (data, myID) => {
     }
     const query = { role: "worker", ...data };
     console.log(query);
-    let users = await UserSchema.find(query);
+    let users = await UserSchema.find(query).select(
+      "id name surname expiriens skills job description avatar city"
+    );
     let findAllPremium = users.map((user) => user.id);
     let premium = await PremiumSchema.find({ userID: { $in: findAllPremium } });
     if (users.length) {
-      users.forEach((user) => {
-        user.isPremium = premium.some((prem) => prem.userID === user.id);
+      users.map((user) => {
+        Object.defineProperty(user, "isPremium", {
+          value: premium.some((prem) => prem.userID === user.id),
+          enumerable: true, 
+        });
       });
+
       if (myID) {
         let me = await UserSchema.findOne({ id: myID }).select("favorite");
         if (!me) {
@@ -85,19 +92,30 @@ let getSpecialList = async (data, myID) => {
           });
         }
       }
-      console.log(data?.expiriens);
-      users = users.filter((user) => {
-        let calcExpiriens = calculateExperience(user.expiriens);
-        if (
-          user.expiriens.length > 0 &&
-          (data.expiriens[0] <= calcExpiriens && !data.expiriens[1]
-            ? true
-            : data.expiriens[1] > calcExpiriens)
-        ) {
-          console.info(user.expiriens.length);
-          return user;
-        }
-      });
+      console.log(exp?.expiriens);
+      if (exp?.expiriens) {
+        users = users.filter((user) => {
+          const calcExpiriens = Math.round(calculateExperience(user.expiriens));
+
+          if (Array.isArray(exp.expiriens)) {
+            if (exp.expiriens.length === 2) {
+              const [min, max] = exp.expiriens;
+              return (
+                calcExpiriens >= min &&
+                (max === undefined || calcExpiriens <= max)
+              );
+            } else {
+              console.warn(
+                "Invalid exp.expiriens array length.  Expected [min, max]."
+              );
+              return false;
+            }
+          } else {
+            console.warn("exp.expiriens is not an array.");
+            return false;
+          }
+        });
+      }
     }
     return { success: true, users };
   } catch (e) {
