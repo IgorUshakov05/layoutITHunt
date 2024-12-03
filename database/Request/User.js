@@ -35,7 +35,7 @@ const findUsersByFavorites = async (favorites) => {
   }
 };
 
-let getSpecialList = async (data, myID) => {
+let getSpecialList = async (data, myID, limit=2) => {
   try {
     let exp = JSON.parse(JSON.stringify(data));
     function calculateExperience(expiriens) {
@@ -68,16 +68,18 @@ let getSpecialList = async (data, myID) => {
     }
     const query = { role: "worker", ...data };
     console.log(query);
-    let users = await UserSchema.find(query).select(
-      "id name surname expiriens skills job description avatar city"
-    );
+    let users = await UserSchema.find(query)
+      .select("id name surname expiriens skills job description avatar city")
+      .skip(limit - 2) // Пропустить записи до последних двух
+      .limit(2); // Взять ровно две записи
+
     let findAllPremium = users.map((user) => user.id);
     let premium = await PremiumSchema.find({ userID: { $in: findAllPremium } });
     if (users.length) {
       users.map((user) => {
         Object.defineProperty(user, "isPremium", {
           value: premium.some((prem) => prem.userID === user.id),
-          enumerable: true, 
+          enumerable: true,
         });
       });
 

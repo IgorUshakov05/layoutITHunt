@@ -279,8 +279,12 @@
           </div>
         </div>
         <div class="MoreInfo">
-          <% users.forEach(user => { %>
+          <div class="append">
+
+          <% users.forEach((user,index) => { %>
           <article
+          data-last="<%-index === users.length - 1?true:false%>"
+          
             class="<%= user.isPremium ?'premiumUser ':'' %> personArticle"
           >
             <div class="topInfoSpec">
@@ -428,6 +432,7 @@ if (months > 0) experienceText += `${years > 0 ? ' и ' : ''}${months} ${monthsW
             </div>
           </article>
           <%});%>
+          </div>
 
           <div class="showMore">
             <button

@@ -26,13 +26,11 @@ router.post("/user", async (req, res) => {
         : null,
     };
     console.log(userData, " - данные для функции");
-    let users = await getSpecialList(userData, user?.userID);
+    let users = await getSpecialList(userData, user?.userID, req.query.limit);
     console.log(users.users[1], " - премиум");
     if (!users.success)
       return res.status(404).json({ message: "Возникла ошибка" });
-    res.status(200).json({
-      users: users,
-    });
+    res.status(200).json(users);
   } catch (e) {
     console.log(e);
     return res.redirect("501");

@@ -1,5 +1,4 @@
 let url = new URL(window.location.origin);
-console.log(url.search);
 const parentSkill = document.querySelector(".listAddadSkills");
 const inputSkills = document.getElementById("skills");
 const input = document.getElementById("specialization");
@@ -12,6 +11,8 @@ const allData = {
   expiriens: [],
 };
 
+let limitUsers = 4;
+let isStop = false;
 let removeSkill = (title) => {
   try {
     document.querySelector(`.skill[data-title="${title}"]`).remove();
@@ -89,7 +90,7 @@ let setLisnk = (nameQueryParam, valueQueryParam) => {
     .setAttribute("href", "/specialists" + url.search);
 };
 
-const listItems = document.querySelectorAll(".listSpecialMy li");
+let istItems = document.querySelectorAll(".listSpecialMy li");
 const parentListSpecial = document.querySelector(".ParentlistSpecial");
 input.addEventListener("input", function () {
   const filter = input.value.toUpperCase();
@@ -152,6 +153,252 @@ function makeInFuture(element) {
 function removeFuture(element) {
   $(element).removeClass("addingFavorite");
 }
+
+let getUserByLimit = async () => {
+  try {
+    if (isStop) {
+      isStop = true;
+      return { success: false };
+    }
+    let user = await fetch(`/api/user?limit=${limitUsers}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "augwod89h1h9awdh9py0y82hjd",
+      },
+      body: JSON.stringify({
+        job: null,
+        name: null,
+        surname: null,
+        skills: null,
+        city: null,
+        expiriens: null,
+      }),
+    }).then((obj) => obj.json());
+    limitUsers += 2;
+    if (!user.success) {
+      isStop = true;
+      return { success: false, message: "Ошибка при получении" };
+    }
+    if (user.users.length <= 0) {
+      isStop = true;
+      return { success: false, message: "Больше пользователей нет!" };
+    }
+    return { success: true, users: user.users, messsage: "Успех!" };
+  } catch (e) {
+    console.log(e);
+    return { success: true, message: "Ошибка при получении" };
+  }
+};
+
+function calculateExperience(expiriens) {
+  if (!Array.isArray(expiriens) || expiriens.length === 0) {
+    return "Нет опыта"; // Обработка пустого или некорректного массива
+  }
+
+  const totalExperience = expiriens.reduce((sum, item) => {
+    const experience = Number(item.date);
+    if (isNaN(experience)) return sum; // Игнорируем некорректные значения
+    return sum + (item.typeData === "m" ? experience / 12 : experience);
+  }, 0);
+
+  // Разделяем годы и месяцы
+  const years = Math.floor(totalExperience);
+  const months = Math.round((totalExperience - years) * 12);
+
+  // Функция для склонения
+  function getDeclension(value, words) {
+    const absValue = Math.abs(value) % 100;
+    const lastDigit = absValue % 10;
+
+    if (absValue > 10 && absValue < 20) return words[2];
+    if (lastDigit === 1) return words[0];
+    if (lastDigit > 1 && lastDigit < 5) return words[1];
+    return words[2];
+  }
+
+  // Слова для склонения
+  const yearsWord = getDeclension(years, ["год", "года", "лет"]);
+  const monthsWord = getDeclension(months, ["месяц", "месяца", "месяцев"]);
+
+  // Формируем итоговый вывод
+  let experienceText = "";
+  if (years > 0) experienceText += `${years} ${yearsWord}`;
+  if (months > 0)
+    experienceText += `${years > 0 ? " и " : ""}${months} ${monthsWord}`;
+
+  return experienceText || "Нет опыта";
+}
+function insertUsers(users) {
+  users.forEach((user, index) => {
+    document.querySelector(".append").insertAdjacentHTML(
+      "beforeend",
+      `
+    <article
+      data-last="${index === users.length - 1 ? true : false}"
+      class="${user.isPremium ? "premiumUser " : ""} personArticle"
+    >
+      <div class="topInfoSpec">
+        <div class="leftTopInfoSpec">
+          <div class="imgProfile">
+            <img
+              width="104"
+              height="104"
+              src="${
+                user.avatar
+                  ? user.avatar
+                  : user.isPremium
+                  ? "/assets/pictures/ПремиумС.jpg"
+                  : "/assets/pictures/ДефолтСпециалист.jpg"
+              }"
+              alt="Фото ${user.surname} ${user.name}"
+            />
+          </div>
+        </div>
+        <div class="rightTopInfoSpec">
+          <div class="flexBeetwin">
+            <div class="rigthTop">
+              <div class="leftleft">
+                <a
+                  href="/${user.id}"
+                  title="${user.surname} ${user.name}"
+                  data-username="${user.surname} ${user.name}"
+                >
+                  <span class="userLFName">${user.surname} ${user.name}</span>
+                </a>
+                <div class="specialnost">
+                  <span class="specialnostText">${
+                    user.job || "Работа не определена"
+                  }</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="rightright">
+              <button
+                id="addToFavorites"
+                class="inFavoritePerson textMy beActive inFav ${
+                  user.isFavorite ? "addingFavorite" : ""
+                }"
+                data-id="${user.id}"
+              >
+                В избранное
+              </button>
+              <a href="/send-message?id=${
+                user.id
+              }" class="inFavoritePerson textMy typing">Написать</a>
+            </div>
+          </div>
+          <div class="bottomRight">
+                  <div class="expitiens">
+              
+                    <span
+                      >Опыт
+                      <b style="font-weight: 700"
+                        >${calculateExperience(user.experience)}</b
+                      ></span
+                    >
+                  </div>
+                  
+                </div>
+            <div class="cityPerson">
+              <div class="point">
+                <svg
+                  class="point"
+                  width="11"
+                  height="15"
+                  viewBox="0 0 11 15"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M5.5 0C8.53757 0 11 2.26228 11 5.05312C11 9.61016 5.5 14.4375 5.5 14.4375C5.5 14.4375 0 9.65067 0 5.05312C0 2.26228 2.46243 0 5.5 0Z"
+                    fill="#5412E0"
+                  />
+                  <path
+                    d="M5.5 8.25003C7.01878 8.25003 8.25 7.01881 8.25 5.50003C8.25 3.98125 7.01878 2.75003 5.5 2.75003C3.98122 2.75003 2.75 3.98125 2.75 5.50003C2.75 7.01881 3.98122 8.25003 5.5 8.25003Z"
+                    fill="white"
+                  />
+                </svg>
+              </div>
+              <p title="${user.city}">${user.city || "Локация не указана"}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      ${
+        user.description?.length
+          ? `<div class="middleInfoVacansya noMob">
+        <div class="descriptionVacansy">
+          <p class="descriptionVacansyText">${user.description}</p>
+        </div>
+        <div class="showFull">
+          <span class="showFullText">Показать полностью</span>
+        </div>
+      </div>`
+          : ""
+      }
+      ${
+        user.skills
+          ? `<div class="bottomInfoSpec">
+        <ul class="listStacks" style="margin-left: -8px">
+          ${user.skills
+            .map(
+              (skill) => `<li class="abilityItem">
+            <h5 class="ability">${skill.title}</h5>
+          </li>`
+            )
+            .join("")}
+        </ul>
+      </div>`
+          : ""
+      }
+      <div class="rightright mobrightright">
+        <button type="button" class="Infavorites defaultButton inFav ${
+          user.isFavorite ? "addingFavorite" : ""
+        }" data-id="${user.userID}">
+          В избранное
+        </button>
+        <a href="/send-message?id=${
+          user.id
+        }" class="inFavoritePerson textMy typing">Написать</a>
+      </div>
+    </article>`
+    );
+  });
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const lastElement = document.querySelector('[data-last="true"]');
+
+  if (lastElement) {
+    const observer = new IntersectionObserver(
+      (entries, observerInstance) => {
+        entries.forEach(async (entry) => {
+          console.log(entry);
+          if (entry.isIntersecting) {
+            let users = await getUserByLimit(limitUsers);
+            console.log(users);
+            if (!users.success) return false;
+            insertUsers(users.users);
+            alert("hello");
+
+            // observerInstance.unobserve(lastElement);
+          }
+        });
+      },
+      {
+        root: null, // Отслеживание относительно viewport
+        rootMargin: "0px", // Без отступов
+        threshold: 1.0, // Полностью в области видимости
+      }
+    );
+
+    // Добавляем наблюдение за последним элементом
+    observer.observe(lastElement);
+  }
+});
 
 document.querySelectorAll(".inFav").forEach(function (item) {
   item.addEventListener("click", function () {
