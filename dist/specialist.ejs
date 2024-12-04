@@ -319,16 +319,18 @@
                   </div>
 
                   <div class="rightright">
+                    <%if(id !== user.id) {%>
                     <button
-                      id="addToFavorites"
-                      class="inFavoritePerson textMy beActive inFav <%-user.isFavorite?'addingFavorite':''%>"
-                      data-id='<%-user.id%>'
+                    id="addToFavorites"
+                    class="inFavoritePerson textMy beActive inFav <%-user.isFavorite?'addingFavorite':''%>"
+                    data-id='<%-user.id%>'
                     >
-                      В избранное
+                    В избранное
                     </button>
                     <a href="/send-message?id=<%-user.id%>" class="inFavoritePerson textMy typing"
                       >Написать</a
-                    >
+                      >
+                    <%}%>
                   </div>
                 </div>
                 <div class="bottomRight">
@@ -424,11 +426,14 @@ if (months > 0) experienceText += `${years > 0 ? ' и ' : ''}${months} ${monthsW
             </div>
             <%}%>
             <div class="rightright mobrightright">
+                    <%if(id !== user.id) {%>
+
                                 <button type="button" class="Infavorites defaultButton inFav <%-user.isFavorite?'addingFavorite':''%>" data-id='<%-user.userID%>'>
 
                 В избранное
               </button>
               <a href="/send-message?id=<%-user.id%>" class="inFavoritePerson textMy typing">Написать</a>
+              <%}%>
             </div>
           </article>
           <%});%>

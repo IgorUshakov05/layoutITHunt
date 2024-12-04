@@ -166,14 +166,7 @@ let getUserByLimit = async () => {
         "Content-Type": "application/json",
         Authorization: "augwod89h1h9awdh9py0y82hjd",
       },
-      body: JSON.stringify({
-        job: null,
-        name: null,
-        surname: null,
-        skills: null,
-        city: null,
-        expiriens: null,
-      }),
+      body: JSON.stringify(allData),
     }).then((obj) => obj.json());
     limitUsers += 2;
     if (!user.success) {
@@ -192,6 +185,7 @@ let getUserByLimit = async () => {
 };
 
 function calculateExperience(expiriens) {
+  console.log(expiriens);
   if (!Array.isArray(expiriens) || expiriens.length === 0) {
     return "Нет опыта"; // Обработка пустого или некорректного массива
   }
@@ -295,7 +289,7 @@ function insertUsers(users) {
                     <span
                       >Опыт
                       <b style="font-weight: 700"
-                        >${calculateExperience(user.experience)}</b
+                        >${calculateExperience(user.expiriens)}</b
                       ></span
                     >
                   </div>
@@ -368,10 +362,11 @@ function insertUsers(users) {
     </article>`
     );
   });
+  lifeForFavorite();
 }
 document.addEventListener("DOMContentLoaded", () => {
-  const lastElement = document.querySelector('[data-last="true"]');
-
+  let lastElement = document.querySelectorAll('[data-last="true"]');
+  lastElement = lastElement[lastElement.length - 1];
   if (lastElement) {
     const observer = new IntersectionObserver(
       (entries, observerInstance) => {
@@ -382,15 +377,16 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log(users);
             if (!users.success) return false;
             insertUsers(users.users);
-            alert("hello");
-
-            // observerInstance.unobserve(lastElement);
+            observerInstance.unobserve(lastElement);
+            lastElement = document.querySelectorAll('[data-last="true"]');
+            lastElement = lastElement[lastElement.length - 1];
+            observer.observe(lastElement);
           }
         });
       },
       {
         root: null, // Отслеживание относительно viewport
-        rootMargin: "0px", // Без отступов
+        rootMargin: "100px", // Без отступов
         threshold: 1.0, // Полностью в области видимости
       }
     );
@@ -399,28 +395,38 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(lastElement);
   }
 });
-
-document.querySelectorAll(".inFav").forEach(function (item) {
-  item.addEventListener("click", function () {
-    let id = this.getAttribute("data-id");
-    fetch("/api/favorite", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "augwod89h1h9awdh9py0y82hjd",
-      },
-      body: JSON.stringify({ id }),
-    })
-      .then((obj) => obj.json())
-      .then((obj) => {
-        if (obj.result) {
-          makeInFuture(item);
-        } else {
-          removeFuture(item);
-        }
-      });
-    // if (item.classList.contains("addingFavorite")) {
-    // } else {
-    // }
+function lifeForFavorite() {
+  document.querySelectorAll(".inFav").forEach(function (item) {
+    item.addEventListener("click", function () {
+      let id = this.getAttribute("data-id");
+      fetch("/api/favorite", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "augwod89h1h9awdh9py0y82hjd",
+        },
+        body: JSON.stringify({ id }),
+      })
+        .then((obj) => obj.json())
+        .then((obj) => {
+          if (obj.result) {
+            makeInFuture(item);
+          } else {
+            removeFuture(item);
+          }
+        });
+      // if (item.classList.contains("addingFavorite")) {
+      // } else {
+      // }
+    });
   });
-});
+  $(".showFull").on("click", function () {
+    let descriptionVacansyText = $(this).prev(".descriptionVacansy");
+    descriptionVacansyText.toggleClass("fullText");
+    var buttonText = $(this).find(".showFullText");
+    buttonText.text(function (i, text) {
+      return text === "Показать полностью" ? "Свернуть" : "Показать полностью";
+    });
+  });
+}
+lifeForFavorite();
