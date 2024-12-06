@@ -8,15 +8,20 @@ router.post("/user", async (req, res) => {
     console.log(req.body);
     let access = req.cookies.access;
     let user = await decodeAccessToken(access);
-    console.log(req.body);
-    let expiriens = req?.body?.expiriens
-      ? JSON.parse(req.body.expiriens)
-      : null;
-    let userData = {
-      job: req.body?.job ? JSON.parse(req?.body?.job) : null,
+    console.log(req.body)
+    const parseJsonSafe = (str) => {
+      try {
+        return JSON.parse(str);
+      } catch (e) {
+        return null;
+      }
+    };
+    let expiriens = parseJsonSafe(req?.body?.expiriens || null);
+    let userData = await {
+      job: parseJsonSafe(req.body?.job),
       name: req.body.name || null,
       surname: req.body.surname || null,
-      skills: req.body?.skills ? JSON.parse(req?.body?.skills) : null,
+      skills: parseJsonSafe(req.body?.skills || null),
       city: req.body.city || null,
       expiriens: expiriens
         ? [
@@ -27,13 +32,16 @@ router.post("/user", async (req, res) => {
     };
     console.log(userData, " - данные для функции");
     let users = await getSpecialList(userData, user?.userID, req.query.limit);
-    console.log(users.users[1], " - премиум");
     if (!users.success)
       return res.status(404).json({ message: "Возникла ошибка" });
     res.status(200).json(users);
   } catch (e) {
-    console.log(e);
-    return res.redirect("501");
+    console.log(e, " - ошибка");
+
+    return res.redirect({
+      success: false,
+      message: "Ошибка при получении пользователей",
+    });
   }
 });
 module.exports = router;

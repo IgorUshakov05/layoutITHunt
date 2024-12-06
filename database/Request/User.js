@@ -37,6 +37,8 @@ const findUsersByFavorites = async (favorites) => {
 
 let getSpecialList = async (data, myID, limit=2) => {
   try {
+    console.log("Начало");
+    
     let exp = JSON.parse(JSON.stringify(data));
     function calculateExperience(expiriens) {
       return expiriens.reduce((sum, item) => {
@@ -45,7 +47,7 @@ let getSpecialList = async (data, myID, limit=2) => {
       }, 0);
     }
     for (const [key, value] of Object.entries(data)) {
-      if (value === null || value === undefined) {
+      if (value === null || value === undefined || value == []) {
         delete data[key];
       } else if (typeof value === "string") {
         data[key] = new RegExp(value, "i");
@@ -119,6 +121,8 @@ let getSpecialList = async (data, myID, limit=2) => {
         });
       }
     }
+    console.log("Конец");
+
     return { success: true, users };
   } catch (e) {
     console.log(e);

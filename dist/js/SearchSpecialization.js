@@ -1,14 +1,14 @@
-let url = new URL(window.location.origin);
+let url = new URL(window.location.href);
 const parentSkill = document.querySelector(".listAddadSkills");
 const inputSkills = document.getElementById("skills");
 const input = document.getElementById("specialization");
 const allData = {
-  firstName: "",
-  lastName: "",
-  job: [],
-  skills: [],
-  city: "",
-  expiriens: [],
+  firstName: url.searchParams.get("name") || null,
+  lastName: url.searchParams.get("surname") || null,
+  job: JSON.parse(url.searchParams.get("job")) || [],
+  skills: JSON.parse(url.searchParams.get("skills")) || [],
+  city: url.searchParams.get("city") || null,
+  expiriens: JSON.parse(url.searchParams.get("expiriens")) || [],
 };
 
 let limitUsers = 4;
@@ -90,7 +90,7 @@ let setLisnk = (nameQueryParam, valueQueryParam) => {
     .setAttribute("href", "/specialists" + url.search);
 };
 
-let istItems = document.querySelectorAll(".listSpecialMy li");
+let listItems = document.querySelectorAll(".listSpecialMy li");
 const parentListSpecial = document.querySelector(".ParentlistSpecial");
 input.addEventListener("input", function () {
   const filter = input.value.toUpperCase();
@@ -180,7 +180,7 @@ let getUserByLimit = async () => {
     return { success: true, users: user.users, messsage: "Успех!" };
   } catch (e) {
     console.log(e);
-    return { success: true, message: "Ошибка при получении" };
+    return { success: false, message: "Ошибка при получении" };
   }
 };
 
