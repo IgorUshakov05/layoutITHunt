@@ -2,26 +2,18 @@ const { Router } = require("express");
 const router = Router();
 const { getSpecialList } = require("../../database/Request/User");
 const { decodeAccessToken } = require("../tokens/accessToken");
-
 router.post("/user", async (req, res) => {
   try {
-    console.log(req.body);
+    console.log(req.body, " - тело");
     let access = req.cookies.access;
     let user = await decodeAccessToken(access);
-    console.log(req.body)
-    const parseJsonSafe = (str) => {
-      try {
-        return JSON.parse(str);
-      } catch (e) {
-        return null;
-      }
-    };
-    let expiriens = parseJsonSafe(req?.body?.expiriens || null);
+   
+    let expiriens = req.body.expiriens;
     let userData = await {
-      job: parseJsonSafe(req.body?.job),
-      name: req.body.name || null,
-      surname: req.body.surname || null,
-      skills: parseJsonSafe(req.body?.skills || null),
+      job: req.body?.job?.length === 0 ? null : req.body?.job,
+      name: req.body.firstName || null,
+      surname: req.body.lastName || null,
+      skills: req.body?.skills?.length === 0 ? null : req.body?.skills,
       city: req.body.city || null,
       expiriens: expiriens
         ? [
@@ -32,6 +24,7 @@ router.post("/user", async (req, res) => {
     };
     console.log(userData, " - данные для функции");
     let users = await getSpecialList(userData, user?.userID, req.query.limit);
+    console.log(users.users.length);
     if (!users.success)
       return res.status(404).json({ message: "Возникла ошибка" });
     res.status(200).json(users);

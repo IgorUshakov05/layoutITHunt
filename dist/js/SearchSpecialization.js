@@ -10,7 +10,7 @@ const allData = {
   city: url.searchParams.get("city") || null,
   expiriens: JSON.parse(url.searchParams.get("expiriens")) || [],
 };
-
+let inputCity = document.getElementById("searchCity");
 let limitUsers = 4;
 let isStop = false;
 let removeSkill = (title) => {
@@ -80,6 +80,31 @@ $("#firstAndLastName").on("input", () => {
   }
 });
 
+function dataLoad() {
+  if (allData.lastName && allData.firstName) {
+    firstAndLastName.value = `${allData.lastName || ""} ${
+      allData.firstName || ""
+    }`;
+  }
+  if (allData.city) {
+    inputCity.value = allData.city || "";
+  }
+  if (allData.skills.length > 0) {
+    allData.skills.forEach((skill) => {
+      const li = document.createElement("li");
+      li.innerHTML = `<div class="skill" data-title="${skill}">
+      <p class="titleSkill">${skill}</p>
+      <div onClick="removeSkill('${skill}')" id="removeSpecial" class="removeSpecial"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1 1L16 16" stroke="white" stroke-linecap="round"/>
+      <path d="M16 1L8.5 8.5L1 16" stroke="white" stroke-linecap="round"/>
+      </svg>
+      </div>
+      </div> `;
+      parentSkill.appendChild(li);
+    });
+  }
+}
+
 let setLisnk = (nameQueryParam, valueQueryParam) => {
   console.log(nameQueryParam, valueQueryParam);
   url.searchParams.delete(nameQueryParam);
@@ -116,7 +141,7 @@ input.addEventListener("input", function () {
     parentListSpecial.style.display = "block";
   }
 });
-document.getElementById("searchCity").addEventListener("input", function (e) {
+inputCity.addEventListener("input", function (e) {
   let value = e.target.value;
   allData.city = value;
   setLisnk("city", allData.city);
@@ -430,3 +455,4 @@ function lifeForFavorite() {
   });
 }
 lifeForFavorite();
+dataLoad();

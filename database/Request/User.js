@@ -35,10 +35,10 @@ const findUsersByFavorites = async (favorites) => {
   }
 };
 
-let getSpecialList = async (data, myID, limit=2) => {
+let getSpecialList = async (data, myID, limit = 2) => {
   try {
     console.log("Начало");
-    
+
     let exp = JSON.parse(JSON.stringify(data));
     function calculateExperience(expiriens) {
       return expiriens.reduce((sum, item) => {
@@ -69,12 +69,12 @@ let getSpecialList = async (data, myID, limit=2) => {
       }
     }
     const query = { role: "worker", ...data };
-    console.log(query);
+    console.log(query, " - запрос на mongoDB");
     let users = await UserSchema.find(query)
       .select("id name surname expiriens skills job description avatar city")
       .skip(limit - 2) // Пропустить записи до последних двух
       .limit(2); // Взять ровно две записи
-
+    console.log(users);
     let findAllPremium = users.map((user) => user.id);
     let premium = await PremiumSchema.find({ userID: { $in: findAllPremium } });
     if (users.length) {
