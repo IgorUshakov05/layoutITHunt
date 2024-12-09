@@ -24,7 +24,7 @@ router.post("/user", async (req, res) => {
     };
     console.log(userData, " - данные для функции");
     let users = await getSpecialList(userData, user?.userID, req.query.limit);
-    console.log(users.users.length);
+    console.log();
     if (!users.success)
       return res.status(404).json({ message: "Возникла ошибка" });
     res.status(200).json(users);
