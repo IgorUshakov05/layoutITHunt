@@ -89,6 +89,7 @@ let getSpecialList = async (data, myID, limit = 2) => {
         let me = await UserSchema.findOne({ id: myID }).select("favorite");
         if (!me) {
         } else {
+          
           console.log("Проверка на Избранные")
           users.forEach((user) => {
             user.isFavorite = me.favorite.some(
