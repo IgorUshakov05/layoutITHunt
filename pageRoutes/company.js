@@ -16,7 +16,7 @@ router.get("/company/:id", isAuthNotRequire, async (req, res) => {
   if (user) {
     findAllFV = await findFAllFavoriteOfId(user.userID);
   }
-  console.log(findAllFV.data.vacancyID, " избраннное");
+  console.log(findAllFV?.data?.vacancyID, " избраннное");
   let company = await findCompanyOfINN(companyId, user.userID);
   if (!company.success) return res.redirect("/404");
   let publication = await getVacansyByCompanyINN(companyId);

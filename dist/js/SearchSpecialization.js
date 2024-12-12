@@ -103,6 +103,25 @@ function dataLoad() {
       parentSkill.appendChild(li);
     });
   }
+  if (allData.job.length > 0) {
+    allData.job.forEach((title) => {
+      $(".allSpecial").append(`<div class="selectedSpecial">
+    <p>${title}</p>
+    <div id="removeSpecial" class="removeSpecial"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L16 16" stroke="white" stroke-linecap="round"/>
+        <path d="M16 1L8.5 8.5L1 16" stroke="white" stroke-linecap="round"/>
+        </svg>
+        </div>
+</div>`);
+    });
+  }
+  $(".allSpecial").on("click", ".removeSpecial", function () {
+    allData.job = allData.job.filter((elem) => {
+      return elem !== $(this).parent().find("p").text();
+    });
+    $(this).parent().remove();
+    console.log(url.search);
+  });
 }
 
 let setLisnk = (nameQueryParam, valueQueryParam) => {

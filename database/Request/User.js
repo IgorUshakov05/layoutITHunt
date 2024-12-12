@@ -124,7 +124,7 @@ let getSpecialList = async (data, myID, limit = 2) => {
       }
     }
     console.log("Конец");
-
+    
     return { success: true, users };
   } catch (e) {
     console.log(e);
