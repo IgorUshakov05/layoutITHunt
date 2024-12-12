@@ -23,6 +23,7 @@ router.post("/user", async (req, res) => {
         : null,
     };
     console.log(userData, " - данные для функции");
+    console.log(user?.userID)
     let users = await getSpecialList(userData, user?.userID, req.query.limit);
     console.log();
     if (!users.success)

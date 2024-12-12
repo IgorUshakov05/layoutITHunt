@@ -81,6 +81,30 @@ $("#firstAndLastName").on("input", () => {
 });
 
 function dataLoad() {
+  document.querySelectorAll(`.inFav`).forEach((item) => {
+    item.addEventListener("click", function () {
+      console.log(this);
+      let id = this.getAttribute("data-id");
+      fetch("/api/favorite", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "augwod89h1h9awdh9py0y82hjd",
+        },
+        body: JSON.stringify({ id }),
+      })
+        .then((obj) => obj.json())
+        .then((obj) => {
+          if (obj.result) {
+            console.log("Hello");
+            makeInFuture(this);
+          } else {
+            removeFuture(this);
+          }
+        });
+    });
+  });
+
   if (allData.lastName && allData.firstName) {
     firstAndLastName.value = `${allData.lastName || ""} ${
       allData.firstName || ""
@@ -405,8 +429,30 @@ function insertUsers(users) {
       </div>
     </article>`
     );
+    document
+      .querySelector(`[data-id="${user.id}"]`)
+      .addEventListener("click", function () {
+        console.log(this);
+        let id = this.getAttribute("data-id");
+        fetch("/api/favorite", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "augwod89h1h9awdh9py0y82hjd",
+          },
+          body: JSON.stringify({ id }),
+        })
+          .then((obj) => obj.json())
+          .then((obj) => {
+            if (obj.result) {
+              console.log("Hello");
+              makeInFuture(this);
+            } else {
+              removeFuture(this);
+            }
+          });
+      });
   });
-  lifeForFavorite();
 }
 document.addEventListener("DOMContentLoaded", () => {
   let lastElement = document.querySelectorAll('[data-last="true"]');
@@ -440,30 +486,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 function lifeForFavorite() {
-  document.querySelectorAll(".inFav").forEach(function (item) {
-    item.addEventListener("click", function () {
-      let id = this.getAttribute("data-id");
-      fetch("/api/favorite", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "augwod89h1h9awdh9py0y82hjd",
-        },
-        body: JSON.stringify({ id }),
-      })
-        .then((obj) => obj.json())
-        .then((obj) => {
-          if (obj.result) {
-            makeInFuture(item);
-          } else {
-            removeFuture(item);
-          }
-        });
-      // if (item.classList.contains("addingFavorite")) {
-      // } else {
-      // }
-    });
-  });
   $(".showFull").on("click", function () {
     let descriptionVacansyText = $(this).prev(".descriptionVacansy");
     descriptionVacansyText.toggleClass("fullText");
@@ -473,5 +495,4 @@ function lifeForFavorite() {
     });
   });
 }
-lifeForFavorite();
 dataLoad();

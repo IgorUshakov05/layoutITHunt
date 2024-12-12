@@ -68,6 +68,7 @@ let getSpecialList = async (data, myID, limit = 2) => {
         }
       }
     }
+
     const query = { role: "worker", ...data };
     console.log(query, " - запрос на mongoDB");
     let users = await UserSchema.find(query)
@@ -88,16 +89,25 @@ let getSpecialList = async (data, myID, limit = 2) => {
       if (myID) {
         let me = await UserSchema.findOne({ id: myID }).select("favorite");
         if (!me) {
+          console.error("Пользователь с указанным myID не найден.");
         } else {
-          
-          console.log("Проверка на Избранные")
+          console.log("Проверка на Избранные");
+          console.log(me.favorite, " - избранные");
+
           users.forEach((user) => {
+            console.log(user.id, " - пользователь");
             user.isFavorite = me.favorite.some(
               (userFav) => userFav.person === user.id
             );
           });
+
+          console.log(
+            users[1],
+            " - первый пользователь с обновленным isFavorite"
+          );
         }
       }
+
       console.log(exp?.expiriens);
       if (exp?.expiriens) {
         users = users.filter((user) => {
@@ -124,7 +134,7 @@ let getSpecialList = async (data, myID, limit = 2) => {
       }
     }
     console.log("Конец");
-    
+
     return { success: true, users };
   } catch (e) {
     console.log(e);

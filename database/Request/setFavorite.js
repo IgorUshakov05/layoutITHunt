@@ -17,7 +17,7 @@ const setFavorite = async (Myid, idUser, requireDel=false) => {
       result = await UserSchema.findOneAndUpdate(
         { id: Myid },
         { $pull: { favorite: { person: idUser } } },
-        { new: true }
+        { new: false }
       );
       if (!result) return { success: false, message: "Ошибка удаления" };
       return { success: true, message: "Удалено из избранного", result: false };
