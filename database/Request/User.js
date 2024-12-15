@@ -71,48 +71,47 @@ let getSpecialList = async (data, myID, limit = 2) => {
 
     const query = { role: "worker", ...data };
     console.log(query, " - запрос на mongoDB");
+
     let users = await UserSchema.find(query)
       .select("id name surname expiriens skills job description avatar city")
       .skip(limit - 2) // Пропустить записи до последних двух
       .limit(2); // Взять ровно две записи
     console.log(users);
-    let findAllPremium = users.map((user) => user.id);
-    let premium = await PremiumSchema.find({ userID: { $in: findAllPremium } });
-    if (users.length) {
-      users.map((user) => {
-        Object.defineProperty(user, "isPremium", {
-          value: premium.some((prem) => prem.userID === user.id),
-          enumerable: true,
-        });
-      });
 
+    if (users.length) {
+      // Проверка на премиум-статус
+      const findAllPremium = users.map((user) => user.id);
+      const premium = await PremiumSchema.find({
+        userID: { $in: findAllPremium },
+      });
+      console.log(premium);
+
+      // Проверка на избранные
+      let favorites = [];
       if (myID) {
-        let me = await UserSchema.findOne({ id: myID }).select("favorite");
+        const me = await UserSchema.findOne({ id: myID }).select("favorite");
         if (!me) {
           console.error("Пользователь с указанным myID не найден.");
         } else {
+          favorites = me.favorite || [];
           console.log("Проверка на Избранные");
-          console.log(me.favorite, " - избранные");
-
-          users.forEach((user) => {
-            console.log(user.id, " - пользователь");
-            user.isFavorite = me.favorite.some(
-              (userFav) => userFav.person === user.id
-            );
-          });
-
-          console.log(
-            users[1],
-            " - первый пользователь с обновленным isFavorite"
-          );
+          console.log(favorites, " - избранные");
         }
       }
 
-      console.log(exp?.expiriens);
+      // Объединение премиум-статуса и избранных
+      users = users.map((user) => {
+        const isPremium = premium.some((prem) => prem.userID === user.id);
+        const isFavorite = favorites.some((fav) => fav.person === user.id);
+        return { ...user._doc, isPremium, isFavorite };
+      });
+
+      console.log(JSON.stringify(users));
+
+      // Фильтрация по опыту
       if (exp?.expiriens) {
         users = users.filter((user) => {
           const calcExpiriens = Math.round(calculateExperience(user.expiriens));
-
           if (Array.isArray(exp.expiriens)) {
             if (exp.expiriens.length === 2) {
               const [min, max] = exp.expiriens;
@@ -122,7 +121,7 @@ let getSpecialList = async (data, myID, limit = 2) => {
               );
             } else {
               console.warn(
-                "Invalid exp.expiriens array length.  Expected [min, max]."
+                "Invalid exp.expiriens array length. Expected [min, max]."
               );
               return false;
             }

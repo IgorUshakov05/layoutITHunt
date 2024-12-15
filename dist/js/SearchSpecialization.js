@@ -310,7 +310,7 @@ function insertUsers(users) {
                 user.avatar
                   ? user.avatar
                   : user.isPremium
-                  ? "/assets/pictures/ПремиумС.jpg"
+                  ? "/assets/pictures/ПремиумСпециалист.jpg"
                   : "/assets/pictures/ДефолтСпециалист.jpg"
               }"
               alt="Фото ${user.surname} ${user.name}"
