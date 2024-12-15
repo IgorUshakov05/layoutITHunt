@@ -51,7 +51,7 @@
                     <div class="allInfoChat">
                     <div class="leftInfoUser">
                         <div class="avatarUserOnChat">
-                            <div class="avatarUserOnChatLeft"><a href="/<%-personUser.id%>"><img class="personPhoto" src="<%-personUser.avatar%>" alt="Фото пользователя"></a></div>
+                            <div class="avatarUserOnChatLeft"><a href="/<%-personUser.id%>"><img class="personPhoto" src="<%- personUser.avatar?personUser.avatar:personUser.role==='worker'?'/assets/pictures/ДефолтСпециалист.jpg':'/assets/pictures/ДефолтРаботодатель.jpg' %>" alt="Фото пользователя"></a></div>
                             <div class="avatarUserOnChatRigth">
                                 <h1 class="userNamePrivateChat"><a href="/<%-personUser.id%>"><%-personUser.surname%> <%-personUser.name%></a></h1>
                                 <span class="lastTime">Оффлайн</span>

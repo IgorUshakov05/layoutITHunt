@@ -6,22 +6,22 @@ let searchChatList = require("../database/Request/chatList");
 const router = Router();
 
 router.get("/chats/:id", isAuth, async (req, res) => {
+  console.error("Вход в список чатов");
   let access = req.cookies.access;
-  console.log(req.params.id);
- 
+  const chatId = req.params.id;
+  console.log(chatId);
+
   let user = await decodeAccessToken(access);
   if (!user) {
     return await res.redirect("/login");
   }
+  console.log("Проверка доступа:", user.chatList, chatId);
   console.log(user);
-  if (user.chatList !== req.params.id) {
-    return await res.redirect("/login"); // return here to stop further execution
-  }
-
   let searchChats = await searchChatList(user.chatList);
   console.log(searchChats, " - чат");
   console.log(user);
-  const currentUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+  const currentUrl = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
+  console.log(currentUrl, " - текущий url");
   return await res.render("chats", {
     isLoggedIn: !!user,
     id: user.userID,

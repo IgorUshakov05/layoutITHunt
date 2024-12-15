@@ -20,7 +20,7 @@
                     <li class="itemChat">
                         <a href="<%- link %>" class="flexItemChat">
                             <div class="leftPhoto">
-                                <img class="personPhoto" width="43" height="43" src="<%- el.avatar %>" alt="Фото профиля">
+                                <img class="personPhoto" width="43" height="43" src="<%- el.avatar?el.avatar:el.role==='worker'?'/assets/pictures/ДефолтСпециалист.jpg':'/assets/pictures/ДефолтРаботодатель.jpg' %>" alt="Фото профиля">
                             </div>
                             <div class="contentChatItem">
                                 <span class="personName"><%= el.name %> <%= el.surname %></span>

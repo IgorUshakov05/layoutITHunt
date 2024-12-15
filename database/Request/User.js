@@ -10,6 +10,19 @@ const searchUserId = async (id) => {
   }
 };
 
+const searchUsersId = async (ids) => {
+  try {
+    // Ищем пользователей по их ID
+    let result = await UserSchema.find({ id: { $in: ids } }).select(
+      "surname name role job avatar id city"
+    );
+    return result;
+  } catch (e) {
+    console.error("Ошибка при поиске пользователей:", e);
+    return false;
+  }
+};
+
 const findUsersByFavorites = async (favorites) => {
   try {
     const personIds = favorites.map((fav) => fav.person);
@@ -154,5 +167,6 @@ module.exports = {
   searchUserId,
   searchUserEmail,
   findUsersByFavorites,
+  searchUsersId,
   getSpecialList,
 };
