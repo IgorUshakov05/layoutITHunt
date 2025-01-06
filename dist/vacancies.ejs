@@ -90,7 +90,7 @@
                   class="descrtopSearchDesctop"
                   id="special"
                 />
-                <ul class="optionsSelectSpec specialList" style="display: none">
+                <ul class="optionsSelectSpec specialList" style="display: none;z-index: 3;">
                   <%specialList.forEach((item) => {%>
                   <li
                     class="optionsSelectSpecItem specialItem"
@@ -189,6 +189,7 @@
                   <input
                     type="text"
                     placeholder="Webpack"
+                    id="skillInput"
                     class="descrtopSearchDesctop"
                   />
                   <div class="downSkill downSkillMob">
@@ -217,113 +218,14 @@
                     </svg>
                   </div>
                 </div>
-                <!-- <ul class="optionsSelectSpec">
-                  <li class="optionsSelectSpecItem">
-                    <p class="titleSearch">JavaScript</p>
-                    <p class="selectSearch">Выбрать</p>
-                  </li>
-                  <li class="optionsSelectSpecItem">
-                    <p class="titleSearch">TypeScript</p>
-                    <p class="selectSearch">Выбрать</p>
-                  </li>
-                </ul> -->
+                <ul
+                  class="optionsSelectSpec listFindSkills"
+                  style="display: none;z-index: 2;"
+                ></ul>
               </div>
               <div class="selectedSkills">
                 <span class="addad">Добавленные</span>
-                <!-- <div class="listAddadSkills">
-                  <div class="skill">
-                    <p class="titleSkill">JavaScript</p>
-                    <div id="removeSpecial" class="removeSpecial">
-                      <svg
-                        width="17"
-                        height="17"
-                        viewBox="0 0 17 17"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M1 1L16 16"
-                          stroke="white"
-                          stroke-linecap="round"
-                        />
-                        <path
-                          d="M16 1L8.5 8.5L1 16"
-                          stroke="white"
-                          stroke-linecap="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="skill">
-                    <p class="titleSkill">CSS</p>
-                    <div id="removeSpecial" class="removeSpecial">
-                      <svg
-                        width="17"
-                        height="17"
-                        viewBox="0 0 17 17"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M1 1L16 16"
-                          stroke="white"
-                          stroke-linecap="round"
-                        />
-                        <path
-                          d="M16 1L8.5 8.5L1 16"
-                          stroke="white"
-                          stroke-linecap="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="skill">
-                    <p class="titleSkill">GIT</p>
-                    <div id="removeSpecial" class="removeSpecial">
-                      <svg
-                        width="17"
-                        height="17"
-                        viewBox="0 0 17 17"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M1 1L16 16"
-                          stroke="white"
-                          stroke-linecap="round"
-                        />
-                        <path
-                          d="M16 1L8.5 8.5L1 16"
-                          stroke="white"
-                          stroke-linecap="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="skill">
-                    <p class="titleSkill">TypeScript</p>
-                    <div id="removeSpecial" class="removeSpecial">
-                      <svg
-                        width="17"
-                        height="17"
-                        viewBox="0 0 17 17"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M1 1L16 16"
-                          stroke="white"
-                          stroke-linecap="round"
-                        />
-                        <path
-                          d="M16 1L8.5 8.5L1 16"
-                          stroke="white"
-                          stroke-linecap="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div> -->
+                <div class="listAddadSkills"></div>
               </div>
             </div>
             <div class="specialisationSelect">
@@ -337,9 +239,7 @@
                     margin-bottom: 10px;
                     flex-wrap: wrap;
                   "
-                >
-                  
-                </div>
+                ></div>
 
                 <input
                   type="text"
@@ -361,8 +261,9 @@
                   <input
                     type="checkbox"
                     id="distant"
+                    onclick="selectTime(this)"
                     name="exp"
-                    value="Удаленная"
+                    value="OneTwo"
                   />
                   <label class="titleWork" for="distant">0-2</label>
                 </div>
@@ -372,7 +273,8 @@
                     type="checkbox"
                     id="fullday"
                     name="exp"
-                    value="Полный день"
+                    onclick="selectTime(this)"
+                    value="ThreeFour"
                   />
                   <label class="titleWork" for="fullday">3-5</label>
                 </div>
@@ -382,7 +284,8 @@
                     type="checkbox"
                     id="partTime"
                     name="exp"
-                    value="Частичная работа"
+                    onclick="selectTime(this)"
+                    value="SixEight"
                   />
                   <label class="titleWork" for="partTime">6-8</label>
                 </div>
@@ -392,7 +295,8 @@
                     type="checkbox"
                     id="office"
                     name="exp"
-                    value="Офисная"
+                    onclick="selectTime(this)"
+                    value="EightPlus"
                   />
                   <label class="titleWork" for="office">8+</label>
                 </div>

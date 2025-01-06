@@ -3,21 +3,65 @@ let dataSearch = {
   typeWork: [],
   skills: [],
   city: [],
-  experience: "",
+  experience: [],
   price: {
     minPrice: 0,
     maxPrice: 0,
   },
 };
+let url = new URL(window.location.href);
+
 const listSearchCity = document.getElementById("ListSearchCity");
 const input_special = document.getElementById("special");
 const input_city = document.getElementById("searchCity");
+const input_skill = document.getElementById("skillInput");
+const input_max = document.getElementById("max");
+const input_min = document.getElementById("min");
 
+input_max.addEventListener("input", function (e) {
+  dataSearch.price.maxPrice = parseInt(e.target.value) || 0;
+  if (dataSearch.price.maxPrice <= 0) {
+    url.searchParams.delete("price_max");
+    return;
+  }
+  url.searchParams.delete("price_max");
+  url.searchParams.append("price_max", dataSearch.price.maxPrice);
+});
+input_min.addEventListener("input", function (e) {
+  dataSearch.price.minPrice = parseInt(e.target.value) || 0;
+  if (dataSearch.price.minPrice <= 0) {
+    url.searchParams.delete("price_min");
+    return;
+  }
+  url.searchParams.delete("price_min");
+  url.searchParams.append("price_min", dataSearch.price.minPrice);
+});
+function selectTime(e) {
+  if (!dataSearch.experience.includes(e.value)) {
+    dataSearch.experience.push(e.value);
+    dataSearch.experience = [...new Set(dataSearch.experience)];
+  } else {
+    dataSearch.experience = dataSearch.experience.filter(
+      (item) => item != e.value
+    );
+  }
+  if (dataSearch.experience.length <= 0) {
+    url.searchParams.delete("experience");
+    return;
+  }
+  url.searchParams.delete("experience");
+  url.searchParams.append("experience", JSON.stringify(dataSearch.experience));
+}
+const listFindSkills = document.querySelector(".listFindSkills");
+const listFindSelected = document.querySelector(".listAddadSkills");
 const selectedCity = document.getElementById("selectedCity");
 const selectedSpecialList = document.getElementById("selectedSpecialList");
 input_special.addEventListener("input", function (e) {
   let searchValue = e.target.value;
-  if (!searchValue) return;
+  if (!searchValue || searchValue.length <= 1) {
+    document.querySelector(".specialList").style.display = "none";
+    return;
+  }
   document.querySelector(".specialList").style.display = "";
   const allItems = document.querySelectorAll(".optionsSelectSpecItem");
   if (allItems.length <= 0) {
@@ -34,6 +78,84 @@ input_special.addEventListener("input", function (e) {
     }
   }
 });
+
+input_skill.addEventListener("input", async function (e) {
+  let searchValue = e.target.value.trim();
+  listFindSkills.innerHTML = "";
+  if (searchValue.length <= 0) {
+    listFindSkills.style.display = "none";
+
+    return;
+  }
+
+  clearTimeout(this.timeoutId);
+
+  this.timeoutId = setTimeout(async () => {
+    // Создание нового таймера
+    let response = await fetch(`/api/setSkills?title=${searchValue}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "augwod89h1h9awdh9py0y82hjd",
+      },
+    });
+    let result = await response.json();
+    if (result.items.length > 0) {
+      listFindSkills.style.display = "block";
+    }
+
+    result.items.forEach((item) => {
+      let appendChild = `  <li class="optionsSelectSpecItem">
+                    <p class="titleSearch">${item.text}</p>
+                    <p class="selectSearch selectSKill" data-title="${item.text}">
+                      Выбрать
+                    </p>
+                  </li>`;
+      listFindSkills.insertAdjacentHTML("afterbegin", appendChild);
+      let selectSkillElement = listFindSkills.querySelector(
+        `[data-title="${item.text}"]`
+      );
+
+      selectSkillElement.addEventListener("click", function () {
+        let selectedTitle = selectSkillElement.getAttribute("data-title");
+        if (dataSearch.skills.includes(selectedTitle)) return;
+        listFindSkills.innerHTML = "";
+        listFindSkills.style.display = "none";
+        input_skill.value = "";
+        let appendElem = document.createElement("div");
+        appendElem.classList.add("skill");
+        appendElem.setAttribute("data-title", selectedTitle);
+        appendElem.innerHTML = `
+  <p class="titleSkill">${selectedTitle}</p>
+  <div class="removeSpecial removeSkill" data-title="${selectedTitle}">
+    <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1 1L16 16" stroke="white" stroke-linecap="round" />
+      <path d="M16 1L8.5 8.5L1 16" stroke="white" stroke-linecap="round" />
+    </svg>
+  </div>
+`;
+        appendElem.addEventListener("click", function () {
+          dataSearch.skills = dataSearch.skills.filter(
+            (skill) => skill != this.getAttribute("data-title")
+          );
+          this.remove();
+          if (dataSearch.skills.length <= 0) {
+            url.searchParams.delete("skills");
+            return;
+          }
+          url.searchParams.delete("skills");
+          url.searchParams.append("skills", dataSearch.skills);
+        });
+        listFindSelected.appendChild(appendElem);
+        dataSearch.skills.push(selectedTitle);
+        dataSearch.skills = [...new Set(dataSearch.skills)];
+        url.searchParams.delete("skills");
+        url.searchParams.append("skills", dataSearch.skills);
+      });
+    });
+  }, 500);
+});
+
 const removeSpecial = (title) => {
   dataSearch.special = dataSearch.special.filter((item) => item != title);
   document.querySelector(".forRemove[data-title=" + title + "]").remove();
@@ -192,7 +314,6 @@ input_city.addEventListener(
       }
 
       let data = await response.json();
-      console.log(data);
       renderCityList(data.path);
     } catch (error) {
       console.error("Ошибка сети:", error);

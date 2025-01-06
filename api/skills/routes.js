@@ -4,27 +4,30 @@ const { sendSkill } = require("./getSkillOfSirvice");
 const { v4 } = require("uuid");
 let { decodeAccessToken } = require("../tokens/accessToken");
 const { isAuthNotRequire } = require("../../api/middlewares/authNotRequire");
-const {saveSkillIntoOurBase,saveSkillInProfile} = require("./addNewSkillUser");
-const {removeSkillsFromProfile} = require("./updateUserSkill");
+const {
+  saveSkillIntoOurBase,
+  saveSkillInProfile,
+} = require("./addNewSkillUser");
+const { removeSkillsFromProfile } = require("./updateUserSkill");
 const { check, validationResult } = require("express-validator");
 
 router.get(
   "/setSkills",
-  [
-    check("title")
-      .exists()
-      .isLength({ max: 50 })
-      .withMessage("Search query is required")
-      .isString()
-      .notEmpty(),
-  ],
+  // [
+  //   check("title")
+  //     .exists()
+  //     .isLength({ max: 50 })
+  //     .withMessage("Search query is required")
+  //     .isString()
+  //     .notEmpty(),
+  // ],
   async (req, res) => {
     try {
-      const errors = validationResult(req);
+      // const? errors = validationResult(req);
       let title = req.query.title; // Получаем title из query-параметров
-      if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-      }
+      // if (!errors.isEmpty()) {
+      //   return res.status(400).json({ errors: errors.array() });
+      // }
       let findSkill = await sendSkill(title);
       console.log(findSkill);
       return res.status(200).json(findSkill);
@@ -46,7 +49,7 @@ router.post(
   async (req, res) => {
     try {
       let skills = req.body.skills;
-      let access = req.cookies.access
+      let access = req.cookies.access;
       let decodeAccess = await decodeAccessToken(access);
       if (!skills.length) {
         return await res.status(400).json({ message: "Ну не надо так!" });
@@ -61,14 +64,13 @@ router.post(
       });
 
       let saveSkillVar = await saveSkillIntoOurBase(newArray);
-      let saveSkillInProfileVar = await saveSkillInProfile(decodeAccess.userID,newArray);
-      console.log(newArray)
+      await saveSkillInProfile(decodeAccess.userID, newArray);
+      console.log(newArray);
       if (!saveSkillVar) {
         return res.status(500).json({ error: "Ошибка при сохранении" });
       }
 
-      return await res.status(200).json({message:"Успех"});
-
+      return await res.status(200).json({ message: "Успех" });
     } catch (e) {
       console.error(e);
       return res.status(500).json({ error: e.message });
@@ -76,31 +78,29 @@ router.post(
   }
 );
 
+router.delete("/setSkills", isAuthNotRequire, async (req, res) => {
+  try {
+    let skills = req.body.skills;
+    let access = req.cookies.access;
+    let decodeAccess = await decodeAccessToken(access);
 
-router.delete(
-  "/setSkills",
-  isAuthNotRequire,
-  async (req, res) => {
-    try {
-      let skills = req.body.skills;
-      let access = req.cookies.access;
-      let decodeAccess = await decodeAccessToken(access);
-
-      if (!skills.length) {
-        return res.status(400).json({ message: "Ну не надо так!" });
-      }
-
-      let removeSkillVar = await removeSkillsFromProfile(decodeAccess.userID, skills);
-
-      if (!removeSkillVar) {
-        return res.status(500).json({ error: "Ошибка при удалении навыков" });
-      }
-
-      return res.status(200).json({ message: "Успех" });
-    } catch (e) {
-      console.error(e);
-      return res.status(500).json({ error: e.message });
+    if (!skills.length) {
+      return res.status(400).json({ message: "Ну не надо так!" });
     }
+
+    let removeSkillVar = await removeSkillsFromProfile(
+      decodeAccess.userID,
+      skills
+    );
+
+    if (!removeSkillVar) {
+      return res.status(500).json({ error: "Ошибка при удалении навыков" });
+    }
+
+    return res.status(200).json({ message: "Успех" });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ error: e.message });
   }
-);
+});
 module.exports = router;
