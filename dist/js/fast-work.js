@@ -1,10 +1,8 @@
 let url = new URL(window.location.href);
 let dataSearch = {
   special: JSON.parse(url.searchParams.get("special")) || [],
-  typeWork: JSON.parse(url.searchParams.get("typeWork")) || [],
+  hard: JSON.parse(url.searchParams.get("hard")) || 0,
   skills: JSON.parse(url.searchParams.get("skills")) || [],
-  city: JSON.parse(url.searchParams.get("city")) || [],
-  experience: JSON.parse(url.searchParams.get("experience")) || [],
   price: {
     minPrice: url.searchParams.get("price_min") || "",
     maxPrice: url.searchParams.get("price_max") || "",
@@ -12,9 +10,7 @@ let dataSearch = {
 };
 const link_url = document.getElementById("send");
 
-const listSearchCity = document.getElementById("ListSearchCity");
 const input_special = document.getElementById("special");
-const input_city = document.getElementById("searchCity");
 const input_skill = document.getElementById("skillInput");
 const input_max = document.getElementById("max");
 const input_min = document.getElementById("min");
@@ -54,14 +50,11 @@ const Load = () => {
       selectedSpecialList.insertAdjacentHTML("afterbegin", appendItem);
     });
   }
-
-  // Способ работы
-
-  if (dataSearch.typeWork.length > 0) {
+  if (dataSearch.hard != 0 && dataSearch.hard <= 5 && dataSearch.hard >= 1) {
     document
-      .querySelectorAll("input[name='workWay']")
+      .querySelectorAll("input[name='Level']")
       .forEach((item) =>
-        dataSearch.typeWork.includes(item.value) ? (item.checked = true) : false
+        dataSearch.hard === item.value ? (item.checked = true) : false
       );
   }
   // Навыки
@@ -90,54 +83,6 @@ const Load = () => {
     });
   }
 
-  // Город
-  if (dataSearch.city.length > 0) {
-
-    dataSearch.city.forEach((city) => {
-       let appendItem = `
-        <div class="selectedSpecial selectedCity">
-          <p id="title">${city}</p>
-          <div id="removeSpecial" data-title="${city}" class="removeSpecial removeCity">
-            <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 1L16 16" stroke="white" stroke-linecap="round" />
-              <path d="M16 1L8.5 8.5L1 16" stroke="white" stroke-linecap="round" />
-            </svg>
-          </div>
-        </div>
-      `;
-       selectedCity.style.display = "flex";
-       selectedCity.insertAdjacentHTML("afterbegin", appendItem);
-
-       // Добавляем обработчик клика для удаления выбранного города
-       const removeButton = document.querySelector(
-         `.removeCity[data-title="${city}"]`
-       );
-       removeButton.addEventListener("click", () => {
-         // Удаляем город из массива
-         dataSearch.city = dataSearch.city.filter((item) => item !== city);
-         changeURL("city", JSON.stringify(dataSearch.city));
-
-         removeButton.closest(".selectedCity").remove();
-
-         // Если массив пуст, скрываем блок с выбранными городами
-         if (dataSearch.city.length === 0) {
-           selectedCity.style.display = "none";
-         }
-       });
-    })
-
-
-  }
-  // Опыт работы
-  if (dataSearch.experience.length) {
-    document
-      .querySelectorAll("input[name='exp']")
-      .forEach((item) =>
-        dataSearch.experience.includes(item.value)
-          ? (item.checked = true)
-          : false
-      );
-  }
   // Зарплата
   if (dataSearch.price.minPrice || dataSearch.price.maxPrice) {
     input_max.value = dataSearch.price.maxPrice || "";
@@ -184,7 +129,6 @@ function selectTime(e) {
   }
   changeURL("experience", JSON.stringify(dataSearch.experience));
 }
-
 input_special.addEventListener("input", function (e) {
   let searchValue = e.target.value;
   if (!searchValue || searchValue.length <= 1) {
@@ -207,7 +151,6 @@ input_special.addEventListener("input", function (e) {
     }
   }
 });
-
 input_skill.addEventListener("input", async function (e) {
   let searchValue = e.target.value.trim();
   listFindSkills.innerHTML = "";
@@ -278,7 +221,6 @@ input_skill.addEventListener("input", async function (e) {
     });
   }, 500);
 });
-
 const removeSpecial = (title) => {
   dataSearch.special = dataSearch.special.filter((item) => item != title);
   document.querySelector(".forRemove[data-title=" + title + "]").remove();
@@ -287,81 +229,6 @@ const removeSpecial = (title) => {
   }
   changeURL("special", JSON.stringify(dataSearch.special));
 };
-function renderCityList(cities) {
-  // Очищаем старый список
-  listSearchCity.innerHTML = "";
-
-  // Если массив пустой, показываем сообщение
-  if (cities.length === 0) {
-    listSearchCity.innerHTML = `
-      <li class="optionsSelectSpecItem">
-        <p class="titleSearch">Города не найдены</p>
-      </li>
-    `;
-    return;
-  }
-
-  listSearchCity.style.display = "block";
-
-  cities.forEach((city) => {
-    // Разделяем строку и получаем последний элемент
-    city = city.split(",").reverse()[0];
-
-    const li = document.createElement("li");
-    li.classList.add("optionsSelectSpecItem");
-    li.innerHTML = `
-      <p class="titleSearch">${city}</p>
-      <p class="selectSearch" data-title="${city}">Выбрать</p>
-    `;
-
-    // Добавляем обработчик клика на элемент "Выбрать"
-    li.querySelector(".selectSearch").addEventListener("click", () => {
-      // Добавляем город в массив и очищаем поле ввода
-      dataSearch.city.push(city);
-      input_city.value = "";
-      listSearchCity.style.display = "none";
-      listSearchCity.innerHTML = "";
-
-      // Убираем повторы в массиве городов
-      dataSearch.city = [...new Set(dataSearch.city)];
-      changeURL("city", JSON.stringify(dataSearch.city));
-
-      // Отображаем выбранный город в списке
-      let appendItem = `
-        <div class="selectedSpecial selectedCity">
-          <p id="title">${city}</p>
-          <div id="removeSpecial" data-title="${city}" class="removeSpecial removeCity">
-            <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 1L16 16" stroke="white" stroke-linecap="round" />
-              <path d="M16 1L8.5 8.5L1 16" stroke="white" stroke-linecap="round" />
-            </svg>
-          </div>
-        </div>
-      `;
-      selectedCity.style.display = "flex";
-      selectedCity.insertAdjacentHTML("afterbegin", appendItem);
-
-      // Добавляем обработчик клика для удаления выбранного города
-      const removeButton = document.querySelector(
-        `.removeCity[data-title="${city}"]`
-      );
-      removeButton.addEventListener("click", () => {
-        // Удаляем город из массива
-        dataSearch.city = dataSearch.city.filter((item) => item !== city);
-        changeURL("city", JSON.stringify(dataSearch.city));
-
-        removeButton.closest(".selectedCity").remove();
-
-        // Если массив пуст, скрываем блок с выбранными городами
-        if (dataSearch.city.length === 0) {
-          selectedCity.style.display = "none";
-        }
-      });
-    });
-
-    listSearchCity.appendChild(li);
-  });
-}
 
 document.querySelectorAll(".specialItem").forEach((item) => {
   item.addEventListener("click", function (e) {
@@ -400,16 +267,14 @@ document.querySelectorAll(".specialItem").forEach((item) => {
     changeURL("special", JSON.stringify(dataSearch.special));
   });
 });
-document.querySelectorAll("input[name='workWay']").forEach((item) => {
+document.querySelectorAll("input[name='Level']").forEach((item) => {
   item.addEventListener("click", function (e) {
     if (e.target.checked) {
-      dataSearch.typeWork.push(e.target.value);
+      dataSearch.hard = e.target.value;
     } else {
-      dataSearch.typeWork = dataSearch.typeWork.filter(
-        (elem) => elem != e.target.value
-      );
+      dataSearch.hard = 0;
     }
-    changeURL("typeWork", JSON.stringify(dataSearch.typeWork));
+    changeURL("hard", JSON.stringify(dataSearch.hard));
   });
 });
 function debounce(func, delay) {
@@ -419,31 +284,3 @@ function debounce(func, delay) {
     timer = setTimeout(() => func.apply(this, args), delay);
   };
 }
-
-input_city.addEventListener(
-  "input",
-  debounce(async function (e) {
-    let city = e.target.value.trim();
-    if (!city || city.length <= 3) return; // Пропуск пустого ввода
-    try {
-      let response = await fetch("/api/areas", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "augwod89h1h9awdh9py0y82hjd",
-        },
-        body: JSON.stringify({ city }),
-      });
-
-      if (!response.ok) {
-        console.error("Ошибка:", await response.json());
-        return;
-      }
-
-      let data = await response.json();
-      renderCityList(data.path);
-    } catch (error) {
-      console.error("Ошибка сети:", error);
-    }
-  }, 500) // Задержка 500 мс
-);
