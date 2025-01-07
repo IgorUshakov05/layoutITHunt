@@ -1,15 +1,16 @@
+let url = new URL(window.location.href);
 let dataSearch = {
-  special: [],
-  typeWork: [],
-  skills: [],
-  city: [],
-  experience: [],
+  special: JSON.parse(url.searchParams.get("special")) || [],
+  typeWork: JSON.parse(url.searchParams.get("typeWork")) || [],
+  skills: JSON.parse(url.searchParams.get("skills")) || [],
+  city: JSON.parse(url.searchParams.get("city")) || [],
+  experience: JSON.parse(url.searchParams.get("experience")) || [],
   price: {
-    minPrice: 0,
-    maxPrice: 0,
+    minPrice: url.searchParams.get("price_min") || "",
+    maxPrice: url.searchParams.get("price_max") || "",
   },
 };
-let url = new URL(window.location.href);
+const link_url = document.getElementById("send");
 
 const listSearchCity = document.getElementById("ListSearchCity");
 const input_special = document.getElementById("special");
@@ -17,24 +18,160 @@ const input_city = document.getElementById("searchCity");
 const input_skill = document.getElementById("skillInput");
 const input_max = document.getElementById("max");
 const input_min = document.getElementById("min");
+const listFindSkills = document.querySelector(".listFindSkills");
+const listFindSelected = document.querySelector(".listAddadSkills");
+const selectedCity = document.getElementById("selectedCity");
+const selectedSpecialList = document.getElementById("selectedSpecialList");
+const Load = () => {
+  // Специалисты
+  link_url.setAttribute("href", url.search);
+  if (dataSearch.special.length > 0) {
+    selectedSpecialList.style.display = "flex";
+    dataSearch.special.forEach((item) => {
+      let appendItem = `<div class="selectedSpecial forRemove" onClick="removeSpecial('${item}')" data-title="${item}">
+                    <p>${item}</p>
+                    <div class="removeSpecial">
+                      <svg
+                        width="17"
+                        height="17"
+                        viewBox="0 0 17 17"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M1 1L16 16"
+                          stroke="white"
+                          stroke-linecap="round"
+                        />
+                        <path
+                          d="M16 1L8.5 8.5L1 16"
+                          stroke="white"
+                          stroke-linecap="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>`;
+      selectedSpecialList.insertAdjacentHTML("afterbegin", appendItem);
+    });
+  }
 
-input_max.addEventListener("input", function (e) {
-  dataSearch.price.maxPrice = parseInt(e.target.value) || 0;
-  if (dataSearch.price.maxPrice <= 0) {
-    url.searchParams.delete("price_max");
+  // Способ работы
+
+  if (dataSearch.typeWork.length > 0) {
+    document
+      .querySelectorAll("input[name='workWay']")
+      .forEach((item) =>
+        dataSearch.typeWork.includes(item.value) ? (item.checked = true) : false
+      );
+  }
+  // Навыки
+  if (dataSearch.skills.length > 0) {
+    dataSearch.skills.forEach((item) => {
+      let appendElem = document.createElement("div");
+      appendElem.classList.add("skill");
+      appendElem.setAttribute("data-title", item);
+      appendElem.innerHTML = `
+  <p class="titleSkill">${item}</p>
+  <div class="removeSpecial removeSkill" data-title="${item}">
+    <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1 1L16 16" stroke="white" stroke-linecap="round" />
+      <path d="M16 1L8.5 8.5L1 16" stroke="white" stroke-linecap="round" />
+    </svg>
+  </div>
+`;
+      appendElem.addEventListener("click", function () {
+        dataSearch.skills = dataSearch.skills.filter(
+          (skill) => skill != this.getAttribute("data-title")
+        );
+        this.remove();
+        changeURL("skills", JSON.stringify(dataSearch.skills));
+      });
+      listFindSelected.appendChild(appendElem);
+    });
+  }
+
+  // Город
+  if (dataSearch.city.length > 0) {
+
+    dataSearch.city.forEach((city) => {
+       let appendItem = `
+        <div class="selectedSpecial selectedCity">
+          <p id="title">${city}</p>
+          <div id="removeSpecial" data-title="${city}" class="removeSpecial removeCity">
+            <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1L16 16" stroke="white" stroke-linecap="round" />
+              <path d="M16 1L8.5 8.5L1 16" stroke="white" stroke-linecap="round" />
+            </svg>
+          </div>
+        </div>
+      `;
+       selectedCity.style.display = "flex";
+       selectedCity.insertAdjacentHTML("afterbegin", appendItem);
+
+       // Добавляем обработчик клика для удаления выбранного города
+       const removeButton = document.querySelector(
+         `.removeCity[data-title="${city}"]`
+       );
+       removeButton.addEventListener("click", () => {
+         // Удаляем город из массива
+         dataSearch.city = dataSearch.city.filter((item) => item !== city);
+         changeURL("city", JSON.stringify(dataSearch.city));
+
+         removeButton.closest(".selectedCity").remove();
+
+         // Если массив пуст, скрываем блок с выбранными городами
+         if (dataSearch.city.length === 0) {
+           selectedCity.style.display = "none";
+         }
+       });
+    })
+
+
+  }
+  // Опыт работы
+  if (dataSearch.experience.length) {
+    document
+      .querySelectorAll("input[name='exp']")
+      .forEach((item) =>
+        dataSearch.experience.includes(item.value)
+          ? (item.checked = true)
+          : false
+      );
+  }
+  // Зарплата
+  if (dataSearch.price.minPrice || dataSearch.price.maxPrice) {
+    input_max.value = dataSearch.price.maxPrice || "";
+    input_min.value = dataSearch.price.minPrice || "";
+  }
+};
+Load();
+const changeURL = (name, value) => {
+  console.log("Уладение", value);
+
+  if (
+    value === null ||
+    value === undefined ||
+    value === 0 ||
+    value == "[]" ||
+    value == []
+  ) {
+    console.log(dataSearch);
+
+    url.searchParams.delete(name);
+    link_url.search = url.search;
     return;
   }
-  url.searchParams.delete("price_max");
-  url.searchParams.append("price_max", dataSearch.price.maxPrice);
+  url.searchParams.delete(name);
+  url.searchParams.append(name, value);
+  link_url.search = url.search;
+};
+input_max.addEventListener("input", function (e) {
+  dataSearch.price.maxPrice = parseInt(e.target.value) || 0;
+  changeURL("price_max", dataSearch.price.maxPrice);
 });
 input_min.addEventListener("input", function (e) {
   dataSearch.price.minPrice = parseInt(e.target.value) || 0;
-  if (dataSearch.price.minPrice <= 0) {
-    url.searchParams.delete("price_min");
-    return;
-  }
-  url.searchParams.delete("price_min");
-  url.searchParams.append("price_min", dataSearch.price.minPrice);
+  changeURL("price_min", dataSearch.price.minPrice);
 });
 function selectTime(e) {
   if (!dataSearch.experience.includes(e.value)) {
@@ -45,17 +182,9 @@ function selectTime(e) {
       (item) => item != e.value
     );
   }
-  if (dataSearch.experience.length <= 0) {
-    url.searchParams.delete("experience");
-    return;
-  }
-  url.searchParams.delete("experience");
-  url.searchParams.append("experience", JSON.stringify(dataSearch.experience));
+  changeURL("experience", JSON.stringify(dataSearch.experience));
 }
-const listFindSkills = document.querySelector(".listFindSkills");
-const listFindSelected = document.querySelector(".listAddadSkills");
-const selectedCity = document.getElementById("selectedCity");
-const selectedSpecialList = document.getElementById("selectedSpecialList");
+
 input_special.addEventListener("input", function (e) {
   let searchValue = e.target.value;
   if (!searchValue || searchValue.length <= 1) {
@@ -139,18 +268,12 @@ input_skill.addEventListener("input", async function (e) {
             (skill) => skill != this.getAttribute("data-title")
           );
           this.remove();
-          if (dataSearch.skills.length <= 0) {
-            url.searchParams.delete("skills");
-            return;
-          }
-          url.searchParams.delete("skills");
-          url.searchParams.append("skills", dataSearch.skills);
+          changeURL("skills", JSON.stringify(dataSearch.skills));
         });
         listFindSelected.appendChild(appendElem);
         dataSearch.skills.push(selectedTitle);
         dataSearch.skills = [...new Set(dataSearch.skills)];
-        url.searchParams.delete("skills");
-        url.searchParams.append("skills", dataSearch.skills);
+        changeURL("skills", JSON.stringify(dataSearch.skills));
       });
     });
   }, 500);
@@ -162,6 +285,7 @@ const removeSpecial = (title) => {
   if (dataSearch.special.length <= 0) {
     selectedSpecialList.style.display = "none";
   }
+  changeURL("special", JSON.stringify(dataSearch.special));
 };
 function renderCityList(cities) {
   // Очищаем старый список
@@ -200,6 +324,7 @@ function renderCityList(cities) {
 
       // Убираем повторы в массиве городов
       dataSearch.city = [...new Set(dataSearch.city)];
+      changeURL("city", JSON.stringify(dataSearch.city));
 
       // Отображаем выбранный город в списке
       let appendItem = `
@@ -223,8 +348,8 @@ function renderCityList(cities) {
       removeButton.addEventListener("click", () => {
         // Удаляем город из массива
         dataSearch.city = dataSearch.city.filter((item) => item !== city);
+        changeURL("city", JSON.stringify(dataSearch.city));
 
-        // Удаляем элемент из DOM
         removeButton.closest(".selectedCity").remove();
 
         // Если массив пуст, скрываем блок с выбранными городами
@@ -246,7 +371,7 @@ document.querySelectorAll(".specialItem").forEach((item) => {
     dataSearch.special.push(item.getAttribute("data-title"));
     document.querySelector(".specialList").style.display = "none";
     selectedSpecialList.style.display = "flex";
-    let appendItem = `    <div class="selectedSpecial forRemove" onClick="removeSpecial('${item.getAttribute(
+    let appendItem = `<div class="selectedSpecial forRemove" onClick="removeSpecial('${item.getAttribute(
       "data-title"
     )}')" data-title="${item.getAttribute("data-title")}">
                     <p>${item.getAttribute("data-title")}</p>
@@ -272,6 +397,7 @@ document.querySelectorAll(".specialItem").forEach((item) => {
                     </div>
                   </div>`;
     selectedSpecialList.insertAdjacentHTML("afterbegin", appendItem);
+    changeURL("special", JSON.stringify(dataSearch.special));
   });
 });
 document.querySelectorAll("input[name='workWay']").forEach((item) => {
@@ -283,6 +409,7 @@ document.querySelectorAll("input[name='workWay']").forEach((item) => {
         (elem) => elem != e.target.value
       );
     }
+    changeURL("typeWork", JSON.stringify(dataSearch.typeWork));
   });
 });
 function debounce(func, delay) {

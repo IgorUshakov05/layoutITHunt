@@ -90,7 +90,10 @@
                   class="descrtopSearchDesctop"
                   id="special"
                 />
-                <ul class="optionsSelectSpec specialList" style="display: none;z-index: 3;">
+                <ul
+                  class="optionsSelectSpec specialList"
+                  style="display: none; z-index: 3"
+                >
                   <%specialList.forEach((item) => {%>
                   <li
                     class="optionsSelectSpecItem specialItem"
@@ -220,7 +223,7 @@
                 </div>
                 <ul
                   class="optionsSelectSpec listFindSkills"
-                  style="display: none;z-index: 2;"
+                  style="display: none; z-index: 2"
                 ></ul>
               </div>
               <div class="selectedSkills">
@@ -324,8 +327,10 @@
               </div>
             </div>
             <div class="resetAndSend">
-              <button type="reset" class="resetForm">Сбросить</button>
-              <button type="submit" class="sendForm">Применить фильтр</button>
+              <a type="reset" class="resetForm" href="vacancies">Сбросить</a>
+              <a type="submit" class="sendForm" id="send" href="vacancies"
+                >Применить фильтр</a
+              >
             </div>
           </div>
         </div>
