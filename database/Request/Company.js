@@ -257,6 +257,7 @@ const searchCompanyForVacancy = async (creatorID) => {
     let result = await CompanySchema.findOne({
       userList: { $elemMatch: { userID: creatorID } },
       isVarefy: true,
+      isFreez:false 
     }).select("INN avatar title description isFreez isActive");
     return result;
   } catch (e) {

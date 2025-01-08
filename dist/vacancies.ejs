@@ -173,6 +173,7 @@
             <div class="softsSkills">
               <div class="downloadSkills">
                 <h1>Навыки</h1>
+                <%if (id) {%>
                 <div class="downSkill">
                   <svg
                     width="17"
@@ -186,6 +187,7 @@
                     <path d="M9 2L9 12" stroke="white" stroke-width="2" />
                   </svg>
                 </div>
+                <%}%>
               </div>
               <div class="searchSpecialist">
                 <div class="inpSkills">
@@ -336,125 +338,114 @@
         </div>
         <div class="MoreInfo">
           <div class="listVacas">
+            <%if(vacancies) {%> <%vacancies.forEach(vacancy =>{ %>
+
             <article class="vakansiaItem">
+              <%let userItem =users.find(user => user.id ===vacancy.userID) %>
+              <%let companyItem = company.find((item) =>
+              item.userList.some(userListItem => userListItem.userID ===
+              userItem.id));%>
               <div class="topInfoPriceAndTitle">
                 <div class="titleAndTypeJob">
                   <h2>
                     <span
-                      ><a href="/vacancia" class="titleJob"
-                        >Веб-дизайнер</a
+                      ><a href="/vacancia/<%-vacancy.id%>" class="titleJob"
+                        ><%-vacancy.special%></a
                       ></span
                     >
                   </h2>
-                  <h4><span class="methodJob">Удаленно</span></h4>
+                  <h4
+                    style="margin-top: 5px; display: flex; align-items: center"
+                  >
+                    <svg
+                      class="methodJob"
+                      width="14"
+                      height="19"
+                      viewBox="0 0 14 19"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M7 0C10.866 0 14 2.87926 14 6.43125C14 12.2311 7 18.375 7 18.375C7 18.375 0 12.2827 0 6.43125C0 2.87926 3.134 0 7 0Z"
+                        fill="#5412E0"
+                      />
+                      <path
+                        d="M7 10.5C8.933 10.5 10.5 8.93303 10.5 7.00003C10.5 5.06703 8.933 3.50003 7 3.50003C5.067 3.50003 3.5 5.06703 3.5 7.00003C3.5 8.93303 5.067 10.5 7 10.5Z"
+                        fill="white"
+                      />
+                    </svg>
+                    <span
+                      style="margin-left: 5px"
+                      class="methodJob"
+                      title="Работадатель из <%-userItem.city%>"
+                    >
+                      <%vacancy.typeWork.forEach((item,index) => {%>
+                      <%-`${item.title} ${index+1 ==
+                      vacancy.typeWork.length?'':', '} `%> <%})%>
+                    </span>
+                  </h4>
                 </div>
                 <div class="priceJob">
                   <h3>
-                    <span class="priceItem"
-                      ><%= (123123).toLocaleString("no-NO") %></span
-                    >
+                    <%if(vacancy.price.agreement) {%>
+                    <span class=""> Договорная</span>
+                    <%}else {%> <% if (vacancy.price.maxPrice) { %>
+                    <span class="priceItem">
+                      до <%= vacancy.price.maxPrice.toLocaleString("no-NO") %>
+                    </span>
                     <span class="p">Ꝑ</span>
+                    <% } else if (vacancy.price.minPrice) { %>
+                    <span class="priceItem">
+                      от <%= vacancy.price.minPrice.toLocaleString("no-NO") %>
+                    </span>
+                    <span class="p">Ꝑ</span>
+                    <% } %> <%}%>
                   </h3>
                 </div>
               </div>
+              <%if(vacancy.description.length) {%>
               <div class="middleInfoVacansya">
                 <div class="descriptionVacansy">
-                  <p class="descriptionVacansyText">
-                    Мы понимаем, что в процессе поиска работы могут возникать
-                    вопросы и затруднения. Поэтому мы предлагаем непрерывную
-                    поддержку нашим пользователям. Наша команда экспертов всегда
-                    готова ответить на ваши вопросы и предоставить необходимую
-                    помощь в кратчайшие сроки. Мы ценим ваше время и стремимся
-                    обеспечить гладкое и безопасное пользование нашей
-                    платформой. Мы понимаем, что в процессе поиска работы могут
-                    возникать вопросы и затруднения. Поэтому мы предлагаем
-                    непрерывную поддержку нашим пользователям. Наша команда
-                    экспертов всегда готова ответить на ваши вопросы работы
-                    могут возникать вопросы и затруднения. Поэтому мы предлагаем
-                    непрерывную поддержку нашим пользователям. Наша команда
-                    экспертов всегда готова ответить на ваши вопросы и
-                    предоставить необходимую помощь в кратчайшие сроки. Мы ценим
-                    ваше время и стремимся обеспечить гладкое и безопасное
-                    пользование нашей платформой. Мы понимаем, что в процессе
-                    поиска работы могут возникать вопросы и затруднения. Поэтому
-                    мы предлагаем непрерывную поддержку нашим пользователям.
-                    Наша команда экспертов всегда готова ответить на ваши
-                    вопросы работы могут возникать вопросы и затруднения.
-                    Поэтому мы предлагаем непрерывную поддержку нашим
-                    пользователям. Наша команда экспертов всегда готова ответить
-                    на ваши вопросы и предоставить необходимую помощь в
-                    кратчайшие сроки. Мы ценим ваше время и стремимся обеспечить
-                    гладкое и безопасное пользование нашей платформой. Мы
-                    понимаем, что в процессе поиска работы могут возникать
-                    вопросы и затруднения. Поэтому мы предлагаем непрерывную
-                    поддержку нашим пользователям. Наша команда экспертов всегда
-                    готова ответить на ваши вопросы
-                  </p>
+                  <p class="descriptionVacansyText"><%-vacancy.description%></p>
                 </div>
                 <div class="showFull">
                   <span class="showFullText">Показать полностью</span>
                 </div>
               </div>
+              <%}%> <%if(vacancy.skills) {%>
               <div class="stackForJob">
                 <ul class="listStacks">
+                  <%vacancy.skills.forEach(skill =>{ %>
                   <li class="abilityItem">
-                    <h5 class="ability">HTML</h5>
+                    <h5 class="ability"><%-skill.title%></h5>
                   </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">JavaScript</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">React</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Node.js</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Python</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Java</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">PHP</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Angular</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Vue.js</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">TypeScript</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Java</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">JavaScript</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">HTML</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">CSS</h5>
-                  </li>
+                  <% })%>
                 </ul>
               </div>
+              <%}%>
+
               <div class="bottomInfo">
-                <a href="/company">
+                <a
+                  href="/<%-companyItem?`company/${companyItem.INN}`:userItem.id%>"
+                >
                   <div class="companyInfo">
                     <div class="img">
                       <img
                         width="40"
                         height="40"
                         alt="Логотип компании"
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/200px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png"
+                        src="<%- (companyItem ? companyItem.avatar : userItem.avatar?'/assets/pictures/ПремиумРаботодатель.jpg':'/assets/pictures/ДефолтРаботодатель.jpg') %>
+"
                       />
                     </div>
                     <div class="titleCompanyAndDate">
                       <div class="titleCompany">
-                        <span class="styleTitleCompany">MTC</span>
+                        <span class="styleTitleCompany">
+                          <%- (companyItem ? companyItem.title : userItem.name +
+                          ' ' +userItem.surname ) %>
+                        </span>
                       </div>
                       <div class="titleCompany">
                         <span class="styleTimeCompany">35 часов назад</span>
@@ -466,263 +457,12 @@
                   <!-- addingFavorite - класс добавленого в избранное -->
                   <button class="Infavorites">В избранное</button>
                   <button class="Respond">
-                    <a href="/vacancia">Откликнуться</a>
+                    <a href="/vacancia/<%-vacancy.id%>">Откликнуться</a>
                   </button>
                 </div>
               </div>
             </article>
-            <article class="vakansiaItem">
-              <div class="topInfoPriceAndTitle">
-                <div class="titleAndTypeJob">
-                  <h2>
-                    <span
-                      ><a href="/vacancia" class="titleJob"
-                        >Веб-дизайнер</a
-                      ></span
-                    >
-                  </h2>
-                  <a
-                    href="https://www.google.com/maps/search/Ростов в Плену"
-                    target="_blank"
-                  >
-                    <h4
-                      style="
-                        margin-top: 5px;
-                        display: flex;
-                        align-items: center;
-                      "
-                    >
-                      <svg
-                        class="methodJob"
-                        width="14"
-                        height="19"
-                        viewBox="0 0 14 19"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M7 0C10.866 0 14 2.87926 14 6.43125C14 12.2311 7 18.375 7 18.375C7 18.375 0 12.2827 0 6.43125C0 2.87926 3.134 0 7 0Z"
-                          fill="#5412E0"
-                        />
-                        <path
-                          d="M7 10.5C8.933 10.5 10.5 8.93303 10.5 7.00003C10.5 5.06703 8.933 3.50003 7 3.50003C5.067 3.50003 3.5 5.06703 3.5 7.00003C3.5 8.93303 5.067 10.5 7 10.5Z"
-                          fill="white"
-                        />
-                      </svg>
-                      <span style="margin-left: 5px" class="methodJob"
-                        >Ростов в Плену</span
-                      >
-                    </h4>
-                  </a>
-                </div>
-                <div class="priceJob">
-                  <h3>
-                    <span class="priceItem"
-                      ><%= (5000000).toLocaleString("no-NO") %></span
-                    >
-                    <span class="p">Ꝑ</span>
-                  </h3>
-                </div>
-              </div>
-              <div class="middleInfoVacansya">
-                <div class="descriptionVacansy">
-                  <p class="descriptionVacansyText">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Cupiditate voluptatibus, nesciunt natus eaque optio possimus
-                    est obcaecati molestias totam ex, voluptatum, quia dolorem
-                    voluptas ut nam hic alias ducimus similique consectetur
-                    recusandae nihil! Quo, porro, aut pariatur ea blanditiis
-                    voluptates labore, ipsum dolore assumenda dolores maxime
-                    esse iste recusandae unde repellendus quae. Ipsam eos omnis
-                    consequatur alias, quis ea laudantium beatae fugiat eius
-                    harum, incidunt quia temporibus facilis illum iusto culpa
-                    sit nulla saepe soluta! Delectus, a dolores. Quisquam
-                    blanditiis veniam cum sequi magni voluptate recusandae?
-                    Quaerat aperiam cum, voluptas minus culpa tenetur! Numquam
-                    minima, quam doloremque nihil a ut!
-                  </p>
-                </div>
-                <div class="showFull">
-                  <span class="showFullText">Показать полностью</span>
-                </div>
-              </div>
-              <div class="stackForJob">
-                <ul class="listStacks">
-                  <li class="abilityItem">
-                    <h5 class="ability">HTML</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">JavaScript</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">React</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Node.js</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Python</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Java</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">PHP</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Angular</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Vue.js</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">TypeScript</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Java</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">JavaScript</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">HTML</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">CSS</h5>
-                  </li>
-                </ul>
-              </div>
-              <div
-                class="mobileMethodJob"
-                style="margin-top: 15px; width: 100%"
-              >
-                <div
-                  class="line"
-                  style="border: 0.5px solid #000; opacity: 0.1"
-                ></div>
-                <div class="addressJob" style="margin-top: 10px">
-                  <svg
-                    class="geo"
-                    width="16"
-                    height="20"
-                    viewBox="0 0 10 14"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                      d="M4.95238 0.391357C7.68751 0.391357 9.90476 2.42839 9.90476 4.94136C9.90476 9.04466 4.95238 13.3914 4.95238 13.3914C4.95238 13.3914 0 9.08113 0 4.94136C0 2.42839 2.21725 0.391357 4.95238 0.391357Z"
-                      fill="#5412E0"
-                    />
-                    <path
-                      d="M4.95239 7.81994C6.31995 7.81994 7.42858 6.71131 7.42858 5.34374C7.42858 3.97618 6.31995 2.86755 4.95239 2.86755C3.58482 2.86755 2.4762 3.97618 2.4762 5.34374C2.4762 6.71131 3.58482 7.81994 4.95239 7.81994Z"
-                      fill="white"
-                    />
-                  </svg>
-                  <a
-                    href="https://www.google.com/maps/search/Арзамас"
-                    target="_blank"
-                    class="adressJobText"
-                    >Арзамас</a
-                  >
-                </div>
-                <div class="wayWork">
-                  <div class="wayWorkItem">
-                    <input
-                      type="checkbox"
-                      id="distant"
-                      name="interest"
-                      value="Удаленная"
-                    />
-                    <label class="titleWork" for="distant">Удаленная</label>
-                  </div>
-
-                  <div class="wayWorkItem">
-                    <input
-                      type="checkbox"
-                      id="fullday"
-                      name="interest"
-                      value="Полный день"
-                    />
-                    <label class="titleWork" for="fullday">Полный день</label>
-                  </div>
-
-                  <div class="wayWorkItem">
-                    <input
-                      type="checkbox"
-                      id="partTime"
-                      name="interest"
-                      value="Частичная работа"
-                    />
-                    <label class="titleWork" for="partTime"
-                      >Частичная работа</label
-                    >
-                  </div>
-
-                  <div class="wayWorkItem">
-                    <input
-                      type="checkbox"
-                      id="office"
-                      name="interest"
-                      value="Офисная"
-                    />
-                    <label class="titleWork" for="office">Офисная</label>
-                  </div>
-                  <div class="wayWorkItem">
-                    <input
-                      type="checkbox"
-                      id="flexeble"
-                      name="interest"
-                      value="Гибкий график"
-                    />
-                    <label class="titleWork" for="flexeble"
-                      >Гибкий график</label
-                    >
-                  </div>
-                  <div class="wayWorkItem">
-                    <input
-                      type="checkbox"
-                      id="shift"
-                      name="interest"
-                      value="Сменный график"
-                    />
-                    <label class="titleWork" for="shift">Сменный график</label>
-                  </div>
-                </div>
-              </div>
-              <div class="bottomInfo">
-                <a href="/company">
-                  <div class="companyInfo">
-                    <div class="img">
-                      <img
-                        width="40"
-                        height="40"
-                        alt="Логотип компании"
-                        src="data:image/jpeg;base64,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"
-                      />
-                    </div>
-                    <div class="titleCompanyAndDate">
-                      <div class="titleCompany">
-                        <span class="styleTitleCompany">MTC</span>
-                      </div>
-                      <div class="titleCompany">
-                        <span class="styleTimeCompany">35 часов назад</span>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-                <div class="buttonsElements">
-                  <!-- addingFavorite - класс добавленого в избранное -->
-                  <button class="Infavorites">В избранное</button>
-                  <button class="Respond">
-                    <a href="/vacancia">Откликнуться</a>
-                  </button>
-                </div>
-              </div>
-            </article>
+            <%})%> <%}%>
           </div>
           <div class="showMore">
             <button

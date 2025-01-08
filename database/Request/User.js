@@ -4,7 +4,12 @@ const PremiumSchema = require("../../database/Schema/Premium");
 const searchUserId = async (id) => {
   try {
     let result = await UserSchema.findOne({ id });
-    return result;
+    let premium = await PremiumSchema.findOne({ userID: id });
+    console.log(premium, " премиум");
+    if(result) {
+      return { ...result.toObject(), premium: !!premium };
+    }
+    return null
   } catch (e) {
     return false;
   }

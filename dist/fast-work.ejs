@@ -143,6 +143,7 @@
             <div class="softsSkills">
               <div class="downloadSkills">
                 <h1>Навыки</h1>
+                <%if (id) {%>
                 <div class="downSkill">
                   <svg
                     width="17"
@@ -156,6 +157,7 @@
                     <path d="M9 2L9 12" stroke="white" stroke-width="2" />
                   </svg>
                 </div>
+                <%}%>
               </div>
               <div class="searchSpecialist">
                 <div class="inpSkills">
@@ -243,7 +245,7 @@
                       ></span
                     ><span
                       class="hardOrNo"
-                      style="color: <%= x <= 2 ? '#A4A4A4' : (x <= 4 ? '#000000' : '#4900E3') %>;"
+                      style="color: <%- x <= 2 ? '#A4A4A4' : (x <= 4 ? '#000000' : '#4900E3') %>;"
                       ><%= x %></span
                     >
                   </h2>

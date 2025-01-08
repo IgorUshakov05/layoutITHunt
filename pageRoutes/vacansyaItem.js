@@ -14,9 +14,12 @@ router.get("/vacancia/:id", isAuthNotRequire, async (req, res) => {
   console.log(findVacancy);
   if (!findVacancy.success || !req.params.id) return res.redirect("/404");
   let findFromUser = await searchUserId(findVacancy.data.userID);
+  console.log(findFromUser);
   let company = await searchCompanyForVacancy(findFromUser.id);
   console.log(company);
-  if (company.isFreez) return res.redirect("/404");
+  if (company) {
+    if (company?.isFreez) return res.redirect("/404");
+  }
   let isFavoriteVacancyVar = false;
   if (findFromUser) {
     isFavoriteVacancyVar = await isFavoriteVacancy(user.userID, req.params.id);

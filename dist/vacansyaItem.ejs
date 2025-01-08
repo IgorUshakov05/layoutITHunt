@@ -36,7 +36,7 @@ var agreement = vacancy.price.agreement;
 
             <div class="titleCompanyAndPhoto">
                 <div class="logoCompany">
-                    <img src="<%- from.avatar %>" width="41" height="41" alt="Логотип компании">
+                    <img src="<%- from.avatar||from.premium?'/assets/pictures/ПремиумРаботодатель.jpg':'/assets/pictures/ДефолтРаботодатель.jpg'%>" width="41" height="41" alt="Логотип компании">
                 </div>
                 <h3><%-from.name || from.title%> <%-from.surname%></h3>
             </div>

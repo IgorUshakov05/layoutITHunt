@@ -3,10 +3,9 @@ const UserScheme = require("../Schema/UserSchema");
 const { v4 } = require("uuid");
 const { Temporal } = require("@js-temporal/polyfill");
 const ReasonRMVacancy = require("../Schema/ReasonRemoveVacansy");
+const CompanySchema = require("../Schema/Company");
 const Premium = require("../Schema/Premium");
 const { addCauseVacancy } = require("./CauseRemovePublication");
-const VacansyRemoved = require("../Schema/VacansyRemoved");
-const Vakancy = require("../Schema/Vakancy");
 async function createVacancy({
   userID,
   special,
@@ -363,10 +362,40 @@ let AnswerOfSolution = async (
   }
 };
 
+const getVacancy = async (query, limit = 3) => {
+  try {
+    let allVacancies = await Vacancy.find(query).limit(limit);
+    let userIDs = [
+      ...new Set(
+        allVacancies.map((item) => {
+          return item.userID;
+        })
+      ),
+    ];
+    let users = await UserScheme.find({ id: { $in: userIDs } }).select(
+      "avatar id name surname city"
+    );
+    const company = await CompanySchema.find({
+      isVarefy: true,
+      isFreez: false,
+      userList: {
+        $elemMatch: { userID: { $in: userIDs } },
+      },
+    }).select("id avatar userList isFreez INN isVerefy title");
+    // console.log(users, " - люди");
+    // console.log(company, " - компании");
+    // console.log(allVacancies, " - вакансии");
+    return { success: true, users, vacancies: allVacancies, company };
+  } catch (e) {
+    console.log(e);
+    return { success: false, message: "Что-то пошло не так!" };
+  }
+};
 module.exports = {
   createVacancy,
   updateVacansy,
   AnswerOfSolution,
+  getVacancy,
   searchVacancyById,
   getAllRequest,
   searchVacancyByUserId,

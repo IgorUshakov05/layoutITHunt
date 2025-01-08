@@ -94,6 +94,10 @@ const vacancySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  dataCreated: {
+    type: Date,
+    default: Date.now, 
+  },
   dateRemove: {
     type: String,
     required: true,
