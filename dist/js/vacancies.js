@@ -6,9 +6,43 @@ let dataSearch = {
   city: JSON.parse(url.searchParams.get("city")) || [],
   experience: JSON.parse(url.searchParams.get("experience")) || [],
   price: {
-    minPrice: url.searchParams.get("price_min") || "",
-    maxPrice: url.searchParams.get("price_max") || "",
+    minPrice: url.searchParams.get("price_min") || 0,
+    maxPrice: url.searchParams.get("price_max") || 0,
   },
+};
+
+let limitVacancy = 4;
+const step = 2;
+let isStop = false;
+let getVacancyByLimit = async () => {
+  try {
+    if (isStop) {
+      isStop = true;
+      return { success: false };
+    }
+    let vacancy = await fetch(`/api/vacancies?limit=${limitVacancy}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "augwod89h1h9awdh9py0y82hjd",
+      },
+      body: JSON.stringify(dataSearch),
+    }).then((obj) => obj.json());
+    console.log(vacancy);
+    limitVacancy += step;
+    if (!vacancy.success) {
+      isStop = true;
+      return { success: false, message: "Ошибка при получении" };
+    }
+    if (vacancy.vacancies.length <= 0) {
+      isStop = true;
+      return { success: false, message: "Больше вакансий нет!" };
+    }
+    return { ...vacancy };
+  } catch (e) {
+    console.log(e);
+    return { success: false, message: "Ошибка при получении" };
+  }
 };
 const link_url = document.getElementById("send");
 
@@ -22,6 +56,231 @@ const listFindSkills = document.querySelector(".listFindSkills");
 const listFindSelected = document.querySelector(".listAddadSkills");
 const selectedCity = document.getElementById("selectedCity");
 const selectedSpecialList = document.getElementById("selectedSpecialList");
+document.addEventListener("DOMContentLoaded", () => {
+  let lastElement = document.querySelectorAll('[data-last="true"]');
+  lastElement = lastElement[lastElement.length - 1];
+  if (lastElement) {
+    const observer = new IntersectionObserver(
+      (entries, observerInstance) => {
+        entries.forEach(async (entry) => {
+          console.log(entry);
+          if (entry.isIntersecting) {
+            let data = await getVacancyByLimit(limitVacancy);
+            console.log(data);
+            if (!data.success) return false;
+            insertVacansy(data);
+            console.log(data);
+            observerInstance.unobserve(lastElement);
+            lastElement = document.querySelectorAll('[data-last="true"]');
+            lastElement = lastElement[lastElement.length - 1];
+            observer.observe(lastElement);
+          }
+        });
+      },
+      {
+        root: null, // Отслеживание относительно viewport
+        rootMargin: "100px", // Без отступов
+        threshold: 1.0, // Полностью в области видимости
+      }
+    );
+
+    // Добавляем наблюдение за последним элементом
+    observer.observe(lastElement);
+  }
+});
+const insertVacansy = (vacancyList) => {
+  vacancyList.vacancies.forEach((vacancy, index) => {
+    const userItem = vacancyList.users.find(
+      (user) => user.id === vacancy.userID
+    );
+    console.log(userItem);
+    console.log(vacancyList.company);
+    const companyItem = vacancyList.company.find((item) =>
+      item.userList.some((userListItem) => userListItem.userID === userItem.id)
+    );
+    console.log(companyItem);
+
+    const article = document.createElement("article");
+    article.setAttribute(
+      "data-last",
+      index === vacancyList.vacancies.length - 1 ? "true" : "false"
+    );
+    article.className = "vakansiaItem";
+
+    const topInfo = document.createElement("div");
+    topInfo.className = "topInfoPriceAndTitle";
+
+    const titleAndTypeJob = document.createElement("div");
+    titleAndTypeJob.className = "titleAndTypeJob";
+
+    const title = document.createElement("h2");
+    const titleLink = document.createElement("a");
+    titleLink.href = `/vacancia/${vacancy.id}`;
+    titleLink.className = "titleJob";
+    titleLink.textContent = vacancy.special;
+    title.appendChild(titleLink);
+    titleAndTypeJob.appendChild(title);
+
+    const jobType = document.createElement("h4");
+    jobType.style.marginTop = "5px";
+    jobType.style.display = "flex";
+    jobType.style.alignItems = "center";
+
+    const svgIcon = document.createElement("svg");
+    svgIcon.className = "methodJob";
+    svgIcon.setAttribute("width", "14");
+    svgIcon.setAttribute("height", "19");
+    svgIcon.innerHTML = `
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M7 0C10.866 0 14 2.87926 14 6.43125C14 12.2311 7 18.375 7 18.375C7 18.375 0 12.2827 0 6.43125C0 2.87926 3.134 0 7 0Z" fill="#5412E0" />
+      <path d="M7 10.5C8.933 10.5 10.5 8.93303 10.5 7.00003C10.5 5.06703 8.933 3.50003 7 3.50003C5.067 3.50003 3.5 5.06703 3.5 7.00003C3.5 8.93303 5.067 10.5 7 10.5Z" fill="white" />
+    `;
+    jobType.appendChild(svgIcon);
+
+    const methodJob = document.createElement("span");
+    methodJob.className = "methodJob";
+    methodJob.style.marginLeft = "5px";
+    methodJob.textContent = vacancy.typeWork
+      .map((type) => type.title)
+      .join(", ");
+    jobType.appendChild(methodJob);
+    titleAndTypeJob.appendChild(jobType);
+
+    topInfo.appendChild(titleAndTypeJob);
+
+    const priceJob = document.createElement("div");
+    priceJob.className = "priceJob";
+
+    const price = document.createElement("h3");
+    if (vacancy.price.agreement) {
+      price.textContent = "Договорная";
+    } else if (vacancy.price.maxPrice) {
+      price.innerHTML = `до ${vacancy.price.maxPrice.toLocaleString(
+        "no-NO"
+      )} Ꝑ`;
+    } else if (vacancy.price.minPrice) {
+      price.innerHTML = `от ${vacancy.price.minPrice.toLocaleString(
+        "no-NO"
+      )} Ꝑ`;
+    }
+    priceJob.appendChild(price);
+    topInfo.appendChild(priceJob);
+
+    article.appendChild(topInfo);
+
+    if (vacancy.description?.length) {
+      const middleInfo = document.createElement("div");
+      middleInfo.className = "middleInfoVacansya";
+
+      const description = document.createElement("p");
+      description.className = "descriptionVacansyText";
+      description.textContent = vacancy.description;
+
+      const showFull = document.createElement("div");
+      showFull.className = "showFull";
+      showFull.innerHTML =
+        '<span class="showFullText">Показать полностью</span>';
+
+      middleInfo.appendChild(description);
+      middleInfo.appendChild(showFull);
+      article.appendChild(middleInfo);
+    }
+
+    if (vacancy.skills?.length) {
+      const stack = document.createElement("div");
+      stack.className = "stackForJob";
+
+      const list = document.createElement("ul");
+      list.className = "listStacks";
+
+      vacancy.skills.forEach((skill) => {
+        const skillItem = document.createElement("li");
+        skillItem.className = "abilityItem";
+
+        const skillTitle = document.createElement("h5");
+        skillTitle.className = "ability";
+        skillTitle.textContent = skill.title;
+
+        skillItem.appendChild(skillTitle);
+        list.appendChild(skillItem);
+      });
+
+      stack.appendChild(list);
+      article.appendChild(stack);
+    }
+
+    const bottomInfo = document.createElement("div");
+    bottomInfo.className = "bottomInfo";
+
+    const link = document.createElement("a");
+    link.href = companyItem
+      ? `/company/${companyItem.INN}`
+      : `/${userItem.id}`;
+
+    const companyInfo = document.createElement("div");
+    companyInfo.className = "companyInfo";
+
+    const imgDiv = document.createElement("div");
+    imgDiv.className = "img";
+
+    const img = document.createElement("img");
+    img.width = 40;
+    img.height = 40;
+    img.alt = "Логотип компании";
+    img.src = companyItem
+      ? companyItem.avatar
+      : userItem.avatar || "/assets/pictures/ДефолтРаботодатель.jpg";
+
+    imgDiv.appendChild(img);
+    companyInfo.appendChild(imgDiv);
+
+    const titleCompanyAndDate = document.createElement("div");
+    titleCompanyAndDate.className = "titleCompanyAndDate";
+
+    const companyName = document.createElement("span");
+    companyName.className = "styleTitleCompany";
+    companyName.textContent = companyItem
+      ? companyItem.title
+      : `${userItem.name} ${userItem.surname}`;
+
+    titleCompanyAndDate.appendChild(companyName);
+
+    const timeCompany = document.createElement("span");
+    timeCompany.className = "styleTimeCompany";
+    timeCompany.textContent = "35 часов назад";
+
+    titleCompanyAndDate.appendChild(timeCompany);
+    companyInfo.appendChild(titleCompanyAndDate);
+    link.appendChild(companyInfo);
+    bottomInfo.appendChild(link);
+
+    const buttons = document.createElement("div");
+    buttons.className = "buttonsElements";
+
+    const favoriteButton = document.createElement("button");
+    favoriteButton.className = `Infavorites ${
+      vacancyList.favorites.some((item) => item.id === vacancy.id)
+        ? "addingFavorite"
+        : ""
+    }`;
+    favoriteButton.textContent = "В избранное";
+
+    const respondButton = document.createElement("button");
+    respondButton.className = "Respond";
+
+    const respondLink = document.createElement("a");
+    respondLink.href = `/vacancia/${vacancy.id}`;
+    respondLink.textContent = "Откликнуться";
+
+    respondButton.appendChild(respondLink);
+    buttons.appendChild(favoriteButton);
+    buttons.appendChild(respondButton);
+    bottomInfo.appendChild(buttons);
+
+    article.appendChild(bottomInfo);
+    document.querySelector(".listVacas").appendChild(article);
+  });
+};
+
 const Load = () => {
   // Специалисты
   link_url.setAttribute("href", url.search);
@@ -92,9 +351,8 @@ const Load = () => {
 
   // Город
   if (dataSearch.city.length > 0) {
-
     dataSearch.city.forEach((city) => {
-       let appendItem = `
+      let appendItem = `
         <div class="selectedSpecial selectedCity">
           <p id="title">${city}</p>
           <div id="removeSpecial" data-title="${city}" class="removeSpecial removeCity">
@@ -105,28 +363,26 @@ const Load = () => {
           </div>
         </div>
       `;
-       selectedCity.style.display = "flex";
-       selectedCity.insertAdjacentHTML("afterbegin", appendItem);
+      selectedCity.style.display = "flex";
+      selectedCity.insertAdjacentHTML("afterbegin", appendItem);
 
-       // Добавляем обработчик клика для удаления выбранного города
-       const removeButton = document.querySelector(
-         `.removeCity[data-title="${city}"]`
-       );
-       removeButton.addEventListener("click", () => {
-         // Удаляем город из массива
-         dataSearch.city = dataSearch.city.filter((item) => item !== city);
-         changeURL("city", JSON.stringify(dataSearch.city));
+      // Добавляем обработчик клика для удаления выбранного города
+      const removeButton = document.querySelector(
+        `.removeCity[data-title="${city}"]`
+      );
+      removeButton.addEventListener("click", () => {
+        // Удаляем город из массива
+        dataSearch.city = dataSearch.city.filter((item) => item !== city);
+        changeURL("city", JSON.stringify(dataSearch.city));
 
-         removeButton.closest(".selectedCity").remove();
+        removeButton.closest(".selectedCity").remove();
 
-         // Если массив пуст, скрываем блок с выбранными городами
-         if (dataSearch.city.length === 0) {
-           selectedCity.style.display = "none";
-         }
-       });
-    })
-
-
+        // Если массив пуст, скрываем блок с выбранными городами
+        if (dataSearch.city.length === 0) {
+          selectedCity.style.display = "none";
+        }
+      });
+    });
   }
   // Опыт работы
   if (dataSearch.experience.length) {

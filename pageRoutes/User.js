@@ -113,7 +113,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
       let vacancys = await searchVacancyByUserId(result.id);
       let fastWork = await searchFastWorkByUserId(result.id);
       let findAllFV = await findFAllFavoriteOfId(decodeAccess.userID);
-      if (!findAllFV) {
+      if (!findAllFV.success) {
         findAllFV = { data: { vacancyID: [], fastWorkID: [] } }; // Обеспечиваем, что data будет пустым массивом в случае ошибки
       }
       let findCompany = await findCompanyOfUser(result.id);
@@ -139,7 +139,7 @@ router.get("/:id", isAuthNotRequire, async (req, res, next) => {
         im: decodeAccess.userROLE || null,
         contacts: result.contacts,
         status: result.status,
-        myFavorites: findAllFV.data,
+        myFavorites: findAllFV.data || [],
         description: result.description,
       });
     }

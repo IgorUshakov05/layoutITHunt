@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { check, validationResult } = require("express-validator");
+const { check, validationResult, body } = require("express-validator");
 const router = Router();
 const { decodeAccessToken } = require("../tokens/accessToken");
 const {
@@ -12,7 +12,10 @@ const {
 const { removeFastWork } = require("../../database/Request/FastWork");
 const { electedVacancy } = require("../../database/Request/FavoriteVacancy");
 const { searchUserId } = require("../../database/Request/User");
-const { searchVacancyById } = require("../../database/Request/Vacancy");
+const {
+  searchVacancyById,
+  getVacancy,
+} = require("../../database/Request/Vacancy");
 const specialList = [
   "Аналитик",
   "SEO-специалист",
@@ -363,5 +366,118 @@ router.post(
     }
   }
 );
+
+const validateData = [
+  // Валидация поля city (опциональное)
+  body("city")
+    .optional()
+    .isArray()
+    .withMessage("Город должен быть массивом строк")
+    .bail()
+    .custom((cities) => cities.every((city) => typeof city === "string"))
+    .withMessage("Все города в массиве должны быть строками"),
+
+  // Валидация поля experience (опциональное)
+  body("experience")
+    .optional()
+    .isArray()
+    .withMessage("Опыт должен быть массивом строк")
+    .bail()
+    .custom((experience) =>
+      experience.every((exp) => expirienceLifeOptions.includes(exp))
+    )
+    .withMessage("Недопустимое значение опыта"),
+
+  // Валидация price
+  body("price.minPrice")
+    .optional()
+    .isNumeric()
+    .withMessage("Минимальная цена должна быть числом"),
+  body("price.maxPrice")
+    .optional()
+    .isNumeric()
+    .withMessage("Максимальная цена должна быть числом"),
+
+  // Валидация skills (опциональное)
+  body("skills")
+    .optional()
+    .isArray()
+    .withMessage("Навыки должны быть массивом строк")
+    .bail()
+    .custom((skills) => skills.every((skill) => typeof skill === "string"))
+    .withMessage("Все навыки в массиве должны быть строками"),
+
+  // Валидация special (опциональное)
+  body("special")
+    .optional()
+    .isArray()
+    .withMessage("Специализации должны быть массивом строк")
+    .bail()
+    .custom((specials) =>
+      specials.every((special) => specialList.includes(special))
+    )
+    .withMessage("Недопустимое значение в специальностях"),
+
+  // Валидация typeWork (опциональное)
+  body("typeWork")
+    .optional()
+    .isArray()
+    .withMessage("Тип работы должен быть массивом строк")
+    .bail()
+    .custom((types) =>
+      types.every((type) => wayOfWorkingOptions.includes(type))
+    )
+    .withMessage("Недопустимое значение в типах работы"),
+];
+
+router.post("/vacancies", validateData, async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ success: false, errors: errors.array() });
+    }
+    console.log(req.body);
+    let data = {
+      special: req.body.special.length ? { $in: req.body.special } : null,
+      typeWork: req.body.typeWork.length
+        ? {
+            $in: req.body.typeWork.map((type) => ({
+              title: type,
+            })),
+          }
+        : null,
+      skills: req.body.skills.length
+        ? {
+            $all: req.body.skills.map((skill) => ({
+              title: skill,
+            })),
+          }
+        : null,
+      experience: req.body.experience.length
+        ? { $in: req.body.experience }
+        : null,
+      "price.minPrice": req.body.price_min
+        ? { $gte: req.body.price_min }
+        : null,
+      "price.maxPrice": req.body.price_max
+        ? { $lte: req.body.price_max }
+        : null,
+    };
+    for (let [key, value] of Object.entries(data)) {
+      if (!data[key]) delete data[key];
+    }
+    console.log(data);
+    let access = req.cookies.access;
+    let user = decodeAccessToken(access);
+    let vacancies = await getVacancy(data, req.query.limit, user.userID);
+    return res.json({
+      ...vacancies,
+      limit: req.query.limit,
+    });
+  } catch (e) {
+    console.log(e);
+    return { success: false, error: "Ошибка сервера" };
+  }
+});
 
 module.exports = router;

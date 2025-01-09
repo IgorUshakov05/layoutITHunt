@@ -1,6 +1,7 @@
 const Vacancy = require("../Schema/Vakancy");
 const UserScheme = require("../Schema/UserSchema");
 const { v4 } = require("uuid");
+const favoriteUserVacancySchema = require("../Schema/FavoriteVacancyOfUserSchema");
 const { Temporal } = require("@js-temporal/polyfill");
 const ReasonRMVacancy = require("../Schema/ReasonRemoveVacansy");
 const CompanySchema = require("../Schema/Company");
@@ -362,9 +363,11 @@ let AnswerOfSolution = async (
   }
 };
 
-const getVacancy = async (query, limit = 3) => {
+const getVacancy = async (query, limit = 2, userID = null) => {
   try {
-    let allVacancies = await Vacancy.find(query).limit(limit);
+    let allVacancies = await Vacancy.find(query)
+      .skip(limit - 2)
+      .limit(2);
     let userIDs = [
       ...new Set(
         allVacancies.map((item) => {
@@ -382,10 +385,22 @@ const getVacancy = async (query, limit = 3) => {
         $elemMatch: { userID: { $in: userIDs } },
       },
     }).select("id avatar userList isFreez INN isVerefy title");
+    let favorites = [];
+    if (userID) {
+      favorites = await favoriteUserVacancySchema
+        .findOne({ userID })
+        .select("vacancyID");
+    }
     // console.log(users, " - люди");
     // console.log(company, " - компании");
     // console.log(allVacancies, " - вакансии");
-    return { success: true, users, vacancies: allVacancies, company };
+    return {
+      success: true,
+      users,
+      vacancies: allVacancies,
+      company,
+      favorites: favorites.vacancyID || [],
+    };
   } catch (e) {
     console.log(e);
     return { success: false, message: "Что-то пошло не так!" };

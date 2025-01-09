@@ -12,6 +12,7 @@ const allData = {
 };
 let inputCity = document.getElementById("searchCity");
 let limitUsers = 4;
+const step = 2;
 let isStop = false;
 let removeSkill = (title) => {
   try {
@@ -236,7 +237,7 @@ let getUserByLimit = async () => {
       },
       body: JSON.stringify(allData),
     }).then((obj) => obj.json());
-    limitUsers += 2;
+    limitUsers += step;
     if (!user.success) {
       isStop = true;
       return { success: false, message: "Ошибка при получении" };

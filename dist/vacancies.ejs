@@ -338,9 +338,12 @@
         </div>
         <div class="MoreInfo">
           <div class="listVacas">
-            <%if(vacancies) {%> <%vacancies.forEach(vacancy =>{ %>
+            <%if(vacancies) {%> <%vacancies.forEach((vacancy,index) =>{ %>
 
-            <article class="vakansiaItem">
+            <article
+              class="vakansiaItem"
+              data-last="<%-index === vacancies.length-1?'true':''%>"
+            >
               <%let userItem =users.find(user => user.id ===vacancy.userID) %>
               <%let companyItem = company.find((item) =>
               item.userList.some(userListItem => userListItem.userID ===
@@ -455,7 +458,11 @@
                 </a>
                 <div class="buttonsElements">
                   <!-- addingFavorite - класс добавленого в избранное -->
-                  <button class="Infavorites">В избранное</button>
+                  <button
+                    class="Infavorites <%-favorites.some(item => item.id === vacancy.id)?'addingFavorite':''%>"
+                  >
+                    В избранное
+                  </button>
                   <button class="Respond">
                     <a href="/vacancia/<%-vacancy.id%>">Откликнуться</a>
                   </button>

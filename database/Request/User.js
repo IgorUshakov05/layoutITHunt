@@ -6,10 +6,10 @@ const searchUserId = async (id) => {
     let result = await UserSchema.findOne({ id });
     let premium = await PremiumSchema.findOne({ userID: id });
     console.log(premium, " премиум");
-    if(result) {
+    if (result) {
       return { ...result.toObject(), premium: !!premium };
     }
-    return null
+    return null;
   } catch (e) {
     return false;
   }
@@ -92,8 +92,8 @@ let getSpecialList = async (data, myID, limit = 2) => {
 
     let users = await UserSchema.find(query)
       .select("id name surname expiriens skills job description avatar city")
-      .skip(limit - 2) // Пропустить записи до последних двух
-      .limit(2); // Взять ровно две записи
+      .skip(limit - 2)
+      .limit(2);
     console.log(users);
 
     if (users.length) {
