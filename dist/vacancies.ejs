@@ -460,6 +460,7 @@
                   <!-- addingFavorite - класс добавленого в избранное -->
                   <button
                     class="Infavorites <%-favorites.some(item => item.id === vacancy.id)?'addingFavorite':''%>"
+                    data-id="<%-vacancy.id%>"
                   >
                     В избранное
                   </button>

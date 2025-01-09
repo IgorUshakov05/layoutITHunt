@@ -16,7 +16,7 @@ router.get("/fast-work/:id", isAuthNotRequire, async (req, res) => {
   let findFromUser = await searchUserId(findFastWork.data.userID);
   let company = await searchCompanyForVacancy(findFromUser.id);
   console.log(company);
-  if (company.isFreez) return res.redirect("/404");
+  if (company?.isFreez) return res.redirect("/404");
   let isFavoriteFastWorkVar = false;
   if (findFromUser && user) {
     isFavoriteFastWorkVar = await isFavoriteFastWork(

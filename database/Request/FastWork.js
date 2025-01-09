@@ -1,7 +1,11 @@
 const FastWork = require("../Schema/FastWork");
 const { v4 } = require("uuid");
 const { Temporal } = require("@js-temporal/polyfill");
-const {addCauseFastWork} = require("../Request/CauseRemovePublication");
+const { addCauseFastWork } = require("../Request/CauseRemovePublication");
+const UserSchema = require("../Schema/UserSchema");
+const favoriteUserVacancySchema = require("../Schema/FavoriteVacancyOfUserSchema");
+const CompanySchema = require("../Schema/Company");
+const Premium = require("../Schema/Premium");
 
 async function createFastWork({
   userID,
@@ -48,7 +52,7 @@ async function createFastWork({
 
 async function searchFastWorkById(id) {
   try {
-    console.log(id, ' - айди')
+    console.log(id, " - айди");
     const fastWork = await FastWork.findOne({ id });
     console.log(fastWork);
     if (!fastWork) {
@@ -117,7 +121,6 @@ const removeFastWork = async (id, userReason) => {
   }
 };
 
-
 let sendRequest = async (id, specialID, message) => {
   try {
     const now = Temporal.Now.plainDateTimeISO();
@@ -145,11 +148,55 @@ let sendRequest = async (id, specialID, message) => {
   }
 };
 
+const getFastWorks = async (query, limit = 2, userID = null) => {
+  try {
+    let allFastWorks = await FastWork.find(query)
+      // .skip(limit - 2)
+      // .limit(2);
+    let userIDs = [
+      ...new Set(
+        allFastWorks.map((item) => {
+          return item.userID;
+        })
+      ),
+    ];
+    let users = await UserSchema.find({ id: { $in: userIDs } }).select(
+      "avatar id name surname city"
+    );
+    const company = await CompanySchema.find({
+      isVarefy: true,
+      isFreez: false,
+      userList: {
+        $elemMatch: { userID: { $in: userIDs } },
+      },
+    }).select("id avatar userList isFreez INN isVerefy title");
+    let favorites = [];
+    if (userID) {
+      favorites = await favoriteUserVacancySchema.findOne({ userID });
+    }
+    console.log(favorites);
+    // console.log(users, " - люди");
+    // console.log(company, " - компании");
+    console.log(allFastWorks, " - фаст-ворки");
+    return {
+      success: true,
+      users,
+      fastWorks: allFastWorks,
+      company,
+      dateTimeServer: new Date(),
+      favorites: favorites?.fastWorkID || [],
+    };
+  } catch (e) {
+    console.log(e);
+    return { success: false, message: "Что-то пошло не так!" };
+  }
+};
 
 module.exports = {
   createFastWork,
   updateFastWork,
   sendRequest,
+  getFastWorks,
   removeFastWork,
   searchFastWorkById,
   searchFastWorkByUserId,

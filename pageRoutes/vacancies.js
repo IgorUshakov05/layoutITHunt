@@ -104,6 +104,17 @@ const validateQueryData = [
     .isNumeric()
     .withMessage("price_max должен быть числом"),
 ];
+let stringToJson = (data) => {
+  try {
+    if (data) {
+      return JSON.parse(data);
+    }
+    return null;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+};
 const { decodeAccessToken } = require("../api/tokens/accessToken");
 const { isAuthNotRequire } = require("../api/middlewares/authNotRequire");
 const { getVacancy } = require("../database/Request/Vacancy");
@@ -116,17 +127,7 @@ router.get(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    let stringToJson = (data) => {
-      try {
-        if (data) {
-          return JSON.parse(data);
-        }
-        return null;
-      } catch (e) {
-        console.log(e);
-        return null;
-      }
-    };
+
     let data = {
       special: stringToJson(req.query.special)
         ? { $in: stringToJson(req.query.special) }

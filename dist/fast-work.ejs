@@ -234,14 +234,22 @@
         </div>
         <div class="MoreInfo">
           <div class="listVacas">
-            <article class="vakansiaItem">
+            <%if(fastWorks) {%> <%fastWorks.forEach((fastWork,index) =>{ %>
+            <article
+              class="vakansiaItem"
+              data-last="<%-index === fastWorks.length-1?'true':''%>"
+            >
+              <%let userItem =users.find(user => user.id ===fastWork.userID) %>
+              <%let companyItem = company.find((item) =>
+              item.userList.some(userListItem => userListItem.userID ===
+              userItem.id));%>
               <div class="topInfoPriceAndTitle">
                 <div class="titleAndTypeJob">
-                  <% let x = 2 %>
+                  <% let x = fastWork.level %>
                   <h2 class="h2Mob">
                     <span
-                      ><a href="/fast-workItem" class="titleJob"
-                        >Веб-дизайнер</a
+                      ><a href="/fast-work/<%-fastWork.id%>" class="titleJob"
+                        ><%-fastWork.special%></a
                       ></span
                     ><span
                       class="hardOrNo"
@@ -252,9 +260,19 @@
                 </div>
                 <div class="priceJob priceJobFastJob">
                   <h3 class="rightPlace">
-                    <span class="priceItem"
-                      ><%= (123123).toLocaleString("no-NO") %></span
-                    ><span class="p">Ꝑ</span>
+                    <%if(fastWork.price.agreement) {%>
+                    <span class=""> Договорная</span>
+                    <%}else {%> <% if (fastWork.price.maxPrice) { %>
+                    <span class="priceItem">
+                      до <%= fastWork.price.maxPrice.toLocaleString("no-NO") %>
+                    </span>
+                    <span class="p">Ꝑ</span>
+                    <% } else if (fastWork.price.minPrice) { %>
+                    <span class="priceItem">
+                      от <%= fastWork.price.minPrice.toLocaleString("no-NO") %>
+                    </span>
+                    <span class="p">Ꝑ</span>
+                    <% } %> <%}%>
                   </h3>
                   <div class="termOfTheWork">
                     <% let mounth = 1 %>
@@ -270,241 +288,71 @@
                 </div>
               </div>
 
+              <%if(fastWork.skills) {%>
               <div class="stackForJob">
                 <ul class="listStacks">
+                  <%fastWork.skills.forEach(skill =>{ %>
                   <li class="abilityItem">
-                    <h5 class="ability">HTML</h5>
+                    <h5 class="ability"><%-skill.title%></h5>
                   </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">JavaScript</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">React</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Node.js</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Python</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Java</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">PHP</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Angular</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Vue.js</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">TypeScript</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Java</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">JavaScript</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">HTML</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">CSS</h5>
-                  </li>
+                  <% })%>
                 </ul>
               </div>
+              <%}%> <%if(fastWork.description.length) {%>
               <div class="middleInfoVacansya d-blockFastWork">
                 <div class="descriptionVacansy">
                   <p class="descriptionVacansyText fast-workElem">
-                    Мы понимаем, что в процессе поиска работы могут возникать
-                    вопросы и затруднения. Поэтому мы предлагаем непрерывную
-                    поддержку нашим пользователям. Наша команда экспертов всегда
-                    готова ответить на ваши вопросы и предоставить необходимую
-                    помощь в кратчайшие сроки. Мы ценим ваше время и стремимся
-                    обеспечить гладкое и безопасное пользование нашей
-                    платформой. Мы понимаем, что в процессе поиска работы могут
-                    возникать вопросы и затруднения. Поэтому мы предлагаем
-                    непрерывную поддержку нашим пользователям. Наша команда
-                    экспертов всегда готова ответить на ваши вопросы работы
-                    могут возникать вопросы и затруднения. Поэтому мы предлагаем
-                    непрерывную поддержку нашим пользователям. Наша команда
-                    экспертов всегда готова ответить на ваши вопросы и
-                    предоставить необходимую помощь в кратчайшие сроки. Мы ценим
-                    ваше время и стремимся обеспечить гладкое и безопасное
-                    пользование нашей платформой. Мы понимаем, что в процессе
-                    поиска работы могут возникать вопросы и затруднения. Поэтому
-                    мы предлагаем непрерывную поддержку нашим пользователям.
-                    Наша команда экспертов всегда готова ответить на ваши
-                    вопросы работы могут возникать вопросы и затруднения.
-                    Поэтому мы предлагаем непрерывную поддержку нашим
-                    пользователям. Наша команда экспертов всегда готова ответить
-                    на ваши вопросы и предоставить необходимую помощь в
-                    кратчайшие сроки. Мы ценим ваше время и стремимся обеспечить
-                    гладкое и безопасное пользование нашей платформой. Мы
-                    понимаем, что в процессе поиска работы могут возникать
-                    вопросы и затруднения. Поэтому мы предлагаем непрерывную
-                    поддержку нашим пользователям. Наша команда экспертов всегда
-                    готова ответить на ваши вопросы
+                    <%-fastWork.description%>
                   </p>
                 </div>
                 <div class="showFull">
                   <span class="showFullText">Показать полностью</span>
                 </div>
               </div>
+              <%}%>
+
               <div class="bottomInfo">
-                <a href="/fast-workItem">
+                <a
+                  href="/<%-companyItem?`company/${companyItem.INN}`:userItem.id%>"
+                >
                   <div class="companyInfo">
                     <div class="img">
                       <img
                         width="40"
                         height="40"
                         alt="Логотип компании"
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/200px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png"
+                        src="<%- (companyItem ? companyItem.avatar : userItem.avatar?'/assets/pictures/ПремиумРаботодатель.jpg':'/assets/pictures/ДефолтРаботодатель.jpg') %>
+"
                       />
                     </div>
                     <div class="titleCompanyAndDate">
                       <div class="titleCompany">
-                        <span class="styleTitleCompany">MTC</span>
+                        <span class="styleTitleCompany">
+                          <%- (companyItem ? companyItem.title : userItem.name +
+                          ' ' +userItem.surname ) %>
+                        </span>
                       </div>
                       <div class="titleCompany">
-                        <span class="styleTimeCompany">35 часов назад</span>
+                        <span class="styleTimeCompany">недавно</span>
                       </div>
                     </div>
                   </div>
                 </a>
                 <div class="buttonsElements">
                   <!-- addingFavorite - класс добавленого в избранное -->
-                  <button class="Infavorites">В избранное</button>
+                  <button
+                    class="Infavorites <%-favorites.some(item => item.id === fastWork.id)?'addingFavorite':''%>"
+                    data-id="<%-fastWork.id%>"
+                  >
+                    В избранное
+                  </button>
                   <button class="Respond">
-                    <a href="/fast-workItem">Откликнуться</a>
+                    <a href="/fast-work/<%-fastWork.id%>">Откликнуться</a>
                   </button>
                 </div>
               </div>
             </article>
-            <article class="vakansiaItem">
-              <div class="topInfoPriceAndTitle">
-                <div class="titleAndTypeJob">
-                  <% let y = 5 %>
-
-                  <h2 class="h2Mob">
-                    <span><a href="#" class="titleJob">Frontend</a></span
-                    ><span
-                      class="hardOrNo"
-                      style="color: <%= y <= 2 ? '#A4A4A4' : (y <= 4 ? '#000000' : '#4900E3') %>;"
-                      ><%= y %></span
-                    >
-                  </h2>
-                </div>
-                <div class="priceJob priceJobFastJob">
-                  <h3 class="rightPlace">
-                    <span class="priceItem"
-                      ><%= (50000).toLocaleString("no-NO") %></span
-                    ><span class="p">Ꝑ</span>
-                  </h3>
-                  <div class="termOfTheWork">
-                    <% let year = 5 %>
-                    <span class="termOfTheWorkNumberOne"><%= year %></span>
-                    <% if (year === 1) { %>
-                    <span class="termOfTheWorkNumber">месяц</span>
-                    <% } else if(year <=4 && year > 1) { %>
-                    <span class="termOfTheWorkNumber">месяца</span>
-                    <% }else {%>
-                    <span class="termOfTheWorkNumber">месяцев</span>
-                    <% } %>
-                  </div>
-                </div>
-              </div>
-              <div class="stackForJob">
-                <ul class="listStacks">
-                  <li class="abilityItem">
-                    <h5 class="ability">HTML</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">JavaScript</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">React</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Node.js</h5>
-                  </li>
-                  <li class="abilityItem">
-                    <h5 class="ability">Python</h5>
-                  </li>
-                </ul>
-              </div>
-              <div class="middleInfoVacansya d-blockFastWork">
-                <div class="descriptionVacansy">
-                  <p class="descriptionVacansyText fast-workElem">
-                    Мы понимаем, что в процессе поиска работы могут возникать
-                    вопросы и затруднения. Поэтому мы предлагаем непрерывную
-                    поддержку нашим пользователям. Наша команда экспертов всегда
-                    готова ответить на ваши вопросы и предоставить необходимую
-                    помощь в кратчайшие сроки. Мы ценим ваше время и стремимся
-                    обеспечить гладкое и безопасное пользование нашей
-                    платформой. Мы понимаем, что в процессе поиска работы могут
-                    возникать вопросы и затруднения. Поэтому мы предлагаем
-                    непрерывную поддержку нашим пользователям. Наша команда
-                    экспертов всегда готова ответить на ваши вопросы работы
-                    могут возникать вопросы и затруднения. Поэтому мы предлагаем
-                    непрерывную поддержку нашим пользователям. Наша команда
-                    экспертов всегда готова ответить на ваши вопросы и
-                    предоставить необходимую помощь в кратчайшие сроки. Мы ценим
-                    ваше время и стремимся обеспечить гладкое и безопасное
-                    пользование нашей платформой. Мы понимаем, что в процессе
-                    поиска работы могут возникать вопросы и затруднения. Поэтому
-                    мы предлагаем непрерывную поддержку нашим пользователям.
-                    Наша команда экспертов всегда готова ответить на ваши
-                    вопросы работы могут возникать вопросы и затруднения.
-                    Поэтому мы предлагаем непрерывную поддержку нашим
-                    пользователям. Наша команда экспертов всегда готова ответить
-                    на ваши вопросы и предоставить необходимую помощь в
-                    кратчайшие сроки. Мы ценим ваше время и стремимся обеспечить
-                    гладкое и безопасное пользование нашей платформой. Мы
-                    понимаем, что в процессе поиска работы могут возникать
-                    вопросы и затруднения. Поэтому мы предлагаем непрерывную
-                    поддержку нашим пользователям. Наша команда экспертов всегда
-                    готова ответить на ваши вопросы
-                  </p>
-                </div>
-                <div class="showFull">
-                  <span class="showFullText">Показать полностью</span>
-                </div>
-              </div>
-
-              <div class="bottomInfo">
-                <a href="#">
-                  <div class="companyInfo">
-                    <div class="img">
-                      <img
-                        width="40"
-                        height="40"
-                        alt="Логотип компании"
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg/200px-Logo_%D0%9C%D0%A2%D0%A1_%282023%29.svg.png"
-                      />
-                    </div>
-                    <div class="titleCompanyAndDate">
-                      <div class="titleCompany">
-                        <span class="styleTitleCompany">MTC</span>
-                      </div>
-                      <div class="titleCompany">
-                        <span class="styleTimeCompany">35 часов назад</span>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-                <div class="buttonsElements">
-                  <!-- addingFavorite - класс добавленого в избранное -->
-                  <button class="Infavorites">В избранное</button>
-                  <button class="Respond">
-                    <a href="/fast-workItem">Откликнуться</a>
-                  </button>
-                </div>
-              </div>
-            </article>
+            <%})%> <%}%>
           </div>
           <div class="showMore">
             <button
