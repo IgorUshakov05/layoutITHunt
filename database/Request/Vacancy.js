@@ -387,10 +387,9 @@ const getVacancy = async (query, limit = 2, userID = null) => {
     }).select("id avatar userList isFreez INN isVerefy title");
     let favorites = [];
     if (userID) {
-      favorites = await favoriteUserVacancySchema
-        .findOne({ userID })
-        .select("vacancyID");
+      favorites = await favoriteUserVacancySchema.findOne({ userID });
     }
+    console.log(favorites);
     // console.log(users, " - люди");
     // console.log(company, " - компании");
     // console.log(allVacancies, " - вакансии");
@@ -399,7 +398,8 @@ const getVacancy = async (query, limit = 2, userID = null) => {
       users,
       vacancies: allVacancies,
       company,
-      favorites: favorites.vacancyID || [],
+      dateTimeServer: new Date(),
+      favorites: favorites?.vacancyID || [],
     };
   } catch (e) {
     console.log(e);

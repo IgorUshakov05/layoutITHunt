@@ -45,7 +45,35 @@ let getVacancyByLimit = async () => {
   }
 };
 const link_url = document.getElementById("send");
+function getTimeDifference(dateString, serverDateTimeString) {
+  const createdDate = new Date(dateString);
+  const currentDate = new Date(serverDateTimeString);
+  console.log(createdDate);
+  const diffInMs = currentDate - createdDate;
 
+  const diffInSeconds = Math.floor(diffInMs / 1000);
+  if (diffInSeconds < 60) {
+    return `${diffInSeconds} с.`;
+  }
+
+  const diffInMinutes = Math.floor(diffInSeconds / 60);
+  if (diffInMinutes < 60) {
+    return `${diffInMinutes} мин.`;
+  }
+
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  if (diffInHours < 24) {
+    return `${diffInHours} ч.`;
+  }
+
+  const diffInDays = Math.floor(diffInHours / 24);
+  if (diffInDays < 30) {
+    return `${diffInDays} д.`;
+  }
+
+  const diffInMonths = Math.floor(diffInDays / 30);
+  return `${diffInMonths} мес`;
+}
 const listSearchCity = document.getElementById("ListSearchCity");
 const input_special = document.getElementById("special");
 const input_city = document.getElementById("searchCity");
@@ -176,6 +204,20 @@ const insertVacansy = (vacancyList) => {
       description.textContent = vacancy.description;
 
       const showFull = document.createElement("div");
+      showFull.addEventListener("click", function () {
+        let descriptionVacansyText = this.previousElementSibling;
+        if (descriptionVacansyText.classList.contains("descriptionVacansy")) {
+          descriptionVacansyText.classList.toggle("fullText");
+        }
+
+        let buttonText = this.querySelector(".showFullText"); // Ищем текст внутри кнопки
+        if (buttonText) {
+          buttonText.textContent =
+            buttonText.textContent === "Показать полностью"
+              ? "Свернуть"
+              : "Показать полностью";
+        }
+      });
       showFull.className = "showFull";
       showFull.innerHTML =
         '<span class="showFullText">Показать полностью</span>';
@@ -212,9 +254,7 @@ const insertVacansy = (vacancyList) => {
     bottomInfo.className = "bottomInfo";
 
     const link = document.createElement("a");
-    link.href = companyItem
-      ? `/company/${companyItem.INN}`
-      : `/${userItem.id}`;
+    link.href = companyItem ? `/company/${companyItem.INN}` : `/${userItem.id}`;
 
     const companyInfo = document.createElement("div");
     companyInfo.className = "companyInfo";
@@ -246,7 +286,10 @@ const insertVacansy = (vacancyList) => {
 
     const timeCompany = document.createElement("span");
     timeCompany.className = "styleTimeCompany";
-    timeCompany.textContent = "35 часов назад";
+    timeCompany.textContent = `${getTimeDifference(
+      vacancy.dataCreated,
+      vacancyList.dateTimeServer
+    )} назад`;
 
     titleCompanyAndDate.appendChild(timeCompany);
     companyInfo.appendChild(titleCompanyAndDate);
