@@ -348,6 +348,7 @@
               <%let companyItem = company.find((item) =>
               item.userList.some(userListItem => userListItem.userID ===
               userItem.id));%>
+              <%let isPremium = premium.some(prem =>prem === userItem.id )%>
               <div class="topInfoPriceAndTitle">
                 <div class="titleAndTypeJob">
                   <h2>
@@ -428,7 +429,6 @@
                 </ul>
               </div>
               <%}%>
-
               <div class="bottomInfo">
                 <a
                   href="/<%-companyItem?`company/${companyItem.INN}`:userItem.id%>"
@@ -439,8 +439,7 @@
                         width="40"
                         height="40"
                         alt="Логотип компании"
-                        src="<%- (companyItem ? companyItem.avatar : userItem.avatar?'/assets/pictures/ПремиумРаботодатель.jpg':'/assets/pictures/ДефолтРаботодатель.jpg') %>
-"
+                        src="<%- (companyItem ? companyItem.avatar : (userItem.avatar ? userItem.avatar : (isPremium) ? '/assets/pictures/ПремиумРаботодатель.jpg' : '/assets/pictures/ДефолтРаботодатель.jpg')) %>"
                       />
                     </div>
                     <div class="titleCompanyAndDate">

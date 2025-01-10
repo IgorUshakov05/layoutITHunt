@@ -74,6 +74,22 @@ function getTimeDifference(dateString, serverDateTimeString) {
   const diffInMonths = Math.floor(diffInDays / 30);
   return `${diffInMonths} мес`;
 }
+function makeInFuture(element) {
+  element.className = "Infavorites addingFavorite";
+}
+
+function removeFuture(element) {
+  element.className = "Infavorites";
+}
+
+const setButtonState = (enabled) => {
+  const buttons = document.querySelectorAll(
+    ".InfavoritesFastWork, .InfavoritesVacancy"
+  );
+  buttons.forEach((button) => {
+    button.disabled = !enabled;
+  });
+};
 const listSearchCity = document.getElementById("ListSearchCity");
 const input_special = document.getElementById("special");
 const input_city = document.getElementById("searchCity");
@@ -121,13 +137,13 @@ const insertVacansy = (vacancyList) => {
     const userItem = vacancyList.users.find(
       (user) => user.id === vacancy.userID
     );
-    console.log(userItem);
-    console.log(vacancyList.company);
     const companyItem = vacancyList.company.find((item) =>
       item.userList.some((userListItem) => userListItem.userID === userItem.id)
     );
-    console.log(companyItem);
-
+    let isPremium = vacancyList.premium.some(
+      (premium) => userItem.id === premium
+    );
+    console.log(`Premium ${isPremium} for ${userItem.name}`);
     const article = document.createElement("article");
     article.setAttribute(
       "data-last",
@@ -266,9 +282,14 @@ const insertVacansy = (vacancyList) => {
     img.width = 40;
     img.height = 40;
     img.alt = "Логотип компании";
+
     img.src = companyItem
       ? companyItem.avatar
-      : userItem.avatar || "/assets/pictures/ДефолтРаботодатель.jpg";
+      : userItem.avatar
+      ? userItem.avatar
+      : isPremium
+      ? "/assets/pictures/ПремиумРаботодатель.jpg"
+      : "/assets/pictures/ДефолтРаботодатель.jpg";
 
     imgDiv.appendChild(img);
     companyInfo.appendChild(imgDiv);
@@ -305,6 +326,42 @@ const insertVacansy = (vacancyList) => {
         ? "addingFavorite"
         : ""
     }`;
+    favoriteButton.addEventListener("click", async function () {
+      const url = "/api/favorite-vacancy";
+      const clickedValue = favoriteButton.getAttribute("data-id");
+
+      // Отключаем кнопки
+      setButtonState(false);
+
+      try {
+        // Выполняем запрос к серверу
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "augwod89h1h9awdh9py0y82hjd",
+          },
+          body: JSON.stringify({
+            vacancyId: clickedValue,
+          }),
+        });
+
+        const data = await response.json();
+
+        console.log(data);
+        console.log(this);
+        if (data.result) {
+          makeInFuture(this);
+        } else {
+          removeFuture(this);
+        }
+      } catch (error) {
+        console.error("Ошибка:", error);
+      } finally {
+        setTimeout(() => setButtonState(true), 1000);
+      }
+    });
+    favoriteButton.setAttribute("data-id", vacancy.id);
     favoriteButton.textContent = "В избранное";
 
     const respondButton = document.createElement("button");
@@ -442,6 +499,45 @@ const Load = () => {
     input_max.value = dataSearch.price.maxPrice || "";
     input_min.value = dataSearch.price.minPrice || "";
   }
+
+  const vacancyList = document.querySelectorAll(".Infavorites");
+  vacancyList.forEach(function (item) {
+    item.addEventListener("click", async function () {
+      const url = "/api/favorite-vacancy";
+      const clickedValue = item.getAttribute("data-id");
+
+      // Отключаем кнопки
+      setButtonState(false);
+
+      try {
+        // Выполняем запрос к серверу
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "augwod89h1h9awdh9py0y82hjd",
+          },
+          body: JSON.stringify({
+            vacancyId: clickedValue,
+          }),
+        });
+
+        const data = await response.json();
+
+        console.log(data);
+        console.log(item);
+        if (data.result) {
+          makeInFuture(item);
+        } else {
+          removeFuture(item);
+        }
+      } catch (error) {
+        console.error("Ошибка:", error);
+      } finally {
+        setTimeout(() => setButtonState(true), 1000);
+      }
+    });
+  });
 };
 Load();
 const changeURL = (name, value) => {

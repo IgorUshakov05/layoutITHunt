@@ -378,6 +378,11 @@ const getVacancy = async (query, limit = 2, userID = null) => {
     let users = await UserScheme.find({ id: { $in: userIDs } }).select(
       "avatar id name surname city"
     );
+    let premium = await Premium.find({ userID: { $in: userIDs } }).select(
+      "userID"
+    );
+    premium = premium.map((premium) => premium.userID);
+    console.log(premium, " premium");
     const company = await CompanySchema.find({
       isVarefy: true,
       isFreez: false,
@@ -398,6 +403,7 @@ const getVacancy = async (query, limit = 2, userID = null) => {
       users,
       vacancies: allVacancies,
       company,
+      premium,
       dateTimeServer: new Date(),
       favorites: favorites?.vacancyID || [],
     };

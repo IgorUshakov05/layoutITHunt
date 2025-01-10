@@ -438,24 +438,30 @@ router.post("/vacancies", validateData, async (req, res) => {
     }
     console.log(req.body);
     let data = {
-      special: req.body.special.length ? { $in: req.body.special } : null,
-      typeWork: req.body.typeWork.length
-        ? {
-            $in: req.body.typeWork.map((type) => ({
-              title: type,
-            })),
-          }
-        : null,
-      skills: req.body.skills.length
-        ? {
-            $all: req.body.skills.map((skill) => ({
-              title: skill,
-            })),
-          }
-        : null,
-      experience: req.body.experience.length
-        ? { $in: req.body.experience }
-        : null,
+      special:
+        req.body.special && req.body.special.length
+          ? { $in: req.body.special }
+          : null,
+      typeWork:
+        req.body.typeWork && req.body.typeWork.length
+          ? {
+              $in: req.body.typeWork.map((type) => ({
+                title: type,
+              })),
+            }
+          : null,
+      skills:
+        req.body.skills && req.body.skills.length
+          ? {
+              $all: req.body.skills.map((skill) => ({
+                title: skill,
+              })),
+            }
+          : null,
+      experience:
+        req.body.experience && req.body.experience.length
+          ? { $in: req.body.experience }
+          : null,
       "price.minPrice": req.body.price_min
         ? { $gte: req.body.price_min }
         : null,
@@ -463,6 +469,7 @@ router.post("/vacancies", validateData, async (req, res) => {
         ? { $lte: req.body.price_max }
         : null,
     };
+
     for (let [key, value] of Object.entries(data)) {
       if (!data[key]) delete data[key];
     }

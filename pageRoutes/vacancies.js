@@ -171,6 +171,7 @@ router.get(
     return res.render("vacancies", {
       isLoggedIn: !!user,
       vacancies: vacancies.vacancies,
+      premium:vacancies.premium, 
       users: vacancies.users,
       company: vacancies.company,
       id: user.userID,

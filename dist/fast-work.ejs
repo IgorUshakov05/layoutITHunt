@@ -243,6 +243,8 @@
               <%let companyItem = company.find((item) =>
               item.userList.some(userListItem => userListItem.userID ===
               userItem.id));%>
+              <%let isPremium = premium.some(prem =>prem === userItem.id )%>
+
               <div class="topInfoPriceAndTitle">
                 <div class="titleAndTypeJob">
                   <% let x = fastWork.level %>
@@ -313,7 +315,7 @@
 
               <div class="bottomInfo">
                 <a
-                  href="/<%-companyItem?`company/${companyItem.INN}`:userItem.id%>"
+                  href="/<%-companyItem?`company/${companyItem.INN}`:userItem?.id%>"
                 >
                   <div class="companyInfo">
                     <div class="img">
@@ -321,15 +323,14 @@
                         width="40"
                         height="40"
                         alt="Логотип компании"
-                        src="<%- (companyItem ? companyItem.avatar : userItem.avatar?'/assets/pictures/ПремиумРаботодатель.jpg':'/assets/pictures/ДефолтРаботодатель.jpg') %>
-"
+                        src="<%- (companyItem ? companyItem.avatar : (userItem?.avatar ? userItem.avatar : (isPremium) ? '/assets/pictures/ПремиумРаботодатель.jpg' : '/assets/pictures/ДефолтРаботодатель.jpg')) %>"
                       />
                     </div>
                     <div class="titleCompanyAndDate">
                       <div class="titleCompany">
                         <span class="styleTitleCompany">
-                          <%- (companyItem ? companyItem.title : userItem.name +
-                          ' ' +userItem.surname ) %>
+                          <%- (companyItem ? companyItem.title : userItem?.name +
+                          ' ' +userItem?.surname ) %>
                         </span>
                       </div>
                       <div class="titleCompany">

@@ -150,9 +150,10 @@ let sendRequest = async (id, specialID, message) => {
 
 const getFastWorks = async (query, limit = 2, userID = null) => {
   try {
+    console.log(query);
     let allFastWorks = await FastWork.find(query)
-      // .skip(limit - 2)
-      // .limit(2);
+      .skip(limit - 2)
+      .limit(limit);
     let userIDs = [
       ...new Set(
         allFastWorks.map((item) => {
@@ -163,6 +164,11 @@ const getFastWorks = async (query, limit = 2, userID = null) => {
     let users = await UserSchema.find({ id: { $in: userIDs } }).select(
       "avatar id name surname city"
     );
+    let premium = await Premium.find({ userID: { $in: userIDs } }).select(
+      "userID"
+    );
+    premium = premium.map((premium) => premium.userID);
+
     const company = await CompanySchema.find({
       isVarefy: true,
       isFreez: false,
@@ -174,13 +180,14 @@ const getFastWorks = async (query, limit = 2, userID = null) => {
     if (userID) {
       favorites = await favoriteUserVacancySchema.findOne({ userID });
     }
-    console.log(favorites);
+    // console.log(favorites);
     // console.log(users, " - люди");
     // console.log(company, " - компании");
-    console.log(allFastWorks, " - фаст-ворки");
+    // console.log(allFastWorks, " - фаст-ворки");
     return {
       success: true,
       users,
+      premium,
       fastWorks: allFastWorks,
       company,
       dateTimeServer: new Date(),

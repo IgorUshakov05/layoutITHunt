@@ -82,6 +82,7 @@ router.get("/fast-work", isAuthNotRequire, async (req, res) => {
     isLoggedIn: !!user,
     fastWorks: fastWorksFromDataBase.fastWorks,
     users: fastWorksFromDataBase.users,
+    premium:fastWorksFromDataBase.premium, 
     company: fastWorksFromDataBase.company,
     id: user.userID,
     favorites: fastWorksFromDataBase.favorites,
