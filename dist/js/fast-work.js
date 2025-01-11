@@ -247,24 +247,38 @@ const insertFastWorks = (FastWorkList) => {
       const descriptionVacansy = document.createElement("div");
       descriptionVacansy.classList.add("descriptionVacansy");
 
-      const descriptionText = document.createElement("p");
-      descriptionText.classList.add("descriptionVacansyText", "fast-workElem");
-      descriptionText.innerText = fastWork.description;
+      if (fastWork.description?.length) {
+      const middleInfo = document.createElement("div");
+      middleInfo.className = "middleInfoVacansya";
 
-      descriptionVacansy.appendChild(descriptionText);
-      middleInfoVacansya.appendChild(descriptionVacansy);
+      const description = document.createElement("pre");
+      description.className = "descriptionVacansyText";
+      description.innerHTML = fastWork.description;
 
+      // Создаем основной контейнер div с классом "showFull"
       const showFull = document.createElement("div");
-      showFull.classList.add("showFull");
-
+      showFull.className = "showFull";
+      showFull.addEventListener("click", function (e) {
+        let isShow = this.previousElementSibling.classList.contains("fullText");
+        console.log(isShow);
+        if (isShow) {
+          this.previousElementSibling.classList.remove("fullText");
+          this.children[0].innerText = "Показать полностью";
+        } else {
+          this.children[0].innerText = "Скрыть";
+          this.previousElementSibling.classList.add("fullText");
+        }
+      });
+      // Создаем span с классом "showFullText" и добавляем текст
       const showFullText = document.createElement("span");
-      showFullText.classList.add("showFullText");
-      showFullText.innerText = "Показать полностью";
+      showFullText.className = "showFullText";
+      showFullText.textContent = "Показать полностью";
 
+      // Вставляем span внутрь div
       showFull.appendChild(showFullText);
-      middleInfoVacansya.appendChild(showFull);
-
-      article.appendChild(middleInfoVacansya);
+      middleInfo.appendChild(description);
+      middleInfo.appendChild(showFull);
+      article.appendChild(middleInfo);
     }
 
     // Добавление нижней информации
@@ -396,7 +410,7 @@ const insertFastWorks = (FastWorkList) => {
 
     // Вставляем статью в контейнер на странице
     document.querySelector(".listVacas").appendChild(article);
-  });
+  }});
 };
 let limitVacancy = 4;
 const step = 2;

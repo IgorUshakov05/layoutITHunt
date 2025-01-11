@@ -215,29 +215,31 @@ const insertVacansy = (vacancyList) => {
       const middleInfo = document.createElement("div");
       middleInfo.className = "middleInfoVacansya";
 
-      const description = document.createElement("p");
+      const description = document.createElement("pre");
       description.className = "descriptionVacansyText";
-      description.textContent = vacancy.description;
+      description.innerHTML = vacancy.description;
 
+      // Создаем основной контейнер div с классом "showFull"
       const showFull = document.createElement("div");
-      showFull.addEventListener("click", function () {
-        let descriptionVacansyText = this.previousElementSibling;
-        if (descriptionVacansyText.classList.contains("descriptionVacansy")) {
-          descriptionVacansyText.classList.toggle("fullText");
-        }
-
-        let buttonText = this.querySelector(".showFullText"); // Ищем текст внутри кнопки
-        if (buttonText) {
-          buttonText.textContent =
-            buttonText.textContent === "Показать полностью"
-              ? "Свернуть"
-              : "Показать полностью";
+      showFull.className = "showFull";
+      showFull.addEventListener("click", function (e) {
+        let isShow = this.previousElementSibling.classList.contains("fullText");
+        console.log(isShow);
+        if (isShow) {
+          this.previousElementSibling.classList.remove("fullText");
+          this.children[0].innerText = "Показать полностью";
+        } else {
+          this.children[0].innerText = "Скрыть";
+          this.previousElementSibling.classList.add("fullText");
         }
       });
-      showFull.className = "showFull";
-      showFull.innerHTML =
-        '<span class="showFullText">Показать полностью</span>';
+      // Создаем span с классом "showFullText" и добавляем текст
+      const showFullText = document.createElement("span");
+      showFullText.className = "showFullText";
+      showFullText.textContent = "Показать полностью";
 
+      // Вставляем span внутрь div
+      showFull.appendChild(showFullText);
       middleInfo.appendChild(description);
       middleInfo.appendChild(showFull);
       article.appendChild(middleInfo);

@@ -3523,6 +3523,9 @@ input[type="number"] {
   line-height: 147%; /* 15.977px */
   letter-spacing: -0.065px;
   height: inherit;
+  overflow: hidden;
+  text-wrap: auto;
+  max-height: 100px;
 }
 
 .descriptionVacansy {

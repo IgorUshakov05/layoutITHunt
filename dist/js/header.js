@@ -61,7 +61,7 @@ $(document).ready(function() {
         });
             
     $(".showFull").on("click", function () {
-        let descriptionVacansyText = $(this).prev(".descriptionVacansy");
+        let descriptionVacansyText = $(this).prev(".descriptionVacansyText");
         descriptionVacansyText.toggleClass("fullText");
         var buttonText = $(this).find(".showFullText");
         buttonText.text(function(i, text){
