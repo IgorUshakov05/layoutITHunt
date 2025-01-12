@@ -257,7 +257,7 @@ const searchCompanyForVacancy = async (creatorID) => {
     let result = await CompanySchema.findOne({
       userList: { $elemMatch: { userID: creatorID } },
       isVarefy: true,
-      isFreez:false 
+      isFreez: false,
     }).select("INN avatar title description isFreez isActive");
     return result;
   } catch (e) {
@@ -475,11 +475,10 @@ const getRequest = async (creatorID) => {
           timeString = `${seconds} ${
             seconds > 1 ? "секунды" : "секунда"
           } назад`;
-          const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+          let seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
           console.log(timeString);
         }
 
-        // Возвращаем объект с обновленным временем
         return { ...user._doc, date: timeString };
       } else {
         return null;

@@ -45,8 +45,10 @@
             <h2 class="descriptionCompanyInVacansy companyPadding">
               <%-company.description%>
             </h2>
-            <div class="panelForHR flex">
-              <%if(isEmployee) {%> <%if(isCreator) {%>
+            <%if(isEmployee) {%>
+              <div class="panelForHR flex">
+                
+                <%if(isCreator) {%>
               <a href="/editComapny" class="showMoreButton editCompany"
                 >Редактировать</a
               >
@@ -67,8 +69,9 @@
                 <img src="/assets/pictures/chatCompanyIcon.svg" alt="Пульс" />
                 <span style="white-space: nowrap">Чат компании</span></a
               >
-              <% } %> <%}%>
+              <% } %> 
             </div>
+              <%}%>
           </div>
 
           <% if(company.isFreez) { %>
@@ -594,7 +597,7 @@
                 <div class="titleAndTypeJob">
                   <h2>
                     <span
-                      ><a href="/vacancia" class="titleJob"
+                      ><a href="/vacancia/<%-vacansia.id%>" class="titleJob"
                         ><%-vacansia.special%></a
                       ></span
                     >
@@ -711,5 +714,6 @@
     <%- include('./footer.ejs') %>
     <script src="/js/header.js"></script>
     <script src="/js/methods.js"></script>
+    <script src="/js/company.js"></script>
   </body>
 </html>
