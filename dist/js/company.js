@@ -221,7 +221,6 @@ const Load = () => {
 };
 const input_special = document.getElementById("special");
 
-
 Load();
 input_max.addEventListener("input", function (e) {
   dataSearch.price.maxPrice = parseInt(e.target.value) || 0;
