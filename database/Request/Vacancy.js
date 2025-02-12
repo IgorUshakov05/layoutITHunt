@@ -363,11 +363,31 @@ let AnswerOfSolution = async (
   }
 };
 
-const getVacancy = async (query, limit = 2, userID = null) => {
+const getVacancy = async (
+  query,
+  limit = 2,
+  userID = null,
+  companyINN = null
+) => {
   try {
-    let allVacancies = await Vacancy.find(query)
-      .skip(limit - 2)
-      .limit(2);
+    let allVacancies;
+    if (companyINN != null) {
+      let findFirst = await CompanySchema.findOne({
+        INN: companyINN,
+        isVarefy: true,
+      });
+      let getUserID = findFirst.userList.map((user) => user.userID);
+      console.log(getUserID);
+      allVacancies = await Vacancy.find({
+        userID: getUserID,
+        ...query,
+      });
+    } else {
+      allVacancies = await Vacancy.find(query)
+        .skip(limit - 2)
+        .limit(2);
+    }
+
     let userIDs = [
       ...new Set(
         allVacancies.map((item) => {
@@ -407,6 +427,16 @@ const getVacancy = async (query, limit = 2, userID = null) => {
       dateTimeServer: new Date(),
       favorites: favorites?.vacancyID || [],
     };
+
+    //  return {
+    //    success: true,
+    //    users,
+    //    premium,
+    //    fastWorks: allFastWorks,
+    //    company,
+    //    dateTimeServer: new Date(),
+    //    favorites: favorites?.fastWorkID || [],
+    //  };
   } catch (e) {
     console.log(e);
     return { success: false, message: "Что-то пошло не так!" };

@@ -114,7 +114,7 @@ router.post(
           maxPrice: req.body.salary.max,
           agreement: req.body.salary.agreement,
         },
-        description: req.body.description, // '<h1>Awdaawdawdawd</h1>'
+        description: req.body.description, 
       });
 
       console.log(result);

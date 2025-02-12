@@ -41,6 +41,7 @@ const removeSpecial = (title) => {
   }
   changeURL("special", JSON.stringify(dataSearch.special));
 };
+
 input_skill.addEventListener("input", async function (e) {
   let searchValue = e.target.value.trim();
   listFindSkills.innerHTML = "";

@@ -8,6 +8,8 @@ const {
   findCompanyOfINN,
   getVacansyByCompanyINN,
 } = require("../database/Request/Company");
+const { getVacancy } = require("../database/Request/Vacancy");
+const { getFastWorks } = require("../database/Request/FastWork");
 
 const specialList = [
   "Аналитик",
@@ -112,6 +114,7 @@ router.get(
         ? { $lte: stringToJson(req.query.price_max) }
         : null,
     };
+    console.log({ ...data, find: req.query.find });
     for (let [key, value] of Object.entries(data)) {
       if (!data[key]) delete data[key];
     }
@@ -123,9 +126,9 @@ router.get(
     if (user) {
       findAllFV = await findFAllFavoriteOfId(user.userID);
     }
-    console.log(findAllFV?.data?.vacancyID, " избраннное");
     let company = await findCompanyOfINN(companyId, user.userID);
     if (!company.success) return res.redirect("/404");
+    
     let publication = await getVacansyByCompanyINN(companyId);
     await res.render("company", {
       isLoggedIn: !!user,

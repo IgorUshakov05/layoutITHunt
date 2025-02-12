@@ -49,11 +49,9 @@ async function electedVacancy(userID, vacancyID) {
 
 async function findFAllFavoriteOfId(userID) {
   try {
-    console.log(userID);
     if (!userID)
       return { success: false, error: "User ID is required", data: [] };
     let electedVacancyAdd = await FavoriteVacancySchema.findOne({ userID });
-    console.log(electedVacancyAdd, " вот");
     if (!electedVacancyAdd) return { succes: false };
     return { success: true, data: electedVacancyAdd };
   } catch (err) {
