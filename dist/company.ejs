@@ -417,9 +417,9 @@
           </div>
         </div>
         <div class="MoreInfo">
-          <% if(publication.data[0]) { %>
+          <% if(publication) { %>
           <div class="listVacas">
-            <% for (let vacansia of publication.data[0]) { %>
+            <% for (let vacansia of publication) { %>
             <article class="vakansiaItem">
               <div class="topInfoPriceAndTitle">
                 <div class="titleAndTypeJob">
@@ -500,9 +500,11 @@
                   </div>
                 </a>
                 <div class="buttonsElements">
-                      <button class="Infavorites InfavoritesVacancy  <%-myFavorites?.vacancyID.some(elem => elem.id ===  vacansia.id)?'addingFavorite':''%>" data-id="<%-vacansia.id%>" data-id="<%-vacansia.id%>">В избранное</button>
-                  <div class="Respond">
-                    <a href="/vacancia/<%-vacansia.id%>">Откликнуться</a>                        
+                  <%if(isLoggedIn) {%>
+                    <button class="Infavorites InfavoritesVacancy  <%-myFavorites?.vacancyID.some(elem => elem.id ===  vacansia.id)?'addingFavorite':''%>" data-id="<%-vacansia.id%>" data-id="<%-vacansia.id%>">В избранное</button>
+                    <%}%>
+                 <div class="Respond" <%- !isLoggedIn ? 'style="width:100%;"' : '' %>>
+                    <a href="<%-isLoggedIn?`/vacancia/${vacansia.id}`:'/login'%>">Откликнуться</a>                        
                   </button>
                 </div>
               </div>

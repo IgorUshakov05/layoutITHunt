@@ -128,12 +128,14 @@ router.get(
     }
     let company = await findCompanyOfINN(companyId, user.userID);
     if (!company.success) return res.redirect("/404");
-    
-    let publication = await getVacansyByCompanyINN(companyId);
+
+    // let publication = await getVacansyByCompanyINN(companyId);
+    let publication = await getVacancy(data, 2, user.userID, companyId);
+    console.log(JSON.stringify(publication));
     await res.render("company", {
       isLoggedIn: !!user,
       id: user.userID,
-      publication,
+      publication: publication.vacancies,
       myFavorites: findAllFV.data,
       isCreator: user ? user.userID === company.data.creatorID : false,
       isEmployee: company?.data?.userList.some(

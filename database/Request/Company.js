@@ -231,8 +231,7 @@ async function getVacansyByCompanyINN(INN) {
     let getUserID = findFirst.userList.map((user) => user.userID);
     console.log(getUserID);
     let vacansys = await VacancySchema.find({ userID: getUserID });
-    // let fastworks = await FastWorkSchema.find({ userID: getUserID });
-    return { success: true, data: [vacansys] };
+    return { success: true, data: vacansys };
   } catch (error) {
     console.error(error);
     return { success: false, error: "Error" };
