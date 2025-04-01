@@ -60,7 +60,7 @@ const chatRouter = require("./api/chat/routes");
 const EditCompany = require("./pageRoutes/EditCompany");
 const googleAuthLogin = require("./api/googleAuth/login");
 const googleAuthRegistration = require("./api/googleAuth/registration");
-
+const notification = require("./api/web-push/router");
 const companyADMIN = require("./admin/company/routes");
 
 app.set("view engine", "ejs");
@@ -85,7 +85,7 @@ app.use("/admin", companyADMIN);
 app.use(
   "/api",
   (req, res, next) => {
-    if (req.headers.authorization !== "augwod89h1h9awdh9py0y82hjd")
+    if (req.headers.authorization !== process.env.API_AUTH)
       return res.status(401).json({ message: "Не авторизован" });
     next();
   },
@@ -103,6 +103,15 @@ app.use(
   skills,
   companyRoute,
   city
+);
+app.use(
+  "/notification",
+  (req, res, next) => {
+    if (req.headers.authorization !== process.env.notificationPrivate)
+      return res.status(401).json({ message: "Не авторизован" });
+    next();
+  },
+  notification
 );
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ noServer: true }); // Используем noServer
