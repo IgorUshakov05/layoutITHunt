@@ -140,7 +140,7 @@ navigator.serviceWorker.register("/js/sw.js").then(async (registration) => {
   const subscription = await registration.pushManager.getSubscription();
 
   if (!subscription) {
-    return registration.pushManager
+    return await registration.pushManager
       .subscribe({
         userVisibleOnly: true,
         applicationServerKey:

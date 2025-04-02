@@ -49,5 +49,20 @@ async function getUserEndpoint(userID) {
     return { success: false };
   }
 }
+const deleteEndPoint = async (arrList) => {
+  try {
+    await WebPushSchema.updateMany(
+      {},
+      {
+        $pull: {
+          subscriptions: { endpoint: { $in: arrList } },
+        },
+      }
+    );
+    console.log("Успех");
+  } catch (e) {
+    console.error("Ошибка при удалении endpoints:", e);
+  }
+};
 
-module.exports = { createOrAddEndpoint, getUserEndpoint };
+module.exports = { createOrAddEndpoint, getUserEndpoint, deleteEndPoint };

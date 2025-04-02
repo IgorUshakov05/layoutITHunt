@@ -41,25 +41,29 @@ router.post("/send-notification", (req, res) => {
     title: req.body.title,
     body: req.body.text,
   };
-  subscriptions.forEach((subscription) => sendPush(subscription, payload));
+  // subscriptions.forEach((subscription) => sendPush(subscription, payload));
 
   res.json({ message: "Уведомления отправлены" });
 });
 
 router.post("/send-notification/:id", async (req, res) => {
-  const payload = {
-    title: req.body.title,
-    body: req.body.text,
-  };
-  let userID = req.params.id;
-  let endpoints = await getUserEndpoint(userID);
-  console.log(endpoints);
-  await endpoints.data.subscriptions.forEach((subscription) =>
-    sendPush(subscription, payload)
-  );
-
-  res.json({
-    message: "Уведомления отправлены",
-  });
+  try {
+    const payload = {
+      title: req.body.title,
+      body: req.body.text,
+    };
+    let userID = req.params.id;
+    let endpoints = await getUserEndpoint(userID);
+    if (!endpoints.success)
+      return res.status(404).json({ message: "Нет токентов авторизации" });
+    let x = await sendPush(endpoints.data.subscriptions, payload);
+    console.log(x);
+    return await res.status(201).json({
+      message: "Уведомления отправлены",
+    });
+  } catch (e) {
+    console.log(e);
+    return res.status(500).json({ message: "Ошибка сервера" });
+  }
 });
 module.exports = router;
