@@ -1,12 +1,10 @@
 const webPush = require("web-push");
 const { deleteEndPoint } = require("../../database/Request/WebPush");
 let sendSub = async (subscriptionItem, subject) => {
-  let x = await webPush.sendNotification(
+  return await webPush.sendNotification(
     subscriptionItem,
     JSON.stringify(subject)
   );
-  console.log(x);
-  return x;
 };
 let sendPush = (subscription, subject) => {
   try {

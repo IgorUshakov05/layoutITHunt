@@ -7,7 +7,6 @@ const setNewPremium = async (
   { typePremium, typePay, amount, paymentId, paymentMethod, timePay, save }
 ) => {
   try {
-    // Вычисляем дату следующего списания
     const now = Temporal.Now.plainDateISO();
     let nextTimePay;
     switch (typePremium) {
@@ -37,7 +36,7 @@ const setNewPremium = async (
     return { success: true, message: "Успешно создано", result };
   } catch (e) {
     console.error("Ошибка создании подписки:", e);
-    return { success: false, message: "Произошла ошибка, попробуйте позже" };
+    return { success: false, message: "Произошла ошибка, попробуйте позже", result };
   }
 };
 

@@ -12,6 +12,9 @@ const {
   updateCountStaffOfCompany,
   freezCompany,
 } = require("../../database/Request/Company");
+const {
+  StartSubNotification,
+} = require("../../database/Request/SubscriptionNotification");
 
 // Маршрут для обработки уведомлений от YooKassa
 router.post("/webhook/yookassa", async (req, res) => {
@@ -51,7 +54,6 @@ router.post("/webhook/yookassa", async (req, res) => {
 
       try {
         if (paymentType === "premium") {
-          // Обработка премиум-платежа
           const premiumData = {
             typePremium: description,
             typePay: paymentMethodType,
@@ -62,13 +64,20 @@ router.post("/webhook/yookassa", async (req, res) => {
             save: isAutoPay,
           };
           const updateResult = await setNewPremium(userId, premiumData);
+
           if (updateResult.success) {
             console.log("Премиум подписка успешно создана");
           } else {
             console.error("Ошибка создании подписки:", updateResult.message);
           }
+          const sendNotification = await StartSubNotification(
+            userId,
+            "start",
+            description,
+            updateResult.result.nextTimePay
+          );
+          console.log(sendNotification);
         } else if (paymentType === "company") {
-          // Обработка платежа за создание компании
           const companyData = {
             title,
             INN,
