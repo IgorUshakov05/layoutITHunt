@@ -1,240 +1,335 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Найдите работу или предложите её в IT-сфере с помощью нашего сайта. Мы предлагаем широкий выбор вакансий для различных специализаций.">
-    <meta name="keywords" content="IT, работа, вакансии, поиск работы, WebHunt, специалисты, программист, разработчик, тестировщик, веб-дизайнер">
-    <meta name="robots" content="index, follow">
-    
-    <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon">
-    <meta name="author" content="WebHunt">
-    <link rel="stylesheet" href="/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Найдите работу или предложите её в IT-сфере с помощью нашего сайта. Мы предлагаем широкий выбор вакансий для различных специализаций."
+    />
+    <meta
+      name="keywords"
+      content="IT, работа, вакансии, поиск работы, WebHunt, специалисты, программист, разработчик, тестировщик, веб-дизайнер"
+    />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="shortcut icon" href="/assets/icon.svg" type="image/x-icon" />
+    <meta name="author" content="WebHunt" />
+    <link rel="stylesheet" href="/style.css" />
     <script src="/js/jquery.js"></script>
     <title>Входящие уведомления - Другие</title>
-</head>
-<body>
+  </head>
+  <body>
     <%- include('./header.ejs', { isLoggedIn, active: 'inbox',chat:chatList}) %>
-    <main  class="main">
-        <div class="twoBlocks mt20">
-            <%- include('./inboxLinks', {active: "4", role,isMain: false }) %>
-            <div class="MoreInfo">
-             <div class="listInbox">
-                    <div class="toDay">
-                        <span class="textDay">Сегодня (1)</span>
-                        <div class="mt-10"></div>
-                        <div class="flex notofication">
-
-                        <div class="messageNotification w50 warningNotification">
-                            <div class="svgAndText">
-                                <div class="svgNotification">
-                                    <img src="/assets/pictures/picNotification/notCreateCompany.svg" alt="">
-                                </div>
-                                <div class="messageNotificationTitleAndText">
-                                    <span class="titleNotificationAndTimeAgo">
-                                        <span class="spanText">Компания была отклонена</span>
-                                        <span class="timeNotification">3 минуты назад</span>
-                                    </span>
-                                    <div class="textNotification">
-                                        <p class="textNoti">Поздравляем! Ваша компания успешно добавлена. Теперь ваши сотрудники могут присоединиться и размещать вакансии от имени компании, общайтесь в чате компании и делайте объявления.</p>
-                                    </div>
-                                    <a class="toTechSupport" href="https://t.me/web_hunt_ru" target="_blank">Написать в поддержку <svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 0.5L5 4.5L1 8.5" stroke="#4900E3" stroke-width="0.5" />
-                                      </svg></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="messageNotification w50">
-                            <div class="svgAndText">
-                                <div class="svgNotification">
-                                    <img src="/assets/pictures/picNotification/createCompany.svg" alt="">
-                                </div>
-                                <div class="messageNotificationTitleAndText">
-                                    <span class="titleNotificationAndTimeAgo">
-                                        <span class="spanText">Компания была принята</span>
-                                        <span class="timeNotification">3 минуты назад</span>
-                                    </span>
-                                    <div class="textNotification">
-                                        <p class="textNoti">Поздравляем! Ваша компания успешно добавлена. Теперь ваши сотрудники могут присоединиться и размещать вакансии от имени компании, общайтесь в чате компании и делайте объявления.</p>
-                                    </div>
-                                    <a class="toTechSupport" href="https://youtube.com" target="_blank">Перейти в компанию <svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 0.5L5 4.5L1 8.5" stroke="#4900E3" stroke-width="0.5" />
-                                      </svg></a>
-                                </div>
-                            </div>
-                        </div>
+    <main class="main">
+      <div class="twoBlocks mt20">
+        <%- include('./inboxLinks', {active: "4", role,isMain: false }) %>
+        <div class="MoreInfo">
+          <div class="listInbox">
+            <div class="toDay">
+              <span class="textDay">Сегодня (1)</span>
+              <div class="mt-10"></div>
+              <div class="flex notofication">
+                <div class="messageNotification w50 warningNotification">
+                  <div class="svgAndText">
+                    <div class="svgNotification">
+                      <img
+                        src="/assets/pictures/picNotification/notCreateCompany.svg"
+                        alt=""
+                      />
                     </div>
-
-                    </div>    
-                    <div class="toDay">
-                        <span class="textDay">Сегодня (1)</span>
-                        <div class="mt-10"></div>
-                        <div class="flex notofication">
-
-                        <div class="messageNotification">
-                            <div class="svgAndText">
-                                <div class="svgNotification">
-                                    <img src="/assets/pictures/picNotification/applicationSent.svg" alt="">
-                                </div>
-                                <div class="messageNotificationTitleAndText">
-                                    <span class="titleNotificationAndTimeAgo">
-                                        <span class="spanText">Компания была отклонена</span>
-                                        <span class="timeNotification">3 минуты назад</span>
-                                    </span>
-                                    <div class="textNotification">
-                                        <p class="textNoti">Ваша заявка успешно отправлена. В случае одобрения регистра  ко мпании, вам будет доступна новая вкладка в этом разделе, и мы отправим сообщение для уведомления об этом. В случае отказа также отправим вам уведомление с указанием причины. </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="messageNotificationTitleAndText">
+                      <span class="titleNotificationAndTimeAgo">
+                        <span class="spanText">Компания была отклонена</span>
+                        <span class="timeNotification">3 минуты назад</span>
+                      </span>
+                      <div class="textNotification">
+                        <p class="textNoti">
+                          Поздравляем! Ваша компания успешно добавлена. Теперь
+                          ваши сотрудники могут присоединиться и размещать
+                          вакансии от имени компании, общайтесь в чате компании
+                          и делайте объявления.
+                        </p>
+                      </div>
+                      <a
+                        class="toTechSupport"
+                        href="https://t.me/web_hunt_ru"
+                        target="_blank"
+                        >Написать в поддержку
+                        <svg
+                          width="6"
+                          height="9"
+                          viewBox="0 0 6 9"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M1 0.5L5 4.5L1 8.5"
+                            stroke="#4900E3"
+                            stroke-width="0.5"
+                          /></svg
+                      ></a>
                     </div>
-
-                    </div>    
-                    <div class="toDay">
-                        <span class="textDay">Сегодня (1)</span>
-                        <div class="mt-10"></div>
-                        <div class="flex notofication">
-
-                        <div class="messageNotification">
-                            <div class="svgAndText">
-                                <div class="svgNotification">
-                                    <img src="/assets/pictures/picNotification/warning.svg" alt="">
-                                </div>
-                                <div class="messageNotificationTitleAndText">
-                                    <span class="titleNotificationAndTimeAgo">
-                                        <span class="spanText">Упс...Платеж не прошел</span>
-                                        <span class="timeNotification">3 минуты назад</span>
-                                    </span>
-                                    <div class="textNotification">
-                                        <p class="textNoti">Мы обратили внимание, что автоматический платеж за подписку вашей компании на нашем сайте не был успешно осуществлен в этом месяце. Причины возникновения такой ситуации могут быть различными, включая недостаточность средств на счету, устаревшие платежные реквизиты и т. д.
-                                            Для предотвращения прекращения работы вашей компании на нашем ресурсе, мы предоставляем вам неделю на внесение оплаты за следующий месяц. В течение этого времени ваша компания будет временно скрыта от других пользователей, но сохранится в системе. Однако, если оплата не будет получена в течение указанного срока, ваша компания будет удалена из нашей базы данных.
-                                            Мы ценим ваше партнерство с нами и надеемся на скорое разрешение данной ситуации. Если у вас возникли какие-либо вопросы или трудности с оплатой, не стесняйтесь обращаться к нам для помощи.</p>
-                                    </div>
-                                    <a class="toTechSupport" href="https://t.me/web_hunt_ru" target="_blank">Перейти к платежу <svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 0.5L5 4.5L1 8.5" stroke="#4900E3" stroke-width="0.5" />
-                                      </svg></a>
-                                </div>
-                            </div>
-                        </div>
+                  </div>
+                </div>
+                <div class="messageNotification w50">
+                  <div class="svgAndText">
+                    <div class="svgNotification">
+                      <img
+                        src="/assets/pictures/picNotification/createCompany.svg"
+                        alt=""
+                      />
                     </div>
-
-                    </div>    
-                    <div class="toDay">
-                        <span class="textDay">Сегодня (1)</span>
-                        <div class="mt-10"></div>
-                        <div class="flex notofication">
-
-                        <div class="messageNotification w50">
-                            <div class="svgAndText">
-                                <div class="svgNotification">
-                                    <img src="/assets/pictures/picNotification/premiumLost.svg" alt="">
-                                </div>
-                                <div class="messageNotificationTitleAndText">
-                                    <span class="titleNotificationAndTimeAgo">
-                                        <span class="spanText">Конец подписки</span>
-                                        <span class="timeNotification">3 минуты назад</span>
-                                    </span>
-                                    <a class="toTechSupport toReplyPremium" href="https://t.me/web_hunt_ru" target="_blank">Оформить подписку снова</a>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="messageNotificationTitleAndText">
+                      <span class="titleNotificationAndTimeAgo">
+                        <span class="spanText">Компания была принята</span>
+                        <span class="timeNotification">3 минуты назад</span>
+                      </span>
+                      <div class="textNotification">
+                        <p class="textNoti">
+                          Поздравляем! Ваша компания успешно добавлена. Теперь
+                          ваши сотрудники могут присоединиться и размещать
+                          вакансии от имени компании, общайтесь в чате компании
+                          и делайте объявления.
+                        </p>
+                      </div>
+                      <a
+                        class="toTechSupport"
+                        href="https://youtube.com"
+                        target="_blank"
+                        >Перейти в компанию
+                        <svg
+                          width="6"
+                          height="9"
+                          viewBox="0 0 6 9"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M1 0.5L5 4.5L1 8.5"
+                            stroke="#4900E3"
+                            stroke-width="0.5"
+                          /></svg
+                      ></a>
                     </div>
-
-                    </div>   
-                    
-                    <div class="toDay">
-                        <span class="textDay">Сегодня (1)</span>
-                        <div class="mt-10"></div>
-                        <div class="flex notofication">
-
-                        <div class="messageNotification w50 ">
-                            <div class="svgAndText">
-                                <div class="svgNotification">
-                                    <img src="/assets/pictures/picNotification/time.svg" alt="" width="38" height="38">
-                                </div>
-                                <div class="messageNotificationTitleAndText">
-                                    <span class="titleNotificationAndTimeAgo">
-                                        <span class="spanText">Подписка скоро завершится</span>
-                                        <span class="timeNotification">3 минуты назад</span>
-                                    </span>
-                                    <div class="textNotification">
-                                        <p class="textNoti">До конца подписки осталось
-                                            <span>2 часа</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="messageNotification w50 ">
-                            <div class="svgAndText">
-                                <div class="svgNotification">
-                                    <img src="/assets/pictures/picNotification/time.svg" alt="" width="38" height="38">
-                                </div>
-                                <div class="messageNotificationTitleAndText">
-                                    <span class="titleNotificationAndTimeAgo">
-                                        <span class="spanText">Подписка скоро завершится</span>
-                                        <span class="timeNotification">3 минуты назад</span>
-                                    </span>
-                                    <div class="textNotification">
-                                        <p class="textNoti">До конца подписки осталось
-                                            <span>2 часа</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="messageNotification w50 ">
-                            <div class="svgAndText">
-                                <div class="svgNotification">
-                                    <img src="/assets/pictures/picNotification/time.svg" alt="" width="38" height="38">
-                                </div>
-                                <div class="messageNotificationTitleAndText">
-                                    <span class="titleNotificationAndTimeAgo">
-                                        <span class="spanText">Подписка скоро завершится</span>
-                                        <span class="timeNotification">3 минуты назад</span>
-                                    </span>
-                                    <div class="textNotification">
-                                        <p class="textNoti">До конца подписки осталось
-                                            <span>2 часа</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-                        <div class="messageNotification w50 ">
-                            <div class="svgAndText">
-                                <div class="svgNotification">
-                                    <img src="/assets/pictures/picNotification/startPremius.svg" alt="">
-                                </div>
-                                <div class="messageNotificationTitleAndText">
-                                    <span class="titleNotificationAndTimeAgo">
-                                        <span class="spanText">Старт подписки</span>
-                                        <span class="timeNotification">3 минуты назад</span>
-                                    </span>
-                                    <div class="textNotification">
-                                        <p class="textNoti"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M7 0L8.33688 4.68445L13.0622 3.5L9.67376 7L13.0622 10.5L8.33688 9.31555L7 14L5.66312 9.31555L0.937822 10.5L4.32624 7L0.937822 3.5L5.66312 4.68445L7 0Z" fill="#4900E3"/>
-                                            </svg>
-                                             Уровень подписки: Лонг</p>
-                                            <p class="textNoti">
-                                                
-                                                <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1.72343 8.85619C2.37316 10.0565 3.41272 10.9994 4.67055 11.5293C5.92838 12.0593 7.32929 12.1445 8.64207 11.7709C9.95485 11.3974 11.101 10.5874 11.8915 9.4747C12.6819 8.36197 13.0693 7.01301 12.9898 5.65044C12.9103 4.28786 12.3686 2.99312 11.4541 1.9799C10.5396 0.966679 9.30695 0.295535 7.95963 0.0772375C6.61231 -0.14106 5.23082 0.106535 4.04317 0.77916C2.85553 1.45178 1.9327 2.50924 1.42701 3.77699L2.52392 4.21454C2.93008 3.19631 3.67126 2.34699 4.62515 1.80675C5.57904 1.26652 6.68861 1.06766 7.77075 1.24299C8.85288 1.41832 9.8429 1.95737 10.5774 2.77116C11.3119 3.58495 11.747 4.62486 11.8109 5.71924C11.8747 6.81362 11.5636 7.89708 10.9287 8.79079C10.2938 9.6845 9.37326 10.335 8.31887 10.6351C7.26447 10.9351 6.1393 10.8666 5.12905 10.441C4.11879 10.0154 3.28384 9.25809 2.76199 8.29402L1.72343 8.85619Z" fill="#4900E3"/>
-                                                    <path d="M1.3125 0.814331L1.53856 4.39455L5.25813 4.15969" stroke="#4900E3" stroke-width="1.1"/>
-                                                    </svg>
-                                                    
-                                                    Конец подписки: <span>30.12.2023</span>
-                                                </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="toDay">
+              <span class="textDay">Сегодня (1)</span>
+              <div class="mt-10"></div>
+              <div class="flex notofication">
+                <div class="messageNotification">
+                  <div class="svgAndText">
+                    <div class="svgNotification">
+                      <img
+                        src="/assets/pictures/picNotification/applicationSent.svg"
+                        alt=""
+                      />
                     </div>
+                    <div class="messageNotificationTitleAndText">
+                      <span class="titleNotificationAndTimeAgo">
+                        <span class="spanText">Компания была отклонена</span>
+                        <span class="timeNotification">3 минуты назад</span>
+                      </span>
+                      <div class="textNotification">
+                        <p class="textNoti">
+                          Ваша заявка успешно отправлена. В случае одобрения
+                          регистра ко мпании, вам будет доступна новая вкладка в
+                          этом разделе, и мы отправим сообщение для уведомления
+                          об этом. В случае отказа также отправим вам
+                          уведомление с указанием причины.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="toDay">
+              <span class="textDay">Сегодня (1)</span>
+              <div class="mt-10"></div>
+              <div class="flex notofication">
+                <div class="messageNotification">
+                  <div class="svgAndText">
+                    <div class="svgNotification">
+                      <img
+                        src="/assets/pictures/picNotification/warning.svg"
+                        alt=""
+                      />
+                    </div>
+                    <div class="messageNotificationTitleAndText">
+                      <span class="titleNotificationAndTimeAgo">
+                        <span class="spanText">Упс...Платеж не прошел</span>
+                        <span class="timeNotification">3 минуты назад</span>
+                      </span>
+                      <div class="textNotification">
+                        <p class="textNoti">
+                          Мы обратили внимание, что автоматический платеж за
+                          подписку вашей компании на нашем сайте не был успешно
+                          осуществлен в этом месяце. Причины возникновения такой
+                          ситуации могут быть различными, включая
+                          недостаточность средств на счету, устаревшие платежные
+                          реквизиты и т. д. Для предотвращения прекращения
+                          работы вашей компании на нашем ресурсе, мы
+                          предоставляем вам неделю на внесение оплаты за
+                          следующий месяц. В течение этого времени ваша компания
+                          будет временно скрыта от других пользователей, но
+                          сохранится в системе. Однако, если оплата не будет
+                          получена в течение указанного срока, ваша компания
+                          будет удалена из нашей базы данных. Мы ценим ваше
+                          партнерство с нами и надеемся на скорое разрешение
+                          данной ситуации. Если у вас возникли какие-либо
+                          вопросы или трудности с оплатой, не стесняйтесь
+                          обращаться к нам для помощи.
+                        </p>
+                      </div>
+                      <a
+                        class="toTechSupport"
+                        href="https://t.me/web_hunt_ru"
+                        target="_blank"
+                        >Перейти к платежу
+                        <svg
+                          width="6"
+                          height="9"
+                          viewBox="0 0 6 9"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M1 0.5L5 4.5L1 8.5"
+                            stroke="#4900E3"
+                            stroke-width="0.5"
+                          /></svg
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-                    </div>    
-             </div>
-         </div>
-     </div>
+            <%subscribe.forEach((sub) =>{%>
+            <div class="toDay">
+              <span class="textDay"
+                ><%- `${sub.date} (${sub.notifications.length})` %></span
+              >
+              <div class="mt-10"></div>
+              <div class="flex notofication">
+                <%sub.notifications.forEach((subscribe) =>{%>
+                <%if(subscribe.status==='start') {%>
+                <div class="messageNotification w50">
+                  <div class="svgAndText">
+                    <div class="svgNotification">
+                      <img
+                        src="/assets/pictures/picNotification/startPremius.svg"
+                        alt=""
+                      />
+                    </div>
+                    <div class="messageNotificationTitleAndText">
+                      <span class="titleNotificationAndTimeAgo">
+                        <span class="spanText">Старт подписки</span>
+                        <span class="timeNotification">3 минуты назад</span>
+                      </span>
+                      <div class="textNotification">
+                        <p class="textNoti">
+                          <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 14 14"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M7 0L8.33688 4.68445L13.0622 3.5L9.67376 7L13.0622 10.5L8.33688 9.31555L7 14L5.66312 9.31555L0.937822 10.5L4.32624 7L0.937822 3.5L5.66312 4.68445L7 0Z"
+                              fill="#4900E3"
+                            />
+                          </svg>
+                          Уровень подписки: <%-subscribe.subscription_level%>
+                        </p>
+                        <p class="textNoti">
+                          <svg
+                            width="13"
+                            height="12"
+                            viewBox="0 0 13 12"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M1.72343 8.85619C2.37316 10.0565 3.41272 10.9994 4.67055 11.5293C5.92838 12.0593 7.32929 12.1445 8.64207 11.7709C9.95485 11.3974 11.101 10.5874 11.8915 9.4747C12.6819 8.36197 13.0693 7.01301 12.9898 5.65044C12.9103 4.28786 12.3686 2.99312 11.4541 1.9799C10.5396 0.966679 9.30695 0.295535 7.95963 0.0772375C6.61231 -0.14106 5.23082 0.106535 4.04317 0.77916C2.85553 1.45178 1.9327 2.50924 1.42701 3.77699L2.52392 4.21454C2.93008 3.19631 3.67126 2.34699 4.62515 1.80675C5.57904 1.26652 6.68861 1.06766 7.77075 1.24299C8.85288 1.41832 9.8429 1.95737 10.5774 2.77116C11.3119 3.58495 11.747 4.62486 11.8109 5.71924C11.8747 6.81362 11.5636 7.89708 10.9287 8.79079C10.2938 9.6845 9.37326 10.335 8.31887 10.6351C7.26447 10.9351 6.1393 10.8666 5.12905 10.441C4.11879 10.0154 3.28384 9.25809 2.76199 8.29402L1.72343 8.85619Z"
+                              fill="#4900E3"
+                            />
+                            <path
+                              d="M1.3125 0.814331L1.53856 4.39455L5.25813 4.15969"
+                              stroke="#4900E3"
+                              stroke-width="1.1"
+                            />
+                          </svg>
+
+                          Конец подписки: <span><%-subscribe.end_date%></span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <%}else if(subscribe.status==='end'){ %> <%}%>
+                <div class="messageNotification w50">
+                  <div class="svgAndText">
+                    <div class="svgNotification">
+                      <img
+                        src="/assets/pictures/picNotification/premiumLost.svg"
+                        alt=""
+                      />
+                    </div>
+                    <div class="messageNotificationTitleAndText">
+                      <span class="titleNotificationAndTimeAgo">
+                        <span class="spanText">Конец подписки</span>
+                        <span class="timeNotification">3 минуты назад</span>
+                      </span>
+                      <a
+                        class="toTechSupport toReplyPremium"
+                        href="/buy-premium?tarrif=2870"
+                        target="_blank"
+                        >Оформить подписку снова</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <%} )%>
+
+              
+              </div>
+            </div>
+            <%} )%>
+          </div>
+        </div>
+      </div>
     </main>
-<%- include('./footer.ejs') %>
-<script src="/js/header.js"></script>
-</body>
+    <%- include('./footer.ejs') %>
+    <script src="/js/header.js"></script>
+  </body>
 </html>
+
+  <!-- <div class="messageNotification w50">
+                  <div class="svgAndText">
+                    <div class="svgNotification">
+                      <img
+                        src="/assets/pictures/picNotification/time.svg"
+                        alt=""
+                        width="38"
+                        height="38"
+                      />
+                    </div>
+                    <div class="messageNotificationTitleAndText">
+                      <span class="titleNotificationAndTimeAgo">
+                        <span class="spanText">Подписка скоро завершится</span>
+                        <span class="timeNotification">3 минуты назад</span>
+                      </span>
+                      <div class="textNotification">
+                        <p class="textNoti">
+                          До конца подписки осталось <span>2 часа</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->

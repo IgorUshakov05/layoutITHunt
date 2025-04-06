@@ -1,25 +1,28 @@
-const { Router } = require("express");
-const router = Router();
-const { decodeAccessToken } = require("../api/tokens/accessToken");
-const {
-  getAllSubNotification,
-} = require("../database/Request/SubscriptionNotification");
-
-router.get("/inbox/other", async (req, res) => {
-  let access = req.cookies.access;
-  let user = await decodeAccessToken(access);
-  if (!access || !user) return res.redirect("/login");
-  let subscribe = await getAllSubNotification(user.userID);
-  subscribe = groupByDay(subscribe.notifications) || [];
-  console.log(JSON.stringify(subscribe));
-  return await res.render("inboxOther", {
-    isLoggedIn: !!user,
-    role: user.userROLE,
-    id: user.userID,
-    subscribe,
-    chatList: user.chatList || null,
-  });
-});
+let x = {
+  success: true,
+  notifications: [
+    {
+      status: "start",
+      subscription_level: "Лонг",
+      end_date: "2023-04-06",
+      timestamp: "2023-04-06T05:48:20.647Z",
+    },
+    {
+      status: "end",
+      timestamp: "2023-04-06T05:50:40.414Z",
+    },
+    {
+      status: "start",
+      subscription_level: "Лонг",
+      end_date: "2026-04-06",
+      timestamp: "2025-04-06T06:13:55.994Z",
+    },
+    {
+      status: "end",
+      timestamp: "2026-04-06T06:15:48.581Z",
+    },
+  ],
+};
 const groupByDay = (notifications) => {
   const grouped = {};
   let now = new Date();
@@ -50,10 +53,12 @@ const groupByDay = (notifications) => {
       return new Date(y2, m2 - 1, d2) - new Date(y1, m1 - 1, d1); // по убыванию
     })
     .map((item) => {
+      console.log(item);
       if (item.date === today) {
         return { ...item, date: "Сегодня" };
       }
       return item;
     });
 };
-module.exports = router;
+const grouped = groupByDay(x.notifications);
+console.log(grouped);
