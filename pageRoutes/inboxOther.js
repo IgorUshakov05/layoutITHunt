@@ -27,8 +27,7 @@ const groupByDay = (notifications) => {
     now.getUTCMonth() + 1
   ).padStart(2, "0")}-${now.getUTCFullYear()}`;
   console.log(today);
-
-  notifications.forEach((item) => {
+  notifications.reverse().forEach((item) => {
     const dateObj = new Date(item.timestamp);
     const day = String(dateObj.getUTCDate()).padStart(2, "0");
     const month = String(dateObj.getUTCMonth() + 1).padStart(2, "0");

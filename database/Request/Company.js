@@ -170,7 +170,7 @@ async function findCompanyOfUser(userID) {
   try {
     console.log(userID);
     let findFirst = await CompanySchema.findOne({
-      userList: { $elemMatch: { userID: userID } }, // Ищем, чтобы userID был в массиве userList
+      userList: { $elemMatch: { userID: userID } },
       isVarefy: true,
       isFreez: false,
     });
@@ -181,6 +181,47 @@ async function findCompanyOfUser(userID) {
     return { success: false, error: "Error" };
   }
 }
+
+async function removeUserFromCompany(userID) {
+  try {
+    const findFirst = await CompanySchema.findOne({
+      userList: { $elemMatch: { userID: userID } },
+      isVarefy: true,
+    });
+    if (!findFirst) {
+      return {
+        success: false,
+        message: { title: "Что-то не так!", body: "Компания не найдена!" },
+      };
+    }
+    if (findFirst.creatorID === userID) {
+      return {
+        success: false,
+        message: {
+          title: "Ошибка",
+          body: "Создатель не может покинуть компанию!",
+        },
+      };
+    }
+    await findFirst.updateOne(
+      {
+        $pull: { userList: { userID: userID } },
+      },
+      { new: true }
+    );
+    return {
+      success: true,
+      message: { title: "Успех!", body: "Вы успешно покинули компанию" },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      success: false,
+      message: { title: "Что-то не так!", body: "Что-то с сервером :( " },
+    };
+  }
+}
+
 async function findCompanyOfINNorTitle(text) {
   try {
     // Создаем регулярное выражение для поиска без учета регистра
@@ -284,13 +325,14 @@ const tariffsCompany = {
 };
 const setStatusOfCompany = async (companyID, status = false) => {
   try {
+    console.log(status)
+    let getCompany = await CompanySchema.findOne({ id: companyID });
+    if (!getCompany) return { success: false, message: "Company not found" };
     if (status === false) {
-      let getCompany = await CompanySchema.findOne({ id: companyID });
-      if (!getCompany) return { success: false, message: "Company not found" };
       let amount = await tariffsCompany[getCompany.countStaffs].amount;
       let payID = getCompany.paymentId;
       let refund = await createRefund(amount, payID);
-      console.log(refund);
+      console.log(refund)
       if (refund === "succeeded") {
         await getCompany.deleteOne({ id: companyID });
         return { success: true, message: "Success" };
@@ -301,6 +343,7 @@ const setStatusOfCompany = async (companyID, status = false) => {
       { id: companyID },
       { isVarefy: status }
     );
+    console.log(result);
     return { success: true, message: "Company active" };
   } catch (e) {
     console.log(e);
@@ -474,7 +517,7 @@ const getRequest = async (creatorID) => {
           timeString = `${seconds} ${
             seconds > 1 ? "секунды" : "секунда"
           } назад`;
-          let seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+          var seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
           console.log(timeString);
         }
 
@@ -515,4 +558,5 @@ module.exports = {
   updateInfoCompany,
   getVacansyByCompanyINN,
   freezCompany,
+  removeUserFromCompany,
 };

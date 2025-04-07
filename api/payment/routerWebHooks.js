@@ -5,7 +5,9 @@ const {
   updatePremium,
   removePremium,
 } = require("../../database/Request/setPremium");
-
+const {
+  pushNotificationEvent,
+} = require("../../database/Request/SetStatusForCompany");
 const {
   createCompany,
   updateCompany,
@@ -15,6 +17,8 @@ const {
 const {
   StartSubNotification,
 } = require("../../database/Request/SubscriptionNotification");
+const { getUserEndpoint } = require("../../database/Request/WebPush");
+const sendPush = require("../web-push/push");
 
 // Маршрут для обработки уведомлений от YooKassa
 router.post("/webhook/yookassa", async (req, res) => {
@@ -93,10 +97,20 @@ router.post("/webhook/yookassa", async (req, res) => {
             egrul_egrip_record_sheet: listWrite || null,
           };
           let saveCompany = await createCompany(companyData);
-          console.log(
-            "Платеж обработан успешно, компания создана: ",
-            saveCompany
-          );
+          console.log("Платеж обработан успешно, компания создана");
+          if (saveCompany.success) {
+            await pushNotificationEvent(userId, "requset");
+            const payload = {
+              title: "Заявка отправлена!",
+              body: "Мы скоро сообщим свое решение",
+            };
+            let endpoints = await getUserEndpoint(userId);
+            if (!endpoints.success)
+              return res
+                .status(404)
+                .json({ message: "Нет токентов авторизации" });
+            await sendPush(endpoints.data.subscriptions, payload);
+          }
         } else if (paymentType === "premium-update") {
           // Обработка обновления премиум-платежа
           const updateResult = await updatePremium(
@@ -106,6 +120,12 @@ router.post("/webhook/yookassa", async (req, res) => {
           );
           if (updateResult.success) {
             console.log("Премиум подписка успешно обновлена");
+            await StartSubNotification(
+              userId,
+              "start",
+              description,
+              updateResult.result.nextTimePay
+            );
           } else {
             console.error(
               "Ошибка при обновлении подписки:",
@@ -178,7 +198,6 @@ router.post("/webhook/yookassa", async (req, res) => {
       return res.status(400).json({ error: "Unsupported event type" });
     }
 
-    // Подтверждаем получение уведомления, если оно прошло все проверки
     return res.json({ received: true });
   } catch (e) {
     console.log(e);

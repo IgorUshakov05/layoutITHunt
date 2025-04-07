@@ -130,7 +130,7 @@
                     </div>
                     <div class="messageNotificationTitleAndText">
                       <span class="titleNotificationAndTimeAgo">
-                        <span class="spanText">Компания была отклонена</span>
+                        <span class="spanText">Заявка отправлена!</span>
                         <span class="timeNotification">3 минуты назад</span>
                       </span>
                       <div class="textNotification">
@@ -272,8 +272,7 @@
                     </div>
                   </div>
                 </div>
-                <%}else if(subscribe.status==='end'){ %> <%}%>
-                <div class="messageNotification w50">
+                <%}else if(subscribe.status==='end'){ %>   <div class="messageNotification w50">
                   <div class="svgAndText">
                     <div class="svgNotification">
                       <img
@@ -294,7 +293,8 @@
                       >
                     </div>
                   </div>
-                </div>
+                </div> <%}%>
+             
                 <%} )%>
 
               

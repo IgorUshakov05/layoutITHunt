@@ -17,11 +17,39 @@ const {
   getCompanyByCreator,
   updateInfoCompany,
   responseToInvite,
+  removeUserFromCompany,
 } = require("../../database/Request/Company");
 const { decodeAccessToken } = require("../tokens/accessToken");
 const { body, validationResult } = require("express-validator");
 const findCompany = require("./findCompanyForInvite");
+const { getUserEndpoint } = require("../../database/Request/WebPush");
+const sendPush = require("../web-push/push");
+router.post("/leav-company", async (req, res) => {
+  let access = await req.cookies.access;
+  if (!access) return res.redirect("/login");
 
+  const decodeAccess = await decodeAccessToken(access);
+  if (!decodeAccess) return res.redirect("/login");
+
+  let removeUser = await removeUserFromCompany(decodeAccess.userID);
+  const payload = {
+    title: removeUser.message.title,
+    body: removeUser.message.body,
+  };
+
+  let endpoints = await getUserEndpoint(decodeAccess.userID);
+  if (!endpoints.success) {
+    return res
+      .status(removeUser.success ? 201 : 404)
+      .json({ success: removeUser.success });
+  }
+
+  let x = await sendPush(endpoints.data.subscriptions, payload);
+  console.log(x);
+  return res
+    .status(removeUser.success ? 201 : 404)
+    .json({ success: removeUser.success });
+});
 router.post(
   "/verefy-company",
   [
