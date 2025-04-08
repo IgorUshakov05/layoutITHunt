@@ -4,19 +4,30 @@ const { decodeAccessToken } = require("../api/tokens/accessToken");
 const {
   getAllSubNotification,
 } = require("../database/Request/SubscriptionNotification");
+const {
+  getAllComNotification,
+} = require("../database/Request/SetStatusForCompany");
 
 router.get("/inbox/other", async (req, res) => {
   let access = req.cookies.access;
   let user = await decodeAccessToken(access);
   if (!access || !user) return res.redirect("/login");
-  let subscribe = await getAllSubNotification(user.userID);
-  subscribe = groupByDay(subscribe.notifications) || [];
-  console.log(JSON.stringify(subscribe));
+  let subscribeSub = await getAllSubNotification(user.userID);
+  let subscribeCompany;
+  if (user.userROLE === "creatorWork") {
+    subscribeCompany =
+      groupByDay((await getAllComNotification(user.userID)).notifications) ||
+      [];
+  }
+  subscribeSub = groupByDay(subscribeSub.notifications) || [];
+  console.log(JSON.stringify(subscribeSub));
+  console.log(JSON.stringify(subscribeCompany));
+
   return await res.render("inboxOther", {
     isLoggedIn: !!user,
     role: user.userROLE,
     id: user.userID,
-    subscribe,
+    subscribe: subscribeSub,
     chatList: user.chatList || null,
   });
 });

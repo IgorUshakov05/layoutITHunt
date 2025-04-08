@@ -1,0 +1,36 @@
+{
+  "_id": {
+    "$oid": "67f49ff2ee6a19a76c9962e1"
+  },
+  "id": "8c73e333-42dc-4f96-b2e0-46572c78a470",
+  "title": "WebHunt",
+  "documents": [
+    {
+      "certificate_of_state_registration": "http://localhost:3001/documtns/d0953204-e52c-4f20-b33a-3eef17f81b9e.pdf",
+      "tax_registration_certificate": "http://localhost:3001/documtns/56d5adc8-f521-4cb4-b7f1-45c2399ec9b7.pdf",
+      "egrul_egrip_record_sheet": "http://localhost:3001/documtns/da8894a4-e860-4c5b-a856-8d95a5fde796.pdf",
+      "_id": {
+        "$oid": "67f49ff2ee6a19a76c9962e2"
+      }
+    }
+  ],
+  "creatorID": "3fdae646-e6ff-450a-ba09-539c9c3c1fa9",
+  "INN": "1356238797",
+  "description": "Крутая компания занимающаяся разработкой ПО и делает жесткий",
+  "avatar": "http://localhost:3001/company/7ff83588-1640-485c-b141-a0f0f12adbe5.png",
+  "countStaffs": 50,
+  "isVarefy": false,
+  "dataCreated": "2025-04-08",
+  "nextPayDay": "2025-05-08",
+  "isFreez": false,
+  "userList": [
+    {
+      "userID": "3fdae646-e6ff-450a-ba09-539c9c3c1fa9"
+    }
+  ],
+  "paymentId": "2f86b3a5-000f-5000-8000-13936a201528",
+  "paymentMethod": "yoo_money",
+  "isAutoPay": true,
+  "RequestList": [],
+  "__v": 0
+}

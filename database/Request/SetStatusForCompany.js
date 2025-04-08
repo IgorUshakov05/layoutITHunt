@@ -5,13 +5,6 @@ const UserSchema = require("../Schema/UserSchema");
 async function pushNotificationEvent(creatorID, status, message) {
   try {
     console.log("Начало добавления уведомления");
-    let findUser = await UserSchema.findOne({ id: creatorID });
-    if (!findUser) return { success: false, message: "Компания не найдена" };
-
-    let findCompany = await Company.findOne({ creatorID });
-    console.log(findCompany)
-    if (!findCompany) return { success: false, message: "Компания не найдена" };
-
     let newPush = {
       status,
     };
@@ -36,4 +29,16 @@ async function pushNotificationEvent(creatorID, status, message) {
   }
 }
 
-module.exports = { pushNotificationEvent };
+async function getAllComNotification(userID) {
+  try {
+    let userNotification = await CompanyStatusNotification.findOne({
+      creator_id: userID,
+    });
+    if (!userNotification) return { success: true, notifications: [] };
+    return { success: true, notifications: userNotification.notifications };
+  } catch (e) {
+    return { success: false, notifications: [] };
+  }
+}
+
+module.exports = { pushNotificationEvent, getAllComNotification };

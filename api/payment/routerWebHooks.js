@@ -102,14 +102,14 @@ router.post("/webhook/yookassa", async (req, res) => {
             await pushNotificationEvent(userId, "requset");
             const payload = {
               title: "Заявка отправлена!",
-              body: "Мы скоро сообщим свое решение",
+              body: "Ваша заявка успешно отправлена. В случае одобрения регистра ко мпании, вам будет доступна новая вкладка в этом разделе, и мы отправим сообщение для уведомления об этом. В случае отказа также отправим вам уведомление с указанием причины.",
             };
             let endpoints = await getUserEndpoint(userId);
-            if (!endpoints.success)
-              return res
-                .status(404)
-                .json({ message: "Нет токентов авторизации" });
-            await sendPush(endpoints.data.subscriptions, payload);
+            if (!endpoints.success) {
+              return;
+            } else {
+              await sendPush(endpoints.data.subscriptions, payload);
+            }
           }
         } else if (paymentType === "premium-update") {
           // Обработка обновления премиум-платежа

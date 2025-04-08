@@ -325,26 +325,35 @@ const tariffsCompany = {
 };
 const setStatusOfCompany = async (companyID, status = false) => {
   try {
-    console.log(status)
     let getCompany = await CompanySchema.findOne({ id: companyID });
     if (!getCompany) return { success: false, message: "Company not found" };
     if (status === false) {
       let amount = await tariffsCompany[getCompany.countStaffs].amount;
       let payID = getCompany.paymentId;
       let refund = await createRefund(amount, payID);
-      console.log(refund)
+      console.log(refund);
       if (refund === "succeeded") {
         await getCompany.deleteOne({ id: companyID });
-        return { success: true, message: "Success" };
+        return {
+          success: true,
+          message: "Success",
+          creatorID: getCompany.creatorID,
+        };
       }
-      return { success: false, message: "Refund Error" };
+      return {
+        success: false,
+        message: "Refund Error",
+        creatorID: getCompany.creatorID,
+      };
     }
-    let result = await CompanySchema.updateOne(
-      { id: companyID },
-      { isVarefy: status }
-    );
-    console.log(result);
-    return { success: true, message: "Company active" };
+    getCompany.isVarefy = true;
+    await getCompany.save();
+
+    return {
+      success: true,
+      message: "Company active",
+      creatorID: getCompany.creatorID,
+    };
   } catch (e) {
     console.log(e);
     return { success: false, message: "Error" };

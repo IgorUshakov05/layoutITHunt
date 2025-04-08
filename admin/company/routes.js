@@ -1,9 +1,11 @@
 const { Router } = require("express");
-const refund = require("../payment/refundMoney");
 const {
   getNotVerefy,
   setStatusOfCompany,
 } = require("../../database/Request/Company");
+const {
+  pushNotificationEvent,
+} = require("../../database/Request/SetStatusForCompany");
 const router = Router(); // Create a new router object
 router.post("/get_all_not_verefy_company", async (req, res) => {
   try {
@@ -16,7 +18,7 @@ router.post("/get_all_not_verefy_company", async (req, res) => {
 });
 router.post("/setVerefy", async (req, res) => {
   try {
-    const { id, status } = req.body;
+    const { id, status, message } = req.body;
     if (!id) {
       return res.json({ success: false, message: "ID компании не передан" });
     }
@@ -24,7 +26,17 @@ router.post("/setVerefy", async (req, res) => {
       return res.json({ success: false, message: "Статус не передан" });
     console.log(status, id);
     const setStatus = await setStatusOfCompany(id, status);
-    return res.json(setStatus);
+    if (!setStatus.success) {
+      return res.json(setStatus);
+    }
+    console.log(setStatus)
+    const sendNotification = await pushNotificationEvent(
+      setStatus.creatorID,
+      status ? "access" : "cancel",
+      message
+    );
+    console.log(sendNotification);
+    return await res.status(setStatus.success ? 201 : 401).json(setStatus);
   } catch (error) {
     console.error("Error getting not verified companies:", error);
     res.status(500).json({ success: false, message: "Error retrieving data" });
