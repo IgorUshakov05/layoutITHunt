@@ -28,6 +28,7 @@ router.get("/inbox/other", async (req, res) => {
     role: user.userROLE,
     id: user.userID,
     subscribe: subscribeSub,
+    subscribeCompany,
     chatList: user.chatList || null,
   });
 });

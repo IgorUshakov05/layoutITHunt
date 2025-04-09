@@ -26,52 +26,17 @@
         <%- include('./inboxLinks', {active: "4", role,isMain: false }) %>
         <div class="MoreInfo">
           <div class="listInbox">
+            <%subscribeCompany.forEach((sub) =>{%>
             <div class="toDay">
-              <span class="textDay">Сегодня (1)</span>
+              <!-- Тут пока убрал об оплате в фильтре -->
+              <span class="textDay"
+                ><%- `${sub.date} (${sub.notifications.filter((item) =>
+                item.status !=='paid').length})` %></span
+              >
               <div class="mt-10"></div>
               <div class="flex notofication">
-                <div class="messageNotification w50 warningNotification">
-                  <div class="svgAndText">
-                    <div class="svgNotification">
-                      <img
-                        src="/assets/pictures/picNotification/notCreateCompany.svg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="messageNotificationTitleAndText">
-                      <span class="titleNotificationAndTimeAgo">
-                        <span class="spanText">Компания была отклонена</span>
-                        <span class="timeNotification">3 минуты назад</span>
-                      </span>
-                      <div class="textNotification">
-                        <p class="textNoti">
-                          Поздравляем! Ваша компания успешно добавлена. Теперь
-                          ваши сотрудники могут присоединиться и размещать
-                          вакансии от имени компании, общайтесь в чате компании
-                          и делайте объявления.
-                        </p>
-                      </div>
-                      <a
-                        class="toTechSupport"
-                        href="https://t.me/web_hunt_ru"
-                        target="_blank"
-                        >Написать в поддержку
-                        <svg
-                          width="6"
-                          height="9"
-                          viewBox="0 0 6 9"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M1 0.5L5 4.5L1 8.5"
-                            stroke="#4900E3"
-                            stroke-width="0.5"
-                          /></svg
-                      ></a>
-                    </div>
-                  </div>
-                </div>
+                <%sub.notifications.forEach((subscribe) =>{%>
+                <%if(subscribe.status==='access') {%>
                 <div class="messageNotification w50">
                   <div class="svgAndText">
                     <div class="svgNotification">
@@ -114,12 +79,50 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="toDay">
-              <span class="textDay">Сегодня (1)</span>
-              <div class="mt-10"></div>
-              <div class="flex notofication">
+                <%} if(subscribe.status==='cancel') {%>
+                <div class="messageNotification w50 warningNotification">
+                  <div class="svgAndText">
+                    <div class="svgNotification">
+                      <img
+                        src="/assets/pictures/picNotification/notCreateCompany.svg"
+                        alt=""
+                      />
+                    </div>
+                    <div class="messageNotificationTitleAndText">
+                      <span class="titleNotificationAndTimeAgo">
+                        <span class="spanText">Компания была отклонена</span>
+                        <span class="timeNotification">3 минуты назад</span>
+                      </span>
+                      <div class="textNotification">
+                        <p class="textNoti">
+                          Поздравляем! Ваша компания успешно добавлена. Теперь
+                          ваши сотрудники могут присоединиться и размещать
+                          вакансии от имени компании, общайтесь в чате компании
+                          и делайте объявления.
+                        </p>
+                      </div>
+                      <a
+                        class="toTechSupport"
+                        href="https://t.me/web_hunt_ru"
+                        target="_blank"
+                        >Написать в поддержку
+                        <svg
+                          width="6"
+                          height="9"
+                          viewBox="0 0 6 9"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M1 0.5L5 4.5L1 8.5"
+                            stroke="#4900E3"
+                            stroke-width="0.5"
+                          /></svg
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+                <%} if(subscribe.status ==='request') {%>
                 <div class="messageNotification">
                   <div class="svgAndText">
                     <div class="svgNotification">
@@ -145,68 +148,72 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="toDay">
-              <span class="textDay">Сегодня (1)</span>
-              <div class="mt-10"></div>
-              <div class="flex notofication">
-                <div class="messageNotification">
-                  <div class="svgAndText">
-                    <div class="svgNotification">
-                      <img
-                        src="/assets/pictures/picNotification/warning.svg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="messageNotificationTitleAndText">
-                      <span class="titleNotificationAndTimeAgo">
-                        <span class="spanText">Упс...Платеж не прошел</span>
-                        <span class="timeNotification">3 минуты назад</span>
-                      </span>
-                      <div class="textNotification">
-                        <p class="textNoti">
-                          Мы обратили внимание, что автоматический платеж за
-                          подписку вашей компании на нашем сайте не был успешно
-                          осуществлен в этом месяце. Причины возникновения такой
-                          ситуации могут быть различными, включая
-                          недостаточность средств на счету, устаревшие платежные
-                          реквизиты и т. д. Для предотвращения прекращения
-                          работы вашей компании на нашем ресурсе, мы
-                          предоставляем вам неделю на внесение оплаты за
-                          следующий месяц. В течение этого времени ваша компания
-                          будет временно скрыта от других пользователей, но
-                          сохранится в системе. Однако, если оплата не будет
-                          получена в течение указанного срока, ваша компания
-                          будет удалена из нашей базы данных. Мы ценим ваше
-                          партнерство с нами и надеемся на скорое разрешение
-                          данной ситуации. Если у вас возникли какие-либо
-                          вопросы или трудности с оплатой, не стесняйтесь
-                          обращаться к нам для помощи.
-                        </p>
+                <%} if(subscribe.status ==='not_pay') {%>
+                <div class="flex notofication">
+                  <div class="messageNotification">
+                    <div class="svgAndText">
+                      <div class="svgNotification">
+                        <img
+                          src="/assets/pictures/picNotification/warning.svg"
+                          alt=""
+                        />
                       </div>
-                      <a
-                        class="toTechSupport"
-                        href="https://t.me/web_hunt_ru"
-                        target="_blank"
-                        >Перейти к платежу
-                        <svg
-                          width="6"
-                          height="9"
-                          viewBox="0 0 6 9"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M1 0.5L5 4.5L1 8.5"
-                            stroke="#4900E3"
-                            stroke-width="0.5"
-                          /></svg
-                      ></a>
+                      <div class="messageNotificationTitleAndText">
+                        <span class="titleNotificationAndTimeAgo">
+                          <span class="spanText">Упс...Платеж не прошел</span>
+                          <span class="timeNotification">3 минуты назад</span>
+                        </span>
+                        <div class="textNotification">
+                          <p class="textNoti">
+                            Мы обратили внимание, что автоматический платеж за
+                            подписку вашей компании на нашем сайте не был
+                            успешно осуществлен в этом месяце. Причины
+                            возникновения такой ситуации могут быть различными,
+                            включая недостаточность средств на счету, устаревшие
+                            платежные реквизиты и т. д. Для предотвращения
+                            прекращения работы вашей компании на нашем ресурсе,
+                            мы предоставляем вам неделю на внесение оплаты за
+                            следующий месяц. В течение этого времени ваша
+                            компания будет временно скрыта от других
+                            пользователей, но сохранится в системе. Однако, если
+                            оплата не будет получена в течение указанного срока,
+                            ваша компания будет удалена из нашей базы данных. Мы
+                            ценим ваше партнерство с нами и надеемся на скорое
+                            разрешение данной ситуации. Если у вас возникли
+                            какие-либо вопросы или трудности с оплатой, не
+                            стесняйтесь обращаться к нам для помощи.
+                          </p>
+                        </div>
+                        <a
+                          class="toTechSupport"
+                          href="https://t.me/web_hunt_ru"
+                          target="_blank"
+                          >Перейти к платежу
+                          <svg
+                            width="6"
+                            height="9"
+                            viewBox="0 0 6 9"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M1 0.5L5 4.5L1 8.5"
+                              stroke="#4900E3"
+                              stroke-width="0.5"
+                            /></svg
+                        ></a>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <%}%> <%})%>
               </div>
+            </div>
+            <%})%>
+
+            <div class="toDay">
+              <span class="textDay">Сегодня (1)</span>
+              <div class="mt-10"></div>
             </div>
 
             <%subscribe.forEach((sub) =>{%>
@@ -272,7 +279,8 @@
                     </div>
                   </div>
                 </div>
-                <%}else if(subscribe.status==='end'){ %>   <div class="messageNotification w50">
+                <%}else if(subscribe.status==='end'){ %>
+                <div class="messageNotification w50">
                   <div class="svgAndText">
                     <div class="svgNotification">
                       <img
@@ -293,11 +301,8 @@
                       >
                     </div>
                   </div>
-                </div> <%}%>
-             
-                <%} )%>
-
-              
+                </div>
+                <%}%> <%} )%>
               </div>
             </div>
             <%} )%>
@@ -310,7 +315,7 @@
   </body>
 </html>
 
-  <!-- <div class="messageNotification w50">
+<!-- <div class="messageNotification w50">
                   <div class="svgAndText">
                     <div class="svgNotification">
                       <img

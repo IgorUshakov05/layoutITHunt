@@ -133,7 +133,6 @@ router.post("/webhook/yookassa", async (req, res) => {
             );
           }
         } else if (paymentType === "company-update") {
-          // Обработка обновления премиум-платежа
           const updateResult = await updateCompany(
             creatorID,
             paymentMethodId,
