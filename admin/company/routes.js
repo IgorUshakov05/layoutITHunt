@@ -6,7 +6,9 @@ const {
 const {
   pushNotificationEvent,
 } = require("../../database/Request/SetStatusForCompany");
-const router = Router(); // Create a new router object
+const { getUserEndpoint } = require("../../database/Request/WebPush");
+const sendPush = require("../../api/web-push/push");
+const router = Router();
 router.post("/get_all_not_verefy_company", async (req, res) => {
   try {
     const notVerifiedCompanies = await getNotVerefy(); // Assuming you have this function
@@ -29,12 +31,23 @@ router.post("/setVerefy", async (req, res) => {
     if (!setStatus.success) {
       return res.json(setStatus);
     }
-    console.log(setStatus)
+    console.log(setStatus);
     const sendNotification = await pushNotificationEvent(
       setStatus.creatorID,
       status ? "access" : "cancel",
       message
     );
+    const payload = {
+      title: status ? "Компания была принята" : "Компания отклонена",
+      body: status
+        ? "Поздравляем! Ваша компания успешно добавлена. Теперь ваши сотрудники могут присоединиться и размещать вакансии от имени компании, общайтесь в чате компании и делайте объявления."
+        : message,
+    };
+    let endpoints = await getUserEndpoint(setStatus.creatorID);
+    if (!endpoints.success) {
+      return await res.status(setStatus.success ? 201 : 401).json(setStatus);
+    }
+    let x = await sendPush(endpoints.data.subscriptions, payload);
     console.log(sendNotification);
     return await res.status(setStatus.success ? 201 : 401).json(setStatus);
   } catch (error) {

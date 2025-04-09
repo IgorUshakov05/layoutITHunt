@@ -336,13 +336,13 @@ const setStatusOfCompany = async (companyID, status = false) => {
         await getCompany.deleteOne({ id: companyID });
         return {
           success: true,
-          message: "Success",
+          message: "Успех!",
           creatorID: getCompany.creatorID,
         };
       }
       return {
         success: false,
-        message: "Refund Error",
+        message: "Ошибка возврата средств!",
         creatorID: getCompany.creatorID,
       };
     }
@@ -351,7 +351,7 @@ const setStatusOfCompany = async (companyID, status = false) => {
 
     return {
       success: true,
-      message: "Company active",
+      message: "Компания подтверждена!",
       creatorID: getCompany.creatorID,
     };
   } catch (e) {
