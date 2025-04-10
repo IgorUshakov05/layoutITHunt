@@ -394,10 +394,49 @@ const updateCountStaffOfCompany = async (
 const searchRequest = async (userID) => {
   try {
     let findRequest = await Company.findOne({
-      RequestList: { $elemMatch: { userID } },
+      RequestList: {
+        $elemMatch: {
+          userID,
+        },
+      },
     });
+
     console.log(findRequest);
     return { success: true, isHave: !!findRequest };
+  } catch (e) {
+    console.log(e);
+    return { success: false, message: "Возникла ошибка" };
+  }
+};
+
+const searchRequestData = async (userID) => {
+  try {
+    const result = await Company.aggregate([
+      {
+        $match: {
+          "RequestList.userID": userID,
+        },
+      },
+      {
+        $project: {
+          title: 1,
+          INN: 1,
+          RequestList: {
+            $filter: {
+              input: "$RequestList",
+              as: "item",
+              cond: { $eq: ["$$item.userID", userID] },
+            },
+          },
+        },
+      },
+    ]);
+    console.log(result);
+    if (!result[0] || result.length === 0) {
+      return { success: true, isHave: null };
+    }
+
+    return { success: true, ...result[0] };
   } catch (e) {
     console.log(e);
     return { success: false, message: "Возникла ошибка" };
@@ -431,7 +470,7 @@ const createNewRequest = async (userRequest, INN) => {
       };
     const now = Temporal.Now.plainDateTimeISO();
     const date = new Date(now.toString());
-    let appendRequest = await CompanySchema.updateOne(
+    let appendRequest = await CompanySchema.findOneAndUpdate(
       { INN },
       {
         $push: {
@@ -442,8 +481,8 @@ const createNewRequest = async (userRequest, INN) => {
           },
         },
       }
-    );
-
+    ).select("INN title creatorID");
+    console.log(appendRequest);
     return { success: true, appendRequest };
   } catch (e) {
     console.log(e);
@@ -462,21 +501,26 @@ const responseToInvite = async (creatorID, userID, status) => {
     }
 
     if (status) {
-      const accept = await CompanySchema.findOneAndUpdate(
-        { creatorID },
+      // Принятие заявки: добавление в userList и установка isInvite: true
+      await CompanySchema.findOneAndUpdate(
+        { creatorID, "RequestList.userID": userID },
         {
-          $push: { userList: { userID } },
-          $pull: { RequestList: { userID } },
+          $addToSet: { userList: { userID } }, // Добавит только если userID ещё нет
+          $set: { "RequestList.$.isInvite": true },
         }
       );
+
       return { success: true, status: true, message: "Пользователь добавлен" };
     } else {
-      const cancel = await CompanySchema.findOneAndUpdate(
-        { creatorID },
+      // Отклонение: только обновляем isInvite: false
+      await CompanySchema.findOneAndUpdate(
+        { creatorID, "RequestList.userID": userID },
         {
-          $pull: { RequestList: { userID } },
+          $set: { "RequestList.$.isInvite": false },
+          $pull: { userList: { userID } },
         }
       );
+
       return { success: true, status: false, message: "Пользователь отклонен" };
     }
   } catch (e) {
@@ -487,20 +531,32 @@ const responseToInvite = async (creatorID, userID, status) => {
 
 const getRequest = async (creatorID) => {
   try {
-    const invites = await Company.findOne({
-      creatorID,
-    }).select("RequestList.userID RequestList.date");
+    const invites = await Company.aggregate([
+      { $match: { creatorID } },
+      {
+        $project: {
+          RequestList: {
+            $filter: {
+              input: "$RequestList",
+              as: "item",
+              cond: { $eq: ["$$item.isInvite", null] },
+            },
+          },
+        },
+      },
+    ]);
+    console.log(invites);
 
-    if (!invites || !invites.RequestList) {
+    if (!invites[0] || !invites[0].RequestList) {
       return { success: true, results: [] };
     }
 
-    const userIDs = invites.RequestList.map((item) => item.userID);
+    const userIDs = invites[0].RequestList.map((item) => item.userID);
     const users = await UserSchema.find({ id: { $in: userIDs } }).select(
       "id surname name avatar city"
     );
 
-    const usersWithDates = invites.RequestList.map((request) => {
+    const usersWithDates = invites[0].RequestList.map((request) => {
       let user = users.find((u) => u.id === request.userID);
       if (user) {
         // Получаем разницу во времени
@@ -565,6 +621,7 @@ module.exports = {
   findCompanyOfINNorTitle,
   updateCompany,
   updateInfoCompany,
+  searchRequestData,
   getVacansyByCompanyINN,
   freezCompany,
   removeUserFromCompany,

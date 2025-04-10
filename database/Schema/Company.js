@@ -28,6 +28,7 @@ const RequestItem = new mongoose.Schema(
   {
     id: { type: String, required: true, unique: true },
     userID: { type: String, required: true, unique: true },
+    isInvite: { type: Boolean, default: null },
     date: { type: Date, required: true },
   },
   { _id: false }

@@ -7,6 +7,7 @@ const {
 const {
   getAllComNotification,
 } = require("../database/Request/SetStatusForCompany");
+const { searchRequestData } = require("../database/Request/Company");
 
 router.get("/inbox/other", async (req, res) => {
   let access = req.cookies.access;
@@ -14,6 +15,8 @@ router.get("/inbox/other", async (req, res) => {
   if (!access || !user) return res.redirect("/login");
   let subscribeSub = await getAllSubNotification(user.userID);
   let subscribeCompany;
+  let requestToCompany = (await searchRequestData(user.userID)) || {};
+  console.log(JSON.stringify(requestToCompany));
   if (user.userROLE === "creatorWork") {
     subscribeCompany =
       groupByDay((await getAllComNotification(user.userID)).notifications) ||
@@ -28,6 +31,7 @@ router.get("/inbox/other", async (req, res) => {
     role: user.userROLE,
     id: user.userID,
     subscribe: subscribeSub,
+    requestToCompany,
     subscribeCompany,
     chatList: user.chatList || null,
   });

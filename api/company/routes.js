@@ -235,6 +235,14 @@ router.post("/invite-company-request", async (req, res) => {
     const decodeAccess = await decodeAccessToken(access);
     if (!decodeAccess) return res.redirect("/login");
     let setInvite = await createNewRequest(decodeAccess.userID, companyId);
+    if (!setInvite.success) return res.status(400).json(setInvite);
+    const payload = {
+      title: "Новая заявка на вступление в компанию",
+      body: "В вашу компанию хочет вступить сотрудник",
+    };
+    let endpoints = await getUserEndpoint(setInvite.appendRequest.creatorID);
+    if (!endpoints.success) return res.status(201).json(setInvite);
+    await sendPush(endpoints.data.subscriptions, payload);
     return res.status(201).json(setInvite);
   } catch (e) {
     console.log(e);
@@ -285,6 +293,17 @@ router.post(
         requestId,
         answer
       );
+      const payload = {
+        title: answer
+          ? "Ваша заявка на вступление принята"
+          : "Ваша заявка на вступление отклонена",
+        body: answer
+          ? "Поздравляем! Вы были добавлены в компанию."
+          : "Вашу заявку на вступление в компанию отклонил создатель компании.",
+      };
+      let endpoints = await getUserEndpoint(requestId);
+      if (!endpoints.success) return res.status(201).json(updateRequest);
+      await sendPush(endpoints.data.subscriptions, payload);
       console.log(updateRequest);
       return res.status(201).json(updateRequest);
     } catch (e) {
