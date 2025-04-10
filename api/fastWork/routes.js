@@ -11,6 +11,8 @@ const {
   sendRequest,
   getFastWorks,
 } = require("../../database/Request/FastWork");
+const { getUserEndpoint } = require("../../database/Request/WebPush");
+const sendPush = require("../web-push/push");
 const specialList = [
   "Аналитик",
   "SEO-специалист",
@@ -235,8 +237,17 @@ router.post(
         decodeAccess.userID,
         req.body.message
       );
-      console.log(send);
-      return res.status(200).json(send);
+      console.log(send, " отклик");
+      if (!send.success) return res.status(400).json(send);
+      const payload = {
+        title: `Новый отклик на фаст-ворк: ${send.data.special}`,
+        body: "Кандидат заинтересовался вашим фаст-ворком и отправил отклик. Проверьте заявку в уведомлениях.",
+      };
+      console.log(send.data.userID)
+      let endpoints = await getUserEndpoint(send.data.userID);
+      if (!endpoints.success) return res.status(201).json(send);
+      await sendPush(endpoints.data.subscriptions, payload);
+      return res.status(201).json(send);
     } catch (e) {
       console.log(e);
       return res.status(500).json({ message: "Программист накосячил(" });

@@ -16,6 +16,8 @@ const {
   searchVacancyById,
   getVacancy,
 } = require("../../database/Request/Vacancy");
+const { getUserEndpoint } = require("../../database/Request/WebPush");
+const sendPush = require("../web-push/push");
 const specialList = [
   "Аналитик",
   "SEO-специалист",
@@ -114,7 +116,7 @@ router.post(
           maxPrice: req.body.salary.max,
           agreement: req.body.salary.agreement,
         },
-        description: req.body.description, 
+        description: req.body.description,
       });
 
       console.log(result);
@@ -312,8 +314,17 @@ router.post(
         decodeAccess.userID,
         req.body.message
       );
-      console.log(send);
-      return res.status(200).json(send);
+      console.log(send, " отклик");
+      if (!send.success) return res.status(400).json(send);
+      const payload = {
+        title: `Новый отклик на вакансию: ${send.data.special}`,
+        body: "Кандидат заинтересовался вашей вакансией и отправил отклик. Проверьте заявку в уведомлениях.",
+      };
+
+      let endpoints = await getUserEndpoint(send.data.userID);
+      if (!endpoints.success) return res.status(201).json(send);
+      await sendPush(endpoints.data.subscriptions, payload);
+      return res.status(201).json(send);
     } catch (e) {
       console.log(e);
       return res.status(500).json({ message: "Программист накосячил(" });

@@ -124,25 +124,42 @@ async function updateVacansy(
 
 let sendRequest = async (id, specialID, message) => {
   try {
-    const now = Temporal.Now.plainDateTimeISO();
-    const date = new Date(now.toString());
-    let isNotRep = await Vacancy.findOne({
-      id,
-      responses: { $elemMatch: { userID: specialID } },
-    });
-    if (isNotRep) return { success: false, message: "Заявка уже существует!" };
-    let findVacancy = await Vacancy.findOneAndUpdate(
-      { id },
+    const now = new Date();
+
+    const updatedVacancy = await Vacancy.findOneAndUpdate(
       {
-        $push: { responses: { userID: specialID, message, datetime: date } },
+        id,
+        "responses.userID": { $ne: specialID }, // проверяем, что отклика от этого userID ещё нет
+      },
+      {
+        $push: {
+          responses: { userID: specialID, message, datetime: now },
+        },
+      },
+      {
+        new: true,
       }
-    );
-    if (!findVacancy) {
-      return { success: false, message: "Вакансия не найдена!" };
+    ).select("userID special");
+
+    if (!updatedVacancy) {
+      const alreadyResponded = await Vacancy.exists({
+        id,
+        "responses.userID": specialID,
+      });
+
+      return {
+        success: false,
+        message: alreadyResponded
+          ? "Вы уже откликнулись"
+          : "Вакансия не найдена!",
+      };
     }
-    if (findVacancy.responses.userID === specialID)
-      return { success: false, message: "Заявка уже отправлена" };
-    return { success: true, message: "Отклик отправлен!" };
+
+    return {
+      success: true,
+      message: "Отклик отправлен!",
+      data: updatedVacancy,
+    };
   } catch (e) {
     console.log(e);
     return { success: false, message: "Непредвиденная ошибка" };

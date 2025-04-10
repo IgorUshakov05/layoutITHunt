@@ -123,25 +123,38 @@ const removeFastWork = async (id, userReason) => {
 
 let sendRequest = async (id, specialID, message) => {
   try {
-    const now = Temporal.Now.plainDateTimeISO();
-    const date = new Date(now.toString());
-    let isNotRep = await FastWork.findOne({
-      id,
-      responses: { $elemMatch: { userID: specialID } },
-    });
-    if (isNotRep) return { success: false, message: "Заявка уже существует!" };
-    let findVacancy = await FastWork.findOneAndUpdate(
-      { id },
+    const now = new Date();
+
+    let updatedFastWork = await FastWork.findOneAndUpdate(
       {
-        $push: { responses: { userID: specialID, message, datetime: date } },
+        id,
+        "responses.userID": { $ne: specialID },
+      },
+      {
+        $push: {
+          responses: { userID: specialID, message, datetime: now },
+        },
       }
-    );
-    if (!findVacancy) {
-      return { success: false, message: "Фаст-Ворк не найден!" };
+    ).select("userID special");
+    if (!updatedFastWork) {
+      const alreadyResponded = await FastWork.exists({
+        id,
+        "responses.userID": specialID,
+      });
+
+      return {
+        success: false,
+        message: alreadyResponded
+          ? "Вы уже откликнулись"
+          : "Вакансия не найдена!",
+      };
     }
-    if (findVacancy.responses.userID === specialID)
-      return { success: false, message: "Заявка уже отправлена" };
-    return { success: true, message: "Отклик отправлен!" };
+
+    return {
+      success: true,
+      message: "Отклик отправлен!",
+      data: updatedFastWork,
+    };
   } catch (e) {
     console.log(e);
     return { success: false, message: "Непредвиденная ошибка" };

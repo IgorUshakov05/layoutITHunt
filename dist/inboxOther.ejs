@@ -26,6 +26,7 @@
         <%- include('./inboxLinks', {active: "4", role,isMain: false }) %>
         <div class="MoreInfo">
           <div class="listInbox">
+            <%if(subscribeCompany) {%>
             <%subscribeCompany.forEach((sub) =>{%>
             <div class="toDay">
               <!-- Тут пока убрал об оплате в фильтре -->
@@ -209,7 +210,10 @@
                 <%}%> <%})%>
               </div>
             </div>
-            <%})%> <%if(requestToCompany?.RequestList){%>
+            <%})%> 
+              <%}%>
+
+            <%if(requestToCompany?.RequestList){%>
             <div class="toDay">
               <!-- Тут пока убрал об оплате в фильтре -->
               <% const dateRaw = new

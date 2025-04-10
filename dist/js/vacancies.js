@@ -195,18 +195,44 @@ const insertVacansy = (vacancyList) => {
     priceJob.className = "priceJob";
 
     const price = document.createElement("h3");
+
     if (vacancy.price.agreement) {
-      price.textContent = "Договорная";
+      // Если договорная цена
+      const span = document.createElement("span");
+      span.textContent = "Договорная";
+      price.appendChild(span);
     } else if (vacancy.price.maxPrice) {
-      price.innerHTML = `до ${vacancy.price.maxPrice.toLocaleString(
+      // Если есть максимальная цена
+      const priceSpan = document.createElement("span");
+      priceSpan.classList.add("priceItem");
+      priceSpan.textContent = `до ${vacancy.price.maxPrice.toLocaleString(
         "no-NO"
-      )} Ꝑ`;
+      )}`;
+
+      const currencySpan = document.createElement("span");
+      currencySpan.classList.add("p");
+      currencySpan.textContent = " Ꝑ";
+
+      price.appendChild(priceSpan);
+      price.appendChild(currencySpan);
     } else if (vacancy.price.minPrice) {
-      price.innerHTML = `от ${vacancy.price.minPrice.toLocaleString(
+      // Если есть минимальная цена
+      const priceSpan = document.createElement("span");
+      priceSpan.classList.add("priceItem");
+      priceSpan.textContent = `от ${vacancy.price.minPrice.toLocaleString(
         "no-NO"
-      )} Ꝑ`;
+      )}`;
+
+      const currencySpan = document.createElement("span");
+      currencySpan.classList.add("p");
+      currencySpan.textContent = " Ꝑ";
+
+      price.appendChild(priceSpan);
+      price.appendChild(currencySpan);
     }
+
     priceJob.appendChild(price);
+
     topInfo.appendChild(priceJob);
 
     article.appendChild(topInfo);
