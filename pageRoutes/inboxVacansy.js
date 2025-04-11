@@ -26,9 +26,7 @@ router.get("/inbox/vacancies", async (req, res) => {
   } else {
     return res.redirect("/login");
   }
-
-  // Now use vacancies, users, and success as needed
-  console.log(success);
+  console.log(vacancies, ' отклик')
   if (!success) return await res.redirect("/");
   return await res.render("inboxVacansy", {
     isLoggedIn: !!user,

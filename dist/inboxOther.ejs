@@ -26,13 +26,11 @@
         <%- include('./inboxLinks', {active: "4", role,isMain: false }) %>
         <div class="MoreInfo">
           <div class="listInbox">
-            <%if(subscribeCompany) {%>
-            <%subscribeCompany.forEach((sub) =>{%>
+            <%if(subscribeCompany) {%> <%subscribeCompany.forEach((sub) =>{%>
             <div class="toDay">
               <!-- Тут пока убрал об оплате в фильтре -->
               <span class="textDay"
-                ><%- `${sub.date} (${sub.notifications.filter((item) =>
-                item.status !=='paid').length})` %></span
+                ><%- `${sub.date} (${sub.notifications.length})` %></span
               >
               <div class="mt-10"></div>
               <div class="flex notofication">
@@ -58,6 +56,56 @@
                           вакансии от имени компании, общайтесь в чате компании
                           и делайте объявления.
                         </p>
+                      </div>
+                      <a
+                        class="toTechSupport"
+                        href="https://youtube.com"
+                        target="_blank"
+                        >Перейти в компанию
+                        <svg
+                          width="6"
+                          height="9"
+                          viewBox="0 0 6 9"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M1 0.5L5 4.5L1 8.5"
+                            stroke="#4900E3"
+                            stroke-width="0.5"
+                          /></svg
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+                <%} if(subscribe.status==='paid') {%>
+                <div class="messageNotification w50">
+                  <div class="svgAndText">
+                    <div class="svgNotification">
+                      <img
+                        src="/assets/pictures/picNotification/createCompany.svg"
+                        alt=""
+                      />
+                    </div>
+                    <div class="messageNotificationTitleAndText">
+                      <span class="titleNotificationAndTimeAgo">
+                        <span class="spanText"
+                          >Продление подписки компании</span
+                        >
+                        <span class="timeNotification">3 минуты назад</span>
+                      </span>
+                      <div class="textNotification">
+                        <p class="textNoti">
+                          Мы рады сообщить вам, что ваша подписка на компанию успешно продлена! Благодарим вас за то, что вы
+                          выбрали наш сервис.
+                        </p>
+                        <p class="textNoti">
+                          Теперь вы можете продолжать использовать все
+                          возможности нашей платформы и наслаждаться улучшением
+                          вашего опыта. Если у вас есть вопросы или нужна
+                          помощь, обращайтесь!
+                        </p>
+                        <p class="textNoti">Спасибо, что остаетесь с нами!</p>
                       </div>
                       <a
                         class="toTechSupport"
@@ -210,16 +258,12 @@
                 <%}%> <%})%>
               </div>
             </div>
-            <%})%> 
-              <%}%>
-
-            <%if(requestToCompany?.RequestList){%>
+            <%})%> <%}%> <%if(requestToCompany?.RequestList){%>
             <div class="toDay">
               <!-- Тут пока убрал об оплате в фильтре -->
-              <% const dateRaw = new
-              Date(requestToCompany.RequestList[0].date); const today =
-              new Date(); const isToday = dateRaw.getDate() === today.getDate()
-              && dateRaw.getMonth() === today.getMonth() &&
+              <% const dateRaw = new Date(requestToCompany.RequestList[0].date);
+              const today = new Date(); const isToday = dateRaw.getDate() ===
+              today.getDate() && dateRaw.getMonth() === today.getMonth() &&
               dateRaw.getFullYear() === today.getFullYear(); const formattedDate
               = isToday ? "Сегодня" : `${String(dateRaw.getDate()).padStart(2,
               "0")}-${String(dateRaw.getMonth() + 1).padStart(2,
@@ -246,9 +290,9 @@
                       <div class="textNotification">
                         <p class="textNoti">
                           Поздравляем! Вы были добавлены в компанию
-                          <%-requestToCompany.title%>. Теперь вы можете
-                          общаться с коллегами в общем чате и публиковать
-                          объявления о работе от имени компании.
+                          <%-requestToCompany.title%>. Теперь вы можете общаться
+                          с коллегами в общем чате и публиковать объявления о
+                          работе от имени компании.
                         </p>
                       </div>
                       <a
@@ -272,8 +316,7 @@
                     </div>
                   </div>
                 </div>
-                <%} if(requestToCompany.RequestList[0].isInvite ===
-                false) {%>
+                <%} if(requestToCompany.RequestList[0].isInvite === false) {%>
                 <div class="messageNotification warningNotification w50">
                   <div class="svgAndText">
                     <div class="svgNotification">
@@ -291,17 +334,16 @@
                       </span>
                       <div class="textNotification">
                         <p class="textNoti">
-                          Вашу заявку на вступление в компанию <%-requestToCompany.title%> отклонил
-                          создатель компании. Если у вас есть вопросы или хотите
-                          уточнить детали, пожалуйста, свяжитесь с ним напрямую.
+                          Вашу заявку на вступление в компанию
+                          <%-requestToCompany.title%> отклонил создатель
+                          компании. Если у вас есть вопросы или хотите уточнить
+                          детали, пожалуйста, свяжитесь с ним напрямую.
                         </p>
                       </div>
-                     
                     </div>
                   </div>
                 </div>
-                <%} if(requestToCompany.RequestList[0].isInvite ===null)
-                {%>
+                <%} if(requestToCompany.RequestList[0].isInvite ===null) {%>
                 <div class="messageNotification">
                   <div class="svgAndText">
                     <div class="svgNotification">
@@ -321,9 +363,9 @@
                       <div class="textNotification">
                         <p class="textNoti">
                           Вы успешно отправили заявку на вступление в компанию
-                          <%-requestToCompany.title%>. Теперь остается
-                          дождаться решения от создателя компании. Как только он
-                          примет решение, мы уведомим вас о результате.
+                          <%-requestToCompany.title%>. Теперь остается дождаться
+                          решения от создателя компании. Как только он примет
+                          решение, мы уведомим вас о результате.
                         </p>
                       </div>
                     </div>
