@@ -161,7 +161,7 @@ router.post(
       return res.status(201).json(response.data);
     } catch (error) {
       console.error("Error creating payment:", error.response.data);
-      res.status(500).json({ error: error.response.data });
+      res.status(501).json({ error: error.response.data });
     }
   }
 );
